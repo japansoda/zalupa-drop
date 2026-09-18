@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { ExternalLink, Check, ShoppingBag, Sparkles, Gift } from 'lucide-react';
+import { ExternalLink, Check, ShoppingBag, Sparkles, Gift, Ticket, FlaskConical } from 'lucide-react';
 import { SkinEntity } from '../../lib/types';
 import { UpgradeToken } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
@@ -220,38 +220,44 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
 
         {/* ── EXTRA BONUS DROP SHOWCASE (ЗЕЛЬЯ И ТОКЕНЫ КАК ДОП. ДРОП) ── */}
         {hasBonus && bonusConsumables && (
-          <div className="w-full mb-5 p-4 rounded-2xl bg-gradient-to-r from-emerald-950/70 via-black/80 to-yellow-950/70 border-2 border-emerald-400/60 shadow-[0_0_30px_rgba(16,185,129,0.35)] flex flex-col items-center gap-3 relative overflow-hidden">
-            <div className="flex items-center justify-center gap-2">
-              <Sparkles className="w-4 h-4 text-emerald-400 animate-spin" />
-              <span className="text-xs font-black uppercase tracking-wider text-emerald-300 flex items-center gap-1.5">
-                <span>{locale === 'ru' ? 'ДОПОЛНИТЕЛЬНЫЙ ДРОП К КЕЙСУ!' : 'EXTRA BONUS DROP!'}</span>
-                <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400 text-[10px] text-emerald-300">
-                  +БОНУС
-                </span>
+          <div className="w-full mb-5 p-4 rounded-2xl bg-gradient-to-r from-emerald-950/60 via-[#0d1512]/90 to-emerald-950/60 border border-emerald-400/50 shadow-[0_0_25px_rgba(16,185,129,0.25)] flex flex-col items-center gap-3 relative overflow-hidden">
+            <div className="flex items-center justify-center gap-2 text-center">
+              <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-emerald-300">
+                {locale === 'ru' ? 'ДОПОЛНИТЕЛЬНЫЙ ДРОП' : 'EXTRA BONUS DROP'}
               </span>
-              <Sparkles className="w-4 h-4 text-emerald-400 animate-spin" />
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/80 text-[10px] font-mono font-black text-emerald-300 shrink-0">
+                +БОНУС
+              </span>
+              <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full">
+            <div className="flex flex-wrap items-center justify-center gap-3 w-full">
               {/* Luck Potion Bonus Card */}
               {bonusConsumables.potions > 0 && (
-                <div className="flex items-center gap-3 p-3 rounded-xl bg-[#091f15] border border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.35)] text-left group">
-                  <div className="relative w-12 h-12 rounded-xl bg-emerald-900/60 border border-emerald-400 flex items-center justify-center text-3xl shrink-0 shadow-inner">
-                    <span className="animate-bounce">🧪</span>
+                <div className="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#091f15] border border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)] text-left w-full sm:max-w-md group">
+                  <div className="relative w-12 h-12 rounded-xl bg-emerald-900/60 border border-emerald-400 flex items-center justify-center shrink-0 shadow-inner">
+                    <FlaskConical className="w-6 h-6 text-emerald-400 animate-pulse" />
                   </div>
-                  <div className="flex flex-col">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-xs font-black text-white">
+                  <div className="flex flex-col min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-black text-white">
                         {locale === 'ru' ? 'Зелье удачи' : 'Luck Potion'}
                       </span>
                       <span className="text-[10px] font-mono font-black text-emerald-300 bg-emerald-500/20 px-1.5 py-0.5 rounded border border-emerald-400/40">
                         x{bonusConsumables.potions}
                       </span>
                     </div>
-                    <span className="text-[10px] text-amber-400 font-bold">
-                      {locale === 'ru' ? '★ Контрабанда' : '★ Contraband'}
-                    </span>
-                    <span className="text-[10px] text-white/60">
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <span className="text-[11px] text-amber-400 font-bold">
+                        {locale === 'ru' ? '★ Контрабанда' : '★ Contraband'}
+                      </span>
+                      <span className="text-white/20">•</span>
+                      <span className="text-xs font-mono font-bold text-emerald-400">
+                        +15%
+                      </span>
+                    </div>
+                    <span className="text-[11px] text-white/50 mt-0.5 truncate">
                       {locale === 'ru' ? '+15% к шансу в апгрейдере (3 раза)' : '+15% upgrader chance (3 spins)'}
                     </span>
                   </div>
@@ -264,27 +270,37 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                 return (
                   <div
                     key={`${tok.id}_${idx}`}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-[#14141d] border text-left shadow-md transition-all"
-                    style={{ borderColor: rConf.color, boxShadow: `0 0 15px ${rConf.color}40` }}
+                    className="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#12131c] border text-left shadow-md transition-all w-full sm:max-w-md"
+                    style={{ borderColor: rConf.color, boxShadow: `0 0 15px ${rConf.color}35` }}
                   >
                     <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center text-3xl shrink-0 border"
-                      style={{ backgroundColor: `${rConf.color}20`, borderColor: rConf.color }}
+                      className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border"
+                      style={{ backgroundColor: `${rConf.color}15`, borderColor: rConf.color }}
                     >
-                      <span className="animate-pulse">🎟️</span>
+                      <Ticket className="w-6 h-6" style={{ color: rConf.color }} />
                     </div>
-                    <div className="flex flex-col">
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-black text-white truncate">
+                    <div className="flex flex-col min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-black text-white truncate">
                           {t('token.' + tok.rarity) || tok.name}
                         </span>
-                        <span className="text-[10px] font-mono font-black text-yellow-400">x1</span>
+                        <span className="text-[10px] font-mono font-black text-yellow-400 bg-yellow-400/10 px-1.5 py-0.5 rounded border border-yellow-400/30">
+                          x1
+                        </span>
                       </div>
-                      <span className="text-[10px] font-bold" style={{ color: rConf.color }}>
-                        {t('rarity.' + tok.rarity) || rConf.label}
-                      </span>
-                      <span className="text-[10px] text-white/60">
-                        +{tok.valueDc.toLocaleString('ru-RU')} DC {locale === 'ru' ? `(цель до ${tok.maxTargetDc.toLocaleString('ru-RU')} DC)` : `(up to ${tok.maxTargetDc.toLocaleString('ru-RU')} DC)`}
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <span className="text-[11px] font-bold" style={{ color: rConf.color }}>
+                          {t('rarity.' + tok.rarity) || rConf.label}
+                        </span>
+                        <span className="text-white/20">•</span>
+                        <span className="text-xs font-mono font-bold text-yellow-400">
+                          +{tok.valueDc.toLocaleString('ru-RU')} DC
+                        </span>
+                      </div>
+                      <span className="text-[11px] text-white/50 mt-0.5 truncate">
+                        {locale === 'ru'
+                          ? `Цель для апгрейда: до ${tok.maxTargetDc.toLocaleString('ru-RU')} DC`
+                          : `Upgrade target: up to ${tok.maxTargetDc.toLocaleString('ru-RU')} DC`}
                       </span>
                     </div>
                   </div>

@@ -38,35 +38,43 @@ export const LUCK_POTION: LuckPotion = {
 
 // Roll drop from opening a case
 export function rollCaseBonusDrop(): { token?: UpgradeToken; potion?: boolean } {
-  const res: { token?: UpgradeToken; potion?: boolean } = {};
-
-  // 24% chance to drop an upgrade token alongside the regular skin
-  if (Math.random() < 0.24) {
-    const roll = Math.random() * 100;
-    // Higher rarity = rarer
-    if (roll < 0.5) {
-      res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_gold');
-    } else if (roll < 1.8) {
-      res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_covert');
-    } else if (roll < 5.5) {
-      res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_classified');
-    } else if (roll < 14.0) {
-      res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_restricted');
-    } else if (roll < 32.0) {
-      res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_milspec');
-    } else if (roll < 62.0) {
-      res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_industrial');
-    } else {
-      res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_consumer');
-    }
+  // Rare bonus drop: only 5.5% overall chance to get ANY bonus drop on opening a case
+  if (Math.random() > 0.055) {
+    return {};
   }
 
-  // 6% chance to drop Luck Potion (Contraband)
-  if (Math.random() < 0.06) {
-    res.potion = true;
+  // Luck Potion is Contraband rarity — extremely rare (~3% of bonus drops -> ~0.16% per case opening)
+  if (Math.random() < 0.03) {
+    return { potion: true };
   }
 
-  return res;
+  // Otherwise, roll an Upgrade Token with rarity weighting (higher rarity = much rarer)
+  const roll = Math.random() * 100;
+  let token: UpgradeToken;
+  if (roll < 0.1) {
+    // 0.1% -> ★ Gold Token
+    token = UPGRADE_TOKENS[6];
+  } else if (roll < 0.5) {
+    // 0.4% -> ★ Covert Token
+    token = UPGRADE_TOKENS[5];
+  } else if (roll < 1.8) {
+    // 1.3% -> Classified Token
+    token = UPGRADE_TOKENS[4];
+  } else if (roll < 6.0) {
+    // 4.2% -> Restricted Token
+    token = UPGRADE_TOKENS[3];
+  } else if (roll < 16.0) {
+    // 10% -> Mil-Spec Token
+    token = UPGRADE_TOKENS[2];
+  } else if (roll < 42.0) {
+    // 26% -> Industrial Token
+    token = UPGRADE_TOKENS[1];
+  } else {
+    // 58% -> Consumer Token
+    token = UPGRADE_TOKENS[0];
+  }
+
+  return { token };
 }
 
 // Roll token for consolation prize in upgrader
