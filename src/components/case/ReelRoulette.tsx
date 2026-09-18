@@ -90,14 +90,14 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       return caseSkins[caseSkins.length - 1];
     }
 
-    // 3. Safari Troll case (exciting 2.5% jackpot)
+    // 3. Safari Troll case (exciting 4.0% jackpot)
     if (caseId === 'case_safari_troll') {
       const dlores = caseSkins.filter((s) => (s.skinName || s.name).includes('Dragon Lore'));
       const meshes = caseSkins.filter((s) => !(s.skinName || s.name).includes('Dragon Lore'));
       const weights = caseSkins.map((s) =>
         (s.skinName || s.name).includes('Dragon Lore')
-          ? 2.5 / (dlores.length || 1)
-          : 97.5 / (meshes.length || 1)
+          ? 4.0 / (dlores.length || 1)
+          : 96.0 / (meshes.length || 1)
       );
       const totalW = weights.reduce((a, b) => a + b, 0);
       let rnd = Math.random() * totalW;
@@ -108,14 +108,14 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       return caseSkins[caseSkins.length - 1];
     }
 
-    // 4. All or Nothing (14% legend, 86% cheap)
+    // 4. All or Nothing (20% legend, 80% cheap)
     if (caseId === 'case_all_or_nothing') {
       const topItems = caseSkins.filter((s) => s.priceDc >= 50000 || isKnifeOrGlove(s));
       const lowItems = caseSkins.filter((s) => s.priceDc < 50000 && !isKnifeOrGlove(s));
       const weights = caseSkins.map((s) =>
         s.priceDc >= 50000 || isKnifeOrGlove(s)
-          ? 14.0 / (topItems.length || 1)
-          : 86.0 / (lowItems.length || 1)
+          ? 20.0 / (topItems.length || 1)
+          : 80.0 / (lowItems.length || 1)
       );
       const totalW = weights.reduce((a, b) => a + b, 0);
       let rnd = Math.random() * totalW;
@@ -126,14 +126,14 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       return caseSkins[caseSkins.length - 1];
     }
 
-    // 5. Zalupa trash case (2.5% jackpot)
+    // 5. Zalupa trash case (4.0% jackpot)
     if (caseId === 'case_zalupa') {
       const rareItems = caseSkins.filter((s) => s.priceDc >= 50000 || isKnifeOrGlove(s));
       const trashItems = caseSkins.filter((s) => s.priceDc < 50000 && !isKnifeOrGlove(s));
       const weights = caseSkins.map((s) =>
         s.priceDc >= 50000 || isKnifeOrGlove(s)
-          ? 2.5 / (rareItems.length || 1)
-          : 97.5 / (trashItems.length || 1)
+          ? 4.0 / (rareItems.length || 1)
+          : 96.0 / (trashItems.length || 1)
       );
       const totalW = weights.reduce((a, b) => a + b, 0);
       let rnd = Math.random() * totalW;
@@ -148,36 +148,60 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       (s) => s.rarity === 'milspec' || s.rarity === 'industrial' || s.rarity === 'consumer'
     );
 
-    const weights = caseSkins.map((s) => {
-      if (hasLowTier) {
-        // Boosted generous simulator odds:
-        // Knives/Gloves: ~2.6% (approx 10x higher than Valve's 0.26%)
-        // Covert / Contraband: ~7.2% (approx 11x higher than Valve's 0.64%)
-        // Classified (Pink): ~18.5% (approx 6x higher than Valve's 3.2%)
-        // Restricted (Purple): ~32.0%
-        // Milspec: ~40.0%
-        if (isKnifeOrGlove(s)) return 2.6;
-        if (s.rarity === 'covert' || s.rarity === 'contraband') return 7.2;
-        if (s.rarity === 'classified') return 18.5;
-        if (s.rarity === 'restricted') return 32.0;
-        if (s.rarity === 'milspec') return 40.0;
-        if (s.rarity === 'industrial') return 35.0;
-        if (s.rarity === 'consumer') return 30.0;
-        return 20.0;
-      } else {
-        // High-tier, knives or theme custom case:
-        // Soft sublinear exponent (0.52) allows winning top-tier jackpots regularly
-        return 100000 / Math.pow(Math.max(50, s.priceDc), 0.52);
-      }
-    });
+    if (hasLowTier) {
+      // Highly rewarding and profitable simulator odds:
+      // Gold (Knives/Gloves): ~5.0% (1 in 20 spins!)
+      // Covert (Reds): ~16.0% (almost 1 in 6 spins!)
+      // Classified (Pinks): ~28.0% (break-even / solid profit)
+      // Restricted (Purples): ~30.0%
+      // Milspec (Blues): ~21.0%
+      const counts = { gold: 0, covert: 0, classified: 0, restricted: 0, milspec: 0, low: 0 };
+      caseSkins.forEach((s) => {
+        if (isKnifeOrGlove(s)) counts.gold++;
+        else if (s.rarity === 'covert' || s.rarity === 'contraband') counts.covert++;
+        else if (s.rarity === 'classified') counts.classified++;
+        else if (s.rarity === 'restricted') counts.restricted++;
+        else if (s.rarity === 'milspec') counts.milspec++;
+        else counts.low++;
+      });
 
-    const totalWeight = weights.reduce((a, b) => a + b, 0);
-    let rnd = Math.random() * totalWeight;
-    for (let i = 0; i < caseSkins.length; i++) {
-      if (rnd <= weights[i]) return caseSkins[i];
-      rnd -= weights[i];
+      const targetShares = {
+        gold: counts.gold ? 5.0 : 0,
+        covert: counts.covert ? 16.0 : 0,
+        classified: counts.classified ? 28.0 : 0,
+        restricted: counts.restricted ? 30.0 : 0,
+        milspec: counts.milspec ? 21.0 : 0,
+        low: counts.low ? 15.0 : 0,
+      };
+
+      const weights = caseSkins.map((s) => {
+        if (isKnifeOrGlove(s)) return targetShares.gold / counts.gold;
+        if (s.rarity === 'covert' || s.rarity === 'contraband') return targetShares.covert / counts.covert;
+        if (s.rarity === 'classified') return targetShares.classified / counts.classified;
+        if (s.rarity === 'restricted') return targetShares.restricted / counts.restricted;
+        if (s.rarity === 'milspec') return (targetShares.milspec || 21) / counts.milspec;
+        return (targetShares.low || 15) / (counts.low || 1);
+      });
+
+      const totalWeight = weights.reduce((a, b) => a + b, 0);
+      let rnd = Math.random() * totalWeight;
+      for (let i = 0; i < caseSkins.length; i++) {
+        if (rnd <= weights[i]) return caseSkins[i];
+        rnd -= weights[i];
+      }
+      return caseSkins[caseSkins.length - 1];
+    } else {
+      // High-tier, knives or theme custom case:
+      // Soft sublinear exponent (0.32) allows winning top-tier jackpots regularly
+      const weights = caseSkins.map((s) => 100000 / Math.pow(Math.max(50, s.priceDc), 0.32));
+      const totalWeight = weights.reduce((a, b) => a + b, 0);
+      let rnd = Math.random() * totalWeight;
+      for (let i = 0; i < caseSkins.length; i++) {
+        if (rnd <= weights[i]) return caseSkins[i];
+        rnd -= weights[i];
+      }
+      return caseSkins[caseSkins.length - 1];
     }
-    return caseSkins[caseSkins.length - 1];
   };
 
   const generateReel = (winner: SkinEntity): SkinEntity[] => {

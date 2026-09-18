@@ -13609,6 +13609,34 @@
     "badge": "ХАЛЯВА",
     "skins": [
       {
+        "id": "skin-4f8d99d09ded",
+        "name": "AWP | Dragon Lore",
+        "weapon": "AWP",
+        "skinName": "Dragon Lore",
+        "rarity": "covert",
+        "wear": "FN",
+        "wearLabel": "Прямо с завода",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqYaF7IfysCnWRxuF4j-B-Xxa_nBovp3Pdwtj9cC_GaAd0DZdwQu9fuhS4kNy0NePntVTbjYpCyyT_3CgY5i9j_a9cBkcCWUKV",
+        "priceUsd": 8500,
+        "priceDc": 850000,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Dragon%20Lore",
+        "statTrak": false
+      },
+      {
+        "id": "skin-4f8d99d09ded_mw",
+        "name": "AWP | Dragon Lore",
+        "weapon": "AWP",
+        "skinName": "Dragon Lore",
+        "rarity": "covert",
+        "wear": "MW",
+        "wearLabel": "Немного поношенное",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqYaF7IfysCnWRxuF4j-B-Xxa_nBovp3Pdwtj9cC_GaAd0DZdwQu9fuhS4kNy0NePntVTbjYpCyyT_3CgY5i9j_a9cBkcCWUKV",
+        "priceUsd": 6970,
+        "priceDc": 697000,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Dragon%20Lore",
+        "statTrak": false
+      },
+      {
         "id": "skin-430436880a99",
         "name": "AK-47 | Safari Mesh",
         "weapon": "AK-47",
@@ -13859,34 +13887,6 @@
         "priceDc": 251,
         "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AK-47%20%7C%20Predator",
         "statTrak": true
-      },
-      {
-        "id": "skin-4f8d99d09ded",
-        "name": "AWP | Dragon Lore",
-        "weapon": "AWP",
-        "skinName": "Dragon Lore",
-        "rarity": "covert",
-        "wear": "FN",
-        "wearLabel": "Прямо с завода",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqYaF7IfysCnWRxuF4j-B-Xxa_nBovp3Pdwtj9cC_GaAd0DZdwQu9fuhS4kNy0NePntVTbjYpCyyT_3CgY5i9j_a9cBkcCWUKV",
-        "priceUsd": 8500,
-        "priceDc": 850000,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Dragon%20Lore",
-        "statTrak": false
-      },
-      {
-        "id": "skin-4f8d99d09ded_mw",
-        "name": "AWP | Dragon Lore",
-        "weapon": "AWP",
-        "skinName": "Dragon Lore",
-        "rarity": "covert",
-        "wear": "MW",
-        "wearLabel": "Немного поношенное",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqYaF7IfysCnWRxuF4j-B-Xxa_nBovp3Pdwtj9cC_GaAd0DZdwQu9fuhS4kNy0NePntVTbjYpCyyT_3CgY5i9j_a9cBkcCWUKV",
-        "priceUsd": 6970,
-        "priceDc": 697000,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Dragon%20Lore",
-        "statTrak": false
       }
     ]
   },
@@ -16729,6 +16729,48 @@
         "statTrak": false
       },
       {
+        "id": "skin-8e45a15cf7f5",
+        "name": "M4A1-S | Printstream",
+        "weapon": "M4A1-S",
+        "skinName": "Printstream",
+        "rarity": "covert",
+        "wear": "FN",
+        "wearLabel": "Прямо с завода",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_OGMWrEwL9lj_F7Rienhgk1tjyIpYPwJiPTcAAoCpsiEO5ZsUbpm9C2Zuni4VHW3o5EzSX62HxP7Sg96-hWVqYi_6TJz1aW0nxrkGs",
+        "priceUsd": 380,
+        "priceDc": 38000,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=M4A1-S%20%7C%20Printstream",
+        "statTrak": false
+      },
+      {
+        "id": "skin-be37abed2b4d",
+        "name": "USP-S | Printstream",
+        "weapon": "USP-S",
+        "skinName": "Printstream",
+        "rarity": "covert",
+        "wear": "FN",
+        "wearLabel": "Прямо с завода",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSI-WsG3SA_v5kue99XD2hkBwqjDGMnYftb3yUPFR0XsNyRrNc5kO5ltziMenr5lONj4kXyi2riywc7y9o5LtQAqQ7uvqAkScWnv4",
+        "priceUsd": 380,
+        "priceDc": 38000,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=USP-S%20%7C%20Printstream",
+        "statTrak": false
+      },
+      {
+        "id": "skin-5a39103af835",
+        "name": "AWP | Printstream",
+        "weapon": "AWP",
+        "skinName": "Printstream",
+        "rarity": "covert",
+        "wear": "FN",
+        "wearLabel": "Прямо с завода",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_DVL0OK8Yap5M-SBC2ad_uJ_t-l9AX_qlk4k5GyAzo6ocC-QZgZxX8AjEbZY5xnrxtPjM7vnsgGIj9oTmXngznQeg3pfcPs",
+        "priceUsd": 380,
+        "priceDc": 38000,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Printstream",
+        "statTrak": false
+      },
+      {
         "id": "skin-32a30647e564_mw",
         "name": "Desert Eagle | Printstream",
         "weapon": "Desert Eagle",
@@ -16782,20 +16824,6 @@
         "priceUsd": 159.6,
         "priceDc": 15960,
         "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=Desert%20Eagle%20%7C%20Printstream",
-        "statTrak": false
-      },
-      {
-        "id": "skin-8e45a15cf7f5",
-        "name": "M4A1-S | Printstream",
-        "weapon": "M4A1-S",
-        "skinName": "Printstream",
-        "rarity": "covert",
-        "wear": "FN",
-        "wearLabel": "Прямо с завода",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_OGMWrEwL9lj_F7Rienhgk1tjyIpYPwJiPTcAAoCpsiEO5ZsUbpm9C2Zuni4VHW3o5EzSX62HxP7Sg96-hWVqYi_6TJz1aW0nxrkGs",
-        "priceUsd": 380,
-        "priceDc": 38000,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=M4A1-S%20%7C%20Printstream",
         "statTrak": false
       },
       {
@@ -16855,20 +16883,6 @@
         "statTrak": false
       },
       {
-        "id": "skin-be37abed2b4d",
-        "name": "USP-S | Printstream",
-        "weapon": "USP-S",
-        "skinName": "Printstream",
-        "rarity": "covert",
-        "wear": "FN",
-        "wearLabel": "Прямо с завода",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSI-WsG3SA_v5kue99XD2hkBwqjDGMnYftb3yUPFR0XsNyRrNc5kO5ltziMenr5lONj4kXyi2riywc7y9o5LtQAqQ7uvqAkScWnv4",
-        "priceUsd": 380,
-        "priceDc": 38000,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=USP-S%20%7C%20Printstream",
-        "statTrak": false
-      },
-      {
         "id": "skin-be37abed2b4d_mw",
         "name": "USP-S | Printstream",
         "weapon": "USP-S",
@@ -16922,20 +16936,6 @@
         "priceUsd": 159.6,
         "priceDc": 15960,
         "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=USP-S%20%7C%20Printstream",
-        "statTrak": false
-      },
-      {
-        "id": "skin-5a39103af835",
-        "name": "AWP | Printstream",
-        "weapon": "AWP",
-        "skinName": "Printstream",
-        "rarity": "covert",
-        "wear": "FN",
-        "wearLabel": "Прямо с завода",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_DVL0OK8Yap5M-SBC2ad_uJ_t-l9AX_qlk4k5GyAzo6ocC-QZgZxX8AjEbZY5xnrxtPjM7vnsgGIj9oTmXngznQeg3pfcPs",
-        "priceUsd": 380,
-        "priceDc": 38000,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Printstream",
         "statTrak": false
       },
       {
@@ -16998,12 +16998,12 @@
   },
   {
     "id": "case_asiimov_mania",
-    "name": "Asiimov Мания",
-    "subtitle": "Культовая футуристическая коллекция Азимов",
+    "name": "Кейс Азимов",
+    "subtitle": "Культовая футуристическая коллекция Азимов (AWP, AK-47, M4A4, P250, P90)",
     "image": "/cases/case_asiimov_mania.svg",
     "priceDc": 8450,
     "category": "custom",
-    "badge": "ASIIMOV",
+    "badge": "АЗИМОВ",
     "skins": [
       {
         "id": "skin-bb633c21fc25",
@@ -17017,6 +17017,62 @@
         "priceUsd": 160,
         "priceDc": 16000,
         "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Asiimov",
+        "statTrak": false
+      },
+      {
+        "id": "skin-09205674e246",
+        "name": "AK-47 | Asiimov",
+        "weapon": "AK-47",
+        "skinName": "Asiimov",
+        "rarity": "covert",
+        "wear": "FN",
+        "wearLabel": "Прямо с завода",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0POlPPNSIeOaB2qf19F6ueZhW2e2wEt-t2jcytf6dymSO1JxA5oiRecLsRa5kIfkYr-241aLgotHz3-rkGoXuUp8oX57",
+        "priceUsd": 160,
+        "priceDc": 16000,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AK-47%20%7C%20Asiimov",
+        "statTrak": false
+      },
+      {
+        "id": "skin-31a3a09d007d",
+        "name": "M4A4 | Asiimov",
+        "weapon": "M4A4",
+        "skinName": "Asiimov",
+        "rarity": "covert",
+        "wear": "FN",
+        "wearLabel": "Прямо с завода",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6V6V-Kf2cGFidxOp_pewnTii3w0x_tmTRnt2qdHyWaFAjA5UlQOYI5BO5k9bhZunm41OI34NDnjK-0H3pAWw_Rw",
+        "priceUsd": 160,
+        "priceDc": 16000,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=M4A4%20%7C%20Asiimov",
+        "statTrak": false
+      },
+      {
+        "id": "skin-b10fdec34656",
+        "name": "P250 | Asiimov",
+        "weapon": "P250",
+        "skinName": "Asiimov",
+        "rarity": "classified",
+        "wear": "FN",
+        "wearLabel": "Прямо с завода",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwiFO0OL8PfRSIeOaB2qf19F6ueZhW2fixx53tWqEm4ugeXuebQN0CZJyRrMJuxm4loCyPr_i51TfjtgXzi79kGoXuUXmUJzm",
+        "priceUsd": 160,
+        "priceDc": 16000,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=P250%20%7C%20Asiimov",
+        "statTrak": false
+      },
+      {
+        "id": "skin-c01d561550ed",
+        "name": "P90 | Asiimov",
+        "weapon": "P90",
+        "skinName": "Asiimov",
+        "rarity": "covert",
+        "wear": "FN",
+        "wearLabel": "Прямо с завода",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf_jdk_6v-JaV-KfmeAXGvzedxuPUnTSjikRgksjuBzoz4dXLFb1QoC8QlTLQD4EPqk4LvN-Pns1aMioNBzTK-0H3gQVv65g",
+        "priceUsd": 160,
+        "priceDc": 16000,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=P90%20%7C%20Asiimov",
         "statTrak": false
       },
       {
@@ -17062,20 +17118,6 @@
         "statTrak": false
       },
       {
-        "id": "skin-09205674e246",
-        "name": "AK-47 | Asiimov",
-        "weapon": "AK-47",
-        "skinName": "Asiimov",
-        "rarity": "covert",
-        "wear": "FN",
-        "wearLabel": "Прямо с завода",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0POlPPNSIeOaB2qf19F6ueZhW2e2wEt-t2jcytf6dymSO1JxA5oiRecLsRa5kIfkYr-241aLgotHz3-rkGoXuUp8oX57",
-        "priceUsd": 160,
-        "priceDc": 16000,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AK-47%20%7C%20Asiimov",
-        "statTrak": false
-      },
-      {
         "id": "skin-09205674e246_mw",
         "name": "AK-47 | Asiimov",
         "weapon": "AK-47",
@@ -17115,20 +17157,6 @@
         "priceUsd": 83.2,
         "priceDc": 8320,
         "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AK-47%20%7C%20Asiimov",
-        "statTrak": false
-      },
-      {
-        "id": "skin-31a3a09d007d",
-        "name": "M4A4 | Asiimov",
-        "weapon": "M4A4",
-        "skinName": "Asiimov",
-        "rarity": "covert",
-        "wear": "FN",
-        "wearLabel": "Прямо с завода",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6V6V-Kf2cGFidxOp_pewnTii3w0x_tmTRnt2qdHyWaFAjA5UlQOYI5BO5k9bhZunm41OI34NDnjK-0H3pAWw_Rw",
-        "priceUsd": 160,
-        "priceDc": 16000,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=M4A4%20%7C%20Asiimov",
         "statTrak": false
       },
       {
@@ -17174,20 +17202,6 @@
         "statTrak": false
       },
       {
-        "id": "skin-b10fdec34656",
-        "name": "P250 | Asiimov",
-        "weapon": "P250",
-        "skinName": "Asiimov",
-        "rarity": "classified",
-        "wear": "FN",
-        "wearLabel": "Прямо с завода",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwiFO0OL8PfRSIeOaB2qf19F6ueZhW2fixx53tWqEm4ugeXuebQN0CZJyRrMJuxm4loCyPr_i51TfjtgXzi79kGoXuUXmUJzm",
-        "priceUsd": 160,
-        "priceDc": 16000,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=P250%20%7C%20Asiimov",
-        "statTrak": false
-      },
-      {
         "id": "skin-b10fdec34656_mw",
         "name": "P250 | Asiimov",
         "weapon": "P250",
@@ -17227,20 +17241,6 @@
         "priceUsd": 83.2,
         "priceDc": 8320,
         "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=P250%20%7C%20Asiimov",
-        "statTrak": false
-      },
-      {
-        "id": "skin-c01d561550ed",
-        "name": "P90 | Asiimov",
-        "weapon": "P90",
-        "skinName": "Asiimov",
-        "rarity": "covert",
-        "wear": "FN",
-        "wearLabel": "Прямо с завода",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf_jdk_6v-JaV-KfmeAXGvzedxuPUnTSjikRgksjuBzoz4dXLFb1QoC8QlTLQD4EPqk4LvN-Pns1aMioNBzTK-0H3gQVv65g",
-        "priceUsd": 160,
-        "priceDc": 16000,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=P90%20%7C%20Asiimov",
         "statTrak": false
       },
       {
@@ -17311,6 +17311,48 @@
         "statTrak": false
       },
       {
+        "id": "skin-7b1351c2adba",
+        "name": "M4A1-S | Hyper Beast",
+        "weapon": "M4A1-S",
+        "skinName": "Hyper Beast",
+        "rarity": "covert",
+        "wear": "FN",
+        "wearLabel": "Прямо с завода",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_OGMWrEwL9JuPh5SjuMlxgmoCm6lob-KT-JbwF1WZEjR-YJskK9k9XiYePltAeNjYlAxSn5j34dvCZstb4LB6Ut-7qX0V8Xkv5_2A",
+        "priceUsd": 420,
+        "priceDc": 42000,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=M4A1-S%20%7C%20Hyper%20Beast",
+        "statTrak": false
+      },
+      {
+        "id": "skin-06e2ad662c73",
+        "name": "Five-SeveN | Hyper Beast",
+        "weapon": "Five-SeveN",
+        "skinName": "Hyper Beast",
+        "rarity": "covert",
+        "wear": "FN",
+        "wearLabel": "Прямо с завода",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3l4Dl7idN6vyRa7FSJvmFC3SV1-t4j-lwXyyhlxgmoCm6lob-KT-JO1QgWZVyELEPu0W4l9KzYbzn5Fbf3YkTzn_8hihIvXxtsOoFUKYirLqX0V_f6-eqCw",
+        "priceUsd": 420,
+        "priceDc": 42000,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=Five-SeveN%20%7C%20Hyper%20Beast",
+        "statTrak": false
+      },
+      {
+        "id": "skin-d0090217a5a4",
+        "name": "Nova | Hyper Beast",
+        "weapon": "Nova",
+        "skinName": "Hyper Beast",
+        "rarity": "classified",
+        "wear": "FN",
+        "wearLabel": "Прямо с завода",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwiFO0PyhfqVSKOmDC3WSxO9lpN5lRi67gVMhsGrTmd2seH6XbA4pDZR1EbMCtES8m4fiNenl4FDcid1Az32ri3tM8G81tMCTwFwB",
+        "priceUsd": 74.8,
+        "priceDc": 7480,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=Nova%20%7C%20Hyper%20Beast",
+        "statTrak": false
+      },
+      {
         "id": "skin-f787cc672771_mw",
         "name": "AWP | Hyper Beast",
         "weapon": "AWP",
@@ -17364,20 +17406,6 @@
         "priceUsd": 126.42,
         "priceDc": 12642,
         "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Hyper%20Beast",
-        "statTrak": false
-      },
-      {
-        "id": "skin-7b1351c2adba",
-        "name": "M4A1-S | Hyper Beast",
-        "weapon": "M4A1-S",
-        "skinName": "Hyper Beast",
-        "rarity": "covert",
-        "wear": "FN",
-        "wearLabel": "Прямо с завода",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_OGMWrEwL9JuPh5SjuMlxgmoCm6lob-KT-JbwF1WZEjR-YJskK9k9XiYePltAeNjYlAxSn5j34dvCZstb4LB6Ut-7qX0V8Xkv5_2A",
-        "priceUsd": 420,
-        "priceDc": 42000,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=M4A1-S%20%7C%20Hyper%20Beast",
         "statTrak": false
       },
       {
@@ -17437,20 +17465,6 @@
         "statTrak": false
       },
       {
-        "id": "skin-06e2ad662c73",
-        "name": "Five-SeveN | Hyper Beast",
-        "weapon": "Five-SeveN",
-        "skinName": "Hyper Beast",
-        "rarity": "covert",
-        "wear": "FN",
-        "wearLabel": "Прямо с завода",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3l4Dl7idN6vyRa7FSJvmFC3SV1-t4j-lwXyyhlxgmoCm6lob-KT-JO1QgWZVyELEPu0W4l9KzYbzn5Fbf3YkTzn_8hihIvXxtsOoFUKYirLqX0V_f6-eqCw",
-        "priceUsd": 420,
-        "priceDc": 42000,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=Five-SeveN%20%7C%20Hyper%20Beast",
-        "statTrak": false
-      },
-      {
         "id": "skin-06e2ad662c73_mw",
         "name": "Five-SeveN | Hyper Beast",
         "weapon": "Five-SeveN",
@@ -17504,20 +17518,6 @@
         "priceUsd": 176.4,
         "priceDc": 17640,
         "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=Five-SeveN%20%7C%20Hyper%20Beast",
-        "statTrak": false
-      },
-      {
-        "id": "skin-d0090217a5a4",
-        "name": "Nova | Hyper Beast",
-        "weapon": "Nova",
-        "skinName": "Hyper Beast",
-        "rarity": "classified",
-        "wear": "FN",
-        "wearLabel": "Прямо с завода",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwiFO0PyhfqVSKOmDC3WSxO9lpN5lRi67gVMhsGrTmd2seH6XbA4pDZR1EbMCtES8m4fiNenl4FDcid1Az32ri3tM8G81tMCTwFwB",
-        "priceUsd": 74.8,
-        "priceDc": 7480,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=Nova%20%7C%20Hyper%20Beast",
         "statTrak": false
       },
       {
@@ -25112,48 +25112,6 @@
     "badge": "ЛЕГЕНДЫ",
     "skins": [
       {
-        "id": "skin-8aacf99e7f2f",
-        "name": "M4A4 | Howl",
-        "weapon": "M4A4",
-        "skinName": "Howl",
-        "rarity": "milspec",
-        "wear": "FN",
-        "wearLabel": "Прямо с завода",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afVSKP-EAm6extF6ueZhW2exwkl2tmTXwt39eCiUPQR2DMN4TOVetUK8xoLgM-K341eM2otDnC6okGoXufBz_TAB",
-        "priceUsd": 4200,
-        "priceDc": 420000,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=M4A4%20%7C%20Howl",
-        "statTrak": false
-      },
-      {
-        "id": "skin-8aacf99e7f2f_mw",
-        "name": "M4A4 | Howl",
-        "weapon": "M4A4",
-        "skinName": "Howl",
-        "rarity": "milspec",
-        "wear": "MW",
-        "wearLabel": "Немного поношенное",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afVSKP-EAm6extF6ueZhW2exwkl2tmTXwt39eCiUPQR2DMN4TOVetUK8xoLgM-K341eM2otDnC6okGoXufBz_TAB",
-        "priceUsd": 3444,
-        "priceDc": 344400,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=M4A4%20%7C%20Howl",
-        "statTrak": false
-      },
-      {
-        "id": "skin-8aacf99e7f2f_ft",
-        "name": "M4A4 | Howl",
-        "weapon": "M4A4",
-        "skinName": "Howl",
-        "rarity": "milspec",
-        "wear": "FT",
-        "wearLabel": "После полевых испытаний",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afVSKP-EAm6extF6ueZhW2exwkl2tmTXwt39eCiUPQR2DMN4TOVetUK8xoLgM-K341eM2otDnC6okGoXufBz_TAB",
-        "priceUsd": 2730,
-        "priceDc": 273000,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=M4A4%20%7C%20Howl",
-        "statTrak": false
-      },
-      {
         "id": "skin-4f8d99d09ded",
         "name": "AWP | Dragon Lore",
         "weapon": "AWP",
@@ -25193,6 +25151,48 @@
         "priceUsd": 5525,
         "priceDc": 552500,
         "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Dragon%20Lore",
+        "statTrak": false
+      },
+      {
+        "id": "skin-8aacf99e7f2f",
+        "name": "M4A4 | Howl",
+        "weapon": "M4A4",
+        "skinName": "Howl",
+        "rarity": "milspec",
+        "wear": "FN",
+        "wearLabel": "Прямо с завода",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afVSKP-EAm6extF6ueZhW2exwkl2tmTXwt39eCiUPQR2DMN4TOVetUK8xoLgM-K341eM2otDnC6okGoXufBz_TAB",
+        "priceUsd": 4200,
+        "priceDc": 420000,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=M4A4%20%7C%20Howl",
+        "statTrak": false
+      },
+      {
+        "id": "skin-8aacf99e7f2f_mw",
+        "name": "M4A4 | Howl",
+        "weapon": "M4A4",
+        "skinName": "Howl",
+        "rarity": "milspec",
+        "wear": "MW",
+        "wearLabel": "Немного поношенное",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afVSKP-EAm6extF6ueZhW2exwkl2tmTXwt39eCiUPQR2DMN4TOVetUK8xoLgM-K341eM2otDnC6okGoXufBz_TAB",
+        "priceUsd": 3444,
+        "priceDc": 344400,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=M4A4%20%7C%20Howl",
+        "statTrak": false
+      },
+      {
+        "id": "skin-8aacf99e7f2f_ft",
+        "name": "M4A4 | Howl",
+        "weapon": "M4A4",
+        "skinName": "Howl",
+        "rarity": "milspec",
+        "wear": "FT",
+        "wearLabel": "После полевых испытаний",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afVSKP-EAm6extF6ueZhW2exwkl2tmTXwt39eCiUPQR2DMN4TOVetUK8xoLgM-K341eM2otDnC6okGoXufBz_TAB",
+        "priceUsd": 2730,
+        "priceDc": 273000,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=M4A4%20%7C%20Howl",
         "statTrak": false
       },
       {
@@ -25238,48 +25238,6 @@
         "statTrak": false
       },
       {
-        "id": "skin-8af685c49feb",
-        "name": "AWP | Medusa",
-        "weapon": "AWP",
-        "skinName": "Medusa",
-        "rarity": "covert",
-        "wear": "FN",
-        "wearLabel": "Прямо с завода",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqfbdsH_GEHlicyOl-pK85TC23wk12tWSGnNr6JXqRPVUnA5J5RLIKshS-l4HuYbji7lfajdgU02yg2bOcOBD3",
-        "priceUsd": 441,
-        "priceDc": 44100,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Medusa",
-        "statTrak": false
-      },
-      {
-        "id": "skin-8af685c49feb_mw",
-        "name": "AWP | Medusa",
-        "weapon": "AWP",
-        "skinName": "Medusa",
-        "rarity": "covert",
-        "wear": "MW",
-        "wearLabel": "Немного поношенное",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqfbdsH_GEHlicyOl-pK85TC23wk12tWSGnNr6JXqRPVUnA5J5RLIKshS-l4HuYbji7lfajdgU02yg2bOcOBD3",
-        "priceUsd": 361.62,
-        "priceDc": 36162,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Medusa",
-        "statTrak": false
-      },
-      {
-        "id": "skin-8af685c49feb_ft",
-        "name": "AWP | Medusa",
-        "weapon": "AWP",
-        "skinName": "Medusa",
-        "rarity": "covert",
-        "wear": "FT",
-        "wearLabel": "После полевых испытаний",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqfbdsH_GEHlicyOl-pK85TC23wk12tWSGnNr6JXqRPVUnA5J5RLIKshS-l4HuYbji7lfajdgU02yg2bOcOBD3",
-        "priceUsd": 286.65,
-        "priceDc": 28665,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Medusa",
-        "statTrak": false
-      },
-      {
         "id": "skin-2b99573c887b",
         "name": "AWP | Gungnir",
         "weapon": "AWP",
@@ -25308,17 +25266,17 @@
         "statTrak": false
       },
       {
-        "id": "skin-2b99573c887b_ft",
-        "name": "AWP | Gungnir",
+        "id": "skin-8af685c49feb",
+        "name": "AWP | Medusa",
         "weapon": "AWP",
-        "skinName": "Gungnir",
+        "skinName": "Medusa",
         "rarity": "covert",
-        "wear": "FT",
-        "wearLabel": "После полевых испытаний",
-        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf-jFk7uW-V6N4LvedB3WvzedxuPUnHnjnzUl0sWrdztitI3rDZgJzAsZ1QOFY4UPqldDgMO_l41HXit9AmTK-0H227dAsvQ",
-        "priceUsd": 386.75,
-        "priceDc": 38675,
-        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Gungnir",
+        "wear": "FN",
+        "wearLabel": "Прямо с завода",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqfbdsH_GEHlicyOl-pK85TC23wk12tWSGnNr6JXqRPVUnA5J5RLIKshS-l4HuYbji7lfajdgU02yg2bOcOBD3",
+        "priceUsd": 441,
+        "priceDc": 44100,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Medusa",
         "statTrak": false
       },
       {
@@ -25336,6 +25294,34 @@
         "statTrak": false
       },
       {
+        "id": "skin-2b99573c887b_ft",
+        "name": "AWP | Gungnir",
+        "weapon": "AWP",
+        "skinName": "Gungnir",
+        "rarity": "covert",
+        "wear": "FT",
+        "wearLabel": "После полевых испытаний",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf-jFk7uW-V6N4LvedB3WvzedxuPUnHnjnzUl0sWrdztitI3rDZgJzAsZ1QOFY4UPqldDgMO_l41HXit9AmTK-0H227dAsvQ",
+        "priceUsd": 386.75,
+        "priceDc": 38675,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Gungnir",
+        "statTrak": false
+      },
+      {
+        "id": "skin-8af685c49feb_mw",
+        "name": "AWP | Medusa",
+        "weapon": "AWP",
+        "skinName": "Medusa",
+        "rarity": "covert",
+        "wear": "MW",
+        "wearLabel": "Немного поношенное",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqfbdsH_GEHlicyOl-pK85TC23wk12tWSGnNr6JXqRPVUnA5J5RLIKshS-l4HuYbji7lfajdgU02yg2bOcOBD3",
+        "priceUsd": 361.62,
+        "priceDc": 36162,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Medusa",
+        "statTrak": false
+      },
+      {
         "id": "skin-921a5a81c48a_mw",
         "name": "AK-47 | Wild Lotus",
         "weapon": "AK-47",
@@ -25347,6 +25333,20 @@
         "priceUsd": 321.44,
         "priceDc": 32144,
         "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AK-47%20%7C%20Wild%20Lotus",
+        "statTrak": false
+      },
+      {
+        "id": "skin-8af685c49feb_ft",
+        "name": "AWP | Medusa",
+        "weapon": "AWP",
+        "skinName": "Medusa",
+        "rarity": "covert",
+        "wear": "FT",
+        "wearLabel": "После полевых испытаний",
+        "image": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqfbdsH_GEHlicyOl-pK85TC23wk12tWSGnNr6JXqRPVUnA5J5RLIKshS-l4HuYbji7lfajdgU02yg2bOcOBD3",
+        "priceUsd": 286.65,
+        "priceDc": 28665,
+        "steamMarketUrl": "https://steamcommunity.com/market/search?appid=730&q=AWP%20%7C%20Medusa",
         "statTrak": false
       },
       {
