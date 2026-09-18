@@ -8,6 +8,7 @@ import { useGameStore } from '../../store/useGameStore';
 import allCasesJson from '../../data/all_cases.json';
 import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, ShieldCheck } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { CashbackModal } from './CashbackModal';
 
 interface RadialGaugeProps {
   inventory: InventoryItem[];
@@ -48,7 +49,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   // Cashback state
   const [cashbackModal, setCashbackModal] = useState<{
     isOpen: boolean;
-    caseName: string;
+    caseItem: CaseItem;
     skin: SkinEntity;
     lostAmount: number;
   } | null>(null);
@@ -295,11 +296,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
         if (selectedCase && selectedCase.skins.length > 0) {
           const cashbackDrop = selectedCase.skins[Math.floor(Math.random() * selectedCase.skins.length)];
-          addToInventory([cashbackDrop]);
-          sound.playWin('restricted');
           setCashbackModal({
             isOpen: true,
-            caseName: selectedCase.name,
+            caseItem: selectedCase,
             skin: cashbackDrop,
             lostAmount: currentLostAmount,
           });
@@ -588,13 +587,25 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 />
               </svg>
 
-              {/* Rotating Pointer Needle */}
+              {/* Rotating Pointer Needle with inward-pointing arrow */}
               <motion.div
                 animate={needleControls}
                 className="absolute w-full h-full flex items-center justify-center pointer-events-none z-10"
               >
-                <div className="relative w-full h-2 flex items-center justify-end pr-2">
-                  <div className="w-6 h-6 rounded-full bg-white border-4 border-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.9)]" />
+                <div className="relative w-full h-4 flex items-center justify-end pr-1.5">
+                  <svg
+                    className="w-7 h-7 drop-shadow-[0_0_12px_rgba(250,204,21,0.95)]"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <polygon
+                      points="2,12 20,4 20,20"
+                      fill="#FACC15"
+                      stroke="#FFFFFF"
+                      strokeWidth="2"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </div>
               </motion.div>
 
@@ -706,48 +717,6 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         </div>
       </div>
 
-      {/* ── CASHBACK MODAL (when losing drop >= 2000 DC) ── */}
-      {cashbackModal && cashbackModal.isOpen && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in">
-          <div className="relative w-full max-w-md rounded-3xl bg-[#11121a] border border-yellow-400/40 p-6 shadow-2xl flex flex-col items-center text-center">
-            <div className="w-16 h-16 rounded-2xl bg-yellow-400/20 border border-yellow-400 flex items-center justify-center text-yellow-400 mb-4 shadow-[0_0_20px_rgba(250,204,21,0.4)]">
-              <ShieldCheck className="w-9 h-9" />
-            </div>
-
-            <span className="text-xs font-black text-yellow-400 uppercase tracking-widest mb-1">
-              УТЕШИТЕЛЬНЫЙ КЕШБЭК
-            </span>
-            <h3 className="text-xl font-black text-white">Вы не остались ни с чем!</h3>
-            <p className="text-xs text-white/60 mt-1 mb-5">
-              Вы проиграли ставку в <strong className="text-yellow-400">{cashbackModal.lostAmount.toLocaleString('ru-RU')} DC</strong>. Мы автоматически открыли для вас кейс «{cashbackModal.caseName}»!
-            </p>
-
-            <div className="w-full rounded-2xl bg-black/60 border border-white/10 p-4 flex flex-col items-center mb-6">
-              <img
-                src={cashbackModal.skin.image}
-                alt={cashbackModal.skin.name}
-                referrerPolicy="no-referrer"
-                className="w-28 h-28 object-contain my-2 filter drop-shadow-xl"
-              />
-              <span className="text-sm font-black text-white">{cashbackModal.skin.name}</span>
-              <span className="text-xs font-mono font-black text-yellow-400 mt-1">
-                {cashbackModal.skin.priceDc.toLocaleString('ru-RU')} DC
-              </span>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => {
-                sound.playClick();
-                setCashbackModal(null);
-              }}
-              className="w-full py-3.5 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-sm uppercase tracking-wider shadow-lg cursor-pointer transition-all"
-            >
-              Забрать в инвентарь
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* ── BOTTOM SECTION: INVENTORY & CATALOG ── */}
       <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -820,10 +789,20 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     </div>
 
                     <div className="w-full flex flex-col">
-                      <span className="text-[11px] font-black text-white truncate">
-                        {item.skinName || item.name}
-                      </span>
-                      <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
+                      <div className="flex items-center gap-1">
+                        {item.statTrak && (
+                          <span className="text-[8px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40 shrink-0">
+                            ST
+                          </span>
+                        )}
+                        <span className="text-[11px] font-black text-white truncate">
+                          {item.skinName || item.name}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between text-[9px] text-white/40">
+                        <span className="truncate">{item.weapon}</span>
+                        <span className="shrink-0">{item.wear}</span>
+                      </div>
                       <span className="text-[11px] font-mono font-black text-yellow-400 mt-1">
                         {item.priceDc.toLocaleString('ru-RU')} DC
                       </span>
@@ -923,10 +902,20 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     </div>
 
                     <div className="w-full flex flex-col">
-                      <span className="text-[11px] font-black text-white truncate">
-                        {skin.skinName || skin.name}
-                      </span>
-                      <span className="text-[9px] text-white/40 truncate">{skin.weapon}</span>
+                      <div className="flex items-center gap-1">
+                        {skin.statTrak && (
+                          <span className="text-[8px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40 shrink-0">
+                            ST
+                          </span>
+                        )}
+                        <span className="text-[11px] font-black text-white truncate">
+                          {skin.skinName || skin.name}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between text-[9px] text-white/40">
+                        <span className="truncate">{skin.weapon}</span>
+                        <span className="shrink-0">{skin.wear}</span>
+                      </div>
                       <span className="text-[11px] font-mono font-black text-yellow-400 mt-1">
                         {skin.priceDc.toLocaleString('ru-RU')} DC
                       </span>
@@ -938,6 +927,21 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           </div>
         </div>
       </div>
+
+      {/* Cashback Modal */}
+      {cashbackModal && (
+        <CashbackModal
+          isOpen={cashbackModal.isOpen}
+          caseItem={cashbackModal.caseItem}
+          winningSkin={cashbackModal.skin}
+          lostAmount={cashbackModal.lostAmount}
+          onClaim={() => {
+            addToInventory([cashbackModal.skin]);
+            setCashbackModal(null);
+          }}
+          onClose={() => setCashbackModal(null)}
+        />
+      )}
     </div>
   );
 };

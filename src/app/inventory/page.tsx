@@ -21,8 +21,25 @@ export default function InventoryPage() {
 
   const filteredInventory = inventory.filter((item) => {
     if (filterRarity === 'all') return true;
-    if (filterRarity === 'gold') return item.rarity === 'gold';
-    if (filterRarity === 'covert') return item.rarity === 'covert' || item.rarity === 'contraband';
+    if (filterRarity === 'gold') {
+      return (
+        item.rarity === 'gold' ||
+        item.rarity === 'extraordinary' ||
+        item.weapon.includes('Knife') ||
+        item.weapon.includes('Bayonet') ||
+        item.weapon.includes('Karambit') ||
+        item.weapon.includes('Daggers') ||
+        item.weapon.includes('Gloves') ||
+        item.weapon.includes('Wraps')
+      );
+    }
+    if (filterRarity === 'covert') {
+      return (item.rarity === 'covert' || item.rarity === 'contraband') &&
+        !item.weapon.includes('Knife') &&
+        !item.weapon.includes('Bayonet') &&
+        !item.weapon.includes('Karambit') &&
+        !item.weapon.includes('Daggers');
+    }
     return item.rarity === filterRarity;
   });
 
@@ -135,7 +152,14 @@ export default function InventoryPage() {
                     style={{ borderBottomWidth: '3px', borderBottomColor: config.color }}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] text-white/40 font-bold">{item.wear}</span>
+                      <div className="flex items-center gap-1">
+                        {item.statTrak && (
+                          <span className="text-[9px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40">
+                            ST
+                          </span>
+                        )}
+                        <span className="text-[10px] text-white/50 font-bold">{item.wear}</span>
+                      </div>
                       <RarityBadge rarity={item.rarity} size="sm" />
                     </div>
 

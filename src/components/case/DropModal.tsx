@@ -53,10 +53,15 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, onKeep, onSell }) =>
         </div>
 
         <div className="flex flex-col items-center gap-1.5 mb-5 w-full">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1 flex-wrap justify-center">
+            {skin.statTrak && (
+              <span className="text-xs px-2.5 py-1 rounded-full bg-amber-500/20 border border-amber-500 text-amber-400 font-mono font-black uppercase tracking-wider shadow-[0_0_8px_rgba(245,158,11,0.4)]">
+                StatTrak™
+              </span>
+            )}
             <RarityBadge rarity={skin.rarity} size="md" />
             <span className="text-xs px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/70 font-bold">
-              {skin.wearLabel}
+              {skin.wearLabel || skin.wear}
             </span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">

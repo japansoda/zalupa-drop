@@ -33,17 +33,50 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseSkins, casePrice
   const lastSoundTickPos = useRef<number>(0);
 
   const pickWeightedSkin = (): SkinEntity => {
-    const golds = caseSkins.filter(s => s.rarity === 'gold');
-    const coverts = caseSkins.filter(s => s.rarity === 'covert' || s.rarity === 'contraband');
-    const classifieds = caseSkins.filter(s => s.rarity === 'classified');
-    const restricteds = caseSkins.filter(s => s.rarity === 'restricted');
-    const milspecs = caseSkins.filter(s => s.rarity === 'milspec' || s.rarity === 'consumer');
+    const isKnifeOrGlove = (s: SkinEntity) =>
+      s.rarity === 'gold' ||
+      s.rarity === 'extraordinary' ||
+      s.weapon.includes('Knife') ||
+      s.weapon.includes('Bayonet') ||
+      s.weapon.includes('Karambit') ||
+      s.weapon.includes('Daggers') ||
+      s.weapon.includes('Gloves') ||
+      s.weapon.includes('Wraps');
 
+    const knivesAndGloves = caseSkins.filter(isKnifeOrGlove);
+    const coverts = caseSkins.filter(s => (s.rarity === 'covert' || s.rarity === 'contraband') && !isKnifeOrGlove(s));
+    const classifieds = caseSkins.filter(s => s.rarity === 'classified' && !isKnifeOrGlove(s));
+    const restricteds = caseSkins.filter(s => s.rarity === 'restricted' && !isKnifeOrGlove(s));
+    const milspecs = caseSkins.filter(s => (s.rarity === 'milspec' || s.rarity === 'consumer' || s.rarity === 'industrial') && !isKnifeOrGlove(s));
+
+    const lowerName = caseName.toLowerCase();
     const roll = Math.random() * 100;
-    if (roll < 0.6 && golds.length > 0) return golds[Math.floor(Math.random() * golds.length)];
-    if (roll < 2.2 && coverts.length > 0) return coverts[Math.floor(Math.random() * coverts.length)];
-    if (roll < 8.5 && classifieds.length > 0) return classifieds[Math.floor(Math.random() * classifieds.length)];
-    if (roll < 26.0 && restricteds.length > 0) return restricteds[Math.floor(Math.random() * restricteds.length)];
+
+    // Special custom cases
+    if (lowerName.includes('10% нож') && knivesAndGloves.length > 0) {
+      if (roll < 10) return knivesAndGloves[Math.floor(Math.random() * knivesAndGloves.length)];
+      const others = caseSkins.filter(s => !isKnifeOrGlove(s));
+      return others.length > 0 ? others[Math.floor(Math.random() * others.length)] : caseSkins[0];
+    }
+
+    if (lowerName.includes('50% нож') && knivesAndGloves.length > 0) {
+      if (roll < 50) return knivesAndGloves[Math.floor(Math.random() * knivesAndGloves.length)];
+      const others = caseSkins.filter(s => !isKnifeOrGlove(s));
+      return others.length > 0 ? others[Math.floor(Math.random() * others.length)] : caseSkins[0];
+    }
+
+    if (lowerName.includes('мусорка') && knivesAndGloves.length > 0) {
+      if (roll < 0.1) return knivesAndGloves[Math.floor(Math.random() * knivesAndGloves.length)];
+      if (roll < 2.0 && coverts.length > 0) return coverts[Math.floor(Math.random() * coverts.length)];
+      if (roll < 15.0 && restricteds.length > 0) return restricteds[Math.floor(Math.random() * restricteds.length)];
+      if (milspecs.length > 0) return milspecs[Math.floor(Math.random() * milspecs.length)];
+    }
+
+    // Standard CS2 calibrated odds (RTP ~93-95%)
+    if (roll < 0.4 && knivesAndGloves.length > 0) return knivesAndGloves[Math.floor(Math.random() * knivesAndGloves.length)];
+    if (roll < 1.9 && coverts.length > 0) return coverts[Math.floor(Math.random() * coverts.length)];
+    if (roll < 6.4 && classifieds.length > 0) return classifieds[Math.floor(Math.random() * classifieds.length)];
+    if (roll < 24.4 && restricteds.length > 0) return restricteds[Math.floor(Math.random() * restricteds.length)];
     if (milspecs.length > 0) return milspecs[Math.floor(Math.random() * milspecs.length)];
     return caseSkins[Math.floor(Math.random() * caseSkins.length)];
   };
@@ -187,7 +220,14 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseSkins, casePrice
                   }}
                 >
                   <div className="w-full flex justify-between items-center z-10">
-                    <span className="text-[10px] text-white/40 font-medium">{skin.wear}</span>
+                    <div className="flex items-center gap-1">
+                      {skin.statTrak && (
+                        <span className="text-[9px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40">
+                          ST
+                        </span>
+                      )}
+                      <span className="text-[10px] text-white/50 font-medium">{skin.wear}</span>
+                    </div>
                     <span 
                       className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full"
                       style={{ color: config.color, backgroundColor: config.bg }}

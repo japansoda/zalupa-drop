@@ -33,6 +33,7 @@ export interface CaseItem {
   image: string;
   priceDc: number;
   badge?: string;
+  category?: 'official' | 'custom' | 'knives' | 'budget' | 'highroller' | 'weapons' | 'stickers';
   skins: SkinEntity[];
 }
 
