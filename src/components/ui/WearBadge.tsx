@@ -1,6 +1,7 @@
 import React from 'react';
 import { WEAR_CONFIG, STICKER_EFFECT_CONFIG } from '../../data/skins';
 import { SkinEntity } from '../../lib/types';
+import { useLanguage } from '../../lib/i18n';
 
 interface WearBadgeProps {
   skin?: Partial<SkinEntity>;
@@ -43,11 +44,15 @@ export const WearBadge: React.FC<WearBadgeProps> = ({
     );
   }
 
+  const { t } = useLanguage();
+
   // If item is a weapon/knife/glove with wear
   const wearConfig = WEAR_CONFIG[wearCode];
   if (!wearConfig) {
     return null;
   }
+
+  const label = t('wear.' + wearCode) || wearConfig.label;
 
   const sizeClasses = {
     xs: 'text-[9px] px-1.5 py-0.5',
@@ -63,9 +68,9 @@ export const WearBadge: React.FC<WearBadgeProps> = ({
         backgroundColor: wearConfig.bg,
         borderColor: wearConfig.border,
       }}
-      title={wearConfig.label}
+      title={label}
     >
-      {showFullLabel ? wearConfig.label : wearConfig.short}
+      {showFullLabel ? label : wearConfig.short}
     </span>
   );
 };

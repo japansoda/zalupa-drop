@@ -14,11 +14,13 @@ import { WearBadge } from '../../../components/ui/WearBadge';
 import { CASES_DATABASE } from '../../../data/cases';
 import { RARITY_CONFIG } from '../../../data/skins';
 import { sound } from '../../../lib/sound';
+import { useLanguage } from '../../../lib/i18n';
 import { ArrowLeft, ExternalLink, ShieldCheck } from 'lucide-react';
 
 export default function CaseOpenPage() {
   const params = useParams();
   const caseId = params?.id as string;
+  const { t, locale } = useLanguage();
 
   const currentCase = CASES_DATABASE.find((c) => c.id === caseId);
 
@@ -27,9 +29,9 @@ export default function CaseOpenPage() {
       <main className="min-h-screen flex flex-col justify-between bg-[#08080a]">
         <Header />
         <div className="max-w-md mx-auto text-center py-24">
-          <h2 className="text-2xl font-bold text-white mb-4">Кейс не найден</h2>
+          <h2 className="text-2xl font-bold text-white mb-4">{t('case.notFound')}</h2>
           <Link href="/" className="px-6 py-3 rounded-xl btn-yellow text-black font-bold">
-            Вернуться на главную
+            {t('case.backHome')}
           </Link>
         </div>
         <Footer />
@@ -50,7 +52,7 @@ export default function CaseOpenPage() {
             className="inline-flex items-center gap-2 text-xs font-bold text-white/60 hover:text-yellow-400 transition-colors mb-4"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Назад ко всем кейсам</span>
+            <span>{t('case.back')}</span>
           </Link>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-white/10">
@@ -74,7 +76,7 @@ export default function CaseOpenPage() {
             </div>
 
             <div className="flex items-center gap-2 px-5 py-2.5 rounded-2xl glass-panel border border-white/10">
-              <span className="text-xs text-white/60 font-bold">Цена открытия:</span>
+              <span className="text-xs text-white/60 font-bold">{t('case.openCost')}</span>
               <div className="flex items-center gap-1.5">
                 <DropCoinIcon size={20} />
                 <span className="font-mono font-black text-lg text-yellow-400">
@@ -98,11 +100,11 @@ export default function CaseOpenPage() {
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-yellow-400" />
               <h2 className="text-xl font-black text-white uppercase tracking-tight">
-                Содержимое кейса ({currentCase.skins.length} предметов)
+                {t('case.contents')} ({currentCase.skins.length} {t('home.items')})
               </h2>
             </div>
             <span className="text-xs text-white/50">
-              Вероятности соответствуют стандартам CS2
+              {t('case.fairOdds')}
             </span>
           </div>
 

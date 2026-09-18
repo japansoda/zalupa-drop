@@ -11,6 +11,7 @@ import confetti from 'canvas-confetti';
 import { CashbackModal } from './CashbackModal';
 import { WearBadge } from '../ui/WearBadge';
 import { SkinImage } from '../ui/SkinImage';
+import { useLanguage } from '../../lib/i18n';
 
 export const matchesCatalogType = (skin: SkinEntity, type: string): boolean => {
   if (type === 'all') return true;
@@ -90,6 +91,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     consumePotionCharge,
     addToken,
   } = useGameStore();
+  const { t, locale } = useLanguage();
 
   const [selectedItems, setSelectedItems] = useState<InventoryItem[]>([]);
   const [customBetDc, setCustomBetDc] = useState<number>(1000);
@@ -261,13 +263,13 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
   // Risk label
   const riskLabel = useMemo(() => {
-    if (chance >= 75) return { text: 'Очень высокий шанс', color: '#10B981' };
-    if (chance >= 50) return { text: 'Высокий шанс', color: '#10B981' };
-    if (chance >= 25) return { text: 'Средний шанс', color: '#FACC15' };
-    if (chance >= 10) return { text: 'Рискованный шанс', color: '#FB923C' };
-    if (chance >= 1) return { text: 'Низкий шанс', color: '#F87171' };
-    return { text: 'Экстремальный шанс', color: '#EF4444' };
-  }, [chance]);
+    if (chance >= 75) return { text: t('risk.veryHigh'), color: '#10B981' };
+    if (chance >= 50) return { text: t('risk.high'), color: '#10B981' };
+    if (chance >= 25) return { text: t('risk.medium'), color: '#FACC15' };
+    if (chance >= 10) return { text: t('risk.risky'), color: '#FB923C' };
+    if (chance >= 1) return { text: t('risk.low'), color: '#F87171' };
+    return { text: t('risk.extreme'), color: '#EF4444' };
+  }, [chance, t]);
 
   // Toggle inventory item selection (up to 5 items)
   const handleToggleInventoryItem = (item: InventoryItem) => {
@@ -490,10 +492,68 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   // Circular gauge constants
   const gaugeR = 100;
   const gaugeC = 2 * Math.PI * gaugeR;
-  const baseArcLen = Math.max(1, (baseChance / 100) * gaugeC);
-  const potionArcLen = potionBonus > 0 ? (potionBonus / 100) * gaugeC : 0;
-  const rotateDeg = 90 - (chance * 1.8);
-  const potionRotateDeg = rotateDeg + (baseChance * 3.6);
+  const baseArcLen = Math.max(0.5, (baseChance / 100) * gaugeC);
+  const halfPotion = potionBonus / 2;
+  const wingArcLen = halfPotion > 0 ? (halfPotion / 100) * gaugeC : 0;
+
+  // Symmetrical layout: Winning sector centered at bottom (90 deg)
+  const baseStartDeg = 90 - (baseChance * 1.8);
+  const leftWingStartDeg = baseStartDeg - (halfPotion * 3.6);
+  const rightWingStartDeg = 90 + (baseChance * 1.8);
+
+  // Bubbles strictly inside potion wings
+  const potionBubbles = useMemo(() => {
+    if (potionBonus <= 0) return [];
+    const bubbles: Array<{ id: string; cx: number; cy: number; r: number; delay: string; duration: string; color: string }> = [];
+
+    const leftSpan = halfPotion * 3.6;
+    const rightSpan = halfPotion * 3.6;
+
+    // 4 bubbles strictly in left wing
+    const leftFractions = [0.2, 0.45, 0.7, 0.9];
+    const leftOffsets = [-3, 2, -1, 3];
+    const leftSizes = [2.8, 3.4, 2.2, 3.0];
+    const delays = ['0s', '0.6s', '1.2s', '1.8s', '0.3s', '0.9s', '1.5s', '2.1s'];
+    const durations = ['2.2s', '2.6s', '2.0s', '2.8s', '2.4s', '2.1s', '2.7s', '2.3s'];
+    const colors = ['#6ee7b7', '#34d399', '#a7f3d0', '#10b981'];
+
+    leftFractions.forEach((frac, idx) => {
+      const angle = leftWingStartDeg + frac * leftSpan;
+      const rad = (angle * Math.PI) / 180;
+      const r = gaugeR + leftOffsets[idx];
+      bubbles.push({
+        id: `left-b-${idx}`,
+        cx: Number((120 + r * Math.cos(rad)).toFixed(2)),
+        cy: Number((120 + r * Math.sin(rad)).toFixed(2)),
+        r: leftSizes[idx],
+        delay: delays[idx],
+        duration: durations[idx],
+        color: colors[idx % colors.length],
+      });
+    });
+
+    // 4 bubbles strictly in right wing
+    const rightFractions = [0.15, 0.4, 0.65, 0.88];
+    const rightOffsets = [3, -2, 2, -3];
+    const rightSizes = [3.2, 2.4, 3.5, 2.0];
+
+    rightFractions.forEach((frac, idx) => {
+      const angle = rightWingStartDeg + frac * rightSpan;
+      const rad = (angle * Math.PI) / 180;
+      const r = gaugeR + rightOffsets[idx];
+      bubbles.push({
+        id: `right-b-${idx}`,
+        cx: Number((120 + r * Math.cos(rad)).toFixed(2)),
+        cy: Number((120 + r * Math.sin(rad)).toFixed(2)),
+        r: rightSizes[idx],
+        delay: delays[idx + 4],
+        duration: durations[idx + 4],
+        color: colors[(idx + 2) % colors.length],
+      });
+    });
+
+    return bubbles;
+  }, [potionBonus, leftWingStartDeg, rightWingStartDeg, halfPotion, gaugeR]);
 
   const targetConfig = targetSkin ? RARITY_CONFIG[targetSkin.rarity] || RARITY_CONFIG.milspec : RARITY_CONFIG.milspec;
 
@@ -513,7 +573,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     betMode === 'skin' ? 'bg-yellow-400 text-black' : 'text-white/60 hover:text-white'
                   }`}
                 >
-                  СКИHЫ ({selectedItems.length}/5)
+                  {t('upg.tab.skins')} ({selectedItems.length}/5)
                 </button>
                 <button
                   type="button"
@@ -522,7 +582,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     betMode === 'dc' ? 'bg-yellow-400 text-black' : 'text-white/60 hover:text-white'
                   }`}
                 >
-                  БАЛАНС
+                  {t('upg.tab.balance')}
                 </button>
                 <button
                   type="button"
@@ -538,7 +598,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   }`}
                 >
                   <Gift className="w-3 h-3" />
-                  <span>РАСХОДНИКИ</span>
+                  <span>{t('upg.tab.consumables')}</span>
                 </button>
               </div>
 
@@ -548,7 +608,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   onClick={handleClearAllSelected}
                   className="text-xs text-white/50 hover:text-red-400 transition-colors cursor-pointer"
                 >
-                  Сбросить
+                  {t('upg.reset')}
                 </button>
               )}
             </div>
@@ -561,8 +621,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     <div className="w-12 h-12 rounded-full border border-dashed border-white/20 flex items-center justify-center text-white/40 mb-2">
                       <Plus className="w-5 h-5" />
                     </div>
-                    <span className="text-xs text-white/60 font-bold">Выберите до 5 скинов</span>
-                    <span className="text-[11px] text-white/40 mt-1">в инвентаре внизу</span>
+                    <span className="text-xs text-white/60 font-bold">{t('upg.selectUpTo5')}</span>
+                    <span className="text-[11px] text-white/40 mt-1">{t('upg.inInventoryBelow')}</span>
                   </div>
                 ) : (
                   <div className="flex flex-col h-full justify-between">
@@ -600,13 +660,13 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                           className="rounded-xl border border-dashed border-white/10 flex flex-col items-center justify-center h-20 text-white/20"
                         >
                           <Plus className="w-4 h-4" />
-                          <span className="text-[9px] mt-0.5">Слот</span>
+                          <span className="text-[9px] mt-0.5">{t('upg.slot')}</span>
                         </div>
                       ))}
                     </div>
 
                     <div className="flex items-center justify-between pt-2 border-t border-white/10 text-xs">
-                      <span className="text-white/60 font-bold">Сумма ставки:</span>
+                      <span className="text-white/60 font-bold">{t('upg.betSum')}</span>
                       <div className="flex items-center gap-1 font-mono font-black text-yellow-400">
                         <DropCoinIcon size={14} />
                         <span>{effectiveBetDc.toLocaleString('ru-RU')} DC</span>
@@ -622,21 +682,25 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
                         <span className="text-base animate-pulse">🧪</span>
-                        <span className="text-xs font-black text-emerald-300">Зелье удачи</span>
+                        <span className="text-xs font-black text-emerald-300">{t('upg.potionTitle')}</span>
                         <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
-                          Контрабанда
+                          {t('upg.contraband')}
                         </span>
                       </div>
-                      <span className="text-xs font-mono font-black text-white">{potionsCount} шт.</span>
+                      <span className="text-xs font-mono font-black text-white">
+                        {locale === 'ru' ? `${potionsCount} шт.` : `${potionsCount} pcs.`}
+                      </span>
                     </div>
 
                     {activePotionCharges > 0 ? (
                       <div className="flex items-center justify-between p-1.5 rounded-lg bg-emerald-900/50 border border-emerald-400/40 text-[11px] font-bold text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
                         <span className="flex items-center gap-1">
                           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                          +15% шанс активно
+                          {t('upg.potionActive')}
                         </span>
-                        <span className="font-mono font-black">{activePotionCharges}/3 прокрута</span>
+                        <span className="font-mono font-black">
+                          {activePotionCharges}/3 {t('upg.potionCharges')}
+                        </span>
                       </div>
                     ) : (
                       <button
@@ -651,7 +715,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                             : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
                         }`}
                       >
-                        <span>{potionsCount > 0 ? 'Выпить (+15% на 3 прокрута)' : 'Нет в запасе (дроп с кейсов)'}</span>
+                        <span>{potionsCount > 0 ? t('upg.drinkPotion') : t('upg.noPotions')}</span>
                       </button>
                     )}
                   </div>
@@ -659,7 +723,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   {/* Tokens Row */}
                   <div className="flex flex-col gap-1 flex-1">
                     <div className="flex items-center justify-between mb-0.5">
-                      <span className="text-[11px] font-bold text-white/70">Мои токены:</span>
+                      <span className="text-[11px] font-bold text-white/70">{t('upg.myTokens')}</span>
                       {selectedToken && (
                         <span className="text-[10px] text-yellow-400 font-mono font-bold">
                           +{selectedToken.valueDc.toLocaleString('ru-RU')} DC
@@ -669,7 +733,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
                     {UPGRADE_TOKENS.filter((tok) => (tokens[tok.id] || 0) > 0).length === 0 ? (
                       <div className="p-3 text-center text-[11px] text-white/40 border border-dashed border-white/10 rounded-xl">
-                        У вас нет токенов. Выбивайте их из кейсов или как утешительный приз!
+                        {t('upg.noTokensOwned')}
                       </div>
                     ) : (
                       <div className="flex flex-col gap-1 overflow-y-auto max-h-28 pr-1">
@@ -696,11 +760,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                                 <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: rConf.color }} />
                                 <div className="flex flex-col">
                                   <div className="flex items-center gap-1">
-                                    <span className="text-xs font-black text-white">{token.name}</span>
+                                    <span className="text-xs font-black text-white">{t('token.' + token.rarity) || token.name}</span>
                                     <span className="text-[10px] font-mono text-yellow-400 font-bold">x{count}</span>
                                   </div>
                                   <span className="text-[9px] text-white/40">
-                                    Цель до {token.maxTargetDc.toLocaleString('ru-RU')} DC
+                                    {t('upg.targetUpTo')} {token.maxTargetDc.toLocaleString('ru-RU')} DC
                                   </span>
                                 </div>
                               </div>
@@ -718,7 +782,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 /* DC BET MODE */
                 <div className="h-full flex flex-col justify-between p-2">
                   <div className="flex flex-col gap-2">
-                    <label className="text-xs font-bold text-white/60">Ставка с баланса DC:</label>
+                    <label className="text-xs font-bold text-white/60">{t('upg.dcBet')}</label>
                     <div className="flex items-center gap-2 p-3 rounded-xl bg-black/60 border border-white/10">
                       <DropCoinIcon size={20} />
                       <input
@@ -751,7 +815,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             </div>
           </div>
 
-          {/* 2. CENTER: CIRCULAR DRUM GAUGE WITH LUCK POTION BUBBLES */}
+          {/* 2. CENTER: CIRCULAR DRUM GAUGE WITH SYMMETRICAL POTION EXPANSION & BUBBLES */}
           <div className="lg:col-span-4 flex flex-col items-center justify-center relative">
             {/* Circular Speedometer Gauge */}
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center">
@@ -763,6 +827,29 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
               {/* SVG Arc Track */}
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 240 240">
+                <defs>
+                  <style>
+                    {`
+                      @keyframes potionBubblePulse {
+                        0%, 100% {
+                          transform: scale(0.85) translate(0, 0);
+                          opacity: 0.5;
+                        }
+                        50% {
+                          transform: scale(1.25) translate(0.5px, -1px);
+                          opacity: 1;
+                        }
+                      }
+                      .potion-bubble-item {
+                        animation: potionBubblePulse ease-in-out infinite;
+                        transform-origin: center;
+                        transform-box: fill-box;
+                      }
+                    `}
+                  </style>
+                </defs>
+
+                {/* Dark Background Track */}
                 <circle
                   cx="120"
                   cy="120"
@@ -772,7 +859,23 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   strokeWidth="18"
                 />
 
-                {/* Base chance arc that sweeps upwards */}
+                {/* Left Potion Wing (Symmetrical left expansion, sharp butt joint) */}
+                {potionBonus > 0 && (
+                  <circle
+                    cx="120"
+                    cy="120"
+                    r={gaugeR}
+                    fill="none"
+                    stroke="#047857"
+                    strokeWidth="18"
+                    strokeDasharray={`${wingArcLen} ${gaugeC}`}
+                    strokeLinecap="butt"
+                    transform={`rotate(${leftWingStartDeg}, 120, 120)`}
+                    className="filter drop-shadow-[0_0_12px_rgba(5,150,105,0.85)] transition-all duration-300"
+                  />
+                )}
+
+                {/* Base chance arc (Emerald Green, sharp butt joint meeting potion wings) */}
                 <circle
                   cx="120"
                   cy="120"
@@ -781,30 +884,55 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   stroke="#10B981"
                   strokeWidth="18"
                   strokeDasharray={`${baseArcLen} ${gaugeC}`}
-                  strokeLinecap="round"
-                  transform={`rotate(${rotateDeg}, 120, 120)`}
+                  strokeLinecap="butt"
+                  transform={`rotate(${baseStartDeg}, 120, 120)`}
                   className="transition-all duration-300 filter drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]"
                 />
 
-                {/* Dark Green Luck Potion Bonus Arc (+15%) with Bubble Animation */}
+                {/* Right Potion Wing (Symmetrical right expansion, sharp butt joint) */}
                 {potionBonus > 0 && (
-                  <g className="transition-all duration-300">
-                    <circle
-                      cx="120"
-                      cy="120"
-                      r={gaugeR}
-                      fill="none"
-                      stroke="#047857"
-                      strokeWidth="18"
-                      strokeDasharray={`${potionArcLen} ${gaugeC}`}
-                      strokeLinecap="round"
-                      transform={`rotate(${potionRotateDeg}, 120, 120)`}
-                      className="filter drop-shadow-[0_0_12px_rgba(5,150,105,0.85)]"
-                    />
-                    {/* Floating SVG bubbles on potion arc */}
-                    <circle cx="120" cy="20" r="3" fill="#34d399" opacity="0.8" className="animate-ping" />
-                    <circle cx="126" cy="25" r="2" fill="#6ee7b7" opacity="0.6" className="animate-bounce" />
-                    <circle cx="114" cy="22" r="2.5" fill="#a7f3d0" opacity="0.7" className="animate-pulse" />
+                  <circle
+                    cx="120"
+                    cy="120"
+                    r={gaugeR}
+                    fill="none"
+                    stroke="#047857"
+                    strokeWidth="18"
+                    strokeDasharray={`${wingArcLen} ${gaugeC}`}
+                    strokeLinecap="butt"
+                    transform={`rotate(${rightWingStartDeg}, 120, 120)`}
+                    className="filter drop-shadow-[0_0_12px_rgba(5,150,105,0.85)] transition-all duration-300"
+                  />
+                )}
+
+                {/* Floating SVG bubbles: STRICTLY inside potion wings */}
+                {potionBonus > 0 && (
+                  <g className="transition-all duration-300 pointer-events-none">
+                    {potionBubbles.map((b) => (
+                      <g
+                        key={b.id}
+                        className="potion-bubble-item"
+                        style={{
+                          animationDelay: b.delay,
+                          animationDuration: b.duration,
+                        }}
+                      >
+                        <circle
+                          cx={b.cx}
+                          cy={b.cy}
+                          r={b.r}
+                          fill={b.color}
+                          className="filter drop-shadow-[0_0_5px_rgba(52,211,153,0.9)]"
+                        />
+                        <circle
+                          cx={b.cx - b.r * 0.3}
+                          cy={b.cy - b.r * 0.3}
+                          r={b.r * 0.35}
+                          fill="#ffffff"
+                          opacity="0.85"
+                        />
+                      </g>
+                    ))}
                   </g>
                 )}
               </svg>
@@ -838,7 +966,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 </span>
                 {activePotionCharges > 0 ? (
                   <div className="flex items-center gap-1 mt-1 px-2.5 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500 text-[10px] font-black text-emerald-300 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]">
-                    <span>🧪 +15% Зелье ({activePotionCharges}/3)</span>
+                    <span>{t('upg.potionBadge')} ({activePotionCharges}/3)</span>
                   </div>
                 ) : (
                   <span
@@ -865,14 +993,14 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               >
                 <span>
                   {isUpgrading
-                    ? 'Крутим...'
+                    ? t('upg.spinning')
                     : betMode === 'skin' && selectedItems.length === 0
-                    ? 'Выберите скины'
+                    ? t('upg.selectSkinsBtn')
                     : betMode === 'consumables' && !selectedToken
-                    ? 'Выберите токен'
+                    ? t('upg.selectTokenBtn')
                     : !targetSkin
-                    ? 'Выберите цель'
-                    : 'Улучшить »'}
+                    ? t('upg.selectTargetBtn')
+                    : t('upg.upgradeBtn')}
                 </span>
               </button>
             </div>
@@ -904,7 +1032,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               }}
             >
               <div className="flex items-center justify-between text-xs">
-                <span className="font-bold text-white/60 uppercase">Вы получаете:</span>
+                <span className="font-bold text-white/60 uppercase">{t('upg.targetItem')}</span>
                 <span
                   className="font-black px-2 py-0.5 rounded-full text-[10px]"
                   style={{ backgroundColor: targetConfig.border, color: '#FFFFFF' }}
@@ -932,12 +1060,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               ) : (
                 <div className="flex flex-col items-center justify-center my-auto text-center text-white/40">
                   <AlertCircle className="w-8 h-8 mb-1" />
-                  <span className="text-xs">Выберите цель из каталога</span>
+                  <span className="text-xs">{t('upg.chooseTarget')}</span>
                 </div>
               )}
 
               <div className="flex items-center justify-between pt-2 border-t border-white/10">
-                <span className="text-xs text-white/60">Стоимость:</span>
+                <span className="text-xs text-white/60">{t('upg.target')}</span>
                 <div className="flex items-center gap-1 font-mono font-black text-yellow-400 text-base">
                   <DropCoinIcon size={18} />
                   <span>{targetSkin ? targetSkin.priceDc.toLocaleString('ru-RU') : 0} DC</span>
@@ -955,7 +1083,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         <div className="rounded-3xl p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col">
           <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
             <div className="flex items-center gap-2">
-              <h2 className="text-base font-black text-white uppercase">Мои скины</h2>
+              <h2 className="text-base font-black text-white uppercase">{t('upg.myInventory')}</h2>
               <span className="text-xs font-bold text-white/40">({inventory.length})</span>
             </div>
 
@@ -966,7 +1094,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 className="text-xs text-white/50 hover:text-white flex items-center gap-1 cursor-pointer"
               >
                 <RotateCcw className="w-3 h-3" />
-                <span>Отменить выбор</span>
+                <span>{t('upg.clearAll')}</span>
               </button>
             )}
           </div>
@@ -976,7 +1104,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             <Search className="w-4 h-4 text-white/40" />
             <input
               type="text"
-              placeholder="Поиск по инвентарю..."
+              placeholder={t('upg.searchMy')}
               value={mySearch}
               onChange={(e) => setMySearch(e.target.value)}
               className="w-full bg-transparent text-xs text-white outline-none"
@@ -987,7 +1115,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-h-96 overflow-y-auto pr-1">
             {filteredMySkins.length === 0 ? (
               <div className="col-span-full py-12 text-center text-xs text-white/40">
-                Инвентарь пуст. Откройте кейсы на главной!
+                {t('inv.emptyHint')}
               </div>
             ) : (
               filteredMySkins.map((item) => {
@@ -1049,10 +1177,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         <div className="rounded-3xl p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10">
             <div className="flex items-center gap-2">
-              <h2 className="text-base font-black text-white uppercase">Вы получаете</h2>
+              <h2 className="text-base font-black text-white uppercase">{t('upg.targetCatalog')}</h2>
               <span className="text-[11px] text-yellow-400/80 font-bold">
-                (скины дороже {effectiveBetDc.toLocaleString('ru-RU')} DC
-                {maxTargetPrice < Infinity ? ` до ${maxTargetPrice.toLocaleString('ru-RU')} DC` : ''})
+                {locale === 'ru'
+                  ? `(скины дороже ${effectiveBetDc.toLocaleString('ru-RU')} DC${maxTargetPrice < Infinity ? ` до ${maxTargetPrice.toLocaleString('ru-RU')} DC` : ''})`
+                  : `(skins above ${effectiveBetDc.toLocaleString('ru-RU')} DC${maxTargetPrice < Infinity ? ` up to ${maxTargetPrice.toLocaleString('ru-RU')} DC` : ''})`}
               </span>
             </div>
 
@@ -1063,12 +1192,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 onChange={(e) => setCatalogRarity(e.target.value)}
                 className="bg-black/60 border border-white/10 rounded-lg px-2 py-1 text-xs text-white outline-none cursor-pointer"
               >
-                <option value="all">Все редкости</option>
-                <option value="extraordinary">★ Экстраординарное</option>
-                <option value="covert">★ Тайное</option>
-                <option value="classified">Засекреченное</option>
-                <option value="restricted">Запрещенное</option>
-                <option value="gold">★ Редкий особый</option>
+                <option value="all">{locale === 'ru' ? 'Все редкости' : 'All rarities'}</option>
+                <option value="extraordinary">★ {locale === 'ru' ? 'Экстраординарное' : 'Extraordinary'}</option>
+                <option value="covert">★ {locale === 'ru' ? 'Тайное' : 'Covert'}</option>
+                <option value="classified">{locale === 'ru' ? 'Засекреченное' : 'Classified'}</option>
+                <option value="restricted">{locale === 'ru' ? 'Запрещенное' : 'Restricted'}</option>
+                <option value="gold">★ {locale === 'ru' ? 'Редкий особый' : 'Rare Special'}</option>
               </select>
 
               <button
@@ -1076,7 +1205,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 onClick={() => setCatalogSort((prev) => (prev === 'asc' ? 'desc' : 'asc'))}
                 className="p-1 rounded-lg bg-black/60 border border-white/10 text-white/70 hover:text-white text-xs cursor-pointer"
               >
-                {catalogSort === 'asc' ? 'Дешевле ↑' : 'Дороже ↓'}
+                {catalogSort === 'asc' ? t('home.sort.priceAsc') : t('home.sort.priceDesc')}
               </button>
             </div>
           </div>
@@ -1097,7 +1226,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
                 }`}
               >
-                {type.label}
+                {t('type.' + type.id) || type.label}
               </button>
             ))}
           </div>
@@ -1107,7 +1236,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             <Search className="w-4 h-4 text-white/40" />
             <input
               type="text"
-              placeholder="Поиск по скинам CS2..."
+              placeholder={t('upg.searchCatalog')}
               value={catalogSearch}
               onChange={(e) => setCatalogSearch(e.target.value)}
               className="w-full bg-transparent text-xs text-white outline-none"
@@ -1118,7 +1247,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-h-96 overflow-y-auto pr-1">
             {filteredCatalogSkins.length === 0 ? (
               <div className="col-span-full py-12 text-center text-xs text-white/40">
-                Нет скинов дороже текущей ставки. Уменьшите ставку!
+                {t('upg.noSkins')}
               </div>
             ) : (
               <>
@@ -1182,7 +1311,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     ref={loadMoreRef}
                     className="col-span-full py-4 text-center text-xs text-white/30"
                   >
-                    Показано {Math.min(catalogLimit, filteredCatalogSkins.length)} из {filteredCatalogSkins.length}. Скролл для загрузки...
+                    {t('upg.showing')} {Math.min(catalogLimit, filteredCatalogSkins.length)} {t('upg.of')} {filteredCatalogSkins.length}. {t('upg.scrollMore')}
                   </div>
                 )}
               </>

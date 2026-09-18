@@ -114,11 +114,11 @@ export const Header: React.FC = () => {
                 sound.playClick();
                 setRefillOpen(true);
               }}
-              title="Бесплатно пополнить виртуальный баланс"
+              title={t('nav.topup.title')}
               className="px-3 py-1.5 rounded-lg btn-yellow text-xs font-black flex items-center gap-1 cursor-pointer active:scale-95"
             >
               <Plus className="w-3.5 h-3.5 stroke-[3]" />
-              <span className="hidden sm:inline">Пополнить</span>
+              <span className="hidden sm:inline">{t('nav.topup')}</span>
             </button>
           </div>
         </div>

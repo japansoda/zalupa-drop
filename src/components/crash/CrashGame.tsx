@@ -1,12 +1,14 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
+import { useLanguage } from '../../lib/i18n';
 import { Rocket, AlertTriangle, Check, RotateCcw } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export const CrashGame: React.FC = () => {
   const { balance, deductBalance, addBalance, recordCrash } = useGameStore();
+  const { t } = useLanguage();
 
   const [betDc, setBetDc] = useState<number>(500);
   const [gameState, setGameState] = useState<'idle' | 'running' | 'crashed' | 'cashed_out'>('idle');
@@ -314,7 +316,7 @@ export const CrashGame: React.FC = () => {
     <div className="w-full max-w-4xl mx-auto flex flex-col gap-6">
       {/* History Badges */}
       <div className="flex items-center gap-2 overflow-x-auto py-1 no-scrollbar">
-        <span className="text-xs font-black text-white/40 uppercase shrink-0">История:</span>
+        <span className="text-xs font-black text-white/40 uppercase shrink-0">{t('crash.history')}</span>
         {history.map((mult, idx) => (
           <span
             key={idx}
@@ -358,13 +360,13 @@ export const CrashGame: React.FC = () => {
 
           {gameState === 'crashed' && (
             <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-red-500/20 border border-red-500/40 text-red-400 font-extrabold text-sm uppercase mt-2">
-              <AlertTriangle className="w-4 h-4" /> Взрыв на {multiplier.toFixed(2)}x!
+              <AlertTriangle className="w-4 h-4" /> {t('crash.crashed')} {multiplier.toFixed(2)}x!
             </div>
           )}
 
           {gameState === 'cashed_out' && (
             <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 font-extrabold text-sm uppercase mt-2">
-              <Check className="w-4 h-4" /> Вы забрали {Math.floor(betDc * multiplier).toLocaleString('ru-RU')} DC!
+              <Check className="w-4 h-4" /> {t('crash.cashedOut')} {Math.floor(betDc * multiplier).toLocaleString('ru-RU')} DC!
             </div>
           )}
         </div>
@@ -374,7 +376,7 @@ export const CrashGame: React.FC = () => {
       <div className="rounded-3xl p-6 bg-[#0e0f14] border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
         {/* Bet Input */}
         <div className="flex flex-col gap-2 w-full sm:w-1/2">
-          <label className="text-xs font-bold text-white/60 uppercase tracking-wider">Размер ставки:</label>
+          <label className="text-xs font-bold text-white/60 uppercase tracking-wider">{t('crash.bet')}</label>
           <div className="flex items-center gap-2 p-3 rounded-2xl bg-black/60 border border-white/10">
             <DropCoinIcon size={24} />
             <input
@@ -450,7 +452,7 @@ export const CrashGame: React.FC = () => {
               onClick={handleCashout}
               className="w-full py-6 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-black text-xl uppercase tracking-wider shadow-[0_0_30px_rgba(16,185,129,0.5)] cursor-pointer active:scale-95 transition-all flex items-center justify-center gap-2"
             >
-              <span>Забрать {Math.floor(betDc * multiplier).toLocaleString('ru-RU')} DC</span>
+              <span>{t('crash.cashout')} ({Math.floor(betDc * multiplier).toLocaleString('ru-RU')} DC)</span>
             </button>
           ) : (
             <button
@@ -459,7 +461,7 @@ export const CrashGame: React.FC = () => {
               className="w-full py-6 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-xl uppercase tracking-wider shadow-[0_0_30px_rgba(250,204,21,0.4)] cursor-pointer active:scale-95 transition-all flex items-center justify-center gap-2"
             >
               <Rocket className="w-5 h-5 text-black" />
-              <span>Ставка ({betDc.toLocaleString('ru-RU')} DC)</span>
+              <span>{t('crash.placeBet')} ({betDc.toLocaleString('ru-RU')} DC)</span>
             </button>
           )}
         </div>

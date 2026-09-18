@@ -6,9 +6,12 @@ import { Footer } from '../../components/layout/Footer';
 import { LiveDropBar } from '../../components/layout/LiveDropBar';
 import { RefillModal } from '../../components/layout/RefillModal';
 import { CrashGame } from '../../components/crash/CrashGame';
+import { useLanguage } from '../../lib/i18n';
 import { Flame } from 'lucide-react';
 
 export default function CrashPage() {
+  const { t } = useLanguage();
+
   return (
     <main className="min-h-screen flex flex-col justify-between bg-[#08080a]">
       <div>
@@ -23,10 +26,10 @@ export default function CrashPage() {
               </div>
               <div>
                 <h1 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
-                  Краш
+                  {t('crash.title')}
                 </h1>
                 <p className="text-xs text-white/50 mt-0.5">
-                  Успей забрать виртуальные DC до того, как множитель крашнется
+                  {t('crash.subtitle')}
                 </p>
               </div>
             </div>

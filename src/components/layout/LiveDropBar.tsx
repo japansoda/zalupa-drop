@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { useGameStore } from '../../store/useGameStore';
 import { SKINS_DATABASE, RARITY_CONFIG } from '../../data/skins';
 import { LiveDrop } from '../../lib/types';
+import { useLanguage } from '../../lib/i18n';
 
 const BOT_AVATARS = [
   'https://avatars.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg',
@@ -18,6 +19,7 @@ const BOT_CASES = ['Кейс «Революция»', 'Грёзы и кошма�
 
 export const LiveDropBar: React.FC = () => {
   const { liveDrops, addLiveDrop } = useGameStore();
+  const { t, locale } = useLanguage();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -55,7 +57,7 @@ export const LiveDropBar: React.FC = () => {
         <div className="flex items-center gap-1.5 shrink-0 pr-3 border-r border-white/10">
           <span className="w-2 h-2 rounded-full bg-yellow-400 animate-ping" />
           <span className="text-[11px] font-black text-white/60 tracking-wider uppercase">
-            LIVE ДРОПЫ
+            {t('live.drops')}
           </span>
         </div>
 
@@ -70,7 +72,7 @@ export const LiveDropBar: React.FC = () => {
                   borderLeftWidth: '3px',
                   borderLeftColor: config.color,
                 }}
-                title={`${drop.user} выбил ${drop.skin.name} в ${drop.caseName}`}
+                title={`${drop.user} ${locale === 'ru' ? 'выбил' : 'won'} ${drop.skin.name} ${locale === 'ru' ? 'в' : 'in'} ${drop.caseName}`}
               >
                 <div className="relative w-10 h-10 rounded-lg bg-black/60 overflow-hidden flex items-center justify-center p-0.5 border border-white/5">
                   <img

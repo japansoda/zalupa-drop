@@ -1,6 +1,7 @@
 import React from 'react';
 import { SkinRarity } from '../../lib/types';
 import { RARITY_CONFIG } from '../../data/skins';
+import { useLanguage } from '../../lib/i18n';
 
 interface RarityBadgeProps {
   rarity: SkinRarity;
@@ -9,12 +10,15 @@ interface RarityBadgeProps {
 
 export const RarityBadge: React.FC<RarityBadgeProps> = ({ rarity, size = 'sm' }) => {
   const config = RARITY_CONFIG[rarity] || RARITY_CONFIG.milspec;
+  const { t } = useLanguage();
 
   const sizeClasses = {
     sm: 'text-[10px] px-2 py-0.5',
     md: 'text-xs px-2.5 py-1',
     lg: 'text-sm px-3 py-1.5',
   }[size];
+
+  const label = t('rarity.' + rarity) || config.label;
 
   return (
     <span
@@ -30,7 +34,7 @@ export const RarityBadge: React.FC<RarityBadgeProps> = ({ rarity, size = 'sm' })
         className="w-1.5 h-1.5 rounded-full mr-1.5 animate-pulse"
         style={{ backgroundColor: config.color }}
       />
-      {config.label}
+      {label}
     </span>
   );
 };

@@ -1,4 +1,4 @@
-﻿// Web Audio API Procedural Synthesizer for CS2 Simulator
+// Web Audio API Procedural Synthesizer for CS2 Simulator
 class SoundController {
   private ctx: AudioContext | null = null;
   public enabled: boolean = true;
@@ -149,6 +149,29 @@ class SoundController {
 
     osc.start();
     osc.stop(ctx.currentTime + 0.02);
+  }
+
+  public playReward() {
+    if (!this.enabled) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    [587.33, 739.99, 880, 1174.66].forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.07);
+
+      gain.gain.setValueAtTime(0.001, ctx.currentTime + idx * 0.07);
+      gain.gain.exponentialRampToValueAtTime(0.14, ctx.currentTime + idx * 0.07 + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.07 + 0.35);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(ctx.currentTime + idx * 0.07);
+      osc.stop(ctx.currentTime + idx * 0.07 + 0.38);
+    });
   }
 }
 

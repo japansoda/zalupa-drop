@@ -10,6 +10,7 @@ import { DropModal } from './DropModal';
 import { WearBadge } from '../ui/WearBadge';
 import { useGameStore } from '../../store/useGameStore';
 import { Zap, Layers } from 'lucide-react';
+import { useLanguage } from '../../lib/i18n';
 
 interface ReelRouletteProps {
   caseSkins: SkinEntity[];
@@ -24,6 +25,7 @@ const REEL_SIZE = 55;
 
 export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseSkins, casePriceDc, caseName }) => {
   const { balance, deductBalance, addToInventory, addBalance, addLiveDrop } = useGameStore();
+  const { t, locale } = useLanguage();
   const [openCount, setOpenCount] = useState<1 | 2 | 3>(1);
   const [isSpinning, setIsSpinning] = useState(false);
   const [fastOpen, setFastOpen] = useState(false);
@@ -358,7 +360,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseSkins, casePrice
         <div className="flex items-center gap-3">
           <span className="text-xs font-bold text-white/50 uppercase tracking-wider flex items-center gap-1.5">
             <Layers className="w-3.5 h-3.5 text-yellow-400" />
-            Количество:
+            {t('case.count')}
           </span>
           <div className="flex items-center gap-1.5 p-1 rounded-xl bg-black/60 border border-white/10">
             {([1, 2, 3] as const).map((cnt) => (
@@ -392,7 +394,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseSkins, casePrice
               className="w-4 h-4 rounded bg-white/10 border-white/20 text-yellow-400 focus:ring-yellow-400 cursor-pointer"
             />
             <span className="flex items-center gap-1">
-              <Zap className="w-3.5 h-3.5 text-yellow-400" /> Быстрое открытие
+              <Zap className="w-3.5 h-3.5 text-yellow-400" /> {t('case.fastOpen')}
             </span>
           </label>
 
@@ -406,8 +408,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseSkins, casePrice
           >
             <span>
               {isSpinning
-                ? 'Открываем...'
-                : `Открыть ${openCount > 1 ? `${openCount} кейса` : 'кейс'} за ${totalCost.toLocaleString('ru-RU')} DC`}
+                ? t('case.openingAction')
+                : locale === 'ru'
+                ? `Открыть ${openCount > 1 ? `${openCount} кейса` : 'кейс'} за ${totalCost.toLocaleString('ru-RU')} DC`
+                : `Open ${openCount > 1 ? `${openCount} cases` : 'case'} for ${totalCost.toLocaleString('ru-RU')} DC`}
             </span>
           </button>
         </div>

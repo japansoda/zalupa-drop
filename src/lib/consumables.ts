@@ -1,4 +1,4 @@
-﻿import { SkinRarity } from './types';
+import { SkinRarity } from './types';
 
 export interface UpgradeToken {
   id: string;
@@ -40,29 +40,29 @@ export const LUCK_POTION: LuckPotion = {
 export function rollCaseBonusDrop(): { token?: UpgradeToken; potion?: boolean } {
   const res: { token?: UpgradeToken; potion?: boolean } = {};
 
-  // 18% chance to drop a token from opening a case
-  if (Math.random() < 0.18) {
+  // 24% chance to drop an upgrade token alongside the regular skin
+  if (Math.random() < 0.24) {
     const roll = Math.random() * 100;
-    // Higher rarity = much rarer
-    if (roll < 0.3) {
+    // Higher rarity = rarer
+    if (roll < 0.5) {
       res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_gold');
-    } else if (roll < 1.2) {
+    } else if (roll < 1.8) {
       res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_covert');
-    } else if (roll < 4.0) {
+    } else if (roll < 5.5) {
       res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_classified');
-    } else if (roll < 12.0) {
+    } else if (roll < 14.0) {
       res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_restricted');
-    } else if (roll < 30.0) {
+    } else if (roll < 32.0) {
       res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_milspec');
-    } else if (roll < 60.0) {
+    } else if (roll < 62.0) {
       res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_industrial');
     } else {
       res.token = UPGRADE_TOKENS.find((t) => t.id === 'token_consumer');
     }
   }
 
-  // 3.5% chance to drop Luck Potion (Contraband)
-  if (Math.random() < 0.035) {
+  // 6% chance to drop Luck Potion (Contraband)
+  if (Math.random() < 0.06) {
     res.potion = true;
   }
 

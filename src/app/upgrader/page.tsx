@@ -8,10 +8,12 @@ import { RefillModal } from '../../components/layout/RefillModal';
 import { RadialGauge } from '../../components/upgrader/RadialGauge';
 import { useGameStore } from '../../store/useGameStore';
 import { SKINS_DATABASE } from '../../data/skins';
+import { useLanguage } from '../../lib/i18n';
 import { Zap } from 'lucide-react';
 
 export default function UpgraderPage() {
   const { inventory } = useGameStore();
+  const { t } = useLanguage();
 
   return (
     <main className="min-h-screen flex flex-col justify-between">
@@ -27,10 +29,10 @@ export default function UpgraderPage() {
               </div>
               <div>
                 <h1 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
-                  Апгрейдер
+                  {t('upg.pageTitle')}
                 </h1>
                 <p className="text-xs text-white/50 mt-0.5">
-                  Улучшай свои скины в топовые ножи и редкие скины CS2
+                  {t('upg.pageSubtitle')}
                 </p>
               </div>
             </div>
