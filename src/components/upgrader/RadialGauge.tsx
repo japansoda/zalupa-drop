@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { SkinEntity, InventoryItem, CaseItem, SkinRarity } from '../../lib/types';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
@@ -10,6 +10,50 @@ import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, Shi
 import confetti from 'canvas-confetti';
 import { CashbackModal } from './CashbackModal';
 import { WearBadge } from '../ui/WearBadge';
+import { SkinImage } from '../ui/SkinImage';
+
+export const matchesCatalogType = (skin: SkinEntity, type: string): boolean => {
+  if (type === 'all') return true;
+  const w = skin.weapon.toLowerCase();
+  const n = skin.name.toLowerCase();
+
+  const isSticker = w === 'sticker' || w === 'наклейка' || n.startsWith('sticker |') || n.startsWith('наклейка |');
+  const isCharm = w === 'charm' || w === 'брелок' || n.startsWith('charm |') || n.startsWith('брелок |');
+  const isAgent = w === 'agent' || w === 'оперативник' || n.startsWith('agent |');
+  const isPatch = w === 'patch' || n.startsWith('patch |');
+
+  if (type === 'stickers') return isSticker || isPatch;
+  if (type === 'charms') return isCharm;
+  if (type === 'agents') return isAgent;
+
+  // Gloves & Knives must NOT be stickers, charms, agents, patches
+  if (isSticker || isCharm || isAgent || isPatch) return false;
+
+  const isGlove = w.includes('gloves') || w.includes('wraps') || w.includes('перчатки') || w.includes('обмотки');
+  if (type === 'gloves') return isGlove;
+  if (isGlove) return false;
+
+  const isKnife =
+    w.includes('knife') ||
+    w.includes('нож') ||
+    w.includes('bayonet') ||
+    w.includes('karambit') ||
+    w.includes('daggers') ||
+    w.includes('stiletto') ||
+    w.includes('kukri') ||
+    w.includes('talon') ||
+    w.includes('ursus');
+  if (type === 'knives') return isKnife;
+  if (isKnife) return false;
+
+  if (type === 'snipers') return ['awp', 'ssg 08', 'scar-20', 'g3sg1'].includes(w);
+  if (type === 'rifles') return ['ak-47', 'm4a4', 'm4a1-s', 'galil ar', 'famas', 'aug', 'sg 553'].includes(w);
+  if (type === 'pistols') return ['usp-s', 'glock-18', 'desert eagle', 'p250', 'five-seven', 'tec-9', 'cz75-auto', 'dual berettas', 'r8 revolver', 'p2000', 'zeus x27'].includes(w);
+  if (type === 'smgs') return ['mp9', 'mac-10', 'mp7', 'mp5-sd', 'ump-45', 'p90', 'pp-bizon'].includes(w);
+  if (type === 'heavy') return ['nova', 'xm1014', 'mag-7', 'sawed-off', 'negev', 'm249'].includes(w);
+
+  return true;
+};
 
 const ITEM_TYPES = [
   { id: 'all', label: 'Все типы' },
@@ -76,6 +120,28 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const [catalogType, setCatalogType] = useState('all');
   const [catalogSort, setCatalogSort] = useState<'asc' | 'desc'>('asc');
 
+  // Infinite scroll for catalog
+  const [catalogLimit, setCatalogLimit] = useState(60);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
+
+
+
+  // IntersectionObserver for load-more sentinel
+  useEffect(() => {
+    const el = loadMoreRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setCatalogLimit(prev => prev + 60);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  });
+
   const needleControls = useAnimation();
 
   // Calculate Total Bet Sum
@@ -97,17 +163,29 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     return Infinity;
   }, [betMode, selectedToken]);
 
+  // Reset catalog limit when filters change
+  useEffect(() => {
+    setCatalogLimit(60);
+  }, [catalogSearch, catalogRarity, catalogType, catalogSort, effectiveBetDc, maxTargetPrice]);
+
   // Auto-Select target skin when bet or target chance changes
-  const autoSelectTargetSkin = (desiredChance: number, currentBet: number) => {
+  const autoSelectTargetSkin = (desiredChance: number, currentBet: number, forceType?: string) => {
     if (currentBet <= 0) return;
-    const candidates = catalogSkins.filter(
-      (s) => s.priceDc > currentBet && s.priceDc <= maxTargetPrice
+    const typeToMatch = forceType !== undefined ? forceType : catalogType;
+    let candidates = catalogSkins.filter(
+      (s) => s.priceDc > currentBet && s.priceDc <= maxTargetPrice && matchesCatalogType(s, typeToMatch)
     );
+    if (candidates.length === 0) {
+      candidates = catalogSkins.filter(
+        (s) => s.priceDc > currentBet && s.priceDc <= maxTargetPrice
+      );
+    }
     if (candidates.length === 0) return;
 
     // Ideal target price based on 95% RTP
     const idealPrice = Math.min(maxTargetPrice, (currentBet / (desiredChance / 100)) * 0.95);
 
+    // Sort candidates: knives first (priority), then by price distance to ideal
     let closest = candidates[0];
     let minDiff = Math.abs(candidates[0].priceDc - idealPrice);
 
@@ -118,6 +196,28 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         closest = s;
       }
     }
+
+    // Knife priority: if closest is not a knife, check if there's a knife within 2x the price distance
+    const closestIsKnife = matchesCatalogType(closest, 'knives');
+    if (!closestIsKnife) {
+      const knifeCandidates = candidates.filter(s => matchesCatalogType(s, 'knives'));
+      if (knifeCandidates.length > 0) {
+        let bestKnife = knifeCandidates[0];
+        let bestKnifeDiff = Math.abs(knifeCandidates[0].priceDc - idealPrice);
+        for (const k of knifeCandidates) {
+          const diff = Math.abs(k.priceDc - idealPrice);
+          if (diff < bestKnifeDiff) {
+            bestKnifeDiff = diff;
+            bestKnife = k;
+          }
+        }
+        // Prefer knife if it's within 2x price distance of the best overall match
+        if (bestKnifeDiff <= minDiff * 2.5) {
+          closest = bestKnife;
+        }
+      }
+    }
+
     setTargetSkin(closest);
   };
 
@@ -191,13 +291,13 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
   // Preset buttons
   const presets = [
-    { label: '0.01%', chance: 0.01 },
     { label: '1%', chance: 1.0 },
     { label: '1.5x', chance: 63.3 },
     { label: '2x', chance: 47.5 },
     { label: '5x', chance: 19.0 },
     { label: '10x', chance: 9.5 },
     { label: '25%', chance: 25.0 },
+    { label: '35%', chance: 35.0 },
     { label: '50%', chance: 50.0 },
     { label: '75%', chance: 75.0 },
   ];
@@ -352,92 +452,13 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       if (!matchesSearch || !matchesRarity) return false;
 
       // Filter by item type
-      if (catalogType !== 'all') {
-        const w = skin.weapon.toLowerCase();
-        const cat = skin.category?.toLowerCase() || '';
-        if (catalogType === 'knives') {
-          const isKnife =
-            skin.rarity === 'gold' ||
-            w.includes('knife') ||
-            w.includes('нож') ||
-            w.includes('bayonet') ||
-            w.includes('karambit') ||
-            w.includes('daggers') ||
-            w.includes('керамбит') ||
-            w.includes('байонет') ||
-            w.includes('тычковые');
-          if (!isKnife) return false;
-        } else if (catalogType === 'gloves') {
-          const isGlove =
-            skin.rarity === 'extraordinary' ||
-            w.includes('gloves') ||
-            w.includes('перчатки') ||
-            w.includes('wraps') ||
-            w.includes('обмотки');
-          if (!isGlove) return false;
-        } else if (catalogType === 'snipers') {
-          if (!w.includes('awp') && !w.includes('ssg') && !w.includes('scar') && !w.includes('g3sg1')) return false;
-        } else if (catalogType === 'rifles') {
-          if (
-            !w.includes('ak-47') &&
-            !w.includes('m4a4') &&
-            !w.includes('m4a1-s') &&
-            !w.includes('galil') &&
-            !w.includes('famas') &&
-            !w.includes('aug') &&
-            !w.includes('sg 553')
-          )
-            return false;
-        } else if (catalogType === 'pistols') {
-          if (
-            !w.includes('usp-s') &&
-            !w.includes('glock') &&
-            !w.includes('desert eagle') &&
-            !w.includes('deagle') &&
-            !w.includes('p250') &&
-            !w.includes('five-seven') &&
-            !w.includes('tec-9') &&
-            !w.includes('cz75') &&
-            !w.includes('dual berettas') &&
-            !w.includes('r8') &&
-            !w.includes('p2000')
-          )
-            return false;
-        } else if (catalogType === 'smgs') {
-          if (
-            !w.includes('mp9') &&
-            !w.includes('mac-10') &&
-            !w.includes('mp7') &&
-            !w.includes('mp5-sd') &&
-            !w.includes('ump-45') &&
-            !w.includes('p90') &&
-            !w.includes('bizon')
-          )
-            return false;
-        } else if (catalogType === 'heavy') {
-          if (
-            !w.includes('nova') &&
-            !w.includes('xm1014') &&
-            !w.includes('mag-7') &&
-            !w.includes('sawed-off') &&
-            !w.includes('negev') &&
-            !w.includes('m249')
-          )
-            return false;
-        } else if (catalogType === 'stickers') {
-          if (cat !== 'stickers' && w !== 'наклейка' && !w.includes('sticker')) return false;
-        } else if (catalogType === 'agents') {
-          if (cat !== 'agents' && w !== 'агент' && !w.includes('agent')) return false;
-        } else if (catalogType === 'charms') {
-          if (cat !== 'charms' && w !== 'брелок' && !w.includes('charm')) return false;
-        }
-      }
+      if (!matchesCatalogType(skin, catalogType)) return false;
 
       return true;
     });
 
     result.sort((a, b) => (catalogSort === 'asc' ? a.priceDc - b.priceDc : b.priceDc - a.priceDc));
-    return result.slice(0, 150);
+    return result;
   }, [catalogSkins, catalogSearch, catalogRarity, catalogType, catalogSort, effectiveBetDc, maxTargetPrice]);
 
   // Circular gauge constants
@@ -996,60 +1017,71 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 Нет скинов дороже текущей ставки. Уменьшите ставку!
               </div>
             ) : (
-              filteredCatalogSkins.map((skin) => {
-                const isSelected = targetSkin?.id === skin.id;
+              <>
+                {filteredCatalogSkins.slice(0, catalogLimit).map((skin) => {
+                  const isSelected = targetSkin?.id === skin.id;
 
-                return (
-                  <button
-                    key={skin.id}
-                    type="button"
-                    onClick={() => {
-                      sound.playClick();
-                      setTargetSkin(skin);
-                    }}
-                    className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
-                      isSelected
-                        ? 'border-yellow-400 bg-yellow-400/15 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
-                        : 'border-white/10 bg-black/40 hover:border-white/20'
-                    }`}
-                  >
-                    {isSelected && (
-                      <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
-                        <Check className="w-3.5 h-3.5 stroke-[3]" />
+                  return (
+                    <button
+                      key={skin.id}
+                      type="button"
+                      onClick={() => {
+                        sound.playClick();
+                        setTargetSkin(skin);
+                      }}
+                      className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
+                        isSelected
+                          ? 'border-yellow-400 bg-yellow-400/15 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
+                          : 'border-white/10 bg-black/40 hover:border-white/20'
+                      }`}
+                    >
+                      {isSelected && (
+                        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
+                          <Check className="w-3.5 h-3.5 stroke-[3]" />
+                        </div>
+                      )}
+
+                      <div className="w-16 h-16 flex items-center justify-center my-1">
+                        <img
+                          src={skin.image}
+                          alt={skin.name}
+                          referrerPolicy="no-referrer"
+                          className="w-full h-full object-contain"
+                        />
                       </div>
-                    )}
 
-                    <div className="w-16 h-16 flex items-center justify-center my-1">
-                      <img
-                        src={skin.image}
-                        alt={skin.name}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-
-                    <div className="w-full flex flex-col">
-                      <div className="flex items-center gap-1">
-                        {skin.statTrak && (
-                          <span className="text-[8px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40 shrink-0">
-                            ST
+                      <div className="w-full flex flex-col">
+                        <div className="flex items-center gap-1">
+                          {skin.statTrak && (
+                            <span className="text-[8px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40 shrink-0">
+                              ST
+                            </span>
+                          )}
+                          <span className="text-[11px] font-black text-white truncate">
+                            {skin.skinName || skin.name}
                           </span>
-                        )}
-                        <span className="text-[11px] font-black text-white truncate">
-                          {skin.skinName || skin.name}
+                        </div>
+                        <div className="flex items-center justify-between text-[9px] text-white/40">
+                          <span className="truncate">{skin.weapon}</span>
+                          <WearBadge skin={skin} size="xs" />
+                        </div>
+                        <span className="text-[11px] font-mono font-black text-yellow-400 mt-1">
+                          {skin.priceDc.toLocaleString('ru-RU')} DC
                         </span>
                       </div>
-                      <div className="flex items-center justify-between text-[9px] text-white/40">
-                        <span className="truncate">{skin.weapon}</span>
-                        <WearBadge skin={skin} size="xs" />
-                      </div>
-                      <span className="text-[11px] font-mono font-black text-yellow-400 mt-1">
-                        {skin.priceDc.toLocaleString('ru-RU')} DC
-                      </span>
-                    </div>
-                  </button>
-                );
-              })
+                    </button>
+                  );
+                })}
+                {/* Load-more sentinel */}
+                {catalogLimit < filteredCatalogSkins.length && (
+                  <div
+                    ref={loadMoreRef}
+                    className="col-span-full py-4 text-center text-xs text-white/30"
+                  >
+                    Показано {Math.min(catalogLimit, filteredCatalogSkins.length)} из {filteredCatalogSkins.length}. Скролл для загрузки...
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
