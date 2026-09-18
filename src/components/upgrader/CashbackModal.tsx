@@ -9,7 +9,6 @@ import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
 import { Gift, FastForward, Check, Sparkles, Ticket, FlaskConical } from 'lucide-react';
-import confetti from 'canvas-confetti';
 
 interface CashbackModalProps {
   isOpen: boolean;
@@ -57,26 +56,14 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
     if (awardedPotion && !winningSkin) {
       setIsSpinning(false);
       setIsRevealed(true);
-      sound.playWin('contraband');
-      confetti({
-        particleCount: 120,
-        spread: 80,
-        origin: { y: 0.6 },
-        colors: ['#10B981', '#FACC15', '#FFFFFF'],
-      });
+      sound.playConsolation(true);
       return;
     }
 
     if (awardedToken && !winningSkin) {
       setIsSpinning(false);
       setIsRevealed(true);
-      sound.playWin(awardedToken.rarity);
-      confetti({
-        particleCount: 90,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ['#FACC15', '#FFFFFF', '#10B981'],
-      });
+      sound.playConsolation(false);
       return;
     }
 
@@ -148,14 +135,7 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
     if (spinTimerRef.current) clearTimeout(spinTimerRef.current);
     setIsSpinning(false);
     setIsRevealed(true);
-    const winRarity = awardedToken?.rarity || winningSkin?.rarity || 'milspec';
-    sound.playWin(winRarity);
-    confetti({
-      particleCount: 90,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ['#FACC15', '#FFFFFF', '#10B981'],
-    });
+    sound.playConsolation(false);
   };
 
   const handleSkip = () => {

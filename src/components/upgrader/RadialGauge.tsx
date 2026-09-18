@@ -417,7 +417,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     const totalRotation = 360 * 5 + targetAngle;
     const duration = 4.2;
 
-    // Smooth decelerating acoustic spin sound
+    // Mechanical wheel launch sound
+    sound.playSpinStart();
     const startTime = performance.now();
     let animId: number;
     let lastTickTime = 0;
@@ -428,8 +429,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       if (elapsed >= duration) return;
 
       const progress = elapsed / duration;
-      // Interval decelerates smoothly from 45ms to 280ms
-      const currentInterval = 45 + Math.pow(progress, 2.4) * 245;
+      // Interval decelerates smoothly from 38ms to 320ms matching needle deceleration
+      const currentInterval = 38 + Math.pow(progress, 2.2) * 280;
 
       if (now - lastTickTime >= currentInterval) {
         sound.playUpgradeSpin(progress);
