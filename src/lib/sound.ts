@@ -162,55 +162,68 @@ class SoundController {
     let lastOut = 0.0;
     for (let i = 0; i < bufferSize; i++) {
       const white = Math.random() * 2 - 1;
-      output[i] = (lastOut + 0.03 * white) / 1.03;
+      output[i] = (lastOut + 0.028 * white) / 1.028;
       lastOut = output[i];
-      output[i] *= 3.8;
+      output[i] *= 3.6;
     }
 
     const noiseSource = ctx.createBufferSource();
     noiseSource.buffer = noiseBuffer;
 
-    // 1. Sweeping Lowpass filter (Wind rush)
+    // 1. Sweeping Lowpass filter: Clear, distinct RISE (0s -> 1.1s) and gradual FALL (1.4s -> 4.2s)
     const lpFilter = ctx.createBiquadFilter();
     lpFilter.type = 'lowpass';
-    lpFilter.Q.setValueAtTime(2.5, now);
-    lpFilter.frequency.setValueAtTime(220, now);
-    lpFilter.frequency.exponentialRampToValueAtTime(880, now + 0.4);
-    lpFilter.frequency.setValueAtTime(850, now + 2.0);
-    lpFilter.frequency.exponentialRampToValueAtTime(140, now + duration);
+    lpFilter.Q.setValueAtTime(2.6, now);
+    lpFilter.frequency.setValueAtTime(150, now);
+    lpFilter.frequency.exponentialRampToValueAtTime(720, now + 1.1); // Rise up
+    lpFilter.frequency.setValueAtTime(700, now + 1.4);              // Apex
+    lpFilter.frequency.exponentialRampToValueAtTime(380, now + 2.3); // Fall stage 1
+    lpFilter.frequency.exponentialRampToValueAtTime(220, now + 3.4); // Fall stage 2
+    lpFilter.frequency.exponentialRampToValueAtTime(100, now + duration); // Coast to stop
 
-    // 2. Resonant Bandpass filter (Gives the distinct hollow "WHOOSH" body)
+    // 2. Resonant Bandpass filter: hollow aerodynamic whoosh body
     const bpFilter = ctx.createBiquadFilter();
     bpFilter.type = 'bandpass';
-    bpFilter.Q.setValueAtTime(3.0, now);
-    bpFilter.frequency.setValueAtTime(260, now);
-    bpFilter.frequency.exponentialRampToValueAtTime(650, now + 0.45);
-    bpFilter.frequency.setValueAtTime(600, now + 2.0);
-    bpFilter.frequency.exponentialRampToValueAtTime(180, now + duration);
+    bpFilter.Q.setValueAtTime(2.8, now);
+    bpFilter.frequency.setValueAtTime(180, now);
+    bpFilter.frequency.exponentialRampToValueAtTime(540, now + 1.1); // Rise up
+    bpFilter.frequency.setValueAtTime(520, now + 1.4);              // Apex
+    bpFilter.frequency.exponentialRampToValueAtTime(320, now + 2.3); // Fall stage 1
+    bpFilter.frequency.exponentialRampToValueAtTime(190, now + 3.4); // Fall stage 2
+    bpFilter.frequency.exponentialRampToValueAtTime(110, now + duration); // Coast to stop
 
-    // 3. Sub-bass Wind Body (Low air displacement)
+    // 3. Sub-bass Wind Body: low displacement rumble (55Hz -> 110Hz -> 38Hz)
     const subOsc = ctx.createOscillator();
     subOsc.type = 'sine';
-    subOsc.frequency.setValueAtTime(65, now);
-    subOsc.frequency.exponentialRampToValueAtTime(120, now + 0.4);
-    subOsc.frequency.setValueAtTime(105, now + 2.0);
-    subOsc.frequency.exponentialRampToValueAtTime(45, now + duration);
+    subOsc.frequency.setValueAtTime(55, now);
+    subOsc.frequency.exponentialRampToValueAtTime(110, now + 1.1);
+    subOsc.frequency.setValueAtTime(105, now + 1.4);
+    subOsc.frequency.exponentialRampToValueAtTime(75, now + 2.3);
+    subOsc.frequency.exponentialRampToValueAtTime(50, now + 3.4);
+    subOsc.frequency.exponentialRampToValueAtTime(38, now + duration);
 
     const subGain = ctx.createGain();
+    // Reduced ~2.5x: peak volume 0.075 (was 0.20)
     subGain.gain.setValueAtTime(0.001, now);
-    subGain.gain.linearRampToValueAtTime(0.20, now + 0.35);
-    subGain.gain.setValueAtTime(0.18, now + 2.2);
+    subGain.gain.linearRampToValueAtTime(0.075, now + 1.1);
+    subGain.gain.setValueAtTime(0.07, now + 1.4);
+    subGain.gain.exponentialRampToValueAtTime(0.035, now + 2.3);
+    subGain.gain.exponentialRampToValueAtTime(0.012, now + 3.4);
     subGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
 
     subOsc.connect(subGain);
     subGain.connect(ctx.destination);
 
-    // Master Whoosh Volume Envelope
+    // Master Whoosh Volume Envelope: Clear Rise & Fall curve
+    // Reduced ~2.5x: peak volume 0.14 (was 0.35)
     const masterGain = ctx.createGain();
     masterGain.gain.setValueAtTime(0.001, now);
-    masterGain.gain.linearRampToValueAtTime(0.35, now + 0.32); // Powerful, smooth whoosh surge
-    masterGain.gain.setValueAtTime(0.30, now + 2.2);
-    masterGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+    masterGain.gain.linearRampToValueAtTime(0.14, now + 1.1);        // Smooth audible rise to peak
+    masterGain.gain.setValueAtTime(0.13, now + 1.4);                 // Crest
+    masterGain.gain.exponentialRampToValueAtTime(0.075, now + 2.3); // Continuous smooth fall
+    masterGain.gain.exponentialRampToValueAtTime(0.028, now + 3.4); // Settling down
+    masterGain.gain.exponentialRampToValueAtTime(0.001, now + 4.1);  // Gentle whisper
+    masterGain.gain.linearRampToValueAtTime(0.0001, now + duration); // Settle to 0
 
     noiseSource.connect(lpFilter);
     lpFilter.connect(masterGain);
@@ -230,15 +243,15 @@ class SoundController {
         try {
           const stopTime = ctx.currentTime;
           masterGain.gain.cancelScheduledValues(stopTime);
-          masterGain.gain.linearRampToValueAtTime(0.0001, stopTime + 0.08);
+          masterGain.gain.linearRampToValueAtTime(0.0001, stopTime + 0.06);
           subGain.gain.cancelScheduledValues(stopTime);
-          subGain.gain.linearRampToValueAtTime(0.0001, stopTime + 0.08);
+          subGain.gain.linearRampToValueAtTime(0.0001, stopTime + 0.06);
           setTimeout(() => {
             try {
               noiseSource.stop();
               subOsc.stop();
             } catch {}
-          }, 90);
+          }, 70);
         } catch {}
       }
     };
@@ -260,10 +273,10 @@ class SoundController {
     const ctx = this.getContext();
     if (!ctx) return;
 
-    // Smooth individual whoosh gust if invoked directly
+    // Smooth individual whoosh gust if invoked directly (~2.5x quieter)
     const clamped = Math.max(0, Math.min(1, progress));
     const now = ctx.currentTime;
-    const dur = 0.22 + (1 - clamped) * 0.12;
+    const dur = 0.26;
 
     const noiseBuf = this.getNoiseBuffer(ctx);
     const noiseSrc = ctx.createBufferSource();
@@ -272,14 +285,14 @@ class SoundController {
     const filter = ctx.createBiquadFilter();
     filter.type = 'lowpass';
     filter.Q.setValueAtTime(2.2, now);
-    filter.frequency.setValueAtTime(200, now);
-    filter.frequency.exponentialRampToValueAtTime(650 - clamped * 250, now + dur * 0.5);
-    filter.frequency.exponentialRampToValueAtTime(150, now + dur);
+    filter.frequency.setValueAtTime(180, now);
+    filter.frequency.exponentialRampToValueAtTime(500 - clamped * 250, now + dur * 0.45);
+    filter.frequency.exponentialRampToValueAtTime(130, now + dur);
 
     const gain = ctx.createGain();
     gain.gain.setValueAtTime(0.001, now);
-    gain.gain.linearRampToValueAtTime(0.22, now + dur * 0.4);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
+    gain.gain.linearRampToValueAtTime(0.09, now + dur * 0.45);
+    gain.gain.exponentialRampToValueAtTime(0.0005, now + dur);
 
     noiseSrc.connect(filter);
     filter.connect(gain);
