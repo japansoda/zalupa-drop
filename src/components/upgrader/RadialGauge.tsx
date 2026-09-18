@@ -6,7 +6,7 @@ import { RARITY_CONFIG } from '../../data/skins';
 import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
 import allCasesJson from '../../data/all_cases.json';
-import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, ShieldCheck } from 'lucide-react';
+import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, ShieldCheck, Percent } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CashbackModal } from './CashbackModal';
 import { WearBadge } from '../ui/WearBadge';
@@ -330,17 +330,24 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     setSelectedItems([]);
   };
 
-  // Preset buttons
-  const presets = [
+  // Quick Chance presets (PRIMARY)
+  const chancePresets = [
     { label: '1%', chance: 1.0 },
-    { label: '1.5x', chance: 63.3 },
-    { label: '2x', chance: 47.5 },
-    { label: '5x', chance: 19.0 },
-    { label: '10x', chance: 9.5 },
+    { label: '5%', chance: 5.0 },
+    { label: '10%', chance: 10.0 },
     { label: '25%', chance: 25.0 },
     { label: '35%', chance: 35.0 },
     { label: '50%', chance: 50.0 },
     { label: '75%', chance: 75.0 },
+    { label: '85%', chance: 85.0 },
+  ];
+
+  // Quick Multiplier presets (SECONDARY)
+  const multiplierPresets = [
+    { label: '1.5x', chance: 63.3 },
+    { label: '2x', chance: 47.5 },
+    { label: '5x', chance: 19.0 },
+    { label: '10x', chance: 9.5 },
   ];
 
   const handleSelectPreset = (desiredChance: number) => {
@@ -1140,24 +1147,25 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
           {/* 3. RIGHT CARD: TARGET ITEM (ВЫ ПОЛУЧАЕТЕ) */}
           <div className="lg:col-span-4 flex flex-col gap-3">
-            {/* Quick Multiplier Presets */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
-              {presets.map((p) => (
+            <div className="flex items-center justify-between pb-2 border-b border-white/10 min-h-[37px]">
+              <span className="text-xs font-black text-white/80 uppercase tracking-wider">
+                {t('upg.targetItem')}
+              </span>
+              {targetSkin && (
                 <button
-                  key={p.label}
                   type="button"
-                  onClick={() => handleSelectPreset(p.chance)}
+                  onClick={() => setTargetSkin(null)}
                   disabled={isUpgrading}
-                  className="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-yellow-400 hover:text-black border border-white/10 text-xs font-bold text-white/70 transition-all cursor-pointer shrink-0"
+                  className="text-xs text-white/50 hover:text-red-400 transition-colors cursor-pointer"
                 >
-                  {p.label}
+                  {t('upg.reset')}
                 </button>
-              ))}
+              )}
             </div>
 
             {/* Target Skin Preview Card */}
             <div
-              className="h-64 rounded-2xl border p-4 flex flex-col justify-between relative overflow-hidden transition-all"
+              className="h-68 rounded-2xl border p-4 flex flex-col justify-between relative overflow-hidden transition-all"
               style={{
                 backgroundColor: targetConfig.bg,
                 borderColor: targetConfig.border,
@@ -1203,6 +1211,64 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   <span>{targetSkin ? targetSkin.priceDc.toLocaleString('ru-RU') : 0} DC</span>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Quick Chance & Multiplier Presets Control Bar */}
+        <div className="mt-6 pt-5 border-t border-white/10 flex flex-col lg:flex-row items-center justify-between gap-4">
+          {/* Chance Presets (PRIMARY) */}
+          <div className="flex items-center gap-2.5 flex-wrap justify-center">
+            <span className="text-xs font-black text-yellow-400 uppercase tracking-wider flex items-center gap-1.5 mr-1 bg-yellow-400/10 px-3 py-1.5 rounded-xl border border-yellow-400/20">
+              <Percent className="w-3.5 h-3.5 text-yellow-400" />
+              <span>{t('upg.presetsTitle')}</span>
+            </span>
+            <div className="flex items-center gap-1.5 flex-wrap justify-center">
+              {chancePresets.map((p) => {
+                const isActive = Math.abs(targetChance - p.chance) < 0.2;
+                return (
+                  <button
+                    key={p.label}
+                    type="button"
+                    onClick={() => handleSelectPreset(p.chance)}
+                    disabled={isUpgrading}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                      isActive
+                        ? 'bg-yellow-400 text-black shadow-[0_0_15px_rgba(250,204,21,0.4)] scale-105'
+                        : 'bg-white/5 hover:bg-white/10 border border-white/10 text-white hover:border-yellow-400/50 hover:text-yellow-400'
+                    }`}
+                  >
+                    {p.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Multipliers (SECONDARY) */}
+          <div className="flex items-center gap-2 flex-wrap justify-center">
+            <span className="text-xs font-bold text-white/40 uppercase tracking-wider mr-1">
+              {t('upg.multipliersTitle')}
+            </span>
+            <div className="flex items-center gap-1.5">
+              {multiplierPresets.map((p) => {
+                const isActive = Math.abs(targetChance - p.chance) < 0.2;
+                return (
+                  <button
+                    key={p.label}
+                    type="button"
+                    onClick={() => handleSelectPreset(p.chance)}
+                    disabled={isUpgrading}
+                    className={`px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                      isActive
+                        ? 'bg-yellow-400 text-black shadow-[0_0_10px_rgba(250,204,21,0.3)]'
+                        : 'bg-white/5 hover:bg-white/10 border border-white/10 text-white/70 hover:text-white'
+                    }`}
+                  >
+                    {p.label}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
