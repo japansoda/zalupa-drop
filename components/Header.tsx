@@ -1,10 +1,11 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { CurrencyBadge } from "./ui/CurrencyBadge";
+import { BrandLogo } from "./ui/BrandLogo";
 import { Button } from "./ui/Button";
 import {
   Package,
@@ -17,7 +18,6 @@ import {
   Plus,
   Menu,
   X,
-  ShieldCheck,
 } from "lucide-react";
 
 export const Header: React.FC = () => {
@@ -44,35 +44,16 @@ export const Header: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-slate-950/80 backdrop-blur-xl transition-all">
+    <header className="sticky top-0 z-40 w-full liquid-glass-nav">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo & Brand */}
-          <Link href="/" className="flex items-center gap-3 group shrink-0">
-            <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-slate-900 border border-white/10 group-hover:border-purple-500/50 shadow-md group-hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all flex items-center justify-center p-1">
-              <img
-                src="/logo.png"
-                alt="Zalupa Drop Logo"
-                className="w-full h-full object-contain filter drop-shadow group-hover:scale-105 transition-transform"
-              />
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5">
-                <span className="text-xl font-black tracking-wider text-white uppercase group-hover:text-purple-400 transition-colors">
-                  Zalupa Drop
-                </span>
-                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase">
-                  CS2 Sim
-                </span>
-              </div>
-              <span className="text-[11px] text-slate-400 font-medium hidden sm:inline-block">
-                Безопасный симулятор кейсов
-              </span>
-            </div>
+          {/* Logo & Brand (Clean Transparent SVG Vector) */}
+          <Link href="/" className="group shrink-0">
+            <BrandLogo size="md" />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+          <nav className="hidden md:flex items-center gap-1.5 lg:gap-2">
             {navLinks.map((link) => {
               const Icon = link.icon;
               const isActive = pathname === link.href;
@@ -80,13 +61,13 @@ export const Header: React.FC = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all ${
+                  className={`relative flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
                     isActive
-                      ? "bg-violet-600/20 text-white border border-violet-500/40 shadow-[0_0_15px_rgba(124,58,237,0.25)]"
-                      : "text-slate-300 hover:text-white hover:bg-white/[0.05]"
+                      ? "liquid-glass bg-violet-600/30 text-white border-violet-400/50 shadow-[0_0_15px_rgba(139,92,246,0.35)]"
+                      : "text-slate-300 hover:text-white hover:bg-white/[0.06]"
                   }`}
                 >
-                  <Icon className={`w-4 h-4 ${isActive ? "text-violet-400" : "text-slate-400"}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? "text-violet-300" : "text-slate-400"}`} />
                   <span>{link.label}</span>
                   {link.badge !== undefined && (
                     <span className="ml-1 px-1.5 py-0.2 text-[11px] rounded-full bg-violet-500/30 border border-violet-400/40 text-violet-200 font-bold">
@@ -101,7 +82,7 @@ export const Header: React.FC = () => {
           {/* User Balance & Actions */}
           <div className="flex items-center gap-2.5 sm:gap-3">
             {/* Balance Pill */}
-            <div className="flex items-center gap-1.5 bg-slate-900/90 border border-yellow-500/20 rounded-xl p-1 pl-2 sm:pl-3 shadow-inner">
+            <div className="flex items-center gap-1.5 liquid-glass-pill rounded-xl p-1 pl-2 sm:pl-3">
               <CurrencyBadge amount={balance} size="md" />
               <Button
                 variant="gold"
@@ -121,7 +102,7 @@ export const Header: React.FC = () => {
               className={`p-2.5 rounded-xl border transition-all ${
                 isSoundMuted
                   ? "bg-rose-500/10 border-rose-500/30 text-rose-400 hover:bg-rose-500/20"
-                  : "bg-white/[0.05] border-white/10 text-slate-300 hover:text-white hover:bg-white/[0.1]"
+                  : "liquid-glass-button text-slate-300 hover:text-white"
               }`}
               title={isSoundMuted ? "Включить звук" : "Отключить звук"}
             >
@@ -131,7 +112,7 @@ export const Header: React.FC = () => {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl border border-white/10 bg-white/[0.05] text-slate-300 hover:text-white md:hidden"
+              className="p-2.5 rounded-xl liquid-glass-button text-slate-300 hover:text-white md:hidden"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -140,7 +121,7 @@ export const Header: React.FC = () => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-white/[0.08] space-y-1.5 animate-in slide-in-from-top-2">
+          <div className="md:hidden py-4 border-t border-white/[0.1] space-y-1.5 animate-in slide-in-from-top-2">
             {navLinks.map((link) => {
               const Icon = link.icon;
               const isActive = pathname === link.href;
@@ -151,7 +132,7 @@ export const Header: React.FC = () => {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center justify-between px-4 py-3 rounded-xl text-base font-semibold transition-all ${
                     isActive
-                      ? "bg-violet-600/20 text-white border border-violet-500/40"
+                      ? "bg-violet-600/30 text-white border border-violet-500/50"
                       : "text-slate-300 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >

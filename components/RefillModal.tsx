@@ -35,7 +35,7 @@ export const RefillModal: React.FC = () => {
       isOpen={isRefillModalOpen}
       onClose={() => setRefillModalOpen(false)}
       title={
-        <div className="flex items-center gap-2 text-yellow-400">
+        <div className="flex items-center gap-2 text-yellow-400 font-black">
           <Coins className="w-5 h-5" />
           <span>Бесплатное пополнение DropCoins</span>
         </div>
@@ -43,8 +43,8 @@ export const RefillModal: React.FC = () => {
       maxWidth="lg"
     >
       <div className="space-y-4">
-        <p className="text-sm text-slate-300 leading-relaxed">
-          В <span className="text-yellow-400 font-semibold">Zalupa Drop</span> игра ведется исключительно на бесплатную виртуальную валюту. Настоящие депозиты и вывод средств отсутствуют! Выберите сумму пополнения:
+        <p className="text-sm text-slate-300 leading-relaxed font-medium">
+          В <span className="text-yellow-400 font-bold">Zalupa Drop</span> игра ведется исключительно на бесплатную виртуальную валюту. Настоящие депозиты и вывод средств отсутствуют! Выберите сумму пополнения:
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
@@ -54,10 +54,10 @@ export const RefillModal: React.FC = () => {
               <button
                 key={pack.amount}
                 onClick={() => handleSelectPack(pack.amount)}
-                className={`group p-4 rounded-xl border border-white/10 hover:border-yellow-400/40 bg-gradient-to-br ${pack.color} hover:bg-white/[0.08] backdrop-blur-md transition-all text-left flex flex-col justify-between`}
+                className={`group p-4 rounded-2xl border border-white/12 hover:border-yellow-400/50 bg-gradient-to-br ${pack.color} liquid-glass transition-all text-left flex flex-col justify-between hover:scale-[1.02]`}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-semibold text-slate-300 group-hover:text-white uppercase tracking-wider">
+                  <span className="text-xs font-bold text-slate-200 group-hover:text-white uppercase tracking-wider">
                     {pack.label}
                   </span>
                   <Icon className="w-4 h-4 text-yellow-400 group-hover:scale-110 transition-transform" />
@@ -68,7 +68,7 @@ export const RefillModal: React.FC = () => {
           })}
         </div>
 
-        <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between">
+        <div className="pt-4 border-t border-white/[0.1] flex items-center justify-between">
           <Button
             variant="ghost"
             size="sm"
@@ -76,7 +76,7 @@ export const RefillModal: React.FC = () => {
             leftIcon={<RefreshCw className="w-4 h-4" />}
             className="text-slate-400 hover:text-white"
           >
-            Сбросить баланс до 10 000 DC
+            Сбросить до 10 000 DC
           </Button>
 
           <Button

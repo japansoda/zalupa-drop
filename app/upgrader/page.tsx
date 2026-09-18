@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import confetti from "canvas-confetti";
@@ -9,18 +9,13 @@ import { CircularGauge } from "@/components/upgrader/CircularGauge";
 import { CurrencyBadge } from "@/components/ui/CurrencyBadge";
 import { Button } from "@/components/ui/Button";
 import { RarityBadge } from "@/components/ui/RarityBadge";
+import { OptimizedSkinImage } from "@/components/ui/OptimizedSkinImage";
 import { sound } from "@/lib/sound";
 import {
   TrendingUp,
-  Sparkles,
   Search,
-  Plus,
-  ArrowRight,
-  ShieldAlert,
-  Coins,
   CheckCircle2,
   XCircle,
-  ExternalLink,
 } from "lucide-react";
 
 export default function UpgraderPage() {
@@ -32,22 +27,18 @@ export default function UpgraderPage() {
   const recordUpgrade = useAppStore((s) => s.recordUpgrade);
   const setRefillModalOpen = useAppStore((s) => s.setRefillModalOpen);
 
-  // Bet Mode: "inventory" or "dc"
   const [betMode, setBetMode] = useState<"inventory" | "dc">("inventory");
   const [selectedInventoryItem, setSelectedInventoryItem] = useState<InventoryItem | null>(null);
   const [customBetDC, setCustomBetDC] = useState<number>(500);
 
-  // Target skin
   const [targetSkin, setTargetSkin] = useState<Skin>(SKINS_DATABASE[0]);
   const [searchTarget, setSearchTarget] = useState<string>("");
 
-  // Game state
   const [isRolling, setIsRolling] = useState<boolean>(false);
   const [resultAngle, setResultAngle] = useState<number | null>(null);
   const [outcome, setOutcome] = useState<"idle" | "win" | "loss">("idle");
   const [lastWonSkin, setLastWonSkin] = useState<Skin | null>(null);
 
-  // Current bet value in DC
   const currentBetValue =
     betMode === "inventory"
       ? selectedInventoryItem
@@ -55,7 +46,6 @@ export default function UpgraderPage() {
         : 0
       : customBetDC;
 
-  // Exact odds formula: RTP 95%, max 85% chance
   const rawChance =
     targetSkin.priceDC > 0
       ? (currentBetValue / targetSkin.priceDC) * 95
@@ -75,7 +65,6 @@ export default function UpgraderPage() {
       return;
     }
 
-    // Deduct
     if (betMode === "dc") {
       const ok = deductBalance(customBetDC);
       if (!ok) return;
@@ -86,11 +75,9 @@ export default function UpgraderPage() {
     setOutcome("idle");
     setLastWonSkin(null);
 
-    // Determine win/loss outcome according to chance
     const isWin = Math.random() * 100 <= chancePercent;
     const winZoneDegrees = (chancePercent / 100) * 360;
 
-    // Pick angle inside winning zone or losing zone
     let stopAngle: number;
     if (isWin) {
       stopAngle = Math.random() * (winZoneDegrees - 5) + 2;
@@ -124,7 +111,6 @@ export default function UpgraderPage() {
       recordUpgrade(currentBetValue, null);
     }
 
-    // Clear selected inventory item
     setSelectedInventoryItem(null);
   };
 
@@ -138,33 +124,33 @@ export default function UpgraderPage() {
     <div className="space-y-8 pb-12">
       {/* Title */}
       <div className="text-center space-y-2">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-bold uppercase tracking-wider">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-glass-pill text-purple-300 text-xs font-bold uppercase tracking-wider">
           <TrendingUp className="w-4 h-4 text-purple-400" />
-          <span>Умный апгрейдер скинов CS2</span>
+          <span>Апгрейдер Liquid Glass CS2</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-wider">
           Апгрейдер <span className="text-purple-400">95% RTP</span>
         </h1>
-        <p className="text-sm text-slate-400 max-w-xl mx-auto">
-          Поставьте скин из инвентаря или DC и попытайтесь выиграть более дорогой предмет!
+        <p className="text-sm text-slate-400 max-w-xl mx-auto font-medium">
+          Поставьте скин из инвентаря или DC и попытайтесь выиграть более ценный предмет!
         </p>
       </div>
 
-      {/* Main Upgrader Arena */}
+      {/* Main Upgrader Arena with Liquid Glass Panels */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
         {/* Left Column: Source Bet */}
-        <div className="rounded-3xl bg-slate-900/80 border border-white/[0.08] p-5 backdrop-blur-xl space-y-4 shadow-xl">
-          <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
-            <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+        <div className="rounded-3xl liquid-glass p-6 space-y-5 shadow-2xl">
+          <div className="flex items-center justify-between pb-3 border-b border-white/[0.1]">
+            <span className="text-xs font-black text-slate-300 uppercase tracking-wider">
               Ваша ставка
             </span>
-            <div className="flex items-center gap-1 bg-slate-950/80 p-1 rounded-xl border border-white/[0.06]">
+            <div className="flex items-center gap-1 liquid-glass-pill p-1 rounded-xl">
               <button
                 disabled={isRolling}
                 onClick={() => setBetMode("inventory")}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+                className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
                   betMode === "inventory"
-                    ? "bg-violet-600 text-white"
+                    ? "bg-violet-600 text-white shadow-md"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -173,9 +159,9 @@ export default function UpgraderPage() {
               <button
                 disabled={isRolling}
                 onClick={() => setBetMode("dc")}
-                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+                className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
                   betMode === "dc"
-                    ? "bg-violet-600 text-white"
+                    ? "bg-violet-600 text-white shadow-md"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -189,7 +175,7 @@ export default function UpgraderPage() {
             <div className="space-y-3">
               {selectedInventoryItem ? (
                 <div
-                  className="relative p-4 rounded-2xl border-2 flex flex-col items-center text-center bg-slate-950/60"
+                  className="relative p-4 rounded-2xl border-2 flex flex-col items-center text-center liquid-glass"
                   style={{
                     borderColor: RARITY_MAP[selectedInventoryItem.rarity]?.color || "#4b69ff",
                   }}
@@ -197,15 +183,17 @@ export default function UpgraderPage() {
                   <button
                     disabled={isRolling}
                     onClick={() => setSelectedInventoryItem(null)}
-                    className="absolute top-2 right-2 text-xs text-slate-400 hover:text-white px-2 py-1 rounded bg-white/10"
+                    className="absolute top-2 right-2 text-xs text-slate-400 hover:text-white px-2 py-1 rounded-lg liquid-glass-button"
                   >
                     Сменить
                   </button>
                   <div className="w-32 h-24 flex items-center justify-center my-2">
-                    <img
+                    <OptimizedSkinImage
                       src={selectedInventoryItem.imageUrl}
                       alt={selectedInventoryItem.name}
-                      className="max-h-full max-w-full object-contain filter drop-shadow"
+                      weaponType={selectedInventoryItem.weapon}
+                      rarityColor={RARITY_MAP[selectedInventoryItem.rarity]?.color}
+                      className="w-full h-full"
                     />
                   </div>
                   <span className="text-sm font-bold text-white">
@@ -214,11 +202,11 @@ export default function UpgraderPage() {
                   <CurrencyBadge amount={selectedInventoryItem.priceDC} size="md" className="mt-2" />
                 </div>
               ) : (
-                <div className="p-6 rounded-2xl border-2 border-dashed border-white/15 text-center flex flex-col items-center justify-center space-y-2 min-h-[180px]">
-                  <span className="text-xs text-slate-400">
+                <div className="p-6 rounded-2xl border-2 border-dashed border-white/20 text-center flex flex-col items-center justify-center space-y-2 min-h-[180px] liquid-glass">
+                  <span className="text-xs text-slate-300 font-medium">
                     Выберите предмет из вашего инвентаря ниже:
                   </span>
-                  <span className="text-[11px] text-yellow-400/80">
+                  <span className="text-[11px] text-yellow-400/90 font-bold">
                     (В инвентаре: {inventory.length} предметов)
                   </span>
                 </div>
@@ -232,14 +220,17 @@ export default function UpgraderPage() {
                       key={item.instanceId}
                       disabled={isRolling}
                       onClick={() => setSelectedInventoryItem(item)}
-                      className="w-full flex items-center justify-between p-2.5 rounded-xl border border-white/10 bg-slate-950/40 hover:bg-white/[0.05] transition-all text-left"
+                      className="w-full flex items-center justify-between p-2.5 rounded-xl border border-white/10 liquid-glass-button hover:border-white/25 transition-all text-left"
                     >
                       <div className="flex items-center gap-2">
-                        <img
-                          src={item.imageUrl}
-                          alt={item.name}
-                          className="w-10 h-7 object-contain"
-                        />
+                        <div className="w-10 h-7 shrink-0">
+                          <OptimizedSkinImage
+                            src={item.imageUrl}
+                            alt={item.name}
+                            weaponType={item.weapon}
+                            className="w-full h-full"
+                          />
+                        </div>
                         <span className="text-xs font-semibold text-slate-200 truncate max-w-[140px]">
                           {item.name}
                         </span>
@@ -255,7 +246,7 @@ export default function UpgraderPage() {
           ) : (
             <div className="space-y-4 py-2">
               <div className="text-center space-y-2">
-                <span className="text-xs text-slate-400">Сумма ставки</span>
+                <span className="text-xs text-slate-400 font-medium">Сумма ставки</span>
                 <div className="flex items-center justify-center">
                   <CurrencyBadge amount={customBetDC} size="xl" />
                 </div>
@@ -268,10 +259,10 @@ export default function UpgraderPage() {
                     key={amt}
                     disabled={isRolling}
                     onClick={() => setCustomBetDC(amt)}
-                    className={`py-1.5 rounded-xl text-xs font-bold border transition-all ${
+                    className={`py-2 rounded-xl text-xs font-bold border transition-all ${
                       customBetDC === amt
-                        ? "bg-purple-600 text-white border-purple-400"
-                        : "bg-white/[0.04] text-slate-300 border-white/10 hover:bg-white/[0.08]"
+                        ? "bg-purple-600 text-white border-purple-400 shadow-md"
+                        : "liquid-glass-button text-slate-300"
                     }`}
                   >
                     {amt} DC
@@ -283,21 +274,21 @@ export default function UpgraderPage() {
                 <button
                   disabled={isRolling}
                   onClick={() => setCustomBetDC(Math.max(10, Math.floor(customBetDC / 2)))}
-                  className="flex-1 py-1.5 rounded-xl text-xs font-bold bg-white/[0.05] text-slate-300 hover:bg-white/10"
+                  className="flex-1 py-2 rounded-xl text-xs font-bold liquid-glass-button text-slate-300"
                 >
                   1/2
                 </button>
                 <button
                   disabled={isRolling}
                   onClick={() => setCustomBetDC(customBetDC * 2)}
-                  className="flex-1 py-1.5 rounded-xl text-xs font-bold bg-white/[0.05] text-slate-300 hover:bg-white/10"
+                  className="flex-1 py-2 rounded-xl text-xs font-bold liquid-glass-button text-slate-300"
                 >
                   2X
                 </button>
                 <button
                   disabled={isRolling}
                   onClick={() => setCustomBetDC(balance)}
-                  className="flex-1 py-1.5 rounded-xl text-xs font-bold bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 hover:bg-yellow-500/30"
+                  className="flex-1 py-2 rounded-xl text-xs font-bold bg-yellow-500/25 text-yellow-300 border border-yellow-500/40 hover:bg-yellow-500/35"
                 >
                   MAX
                 </button>
@@ -306,7 +297,7 @@ export default function UpgraderPage() {
           )}
         </div>
 
-        {/* Center Column: Circular Gauge & Actions */}
+        {/* Center Column: Circular Gauge in Liquid Glass */}
         <div className="flex flex-col items-center justify-center space-y-6">
           <CircularGauge
             chancePercent={chancePercent}
@@ -315,7 +306,6 @@ export default function UpgraderPage() {
             resultAngle={resultAngle}
           />
 
-          {/* Upgrade Trigger Button */}
           <Button
             variant={canUpgrade ? "gold" : "secondary"}
             size="xl"
@@ -331,19 +321,18 @@ export default function UpgraderPage() {
               : `Улучшить за ${currentBetValue} DC`}
           </Button>
 
-          {/* Outcome Result Alert */}
           {outcome !== "idle" && (
             <div
-              className={`p-4 rounded-2xl border text-center animate-in zoom-in-95 w-full max-w-sm ${
+              className={`p-4 rounded-2xl border text-center animate-in zoom-in-95 w-full max-w-sm liquid-glass shadow-2xl ${
                 outcome === "win"
-                  ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-300"
-                  : "bg-rose-500/15 border-rose-500/40 text-rose-300"
+                  ? "border-emerald-500/50 text-emerald-300 shadow-[0_0_30px_rgba(16,185,129,0.3)]"
+                  : "border-rose-500/50 text-rose-300 shadow-[0_0_30px_rgba(239,68,68,0.3)]"
               }`}
             >
               {outcome === "win" ? (
                 <div className="space-y-1">
                   <div className="flex items-center justify-center gap-1.5 font-black text-base">
-                    <CheckCircle2 className="w-5 h-5" />
+                    <CheckCircle2 className="w-5 h-5 text-emerald-400" />
                     <span>УСПЕШНЫЙ АПГРЕЙД!</span>
                   </div>
                   <p className="text-xs text-emerald-200">
@@ -353,7 +342,7 @@ export default function UpgraderPage() {
               ) : (
                 <div className="space-y-1">
                   <div className="flex items-center justify-center gap-1.5 font-black text-base">
-                    <XCircle className="w-5 h-5" />
+                    <XCircle className="w-5 h-5 text-rose-400" />
                     <span>НЕУДАЧА</span>
                   </div>
                   <p className="text-xs text-rose-200">
@@ -366,26 +355,27 @@ export default function UpgraderPage() {
         </div>
 
         {/* Right Column: Target Skin Selection */}
-        <div className="rounded-3xl bg-slate-900/80 border border-white/[0.08] p-5 backdrop-blur-xl space-y-4 shadow-xl">
-          <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
-            <span className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+        <div className="rounded-3xl liquid-glass p-6 space-y-5 shadow-2xl">
+          <div className="flex items-center justify-between pb-3 border-b border-white/[0.1]">
+            <span className="text-xs font-black text-slate-300 uppercase tracking-wider">
               Желаемый скин (Цель)
             </span>
             <CurrencyBadge amount={targetSkin.priceDC} size="sm" />
           </div>
 
-          {/* Active Target Card */}
           <div
-            className="p-4 rounded-2xl border-2 flex flex-col items-center text-center bg-slate-950/60"
+            className="p-4 rounded-2xl border-2 flex flex-col items-center text-center liquid-glass"
             style={{
               borderColor: RARITY_MAP[targetSkin.rarity]?.color || "#ffd700",
             }}
           >
             <div className="w-36 h-24 flex items-center justify-center my-2">
-              <img
+              <OptimizedSkinImage
                 src={targetSkin.imageUrl}
                 alt={targetSkin.name}
-                className="max-h-full max-w-full object-contain filter drop-shadow hover:scale-105 transition-transform"
+                weaponType={targetSkin.weapon}
+                rarityColor={RARITY_MAP[targetSkin.rarity]?.color}
+                className="w-full h-full hover:scale-105 transition-transform"
               />
             </div>
             <span className="text-sm font-bold text-white">{targetSkin.name}</span>
@@ -396,13 +386,13 @@ export default function UpgraderPage() {
 
           {/* Search Targets */}
           <div className="relative">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Поиск желаемого скина..."
               value={searchTarget}
               onChange={(e) => setSearchTarget(e.target.value)}
-              className="w-full bg-slate-950/60 border border-white/10 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-purple-500 transition-colors"
+              className="w-full liquid-glass-pill rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-purple-400 transition-colors"
             />
           </div>
 
@@ -415,16 +405,19 @@ export default function UpgraderPage() {
                 onClick={() => setTargetSkin(skin)}
                 className={`w-full flex items-center justify-between p-2.5 rounded-xl border transition-all text-left ${
                   targetSkin.id === skin.id
-                    ? "bg-purple-600/20 border-purple-500/50 shadow-sm"
-                    : "border-white/10 bg-slate-950/40 hover:bg-white/[0.05]"
+                    ? "bg-purple-600/30 border-purple-400/60 shadow-md"
+                    : "border-white/10 liquid-glass-button"
                 }`}
               >
                 <div className="flex items-center gap-2">
-                  <img
-                    src={skin.imageUrl}
-                    alt={skin.name}
-                    className="w-10 h-7 object-contain"
-                  />
+                  <div className="w-10 h-7 shrink-0">
+                    <OptimizedSkinImage
+                      src={skin.imageUrl}
+                      alt={skin.name}
+                      weaponType={skin.weapon}
+                      className="w-full h-full"
+                    />
+                  </div>
                   <span className="text-xs font-semibold text-slate-200 truncate max-w-[140px]">
                     {skin.name}
                   </span>

@@ -1,4 +1,4 @@
-﻿import { create } from "zustand";
+import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { InventoryItem, LiveDrop, Skin } from "../types";
 import { sound } from "../sound";

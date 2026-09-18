@@ -1,4 +1,4 @@
-﻿// Web Audio API procedural sound engine - 0 external files, 0 latency
+// Web Audio API procedural sound engine - 0 external files, 0 latency
 
 class SoundEngine {
   private ctx: AudioContext | null = null;

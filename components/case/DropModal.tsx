@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useEffect } from "react";
 import confetti from "canvas-confetti";
@@ -7,7 +7,8 @@ import { sound } from "@/lib/sound";
 import { CurrencyBadge } from "../ui/CurrencyBadge";
 import { Button } from "../ui/Button";
 import { RarityBadge } from "../ui/RarityBadge";
-import { ExternalLink, Check, DollarSign, X } from "lucide-react";
+import { OptimizedSkinImage } from "../ui/OptimizedSkinImage";
+import { ExternalLink, Check, DollarSign } from "lucide-react";
 
 interface DropModalProps {
   isOpen: boolean;
@@ -29,7 +30,6 @@ export const DropModal: React.FC<DropModalProps> = ({
   useEffect(() => {
     if (!isOpen || wonSkins.length === 0) return;
 
-    // Determine highest rarity
     const hasGold = wonSkins.some((s) => s.rarity === "special");
     const hasCovert = wonSkins.some((s) => s.rarity === "covert");
     const hasClassified = wonSkins.some((s) => s.rarity === "classified");
@@ -67,13 +67,13 @@ export const DropModal: React.FC<DropModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
-      <div className="fixed inset-0 bg-black/85 backdrop-blur-xl animate-in fade-in" />
+      <div className="fixed inset-0 bg-black/85 backdrop-blur-md animate-in fade-in" />
 
       {/* Main Container */}
-      <div className="relative w-full max-w-2xl bg-slate-900/95 border border-white/10 rounded-3xl p-6 sm:p-8 shadow-[0_0_60px_rgba(0,0,0,0.8)] backdrop-blur-2xl z-10 animate-in zoom-in-95 duration-300 text-center">
+      <div className="relative w-full max-w-2xl liquid-glass-modal rounded-3xl p-6 sm:p-8 z-10 animate-in zoom-in-95 duration-300 text-center">
         {/* Top Header */}
         <div className="mb-6">
-          <span className="text-xs font-black tracking-widest text-yellow-400 uppercase bg-yellow-500/10 px-3 py-1 rounded-full border border-yellow-500/20">
+          <span className="text-xs font-black tracking-widest text-amber-400 uppercase bg-amber-500/15 px-3.5 py-1 rounded-full border border-amber-500/30">
             {isSingle ? "Поздравляем с дропом!" : `Вы открыли ${wonSkins.length} кейса!`}
           </span>
           <h2 className="text-2xl sm:text-3xl font-black text-white mt-2">
@@ -97,24 +97,26 @@ export const DropModal: React.FC<DropModalProps> = ({
               return (
                 <div
                   key={idx}
-                  className="relative flex flex-col items-center p-6 rounded-2xl border-2 w-full max-w-md bg-gradient-to-b from-slate-800/50 to-slate-950/80 shadow-2xl transition-all"
+                  className="relative flex flex-col items-center p-6 rounded-3xl border-2 w-full max-w-md liquid-glass shadow-2xl transition-all"
                   style={{
-                    borderColor: `${config.color}80`,
-                    boxShadow: `0 0 40px ${config.color}25`,
+                    borderColor: `${config.color}90`,
+                    boxShadow: `0 0 50px ${config.color}30`,
                   }}
                 >
                   <div
-                    className="absolute inset-0 rounded-2xl opacity-20 pointer-events-none"
+                    className="absolute inset-0 rounded-3xl opacity-20 pointer-events-none"
                     style={{
                       background: `radial-gradient(circle at 50% 50%, ${config.color}, transparent 70%)`,
                     }}
                   />
 
                   <div className="relative w-64 h-44 flex items-center justify-center mb-4">
-                    <img
+                    <OptimizedSkinImage
                       src={skin.imageUrl}
                       alt={skin.name}
-                      className="max-h-full max-w-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] hover:scale-110 transition-transform duration-300"
+                      weaponType={skin.weapon}
+                      rarityColor={config.color}
+                      className="w-full h-full hover:scale-110 transition-transform duration-300"
                     />
                   </div>
 
@@ -141,16 +143,18 @@ export const DropModal: React.FC<DropModalProps> = ({
             return (
               <div
                 key={idx}
-                className={`relative flex flex-col items-center justify-between p-3 rounded-xl border ${
+                className={`relative flex flex-col items-center justify-between p-3 rounded-2xl border ${
                   isSold ? "opacity-40 grayscale" : ""
-                } bg-slate-800/60`}
-                style={{ borderColor: `${config.color}60` }}
+                } liquid-glass`}
+                style={{ borderColor: `${config.color}70` }}
               >
                 <div className="relative w-full h-24 flex items-center justify-center">
-                  <img
+                  <OptimizedSkinImage
                     src={skin.imageUrl}
                     alt={skin.name}
-                    className="max-h-full max-w-full object-contain filter drop-shadow"
+                    weaponType={skin.weapon}
+                    rarityColor={config.color}
+                    className="w-full h-full"
                   />
                 </div>
                 <div className="w-full text-center mt-2">
@@ -183,7 +187,7 @@ export const DropModal: React.FC<DropModalProps> = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4 border-t border-white/[0.08]">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4 border-t border-white/[0.1]">
           {totalUnsoldDC > 0 && (
             <Button
               variant="gold"

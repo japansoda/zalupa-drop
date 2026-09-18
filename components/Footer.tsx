@@ -1,30 +1,26 @@
-﻿import React from "react";
+"use client";
+
+import React from "react";
 import Link from "next/link";
-import { ShieldCheck, Sparkles, Heart } from "lucide-react";
+import { BrandLogo } from "./ui/BrandLogo";
+import { ShieldCheck, Heart } from "lucide-react";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full border-t border-white/[0.08] bg-slate-950/90 backdrop-blur-xl text-slate-400 py-10 mt-auto">
+    <footer className="w-full border-t border-white/[0.1] liquid-glass-nav text-slate-400 py-12 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
           <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg overflow-hidden bg-slate-900 border border-white/10 p-1 flex items-center justify-center">
-                <img src="/logo.png" alt="Zalupa Drop" className="w-full h-full object-contain" />
-              </div>
-              <span className="text-lg font-black text-white uppercase tracking-wider">
-                Zalupa Drop
-              </span>
-            </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Современный симулятор открытия кейсов, апгрейда и мини-игр CS2. Открывайте кейсы без реальных финансовых рисков и наслаждайтесь азартом!
+            <BrandLogo size="md" />
+            <p className="text-xs text-slate-400 leading-relaxed max-w-sm pt-2">
+              Современный симулятор открытия кейсов, апгрейда и мини-игр CS2 в дизайне Liquid Glass. Открывайте кейсы без финансовых рисков!
             </p>
           </div>
 
           {/* Navigation */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
+            <h4 className="text-xs font-black text-slate-200 uppercase tracking-wider">
               Быстрая навигация
             </h4>
             <div className="grid grid-cols-2 gap-2 text-xs">
@@ -58,7 +54,7 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
+        <div className="pt-6 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
           <p>© {new Date().getFullYear()} Zalupa Drop. Все права защищены.</p>
           <div className="flex items-center gap-1 text-slate-400">
             <span>Сделано с любовью к CS2</span>

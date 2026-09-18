@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { useParams } from "next/navigation";
@@ -9,6 +9,7 @@ import { RouletteReel } from "@/components/case/RouletteReel";
 import { DropModal } from "@/components/case/DropModal";
 import { CurrencyBadge } from "@/components/ui/CurrencyBadge";
 import { Button } from "@/components/ui/Button";
+import { OptimizedSkinImage } from "@/components/ui/OptimizedSkinImage";
 import { RARITY_MAP, Skin, InventoryItem } from "@/lib/types";
 import {
   ArrowLeft,
@@ -34,7 +35,6 @@ export default function CasePage() {
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [targetSkin, setTargetSkin] = useState<Skin | null>(null);
 
-  // Drop Modal State
   const [isDropModalOpen, setIsDropModalOpen] = useState<boolean>(false);
   const [wonSkins, setWonSkins] = useState<Skin[]>([]);
   const [createdInventoryItems, setCreatedInventoryItems] = useState<InventoryItem[]>([]);
@@ -68,7 +68,6 @@ export default function CasePage() {
     const deducted = deductBalance(totalCost);
     if (!deducted) return;
 
-    // Roll winners
     const winners: Skin[] = [];
     for (let i = 0; i < openCount; i++) {
       const rolled = rollSkinFromCase(caseItem);
@@ -76,7 +75,6 @@ export default function CasePage() {
       recordCaseOpen(caseItem.priceDC, rolled);
     }
 
-    // Set first winner for reel animation
     setTargetSkin(winners[0]);
     setWonSkins(winners);
     setSoldIndices([]);
@@ -86,7 +84,6 @@ export default function CasePage() {
   const handleFinishRoulette = (singleWinner: Skin) => {
     setIsSpinning(false);
 
-    // Save all won items to user inventory
     const newItems: InventoryItem[] = wonSkins.map((s) =>
       addDropToInventory(s, "case")
     );
@@ -94,7 +91,6 @@ export default function CasePage() {
     setIsDropModalOpen(true);
   };
 
-  // Modal actions
   const handleKeepAll = () => {
     setIsDropModalOpen(false);
   };
@@ -105,9 +101,7 @@ export default function CasePage() {
     const skin = wonSkins[index];
     if (!skin) return;
 
-    // Credit balance
     addBalance(skin.priceDC);
-    // Remove from inventory store if created
     if (invItem) {
       useAppStore.getState().removeInventoryItem(invItem.instanceId);
     }
@@ -129,7 +123,7 @@ export default function CasePage() {
       <div className="flex items-center justify-between">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Назад ко всем кейсам</span>
@@ -143,12 +137,12 @@ export default function CasePage() {
         <h1 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-wider">
           {caseItem.name}
         </h1>
-        <p className="text-sm text-slate-400 max-w-xl mx-auto">
+        <p className="text-sm text-slate-400 max-w-xl mx-auto font-medium">
           {caseItem.description}
         </p>
       </div>
 
-      {/* Roulette Reel */}
+      {/* Roulette Reel with Liquid Glass */}
       <div className="relative">
         <RouletteReel
           caseItem={caseItem}
@@ -160,18 +154,18 @@ export default function CasePage() {
       </div>
 
       {/* Controls Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 bg-slate-900/80 border border-white/[0.08] p-4 rounded-2xl backdrop-blur-xl max-w-2xl mx-auto">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 liquid-glass p-4 rounded-3xl max-w-2xl mx-auto shadow-2xl">
         {/* Open Count Selector */}
-        <div className="flex items-center gap-1 bg-slate-950/80 p-1 rounded-xl border border-white/[0.06]">
+        <div className="flex items-center gap-1 liquid-glass-pill p-1 rounded-xl">
           {[1, 2, 3, 5].map((count) => (
             <button
               key={count}
               disabled={isSpinning}
               onClick={() => setOpenCount(count)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+              className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
                 openCount === count
                   ? "bg-violet-600 text-white shadow-md"
-                  : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                  : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
               }`}
             >
               x{count}
@@ -183,10 +177,10 @@ export default function CasePage() {
         <button
           disabled={isSpinning}
           onClick={() => setFastMode(!fastMode)}
-          className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold border transition-all ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold border transition-all ${
             fastMode
-              ? "bg-amber-500/20 text-yellow-300 border-yellow-500/40 shadow-[0_0_10px_rgba(245,158,11,0.2)]"
-              : "bg-white/[0.04] text-slate-400 border-white/[0.08] hover:text-white"
+              ? "bg-amber-500/25 text-yellow-300 border-yellow-500/50 shadow-[0_0_12px_rgba(245,158,11,0.3)]"
+              : "liquid-glass-button text-slate-400 hover:text-white"
           }`}
         >
           <Zap className={`w-3.5 h-3.5 ${fastMode ? "text-yellow-400 fill-yellow-400" : ""}`} />
@@ -199,7 +193,7 @@ export default function CasePage() {
           size="lg"
           disabled={isSpinning}
           onClick={handleStartOpen}
-          className="w-full sm:w-auto px-8"
+          className="w-full sm:w-auto px-8 shadow-xl"
           leftIcon={<Package className="w-5 h-5" />}
         >
           {isSpinning
@@ -211,13 +205,13 @@ export default function CasePage() {
       </div>
 
       {/* Drops in this case */}
-      <section className="space-y-4 pt-6 border-t border-white/[0.08]">
+      <section className="space-y-4 pt-6 border-t border-white/[0.1]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Layers className="w-5 h-5 text-purple-400" />
             <h2 className="text-xl font-bold text-white">Содержимое кейса</h2>
           </div>
-          <span className="text-xs text-slate-400 font-medium">
+          <span className="text-xs text-slate-400 font-semibold">
             Всего {caseItem.skins.length} предметов
           </span>
         </div>
@@ -230,8 +224,8 @@ export default function CasePage() {
               return (
                 <div
                   key={skin.id}
-                  className="group relative flex flex-col justify-between p-3 rounded-xl border bg-slate-900/60 hover:bg-slate-800/80 transition-all backdrop-blur-md overflow-hidden"
-                  style={{ borderColor: `${config.color}35` }}
+                  className="group relative flex flex-col justify-between p-3 rounded-2xl border liquid-glass transition-all overflow-hidden"
+                  style={{ borderColor: `${config.color}45` }}
                 >
                   <div
                     className="absolute inset-0 opacity-10 pointer-events-none group-hover:opacity-20 transition-opacity"
@@ -239,10 +233,12 @@ export default function CasePage() {
                   />
 
                   <div className="relative w-full h-24 flex items-center justify-center my-1">
-                    <img
+                    <OptimizedSkinImage
                       src={skin.imageUrl}
                       alt={skin.name}
-                      className="max-h-full max-w-full object-contain filter drop-shadow group-hover:scale-105 transition-transform"
+                      weaponType={skin.weapon}
+                      rarityColor={config.color}
+                      className="w-full h-full group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
 
@@ -251,12 +247,12 @@ export default function CasePage() {
                       {skin.weapon}
                     </span>
                     <span
-                      className="text-xs font-bold truncate block leading-tight"
+                      className="text-xs font-black truncate block leading-tight"
                       style={{ color: config.color }}
                     >
                       {skin.skinName}
                     </span>
-                    <div className="flex items-center justify-between pt-1 border-t border-white/[0.06]">
+                    <div className="flex items-center justify-between pt-1 border-t border-white/[0.08]">
                       <span className="text-[10px] text-slate-400">{skin.wear}</span>
                       <span className="text-[11px] font-bold text-yellow-400">
                         {skin.priceDC} DC

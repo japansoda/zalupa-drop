@@ -50,20 +50,20 @@ export const Modal: React.FC<ModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/75 backdrop-blur-md transition-opacity animate-in fade-in"
+        className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity animate-in fade-in"
         onClick={onClose}
       />
 
-      {/* Dialog */}
+      {/* Dialog with Liquid Glass Specifications */}
       <div
-        className={`relative w-full ${maxWidthClasses[maxWidth]} bg-slate-900/90 border border-white/10 rounded-2xl p-6 shadow-2xl backdrop-blur-2xl z-10 animate-in zoom-in-95 duration-200`}
+        className={`relative w-full ${maxWidthClasses[maxWidth]} liquid-glass-modal rounded-3xl p-6 sm:p-7 z-10 animate-in zoom-in-95 duration-200`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between pb-4 border-b border-white/[0.08] mb-4">
-          <div className="text-lg font-bold text-white tracking-wide">{title}</div>
+        <div className="flex items-center justify-between pb-4 border-b border-white/[0.1] mb-5">
+          <div className="text-lg font-black text-white tracking-wide">{title}</div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.08] transition-colors"
+            className="p-2 rounded-xl text-slate-400 hover:text-white liquid-glass-button transition-colors"
           >
             <X className="w-5 h-5" />
           </button>

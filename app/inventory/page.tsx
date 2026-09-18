@@ -1,24 +1,22 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
 import { useAppStore } from "@/lib/store/useAppStore";
-import { RARITY_MAP, RarityTier, InventoryItem } from "@/lib/types";
+import { RARITY_MAP } from "@/lib/types";
 import { CurrencyBadge } from "@/components/ui/CurrencyBadge";
 import { Button } from "@/components/ui/Button";
 import { RarityBadge } from "@/components/ui/RarityBadge";
+import { OptimizedSkinImage } from "@/components/ui/OptimizedSkinImage";
 import {
   Briefcase,
   ExternalLink,
   DollarSign,
-  Trash2,
   Search,
-  Filter,
   Package,
   Trophy,
   TrendingUp,
   Sparkles,
-  ArrowUpDown,
 } from "lucide-react";
 
 export default function InventoryPage() {
@@ -31,10 +29,8 @@ export default function InventoryPage() {
   const [selectedRarity, setSelectedRarity] = useState<string>("all");
   const [sortBy, setSortBy] = useState<"price_desc" | "price_asc" | "newest">("price_desc");
 
-  // Total inventory valuation
   const totalValuation = inventory.reduce((sum, item) => sum + item.priceDC, 0);
 
-  // Filtering
   const filteredItems = inventory
     .filter((item) => {
       const matchesSearch =
@@ -55,7 +51,7 @@ export default function InventoryPage() {
       {/* Title & Stats Overview */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-bold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-glass-pill text-purple-300 text-xs font-bold uppercase tracking-wider mb-2">
             <Briefcase className="w-4 h-4 text-purple-400" />
             <span>Личный инвентарь игрока</span>
           </div>
@@ -67,8 +63,8 @@ export default function InventoryPage() {
           </p>
         </div>
 
-        {/* Valuation & Bulk Sell */}
-        <div className="flex flex-wrap items-center gap-3 bg-slate-900/80 border border-white/[0.08] p-3 sm:p-4 rounded-2xl backdrop-blur-xl">
+        {/* Valuation & Bulk Sell in Liquid Glass */}
+        <div className="flex flex-wrap items-center gap-3 liquid-glass p-3 sm:p-4 rounded-3xl shadow-xl">
           <div className="flex flex-col">
             <span className="text-[11px] text-slate-400 uppercase font-bold">
               Общая стоимость инвентаря:
@@ -95,28 +91,28 @@ export default function InventoryPage() {
 
       {/* Profile & Simulator Statistics Widget */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="rounded-2xl bg-slate-900/60 border border-white/[0.08] p-4 backdrop-blur-md flex flex-col justify-between">
-          <div className="flex items-center gap-2 text-slate-400 text-xs font-semibold">
+        <div className="rounded-3xl liquid-glass p-5 flex flex-col justify-between shadow-lg">
+          <div className="flex items-center gap-2 text-slate-400 text-xs font-bold">
             <Package className="w-4 h-4 text-purple-400" />
             <span>Открыто кейсов</span>
           </div>
-          <span className="text-2xl font-black text-white mt-2">
+          <span className="text-2xl sm:text-3xl font-black text-white mt-2">
             {stats.casesOpened}
           </span>
         </div>
 
-        <div className="rounded-2xl bg-slate-900/60 border border-white/[0.08] p-4 backdrop-blur-md flex flex-col justify-between">
-          <div className="flex items-center gap-2 text-slate-400 text-xs font-semibold">
+        <div className="rounded-3xl liquid-glass p-5 flex flex-col justify-between shadow-lg">
+          <div className="flex items-center gap-2 text-slate-400 text-xs font-bold">
             <TrendingUp className="w-4 h-4 text-emerald-400" />
             <span>Успешных апгрейдов</span>
           </div>
-          <span className="text-2xl font-black text-emerald-400 mt-2">
+          <span className="text-2xl sm:text-3xl font-black text-emerald-400 mt-2">
             {stats.upgradesWon} / {stats.upgradesAttempted}
           </span>
         </div>
 
-        <div className="rounded-2xl bg-slate-900/60 border border-white/[0.08] p-4 backdrop-blur-md flex flex-col justify-between">
-          <div className="flex items-center gap-2 text-slate-400 text-xs font-semibold">
+        <div className="rounded-3xl liquid-glass p-5 flex flex-col justify-between shadow-lg">
+          <div className="flex items-center gap-2 text-slate-400 text-xs font-bold">
             <Trophy className="w-4 h-4 text-yellow-400" />
             <span>Лучший дроп</span>
           </div>
@@ -125,66 +121,62 @@ export default function InventoryPage() {
           </span>
         </div>
 
-        <div className="rounded-2xl bg-slate-900/60 border border-white/[0.08] p-4 backdrop-blur-md flex flex-col justify-between">
-          <div className="flex items-center gap-2 text-slate-400 text-xs font-semibold">
+        <div className="rounded-3xl liquid-glass p-5 flex flex-col justify-between shadow-lg">
+          <div className="flex items-center gap-2 text-slate-400 text-xs font-bold">
             <Sparkles className="w-4 h-4 text-cyan-400" />
             <span>Всего заработано</span>
           </div>
-          <span className="text-xl font-black text-cyan-300 mt-2">
+          <span className="text-xl sm:text-2xl font-black text-cyan-300 mt-2">
             {new Intl.NumberFormat("ru-RU").format(stats.totalEarnedDC)} DC
           </span>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-slate-900/80 border border-white/[0.08] p-3 rounded-2xl backdrop-blur-xl">
-        {/* Search */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 liquid-glass p-3.5 rounded-3xl shadow-xl">
         <div className="relative w-full md:w-72">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Поиск по скинам..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-slate-950/60 border border-white/10 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-purple-500 transition-colors"
+            className="w-full liquid-glass-pill rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-purple-500 transition-colors"
           />
         </div>
 
-        {/* Filters and Sorters */}
         <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto no-scrollbar">
-          {/* Rarity selector */}
           <select
             value={selectedRarity}
             onChange={(e) => setSelectedRarity(e.target.value)}
-            className="bg-slate-950/80 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+            className="liquid-glass-pill rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
           >
-            <option value="all">Все редкости</option>
-            <option value="special">★ Экстраординарное (Ножи)</option>
-            <option value="covert">Тайное (Covert)</option>
-            <option value="classified">Засекреченное (Classified)</option>
-            <option value="restricted">Запрещенное (Restricted)</option>
-            <option value="milspec">Армейское (Mil-Spec)</option>
-            <option value="consumer">Ширпотреб</option>
+            <option value="all" className="bg-slate-900 text-white">Все редкости</option>
+            <option value="special" className="bg-slate-900 text-yellow-400">★ Экстраординарное (Ножи)</option>
+            <option value="covert" className="bg-slate-900 text-red-400">Тайное (Covert)</option>
+            <option value="classified" className="bg-slate-900 text-pink-400">Засекреченное (Classified)</option>
+            <option value="restricted" className="bg-slate-900 text-purple-400">Запрещенное (Restricted)</option>
+            <option value="milspec" className="bg-slate-900 text-blue-400">Армейское (Mil-Spec)</option>
+            <option value="consumer" className="bg-slate-900 text-slate-300">Ширпотреб</option>
           </select>
 
-          {/* Sort selector */}
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="bg-slate-950/80 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
+            className="liquid-glass-pill rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500"
           >
-            <option value="price_desc">Сначала дорогие</option>
-            <option value="price_asc">Сначала дешевые</option>
-            <option value="newest">Сначала новые</option>
+            <option value="price_desc" className="bg-slate-900 text-white">Сначала дорогие</option>
+            <option value="price_asc" className="bg-slate-900 text-white">Сначала дешевые</option>
+            <option value="newest" className="bg-slate-900 text-white">Сначала новые</option>
           </select>
         </div>
       </div>
 
       {/* Skins Grid */}
       {filteredItems.length === 0 ? (
-        <div className="text-center py-16 space-y-4 rounded-3xl border border-white/[0.06] bg-slate-900/40 backdrop-blur-md">
-          <Briefcase className="w-12 h-12 text-slate-600 mx-auto" />
-          <h3 className="text-lg font-bold text-slate-300">Инвентарь пуст</h3>
+        <div className="text-center py-16 space-y-4 rounded-3xl liquid-glass">
+          <Briefcase className="w-12 h-12 text-slate-500 mx-auto" />
+          <h3 className="text-lg font-bold text-slate-200">Инвентарь пуст</h3>
           <p className="text-xs text-slate-400 max-w-sm mx-auto">
             {inventory.length === 0
               ? "Вы пока не открыли ни одного кейса. Перейдите в каталог и начните игру!"
@@ -205,31 +197,29 @@ export default function InventoryPage() {
             return (
               <div
                 key={item.instanceId}
-                className="group relative flex flex-col justify-between rounded-2xl border bg-slate-900/60 hover:bg-slate-800/80 p-4 backdrop-blur-xl shadow-glass transition-all duration-300 overflow-hidden"
-                style={{ borderColor: `${config.color}40` }}
+                className="group relative flex flex-col justify-between rounded-3xl border liquid-glass p-4 transition-all duration-300 hover:-translate-y-1.5 overflow-hidden"
+                style={{ borderColor: `${config.color}45` }}
               >
-                {/* Rarity background glow */}
                 <div
                   className="absolute inset-0 opacity-10 pointer-events-none group-hover:opacity-20 transition-opacity"
                   style={{ backgroundColor: config.color }}
                 />
 
-                {/* Top Info */}
                 <div className="flex items-center justify-between gap-1 z-10">
                   <RarityBadge rarity={item.rarity} wear={item.wear} size="sm" />
                   <CurrencyBadge amount={item.priceDC} size="sm" />
                 </div>
 
-                {/* Skin Preview */}
                 <div className="relative w-full h-32 flex items-center justify-center my-3 z-10">
-                  <img
+                  <OptimizedSkinImage
                     src={item.imageUrl}
                     alt={item.name}
-                    className="max-h-full max-w-full object-contain filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.6)] group-hover:scale-110 transition-transform duration-300"
+                    weaponType={item.weapon}
+                    rarityColor={config.color}
+                    className="w-full h-full group-hover:scale-110 transition-transform duration-300"
                   />
                 </div>
 
-                {/* Skin Title */}
                 <div className="z-10 text-center mb-3">
                   <span className="text-[10px] text-slate-400 font-bold uppercase truncate block">
                     {item.weapon}
@@ -242,7 +232,6 @@ export default function InventoryPage() {
                   </h4>
                 </div>
 
-                {/* Action Buttons */}
                 <div className="z-10 pt-3 border-t border-white/[0.08] space-y-2">
                   <Button
                     variant="gold"

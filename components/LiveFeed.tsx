@@ -1,12 +1,12 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { RARITY_MAP, LiveDrop } from "@/lib/types";
 import { CurrencyBadge } from "./ui/CurrencyBadge";
 import { Modal } from "./ui/Modal";
-import { ExternalLink, ShoppingBag } from "lucide-react";
+import { OptimizedSkinImage } from "./ui/OptimizedSkinImage";
+import { ExternalLink } from "lucide-react";
 import { Button } from "./ui/Button";
 
 export const LiveFeed: React.FC = () => {
@@ -15,21 +15,21 @@ export const LiveFeed: React.FC = () => {
 
   if (liveFeed.length === 0) {
     return (
-      <div className="h-14 border-b border-white/[0.06] bg-slate-950/40 backdrop-blur-md flex items-center justify-center text-xs text-slate-400">
-        <span className="animate-pulse">Ожидание новых дропов...</span>
+      <div className="h-14 border-b border-white/[0.08] liquid-glass-pill flex items-center justify-center text-xs text-slate-400">
+        <span className="animate-pulse">Ожидание новых дропов в реальном времени...</span>
       </div>
     );
   }
 
   return (
     <>
-      <div className="relative w-full border-b border-white/[0.06] bg-slate-950/60 backdrop-blur-md overflow-hidden py-2 select-none">
+      <div className="relative w-full border-b border-white/[0.08] liquid-glass-nav overflow-hidden py-2 select-none">
         {/* Left and Right Fade overlays */}
-        <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#090a10] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#090a10] to-transparent z-10 pointer-events-none" />
 
         <div className="flex items-center gap-2 overflow-x-auto no-scrollbar px-4">
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs font-bold uppercase tracking-wider shrink-0">
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-red-500/15 border border-red-500/40 text-red-400 text-xs font-black uppercase tracking-wider shrink-0 backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
             Live Дропы
           </div>
@@ -40,20 +40,20 @@ export const LiveFeed: React.FC = () => {
               <button
                 key={drop.id}
                 onClick={() => setSelectedDrop(drop)}
-                className={`group relative flex items-center gap-2.5 px-2.5 py-1.5 rounded-xl border ${config.borderClass} bg-slate-900/60 hover:bg-slate-800/80 transition-all shrink-0 cursor-pointer text-left`}
+                className={`group relative flex items-center gap-2.5 px-3 py-1.5 rounded-xl border ${config.borderClass} liquid-glass hover:border-white/30 transition-all shrink-0 cursor-pointer text-left`}
               >
-                {/* Glow accent */}
                 <div
                   className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity pointer-events-none"
                   style={{ backgroundColor: config.color }}
                 />
 
-                <div className="relative w-10 h-7 shrink-0 flex items-center justify-center">
-                  <img
+                <div className="relative w-11 h-8 shrink-0 flex items-center justify-center">
+                  <OptimizedSkinImage
                     src={drop.skin.imageUrl}
                     alt={drop.skin.name}
-                    className="max-h-full max-w-full object-contain filter drop-shadow group-hover:scale-110 transition-transform"
-                    loading="lazy"
+                    weaponType={drop.skin.weapon}
+                    rarityColor={config.color}
+                    className="w-full h-full group-hover:scale-110 transition-transform"
                   />
                 </div>
 
@@ -62,14 +62,14 @@ export const LiveFeed: React.FC = () => {
                     {drop.skin.weapon}
                   </span>
                   <span
-                    className="text-[10px] truncate max-w-[120px] font-medium leading-tight"
+                    className="text-[10px] truncate max-w-[120px] font-extrabold leading-tight"
                     style={{ color: config.color }}
                   >
                     {drop.skin.skinName}
                   </span>
                 </div>
 
-                <span className="text-[10px] text-yellow-400 font-bold bg-yellow-500/10 px-1.5 py-0.5 rounded border border-yellow-500/20">
+                <span className="text-[10px] text-yellow-400 font-black bg-yellow-500/15 px-1.5 py-0.5 rounded-md border border-yellow-500/30">
                   {drop.skin.priceDC} DC
                 </span>
               </button>
@@ -87,22 +87,24 @@ export const LiveFeed: React.FC = () => {
         >
           <div className="flex flex-col items-center text-center space-y-4 pt-2">
             <div
-              className="relative w-48 h-36 flex items-center justify-center rounded-2xl p-4 border"
+              className="relative w-56 h-40 flex items-center justify-center rounded-3xl p-4 border liquid-glass shadow-2xl"
               style={{
-                borderColor: `${RARITY_MAP[selectedDrop.skin.rarity]?.color}60`,
+                borderColor: `${RARITY_MAP[selectedDrop.skin.rarity]?.color}70`,
                 backgroundColor: `${RARITY_MAP[selectedDrop.skin.rarity]?.color}15`,
               }}
             >
-              <img
+              <OptimizedSkinImage
                 src={selectedDrop.skin.imageUrl}
                 alt={selectedDrop.skin.name}
-                className="max-h-full max-w-full object-contain filter drop-shadow-2xl hover:scale-105 transition-transform"
+                weaponType={selectedDrop.skin.weapon}
+                rarityColor={RARITY_MAP[selectedDrop.skin.rarity]?.color}
+                className="w-full h-full hover:scale-105 transition-transform"
               />
             </div>
 
             <div>
               <div
-                className="text-xs font-semibold uppercase tracking-wider mb-1"
+                className="text-xs font-black uppercase tracking-wider mb-1"
                 style={{ color: RARITY_MAP[selectedDrop.skin.rarity]?.color }}
               >
                 {RARITY_MAP[selectedDrop.skin.rarity]?.nameRu}
@@ -111,7 +113,7 @@ export const LiveFeed: React.FC = () => {
                 {selectedDrop.skin.name}
               </h3>
               <p className="text-xs text-slate-400 mt-1">
-                Игрок: <span className="text-slate-200 font-semibold">{selectedDrop.userName}</span>
+                Игрок: <span className="text-slate-200 font-bold">{selectedDrop.userName}</span>
               </p>
             </div>
 

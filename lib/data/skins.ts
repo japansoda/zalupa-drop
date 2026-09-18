@@ -1,4 +1,4 @@
-﻿import { Skin } from "../types";
+import { Skin } from "../types";
 
 export const SKINS_DATABASE: Skin[] = [
   // --- SPECIAL (Ножи и Перчатки) ---

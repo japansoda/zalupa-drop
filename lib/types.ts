@@ -1,4 +1,4 @@
-﻿export type RarityTier = 
+export type RarityTier = 
   | "consumer"     // Ширпотреб (Gray)
   | "industrial"   // Промышленное (Light Blue)
   | "milspec"      // Армейское качество (Blue)

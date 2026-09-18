@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import confetti from "canvas-confetti";
@@ -12,8 +12,6 @@ import {
   Bomb,
   User,
   Bot,
-  Sparkles,
-  Trophy,
 } from "lucide-react";
 
 export default function CoinflipPage() {
@@ -46,7 +44,6 @@ export default function CoinflipPage() {
     setWinnerSide(null);
     sound.playCoinFlip();
 
-    // 50/50 outcome
     const willWin = Math.random() >= 0.5;
     const winningSide: "CT" | "T" = willWin
       ? selectedSide
@@ -54,8 +51,6 @@ export default function CoinflipPage() {
       ? "T"
       : "CT";
 
-    // 6 full rotations (2160 deg) + side alignment
-    // CT is 0 deg (or multiples of 360), T is 180 deg
     const targetDeg = 2160 + (winningSide === "CT" ? 0 : 180);
     setCoinRotation(targetDeg);
 
@@ -83,27 +78,23 @@ export default function CoinflipPage() {
 
   return (
     <div className="space-y-8 pb-12">
-      {/* Title */}
       <div className="text-center space-y-2">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full liquid-glass-pill text-amber-300 text-xs font-bold uppercase tracking-wider">
           <CircleDollarSign className="w-4 h-4 text-amber-400" />
           <span>Дуэль 50/50 против бота</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-wider">
           Монетка <span className="text-amber-400">CS2 Coinflip</span>
         </h1>
-        <p className="text-sm text-slate-400 max-w-xl mx-auto">
+        <p className="text-sm text-slate-400 max-w-xl mx-auto font-medium">
           Выберите сторону (Спецназ или Террористы), сделайте ставку и удвойте свои DropCoins!
         </p>
       </div>
 
-      {/* Main Coinflip Arena */}
-      <div className="max-w-4xl mx-auto rounded-3xl bg-slate-900/80 border border-white/[0.08] p-6 sm:p-10 backdrop-blur-xl shadow-2xl space-y-8">
-        {/* Opponents Matchup Header */}
-        <div className="flex items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
-          {/* Player */}
+      <div className="max-w-4xl mx-auto rounded-3xl liquid-glass p-6 sm:p-10 shadow-2xl space-y-8">
+        <div className="flex items-center justify-between gap-4 pb-6 border-b border-white/[0.1]">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-violet-600/20 border border-violet-500/40 flex items-center justify-center text-violet-300">
+            <div className="w-12 h-12 rounded-2xl liquid-glass border-blue-500/40 flex items-center justify-center text-blue-300 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
               <User className="w-6 h-6" />
             </div>
             <div>
@@ -120,7 +111,6 @@ export default function CoinflipPage() {
 
           <span className="text-lg font-black text-slate-500">VS</span>
 
-          {/* Bot */}
           <div className="flex items-center gap-3 text-right">
             <div>
               <span className="text-sm font-bold text-white block">{botName}</span>
@@ -132,13 +122,12 @@ export default function CoinflipPage() {
                 Сторона: {selectedSide === "CT" ? "Террористы (T)" : "Контр-террористы (CT)"}
               </span>
             </div>
-            <div className="w-12 h-12 rounded-2xl bg-amber-600/20 border border-amber-500/40 flex items-center justify-center text-amber-300">
+            <div className="w-12 h-12 rounded-2xl liquid-glass border-amber-500/40 flex items-center justify-center text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.3)]">
               <Bot className="w-6 h-6" />
             </div>
           </div>
         </div>
 
-        {/* 3D Animated Coin Wheel */}
         <div className="flex flex-col items-center justify-center py-6">
           <div
             style={{ perspective: "1000px" }}
@@ -152,20 +141,18 @@ export default function CoinflipPage() {
                   ? "transform 3.2s cubic-bezier(0.15, 0.9, 0.25, 1)"
                   : "none",
               }}
-              className="w-full h-full relative rounded-full shadow-[0_0_40px_rgba(0,0,0,0.8)]"
+              className="w-full h-full relative rounded-full shadow-[0_0_50px_rgba(0,0,0,0.85)]"
             >
-              {/* Front Side: CT (Blue) */}
               <div
                 style={{ backfaceVisibility: "hidden" }}
                 className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-900 via-blue-600 to-cyan-500 border-4 border-cyan-300 flex flex-col items-center justify-center shadow-inner"
               >
-                <Shield className="w-20 h-20 text-white filter drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
+                <Shield className="w-20 h-20 text-white filter drop-shadow-[0_0_12px_rgba(255,255,255,0.9)]" />
                 <span className="text-base font-black text-white tracking-widest mt-1">
                   CT
                 </span>
               </div>
 
-              {/* Back Side: T (Orange) */}
               <div
                 style={{
                   transform: "rotateY(180deg)",
@@ -173,7 +160,7 @@ export default function CoinflipPage() {
                 }}
                 className="absolute inset-0 rounded-full bg-gradient-to-tr from-amber-900 via-orange-600 to-yellow-500 border-4 border-yellow-300 flex flex-col items-center justify-center shadow-inner"
               >
-                <Bomb className="w-20 h-20 text-white filter drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
+                <Bomb className="w-20 h-20 text-white filter drop-shadow-[0_0_12px_rgba(255,255,255,0.9)]" />
                 <span className="text-base font-black text-white tracking-widest mt-1">
                   T
                 </span>
@@ -181,7 +168,6 @@ export default function CoinflipPage() {
             </div>
           </div>
 
-          {/* Winner announcement */}
           {winnerSide && (
             <div className="mt-6 text-center animate-in zoom-in-95">
               <span
@@ -197,11 +183,9 @@ export default function CoinflipPage() {
           )}
         </div>
 
-        {/* Side Selection and Bet Input */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-white/[0.08]">
-          {/* Side Selector */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-white/[0.1]">
           <div className="space-y-3">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+            <span className="text-xs font-bold text-slate-300 uppercase tracking-wider block">
               Выберите вашу сторону:
             </span>
             <div className="grid grid-cols-2 gap-3">
@@ -210,8 +194,8 @@ export default function CoinflipPage() {
                 onClick={() => setSelectedSide("CT")}
                 className={`p-4 rounded-2xl border-2 flex items-center justify-center gap-3 font-black transition-all ${
                   selectedSide === "CT"
-                    ? "bg-blue-600/25 border-blue-500 text-white shadow-[0_0_20px_rgba(59,130,246,0.4)]"
-                    : "border-white/10 bg-white/[0.03] text-slate-400 hover:text-white hover:bg-white/[0.06]"
+                    ? "bg-blue-600/30 border-blue-400 text-white shadow-[0_0_25px_rgba(59,130,246,0.5)]"
+                    : "border-white/10 liquid-glass-button text-slate-400"
                 }`}
               >
                 <Shield className="w-5 h-5 text-blue-400" />
@@ -223,8 +207,8 @@ export default function CoinflipPage() {
                 onClick={() => setSelectedSide("T")}
                 className={`p-4 rounded-2xl border-2 flex items-center justify-center gap-3 font-black transition-all ${
                   selectedSide === "T"
-                    ? "bg-amber-600/25 border-amber-500 text-white shadow-[0_0_20px_rgba(245,158,11,0.4)]"
-                    : "border-white/10 bg-white/[0.03] text-slate-400 hover:text-white hover:bg-white/[0.06]"
+                    ? "bg-amber-600/30 border-amber-400 text-white shadow-[0_0_25px_rgba(245,158,11,0.5)]"
+                    : "border-white/10 liquid-glass-button text-slate-400"
                 }`}
               >
                 <Bomb className="w-5 h-5 text-amber-400" />
@@ -233,9 +217,8 @@ export default function CoinflipPage() {
             </div>
           </div>
 
-          {/* Bet size */}
           <div className="space-y-3">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+            <span className="text-xs font-bold text-slate-300 uppercase tracking-wider block">
               Размер ставки:
             </span>
             <div className="flex items-center gap-2">
@@ -246,8 +229,8 @@ export default function CoinflipPage() {
                   onClick={() => setBetDC(amt)}
                   className={`flex-1 py-2 rounded-xl text-xs font-bold border transition-all ${
                     betDC === amt
-                      ? "bg-violet-600 text-white border-violet-400"
-                      : "bg-white/[0.04] text-slate-300 border-white/10 hover:bg-white/[0.08]"
+                      ? "bg-violet-600 text-white border-violet-400 shadow-md"
+                      : "liquid-glass-button text-slate-300"
                   }`}
                 >
                   {amt} DC
@@ -256,20 +239,19 @@ export default function CoinflipPage() {
             </div>
 
             <div className="flex items-center justify-between pt-1">
-              <span className="text-xs text-slate-400">Текущий банк:</span>
+              <span className="text-xs text-slate-400 font-medium">Текущий банк:</span>
               <CurrencyBadge amount={betDC * 2} size="md" />
             </div>
           </div>
         </div>
 
-        {/* Start Button */}
         <div className="pt-2">
           <Button
             variant="gold"
             size="xl"
             disabled={isFlipping}
             onClick={handleStartFlip}
-            className="w-full"
+            className="w-full shadow-2xl"
             leftIcon={<CircleDollarSign className="w-6 h-6" />}
           >
             {isFlipping
