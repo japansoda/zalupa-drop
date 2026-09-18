@@ -13,6 +13,7 @@ import { Zap, Layers } from 'lucide-react';
 import { useLanguage } from '../../lib/i18n';
 
 interface ReelRouletteProps {
+  caseId?: string;
   caseSkins: SkinEntity[];
   casePriceDc: number;
   caseName: string;
@@ -23,7 +24,7 @@ const ITEM_GAP = 12;
 const WIN_INDEX = 45;
 const REEL_SIZE = 55;
 
-export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseSkins, casePriceDc, caseName }) => {
+export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, casePriceDc, caseName }) => {
   const { balance, deductBalance, addToInventory, addBalance, addLiveDrop } = useGameStore();
   const { t, locale } = useLanguage();
   const [openCount, setOpenCount] = useState<1 | 2 | 3>(1);
@@ -57,23 +58,116 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseSkins, casePrice
           s.weapon.includes('Gloves') ||
           s.weapon.includes('Wraps')));
 
+    // 1. Exact 10% knife cases
+    if (caseId === 'case_10_knife' || caseName.includes('10% Нож')) {
+      const knives = caseSkins.filter(isKnifeOrGlove);
+      const others = caseSkins.filter((s) => !isKnifeOrGlove(s));
+      const weights = caseSkins.map((s) =>
+        isKnifeOrGlove(s) ? 10.0 / (knives.length || 1) : 90.0 / (others.length || 1)
+      );
+      const totalW = weights.reduce((a, b) => a + b, 0);
+      let rnd = Math.random() * totalW;
+      for (let i = 0; i < caseSkins.length; i++) {
+        if (rnd <= weights[i]) return caseSkins[i];
+        rnd -= weights[i];
+      }
+      return caseSkins[caseSkins.length - 1];
+    }
+
+    // 2. Exact 50% knife cases
+    if (caseId === 'case_50_knife' || caseName.includes('50% Нож')) {
+      const knives = caseSkins.filter(isKnifeOrGlove);
+      const others = caseSkins.filter((s) => !isKnifeOrGlove(s));
+      const weights = caseSkins.map((s) =>
+        isKnifeOrGlove(s) ? 50.0 / (knives.length || 1) : 50.0 / (others.length || 1)
+      );
+      const totalW = weights.reduce((a, b) => a + b, 0);
+      let rnd = Math.random() * totalW;
+      for (let i = 0; i < caseSkins.length; i++) {
+        if (rnd <= weights[i]) return caseSkins[i];
+        rnd -= weights[i];
+      }
+      return caseSkins[caseSkins.length - 1];
+    }
+
+    // 3. Safari Troll case (exciting 2.5% jackpot)
+    if (caseId === 'case_safari_troll') {
+      const dlores = caseSkins.filter((s) => (s.skinName || s.name).includes('Dragon Lore'));
+      const meshes = caseSkins.filter((s) => !(s.skinName || s.name).includes('Dragon Lore'));
+      const weights = caseSkins.map((s) =>
+        (s.skinName || s.name).includes('Dragon Lore')
+          ? 2.5 / (dlores.length || 1)
+          : 97.5 / (meshes.length || 1)
+      );
+      const totalW = weights.reduce((a, b) => a + b, 0);
+      let rnd = Math.random() * totalW;
+      for (let i = 0; i < caseSkins.length; i++) {
+        if (rnd <= weights[i]) return caseSkins[i];
+        rnd -= weights[i];
+      }
+      return caseSkins[caseSkins.length - 1];
+    }
+
+    // 4. All or Nothing (14% legend, 86% cheap)
+    if (caseId === 'case_all_or_nothing') {
+      const topItems = caseSkins.filter((s) => s.priceDc >= 50000 || isKnifeOrGlove(s));
+      const lowItems = caseSkins.filter((s) => s.priceDc < 50000 && !isKnifeOrGlove(s));
+      const weights = caseSkins.map((s) =>
+        s.priceDc >= 50000 || isKnifeOrGlove(s)
+          ? 14.0 / (topItems.length || 1)
+          : 86.0 / (lowItems.length || 1)
+      );
+      const totalW = weights.reduce((a, b) => a + b, 0);
+      let rnd = Math.random() * totalW;
+      for (let i = 0; i < caseSkins.length; i++) {
+        if (rnd <= weights[i]) return caseSkins[i];
+        rnd -= weights[i];
+      }
+      return caseSkins[caseSkins.length - 1];
+    }
+
+    // 5. Zalupa trash case (2.5% jackpot)
+    if (caseId === 'case_zalupa') {
+      const rareItems = caseSkins.filter((s) => s.priceDc >= 50000 || isKnifeOrGlove(s));
+      const trashItems = caseSkins.filter((s) => s.priceDc < 50000 && !isKnifeOrGlove(s));
+      const weights = caseSkins.map((s) =>
+        s.priceDc >= 50000 || isKnifeOrGlove(s)
+          ? 2.5 / (rareItems.length || 1)
+          : 97.5 / (trashItems.length || 1)
+      );
+      const totalW = weights.reduce((a, b) => a + b, 0);
+      let rnd = Math.random() * totalW;
+      for (let i = 0; i < caseSkins.length; i++) {
+        if (rnd <= weights[i]) return caseSkins[i];
+        rnd -= weights[i];
+      }
+      return caseSkins[caseSkins.length - 1];
+    }
+
     const hasLowTier = caseSkins.some(
       (s) => s.rarity === 'milspec' || s.rarity === 'industrial' || s.rarity === 'consumer'
     );
 
     const weights = caseSkins.map((s) => {
       if (hasLowTier) {
-        if (isKnifeOrGlove(s)) return 0.26;
-        if (s.rarity === 'covert' || s.rarity === 'contraband') return 0.64;
-        if (s.rarity === 'classified') return 3.2;
-        if (s.rarity === 'restricted') return 15.98;
-        if (s.rarity === 'milspec') return 79.92;
-        if (s.rarity === 'industrial') return 120.0;
-        if (s.rarity === 'consumer') return 150.0;
-        return 10.0;
+        // Boosted generous simulator odds:
+        // Knives/Gloves: ~2.6% (approx 10x higher than Valve's 0.26%)
+        // Covert / Contraband: ~7.2% (approx 11x higher than Valve's 0.64%)
+        // Classified (Pink): ~18.5% (approx 6x higher than Valve's 3.2%)
+        // Restricted (Purple): ~32.0%
+        // Milspec: ~40.0%
+        if (isKnifeOrGlove(s)) return 2.6;
+        if (s.rarity === 'covert' || s.rarity === 'contraband') return 7.2;
+        if (s.rarity === 'classified') return 18.5;
+        if (s.rarity === 'restricted') return 32.0;
+        if (s.rarity === 'milspec') return 40.0;
+        if (s.rarity === 'industrial') return 35.0;
+        if (s.rarity === 'consumer') return 30.0;
+        return 20.0;
       } else {
-        // High-tier or theme custom case: inverse power law based on price
-        return 1000000 / Math.pow(Math.max(100, s.priceDc), 1.25);
+        // High-tier, knives or theme custom case:
+        // Soft sublinear exponent (0.52) allows winning top-tier jackpots regularly
+        return 100000 / Math.pow(Math.max(50, s.priceDc), 0.52);
       }
     });
 
