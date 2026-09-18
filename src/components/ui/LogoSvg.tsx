@@ -27,7 +27,7 @@ export const LogoSvg: React.FC<LogoSvgProps> = ({
   return (
     <img
       src="/images/logo_yellow.png"
-      alt="ZALUPA DOROP"
+      alt="ZALUPA DROP"
       style={style}
       className={`inline-block object-contain select-none ${sizeMap[size]} ${className}`}
     />

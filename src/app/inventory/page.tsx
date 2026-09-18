@@ -7,6 +7,7 @@ import { Footer } from '../../components/layout/Footer';
 import { LiveDropBar } from '../../components/layout/LiveDropBar';
 import { RefillModal } from '../../components/layout/RefillModal';
 import { RarityBadge } from '../../components/ui/RarityBadge';
+import { WearBadge } from '../../components/ui/WearBadge';
 import { DropCoinIcon } from '../../components/ui/DropCoinIcon';
 import { useGameStore } from '../../store/useGameStore';
 import { RARITY_CONFIG } from '../../data/skins';
@@ -158,7 +159,7 @@ export default function InventoryPage() {
                             ST
                           </span>
                         )}
-                        <span className="text-[10px] text-white/50 font-bold">{item.wear}</span>
+                        <WearBadge skin={item} size="xs" />
                       </div>
                       <RarityBadge rarity={item.rarity} size="sm" />
                     </div>

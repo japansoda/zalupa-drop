@@ -24,6 +24,8 @@ export interface SkinEntity {
   priceDc: number;
   steamMarketUrl: string;
   statTrak?: boolean;
+  effect?: 'Holo' | 'Foil' | 'Gold' | 'Glitter' | 'Lenticular';
+  category?: string;
 }
 
 export interface CaseItem {

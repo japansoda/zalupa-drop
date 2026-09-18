@@ -1,0 +1,115 @@
+﻿const fs = require('fs');
+const path = require('path');
+
+function create3DCrateSvg({
+  topColor1 = '#3a3d4a',
+  topColor2 = '#232530',
+  leftColor1 = '#1c1e26',
+  leftColor2 = '#121319',
+  rightColor1 = '#2c2e3a',
+  rightColor2 = '#1b1d24',
+  accentColor = '#facc15',
+  metalColor = '#94a3b8',
+  emblemSvg = '',
+  patternSvg = '',
+  hazardStripes = false,
+  digitalLed = false
+}) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="topG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="${topColor1}" />
+      <stop offset="100%" stop-color="${topColor2}" />
+    </linearGradient>
+    <linearGradient id="leftG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="${leftColor1}" />
+      <stop offset="100%" stop-color="${leftColor2}" />
+    </linearGradient>
+    <linearGradient id="rightG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="${rightColor1}" />
+      <stop offset="100%" stop-color="${rightColor2}" />
+    </linearGradient>
+    <linearGradient id="accentG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="${accentColor}" />
+      <stop offset="100%" stop-color="${accentColor}" stop-opacity="0.8" />
+    </linearGradient>
+    <linearGradient id="metalG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="${metalColor}" />
+      <stop offset="100%" stop-color="#475569" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.65" />
+    </filter>
+  </defs>
+
+  <!-- Ground Ambient Shadow -->
+  <ellipse cx="120" cy="174" rx="85" ry="18" fill="#000000" opacity="0.65" />
+
+  <!-- LEFT FACE -->
+  <polygon points="35,80 120,122 120,172 35,130" fill="url(#leftG)" stroke="#0f1015" stroke-width="2" filter="url(#shadow)" />
+
+  <!-- Left Face Structural Ribs -->
+  <polygon points="48,87 60,93 60,143 48,137" fill="#0c0d12" opacity="0.6" />
+  <polygon points="75,100 87,106 87,156 75,150" fill="#0c0d12" opacity="0.6" />
+  <polygon points="102,113 114,119 114,169 102,163" fill="#0c0d12" opacity="0.6" />
+
+  <!-- Left Side Carry Handle -->
+  <polygon points="62,118 90,132 90,138 62,124" fill="url(#metalG)" stroke="#0f1015" stroke-width="1" />
+
+  <!-- RIGHT FACE (FRONT) -->
+  <polygon points="120,122 205,80 205,130 120,172" fill="url(#rightG)" stroke="#0f1015" stroke-width="2" />
+
+  <!-- Right Face Bevel Inset -->
+  <polygon points="128,124 197,90 197,126 128,162" fill="#0c0d12" opacity="0.4" />
+
+  <!-- Thematic Pattern Layer -->
+  ${patternSvg}
+
+  <!-- Hazard Stripes Option -->
+  ${hazardStripes ? `
+    <g opacity="0.8">
+      <polygon points="135,128 145,123 145,150 135,155" fill="${accentColor}" />
+      <polygon points="152,119 162,114 162,141 152,146" fill="${accentColor}" />
+      <polygon points="169,110 179,105 179,132 169,137" fill="${accentColor}" />
+      <polygon points="186,102 194,98 194,124 186,128" fill="${accentColor}" />
+    </g>
+  ` : ''}
+
+  <!-- Dual Metal Latches / Locks -->
+  <!-- Latch 1 -->
+  <polygon points="142,108 152,103 152,116 142,121" fill="url(#metalG)" stroke="#000" stroke-width="1" />
+  <polygon points="144,112 150,109 150,128 144,131" fill="#f1f5f9" stroke="#000" stroke-width="0.75" />
+  <!-- Latch 2 -->
+  <polygon points="172,93 182,88 182,101 172,106" fill="url(#metalG)" stroke="#000" stroke-width="1" />
+  <polygon points="174,97 180,94 180,113 174,116" fill="#f1f5f9" stroke="#000" stroke-width="0.75" />
+
+  <!-- Digital LED Status Option -->
+  ${digitalLed ? `
+    <rect x="156" y="132" width="28" height="10" rx="2" fill="#000" stroke="#333" stroke-width="0.7" transform="skewY(-26)" />
+    <text x="158" y="139" font-family="monospace" font-size="6" font-weight="900" fill="#f97316" transform="skewY(-26)">000000</text>
+  ` : ''}
+
+  <!-- Front Central Thematic Emblem -->
+  <g transform="translate(160, 134) scale(0.9)">
+    ${emblemSvg}
+  </g>
+
+  <!-- TOP FACE (LID) -->
+  <polygon points="120,38 205,80 120,122 35,80" fill="url(#topG)" stroke="#0f1015" stroke-width="2" />
+
+  <!-- Top Inset Panel -->
+  <polygon points="120,48 190,82 120,114 50,82" fill="#151720" opacity="0.65" stroke="${accentColor}" stroke-opacity="0.4" stroke-width="1" />
+
+  <!-- Top Corner Brackets -->
+  <polygon points="120,38 128,42 120,46 112,42" fill="url(#metalG)" stroke="#000" stroke-width="0.7" />
+  <polygon points="205,80 197,76 195,82 203,86" fill="url(#metalG)" stroke="#000" stroke-width="0.7" />
+  <polygon points="120,122 128,118 120,114 112,118" fill="url(#metalG)" stroke="#000" stroke-width="0.7" />
+  <polygon points="35,80 43,76 45,82 37,86" fill="url(#metalG)" stroke="#000" stroke-width="0.7" />
+
+  <!-- Top Central Handle Grip -->
+  <polygon points="105,74 135,88 135,78 105,64" fill="url(#accentG)" stroke="#000" stroke-width="1" />
+  <polygon points="109,72 131,83 131,76 109,65" fill="#000" opacity="0.4" />
+</svg>`;
+}
+
+module.exports = { create3DCrateSvg };

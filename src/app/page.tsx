@@ -89,12 +89,9 @@ export default function HomePage() {
               <div>
                 <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight flex items-center gap-3">
                   <span>КАТАЛОГ КЕЙСОВ CS2</span>
-                  <span className="text-sm font-mono px-2.5 py-0.5 rounded-full bg-yellow-400/20 text-yellow-400 border border-yellow-400/30">
-                    {filteredCases.length}
-                  </span>
                 </h2>
                 <p className="text-xs text-white/50">
-                  100+ официальных и авторских кейсов с 3D моделями и оригинальной физической рулеткой
+                  Официальные и авторские кейсы с 3D моделями и оригинальной физической рулеткой
                 </p>
               </div>
             </div>

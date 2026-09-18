@@ -10,6 +10,7 @@ import { RefillModal } from '../../../components/layout/RefillModal';
 import { ReelRoulette } from '../../../components/case/ReelRoulette';
 import { DropCoinIcon } from '../../../components/ui/DropCoinIcon';
 import { RarityBadge } from '../../../components/ui/RarityBadge';
+import { WearBadge } from '../../../components/ui/WearBadge';
 import { CASES_DATABASE } from '../../../data/cases';
 import { RARITY_CONFIG } from '../../../data/skins';
 import { sound } from '../../../lib/sound';
@@ -115,7 +116,7 @@ export default function CaseOpenPage() {
                   style={{ borderBottomWidth: '3px', borderBottomColor: config.color }}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] text-white/40 font-bold">{skin.wear}</span>
+                    <WearBadge skin={skin} size="xs" />
                     <RarityBadge rarity={skin.rarity} size="sm" />
                   </div>
 

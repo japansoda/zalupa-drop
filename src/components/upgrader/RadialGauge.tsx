@@ -9,6 +9,21 @@ import allCasesJson from '../../data/all_cases.json';
 import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, ShieldCheck } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CashbackModal } from './CashbackModal';
+import { WearBadge } from '../ui/WearBadge';
+
+const ITEM_TYPES = [
+  { id: 'all', label: 'Все типы' },
+  { id: 'knives', label: '★ Ножи' },
+  { id: 'gloves', label: '★ Перчатки' },
+  { id: 'snipers', label: 'Снайперские' },
+  { id: 'rifles', label: 'Винтовки' },
+  { id: 'pistols', label: 'Пистолеты' },
+  { id: 'smgs', label: 'ПП' },
+  { id: 'heavy', label: 'Тяжелое' },
+  { id: 'stickers', label: 'Наклейки' },
+  { id: 'agents', label: 'Агенты' },
+  { id: 'charms', label: 'Брелоки' },
+];
 
 interface RadialGaugeProps {
   inventory: InventoryItem[];
@@ -58,6 +73,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const [mySearch, setMySearch] = useState('');
   const [catalogSearch, setCatalogSearch] = useState('');
   const [catalogRarity, setCatalogRarity] = useState('all');
+  const [catalogType, setCatalogType] = useState('all');
   const [catalogSort, setCatalogSort] = useState<'asc' | 'desc'>('asc');
 
   const needleControls = useAnimation();
@@ -330,12 +346,96 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         skin.name.toLowerCase().includes(catalogSearch.toLowerCase()) ||
         skin.weapon.toLowerCase().includes(catalogSearch.toLowerCase());
       const matchesRarity = catalogRarity === 'all' || skin.rarity === catalogRarity;
-      return matchesSearch && matchesRarity;
+      if (!matchesSearch || !matchesRarity) return false;
+
+      // Filter by item type
+      if (catalogType !== 'all') {
+        const w = skin.weapon.toLowerCase();
+        const cat = skin.category?.toLowerCase() || '';
+        if (catalogType === 'knives') {
+          const isKnife =
+            skin.rarity === 'gold' ||
+            w.includes('knife') ||
+            w.includes('нож') ||
+            w.includes('bayonet') ||
+            w.includes('karambit') ||
+            w.includes('daggers') ||
+            w.includes('керамбит') ||
+            w.includes('байонет') ||
+            w.includes('тычковые');
+          if (!isKnife) return false;
+        } else if (catalogType === 'gloves') {
+          const isGlove =
+            skin.rarity === 'extraordinary' ||
+            w.includes('gloves') ||
+            w.includes('перчатки') ||
+            w.includes('wraps') ||
+            w.includes('обмотки');
+          if (!isGlove) return false;
+        } else if (catalogType === 'snipers') {
+          if (!w.includes('awp') && !w.includes('ssg') && !w.includes('scar') && !w.includes('g3sg1')) return false;
+        } else if (catalogType === 'rifles') {
+          if (
+            !w.includes('ak-47') &&
+            !w.includes('m4a4') &&
+            !w.includes('m4a1-s') &&
+            !w.includes('galil') &&
+            !w.includes('famas') &&
+            !w.includes('aug') &&
+            !w.includes('sg 553')
+          )
+            return false;
+        } else if (catalogType === 'pistols') {
+          if (
+            !w.includes('usp-s') &&
+            !w.includes('glock') &&
+            !w.includes('desert eagle') &&
+            !w.includes('deagle') &&
+            !w.includes('p250') &&
+            !w.includes('five-seven') &&
+            !w.includes('tec-9') &&
+            !w.includes('cz75') &&
+            !w.includes('dual berettas') &&
+            !w.includes('r8') &&
+            !w.includes('p2000')
+          )
+            return false;
+        } else if (catalogType === 'smgs') {
+          if (
+            !w.includes('mp9') &&
+            !w.includes('mac-10') &&
+            !w.includes('mp7') &&
+            !w.includes('mp5-sd') &&
+            !w.includes('ump-45') &&
+            !w.includes('p90') &&
+            !w.includes('bizon')
+          )
+            return false;
+        } else if (catalogType === 'heavy') {
+          if (
+            !w.includes('nova') &&
+            !w.includes('xm1014') &&
+            !w.includes('mag-7') &&
+            !w.includes('sawed-off') &&
+            !w.includes('negev') &&
+            !w.includes('m249')
+          )
+            return false;
+        } else if (catalogType === 'stickers') {
+          if (cat !== 'stickers' && w !== 'наклейка' && !w.includes('sticker')) return false;
+        } else if (catalogType === 'agents') {
+          if (cat !== 'agents' && w !== 'агент' && !w.includes('agent')) return false;
+        } else if (catalogType === 'charms') {
+          if (cat !== 'charms' && w !== 'брелок' && !w.includes('charm')) return false;
+        }
+      }
+
+      return true;
     });
 
     result.sort((a, b) => (catalogSort === 'asc' ? a.priceDc - b.priceDc : b.priceDc - a.priceDc));
-    return result.slice(0, 120);
-  }, [catalogSkins, catalogSearch, catalogRarity, catalogSort, effectiveBetDc, maxTargetPrice]);
+    return result.slice(0, 150);
+  }, [catalogSkins, catalogSearch, catalogRarity, catalogType, catalogSort, effectiveBetDc, maxTargetPrice]);
 
   // Circular gauge constants
   const gaugeR = 100;
@@ -696,7 +796,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   <span className="font-black text-white text-base text-center line-clamp-1 mt-1">
                     {targetSkin.name}
                   </span>
-                  <span className="text-xs text-white/50">{targetSkin.weapon}</span>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <span className="text-xs text-white/50">{targetSkin.weapon}</span>
+                    <WearBadge skin={targetSkin} size="xs" showFullLabel />
+                  </div>
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center my-auto text-center text-white/40">
@@ -801,7 +904,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       </div>
                       <div className="flex items-center justify-between text-[9px] text-white/40">
                         <span className="truncate">{item.weapon}</span>
-                        <span className="shrink-0">{item.wear}</span>
+                        <WearBadge skin={item} size="xs" />
                       </div>
                       <span className="text-[11px] font-mono font-black text-yellow-400 mt-1">
                         {item.priceDc.toLocaleString('ru-RU')} DC
@@ -848,6 +951,27 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 {catalogSort === 'asc' ? 'Дешевле ↑' : 'Дороже ↓'}
               </button>
             </div>
+          </div>
+
+          {/* Item Types Filter Pills */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-2 mb-3 no-scrollbar">
+            {ITEM_TYPES.map((type) => (
+              <button
+                key={type.id}
+                type="button"
+                onClick={() => {
+                  sound.playClick();
+                  setCatalogType(type.id);
+                }}
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap transition-all cursor-pointer ${
+                  catalogType === type.id
+                    ? 'bg-yellow-400 text-black shadow-[0_0_10px_rgba(250,204,21,0.3)]'
+                    : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                {type.label}
+              </button>
+            ))}
           </div>
 
           {/* Search */}
@@ -914,7 +1038,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       </div>
                       <div className="flex items-center justify-between text-[9px] text-white/40">
                         <span className="truncate">{skin.weapon}</span>
-                        <span className="shrink-0">{skin.wear}</span>
+                        <WearBadge skin={skin} size="xs" />
                       </div>
                       <span className="text-[11px] font-mono font-black text-yellow-400 mt-1">
                         {skin.priceDc.toLocaleString('ru-RU')} DC
