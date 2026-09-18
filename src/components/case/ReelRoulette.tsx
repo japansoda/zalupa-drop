@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { SkinEntity } from '../../lib/types';
+import { rollCaseBonusDrop, UpgradeToken } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
 import { sound } from '../../lib/sound';
 import { DropModal } from './DropModal';
@@ -30,6 +31,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseSkins, casePrice
   // Up to 3 reels
   const [reels, setReels] = useState<SkinEntity[][]>([[], [], []]);
   const [winningSkins, setWinningSkins] = useState<SkinEntity[]>([]);
+  const [bonusConsumables, setBonusConsumables] = useState<{ tokens: UpgradeToken[]; potions: number }>({
+    tokens: [],
+    potions: 0,
+  });
   const [showModal, setShowModal] = useState(false);
 
   const containerRef0 = useRef<HTMLDivElement>(null);
@@ -42,49 +47,41 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseSkins, casePrice
     const isKnifeOrGlove = (s: SkinEntity) =>
       s.rarity === 'gold' ||
       s.rarity === 'extraordinary' ||
-      s.weapon.includes('Knife') ||
-      s.weapon.includes('Bayonet') ||
-      s.weapon.includes('Karambit') ||
-      s.weapon.includes('Daggers') ||
-      s.weapon.includes('Gloves') ||
-      s.weapon.includes('Wraps');
+      (s.weapon &&
+        (s.weapon.includes('Knife') ||
+          s.weapon.includes('Bayonet') ||
+          s.weapon.includes('Karambit') ||
+          s.weapon.includes('Daggers') ||
+          s.weapon.includes('Gloves') ||
+          s.weapon.includes('Wraps')));
 
-    const knivesAndGloves = caseSkins.filter(isKnifeOrGlove);
-    const coverts = caseSkins.filter(s => (s.rarity === 'covert' || s.rarity === 'contraband') && !isKnifeOrGlove(s));
-    const classifieds = caseSkins.filter(s => s.rarity === 'classified' && !isKnifeOrGlove(s));
-    const restricteds = caseSkins.filter(s => s.rarity === 'restricted' && !isKnifeOrGlove(s));
-    const milspecs = caseSkins.filter(s => (s.rarity === 'milspec' || s.rarity === 'consumer' || s.rarity === 'industrial') && !isKnifeOrGlove(s));
+    const hasLowTier = caseSkins.some(
+      (s) => s.rarity === 'milspec' || s.rarity === 'industrial' || s.rarity === 'consumer'
+    );
 
-    const lowerName = caseName.toLowerCase();
-    const roll = Math.random() * 100;
+    const weights = caseSkins.map((s) => {
+      if (hasLowTier) {
+        if (isKnifeOrGlove(s)) return 0.26;
+        if (s.rarity === 'covert' || s.rarity === 'contraband') return 0.64;
+        if (s.rarity === 'classified') return 3.2;
+        if (s.rarity === 'restricted') return 15.98;
+        if (s.rarity === 'milspec') return 79.92;
+        if (s.rarity === 'industrial') return 120.0;
+        if (s.rarity === 'consumer') return 150.0;
+        return 10.0;
+      } else {
+        // High-tier or theme custom case: inverse power law based on price
+        return 1000000 / Math.pow(Math.max(100, s.priceDc), 1.25);
+      }
+    });
 
-    // Special custom cases
-    if (lowerName.includes('10% нож') && knivesAndGloves.length > 0) {
-      if (roll < 10) return knivesAndGloves[Math.floor(Math.random() * knivesAndGloves.length)];
-      const others = caseSkins.filter(s => !isKnifeOrGlove(s));
-      return others.length > 0 ? others[Math.floor(Math.random() * others.length)] : caseSkins[0];
+    const totalWeight = weights.reduce((a, b) => a + b, 0);
+    let rnd = Math.random() * totalWeight;
+    for (let i = 0; i < caseSkins.length; i++) {
+      if (rnd <= weights[i]) return caseSkins[i];
+      rnd -= weights[i];
     }
-
-    if (lowerName.includes('50% нож') && knivesAndGloves.length > 0) {
-      if (roll < 50) return knivesAndGloves[Math.floor(Math.random() * knivesAndGloves.length)];
-      const others = caseSkins.filter(s => !isKnifeOrGlove(s));
-      return others.length > 0 ? others[Math.floor(Math.random() * others.length)] : caseSkins[0];
-    }
-
-    if (lowerName.includes('мусорка') && knivesAndGloves.length > 0) {
-      if (roll < 0.1) return knivesAndGloves[Math.floor(Math.random() * knivesAndGloves.length)];
-      if (roll < 2.0 && coverts.length > 0) return coverts[Math.floor(Math.random() * coverts.length)];
-      if (roll < 15.0 && restricteds.length > 0) return restricteds[Math.floor(Math.random() * restricteds.length)];
-      if (milspecs.length > 0) return milspecs[Math.floor(Math.random() * milspecs.length)];
-    }
-
-    // Standard CS2 calibrated odds (RTP ~93-95%)
-    if (roll < 0.4 && knivesAndGloves.length > 0) return knivesAndGloves[Math.floor(Math.random() * knivesAndGloves.length)];
-    if (roll < 1.9 && coverts.length > 0) return coverts[Math.floor(Math.random() * coverts.length)];
-    if (roll < 6.4 && classifieds.length > 0) return classifieds[Math.floor(Math.random() * classifieds.length)];
-    if (roll < 24.4 && restricteds.length > 0) return restricteds[Math.floor(Math.random() * restricteds.length)];
-    if (milspecs.length > 0) return milspecs[Math.floor(Math.random() * milspecs.length)];
-    return caseSkins[Math.floor(Math.random() * caseSkins.length)];
+    return caseSkins[caseSkins.length - 1];
   };
 
   const generateReel = (winner: SkinEntity): SkinEntity[] => {
@@ -126,6 +123,22 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseSkins, casePrice
     sound.playClick();
     setIsSpinning(true);
     setShowModal(false);
+
+    // Roll bonus consumables for each opened case
+    const droppedTokens: UpgradeToken[] = [];
+    let droppedPotions = 0;
+    for (let i = 0; i < openCount; i++) {
+      const bonus = rollCaseBonusDrop();
+      if (bonus.token) {
+        droppedTokens.push(bonus.token);
+        useGameStore.getState().addToken(bonus.token.id);
+      }
+      if (bonus.potion) {
+        droppedPotions++;
+        useGameStore.getState().addPotion(1);
+      }
+    }
+    setBonusConsumables({ tokens: droppedTokens, potions: droppedPotions });
 
     // Pick winners for each reel
     const winners: SkinEntity[] = [];
@@ -403,6 +416,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseSkins, casePrice
       {showModal && (
         <DropModal
           skins={winningSkins}
+          bonusConsumables={bonusConsumables}
           onKeep={handleKeep}
           onSell={handleSell}
         />

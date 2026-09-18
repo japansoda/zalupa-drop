@@ -12,6 +12,11 @@ interface GameState {
   stats: UserStats;
   isRefillOpen: boolean;
 
+  // Consumables (tokens & luck potion)
+  tokens: Record<string, number>;
+  potionsCount: number;
+  activePotionCharges: number;
+
   // Actions
   addBalance: (amount: number) => void;
   deductBalance: (amount: number) => boolean;
@@ -24,6 +29,11 @@ interface GameState {
   setRefillOpen: (open: boolean) => void;
   recordUpgrade: (won: boolean, profitDc: number) => void;
   recordCrash: (profitDc: number) => void;
+  addToken: (tokenId: string, count?: number) => void;
+  useToken: (tokenId: string) => boolean;
+  addPotion: (count?: number) => void;
+  drinkPotion: () => boolean;
+  consumePotionCharge: () => boolean;
 }
 
 const INITIAL_BOT_NAMES = [
@@ -38,6 +48,12 @@ export const useGameStore = create<GameState>()(
       inventory: [],
       soundEnabled: true,
       isRefillOpen: false,
+      tokens: {
+        token_consumer: 1,
+        token_industrial: 1,
+      },
+      potionsCount: 1,
+      activePotionCharges: 0,
       stats: {
         casesOpened: 0,
         totalWonDc: 0,
@@ -164,6 +180,55 @@ export const useGameStore = create<GameState>()(
           },
         }));
       },
+
+      addToken: (tokenId, count = 1) => {
+        set((state) => {
+          const current = state.tokens[tokenId] || 0;
+          return {
+            tokens: {
+              ...state.tokens,
+              [tokenId]: current + count,
+            },
+          };
+        });
+      },
+
+      useToken: (tokenId) => {
+        const current = get().tokens[tokenId] || 0;
+        if (current <= 0) return false;
+        set((state) => {
+          const updated = { ...state.tokens };
+          if (updated[tokenId] <= 1) {
+            delete updated[tokenId];
+          } else {
+            updated[tokenId] -= 1;
+          }
+          return { tokens: updated };
+        });
+        return true;
+      },
+
+      addPotion: (count = 1) => {
+        set((state) => ({ potionsCount: state.potionsCount + count }));
+      },
+
+      drinkPotion: () => {
+        const count = get().potionsCount;
+        if (count <= 0) return false;
+        set((state) => ({
+          potionsCount: state.potionsCount - 1,
+          activePotionCharges: state.activePotionCharges + 3,
+        }));
+        sound.playWin('contraband');
+        return true;
+      },
+
+      consumePotionCharge: () => {
+        const charges = get().activePotionCharges;
+        if (charges <= 0) return false;
+        set((state) => ({ activePotionCharges: Math.max(0, state.activePotionCharges - 1) }));
+        return true;
+      },
     }),
     {
       name: 'zalupa_drop_state_v1',
@@ -173,6 +238,9 @@ export const useGameStore = create<GameState>()(
         inventory: state.inventory,
         soundEnabled: state.soundEnabled,
         stats: state.stats,
+        tokens: state.tokens,
+        potionsCount: state.potionsCount,
+        activePotionCharges: state.activePotionCharges,
       }),
     }
   )

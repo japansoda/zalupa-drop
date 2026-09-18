@@ -74,30 +74,26 @@ interface RadialGaugeProps {
   catalogSkins: SkinEntity[];
 }
 
-export interface UpgradeToken {
-  id: string;
-  name: string;
-  rarity: SkinRarity;
-  valueDc: number;
-  maxTargetDc: number;
-}
-
-export const UPGRADE_TOKENS: UpgradeToken[] = [
-  { id: 'token_consumer', name: 'Ширпотреб Токен', rarity: 'consumer', valueDc: 500, maxTargetDc: 2000 },
-  { id: 'token_industrial', name: 'Промышленный Токен', rarity: 'industrial', valueDc: 1500, maxTargetDc: 5000 },
-  { id: 'token_milspec', name: 'Армейский Токен', rarity: 'milspec', valueDc: 5000, maxTargetDc: 15000 },
-  { id: 'token_restricted', name: 'Запрещенный Токен', rarity: 'restricted', valueDc: 15000, maxTargetDc: 35000 },
-  { id: 'token_classified', name: 'Засекреченный Токен', rarity: 'classified', valueDc: 35000, maxTargetDc: 65000 },
-  { id: 'token_covert', name: '★ Тайный Токен', rarity: 'covert', valueDc: 70000, maxTargetDc: 85000 },
-  { id: 'token_gold', name: '★ Золотой Токен', rarity: 'gold', valueDc: 100000, maxTargetDc: 120000 },
-];
+import { UPGRADE_TOKENS, UpgradeToken, rollConsolationToken, LUCK_POTION } from '../../lib/consumables';
 
 export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkins }) => {
-  const { balance, deductBalance, addToInventory, recordUpgrade } = useGameStore();
+  const {
+    balance,
+    deductBalance,
+    addToInventory,
+    recordUpgrade,
+    tokens,
+    potionsCount,
+    activePotionCharges,
+    drinkPotion,
+    useToken,
+    consumePotionCharge,
+    addToken,
+  } = useGameStore();
 
   const [selectedItems, setSelectedItems] = useState<InventoryItem[]>([]);
   const [customBetDc, setCustomBetDc] = useState<number>(1000);
-  const [betMode, setBetMode] = useState<'skin' | 'dc' | 'token'>('skin');
+  const [betMode, setBetMode] = useState<'skin' | 'dc' | 'consumables'>('skin');
   const [selectedToken, setSelectedToken] = useState<UpgradeToken | null>(null);
 
   const [targetChance, setTargetChance] = useState<number>(50);
@@ -108,8 +104,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   // Cashback state
   const [cashbackModal, setCashbackModal] = useState<{
     isOpen: boolean;
-    caseItem: CaseItem;
-    skin: SkinEntity;
+    caseItem?: CaseItem;
+    skin?: SkinEntity;
+    awardedToken?: UpgradeToken;
     lostAmount: number;
   } | null>(null);
 
@@ -149,7 +146,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     if (betMode === 'skin') {
       return selectedItems.reduce((sum, item) => sum + item.priceDc, 0);
     }
-    if (betMode === 'token') {
+    if (betMode === 'consumables') {
       return selectedToken ? selectedToken.valueDc : 0;
     }
     return customBetDc;
@@ -157,7 +154,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
   // Max target price restriction (tokens have target limit)
   const maxTargetPrice = useMemo(() => {
-    if (betMode === 'token' && selectedToken) {
+    if (betMode === 'consumables' && selectedToken) {
       return selectedToken.maxTargetDc;
     }
     return Infinity;
@@ -228,11 +225,14 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       autoSelectTargetSkin(50, inventory[0].priceDc);
     } else if (betMode === 'dc' && !targetSkin) {
       autoSelectTargetSkin(targetChance, customBetDc);
-    } else if (betMode === 'token' && !selectedToken) {
-      setSelectedToken(UPGRADE_TOKENS[2]);
-      autoSelectTargetSkin(50, UPGRADE_TOKENS[2].valueDc);
+    } else if (betMode === 'consumables' && !selectedToken) {
+      const firstOwnedToken = UPGRADE_TOKENS.find(tok => (tokens[tok.id] || 0) > 0);
+      if (firstOwnedToken) {
+        setSelectedToken(firstOwnedToken);
+        autoSelectTargetSkin(50, firstOwnedToken.valueDc);
+      }
     }
-  }, [inventory, betMode]);
+  }, [inventory, betMode, tokens]);
 
   // When effectiveBetDc changes, ensure targetSkin is valid
   useEffect(() => {
@@ -243,12 +243,21 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     }
   }, [effectiveBetDc, maxTargetPrice]);
 
-  // Calculate Chance (RTP 95%)
-  const chance = useMemo(() => {
+  // Base raw chance from bet vs target
+  const baseChance = useMemo(() => {
     if (!targetSkin || targetSkin.priceDc <= 0 || effectiveBetDc <= 0) return 0;
     const raw = (effectiveBetDc / targetSkin.priceDc) * 95;
     return Math.min(95, Math.max(0.01, Number(raw.toFixed(2))));
   }, [effectiveBetDc, targetSkin]);
+
+  // Luck Potion bonus (+15% to chance if charges active)
+  const potionBonus = activePotionCharges > 0 && targetSkin && effectiveBetDc > 0 ? 15 : 0;
+
+  // Total chance displayed and used for roll
+  const chance = useMemo(() => {
+    if (baseChance <= 0) return 0;
+    return Math.min(95, Number((baseChance + potionBonus).toFixed(2)));
+  }, [baseChance, potionBonus]);
 
   // Risk label
   const riskLabel = useMemo(() => {
@@ -317,11 +326,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     if (betMode === 'dc') {
       return customBetDc > 0 && balance >= customBetDc;
     }
-    if (betMode === 'token') {
-      return selectedToken !== null && effectiveBetDc > 0;
+    if (betMode === 'consumables') {
+      return selectedToken !== null && (tokens[selectedToken.id] || 0) > 0 && effectiveBetDc > 0;
     }
     return false;
-  }, [isUpgrading, targetSkin, betMode, selectedItems, effectiveBetDc, customBetDc, balance, selectedToken]);
+  }, [isUpgrading, targetSkin, betMode, selectedItems, effectiveBetDc, customBetDc, balance, selectedToken, tokens]);
 
   // Perform Upgrade Spin
   const handleStartUpgrade = async () => {
@@ -342,8 +351,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       }
       const deducted = deductBalance(customBetDc);
       if (!deducted) return;
-    } else if (betMode === 'token') {
-      // Free token spin!
+    } else if (betMode === 'consumables' && selectedToken) {
+      // Consume 1 token from inventory
+      const used = useToken(selectedToken.id);
+      if (!used) return;
     }
 
     sound.playClick();
@@ -389,6 +400,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     clearInterval(interval);
     setIsUpgrading(false);
 
+    // Consume 1 potion charge if active
+    if (activePotionCharges > 0) {
+      consumePotionCharge();
+    }
+
     if (isWin) {
       sound.playWin(targetSkin.rarity);
       setLastResult('win');
@@ -405,22 +421,32 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       setLastResult('lose');
       recordUpgrade(false, -effectiveBetDc);
 
-      // ── CASHBACK FEATURE: If losing a high-value drop (>= 2000 DC) ──
-      if (currentLostAmount >= 2000) {
-        const casesList = allCasesJson as CaseItem[];
-        const cheapCases = casesList.filter((c) => c.priceDc <= 1500 && c.skins && c.skins.length > 0);
-        const selectedCase = cheapCases.length > 0 
-          ? cheapCases[Math.floor(Math.random() * cheapCases.length)] 
-          : casesList[0];
-
-        if (selectedCase && selectedCase.skins.length > 0) {
-          const cashbackDrop = selectedCase.skins[Math.floor(Math.random() * selectedCase.skins.length)];
+      // ── CASHBACK FEATURE: If losing a bet (>= 1500 DC) ──
+      if (currentLostAmount >= 1500) {
+        // 50% chance: roll upgrade token, 50% chance: cheap case
+        if (Math.random() < 0.5) {
+          const tokenPrize = rollConsolationToken();
           setCashbackModal({
             isOpen: true,
-            caseItem: selectedCase,
-            skin: cashbackDrop,
+            awardedToken: tokenPrize,
             lostAmount: currentLostAmount,
           });
+        } else {
+          const casesList = allCasesJson as CaseItem[];
+          const cheapCases = casesList.filter((c) => c.priceDc <= 2000 && c.skins && c.skins.length > 0);
+          const selectedCase = cheapCases.length > 0 
+            ? cheapCases[Math.floor(Math.random() * cheapCases.length)] 
+            : casesList[0];
+
+          if (selectedCase && selectedCase.skins.length > 0) {
+            const cashbackDrop = selectedCase.skins[Math.floor(Math.random() * selectedCase.skins.length)];
+            setCashbackModal({
+              isOpen: true,
+              caseItem: selectedCase,
+              skin: cashbackDrop,
+              lostAmount: currentLostAmount,
+            });
+          }
         }
       }
     }
@@ -464,8 +490,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   // Circular gauge constants
   const gaugeR = 100;
   const gaugeC = 2 * Math.PI * gaugeR;
-  const arcLen = Math.max(1, (chance / 100) * gaugeC);
+  const baseArcLen = Math.max(1, (baseChance / 100) * gaugeC);
+  const potionArcLen = potionBonus > 0 ? (potionBonus / 100) * gaugeC : 0;
   const rotateDeg = 90 - (chance * 1.8);
+  const potionRotateDeg = rotateDeg + (baseChance * 3.6);
 
   const targetConfig = targetSkin ? RARITY_CONFIG[targetSkin.rarity] || RARITY_CONFIG.milspec : RARITY_CONFIG.milspec;
 
@@ -474,7 +502,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       {/* ── TOP SECTION: PHOTO 2 DRUM & SLOTS ── */}
       <div className="w-full max-w-6xl mx-auto rounded-3xl p-6 sm:p-8 bg-[#0d0e14] border border-white/10 shadow-2xl relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-          {/* 1. LEFT CARD: Selected Input / Bet / Tokens */}
+          {/* 1. LEFT CARD: Selected Input / Bet / Consumables */}
           <div className="lg:col-span-4 flex flex-col gap-3">
             <div className="flex items-center justify-between pb-2 border-b border-white/10">
               <div className="flex items-center gap-1.5 flex-wrap">
@@ -499,15 +527,18 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 <button
                   type="button"
                   onClick={() => {
-                    setBetMode('token');
-                    if (!selectedToken) setSelectedToken(UPGRADE_TOKENS[2]);
+                    setBetMode('consumables');
+                    if (!selectedToken) {
+                      const firstOwned = UPGRADE_TOKENS.find(tok => (tokens[tok.id] || 0) > 0);
+                      if (firstOwned) setSelectedToken(firstOwned);
+                    }
                   }}
                   className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
-                    betMode === 'token' ? 'bg-yellow-400 text-black' : 'text-yellow-400/80 hover:text-yellow-400'
+                    betMode === 'consumables' ? 'bg-yellow-400 text-black' : 'text-yellow-400/80 hover:text-yellow-400'
                   }`}
                 >
                   <Gift className="w-3 h-3" />
-                  <span>ТОКЕН</span>
+                  <span>РАСХОДНИКИ</span>
                 </button>
               </div>
 
@@ -583,59 +614,104 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     </div>
                   </div>
                 )
-              ) : betMode === 'token' ? (
-                /* FREE TOKENS SELECTOR */
-                <div className="flex flex-col h-full justify-between">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs font-bold text-white/70">Бесплатные токены:</span>
-                    <span className="text-[10px] text-yellow-400 font-black uppercase">100% БЕСПЛАТНО</span>
+              ) : betMode === 'consumables' ? (
+                /* CONSUMABLES TAB: POTIONS & TOKENS */
+                <div className="flex flex-col h-full justify-between overflow-y-auto pr-1 gap-2.5">
+                  {/* Luck Potion Row */}
+                  <div className="p-2.5 rounded-xl bg-[#091a13] border border-emerald-500/40 flex flex-col gap-1.5 shadow-sm">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-base animate-pulse">🧪</span>
+                        <span className="text-xs font-black text-emerald-300">Зелье удачи</span>
+                        <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                          Контрабанда
+                        </span>
+                      </div>
+                      <span className="text-xs font-mono font-black text-white">{potionsCount} шт.</span>
+                    </div>
+
+                    {activePotionCharges > 0 ? (
+                      <div className="flex items-center justify-between p-1.5 rounded-lg bg-emerald-900/50 border border-emerald-400/40 text-[11px] font-bold text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                        <span className="flex items-center gap-1">
+                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                          +15% шанс активно
+                        </span>
+                        <span className="font-mono font-black">{activePotionCharges}/3 прокрута</span>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          drinkPotion();
+                        }}
+                        disabled={potionsCount <= 0}
+                        className={`w-full py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                          potionsCount > 0
+                            ? 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-[0_0_12px_rgba(16,185,129,0.4)] active:scale-95'
+                            : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
+                        }`}
+                      >
+                        <span>{potionsCount > 0 ? 'Выпить (+15% на 3 прокрута)' : 'Нет в запасе (дроп с кейсов)'}</span>
+                      </button>
+                    )}
                   </div>
 
-                  <div className="flex flex-col gap-1.5 overflow-y-auto max-h-48 pr-1">
-                    {UPGRADE_TOKENS.map((token) => {
-                      const isSel = selectedToken?.id === token.id;
-                      const rConf = RARITY_CONFIG[token.rarity];
+                  {/* Tokens Row */}
+                  <div className="flex flex-col gap-1 flex-1">
+                    <div className="flex items-center justify-between mb-0.5">
+                      <span className="text-[11px] font-bold text-white/70">Мои токены:</span>
+                      {selectedToken && (
+                        <span className="text-[10px] text-yellow-400 font-mono font-bold">
+                          +{selectedToken.valueDc.toLocaleString('ru-RU')} DC
+                        </span>
+                      )}
+                    </div>
 
-                      return (
-                        <button
-                          key={token.id}
-                          type="button"
-                          onClick={() => {
-                            sound.playClick();
-                            setSelectedToken(token);
-                          }}
-                          className={`flex items-center justify-between p-2 rounded-xl border transition-all cursor-pointer text-left ${
-                            isSel
-                              ? 'border-yellow-400 bg-yellow-400/15 shadow-[0_0_12px_rgba(250,204,21,0.25)]'
-                              : 'border-white/10 bg-black/40 hover:border-white/20'
-                          }`}
-                        >
-                          <div className="flex items-center gap-2">
-                            <div
-                              className="w-3 h-3 rounded-full"
-                              style={{ backgroundColor: rConf.color }}
-                            />
-                            <div className="flex flex-col">
-                              <span className="text-xs font-black text-white">{token.name}</span>
-                              <span className="text-[10px] text-white/40">
-                                Цель до {token.maxTargetDc.toLocaleString('ru-RU')} DC
+                    {UPGRADE_TOKENS.filter((tok) => (tokens[tok.id] || 0) > 0).length === 0 ? (
+                      <div className="p-3 text-center text-[11px] text-white/40 border border-dashed border-white/10 rounded-xl">
+                        У вас нет токенов. Выбивайте их из кейсов или как утешительный приз!
+                      </div>
+                    ) : (
+                      <div className="flex flex-col gap-1 overflow-y-auto max-h-28 pr-1">
+                        {UPGRADE_TOKENS.filter((tok) => (tokens[tok.id] || 0) > 0).map((token) => {
+                          const isSel = selectedToken?.id === token.id;
+                          const rConf = RARITY_CONFIG[token.rarity];
+                          const count = tokens[token.id] || 0;
+
+                          return (
+                            <button
+                              key={token.id}
+                              type="button"
+                              onClick={() => {
+                                sound.playClick();
+                                setSelectedToken(token);
+                              }}
+                              className={`flex items-center justify-between p-1.5 rounded-xl border transition-all cursor-pointer text-left ${
+                                isSel
+                                  ? 'border-yellow-400 bg-yellow-400/15 shadow-[0_0_10px_rgba(250,204,21,0.25)]'
+                                  : 'border-white/10 bg-black/40 hover:border-white/20'
+                              }`}
+                            >
+                              <div className="flex items-center gap-1.5">
+                                <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: rConf.color }} />
+                                <div className="flex flex-col">
+                                  <div className="flex items-center gap-1">
+                                    <span className="text-xs font-black text-white">{token.name}</span>
+                                    <span className="text-[10px] font-mono text-yellow-400 font-bold">x{count}</span>
+                                  </div>
+                                  <span className="text-[9px] text-white/40">
+                                    Цель до {token.maxTargetDc.toLocaleString('ru-RU')} DC
+                                  </span>
+                                </div>
+                              </div>
+                              <span className="font-mono font-black text-xs text-yellow-400">
+                                +{token.valueDc.toLocaleString('ru-RU')} DC
                               </span>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center gap-1 font-mono font-black text-xs text-yellow-400">
-                            <span>+{token.valueDc.toLocaleString('ru-RU')} DC</span>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  <div className="flex items-center justify-between pt-2 border-t border-white/10 text-xs">
-                    <span className="text-white/60 font-bold">Выбран токен:</span>
-                    <span className="text-yellow-400 font-mono font-black">
-                      {selectedToken ? `+${selectedToken.valueDc.toLocaleString('ru-RU')} DC` : 'Не выбран'}
-                    </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 </div>
               ) : (
@@ -675,7 +751,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             </div>
           </div>
 
-          {/* 2. CENTER: CIRCULAR DRUM GAUGE MATCHING PHOTO 2 */}
+          {/* 2. CENTER: CIRCULAR DRUM GAUGE WITH LUCK POTION BUBBLES */}
           <div className="lg:col-span-4 flex flex-col items-center justify-center relative">
             {/* Circular Speedometer Gauge */}
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center">
@@ -696,7 +772,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   strokeWidth="18"
                 />
 
-                {/* Bottom-oriented chance arc that sweeps upwards */}
+                {/* Base chance arc that sweeps upwards */}
                 <circle
                   cx="120"
                   cy="120"
@@ -704,11 +780,33 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   fill="none"
                   stroke="#10B981"
                   strokeWidth="18"
-                  strokeDasharray={`${arcLen} ${gaugeC}`}
+                  strokeDasharray={`${baseArcLen} ${gaugeC}`}
                   strokeLinecap="round"
                   transform={`rotate(${rotateDeg}, 120, 120)`}
                   className="transition-all duration-300 filter drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]"
                 />
+
+                {/* Dark Green Luck Potion Bonus Arc (+15%) with Bubble Animation */}
+                {potionBonus > 0 && (
+                  <g className="transition-all duration-300">
+                    <circle
+                      cx="120"
+                      cy="120"
+                      r={gaugeR}
+                      fill="none"
+                      stroke="#047857"
+                      strokeWidth="18"
+                      strokeDasharray={`${potionArcLen} ${gaugeC}`}
+                      strokeLinecap="round"
+                      transform={`rotate(${potionRotateDeg}, 120, 120)`}
+                      className="filter drop-shadow-[0_0_12px_rgba(5,150,105,0.85)]"
+                    />
+                    {/* Floating SVG bubbles on potion arc */}
+                    <circle cx="120" cy="20" r="3" fill="#34d399" opacity="0.8" className="animate-ping" />
+                    <circle cx="126" cy="25" r="2" fill="#6ee7b7" opacity="0.6" className="animate-bounce" />
+                    <circle cx="114" cy="22" r="2.5" fill="#a7f3d0" opacity="0.7" className="animate-pulse" />
+                  </g>
+                )}
               </svg>
 
               {/* Rotating Pointer Needle with inward-pointing arrow */}
@@ -738,12 +836,18 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 <span className="font-mono font-black text-4xl sm:text-5xl text-white tracking-tight">
                   {chance < 1 ? chance.toFixed(2) : chance.toFixed(1)}%
                 </span>
-                <span
-                  className="text-[11px] font-bold mt-1 max-w-[120px] leading-tight"
-                  style={{ color: riskLabel.color }}
-                >
-                  {riskLabel.text}
-                </span>
+                {activePotionCharges > 0 ? (
+                  <div className="flex items-center gap-1 mt-1 px-2.5 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500 text-[10px] font-black text-emerald-300 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]">
+                    <span>🧪 +15% Зелье ({activePotionCharges}/3)</span>
+                  </div>
+                ) : (
+                  <span
+                    className="text-[11px] font-bold mt-1 max-w-[120px] leading-tight"
+                    style={{ color: riskLabel.color }}
+                  >
+                    {riskLabel.text}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -764,7 +868,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     ? 'Крутим...'
                     : betMode === 'skin' && selectedItems.length === 0
                     ? 'Выберите скины'
-                    : betMode === 'token' && !selectedToken
+                    : betMode === 'consumables' && !selectedToken
                     ? 'Выберите токен'
                     : !targetSkin
                     ? 'Выберите цель'
@@ -1093,9 +1197,14 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           isOpen={cashbackModal.isOpen}
           caseItem={cashbackModal.caseItem}
           winningSkin={cashbackModal.skin}
+          awardedToken={cashbackModal.awardedToken}
           lostAmount={cashbackModal.lostAmount}
           onClaim={() => {
-            addToInventory([cashbackModal.skin]);
+            if (cashbackModal.awardedToken) {
+              addToken(cashbackModal.awardedToken.id);
+            } else if (cashbackModal.skin) {
+              addToInventory([cashbackModal.skin]);
+            }
             setCashbackModal(null);
           }}
           onClose={() => setCashbackModal(null)}

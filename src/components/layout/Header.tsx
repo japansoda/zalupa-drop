@@ -8,16 +8,18 @@ import { useGameStore } from '../../store/useGameStore';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { LogoSvg } from '../ui/LogoSvg';
 import { sound } from '../../lib/sound';
+import { useLanguage } from '../../lib/i18n';
 
 export const Header: React.FC = () => {
   const pathname = usePathname();
   const { balance, inventory, soundEnabled, toggleSound, setRefillOpen } = useGameStore();
+  const { locale, setLocale, t } = useLanguage();
 
   const navLinks = [
-    { href: '/', label: 'Кейсы', icon: Box },
-    { href: '/upgrader', label: 'Апгрейдер', icon: Zap },
-    { href: '/crash', label: 'Краш', icon: Flame },
-    { href: '/inventory', label: 'Инвентарь', icon: Briefcase, count: inventory.length },
+    { href: '/', label: t('nav.cases'), icon: Box },
+    { href: '/upgrader', label: t('nav.upgrader'), icon: Zap },
+    { href: '/crash', label: t('nav.crash'), icon: Flame },
+    { href: '/inventory', label: t('nav.inventory'), icon: Briefcase, count: inventory.length },
   ];
 
   return (
@@ -68,11 +70,24 @@ export const Header: React.FC = () => {
 
         {/* Controls & Balance */}
         <div className="flex items-center gap-3">
+          {/* Language Switcher */}
+          <button
+            type="button"
+            onClick={() => {
+              sound.playClick();
+              setLocale(locale === 'ru' ? 'en' : 'ru');
+            }}
+            title={locale === 'ru' ? 'Switch to English' : 'Переключить на русский'}
+            className="px-2.5 h-10 rounded-xl glass-button flex items-center justify-center font-mono font-black text-xs text-white/80 hover:text-yellow-400 cursor-pointer transition-colors"
+          >
+            {locale === 'ru' ? '🇷🇺 RU' : '🇬🇧 EN'}
+          </button>
+
           {/* Sound Toggle */}
           <button
             type="button"
             onClick={toggleSound}
-            aria-label={soundEnabled ? 'Выключить звук' : 'Включить звук'}
+            aria-label={soundEnabled ? t('sound.disable') : t('sound.enable')}
             className="w-10 h-10 rounded-xl glass-button flex items-center justify-center text-white/70 hover:text-yellow-400 cursor-pointer"
           >
             {soundEnabled ? <Volume2 className="w-4 h-4 text-yellow-400" /> : <VolumeX className="w-4 h-4 text-white/30" />}

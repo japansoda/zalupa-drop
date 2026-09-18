@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { ExternalLink, Check, ShoppingBag, Sparkles } from 'lucide-react';
 import { SkinEntity } from '../../lib/types';
+import { UpgradeToken } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
 import { RarityBadge } from '../ui/RarityBadge';
 import { WearBadge } from '../ui/WearBadge';
@@ -13,11 +14,12 @@ import { sound } from '../../lib/sound';
 interface DropModalProps {
   skin?: SkinEntity | null;
   skins?: SkinEntity[];
+  bonusConsumables?: { tokens: UpgradeToken[]; potions: number };
   onKeep: () => void;
   onSell: () => void;
 }
 
-export const DropModal: React.FC<DropModalProps> = ({ skin, skins, onKeep, onSell }) => {
+export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumables, onKeep, onSell }) => {
   const items: SkinEntity[] = (skins && skins.length > 0) ? skins : (skin ? [skin] : []);
   if (items.length === 0) return null;
 
@@ -182,6 +184,34 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, onKeep, onSel
               <span className="text-xs text-white/40">
                 (~${totalPriceUsd.toFixed(2)})
               </span>
+            </div>
+          </div>
+        )}
+
+        {/* Bonus Consumables Drop Banner */}
+        {bonusConsumables && (bonusConsumables.tokens.length > 0 || bonusConsumables.potions > 0) && (
+          <div className="w-full mb-4 p-3 rounded-2xl bg-gradient-to-r from-emerald-500/20 via-yellow-400/15 to-purple-500/20 border border-emerald-500/40 flex flex-col items-center gap-2">
+            <div className="flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-emerald-400">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Бонусный дроп из кейса!</span>
+              <Sparkles className="w-3.5 h-3.5" />
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              {bonusConsumables.potions > 0 && (
+                <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-950/80 border border-emerald-400 text-emerald-300 text-xs font-black shadow-[0_0_12px_rgba(16,185,129,0.3)]">
+                  <span className="text-base animate-bounce">🧪</span>
+                  <span>Зелье удачи x{bonusConsumables.potions} (Контрабанда)</span>
+                </div>
+              )}
+              {bonusConsumables.tokens.map((tok, idx) => (
+                <div
+                  key={`${tok.id}_${idx}`}
+                  className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-black/60 border border-yellow-400/60 text-yellow-300 text-xs font-black"
+                >
+                  <span>🎟️</span>
+                  <span>{tok.name} (+{tok.valueDc.toLocaleString('ru-RU')} DC)</span>
+                </div>
+              ))}
             </div>
           </div>
         )}

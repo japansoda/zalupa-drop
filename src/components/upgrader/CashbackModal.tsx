@@ -1,8 +1,9 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { SkinEntity, CaseItem } from '../../lib/types';
+import { UpgradeToken } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { sound } from '../../lib/sound';
@@ -11,8 +12,9 @@ import confetti from 'canvas-confetti';
 
 interface CashbackModalProps {
   isOpen: boolean;
-  caseItem: CaseItem;
-  winningSkin: SkinEntity;
+  caseItem?: CaseItem;
+  winningSkin?: SkinEntity;
+  awardedToken?: UpgradeToken;
   lostAmount: number;
   onClaim: () => void;
   onClose: () => void;
@@ -27,6 +29,7 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
   isOpen,
   caseItem,
   winningSkin,
+  awardedToken,
   lostAmount,
   onClaim,
   onClose,
@@ -46,6 +49,21 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
       setIsRevealed(false);
       return;
     }
+
+    if (awardedToken && !winningSkin) {
+      setIsSpinning(false);
+      setIsRevealed(true);
+      sound.playWin(awardedToken.rarity);
+      confetti({
+        particleCount: 90,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#FACC15', '#FFFFFF', '#10B981'],
+      });
+      return;
+    }
+
+    if (!winningSkin || !caseItem) return;
 
     // Build reel with winningSkin at WIN_INDEX
     const items: SkinEntity[] = [];
@@ -107,13 +125,14 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
       clearInterval(tickInterval);
       if (spinTimerRef.current) clearTimeout(spinTimerRef.current);
     };
-  }, [isOpen, caseItem, winningSkin]);
+  }, [isOpen, caseItem, winningSkin, awardedToken]);
 
   const revealDrop = () => {
     if (spinTimerRef.current) clearTimeout(spinTimerRef.current);
     setIsSpinning(false);
     setIsRevealed(true);
-    sound.playWin(winningSkin.rarity);
+    const winRarity = awardedToken?.rarity || winningSkin?.rarity || 'milspec';
+    sound.playWin(winRarity);
     confetti({
       particleCount: 90,
       spread: 70,
@@ -128,7 +147,11 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
 
   if (!isOpen) return null;
 
-  const rConf = RARITY_CONFIG[winningSkin.rarity] || RARITY_CONFIG.milspec;
+  const rConf = awardedToken
+    ? RARITY_CONFIG[awardedToken.rarity] || RARITY_CONFIG.milspec
+    : winningSkin
+    ? RARITY_CONFIG[winningSkin.rarity] || RARITY_CONFIG.milspec
+    : RARITY_CONFIG.milspec;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
@@ -139,11 +162,11 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
         {/* Header */}
         <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/15 border border-yellow-400/30 text-yellow-400 text-xs font-black uppercase tracking-wider mb-2">
           <Gift className="w-3.5 h-3.5" />
-          <span>Утешительный приз: Кешбэк</span>
+          <span>{awardedToken ? 'Утешительный приз: Токен апгрейдера' : 'Утешительный приз: Кешбэк'}</span>
         </div>
 
         <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight mb-1">
-          Крутим кейс «{caseItem.name}»
+          {awardedToken ? awardedToken.name : caseItem ? `Крутим кейс «${caseItem.name}»` : 'Утешительный приз'}
         </h3>
         <p className="text-xs text-white/50 mb-6">
           Кешбэк за проигрыш ставки {lostAmount.toLocaleString('ru-RU')} DC
@@ -227,41 +250,65 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                 boxShadow: `0 0 35px ${rConf.color}40`,
               }}
             >
-              {/* StatTrak badge */}
-              {winningSkin.statTrak && (
-                <div className="absolute top-4 left-4 px-2.5 py-0.5 rounded-md bg-amber-500/20 border border-amber-500 text-amber-400 font-mono font-black text-[10px] uppercase tracking-wider">
-                  StatTrak™
+              {/* Card Body */}
+              {awardedToken ? (
+                <div className="w-full flex flex-col items-center my-4">
+                  <div className="text-6xl mb-3 animate-bounce">🎟️</div>
+                  <h4 className="font-black text-2xl text-white tracking-tight">
+                    {awardedToken.name}
+                  </h4>
+                  <p className="text-xs font-bold mt-1 uppercase tracking-wider" style={{ color: rConf.color }}>
+                    {rConf.label}
+                  </p>
+                  <div className="flex items-center justify-center gap-1.5 mt-3 px-4 py-2 rounded-xl bg-black/60 border border-white/10">
+                    <DropCoinIcon size={20} />
+                    <span className="font-mono font-black text-yellow-400 text-xl">
+                      +{awardedToken.valueDc.toLocaleString('ru-RU')} DC
+                    </span>
+                  </div>
+                  <p className="text-xs text-white/50 mt-2">
+                    Макс. цель: до {awardedToken.maxTargetDc.toLocaleString('ru-RU')} DC
+                  </p>
                 </div>
-              )}
+              ) : winningSkin ? (
+                <>
+                  {/* StatTrak badge */}
+                  {winningSkin.statTrak && (
+                    <div className="absolute top-4 left-4 px-2.5 py-0.5 rounded-md bg-amber-500/20 border border-amber-500 text-amber-400 font-mono font-black text-[10px] uppercase tracking-wider">
+                      StatTrak™
+                    </div>
+                  )}
 
-              {/* Wear Badge */}
-              <div className="absolute top-4 right-4 px-2.5 py-0.5 rounded-md bg-black/60 border border-white/10 text-white/80 font-bold text-[10px]">
-                {winningSkin.wearLabel || winningSkin.wear}
-              </div>
+                  {/* Wear Badge */}
+                  <div className="absolute top-4 right-4 px-2.5 py-0.5 rounded-md bg-black/60 border border-white/10 text-white/80 font-bold text-[10px]">
+                    {winningSkin.wearLabel || winningSkin.wear}
+                  </div>
 
-              {/* Big Image */}
-              <div className="relative w-36 h-36 flex items-center justify-center my-3">
-                <img
-                  src={winningSkin.image}
-                  alt={winningSkin.name}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] animate-pulse"
-                />
-              </div>
+                  {/* Big Image */}
+                  <div className="relative w-36 h-36 flex items-center justify-center my-3">
+                    <img
+                      src={winningSkin.image}
+                      alt={winningSkin.name}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] animate-pulse"
+                    />
+                  </div>
 
-              {/* Titles */}
-              <div className="w-full text-center">
-                <h4 className="font-black text-xl text-white truncate">
-                  {winningSkin.name}
-                </h4>
-                <p className="text-xs text-white/60 mt-0.5">{rConf.label}</p>
-                <div className="flex items-center justify-center gap-1.5 mt-3">
-                  <DropCoinIcon size={20} />
-                  <span className="font-mono font-black text-yellow-400 text-xl">
-                    +{winningSkin.priceDc.toLocaleString('ru-RU')} DC
-                  </span>
-                </div>
-              </div>
+                  {/* Titles */}
+                  <div className="w-full text-center">
+                    <h4 className="font-black text-xl text-white truncate">
+                      {winningSkin.name}
+                    </h4>
+                    <p className="text-xs text-white/60 mt-0.5">{rConf.label}</p>
+                    <div className="flex items-center justify-center gap-1.5 mt-3">
+                      <DropCoinIcon size={20} />
+                      <span className="font-mono font-black text-yellow-400 text-xl">
+                        +{winningSkin.priceDc.toLocaleString('ru-RU')} DC
+                      </span>
+                    </div>
+                  </div>
+                </>
+              ) : null}
             </div>
 
             {/* Claim Button */}
@@ -271,7 +318,7 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
               className="w-full max-w-sm py-3.5 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(250,204,21,0.5)] transition-all cursor-pointer flex items-center justify-center gap-2 hover:scale-105"
             >
               <Check className="w-5 h-5 stroke-[3]" />
-              <span>Забрать в инвентарь</span>
+              <span>{awardedToken ? 'Забрать токен в расходники' : 'Забрать в инвентарь'}</span>
             </button>
           </div>
         )}
