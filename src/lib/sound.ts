@@ -130,25 +130,42 @@ class SoundController {
     osc.stop(ctx.currentTime + 0.45);
   }
 
-  public playUpgradeSpin() {
+  public playUpgradeSpin(progress: number = 0.5) {
     if (!this.enabled) return;
     const ctx = this.getContext();
     if (!ctx) return;
 
-    const osc = ctx.createOscillator();
+    // Pitch smoothly descends as needle decelerates (from ~760Hz down to ~420Hz)
+    const clampedProgress = Math.max(0, Math.min(1, progress));
+    const baseFreq = 760 - clampedProgress * 340;
+
+    // Dual-oscillator: warm fundamental sine + harmonic chime overtone
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
     const gain = ctx.createGain();
-    osc.type = 'square';
-    osc.frequency.setValueAtTime(600, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.02);
 
-    gain.gain.setValueAtTime(0.06, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.02);
+    osc1.type = 'sine';
+    osc1.frequency.setValueAtTime(baseFreq, ctx.currentTime);
+    osc1.frequency.exponentialRampToValueAtTime(baseFreq * 0.8, ctx.currentTime + 0.045);
 
-    osc.connect(gain);
+    osc2.type = 'triangle';
+    osc2.frequency.setValueAtTime(baseFreq * 2.05, ctx.currentTime);
+    osc2.frequency.exponentialRampToValueAtTime(baseFreq * 1.5, ctx.currentTime + 0.035);
+
+    // Warm, round envelope with soft attack and decay
+    const vol = 0.06 + (1 - clampedProgress) * 0.04;
+    gain.gain.setValueAtTime(0.001, ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(vol, ctx.currentTime + 0.004);
+    gain.gain.exponentialRampToValueAtTime(0.0005, ctx.currentTime + 0.05);
+
+    osc1.connect(gain);
+    osc2.connect(gain);
     gain.connect(ctx.destination);
 
-    osc.start();
-    osc.stop(ctx.currentTime + 0.02);
+    osc1.start(ctx.currentTime);
+    osc2.start(ctx.currentTime);
+    osc1.stop(ctx.currentTime + 0.052);
+    osc2.stop(ctx.currentTime + 0.052);
   }
 
   public playReward() {

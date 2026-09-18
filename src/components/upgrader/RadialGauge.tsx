@@ -35,6 +35,7 @@ export const matchesCatalogType = (skin: SkinEntity, type: string): boolean => {
   if (isGlove) return false;
 
   const isKnife =
+    (skin.name.startsWith('★') && !isGlove) ||
     w.includes('knife') ||
     w.includes('нож') ||
     w.includes('bayonet') ||
@@ -90,6 +91,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     useToken,
     consumePotionCharge,
     addToken,
+    addPotion,
   } = useGameStore();
   const { t, locale } = useLanguage();
 
@@ -109,6 +111,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     caseItem?: CaseItem;
     skin?: SkinEntity;
     awardedToken?: UpgradeToken;
+    awardedPotion?: boolean;
     lostAmount: number;
   } | null>(null);
 
@@ -184,7 +187,32 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     // Ideal target price based on 95% RTP
     const idealPrice = Math.min(maxTargetPrice, (currentBet / (desiredChance / 100)) * 0.95);
 
-    // Sort candidates: knives first (priority), then by price distance to ideal
+    // Knife Priority:
+    // When knives appear (idealPrice >= 35,000 DC or closest knife provides viable chance within range),
+    // KNIVES MUST BE PROPOSED IN THE FIRST PLACE!
+    const knifeCandidates = candidates.filter((s) => matchesCatalogType(s, 'knives'));
+    if (knifeCandidates.length > 0) {
+      let bestKnife = knifeCandidates[0];
+      let bestKnifeDiff = Math.abs(knifeCandidates[0].priceDc - idealPrice);
+      for (const k of knifeCandidates) {
+        const diff = Math.abs(k.priceDc - idealPrice);
+        if (diff < bestKnifeDiff) {
+          bestKnifeDiff = diff;
+          bestKnife = k;
+        }
+      }
+
+      const knifeChance = (currentBet / bestKnife.priceDc) * 95;
+      const chanceRatio = knifeChance / desiredChance;
+      // If target price is in knife range (>= 35,000 DC) OR knife chance is reasonably close to desired chance:
+      // ALWAYS pick the knife first!
+      if (idealPrice >= 35000 || (chanceRatio >= 0.35 && chanceRatio <= 2.5 && knifeChance >= 0.4)) {
+        setTargetSkin(bestKnife);
+        return;
+      }
+    }
+
+    // Fallback: If price is too low for knives yet (budget bet), find closest item across candidates
     let closest = candidates[0];
     let minDiff = Math.abs(candidates[0].priceDc - idealPrice);
 
@@ -193,27 +221,6 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       if (diff < minDiff) {
         minDiff = diff;
         closest = s;
-      }
-    }
-
-    // Knife priority: if closest is not a knife, check if there's a knife within 2x the price distance
-    const closestIsKnife = matchesCatalogType(closest, 'knives');
-    if (!closestIsKnife) {
-      const knifeCandidates = candidates.filter(s => matchesCatalogType(s, 'knives'));
-      if (knifeCandidates.length > 0) {
-        let bestKnife = knifeCandidates[0];
-        let bestKnifeDiff = Math.abs(knifeCandidates[0].priceDc - idealPrice);
-        for (const k of knifeCandidates) {
-          const diff = Math.abs(k.priceDc - idealPrice);
-          if (diff < bestKnifeDiff) {
-            bestKnifeDiff = diff;
-            bestKnife = k;
-          }
-        }
-        // Prefer knife if it's within 2x price distance of the best overall match
-        if (bestKnifeDiff <= minDiff * 2.5) {
-          closest = bestKnife;
-        }
       }
     }
 
@@ -279,19 +286,30 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
     setSelectedItems((prev) => {
       const exists = prev.some((i) => i.instanceId === item.instanceId);
-      if (exists) {
-        return prev.filter((i) => i.instanceId !== item.instanceId);
-      } else {
-        if (prev.length >= 5) return prev;
-        return [...prev, item];
+      const next = exists
+        ? prev.filter((i) => i.instanceId !== item.instanceId)
+        : prev.length >= 5
+        ? prev
+        : [...prev, item];
+      const nextBet = next.reduce((sum, i) => sum + i.priceDc, 0);
+      if (nextBet > 0) {
+        autoSelectTargetSkin(targetChance, nextBet);
       }
+      return next;
     });
   };
 
   const handleRemoveSelectedItem = (instanceId: string) => {
     if (isUpgrading) return;
     sound.playClick();
-    setSelectedItems((prev) => prev.filter((i) => i.instanceId !== instanceId));
+    setSelectedItems((prev) => {
+      const next = prev.filter((i) => i.instanceId !== instanceId);
+      const nextBet = next.reduce((sum, i) => sum + i.priceDc, 0);
+      if (nextBet > 0) {
+        autoSelectTargetSkin(targetChance, nextBet);
+      }
+      return next;
+    });
   };
 
   const handleClearAllSelected = () => {
@@ -380,15 +398,27 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     const totalRotation = 360 * 5 + targetAngle;
     const duration = 4.2;
 
-    const startTime = Date.now();
-    const interval = setInterval(() => {
-      const elapsed = (Date.now() - startTime) / 1000;
-      if (elapsed >= duration) {
-        clearInterval(interval);
-        return;
+    // Smooth decelerating acoustic spin sound
+    const startTime = performance.now();
+    let animId: number;
+    let lastTickTime = 0;
+
+    const tickLoop = () => {
+      const now = performance.now();
+      const elapsed = (now - startTime) / 1000;
+      if (elapsed >= duration) return;
+
+      const progress = elapsed / duration;
+      // Interval decelerates smoothly from 45ms to 280ms
+      const currentInterval = 45 + Math.pow(progress, 2.4) * 245;
+
+      if (now - lastTickTime >= currentInterval) {
+        sound.playUpgradeSpin(progress);
+        lastTickTime = now;
       }
-      sound.playUpgradeSpin();
-    }, 110);
+      animId = requestAnimationFrame(tickLoop);
+    };
+    animId = requestAnimationFrame(tickLoop);
 
     await needleControls.set({ rotate: 0 });
     await needleControls.start({
@@ -399,7 +429,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       },
     });
 
-    clearInterval(interval);
+    cancelAnimationFrame(animId);
     setIsUpgrading(false);
 
     // Consume 1 potion charge if active
@@ -423,29 +453,89 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       setLastResult('lose');
       recordUpgrade(false, -effectiveBetDc);
 
-      // ── CASHBACK FEATURE: If losing a bet (>= 1500 DC) ──
-      if (currentLostAmount >= 1500) {
-        // 50% chance: roll upgrade token, 50% chance: cheap case
-        if (Math.random() < 0.5) {
-          const tokenPrize = rollConsolationToken();
+      // ── CONSOLATION PRIZE (Кешбэк / Утешительный приз) ──
+      // Triggers on losses >= 500 DC
+      const shouldTriggerConsolation =
+        currentLostAmount >= 2000 ? Math.random() < 0.85 :
+        currentLostAmount >= 1000 ? Math.random() < 0.65 :
+        currentLostAmount >= 500 ? Math.random() < 0.40 : false;
+
+      if (shouldTriggerConsolation) {
+        // 1. Зелье удачи (Контрабанда): ОЧЕНЬ РЕДКО, и ТОЛЬКО если сумма проигрыша >= 10 000 DC!
+        // Шанс плавно растет от 1.5% (при 10к) до 5% (при 80к+)
+        let awardedPotion = false;
+        if (currentLostAmount >= 10000) {
+          const potionChance = Math.min(0.05, 0.015 + ((currentLostAmount - 10000) / 100000) * 0.04);
+          if (Math.random() < potionChance) {
+            awardedPotion = true;
+          }
+        }
+
+        if (awardedPotion) {
           setCashbackModal({
             isOpen: true,
-            awardedToken: tokenPrize,
+            awardedPotion: true,
             lostAmount: currentLostAmount,
           });
         } else {
-          const casesList = allCasesJson as CaseItem[];
-          const cheapCases = casesList.filter((c) => c.priceDc <= 2000 && c.skins && c.skins.length > 0);
-          const selectedCase = cheapCases.length > 0 
-            ? cheapCases[Math.floor(Math.random() * cheapCases.length)] 
-            : casesList[0];
+          // 2. Основной пул утешительного приза:
+          // Кейсы падают ЧАЩЕ ВСЕГО (~76%), а Токены — РЕДКО (~24%)
+          const rollType = Math.random();
+          const isCasePrize = rollType < 0.76;
 
-          if (selectedCase && selectedCase.skins.length > 0) {
-            const cashbackDrop = selectedCase.skins[Math.floor(Math.random() * selectedCase.skins.length)];
+          if (isCasePrize) {
+            // КЕЙС: Выбираем кейс с тиром под сумму проигрыша
+            const casesList = allCasesJson as CaseItem[];
+            const validCases = casesList.filter((c) => c.skins && c.skins.length > 0);
+
+            let casePool: CaseItem[];
+            if (currentLostAmount < 3000) {
+              casePool = validCases.filter((c) => c.priceDc <= 2000);
+            } else if (currentLostAmount < 15000) {
+              casePool = validCases.filter((c) => c.priceDc <= 6000);
+            } else if (currentLostAmount < 40000) {
+              casePool = validCases.filter((c) => c.priceDc <= 15000);
+            } else {
+              casePool = validCases.filter((c) => c.priceDc > 10000);
+            }
+
+            if (casePool.length === 0) casePool = validCases;
+            const selectedCase = casePool[Math.floor(Math.random() * casePool.length)];
+
+            if (selectedCase && selectedCase.skins.length > 0) {
+              const cashbackDrop = selectedCase.skins[Math.floor(Math.random() * selectedCase.skins.length)];
+              setCashbackModal({
+                isOpen: true,
+                caseItem: selectedCase,
+                skin: cashbackDrop,
+                lostAmount: currentLostAmount,
+              });
+            }
+          } else {
+            // ТОКЕН (Редко): Редкость токена зависит от суммы проигрыша
+            let tokenPrize: UpgradeToken;
+            const tRoll = Math.random() * 100;
+
+            if (currentLostAmount < 3000) {
+              // Ширпотреб (85%) / Промышленный (15%)
+              tokenPrize = tRoll < 15 ? UPGRADE_TOKENS[1] : UPGRADE_TOKENS[0];
+            } else if (currentLostAmount < 10000) {
+              // Промышленный (60%) / Армейский (40%)
+              tokenPrize = tRoll < 40 ? UPGRADE_TOKENS[2] : UPGRADE_TOKENS[1];
+            } else if (currentLostAmount < 25000) {
+              // Армейский (60%) / Запрещенный (40%)
+              tokenPrize = tRoll < 40 ? UPGRADE_TOKENS[3] : UPGRADE_TOKENS[2];
+            } else if (currentLostAmount < 60000) {
+              // Запрещенный (50%) / Засекреченный (50%)
+              tokenPrize = tRoll < 50 ? UPGRADE_TOKENS[4] : UPGRADE_TOKENS[3];
+            } else {
+              // Засекреченный (45%) / Тайный (40%) / Золотой (15%)
+              tokenPrize = tRoll < 15 ? UPGRADE_TOKENS[6] : tRoll < 55 ? UPGRADE_TOKENS[5] : UPGRADE_TOKENS[4];
+            }
+
             setCashbackModal({
               isOpen: true,
-              caseItem: selectedCase,
-              skin: cashbackDrop,
+              awardedToken: tokenPrize,
               lostAmount: currentLostAmount,
             });
           }
@@ -485,7 +575,20 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       return true;
     });
 
-    result.sort((a, b) => (catalogSort === 'asc' ? a.priceDc - b.priceDc : b.priceDc - a.priceDc));
+    result.sort((a, b) => {
+      if (catalogType === 'all') {
+        const aIsKnife = matchesCatalogType(a, 'knives');
+        const bIsKnife = matchesCatalogType(b, 'knives');
+        if (aIsKnife !== bIsKnife) {
+          const maxP = Math.max(a.priceDc, b.priceDc);
+          const diff = Math.abs(a.priceDc - b.priceDc);
+          if (maxP >= 38000 && diff / maxP < 0.25) {
+            return aIsKnife ? -1 : 1;
+          }
+        }
+      }
+      return catalogSort === 'asc' ? a.priceDc - b.priceDc : b.priceDc - a.priceDc;
+    });
     return result;
   }, [catalogSkins, catalogSearch, catalogRarity, catalogType, catalogSort, effectiveBetDc, maxTargetPrice]);
 
@@ -568,7 +671,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               <div className="flex items-center gap-1.5 flex-wrap">
                 <button
                   type="button"
-                  onClick={() => setBetMode('skin')}
+                  onClick={() => {
+                    setBetMode('skin');
+                    const bet = selectedItems.reduce((s, i) => s + i.priceDc, 0);
+                    if (bet > 0) autoSelectTargetSkin(targetChance, bet);
+                  }}
                   className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     betMode === 'skin' ? 'bg-yellow-400 text-black' : 'text-white/60 hover:text-white'
                   }`}
@@ -577,7 +684,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 </button>
                 <button
                   type="button"
-                  onClick={() => setBetMode('dc')}
+                  onClick={() => {
+                    setBetMode('dc');
+                    if (customBetDc > 0) autoSelectTargetSkin(targetChance, customBetDc);
+                  }}
                   className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     betMode === 'dc' ? 'bg-yellow-400 text-black' : 'text-white/60 hover:text-white'
                   }`}
@@ -588,10 +698,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   type="button"
                   onClick={() => {
                     setBetMode('consumables');
-                    if (!selectedToken) {
-                      const firstOwned = UPGRADE_TOKENS.find(tok => (tokens[tok.id] || 0) > 0);
-                      if (firstOwned) setSelectedToken(firstOwned);
+                    let tok = selectedToken;
+                    if (!tok) {
+                      tok = UPGRADE_TOKENS.find(t => (tokens[t.id] || 0) > 0) || null;
+                      if (tok) setSelectedToken(tok);
                     }
+                    if (tok) autoSelectTargetSkin(targetChance, tok.valueDc);
                   }}
                   className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
                     betMode === 'consumables' ? 'bg-yellow-400 text-black' : 'text-yellow-400/80 hover:text-yellow-400'
@@ -749,6 +861,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                               onClick={() => {
                                 sound.playClick();
                                 setSelectedToken(token);
+                                autoSelectTargetSkin(targetChance, token.valueDc);
                               }}
                               className={`flex items-center justify-between p-1.5 rounded-xl border transition-all cursor-pointer text-left ${
                                 isSel
@@ -790,7 +903,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                         min="10"
                         max={balance}
                         value={customBetDc}
-                        onChange={(e) => setCustomBetDc(Math.max(10, Number(e.target.value)))}
+                        onChange={(e) => {
+                          const val = Math.max(10, Number(e.target.value));
+                          setCustomBetDc(val);
+                          autoSelectTargetSkin(targetChance, val);
+                        }}
                         disabled={isUpgrading}
                         className="w-full bg-transparent font-mono font-black text-lg text-white outline-none"
                       />
@@ -802,7 +919,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       <button
                         key={amt}
                         type="button"
-                        onClick={() => setCustomBetDc(amt)}
+                        onClick={() => {
+                          const val = amt;
+                          setCustomBetDc(val);
+                          autoSelectTargetSkin(targetChance, val);
+                        }}
                         disabled={isUpgrading}
                         className="py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-white cursor-pointer"
                       >
@@ -1327,9 +1448,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           caseItem={cashbackModal.caseItem}
           winningSkin={cashbackModal.skin}
           awardedToken={cashbackModal.awardedToken}
+          awardedPotion={cashbackModal.awardedPotion}
           lostAmount={cashbackModal.lostAmount}
           onClaim={() => {
-            if (cashbackModal.awardedToken) {
+            if (cashbackModal.awardedPotion) {
+              addPotion(1);
+            } else if (cashbackModal.awardedToken) {
               addToken(cashbackModal.awardedToken.id);
             } else if (cashbackModal.skin) {
               addToInventory([cashbackModal.skin]);

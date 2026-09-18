@@ -7,7 +7,8 @@ import { UpgradeToken } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { sound } from '../../lib/sound';
-import { Gift, FastForward, Check, Sparkles } from 'lucide-react';
+import { useLanguage } from '../../lib/i18n';
+import { Gift, FastForward, Check, Sparkles, Ticket, FlaskConical } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface CashbackModalProps {
@@ -15,6 +16,7 @@ interface CashbackModalProps {
   caseItem?: CaseItem;
   winningSkin?: SkinEntity;
   awardedToken?: UpgradeToken;
+  awardedPotion?: boolean;
   lostAmount: number;
   onClaim: () => void;
   onClose: () => void;
@@ -30,10 +32,12 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
   caseItem,
   winningSkin,
   awardedToken,
+  awardedPotion,
   lostAmount,
   onClaim,
   onClose,
 }) => {
+  const { t, locale } = useLanguage();
   const [isSpinning, setIsSpinning] = useState(true);
   const [isRevealed, setIsRevealed] = useState(false);
   const [reelItems, setReelItems] = useState<SkinEntity[]>([]);
@@ -47,6 +51,19 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
     if (!isOpen) {
       setIsSpinning(true);
       setIsRevealed(false);
+      return;
+    }
+
+    if (awardedPotion && !winningSkin) {
+      setIsSpinning(false);
+      setIsRevealed(true);
+      sound.playWin('contraband');
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#10B981', '#FACC15', '#FFFFFF'],
+      });
       return;
     }
 
@@ -147,7 +164,9 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
 
   if (!isOpen) return null;
 
-  const rConf = awardedToken
+  const rConf = awardedPotion
+    ? RARITY_CONFIG.contraband
+    : awardedToken
     ? RARITY_CONFIG[awardedToken.rarity] || RARITY_CONFIG.milspec
     : winningSkin
     ? RARITY_CONFIG[winningSkin.rarity] || RARITY_CONFIG.milspec
@@ -162,14 +181,26 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
         {/* Header */}
         <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/15 border border-yellow-400/30 text-yellow-400 text-xs font-black uppercase tracking-wider mb-2">
           <Gift className="w-3.5 h-3.5" />
-          <span>{awardedToken ? 'Утешительный приз: Токен апгрейдера' : 'Утешительный приз: Кешбэк'}</span>
+          <span>
+            {awardedPotion
+              ? t('cashback.badgePotion')
+              : awardedToken
+              ? t('cashback.badgeToken')
+              : t('cashback.badgeCase')}
+          </span>
         </div>
 
         <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight mb-1">
-          {awardedToken ? awardedToken.name : caseItem ? `Крутим кейс «${caseItem.name}»` : 'Утешительный приз'}
+          {awardedPotion
+            ? (locale === 'ru' ? 'Зелье удачи' : 'Luck Potion')
+            : awardedToken
+            ? (t('token.' + awardedToken.rarity) || awardedToken.name)
+            : caseItem
+            ? `${t('cashback.spinningCase')} «${caseItem.name}»`
+            : t('cashback.badgeCase')}
         </h3>
         <p className="text-xs text-white/50 mb-6">
-          Кешбэк за проигрыш ставки {lostAmount.toLocaleString('ru-RU')} DC
+          {t('cashback.lostSub')} {lostAmount.toLocaleString('ru-RU')} DC
         </p>
 
         {/* STAGE 1: SPINNING REEL */}
@@ -235,13 +266,13 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
               className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md hover:scale-105"
             >
               <FastForward className="w-4 h-4 text-yellow-400" />
-              <span>Пропустить ⏭</span>
+              <span>{t('cashback.skip')}</span>
             </button>
           </div>
         ) : (
           /* STAGE 2: REVEAL DROP IN THE SAME MODAL */
           <div className="w-full flex flex-col items-center animate-in fade-in zoom-in duration-300">
-            {/* Skin Display Card */}
+            {/* Display Card */}
             <div
               className="relative w-full max-w-sm rounded-3xl p-6 flex flex-col items-center justify-center border-2 mb-6 shadow-2xl"
               style={{
@@ -251,14 +282,43 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
               }}
             >
               {/* Card Body */}
-              {awardedToken ? (
+              {awardedPotion ? (
                 <div className="w-full flex flex-col items-center my-4">
-                  <div className="text-6xl mb-3 animate-bounce">🎟️</div>
+                  <div className="w-20 h-20 rounded-2xl bg-emerald-950/70 border-2 border-emerald-400 flex items-center justify-center mb-3 shadow-[0_0_30px_rgba(16,185,129,0.5)]">
+                    <FlaskConical className="w-10 h-10 text-emerald-400 animate-pulse" />
+                  </div>
                   <h4 className="font-black text-2xl text-white tracking-tight">
-                    {awardedToken.name}
+                    {locale === 'ru' ? 'Зелье удачи' : 'Luck Potion'}
+                  </h4>
+                  <p className="text-xs font-black mt-1 uppercase tracking-wider text-amber-400">
+                    {locale === 'ru' ? '★ Контрабанда' : '★ Contraband'}
+                  </p>
+                  <div className="flex items-center justify-center gap-1.5 mt-3 px-4 py-2 rounded-xl bg-emerald-950/40 border border-emerald-400/40 shadow-inner">
+                    <span className="font-mono font-black text-emerald-300 text-lg">
+                      +15% {locale === 'ru' ? 'шанс (3 прокрута)' : 'chance (3 spins)'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-white/50 mt-2">
+                    {locale === 'ru' ? 'Сверхредкий утешительный приз за крупный проигрыш!' : 'Ultra-rare consolation reward for major loss!'}
+                  </p>
+                </div>
+              ) : awardedToken ? (
+                <div className="w-full flex flex-col items-center my-4">
+                  <div
+                    className="w-20 h-20 rounded-2xl flex items-center justify-center mb-3 border-2 shadow-lg"
+                    style={{
+                      backgroundColor: `${rConf.color}15`,
+                      borderColor: rConf.color,
+                      boxShadow: `0 0 25px ${rConf.color}40`,
+                    }}
+                  >
+                    <Ticket className="w-10 h-10" style={{ color: rConf.color }} />
+                  </div>
+                  <h4 className="font-black text-2xl text-white tracking-tight">
+                    {t('token.' + awardedToken.rarity) || awardedToken.name}
                   </h4>
                   <p className="text-xs font-bold mt-1 uppercase tracking-wider" style={{ color: rConf.color }}>
-                    {rConf.label}
+                    {t('rarity.' + awardedToken.rarity) || rConf.label}
                   </p>
                   <div className="flex items-center justify-center gap-1.5 mt-3 px-4 py-2 rounded-xl bg-black/60 border border-white/10">
                     <DropCoinIcon size={20} />
@@ -267,7 +327,7 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                     </span>
                   </div>
                   <p className="text-xs text-white/50 mt-2">
-                    Макс. цель: до {awardedToken.maxTargetDc.toLocaleString('ru-RU')} DC
+                    {t('cashback.maxTarget')} {awardedToken.maxTargetDc.toLocaleString('ru-RU')} DC
                   </p>
                 </div>
               ) : winningSkin ? (
@@ -299,7 +359,9 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                     <h4 className="font-black text-xl text-white truncate">
                       {winningSkin.name}
                     </h4>
-                    <p className="text-xs text-white/60 mt-0.5">{rConf.label}</p>
+                    <p className="text-xs text-white/60 mt-0.5" style={{ color: rConf.color }}>
+                      {t('rarity.' + winningSkin.rarity) || rConf.label}
+                    </p>
                     <div className="flex items-center justify-center gap-1.5 mt-3">
                       <DropCoinIcon size={20} />
                       <span className="font-mono font-black text-yellow-400 text-xl">
@@ -318,7 +380,13 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
               className="w-full max-w-sm py-3.5 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(250,204,21,0.5)] transition-all cursor-pointer flex items-center justify-center gap-2 hover:scale-105"
             >
               <Check className="w-5 h-5 stroke-[3]" />
-              <span>{awardedToken ? 'Забрать токен в расходники' : 'Забрать в инвентарь'}</span>
+              <span>
+                {awardedPotion
+                  ? t('cashback.claimPotion')
+                  : awardedToken
+                  ? t('cashback.claimToken')
+                  : t('cashback.claimSkin')}
+              </span>
             </button>
           </div>
         )}
