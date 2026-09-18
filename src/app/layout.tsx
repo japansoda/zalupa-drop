@@ -1,0 +1,24 @@
+import type { Metadata } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "ZALUPA DROP — CS2 Кейс Симулятор & Liquid Glass",
+  description: "Премиальный симулятор открытия CS2 кейсов, апгрейдер и краш на виртуальную валюту DropCoin (DC)",
+  icons: {
+    icon: "/logo.png",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="ru" className="dark">
+      <body className="min-h-screen bg-[#090a10] text-[#e2e8f0] antialiased selection:bg-purple-600 selection:text-white">
+        {children}
+      </body>
+    </html>
+  );
+}

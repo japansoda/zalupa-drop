@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+:root {
+  --background: #08080a;
+  --foreground: #f3f4f6;
+
+  /* CS2 Rarity Colors */
+  --rarity-consumer: #b0c3d9;
+  --rarity-industrial: #5e98d9;
+  --rarity-milspec: #4b69ff;
+  --rarity-restricted: #8847ff;
+  --rarity-classified: #d32ce6;
+  --rarity-covert: #eb4b4b;
+  --rarity-gold: #facc15;
+  --rarity-contraband: #eab308;
+}
+
+body {
+  background-color: #08080a;
+  color: #f3f4f6;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 50% -10%, rgba(250, 204, 21, 0.05), transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(250, 204, 21, 0.03), transparent 45%);
+  background-attachment: fixed;
+}
+
+/* Glass Panels: Deep Black/White/Yellow */
+.glass-panel {
+  background: rgba(14, 14, 18, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.7);
+}
+
+.glass-card {
+  background: rgba(18, 18, 24, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.5);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(24, 24, 32, 0.9);
+  border-color: rgba(250, 204, 21, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px 0 rgba(0, 0, 0, 0.7);
+}
+
+.glass-button {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.15s ease;
+}
+
+.glass-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(250, 204, 21, 0.5);
+  color: #facc15;
+}
+
+.glass-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* Yellow Button */
+.btn-yellow {
+  background-color: #facc15;
+  color: #000000;
+  font-weight: 900;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 25px rgba(250, 204, 21, 0.35);
+}
+
+.btn-yellow:hover:not(:disabled) {
+  background-color: #fde047;
+  transform: translateY(-1px);
+  box-shadow: 0 0 35px rgba(250, 204, 21, 0.55);
+}
+
+.btn-yellow:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08080a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #facc15;
+}

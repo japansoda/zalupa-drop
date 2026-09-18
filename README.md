@@ -1,63 +1,36 @@
-﻿# 🎯 Zalupa Drop — CS2 Case Opening & Skin Simulator
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-![Zalupa Drop Logo](/public/logo.png)
+## Getting Started
 
-Современный, высокопроизводительный симулятор открытия кейсов, апгрейда и мини-игр CS2 в дизайне **Liquid Glass (Glassmorphism)**.
-
-> ⚠️ **Важное примечание:** Проект является симулятором / пет-проектом для портфолио. Все операции осуществляются исключительно с виртуальной игровой валютой **DropCoin (DC)**. Настоящие депозиты, вывод реальных средств и азартные игры на реальные деньги полностью отсутствуют.
-
----
-
-## ✨ Основные возможности
-
-1. **Виртуальная экономика DropCoin (DC):**
-   - Стартовый баланс: **10 000 DC** при первом входе.
-   - Курс конвертации: 1 $ реального рынка Steam = 100 DC.
-   - Модальное окно бесплатного пополнения баланса (+1 000, +5 000, +10 000, +50 000 DC или сброс к 10 000 DC).
-
-2. **Кейсы CS2 и горизонтальная рулетка:**
-   - 7 уникальных тематических кейсов: *«Кейс Революция»*, *«Кейс Ножей и Перчаток»*, *«Грезы и Кошмары»*, *«Кейс Киловатт»*, *«Тайное или Ничего»*, *«Кейс для бомжей»*, *«Легенды AWP»*.
-   - Горизонтальная плавная рулетка из 55+ карточек с реалистичной физикой замедления (`cubic-bezier(0.12, 0.8, 0.33, 1)`).
-   - Взвешенные шансы выпадения по официальным тирам редкости CS2 (Армейское, Запрещенное, Засекреченное, Тайное, Экстраординарное).
-   - Быстрое открытие (Fast Mode) и мульти-открытие (x1, x2, x3, x5).
-   - Модальное окно выигрыша с салютом конфетти, кнопками быстрой продажи и прямыми ссылками на Торговую площадку Steam.
-
-3. **Апгрейдер (Skin Upgrader):**
-   - Выбор предмета из инвентаря или ставки в DC.
-   - Выбор цели из общего каталога 70+ скинов.
-   - Честный расчет вероятности: `Шанс = (Ставка DC / Стоимость цели DC) * 95% (RTP)`.
-   - Круговой неоновый SVG-спиннер со стрелкой и сектором победы.
-
-4. **Мини-игры:**
-   - **Краш (Crash):** График на HTML5 Canvas с растущим неоновым множителем (1.00x... 100x+), нарастающими звуковыми тиками и кнопкой моментального кэшаута.
-   - **Монетка (Coinflip):** Дуэль 50/50 против бота за сторону CT (Спецназ) или T (Террористы) с 3D-вращением монеты.
-
-5. **Инвентарь игрока:**
-   - Суммарная оценка стоимости всех скинов в DC.
-   - Фильтры по редкости, сортировка по цене и поиск.
-   - Одиночная продажа скинов и массовая «Продать всё».
-   - Статистика игрока (кейсов открыто, винрейт в апгрейде, лучший дроп).
-
-6. **Аудио-движок Web Audio API:**
-   - Процедурный синтезатор звуков без внешних файлов: клики рулетки, фанфары Тайного и Ножей, свист краша, звон монеты.
-   - Переключатель звука с сохранением состояния.
-
-7. **Дизайн Liquid Glass:**
-   - Глубокая тёмная палитра CS2 (`#090a10`), полупрозрачные карточки с `backdrop-blur-xl`, неоновые свечения редких предметов и полная адаптивность для ПК и мобильных устройств.
-
----
-
-## 🚀 Запуск проекта локально
+First, run the development server:
 
 ```bash
-# Установка зависимостей
-npm install
-
-# Запуск dev-сервера
 npm run dev
-
-# Сборка production
-npm run build
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Открыть в браузере: `http://localhost:3000`
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

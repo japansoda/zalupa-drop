@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 280" width="320" height="280" fill="none">
+  <defs>
+    <linearGradient id="tcBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181f"/>
+      <stop offset="100%" stop-color="#08080b"/>
+    </linearGradient>
+  </defs>
+
+  <ellipse cx="160" cy="260" rx="110" ry="14" fill="#000000" opacity="0.7" />
+  <circle cx="160" cy="140" r="90" fill="#FACC15" opacity="0.08" />
+
+  <g transform="translate(155, 150) rotate(-6) translate(-155, -150)">
+    <path d="M 160 45 C 160 60 148 70 132 66 C 142 74 158 72 166 60 C 170 52 166 46 160 45 Z" fill="#FACC15" />
+    <circle cx="115" cy="65" r="2.5" fill="#FFFFFF" />
+    <circle cx="195" cy="75" r="2" fill="#FFFFFF" />
+    <circle cx="135" cy="90" r="2.5" fill="#FFFFFF" />
+    <circle cx="210" cy="105" r="2" fill="#FFFFFF" />
+
+    <path d="M 105 125 L 80 75 L 92 68 L 120 115 Z" fill="#FACC15" />
+    <line x1="85" y1="70" x2="70" y2="50" stroke="#FACC15" stroke-width="4" stroke-linecap="round" />
+    <line x1="93" y1="66" x2="102" y2="52" stroke="#FFFFFF" stroke-width="3" />
+
+    <path d="M 175 125 L 225 70 L 235 78 L 190 135 Z" fill="#FACC15" />
+    <line x1="230" y1="74" x2="265" y2="45" stroke="#FACC15" stroke-width="4.5" stroke-linecap="round" />
+    <rect x="205" y="72" width="22" height="7" transform="rotate(-32 205 72)" fill="#FFFFFF" />
+
+    <path d="M 152 125 L 160 85 L 170 87 L 163 125 Z" fill="#FFFFFF" />
+    <polygon points="160,85 168,76 172,87" fill="#FACC15" />
+
+    <ellipse cx="155" cy="135" rx="55" ry="16" fill="#1c1d24" stroke="#FACC15" stroke-width="5" />
+    <path d="M 105 137 L 118 245 C 118 252 132 258 155 258 C 178 258 192 252 192 245 L 205 137" fill="url(#tcBg)" stroke="#FACC15" stroke-width="5" stroke-linejoin="round" />
+
+    <line x1="124" y1="148" x2="131" y2="242" stroke="#FACC15" stroke-width="4" opacity="0.9" />
+    <line x1="140" y1="151" x2="143" y2="249" stroke="#FACC15" stroke-width="4" opacity="0.9" />
+    <line x1="155" y1="152" x2="155" y2="250" stroke="#FACC15" stroke-width="4" opacity="0.9" />
+    <line x1="170" y1="151" x2="167" y2="249" stroke="#FACC15" stroke-width="4" opacity="0.9" />
+    <line x1="186" y1="148" x2="179" y2="242" stroke="#FACC15" stroke-width="4" opacity="0.9" />
+
+    <rect x="85" y="250" width="15" height="6" rx="2" transform="rotate(-15 85 250)" fill="#FACC15" />
+    <rect x="98" y="258" width="13" height="5" rx="2" transform="rotate(10 98 258)" fill="#FFFFFF" />
+    <rect x="205" y="248" width="15" height="6" rx="2" transform="rotate(35 205 248)" fill="#FACC15" />
+    <rect x="222" y="256" width="13" height="5" rx="2" fill="#FFFFFF" />
+  </g>
+</svg>
