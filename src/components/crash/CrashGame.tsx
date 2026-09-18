@@ -24,6 +24,8 @@ export const CrashGame: React.FC = () => {
   const stateRef = useRef<'idle' | 'running' | 'crashed' | 'cashed_out'>('idle');
   const multRef = useRef<number>(1.00);
   const crashPointRef = useRef<number>(2.00);
+  const finalDurationRef = useRef<number>(0);
+  const isStartingRef = useRef<boolean>(false);
   const particlesRef = useRef<Array<{ x: number; y: number; vx: number; vy: number; life: number; color: string }>>([]);
 
   useEffect(() => {
@@ -43,7 +45,13 @@ export const CrashGame: React.FC = () => {
   };
 
   const handleStartRound = () => {
-    if (gameState === 'running') return;
+    // Synchronous guard against button spamming
+    if (stateRef.current === 'running' || isStartingRef.current) return;
+    isStartingRef.current = true;
+    setTimeout(() => {
+      isStartingRef.current = false;
+    }, 200);
+
     if (balance < betDc) {
       useGameStore.getState().setRefillOpen(true);
       return;
@@ -61,15 +69,24 @@ export const CrashGame: React.FC = () => {
     stateRef.current = 'running';
     setGameState('running');
     startTimeRef.current = performance.now();
+    finalDurationRef.current = 0;
     particlesRef.current = [];
 
+    if (requestRef.current) {
+      cancelAnimationFrame(requestRef.current);
+      requestRef.current = null;
+    }
+
     const tick = (now: number) => {
-      const elapsed = (now - startTimeRef.current) / 1000;
-      // Smooth exponential growth: 1 + 0.08 * t^1.85
-      const current = Number((1.00 + 0.08 * Math.pow(elapsed * 1.5, 1.85)).toFixed(2));
+      if (stateRef.current !== 'running') return;
+
+      const elapsed = Math.max(0, (now - startTimeRef.current) / 1000);
+      // Smooth exponential growth: 1 + 0.08 * t^1.85 (guarantee non-negative input to Math.pow)
+      const current = Number((1.00 + 0.08 * Math.pow(Math.max(0, elapsed * 1.5), 1.85)).toFixed(2));
 
       if (current >= crashPointRef.current) {
         const finalPoint = crashPointRef.current;
+        finalDurationRef.current = elapsed;
         multRef.current = finalPoint;
         setMultiplier(finalPoint);
         stateRef.current = 'crashed';
@@ -91,6 +108,7 @@ export const CrashGame: React.FC = () => {
             color: Math.random() > 0.4 ? '#EF4444' : '#FACC15',
           });
         }
+        requestRef.current = null;
         return;
       }
 
@@ -99,13 +117,18 @@ export const CrashGame: React.FC = () => {
       requestRef.current = requestAnimationFrame(tick);
     };
 
-    if (requestRef.current) cancelAnimationFrame(requestRef.current);
     requestRef.current = requestAnimationFrame(tick);
   };
 
   const handleCashout = () => {
-    if (gameState !== 'running') return;
-    if (requestRef.current) cancelAnimationFrame(requestRef.current);
+    if (stateRef.current !== 'running') return;
+    if (requestRef.current) {
+      cancelAnimationFrame(requestRef.current);
+      requestRef.current = null;
+    }
+
+    const finalElapsed = Math.max(0.01, (performance.now() - startTimeRef.current) / 1000);
+    finalDurationRef.current = finalElapsed;
 
     const winAmount = Math.floor(betDc * multRef.current);
     addBalance(winAmount);
@@ -131,185 +154,212 @@ export const CrashGame: React.FC = () => {
   // Continuous Canvas Render Loop (60 FPS smooth graphics)
   useEffect(() => {
     let animId: number;
+    let isMounted = true;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     const render = () => {
-      const width = canvas.width;
-      const height = canvas.height;
-      ctx.clearRect(0, 0, width, height);
+      if (!isMounted) return;
 
-      const padLeft = 50;
-      const padBottom = 40;
-      const padTop = 30;
-      const padRight = 50;
-      const plotW = width - padLeft - padRight;
-      const plotH = height - padBottom - padTop;
+      try {
+        const width = canvas.width || 800;
+        const height = canvas.height || 384;
+        if (width <= 0 || height <= 0) return;
 
-      const currentMult = multRef.current;
-      const st = stateRef.current;
+        ctx.save();
+        ctx.clearRect(0, 0, width, height);
 
-      // Dynamic scales
-      const maxM = Math.max(2.0, currentMult * 1.25);
-      const elapsed = st === 'running' || st === 'crashed' || st === 'cashed_out'
-        ? Math.max(0.1, (performance.now() - startTimeRef.current) / 1000)
-        : 1.0;
-      const maxT = Math.max(4.0, elapsed * 1.25);
+        const padLeft = 50;
+        const padBottom = 40;
+        const padTop = 30;
+        const padRight = 50;
+        const plotW = width - padLeft - padRight;
+        const plotH = height - padBottom - padTop;
 
-      // Draw horizontal multiplier grid lines
-      const gridLevels = [1.5, 2.0, 5.0, 10.0, 25.0, 50.0, 100.0];
-      ctx.lineWidth = 1;
-      ctx.font = '10px monospace';
-      ctx.textAlign = 'right';
-      ctx.textBaseline = 'middle';
+        const currentMult = Math.max(1.0, multRef.current || 1.0);
+        const st = stateRef.current;
 
-      gridLevels.forEach((lvl) => {
-        if (lvl <= maxM) {
-          const y = height - padBottom - ((lvl - 1) / (maxM - 1)) * plotH;
-          if (y >= padTop && y <= height - padBottom) {
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
-            ctx.beginPath();
-            ctx.moveTo(padLeft, y);
-            ctx.lineTo(width - padRight, y);
-            ctx.stroke();
+        // Dynamic scales: freeze elapsed when round finishes
+        const elapsed = st === 'running'
+          ? Math.max(0.01, (performance.now() - startTimeRef.current) / 1000)
+          : st === 'crashed' || st === 'cashed_out'
+          ? Math.max(0.01, finalDurationRef.current || (performance.now() - startTimeRef.current) / 1000)
+          : 1.0;
+        const maxM = Math.max(2.0, currentMult * 1.25);
+        const maxT = Math.max(4.0, elapsed * 1.25);
 
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
-            ctx.fillText(`${lvl}x`, padLeft - 8, y);
-          }
-        }
-      });
+        // Draw horizontal multiplier grid lines
+        const gridLevels = [1.5, 2.0, 5.0, 10.0, 25.0, 50.0, 100.0];
+        ctx.lineWidth = 1;
+        ctx.font = '10px monospace';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'middle';
 
-      // Bottom baseline axis
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.moveTo(padLeft, height - padBottom);
-      ctx.lineTo(width - padRight, height - padBottom);
-      ctx.stroke();
-
-      if (st !== 'idle') {
-        // Build trajectory points
-        const points: Array<{ x: number; y: number }> = [];
-        const steps = 60;
-        for (let i = 0; i <= steps; i++) {
-          const t = (i / steps) * elapsed;
-          const m = 1.00 + 0.08 * Math.pow(t * 1.5, 1.85);
-          const clampedM = Math.min(m, currentMult);
-
-          const px = padLeft + (t / maxT) * plotW;
-          const py = height - padBottom - ((clampedM - 1) / (maxM - 1)) * plotH;
-          points.push({ x: px, y: py });
-        }
-
-        if (points.length > 1) {
-          const endPt = points[points.length - 1];
-
-          // Fill under curve
-          ctx.beginPath();
-          ctx.moveTo(padLeft, height - padBottom);
-          for (let pt of points) {
-            ctx.lineTo(pt.x, pt.y);
-          }
-          ctx.lineTo(endPt.x, height - padBottom);
-          ctx.closePath();
-
-          const fillGrad = ctx.createLinearGradient(0, endPt.y, 0, height - padBottom);
-          if (st === 'crashed') {
-            fillGrad.addColorStop(0, 'rgba(239, 68, 68, 0.25)');
-            fillGrad.addColorStop(1, 'rgba(239, 68, 68, 0.0)');
-          } else {
-            fillGrad.addColorStop(0, 'rgba(250, 204, 21, 0.25)');
-            fillGrad.addColorStop(1, 'rgba(250, 204, 21, 0.0)');
-          }
-          ctx.fillStyle = fillGrad;
-          ctx.fill();
-
-          // Stroke trajectory curve
-          ctx.beginPath();
-          ctx.moveTo(points[0].x, points[0].y);
-          for (let i = 1; i < points.length; i++) {
-            ctx.lineTo(points[i].x, points[i].y);
-          }
-          ctx.strokeStyle = st === 'crashed' ? '#EF4444' : '#FACC15';
-          ctx.lineWidth = 4;
-          ctx.lineCap = 'round';
-          ctx.lineJoin = 'round';
-          ctx.stroke();
-
-          // Rocket / Orb head
-          if (st === 'running') {
-            // Spawn flame trail particle
-            if (Math.random() < 0.6) {
-              particlesRef.current.push({
-                x: endPt.x,
-                y: endPt.y,
-                vx: -Math.random() * 3 - 1,
-                vy: Math.random() * 2 - 1,
-                life: 0.8,
-                color: Math.random() > 0.3 ? '#FACC15' : '#FFFFFF',
-              });
-            }
-
-            // Glowing rocket head
-            ctx.shadowColor = '#FACC15';
-            ctx.shadowBlur = 15;
-            ctx.fillStyle = '#FFFFFF';
-            ctx.beginPath();
-            ctx.arc(endPt.x, endPt.y, 6, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.fillStyle = '#FACC15';
-            ctx.beginPath();
-            ctx.arc(endPt.x, endPt.y, 9, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.shadowBlur = 0;
-          } else if (st === 'crashed') {
-            ctx.fillStyle = '#EF4444';
-            ctx.beginPath();
-            ctx.arc(endPt.x, endPt.y, 8, 0, Math.PI * 2);
-            ctx.fill();
-          } else if (st === 'cashed_out') {
-            ctx.fillStyle = '#10B981';
-            ctx.beginPath();
-            ctx.arc(endPt.x, endPt.y, 8, 0, Math.PI * 2);
-            ctx.fill();
-          }
-
-          // Render & update particles
-          const currentParticles = particlesRef.current;
-          for (let i = currentParticles.length - 1; i >= 0; i--) {
-            const p = currentParticles[i];
-            p.x += p.vx;
-            p.y += p.vy;
-            p.life -= 0.02;
-
-            if (p.life <= 0) {
-              currentParticles.splice(i, 1);
-            } else {
-              ctx.fillStyle = p.color;
-              ctx.globalAlpha = p.life;
+        gridLevels.forEach((lvl) => {
+          if (lvl <= maxM) {
+            const y = height - padBottom - ((lvl - 1) / (maxM - 1)) * plotH;
+            if (y >= padTop && y <= height - padBottom) {
+              ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
               ctx.beginPath();
-              ctx.arc(
-                (st === 'crashed' ? endPt.x : 0) + p.x,
-                (st === 'crashed' ? endPt.y : 0) + p.y,
-                st === 'crashed' ? 3 : 2,
-                0,
-                Math.PI * 2
-              );
-              ctx.fill();
-              ctx.globalAlpha = 1.0;
+              ctx.moveTo(padLeft, y);
+              ctx.lineTo(width - padRight, y);
+              ctx.stroke();
+
+              ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+              ctx.fillText(`${lvl}x`, padLeft - 8, y);
             }
           }
+        });
+
+        // Bottom baseline axis
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(padLeft, height - padBottom);
+        ctx.lineTo(width - padRight, height - padBottom);
+        ctx.stroke();
+
+        if (st !== 'idle') {
+          // Build trajectory points safely
+          const points: Array<{ x: number; y: number }> = [];
+          const steps = 60;
+          for (let i = 0; i <= steps; i++) {
+            const t = Math.max(0, (i / steps) * elapsed);
+            const m = 1.00 + 0.08 * Math.pow(Math.max(0, t * 1.5), 1.85);
+            const clampedM = Math.min(m, currentMult);
+
+            const px = padLeft + (t / maxT) * plotW;
+            const py = height - padBottom - ((clampedM - 1) / (maxM - 1)) * plotH;
+            if (Number.isFinite(px) && Number.isFinite(py)) {
+              points.push({ x: px, y: py });
+            }
+          }
+
+          if (points.length > 1) {
+            const endPt = points[points.length - 1];
+
+            // Fill under curve
+            ctx.beginPath();
+            ctx.moveTo(padLeft, height - padBottom);
+            for (let pt of points) {
+              ctx.lineTo(pt.x, pt.y);
+            }
+            ctx.lineTo(endPt.x, height - padBottom);
+            ctx.closePath();
+
+            // Guard: ensure top and bottom y are never equal to avoid zero-length gradient crash
+            const gradTop = Math.min(endPt.y, height - padBottom - 1);
+            const fillGrad = ctx.createLinearGradient(0, gradTop, 0, height - padBottom);
+            if (st === 'crashed') {
+              fillGrad.addColorStop(0, 'rgba(239, 68, 68, 0.25)');
+              fillGrad.addColorStop(1, 'rgba(239, 68, 68, 0.0)');
+            } else {
+              fillGrad.addColorStop(0, 'rgba(250, 204, 21, 0.25)');
+              fillGrad.addColorStop(1, 'rgba(250, 204, 21, 0.0)');
+            }
+            ctx.fillStyle = fillGrad;
+            ctx.fill();
+
+            // Stroke trajectory curve
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, points[0].y);
+            for (let i = 1; i < points.length; i++) {
+              ctx.lineTo(points[i].x, points[i].y);
+            }
+            ctx.strokeStyle = st === 'crashed' ? '#EF4444' : '#FACC15';
+            ctx.lineWidth = 4;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+
+            // Rocket / Orb head
+            if (st === 'running') {
+              // Spawn flame trail particle
+              if (Math.random() < 0.6) {
+                particlesRef.current.push({
+                  x: endPt.x,
+                  y: endPt.y,
+                  vx: -Math.random() * 3 - 1,
+                  vy: Math.random() * 2 - 1,
+                  life: 0.8,
+                  color: Math.random() > 0.3 ? '#FACC15' : '#FFFFFF',
+                });
+              }
+
+              // Glowing rocket head
+              ctx.shadowColor = '#FACC15';
+              ctx.shadowBlur = 15;
+              ctx.fillStyle = '#FFFFFF';
+              ctx.beginPath();
+              ctx.arc(endPt.x, endPt.y, 6, 0, Math.PI * 2);
+              ctx.fill();
+
+              ctx.fillStyle = '#FACC15';
+              ctx.beginPath();
+              ctx.arc(endPt.x, endPt.y, 9, 0, Math.PI * 2);
+              ctx.stroke();
+              ctx.shadowBlur = 0;
+            } else if (st === 'crashed') {
+              ctx.fillStyle = '#EF4444';
+              ctx.beginPath();
+              ctx.arc(endPt.x, endPt.y, 8, 0, Math.PI * 2);
+              ctx.fill();
+            } else if (st === 'cashed_out') {
+              ctx.fillStyle = '#10B981';
+              ctx.beginPath();
+              ctx.arc(endPt.x, endPt.y, 8, 0, Math.PI * 2);
+              ctx.fill();
+            }
+
+            // Render & update particles
+            const currentParticles = particlesRef.current;
+            for (let i = currentParticles.length - 1; i >= 0; i--) {
+              const p = currentParticles[i];
+              p.x += p.vx;
+              p.y += p.vy;
+              p.life -= 0.02;
+
+              if (p.life <= 0) {
+                currentParticles.splice(i, 1);
+              } else {
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = Math.max(0, Math.min(1, p.life));
+                ctx.beginPath();
+                const partX = (st === 'crashed' ? endPt.x : 0) + p.x;
+                const partY = (st === 'crashed' ? endPt.y : 0) + p.y;
+                if (Number.isFinite(partX) && Number.isFinite(partY)) {
+                  ctx.arc(
+                    partX,
+                    partY,
+                    st === 'crashed' ? 3 : 2,
+                    0,
+                    Math.PI * 2
+                  );
+                  ctx.fill();
+                }
+                ctx.globalAlpha = 1.0;
+              }
+            }
+          }
+        }
+
+        ctx.restore();
+      } catch (err) {
+        console.error('Crash render error:', err);
+      } finally {
+        if (isMounted) {
+          animId = requestAnimationFrame(render);
         }
       }
-
-      animId = requestAnimationFrame(render);
     };
 
     animId = requestAnimationFrame(render);
-    return () => cancelAnimationFrame(animId);
+    return () => {
+      isMounted = false;
+      cancelAnimationFrame(animId);
+    };
   }, []);
 
   return (

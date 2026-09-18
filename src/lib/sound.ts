@@ -155,12 +155,12 @@ class SoundController {
     const gain = ctx.createGain();
 
     osc.type = 'sine';
-    osc.frequency.setValueAtTime(85, now);
-    osc.frequency.exponentialRampToValueAtTime(220, now + 0.15);
-    osc.frequency.exponentialRampToValueAtTime(110, now + 0.45);
+    osc.frequency.setValueAtTime(55, now);
+    osc.frequency.exponentialRampToValueAtTime(145, now + 0.14);
+    osc.frequency.exponentialRampToValueAtTime(70, now + 0.45);
 
     gain.gain.setValueAtTime(0.001, now);
-    gain.gain.linearRampToValueAtTime(0.07, now + 0.04);
+    gain.gain.linearRampToValueAtTime(0.20, now + 0.04);
     gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
 
     osc.connect(gain);
@@ -178,19 +178,19 @@ class SoundController {
     const now = ctx.currentTime;
     const jitter = 0.95 + Math.random() * 0.1;
 
-    // 1. Crisp mechanical transient (Peg click / snap)
+    // 1. Deep mechanical transient clack (lowered from 2200Hz to ~800-1200Hz, louder)
     const noiseBuf = this.getNoiseBuffer(ctx);
     const noiseSrc = ctx.createBufferSource();
     noiseSrc.buffer = noiseBuf;
 
     const filter = ctx.createBiquadFilter();
     filter.type = 'bandpass';
-    filter.frequency.setValueAtTime((2200 - clamped * 750) * jitter, now);
-    filter.Q.setValueAtTime(2.6, now);
+    filter.frequency.setValueAtTime((1150 - clamped * 450) * jitter, now);
+    filter.Q.setValueAtTime(2.2, now);
 
     const noiseGain = ctx.createGain();
-    const noiseDuration = 0.005 + (1 - clamped) * 0.004;
-    const noiseVol = 0.07 + clamped * 0.035;
+    const noiseDuration = 0.007 + (1 - clamped) * 0.005;
+    const noiseVol = 0.22 + clamped * 0.10;
     noiseGain.gain.setValueAtTime(noiseVol, now);
     noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + noiseDuration);
 
@@ -200,25 +200,44 @@ class SoundController {
     noiseSrc.start(now);
     noiseSrc.stop(now + noiseDuration + 0.005);
 
-    // 2. Tactile wooden/acrylic wheel body resonance ("thock")
+    // 2. Heavy low body resonance thud (Triangle at 165Hz -> 75Hz)
     const osc = ctx.createOscillator();
     const oscGain = ctx.createGain();
 
     osc.type = 'triangle';
-    const baseFreq = (290 - clamped * 130) * jitter;
+    const baseFreq = (165 - clamped * 70) * jitter;
     osc.frequency.setValueAtTime(baseFreq, now);
-    osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.45, now + 0.04);
+    osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.45, now + 0.05);
 
-    const bodyVol = 0.07 + clamped * 0.05;
-    const bodyDuration = 0.022 + clamped * 0.026;
+    const bodyVol = 0.28 + clamped * 0.14;
+    const bodyDuration = 0.036 + clamped * 0.036;
     oscGain.gain.setValueAtTime(0.001, now);
-    oscGain.gain.linearRampToValueAtTime(bodyVol, now + 0.002);
+    oscGain.gain.linearRampToValueAtTime(bodyVol, now + 0.003);
     oscGain.gain.exponentialRampToValueAtTime(0.0001, now + bodyDuration);
 
     osc.connect(oscGain);
     oscGain.connect(ctx.destination);
     osc.start(now);
     osc.stop(now + bodyDuration + 0.01);
+
+    // 3. Sub-bass punch layer (Sine at 88Hz -> 42Hz) for deep visceral impact
+    const subOsc = ctx.createOscillator();
+    const subGain = ctx.createGain();
+
+    subOsc.type = 'sine';
+    const subFreq = (88 - clamped * 30) * jitter;
+    subOsc.frequency.setValueAtTime(subFreq, now);
+    subOsc.frequency.exponentialRampToValueAtTime(42, now + 0.055);
+
+    const subVol = 0.22 + clamped * 0.10;
+    subGain.gain.setValueAtTime(0.001, now);
+    subGain.gain.linearRampToValueAtTime(subVol, now + 0.003);
+    subGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
+
+    subOsc.connect(subGain);
+    subGain.connect(ctx.destination);
+    subOsc.start(now);
+    subOsc.stop(now + 0.065);
   }
 
   public playConsolation(isPotion: boolean = false) {
