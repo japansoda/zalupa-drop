@@ -147,7 +147,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const chance = useMemo(() => {
     if (!targetSkin || targetSkin.priceDc <= 0 || effectiveBetDc <= 0) return 0;
     const raw = (effectiveBetDc / targetSkin.priceDc) * 95;
-    return Math.min(95, Math.max(1, Number(raw.toFixed(1))));
+    return Math.min(95, Math.max(0.01, Number(raw.toFixed(2))));
   }, [effectiveBetDc, targetSkin]);
 
   // Risk label
@@ -156,6 +156,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     if (chance >= 50) return { text: 'Высокий шанс', color: '#10B981' };
     if (chance >= 25) return { text: 'Средний шанс', color: '#FACC15' };
     if (chance >= 10) return { text: 'Рискованный шанс', color: '#FB923C' };
+    if (chance >= 1) return { text: 'Низкий шанс', color: '#F87171' };
     return { text: 'Экстремальный шанс', color: '#EF4444' };
   }, [chance]);
 
@@ -190,6 +191,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
   // Preset buttons
   const presets = [
+    { label: '0.01%', chance: 0.01 },
+    { label: '1%', chance: 1.0 },
     { label: '1.5x', chance: 63.3 },
     { label: '2x', chance: 47.5 },
     { label: '5x', chance: 19.0 },
@@ -440,7 +443,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   // Circular gauge constants
   const gaugeR = 100;
   const gaugeC = 2 * Math.PI * gaugeR;
-  const arcLen = (chance / 100) * gaugeC;
+  const arcLen = Math.max(1, (chance / 100) * gaugeC);
   const rotateDeg = 90 - (chance * 1.8);
 
   const targetConfig = targetSkin ? RARITY_CONFIG[targetSkin.rarity] || RARITY_CONFIG.milspec : RARITY_CONFIG.milspec;
@@ -712,7 +715,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               {/* Center Display Hub */}
               <div className="relative z-10 w-40 h-40 rounded-full bg-[#0a0a0f] border-4 border-[#1f212e] flex flex-col items-center justify-center text-center shadow-inner">
                 <span className="font-mono font-black text-4xl sm:text-5xl text-white tracking-tight">
-                  {chance.toFixed(1)}%
+                  {chance < 1 ? chance.toFixed(2) : chance.toFixed(1)}%
                 </span>
                 <span
                   className="text-[11px] font-bold mt-1 max-w-[120px] leading-tight"
