@@ -2,6 +2,7 @@
 class SoundController {
   private ctx: AudioContext | null = null;
   private noiseBuffer: AudioBuffer | null = null;
+  private activeWhooshNodes: { stop: () => void } | null = null;
   public enabled: boolean = true;
 
   private getContext(): AudioContext | null {
@@ -145,28 +146,113 @@ class SoundController {
     osc.stop(ctx.currentTime + 0.45);
   }
 
-  public playSpinStart() {
+  public startSpinWhoosh(duration: number = 4.2) {
     if (!this.enabled) return;
     const ctx = this.getContext();
     if (!ctx) return;
 
+    this.stopSpinWhoosh();
+
     const now = ctx.currentTime;
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
+    const bufferSize = Math.floor(ctx.sampleRate * (duration + 0.5));
+    const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const output = noiseBuffer.getChannelData(0);
 
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(55, now);
-    osc.frequency.exponentialRampToValueAtTime(145, now + 0.14);
-    osc.frequency.exponentialRampToValueAtTime(70, now + 0.45);
+    // Warm Brownian-tinted noise for smooth aerodynamic wind texture (not harsh or crackling)
+    let lastOut = 0.0;
+    for (let i = 0; i < bufferSize; i++) {
+      const white = Math.random() * 2 - 1;
+      output[i] = (lastOut + 0.03 * white) / 1.03;
+      lastOut = output[i];
+      output[i] *= 3.8;
+    }
 
-    gain.gain.setValueAtTime(0.001, now);
-    gain.gain.linearRampToValueAtTime(0.20, now + 0.04);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
+    const noiseSource = ctx.createBufferSource();
+    noiseSource.buffer = noiseBuffer;
 
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.start(now);
-    osc.stop(now + 0.48);
+    // 1. Sweeping Lowpass filter (Wind rush)
+    const lpFilter = ctx.createBiquadFilter();
+    lpFilter.type = 'lowpass';
+    lpFilter.Q.setValueAtTime(2.5, now);
+    lpFilter.frequency.setValueAtTime(220, now);
+    lpFilter.frequency.exponentialRampToValueAtTime(880, now + 0.4);
+    lpFilter.frequency.setValueAtTime(850, now + 2.0);
+    lpFilter.frequency.exponentialRampToValueAtTime(140, now + duration);
+
+    // 2. Resonant Bandpass filter (Gives the distinct hollow "WHOOSH" body)
+    const bpFilter = ctx.createBiquadFilter();
+    bpFilter.type = 'bandpass';
+    bpFilter.Q.setValueAtTime(3.0, now);
+    bpFilter.frequency.setValueAtTime(260, now);
+    bpFilter.frequency.exponentialRampToValueAtTime(650, now + 0.45);
+    bpFilter.frequency.setValueAtTime(600, now + 2.0);
+    bpFilter.frequency.exponentialRampToValueAtTime(180, now + duration);
+
+    // 3. Sub-bass Wind Body (Low air displacement)
+    const subOsc = ctx.createOscillator();
+    subOsc.type = 'sine';
+    subOsc.frequency.setValueAtTime(65, now);
+    subOsc.frequency.exponentialRampToValueAtTime(120, now + 0.4);
+    subOsc.frequency.setValueAtTime(105, now + 2.0);
+    subOsc.frequency.exponentialRampToValueAtTime(45, now + duration);
+
+    const subGain = ctx.createGain();
+    subGain.gain.setValueAtTime(0.001, now);
+    subGain.gain.linearRampToValueAtTime(0.20, now + 0.35);
+    subGain.gain.setValueAtTime(0.18, now + 2.2);
+    subGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+    subOsc.connect(subGain);
+    subGain.connect(ctx.destination);
+
+    // Master Whoosh Volume Envelope
+    const masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(0.001, now);
+    masterGain.gain.linearRampToValueAtTime(0.35, now + 0.32); // Powerful, smooth whoosh surge
+    masterGain.gain.setValueAtTime(0.30, now + 2.2);
+    masterGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+    noiseSource.connect(lpFilter);
+    lpFilter.connect(masterGain);
+
+    noiseSource.connect(bpFilter);
+    bpFilter.connect(masterGain);
+
+    masterGain.connect(ctx.destination);
+
+    noiseSource.start(now);
+    subOsc.start(now);
+    noiseSource.stop(now + duration + 0.1);
+    subOsc.stop(now + duration + 0.1);
+
+    this.activeWhooshNodes = {
+      stop: () => {
+        try {
+          const stopTime = ctx.currentTime;
+          masterGain.gain.cancelScheduledValues(stopTime);
+          masterGain.gain.linearRampToValueAtTime(0.0001, stopTime + 0.08);
+          subGain.gain.cancelScheduledValues(stopTime);
+          subGain.gain.linearRampToValueAtTime(0.0001, stopTime + 0.08);
+          setTimeout(() => {
+            try {
+              noiseSource.stop();
+              subOsc.stop();
+            } catch {}
+          }, 90);
+        } catch {}
+      }
+    };
+  }
+
+  public stopSpinWhoosh() {
+    if (this.activeWhooshNodes) {
+      this.activeWhooshNodes.stop();
+      this.activeWhooshNodes = null;
+    }
+  }
+
+  public playSpinStart() {
+    this.startSpinWhoosh(4.2);
   }
 
   public playUpgradeSpin(progress: number = 0.5) {
@@ -174,70 +260,33 @@ class SoundController {
     const ctx = this.getContext();
     if (!ctx) return;
 
+    // Smooth individual whoosh gust if invoked directly
     const clamped = Math.max(0, Math.min(1, progress));
     const now = ctx.currentTime;
-    const jitter = 0.95 + Math.random() * 0.1;
+    const dur = 0.22 + (1 - clamped) * 0.12;
 
-    // 1. Deep mechanical transient clack (lowered from 2200Hz to ~800-1200Hz, louder)
     const noiseBuf = this.getNoiseBuffer(ctx);
     const noiseSrc = ctx.createBufferSource();
     noiseSrc.buffer = noiseBuf;
 
     const filter = ctx.createBiquadFilter();
-    filter.type = 'bandpass';
-    filter.frequency.setValueAtTime((1150 - clamped * 450) * jitter, now);
+    filter.type = 'lowpass';
     filter.Q.setValueAtTime(2.2, now);
+    filter.frequency.setValueAtTime(200, now);
+    filter.frequency.exponentialRampToValueAtTime(650 - clamped * 250, now + dur * 0.5);
+    filter.frequency.exponentialRampToValueAtTime(150, now + dur);
 
-    const noiseGain = ctx.createGain();
-    const noiseDuration = 0.007 + (1 - clamped) * 0.005;
-    const noiseVol = 0.22 + clamped * 0.10;
-    noiseGain.gain.setValueAtTime(noiseVol, now);
-    noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + noiseDuration);
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.linearRampToValueAtTime(0.22, now + dur * 0.4);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
 
     noiseSrc.connect(filter);
-    filter.connect(noiseGain);
-    noiseGain.connect(ctx.destination);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+
     noiseSrc.start(now);
-    noiseSrc.stop(now + noiseDuration + 0.005);
-
-    // 2. Heavy low body resonance thud (Triangle at 165Hz -> 75Hz)
-    const osc = ctx.createOscillator();
-    const oscGain = ctx.createGain();
-
-    osc.type = 'triangle';
-    const baseFreq = (165 - clamped * 70) * jitter;
-    osc.frequency.setValueAtTime(baseFreq, now);
-    osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.45, now + 0.05);
-
-    const bodyVol = 0.28 + clamped * 0.14;
-    const bodyDuration = 0.036 + clamped * 0.036;
-    oscGain.gain.setValueAtTime(0.001, now);
-    oscGain.gain.linearRampToValueAtTime(bodyVol, now + 0.003);
-    oscGain.gain.exponentialRampToValueAtTime(0.0001, now + bodyDuration);
-
-    osc.connect(oscGain);
-    oscGain.connect(ctx.destination);
-    osc.start(now);
-    osc.stop(now + bodyDuration + 0.01);
-
-    // 3. Sub-bass punch layer (Sine at 88Hz -> 42Hz) for deep visceral impact
-    const subOsc = ctx.createOscillator();
-    const subGain = ctx.createGain();
-
-    subOsc.type = 'sine';
-    const subFreq = (88 - clamped * 30) * jitter;
-    subOsc.frequency.setValueAtTime(subFreq, now);
-    subOsc.frequency.exponentialRampToValueAtTime(42, now + 0.055);
-
-    const subVol = 0.22 + clamped * 0.10;
-    subGain.gain.setValueAtTime(0.001, now);
-    subGain.gain.linearRampToValueAtTime(subVol, now + 0.003);
-    subGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
-
-    subOsc.connect(subGain);
-    subGain.connect(ctx.destination);
-    subOsc.start(now);
-    subOsc.stop(now + 0.065);
+    noiseSrc.stop(now + dur + 0.02);
   }
 
   public playConsolation(isPotion: boolean = false) {

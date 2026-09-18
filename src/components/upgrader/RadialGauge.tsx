@@ -417,28 +417,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     const totalRotation = 360 * 5 + targetAngle;
     const duration = 4.2;
 
-    // Mechanical wheel launch sound
-    sound.playSpinStart();
-    const startTime = performance.now();
-    let animId: number;
-    let lastTickTime = 0;
-
-    const tickLoop = () => {
-      const now = performance.now();
-      const elapsed = (now - startTime) / 1000;
-      if (elapsed >= duration) return;
-
-      const progress = elapsed / duration;
-      // Interval decelerates smoothly from 38ms to 320ms matching needle deceleration
-      const currentInterval = 38 + Math.pow(progress, 2.2) * 280;
-
-      if (now - lastTickTime >= currentInterval) {
-        sound.playUpgradeSpin(progress);
-        lastTickTime = now;
-      }
-      animId = requestAnimationFrame(tickLoop);
-    };
-    animId = requestAnimationFrame(tickLoop);
+    // Aerodynamic continuous WHOOSH spin sound (no crackling clicks)
+    sound.startSpinWhoosh(duration);
 
     await needleControls.set({ rotate: 0 });
     await needleControls.start({
@@ -449,7 +429,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       },
     });
 
-    cancelAnimationFrame(animId);
+    sound.stopSpinWhoosh();
     setIsUpgrading(false);
 
     // Consume 1 potion charge if active
