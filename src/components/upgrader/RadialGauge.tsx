@@ -57,6 +57,18 @@ export const matchesCatalogType = (skin: SkinEntity, type: string): boolean => {
   return true;
 };
 
+export const isActualWeapon = (skin: SkinEntity): boolean => {
+  const w = (skin.weapon || '').toLowerCase();
+  const n = (skin.name || '').toLowerCase();
+  if (w === 'sticker' || w === 'наклейка' || n.startsWith('sticker |') || n.startsWith('наклейка |')) return false;
+  if (w === 'charm' || w === 'брелок' || n.startsWith('charm |') || n.startsWith('брелок |')) return false;
+  if (w === 'agent' || w === 'оперативник' || n.startsWith('agent |')) return false;
+  if (w === 'patch' || n.startsWith('patch |')) return false;
+  if (w.includes('music kit') || n.includes('music kit')) return false;
+  if (w.includes('pin') || n.includes('pin |')) return false;
+  return true;
+};
+
 const ITEM_TYPES = [
   { id: 'all', label: 'Все типы' },
   { id: 'knives', label: '★ Ножи' },
@@ -184,47 +196,47 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     }
     if (candidates.length === 0) return;
 
+    // Filter out stickers/charms/agents from default general auto-upgrades
+    if (typeToMatch === 'all') {
+      const weaponOnly = candidates.filter(isActualWeapon);
+      if (weaponOnly.length > 0) candidates = weaponOnly;
+    }
+
     // Ideal target price based on 95% RTP
     const idealPrice = Math.min(maxTargetPrice, (currentBet / (desiredChance / 100)) * 0.95);
 
     // Knife Priority:
-    // When knives appear (idealPrice >= 35,000 DC or closest knife provides viable chance within range),
-    // KNIVES MUST BE PROPOSED IN THE FIRST PLACE!
+    // When knives appear (idealPrice >= 35,000 DC or user specifically filtered knives or bet allows knife)
     const knifeCandidates = candidates.filter((s) => matchesCatalogType(s, 'knives'));
-    if (knifeCandidates.length > 0) {
-      let bestKnife = knifeCandidates[0];
-      let bestKnifeDiff = Math.abs(knifeCandidates[0].priceDc - idealPrice);
-      for (const k of knifeCandidates) {
-        const diff = Math.abs(k.priceDc - idealPrice);
-        if (diff < bestKnifeDiff) {
-          bestKnifeDiff = diff;
-          bestKnife = k;
-        }
-      }
+    const shouldTargetKnife =
+      knifeCandidates.length > 0 &&
+      (typeToMatch === 'knives' ||
+        idealPrice >= 35000 ||
+        (currentBet >= 15000 && (currentBet / 40320) * 95 >= desiredChance * 0.5));
 
-      const knifeChance = (currentBet / bestKnife.priceDc) * 95;
-      const chanceRatio = knifeChance / desiredChance;
-      // If target price is in knife range (>= 35,000 DC) OR knife chance is reasonably close to desired chance:
-      // ALWAYS pick the knife first!
-      if (idealPrice >= 35000 || (chanceRatio >= 0.35 && chanceRatio <= 2.5 && knifeChance >= 0.4)) {
-        setTargetSkin(bestKnife);
+    if (shouldTargetKnife) {
+      // Sort knives by distance to idealPrice
+      const sortedKnives = [...knifeCandidates].sort(
+        (a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice)
+      );
+      // Pick among top diverse knives close to idealPrice (diverse knives, not just one Doppler)
+      const topKnives = sortedKnives.slice(0, 10);
+      const picked = topKnives[Math.floor(Math.random() * Math.min(5, topKnives.length))];
+      if (picked) {
+        setTargetSkin(picked);
         return;
       }
     }
 
-    // Fallback: If price is too low for knives yet (budget bet), find closest item across candidates
-    let closest = candidates[0];
-    let minDiff = Math.abs(candidates[0].priceDc - idealPrice);
-
-    for (const s of candidates) {
-      const diff = Math.abs(s.priceDc - idealPrice);
-      if (diff < minDiff) {
-        minDiff = diff;
-        closest = s;
-      }
+    // Regular weapons pool (guns, rifles, snipers, pistols, etc.)
+    const sortedWeapons = [...candidates].sort(
+      (a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice)
+    );
+    const topWeapons = sortedWeapons.slice(0, 8);
+    const picked = topWeapons[Math.floor(Math.random() * Math.min(4, topWeapons.length))];
+    if (picked) {
+      setTargetSkin(picked);
     }
-
-    setTargetSkin(closest);
   };
 
   // Initial load or item selection changes
@@ -462,10 +474,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
       if (shouldTriggerConsolation) {
         // 1. Зелье удачи (Контрабанда): ОЧЕНЬ РЕДКО, и ТОЛЬКО если сумма проигрыша >= 10 000 DC!
-        // Шанс плавно растет от 1.5% (при 10к) до 5% (при 80к+)
+        // Шанс плавно растет от 1.0% (при 10к) до 3% (при 100к+)
         let awardedPotion = false;
         if (currentLostAmount >= 10000) {
-          const potionChance = Math.min(0.05, 0.015 + ((currentLostAmount - 10000) / 100000) * 0.04);
+          const potionChance = Math.min(0.03, 0.01 + ((currentLostAmount - 10000) / 200000) * 0.02);
           if (Math.random() < potionChance) {
             awardedPotion = true;
           }
@@ -484,26 +496,38 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           const isCasePrize = rollType < 0.76;
 
           if (isCasePrize) {
-            // КЕЙС: Выбираем кейс с тиром под сумму проигрыша
+            // КЕЙС: Выбираем дешевый кейс (кешбэк 10-12% от суммы проигрыша, максимум 2 500 DC)
             const casesList = allCasesJson as CaseItem[];
             const validCases = casesList.filter((c) => c.skins && c.skins.length > 0);
 
-            let casePool: CaseItem[];
-            if (currentLostAmount < 3000) {
-              casePool = validCases.filter((c) => c.priceDc <= 2000);
-            } else if (currentLostAmount < 15000) {
-              casePool = validCases.filter((c) => c.priceDc <= 6000);
-            } else if (currentLostAmount < 40000) {
-              casePool = validCases.filter((c) => c.priceDc <= 15000);
-            } else {
-              casePool = validCases.filter((c) => c.priceDc > 10000);
+            const maxCasePrice = Math.min(2500, Math.max(300, Math.floor(currentLostAmount * 0.12)));
+            // Предпочитаем оружейные кейсы (не капсулы и не сувенирные наборы за 100k+)
+            let casePool = validCases.filter(
+              (c) => c.priceDc <= maxCasePrice && !c.name.includes('Capsule') && !c.name.includes('Package')
+            );
+            if (casePool.length === 0) {
+              casePool = validCases.filter((c) => c.priceDc <= maxCasePrice);
+            }
+            if (casePool.length === 0) {
+              casePool = validCases.filter((c) => c.priceDc <= 1000);
             }
 
-            if (casePool.length === 0) casePool = validCases;
             const selectedCase = casePool[Math.floor(Math.random() * casePool.length)];
 
             if (selectedCase && selectedCase.skins.length > 0) {
-              const cashbackDrop = selectedCase.skins[Math.floor(Math.random() * selectedCase.skins.length)];
+              // КЕШБЭК НЕ ДОЛЖЕН ОКУПАТЬ АПГРЕЙД!
+              // Дроп со скина составляет скромную долю от проигрыша (до 15% от проигранной суммы)
+              const maxDropPrice = Math.max(30, Math.floor(currentLostAmount * 0.15));
+              let candidateSkins = selectedCase.skins.filter((s) => s.priceDc <= maxDropPrice);
+              if (candidateSkins.length === 0) {
+                const cheapest = selectedCase.skins.reduce(
+                  (min, s) => (s.priceDc < min.priceDc ? s : min),
+                  selectedCase.skins[0]
+                );
+                candidateSkins = [cheapest];
+              }
+
+              const cashbackDrop = candidateSkins[Math.floor(Math.random() * candidateSkins.length)];
               setCashbackModal({
                 isOpen: true,
                 caseItem: selectedCase,
@@ -575,20 +599,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       return true;
     });
 
-    result.sort((a, b) => {
-      if (catalogType === 'all') {
-        const aIsKnife = matchesCatalogType(a, 'knives');
-        const bIsKnife = matchesCatalogType(b, 'knives');
-        if (aIsKnife !== bIsKnife) {
-          const maxP = Math.max(a.priceDc, b.priceDc);
-          const diff = Math.abs(a.priceDc - b.priceDc);
-          if (maxP >= 38000 && diff / maxP < 0.25) {
-            return aIsKnife ? -1 : 1;
-          }
-        }
-      }
-      return catalogSort === 'asc' ? a.priceDc - b.priceDc : b.priceDc - a.priceDc;
-    });
+    result.sort((a, b) => (catalogSort === 'asc' ? a.priceDc - b.priceDc : b.priceDc - a.priceDc));
     return result;
   }, [catalogSkins, catalogSearch, catalogRarity, catalogType, catalogSort, effectiveBetDc, maxTargetPrice]);
 
