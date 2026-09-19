@@ -14,6 +14,8 @@ import { CASES_DATABASE } from '../../../data/cases';
 import { sound } from '../../../lib/sound';
 import { useLanguage } from '../../../lib/i18n';
 import { ArrowLeft, ShieldCheck } from 'lucide-react';
+import { CaseSpecialItemCard } from '../../../components/case/CaseSpecialItemCard';
+import { isOfficialCase, getCaseKnifePool, isKnifeOrGlove } from '../../../lib/caseSpecials';
 
 export default function CaseOpenPage() {
   const params = useParams();
@@ -22,10 +24,21 @@ export default function CaseOpenPage() {
 
   const currentCase = CASES_DATABASE.find((c) => c.id === caseId);
 
+  const isOfficial = Boolean(currentCase && isOfficialCase(currentCase.id, currentCase.category));
+  const knifePool = React.useMemo(() => {
+    if (!currentCase || !isOfficial) return [];
+    return getCaseKnifePool(currentCase.id);
+  }, [currentCase, isOfficial]);
+
   const groupedSkins = React.useMemo(() => {
     if (!currentCase?.skins) return [];
+    // For official cases: knives are unified into the special item card
+    const sourceSkins = isOfficial
+      ? currentCase.skins.filter((s) => !isKnifeOrGlove(s))
+      : currentCase.skins;
+
     const map = new Map<string, typeof currentCase.skins>();
-    for (const skin of currentCase.skins) {
+    for (const skin of sourceSkins) {
       const key = `${skin.weapon || ''}___${skin.skinName || skin.name}`;
       if (!map.has(key)) {
         map.set(key, []);
@@ -33,7 +46,7 @@ export default function CaseOpenPage() {
       map.get(key)!.push(skin);
     }
     return Array.from(map.values());
-  }, [currentCase]);
+  }, [currentCase, isOfficial]);
 
   if (!currentCase) {
     return (
@@ -109,12 +122,15 @@ export default function CaseOpenPage() {
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-yellow-400" />
               <h2 className="text-xl font-black text-white uppercase tracking-tight">
-                {t('case.contents')} ({groupedSkins.length} {t('home.items')})
+                {t('case.contents')} ({groupedSkins.length + (isOfficial ? 1 : 0)} {t('home.items')})
               </h2>
             </div>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {isOfficial && (
+              <CaseSpecialItemCard caseId={currentCase.id} knifePool={knifePool} />
+            )}
             {groupedSkins.map((variants, idx) => (
               <CaseSkinGroupCard key={variants[0]?.id || idx} variants={variants} />
             ))}

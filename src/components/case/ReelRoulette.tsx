@@ -11,6 +11,7 @@ import { WearBadge } from '../ui/WearBadge';
 import { useGameStore } from '../../store/useGameStore';
 import { Zap, Layers } from 'lucide-react';
 import { useLanguage } from '../../lib/i18n';
+import { isKnifeOrGlove, isOfficialCase, rollSpecialKnifeDrop } from '../../lib/caseSpecials';
 
 interface ReelRouletteProps {
   caseId?: string;
@@ -29,6 +30,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
   const { t, locale } = useLanguage();
   const [openCount, setOpenCount] = useState<1 | 2 | 3>(1);
   const [isSpinning, setIsSpinning] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
   const [fastOpen, setFastOpen] = useState(false);
 
   // Up to 3 reels
@@ -47,17 +49,6 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
   const lastSoundTickPos = useRef<number>(0);
 
   const pickWeightedSkin = (): SkinEntity => {
-    const isKnifeOrGlove = (s: SkinEntity) =>
-      s.rarity === 'gold' ||
-      s.rarity === 'extraordinary' ||
-      (s.weapon &&
-        (s.weapon.includes('Knife') ||
-          s.weapon.includes('Bayonet') ||
-          s.weapon.includes('Karambit') ||
-          s.weapon.includes('Daggers') ||
-          s.weapon.includes('Gloves') ||
-          s.weapon.includes('Wraps')));
-
     // 1. Exact 10% knife cases
     if (caseId === 'case_10_knife' || caseName.includes('10% Нож')) {
       const knives = caseSkins.filter(isKnifeOrGlove);
@@ -68,10 +59,14 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       const totalW = weights.reduce((a, b) => a + b, 0);
       let rnd = Math.random() * totalW;
       for (let i = 0; i < caseSkins.length; i++) {
-        if (rnd <= weights[i]) return caseSkins[i];
+        if (rnd <= weights[i]) {
+          const sel = caseSkins[i];
+          return caseId && isOfficialCase(caseId) && isKnifeOrGlove(sel) ? rollSpecialKnifeDrop(caseId) : sel;
+        }
         rnd -= weights[i];
       }
-      return caseSkins[caseSkins.length - 1];
+      const last = caseSkins[caseSkins.length - 1];
+      return caseId && isOfficialCase(caseId) && isKnifeOrGlove(last) ? rollSpecialKnifeDrop(caseId) : last;
     }
 
     // 2. Exact 50% knife cases
@@ -84,10 +79,14 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       const totalW = weights.reduce((a, b) => a + b, 0);
       let rnd = Math.random() * totalW;
       for (let i = 0; i < caseSkins.length; i++) {
-        if (rnd <= weights[i]) return caseSkins[i];
+        if (rnd <= weights[i]) {
+          const sel = caseSkins[i];
+          return caseId && isOfficialCase(caseId) && isKnifeOrGlove(sel) ? rollSpecialKnifeDrop(caseId) : sel;
+        }
         rnd -= weights[i];
       }
-      return caseSkins[caseSkins.length - 1];
+      const last = caseSkins[caseSkins.length - 1];
+      return caseId && isOfficialCase(caseId) && isKnifeOrGlove(last) ? rollSpecialKnifeDrop(caseId) : last;
     }
 
     // 3. Guaranteed 98.0% RTP for ALL cases:
@@ -130,11 +129,20 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
 
     const totalW = weights.reduce((a, b) => a + b, 0);
     let rnd = Math.random() * totalW;
+    let selected = caseSkins[caseSkins.length - 1];
     for (let i = 0; i < caseSkins.length; i++) {
-      if (rnd <= weights[i]) return caseSkins[i];
+      if (rnd <= weights[i]) {
+        selected = caseSkins[i];
+        break;
+      }
       rnd -= weights[i];
     }
-    return caseSkins[caseSkins.length - 1];
+
+    if (caseId && isOfficialCase(caseId) && isKnifeOrGlove(selected)) {
+      return rollSpecialKnifeDrop(caseId);
+    }
+
+    return selected;
   };
 
   const generateReel = (winner: SkinEntity): SkinEntity[] => {
@@ -175,6 +183,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
 
     sound.playClick();
     setIsSpinning(true);
+    setIsRevealed(false);
     setShowModal(false);
 
     // Roll bonus consumables for each opened case
@@ -209,6 +218,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
 
     if (fastOpen) {
       setTimeout(() => {
+        setIsRevealed(true);
         // Play single win sound of highest rarity
         const highestWinner = winners.reduce((prev, curr) => {
           const rank = (s: SkinEntity) =>
@@ -290,6 +300,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
 
     await Promise.all(animPromises);
     cancelAnimationFrame(rafId);
+    setIsRevealed(true);
 
     // Single win sound of highest rarity
     const highestWinner = winners.reduce((prev, curr) => {
@@ -358,11 +369,28 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
                 }}
               >
                 {(reels[reelIdx] || []).map((skin, idx) => {
-                  const config = RARITY_CONFIG[skin.rarity] || RARITY_CONFIG.milspec;
+                  const isOfficial = Boolean(caseId && isOfficialCase(caseId));
+                  const isKnife = isKnifeOrGlove(skin);
+                  const isWinSlot = idx === WIN_INDEX;
+
+                  // In official cases: knives on the tape appear as the gold Special Item
+                  // and reveal the actual dropped knife once the spin completes
+                  const showAsSpecial = isOfficial && isKnife && (!isWinSlot || !isRevealed);
+
+                  const displayRarity = showAsSpecial ? 'gold' : skin.rarity;
+                  const config = RARITY_CONFIG[displayRarity] || RARITY_CONFIG.milspec;
+                  const displayImage = showAsSpecial ? '/images/special_item.png' : skin.image;
+                  const displayWeapon = showAsSpecial ? '★' : skin.weapon;
+                  const displaySkinName = showAsSpecial ? 'Редкий особый предмет' : skin.skinName;
+
                   return (
                     <div
                       key={`${skin.id}_${idx}`}
-                      className="relative rounded-2xl bg-[#11121a] border border-white/10 shrink-0 flex flex-col items-center justify-between p-3 select-none overflow-hidden"
+                      className={`relative rounded-2xl bg-[#11121a] border shrink-0 flex flex-col items-center justify-between p-3 select-none overflow-hidden transition-all ${
+                        showAsSpecial
+                          ? 'border-yellow-400/50 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
+                          : 'border-white/10'
+                      }`}
                       style={{
                         width: `${ITEM_WIDTH}px`,
                         height: openCount > 1 ? '180px' : '210px',
@@ -373,33 +401,40 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
                     >
                       <div className="w-full flex justify-between items-center z-10">
                         <div className="flex items-center gap-1">
-                          {skin.statTrak && (
+                          {!showAsSpecial && skin.statTrak && (
                             <span className="text-[9px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40">
                               ST
                             </span>
                           )}
-                          <WearBadge skin={skin} size="xs" />
+                          {!showAsSpecial && <WearBadge skin={skin} size="xs" />}
+                          {showAsSpecial && (
+                            <span className="text-[8.5px] font-black text-yellow-300 bg-yellow-500/20 px-1 py-0.5 rounded border border-yellow-500/30">
+                              ★
+                            </span>
+                          )}
                         </div>
                         <span
                           className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full"
                           style={{ color: config.color, backgroundColor: config.bg }}
                         >
-                          {config.label}
+                          {showAsSpecial ? '★ РЕДКИЙ ОСОБЫЙ' : config.label}
                         </span>
                       </div>
 
                       <div className={`relative ${openCount > 1 ? 'w-24 h-24' : 'w-28 h-28'} my-auto flex items-center justify-center z-10`}>
                         <img
-                          src={skin.image}
-                          alt={skin.name}
+                          src={displayImage}
+                          alt={displayWeapon}
                           referrerPolicy="no-referrer"
-                          className="w-full h-full object-contain filter drop-shadow-md"
+                          className={`w-full h-full object-contain filter drop-shadow-md ${
+                            showAsSpecial ? 'drop-shadow-[0_0_12px_rgba(250,204,21,0.6)]' : ''
+                          }`}
                         />
                       </div>
 
                       <div className="w-full text-center z-10">
-                        <p className="text-xs font-bold text-white truncate">{skin.weapon}</p>
-                        <p className="text-[11px] truncate" style={{ color: config.color }}>{skin.skinName}</p>
+                        <p className="text-xs font-bold text-white truncate">{displayWeapon}</p>
+                        <p className="text-[11px] truncate font-semibold" style={{ color: config.color }}>{displaySkinName}</p>
                       </div>
                     </div>
                   );
