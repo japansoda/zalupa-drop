@@ -255,8 +255,18 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     return Math.min(80, Math.max(0.01, Number(raw.toFixed(2))));
   }, [effectiveBetDc, targetSkin]);
 
-  // Luck Potion bonus (+15% to chance if charges active)
-  const potionBonus = activePotionCharges > 0 && targetSkin && effectiveBetDc > 0 ? 15 : 0;
+  // If 80% is reached without potion, the potion is NOT used and charges are saved
+  const isBaseAtMax = baseChance >= 79.95;
+
+  // Potion is only eligible & used if base chance is below 80%
+  const isPotionUsed = activePotionCharges > 0 && targetSkin !== null && effectiveBetDc > 0 && !isBaseAtMax;
+
+  // Luck Potion bonus (+15% max, but strictly clamped so total chance and potion bar never exceed 80%)
+  const potionBonus = useMemo(() => {
+    if (!isPotionUsed) return 0;
+    const remainingTo80 = Number((80 - baseChance).toFixed(2));
+    return Math.min(15, Math.max(0, remainingTo80));
+  }, [isPotionUsed, baseChance]);
 
   // Total chance displayed and used for roll (strictly max 80% with potion included)
   const chance = useMemo(() => {
@@ -383,6 +393,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     setIsUpgrading(true);
     setLastResult(null);
 
+    // Save whether potion was actually used to boost this roll
+    const potionWasUsed = isPotionUsed && potionBonus > 0;
+
     // Math: Winning sector is centered at bottom (90 deg)
     const span = chance * 3.6;
     const halfSpan = span / 2;
@@ -415,8 +428,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     sound.stopSpinWhoosh();
     setIsUpgrading(false);
 
-    // Consume 1 potion charge if active
-    if (activePotionCharges > 0) {
+    // Consume 1 potion charge ONLY IF potion was actually used
+    if (potionWasUsed) {
       consumePotionCharge();
     }
 
@@ -594,10 +607,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     const leftSpan = halfPotion * 3.6;
     const rightSpan = halfPotion * 3.6;
 
-    // 4 bubbles strictly in left wing
-    const leftFractions = [0.2, 0.45, 0.7, 0.9];
-    const leftOffsets = [-3, 2, -1, 3];
-    const leftSizes = [2.8, 3.4, 2.2, 3.0];
+    // Adjust bubble count according to wing size so small wings don't overcrowd
+    const countPerWing = potionBonus < 4 ? 2 : potionBonus < 8 ? 3 : 4;
+    const leftFractions = [0.2, 0.45, 0.7, 0.9].slice(0, countPerWing);
+    const leftOffsets = [-3, 2, -1, 3].slice(0, countPerWing);
+    const leftSizes = [2.8, 3.4, 2.2, 3.0].slice(0, countPerWing);
     const delays = ['0s', '0.6s', '1.2s', '1.8s', '0.3s', '0.9s', '1.5s', '2.1s'];
     const durations = ['2.2s', '2.6s', '2.0s', '2.8s', '2.4s', '2.1s', '2.7s', '2.3s'];
     const colors = ['#6ee7b7', '#34d399', '#a7f3d0', '#10b981'];
@@ -617,10 +631,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       });
     });
 
-    // 4 bubbles strictly in right wing
-    const rightFractions = [0.15, 0.4, 0.65, 0.88];
-    const rightOffsets = [3, -2, 2, -3];
-    const rightSizes = [3.2, 2.4, 3.5, 2.0];
+    // Bubbles strictly in right wing
+    const rightFractions = [0.15, 0.4, 0.65, 0.88].slice(0, countPerWing);
+    const rightOffsets = [3, -2, 2, -3].slice(0, countPerWing);
+    const rightSizes = [3.2, 2.4, 3.5, 2.0].slice(0, countPerWing);
 
     rightFractions.forEach((frac, idx) => {
       const angle = rightWingStartDeg + frac * rightSpan;
@@ -1092,9 +1106,15 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 <span className="font-mono font-black text-4xl sm:text-5xl text-white tracking-tight">
                   {chance < 1 ? chance.toFixed(2) : chance.toFixed(1)}%
                 </span>
-                {activePotionCharges > 0 ? (
+                {activePotionCharges > 0 && isPotionUsed && potionBonus > 0 ? (
                   <div className="flex items-center gap-1 mt-1 px-2.5 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500 text-[10px] font-black text-emerald-300 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]">
-                    <span>{t('upg.potionBadge')} ({activePotionCharges}/3)</span>
+                    <span>
+                      🧪 +{potionBonus % 1 === 0 ? potionBonus.toFixed(0) : potionBonus.toFixed(1)}% {locale === 'ru' ? 'Зелье' : 'Potion'} ({activePotionCharges}/3)
+                    </span>
+                  </div>
+                ) : activePotionCharges > 0 && isBaseAtMax ? (
+                  <div className="flex items-center gap-1 mt-1 px-2.5 py-0.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-[9px] font-bold text-emerald-400/80 shadow-[0_0_8px_rgba(16,185,129,0.2)]">
+                    <span>{t('upg.potionSaved')} ({activePotionCharges}/3)</span>
                   </div>
                 ) : (
                   <span

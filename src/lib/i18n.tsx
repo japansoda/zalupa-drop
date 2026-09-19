@@ -133,6 +133,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'upg.targetCatalog': 'Каталог для апгрейда',
     'upg.searchCatalog': 'Поиск по каталогу скинов...',
     'upg.potionBadge': '🧪 +15% Зелье',
+    'upg.potionSaved': '🧪 Зелье сохранено',
     // Risk labels
     'risk.veryHigh': 'Очень высокий шанс',
     'risk.high': 'Высокий шанс',
@@ -400,6 +401,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'upg.targetCatalog': 'Upgrade catalog',
     'upg.searchCatalog': 'Search skin catalog...',
     'upg.potionBadge': '🧪 +15% Potion',
+    'upg.potionSaved': '🧪 Potion saved',
     // Risk labels
     'risk.veryHigh': 'Very high chance',
     'risk.high': 'High chance',
