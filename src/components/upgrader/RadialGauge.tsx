@@ -442,15 +442,17 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       addToInventory([targetSkin]);
       recordUpgrade(true, targetSkin.priceDc - effectiveBetDc);
 
-      // Emit real drop to live drops ticker
-      addLiveDrop({
-        id: `upgrade_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
-        user: 'Вы',
-        avatar: '',
-        skin: targetSkin,
-        caseName: locale === 'ru' ? 'Апгрейдер' : 'Upgrader',
-        timestamp: Date.now(),
-      });
+      // Emit real drop to live drops ticker (expensive items only)
+      if (targetSkin.priceDc >= 750 || targetSkin.rarity === 'covert' || targetSkin.rarity === 'gold' || targetSkin.rarity === 'extraordinary') {
+        addLiveDrop({
+          id: `upgrade_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+          user: 'Вы',
+          avatar: '',
+          skin: targetSkin,
+          caseName: locale === 'ru' ? 'Апгрейдер' : 'Upgrader',
+          timestamp: Date.now(),
+        });
+      }
 
       confetti({
         particleCount: 130,

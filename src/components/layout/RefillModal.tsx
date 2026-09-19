@@ -114,17 +114,17 @@ export const RefillModal: React.FC = () => {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.94, opacity: 0 }}
         transition={{ duration: 0.16 }}
-        className="relative w-full max-w-3xl glass-panel rounded-3xl border border-yellow-400/30 p-5 sm:p-6 shadow-[0_0_60px_rgba(0,0,0,0.95)] overflow-hidden"
+        className="relative w-full max-w-3xl glass-panel rounded-3xl border border-yellow-400/30 p-5 sm:p-6 shadow-[0_0_60px_rgba(0,0,0,0.95)] max-h-[90vh] overflow-y-auto no-scrollbar"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Success Splash Notification */}
+        {/* Success Splash Notification (Bottom) */}
         <AnimatePresence>
           {successAnimation !== null && (
             <motion.div
-              initial={{ opacity: 0, y: -12 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              className="absolute inset-x-6 top-4 z-30 p-3 rounded-2xl bg-emerald-950/95 border border-emerald-400 flex items-center justify-center gap-2 shadow-2xl"
+              exit={{ opacity: 0, y: 16 }}
+              className="absolute inset-x-6 bottom-4 z-30 p-3 rounded-2xl bg-emerald-950/95 border border-emerald-400 flex items-center justify-center gap-2 shadow-2xl"
             >
               <Sparkles className="w-5 h-5 text-emerald-400 animate-spin" />
               <span className="text-emerald-300 font-black text-sm font-mono">
@@ -250,11 +250,6 @@ export const RefillModal: React.FC = () => {
               {totalTokensOwned} шт.
             </div>
           </button>
-        </div>
-
-        {/* Minimal Muted Footer Note */}
-        <div className="text-[10px] text-white/30 text-center font-mono pt-2 border-t border-white/5">
-          ⚡ Виртуальный демо-баланс для открытия кейсов, контрактов и апгрейдера (без реальных денег)
         </div>
       </motion.div>
     </div>

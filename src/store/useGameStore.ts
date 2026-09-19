@@ -154,9 +154,20 @@ export const useGameStore = create<GameState>()(
       },
 
       addLiveDrop: (drop) => {
-        set((state) => ({
-          liveDrops: [drop, ...state.liveDrops.slice(0, 19)],
-        }));
+        set((state) => {
+          if (state.liveDrops.some((d) => d.id === drop.id)) return state;
+          return {
+            liveDrops: [drop, ...state.liveDrops.slice(0, 24)],
+          };
+        });
+
+        if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
+          try {
+            const bc = new BroadcastChannel('zalupa_live_drops');
+            bc.postMessage(drop);
+            bc.close();
+          } catch (_) {}
+        }
       },
 
       toggleSound: () => {

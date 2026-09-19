@@ -199,15 +199,17 @@ export const TradeUpContract: React.FC = () => {
       // Add won item
       addToInventory([pickedSkin]);
 
-      // Add to live drop feed
-      addLiveDrop({
-        id: `contract_${Date.now()}`,
-        user: 'Вы (Контракт)',
-        avatar: 'https://avatars.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg',
-        skin: pickedSkin,
-        caseName: 'Контракт обмена CS2',
-        timestamp: Date.now(),
-      });
+      // Add to live drop feed (expensive items only)
+      if (pickedSkin.priceDc >= 750 || pickedSkin.rarity === 'covert' || pickedSkin.rarity === 'gold' || pickedSkin.rarity === 'extraordinary') {
+        addLiveDrop({
+          id: `contract_${Date.now()}`,
+          user: 'Вы',
+          avatar: '',
+          skin: pickedSkin,
+          caseName: 'Контракт CS2',
+          timestamp: Date.now(),
+        });
+      }
 
       setWonSkin(pickedSkin);
       setShowWinModal(true);

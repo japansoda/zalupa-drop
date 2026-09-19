@@ -17,8 +17,8 @@ export interface SkinEntity {
   weapon: string;
   skinName: string;
   rarity: SkinRarity;
-  wear: SkinWear;
-  wearLabel: string;
+  wear?: SkinWear;
+  wearLabel?: string;
   image: string;
   priceUsd: number;
   priceDc: number;

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { LanguageProvider } from "../lib/i18n";
 import { HorizontalScrollManager } from "../components/layout/HorizontalScrollManager";
+import { MobileNav } from "../components/layout/MobileNav";
 
 export const metadata: Metadata = {
   title: "ZALUPA DROP — CS2 Кейс Симулятор & Liquid Glass",
@@ -18,10 +19,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className="dark">
-      <body className="min-h-screen bg-[#090a10] text-[#e2e8f0] antialiased selection:bg-purple-600 selection:text-white">
+      <body className="min-h-screen bg-[#090a10] text-[#e2e8f0] antialiased selection:bg-purple-600 selection:text-white pb-20 md:pb-0">
         <LanguageProvider>
           <HorizontalScrollManager />
           {children}
+          <MobileNav />
         </LanguageProvider>
       </body>
     </html>

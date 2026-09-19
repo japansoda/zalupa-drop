@@ -123,34 +123,6 @@ export const Header: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Mobile Nav Bar */}
-      <div className="md:hidden flex items-center justify-around border-t border-white/5 bg-black/60 py-2 px-2">
-        {navLinks.map((item) => {
-          const Icon = item.icon;
-          const isActive = pathname === item.href;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => sound.playClick()}
-              className={`flex flex-col items-center gap-1 py-1 px-3 rounded-lg text-xs font-bold transition-all ${
-                isActive ? 'text-yellow-400' : 'text-white/50'
-              }`}
-            >
-              <div className="relative">
-                <Icon className="w-4 h-4" />
-                {item.count !== undefined && item.count > 0 && (
-                  <span className="absolute -top-1 -right-2 w-3.5 h-3.5 rounded-full bg-yellow-400 text-black text-[9px] flex items-center justify-center font-black">
-                    {item.count}
-                  </span>
-                )}
-              </div>
-              <span>{item.label}</span>
-            </Link>
-          );
-        })}
-      </div>
     </header>
   );
 };

@@ -11,8 +11,9 @@ import { WearBadge } from '../ui/WearBadge';
 import { useGameStore } from '../../store/useGameStore';
 import { Zap, Layers } from 'lucide-react';
 import { useLanguage } from '../../lib/i18n';
-import { isKnifeOrGlove, isOfficialCase, rollSpecialKnifeDrop } from '../../lib/caseSpecials';
+import { isOfficialCase, isKnifeOrGlove, rollSpecialKnifeDrop } from '../../lib/caseSpecials';
 import { isStatTrakableItem } from '../../lib/steam';
+import { rollWearAndStatTrak } from '../../lib/dropRoll';
 
 interface ReelRouletteProps {
   caseId?: string;
@@ -201,7 +202,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       if (i === WIN_INDEX) {
         list.push(winner);
       } else {
-        list.push(pickVisualTapeSkin(caseSkins));
+        list.push(rollWearAndStatTrak(pickVisualTapeSkin(caseSkins)));
       }
     }
     return list;
@@ -212,9 +213,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     const initial1: SkinEntity[] = [];
     const initial2: SkinEntity[] = [];
     for (let i = 0; i < REEL_SIZE; i++) {
-      initial0.push(pickVisualTapeSkin(caseSkins));
-      initial1.push(pickVisualTapeSkin(caseSkins));
-      initial2.push(pickVisualTapeSkin(caseSkins));
+      initial0.push(rollWearAndStatTrak(pickVisualTapeSkin(caseSkins)));
+      initial1.push(rollWearAndStatTrak(pickVisualTapeSkin(caseSkins)));
+      initial2.push(rollWearAndStatTrak(pickVisualTapeSkin(caseSkins)));
     }
     setReels([initial0, initial1, initial2]);
   }, [caseSkins]);
@@ -252,10 +253,11 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     }
     setBonusConsumables({ tokens: droppedTokens, potions: droppedPotions });
 
-    // Pick winners for each reel
+    // Pick winners for each reel and roll wear & StatTrak
     const winners: SkinEntity[] = [];
     for (let i = 0; i < openCount; i++) {
-      winners.push(pickWeightedSkin());
+      const baseSkin = pickWeightedSkin();
+      winners.push(rollWearAndStatTrak(baseSkin));
     }
     setWinningSkins(winners);
 
@@ -295,15 +297,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     const startTime = Date.now();
     lastSoundTickPos.current = 0;
 
-    // SINGLE sound tick loop - sound DOES NOT stack!
-    const jitter0 = (Math.random() - 0.5) * (ITEM_WIDTH * 0.7);
-    const targetX0 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset + jitter0);
-
-    const jitter1 = (Math.random() - 0.5) * (ITEM_WIDTH * 0.7);
-    const targetX1 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset + jitter1);
-
-    const jitter2 = (Math.random() - 0.5) * (ITEM_WIDTH * 0.7);
-    const targetX2 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset + jitter2);
+    // Perfect centering without jitter so all 1, 2, or 3 reels align dead center under the arrow
+    const targetX0 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset);
+    const targetX1 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset);
+    const targetX2 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset);
 
     let rafId: number;
     const updateSoundTick = () => {
@@ -363,16 +360,18 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     setIsSpinning(false);
     setShowModal(true);
 
-    // Immediately emit real drops to live ticker on unbox completion
+    // Immediately emit real drops to live ticker (only expensive/valuable items)
     winners.forEach((skin) => {
-      addLiveDrop({
-        id: `real_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
-        user: 'Вы',
-        avatar: '',
-        skin: skin,
-        caseName: caseName,
-        timestamp: Date.now(),
-      });
+      if (skin.priceDc >= 750 || skin.rarity === 'covert' || skin.rarity === 'gold' || skin.rarity === 'extraordinary') {
+        addLiveDrop({
+          id: `real_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+          user: 'Вы',
+          avatar: '',
+          skin: skin,
+          caseName: caseName,
+          timestamp: Date.now(),
+        });
+      }
     });
   };
 
@@ -410,7 +409,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
             className="relative w-full rounded-3xl p-3 glass-panel border border-white/10 shadow-2xl overflow-hidden"
           >
             {/* Center Winner Indicator */}
-            <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 z-30 pointer-events-none flex flex-col justify-between items-center py-1">
+            <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-6 z-30 pointer-events-none flex flex-col justify-between items-center py-0.5">
               <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[14px] border-t-yellow-400 filter drop-shadow-[0_0_10px_#facc15]" />
               <div className="w-[2px] h-full bg-yellow-400 opacity-90 shadow-[0_0_12px_#facc15]" />
               <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[14px] border-b-yellow-400 filter drop-shadow-[0_0_10px_#facc15]" />
