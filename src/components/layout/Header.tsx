@@ -93,8 +93,15 @@ export const Header: React.FC = () => {
             {soundEnabled ? <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-400" /> : <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/30" />}
           </button>
 
-          {/* Balance Widget */}
-          <div className="flex items-center glass-panel rounded-xl pl-2.5 pr-1 py-1 sm:pl-3.5 sm:pr-1.5 sm:py-1.5 border border-white/10 gap-1.5 sm:gap-3 shrink-0">
+          {/* Balance Widget: on mobile tapping balance opens refill modal */}
+          <div 
+            onClick={() => {
+              sound.playClick();
+              setRefillOpen(true);
+            }}
+            title={t('nav.topup.title')}
+            className="flex items-center glass-panel rounded-xl px-2.5 sm:pl-3.5 sm:pr-1.5 py-1 sm:py-1.5 border border-white/10 gap-1.5 sm:gap-3 shrink-0 cursor-pointer sm:cursor-default active:scale-95 sm:active:scale-100 transition-all"
+          >
             <div className="flex items-center gap-1 sm:gap-1.5">
               <DropCoinIcon size={18} />
               <div className="flex flex-col text-right leading-none">
@@ -107,18 +114,19 @@ export const Header: React.FC = () => {
               </div>
             </div>
 
-            {/* Free Demo Refill Button */}
+            {/* Free Demo Refill Button (Desktop only, hidden on mobile) */}
             <button
               type="button"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 sound.playClick();
                 setRefillOpen(true);
               }}
               title={t('nav.topup.title')}
-              className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg btn-yellow text-xs font-black flex items-center gap-1 cursor-pointer active:scale-95 shrink-0"
+              className="hidden sm:flex px-3 py-1.5 rounded-lg btn-yellow text-xs font-black items-center gap-1 cursor-pointer active:scale-95 shrink-0"
             >
               <Plus className="w-3.5 h-3.5 stroke-[3]" />
-              <span className="hidden sm:inline">{t('nav.topup')}</span>
+              <span>{t('nav.topup')}</span>
             </button>
           </div>
         </div>

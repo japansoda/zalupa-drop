@@ -41,43 +41,6 @@ interface GameState {
   consumePotionCharge: () => boolean;
 }
 
-const INITIAL_SKIN_IDS = [
-  'skin-4f8d99d09ded', // AWP | Dragon Lore
-  'skin-8aacf99e7f2f', // M4A4 | Howl
-  'skin-2599a8720f89', // AK-47 | Fire Serpent
-  'skin-d466b1683b88', // ★ Bayonet | Doppler
-  'skin-25bbf8e641c1', // ★ Specialist Gloves | Fade
-  'skin-b14c9f234bc5', // AK-47 | Vulcan
-  'skin-5a39103af835', // AWP | Printstream
-  'skin-921a5a81c48a', // AK-47 | Wild Lotus
-];
-
-const INITIAL_CASES = [
-  'Кейс «Революция»',
-  'Грёзы и кошмары',
-  'Кейс «Легенда Howl»',
-  'Кейс «Галактика Допплер»',
-  'Кейс «Хранилище Перчаток»',
-  'Кейс «Дикий Лотос»',
-  'Кейс «Градиентный Раш»',
-  'Kilowatt Case',
-];
-
-const buildInitialDrops = (): LiveDrop[] => {
-  const now = Date.now();
-  return INITIAL_SKIN_IDS.map((id, index) => {
-    const skin = SKINS_DATABASE.find((s) => s.id === id) || SKINS_DATABASE[index * 40] || SKINS_DATABASE[0];
-    return {
-      id: `fake_init_${index + 1}`,
-      user: '',
-      avatar: '',
-      skin,
-      caseName: INITIAL_CASES[index % INITIAL_CASES.length],
-      timestamp: now - (index + 1) * 32000,
-    };
-  });
-};
-
 export const useGameStore = create<GameState>()(
   persist(
     (set, get) => ({
@@ -99,7 +62,7 @@ export const useGameStore = create<GameState>()(
         upgradesLost: 0,
         crashWonDc: 0,
       },
-      liveDrops: buildInitialDrops(),
+      liveDrops: [],
 
       addBalance: (amount) => {
         set((state) => ({ balance: Math.max(0, state.balance + Math.floor(amount)) }));
@@ -166,10 +129,13 @@ export const useGameStore = create<GameState>()(
       },
 
       addLiveDrop: (drop) => {
+        // Strictly only drops >= 100,000 DC can enter live drop ticker
+        if (!drop || !drop.skin || (drop.skin.priceDc || 0) < 100000) return;
+
         set((state) => {
           if (state.liveDrops.some((d) => d.id === drop.id)) return state;
           return {
-            liveDrops: [drop, ...state.liveDrops.slice(0, 14)],
+            liveDrops: [drop, ...state.liveDrops.slice(0, 19)],
           };
         });
 

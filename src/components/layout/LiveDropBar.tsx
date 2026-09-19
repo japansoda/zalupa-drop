@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useEffect, useRef, useState, useMemo, memo } from 'react';
+import React, { useEffect, useState, useMemo, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '../../store/useGameStore';
 import { SKINS_DATABASE, RARITY_CONFIG } from '../../data/skins';
 import { LiveDrop } from '../../lib/types';
 import { useLanguage } from '../../lib/i18n';
-import { handleHorizontalWheel } from './HorizontalScrollManager';
-import { DropCoinIcon } from '../ui/DropCoinIcon';
+
+const BLEND_WINDOW_MS = 3 * 60 * 1000; // 3 minutes dynamic window
 
 const SIMULATED_CASES = [
   'Кейс «Революция»',
@@ -75,7 +75,7 @@ const LiveDropCard = memo(({ drop, isUser, locale }: CardProps) => {
           >
             {drop.skin.weapon}
           </span>
-          {/* ONLY show tag for user's own drop, NO OTHER TAGS allowed */}
+          {/* ONLY show tag for user's own drop (which is strictly >= 100k) */}
           {isUser && (
             <span className="text-[8px] font-black uppercase px-1.5 py-0.5 rounded bg-yellow-400 text-black shrink-0 tracking-tighter">
               {locale === 'ru' ? 'ВЫ' : 'YOU'}
@@ -102,21 +102,36 @@ export const LiveDropBar: React.FC = () => {
   const { liveDrops, addLiveDrop } = useGameStore();
   const { t, locale } = useLanguage();
 
-  // Timestamp of the latest real player drop
-  const lastRealDropRef = useRef<number>(Date.now());
+  // Clock tick to update 3-minute window expiration
+  const [nowTick, setNowTick] = useState<number>(() => Date.now());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setNowTick(Date.now());
+    }, 10000); // Check expiration every 10s
+    return () => clearInterval(timer);
+  }, []);
 
   // Filter pool: strictly firearms & knives >= 100,000 DC (NO STICKERS, NO CHARMS, NO DUPLICATE GLOVES)
   const expensiveWeapons = useMemo(() => {
     return SKINS_DATABASE.filter((s) => {
-      const w = (s.weapon || '').toLowerCase();
-      if (w === 'sticker' || w === 'charm' || w === 'patch' || w.includes('наклейка') || w.includes('брелок')) return false;
-      // Filter out low tier/placeholder items
-      if (s.name.includes('Spruce DDPAT')) return false;
-      return s.priceDc >= 100000 || s.rarity === 'gold' || s.rarity === 'covert';
+      if (!s || !s.image || !s.weapon) return false;
+      const w = s.weapon.toLowerCase();
+      if (
+        w.includes('sticker') ||
+        w.includes('charm') ||
+        w.includes('patch') ||
+        w.includes('наклейка') ||
+        w.includes('брелок') ||
+        s.name.includes('Spruce DDPAT')
+      ) {
+        return false;
+      }
+      return s.priceDc >= 100000;
     });
   }, []);
 
-  // Sync real drops from other tabs/users: ONLY if >= 100,000 coins and within current time (<60s ago)
+  // Sync real drops from other tabs/users: ONLY if >= 100,000 coins and within 3-minute window
   useEffect(() => {
     if (typeof window === 'undefined' || !('BroadcastChannel' in window)) return;
     try {
@@ -127,9 +142,8 @@ export const LiveDropBar: React.FC = () => {
           drop &&
           drop.skin &&
           drop.skin.priceDc >= 100000 &&
-          Math.abs(Date.now() - (drop.timestamp || 0)) < 60000
+          Date.now() - (drop.timestamp || 0) < BLEND_WINDOW_MS
         ) {
-          lastRealDropRef.current = Date.now();
           addLiveDrop({ ...drop, id: `net_${drop.id}` });
         }
       };
@@ -139,77 +153,73 @@ export const LiveDropBar: React.FC = () => {
     } catch (_) {}
   }, [addLiveDrop]);
 
-  // Track real drops vs fake drops
-  const { realDrops, fakeDrops } = useMemo(() => {
+  // Real drops within the active 3-minute window
+  const { recentRealDrops, fakeDrops } = useMemo(() => {
     const real: LiveDrop[] = [];
     const fake: LiveDrop[] = [];
+    const now = Date.now();
+
     for (const d of liveDrops) {
+      if (!d.skin || d.skin.priceDc < 100000) continue;
+
       if (isRealDrop(d)) {
-        real.push(d);
+        if (now - d.timestamp < BLEND_WINDOW_MS) {
+          real.push(d);
+        }
       } else {
         fake.push(d);
       }
     }
-    return { realDrops: real, fakeDrops: fake };
-  }, [liveDrops]);
+    return { recentRealDrops: real, fakeDrops: fake };
+  }, [liveDrops, nowTick]);
 
-  // Track user's own real drops to reset inactivity timer
+  // Working fake drop generator:
+  // Starts empty at page reload, then drops appear over time.
+  // If 6 or more real drops occurred in the last 3 minutes, fake drops are completely disabled.
   useEffect(() => {
-    if (realDrops.length > 0) {
-      lastRealDropRef.current = Date.now();
-    }
-  }, [realDrops.length]);
+    if (recentRealDrops.length >= 6) return;
+    if (expensiveWeapons.length === 0) return;
 
-  // Dynamic slow mode:
-  // If there are many real drops (>= 6), fake drops are 100% disabled.
-  // Slow simulated drops ONLY fire if real drops count < 6 AND no real drop happened for > 60s.
-  useEffect(() => {
-    if (realDrops.length >= 6) return;
+    // First fake drop appears fast (3.5s after load), then every 14-22s
+    const delay = liveDrops.length === 0 ? 3500 : 14000 + Math.random() * 8000;
 
-    const interval = setInterval(() => {
-      const now = Date.now();
-      const timeSinceReal = now - lastRealDropRef.current;
-
-      // If less than 1 minute since last real drop, do nothing
-      if (timeSinceReal < 60000) return;
-
-      if (expensiveWeapons.length === 0) return;
+    const timeoutId = setTimeout(() => {
       const randomSkin = expensiveWeapons[Math.floor(Math.random() * expensiveWeapons.length)];
       const randomCase = SIMULATED_CASES[Math.floor(Math.random() * SIMULATED_CASES.length)];
+      const timestamp = Date.now();
 
       const newDrop: LiveDrop = {
-        id: `slow_sim_${now}_${Math.random().toString(36).substr(2, 5)}`,
-        user: '', // No tag
+        id: `sim_${timestamp}_${Math.random().toString(36).substring(2, 6)}`,
+        user: '',
         avatar: '',
         skin: randomSkin,
         caseName: randomCase,
-        timestamp: now,
+        timestamp,
       };
 
       addLiveDrop(newDrop);
-    }, 55000); // Slow mode: 55 seconds interval
+    }, delay);
 
-    return () => clearInterval(interval);
-  }, [addLiveDrop, expensiveWeapons, realDrops.length]);
+    return () => clearTimeout(timeoutId);
+  }, [liveDrops.length, recentRealDrops.length, expensiveWeapons, addLiveDrop]);
 
-  // Dynamic blend logic:
-  // 1. If realDrops >= 6: ZERO fake drops shown, only real drops!
-  // 2. If realDrops === 0: show initial fake drops.
-  // 3. If 0 < realDrops < 6: blend real drops (at front) and fill remaining slots up to 12 with fake drops.
+  // Dynamic 3-minute blend logic:
+  // 1. If >= 6 real drops in last 3 min: ZERO fake drops shown, only real drops!
+  // 2. If 0 real drops in last 3 min: show fake drops generated over time.
+  // 3. If 1-5 real drops in last 3 min: real drops first, fill remaining slots up to 12 with fake drops.
   const visibleDrops = useMemo(() => {
-    if (realDrops.length >= 6) {
-      return realDrops.slice(0, 12);
+    if (recentRealDrops.length >= 6) {
+      return recentRealDrops.slice(0, 12);
     }
-    if (realDrops.length === 0) {
+    if (recentRealDrops.length === 0) {
       return fakeDrops.slice(0, 12);
     }
-    // Blend real drops with fake drops
-    const remainingSlots = Math.max(0, 12 - realDrops.length);
-    return [...realDrops, ...fakeDrops.slice(0, remainingSlots)];
-  }, [realDrops, fakeDrops]);
+    const remainingSlots = Math.max(0, 12 - recentRealDrops.length);
+    return [...recentRealDrops, ...fakeDrops.slice(0, remainingSlots)];
+  }, [recentRealDrops, fakeDrops]);
 
   return (
-    <div className="w-full bg-[#0a0a0d] border-b border-white/5 py-2 overflow-hidden backdrop-blur-md max-w-full">
+    <div className="w-full bg-[#0a0a0d] border-b border-white/5 py-2 overflow-hidden backdrop-blur-md max-w-full select-none">
       <div className="max-w-7xl mx-auto px-4 flex items-center gap-3">
         <div className="flex items-center gap-1.5 shrink-0 pr-3 border-r border-white/10">
           <span className="w-2 h-2 rounded-full bg-yellow-400 animate-ping" />
@@ -218,32 +228,40 @@ export const LiveDropBar: React.FC = () => {
           </span>
         </div>
 
+        {/* PC Version: strictly non-scrollable (md:overflow-x-hidden, no-wheel-scroll) */}
+        {/* Mobile: touch swipeable (overflow-x-auto) */}
         <div
-          onWheel={handleHorizontalWheel}
-          className="flex items-center gap-2.5 overflow-x-auto no-scrollbar scroll-smooth py-0.5 will-change-scroll max-w-full"
+          data-no-wheel="true"
+          className="flex items-center gap-2.5 overflow-x-auto md:overflow-x-hidden no-scrollbar no-wheel-scroll py-0.5 max-w-full min-h-[52px]"
         >
-          <AnimatePresence initial={false}>
-            {visibleDrops.map((drop) => {
-              const isUser = isRealDrop(drop);
-              return (
-                <motion.div
-                  key={drop.id}
-                  layout
-                  initial={{ opacity: 0, x: -28, scale: 0.9 }}
-                  animate={{ opacity: 1, x: 0, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.85, transition: { duration: 0.2 } }}
-                  transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-                  className="shrink-0"
-                >
-                  <LiveDropCard
-                    drop={drop}
-                    isUser={isUser}
-                    locale={locale}
-                  />
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+          {visibleDrops.length === 0 ? (
+            <div className="flex items-center gap-2 text-xs text-white/30 font-medium italic animate-pulse py-1 pl-1">
+              <span>{locale === 'ru' ? 'Ожидание дропов...' : 'Waiting for drops...'}</span>
+            </div>
+          ) : (
+            <AnimatePresence initial={false}>
+              {visibleDrops.map((drop) => {
+                const isUser = isRealDrop(drop);
+                return (
+                  <motion.div
+                    key={drop.id}
+                    layout
+                    initial={{ opacity: 0, x: -28, scale: 0.9 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.85, transition: { duration: 0.2 } }}
+                    transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+                    className="shrink-0"
+                  >
+                    <LiveDropCard
+                      drop={drop}
+                      isUser={isUser}
+                      locale={locale}
+                    />
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          )}
         </div>
       </div>
     </div>

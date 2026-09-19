@@ -21,6 +21,11 @@ export const HorizontalScrollManager: React.FC = () => {
       while (el && el !== document.body && el !== document.documentElement) {
         const style = window.getComputedStyle(el);
         const overflowX = style.overflowX;
+        if (el.dataset.noWheel === 'true' || el.classList.contains('no-wheel-scroll')) {
+          el = el.parentElement;
+          continue;
+        }
+
         const isHorizontalCandidate =
           overflowX === 'auto' ||
           overflowX === 'scroll' ||

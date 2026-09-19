@@ -199,8 +199,8 @@ export const TradeUpContract: React.FC = () => {
       // Add won item
       addToInventory([pickedSkin]);
 
-      // Add to live drop feed (expensive items only)
-      if (pickedSkin.priceDc >= 750 || pickedSkin.rarity === 'covert' || pickedSkin.rarity === 'gold' || pickedSkin.rarity === 'extraordinary') {
+      // Add to live drop feed (strictly >= 100,000 DC)
+      if (pickedSkin.priceDc >= 100000) {
         addLiveDrop({
           id: `contract_${Date.now()}`,
           user: 'Вы',
