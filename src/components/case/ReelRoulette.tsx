@@ -145,13 +145,62 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     return selected;
   };
 
+  const pickVisualTapeSkin = (skins: SkinEntity[]): SkinEntity => {
+    const buckets: Record<'common' | 'restricted' | 'classified' | 'covert' | 'gold', SkinEntity[]> = {
+      common: [],
+      restricted: [],
+      classified: [],
+      covert: [],
+      gold: [],
+    };
+
+    for (const s of skins) {
+      if (isKnifeOrGlove(s) || s.rarity === 'gold') {
+        buckets.gold.push(s);
+      } else if (s.rarity === 'covert' || s.rarity === 'extraordinary') {
+        buckets.covert.push(s);
+      } else if (s.rarity === 'classified') {
+        buckets.classified.push(s);
+      } else if (s.rarity === 'restricted') {
+        buckets.restricted.push(s);
+      } else {
+        buckets.common.push(s);
+      }
+    }
+
+    // Authentic CS2 reel visual distribution:
+    // Common items dominate (78%), Restricted (16%), Classified (4.5%), Covert (1.2%), Gold (0.3%)
+    const bucketWeights: { bucket: keyof typeof buckets; weight: number }[] = [
+      { bucket: 'common', weight: 78 },
+      { bucket: 'restricted', weight: 16 },
+      { bucket: 'classified', weight: 4.5 },
+      { bucket: 'covert', weight: 1.2 },
+      { bucket: 'gold', weight: 0.3 },
+    ];
+
+    const active = bucketWeights.filter((b) => buckets[b.bucket].length > 0);
+    if (active.length === 0) return skins[Math.floor(Math.random() * skins.length)];
+
+    const totalW = active.reduce((sum, b) => sum + b.weight, 0);
+    let rnd = Math.random() * totalW;
+    for (const b of active) {
+      if (rnd <= b.weight) {
+        const list = buckets[b.bucket];
+        return list[Math.floor(Math.random() * list.length)];
+      }
+      rnd -= b.weight;
+    }
+
+    return skins[0];
+  };
+
   const generateReel = (winner: SkinEntity): SkinEntity[] => {
     const list: SkinEntity[] = [];
     for (let i = 0; i < REEL_SIZE; i++) {
       if (i === WIN_INDEX) {
         list.push(winner);
       } else {
-        list.push(caseSkins[Math.floor(Math.random() * caseSkins.length)]);
+        list.push(pickVisualTapeSkin(caseSkins));
       }
     }
     return list;
@@ -162,9 +211,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     const initial1: SkinEntity[] = [];
     const initial2: SkinEntity[] = [];
     for (let i = 0; i < REEL_SIZE; i++) {
-      initial0.push(caseSkins[i % caseSkins.length]);
-      initial1.push(caseSkins[(i + 3) % caseSkins.length]);
-      initial2.push(caseSkins[(i + 7) % caseSkins.length]);
+      initial0.push(pickVisualTapeSkin(caseSkins));
+      initial1.push(pickVisualTapeSkin(caseSkins));
+      initial2.push(pickVisualTapeSkin(caseSkins));
     }
     setReels([initial0, initial1, initial2]);
   }, [caseSkins]);
@@ -421,13 +470,17 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
                         </span>
                       </div>
 
-                      <div className={`relative ${openCount > 1 ? 'w-24 h-24' : 'w-28 h-28'} my-auto flex items-center justify-center z-10`}>
+                      <div className={`relative ${
+                        showAsSpecial 
+                          ? (openCount > 1 ? 'w-28 h-26' : 'w-36 h-32') 
+                          : (openCount > 1 ? 'w-24 h-24' : 'w-28 h-28')
+                      } my-auto flex items-center justify-center z-10 overflow-visible`}>
                         <img
                           src={displayImage}
                           alt={displayWeapon}
                           referrerPolicy="no-referrer"
                           className={`w-full h-full object-contain filter drop-shadow-md ${
-                            showAsSpecial ? 'drop-shadow-[0_0_12px_rgba(250,204,21,0.6)]' : ''
+                            showAsSpecial ? 'scale-120 drop-shadow-[0_0_20px_rgba(250,204,21,0.65)]' : ''
                           }`}
                         />
                       </div>

@@ -26,12 +26,12 @@ export const CaseSpecialItemCard: React.FC<CaseSpecialItemCardProps> = () => {
       </div>
 
       {/* Central Special Item Image */}
-      <div className="w-full h-28 flex items-center justify-center my-2 relative">
-        <div className="absolute inset-0 bg-radial from-yellow-500/15 to-transparent blur-xl pointer-events-none" />
+      <div className="w-full h-32 flex items-center justify-center my-1 relative">
+        <div className="absolute inset-0 bg-radial from-yellow-500/20 to-transparent blur-2xl pointer-events-none" />
         <img
           src="/images/special_item.png"
           alt="★ Редкий особый предмет"
-          className="w-24 h-24 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_15px_rgba(250,204,21,0.45)] z-10"
+          className="w-full h-28 sm:h-30 object-contain scale-110 group-hover:scale-120 transition-transform duration-300 drop-shadow-[0_0_20px_rgba(250,204,21,0.55)] z-10"
         />
       </div>
 
