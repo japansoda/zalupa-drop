@@ -185,7 +185,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   // Auto-Select target skin when bet or target chance changes
   const autoSelectTargetSkin = (desiredChance: number, currentBet: number, forceType?: string) => {
     if (currentBet <= 0) return;
+    const clampedChance = Math.min(80, Math.max(1, desiredChance));
     const typeToMatch = forceType !== undefined ? forceType : catalogType;
+
+    // Ideal target price based on 95% RTP
+    const idealPrice = Math.min(maxTargetPrice, (currentBet / (clampedChance / 100)) * 0.95);
+
     let candidates = catalogSkins.filter(
       (s) => s.priceDc > currentBet && s.priceDc <= maxTargetPrice && matchesCatalogType(s, typeToMatch)
     );
@@ -196,44 +201,23 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     }
     if (candidates.length === 0) return;
 
-    // Filter out stickers/charms/agents from default general auto-upgrades
+    // Only exclude low-tier junk stickers/charms (< 15,000 DC) from general recommendations;
+    // expensive high-tier Katowice stickers and rare collectibles (> 15,000 DC) are fully included!
     if (typeToMatch === 'all') {
-      const weaponOnly = candidates.filter(isActualWeapon);
-      if (weaponOnly.length > 0) candidates = weaponOnly;
-    }
-
-    // Ideal target price based on 95% RTP
-    const idealPrice = Math.min(maxTargetPrice, (currentBet / (desiredChance / 100)) * 0.95);
-
-    // Knife Priority:
-    // When knives appear (idealPrice >= 35,000 DC or user specifically filtered knives or bet allows knife)
-    const knifeCandidates = candidates.filter((s) => matchesCatalogType(s, 'knives'));
-    const shouldTargetKnife =
-      knifeCandidates.length > 0 &&
-      (typeToMatch === 'knives' ||
-        idealPrice >= 35000 ||
-        (currentBet >= 15000 && (currentBet / 40320) * 95 >= desiredChance * 0.5));
-
-    if (shouldTargetKnife) {
-      // Sort knives by distance to idealPrice
-      const sortedKnives = [...knifeCandidates].sort(
-        (a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice)
-      );
-      // Pick among top diverse knives close to idealPrice (diverse knives, not just one Doppler)
-      const topKnives = sortedKnives.slice(0, 10);
-      const picked = topKnives[Math.floor(Math.random() * Math.min(5, topKnives.length))];
-      if (picked) {
-        setTargetSkin(picked);
-        return;
+      const filtered = candidates.filter((s) => s.priceDc >= 15000 || isActualWeapon(s));
+      if (filtered.length > 0) {
+        candidates = filtered;
       }
     }
 
-    // Regular weapons pool (guns, rifles, snipers, pistols, etc.)
-    const sortedWeapons = [...candidates].sort(
+    // Sort all candidates by absolute distance to ideal target price
+    const sorted = [...candidates].sort(
       (a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice)
     );
-    const topWeapons = sortedWeapons.slice(0, 8);
-    const picked = topWeapons[Math.floor(Math.random() * Math.min(4, topWeapons.length))];
+
+    // Pick among top 8 closest items to idealPrice for good variety without breaking requested odds
+    const topCandidates = sorted.slice(0, 8);
+    const picked = topCandidates[Math.floor(Math.random() * Math.min(4, topCandidates.length))];
     if (picked) {
       setTargetSkin(picked);
     }
@@ -264,20 +248,20 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     }
   }, [effectiveBetDc, maxTargetPrice]);
 
-  // Base raw chance from bet vs target
+  // Base raw chance from bet vs target (capped at max 80%)
   const baseChance = useMemo(() => {
     if (!targetSkin || targetSkin.priceDc <= 0 || effectiveBetDc <= 0) return 0;
     const raw = (effectiveBetDc / targetSkin.priceDc) * 95;
-    return Math.min(95, Math.max(0.01, Number(raw.toFixed(2))));
+    return Math.min(80, Math.max(0.01, Number(raw.toFixed(2))));
   }, [effectiveBetDc, targetSkin]);
 
   // Luck Potion bonus (+15% to chance if charges active)
   const potionBonus = activePotionCharges > 0 && targetSkin && effectiveBetDc > 0 ? 15 : 0;
 
-  // Total chance displayed and used for roll
+  // Total chance displayed and used for roll (strictly max 80% with potion included)
   const chance = useMemo(() => {
     if (baseChance <= 0) return 0;
-    return Math.min(95, Number((baseChance + potionBonus).toFixed(2)));
+    return Math.min(80, Number((baseChance + potionBonus).toFixed(2)));
   }, [baseChance, potionBonus]);
 
   // Risk label
@@ -338,8 +322,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     { label: '25%', chance: 25.0 },
     { label: '35%', chance: 35.0 },
     { label: '50%', chance: 50.0 },
-    { label: '75%', chance: 75.0 },
-    { label: '85%', chance: 85.0 },
+    { label: '70%', chance: 70.0 },
+    { label: '80%', chance: 80.0 },
   ];
 
   // Quick Multiplier presets (SECONDARY)

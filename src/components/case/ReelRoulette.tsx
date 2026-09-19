@@ -363,10 +363,14 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     setShowModal(true);
   };
 
-  const handleKeep = () => {
-    if (winningSkins.length === 0) return;
-    addToInventory(winningSkins);
-    winningSkins.forEach((skin) => {
+  const handleKeep = (itemsToKeep?: SkinEntity[]) => {
+    const list = itemsToKeep !== undefined ? itemsToKeep : winningSkins;
+    if (list.length === 0) {
+      setShowModal(false);
+      return;
+    }
+    addToInventory(list);
+    list.forEach((skin) => {
       addLiveDrop({
         id: `user_${Date.now()}_${Math.random()}`,
         user: 'Вы',
@@ -379,9 +383,13 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     setShowModal(false);
   };
 
-  const handleSell = () => {
-    if (winningSkins.length === 0) return;
-    const totalWon = winningSkins.reduce((sum, s) => sum + s.priceDc, 0);
+  const handleSell = (itemsToSell?: SkinEntity[]) => {
+    const list = itemsToSell !== undefined ? itemsToSell : winningSkins;
+    if (list.length === 0) {
+      setShowModal(false);
+      return;
+    }
+    const totalWon = list.reduce((sum, s) => sum + s.priceDc, 0);
     addBalance(totalWon);
     sound.playCashout();
     setShowModal(false);

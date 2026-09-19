@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import confetti from 'canvas-confetti';
 import { ExternalLink, Check, ShoppingBag, Sparkles, Gift, Ticket, FlaskConical } from 'lucide-react';
 import { SkinEntity } from '../../lib/types';
@@ -10,19 +10,29 @@ import { RarityBadge } from '../ui/RarityBadge';
 import { WearBadge } from '../ui/WearBadge';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { sound } from '../../lib/sound';
+import { useGameStore } from '../../store/useGameStore';
 import { useLanguage } from '../../lib/i18n';
 
 interface DropModalProps {
   skin?: SkinEntity | null;
   skins?: SkinEntity[];
   bonusConsumables?: { tokens: UpgradeToken[]; potions: number };
-  onKeep: () => void;
-  onSell: () => void;
+  onKeep: (remaining?: SkinEntity[]) => void;
+  onSell: (remaining?: SkinEntity[]) => void;
 }
 
 export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumables, onKeep, onSell }) => {
   const { t, locale } = useLanguage();
-  const items: SkinEntity[] = (skins && skins.length > 0) ? skins : (skin ? [skin] : []);
+  const rawItems: SkinEntity[] = useMemo(() => {
+    return (skins && skins.length > 0) ? skins : (skin ? [skin] : []);
+  }, [skins, skin]);
+
+  const [items, setItems] = useState<SkinEntity[]>(rawItems);
+
+  useEffect(() => {
+    setItems(rawItems);
+  }, [rawItems]);
+
   if (items.length === 0) return null;
 
   const isMulti = items.length > 1;
@@ -55,6 +65,16 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
     }
   }, [hasHighTier, isMulti, hasBonus]);
 
+  const handleSellIndividual = (itemToSell: SkinEntity, index: number) => {
+    sound.playCashout();
+    useGameStore.getState().addBalance(itemToSell.priceDc);
+    const remaining = items.filter((_, idx) => idx !== index);
+    setItems(remaining);
+    if (remaining.length === 0) {
+      onSell([]);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-lg animate-fade-in overflow-y-auto">
       <div
@@ -84,7 +104,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
               const config = RARITY_CONFIG[single.rarity] || RARITY_CONFIG.milspec;
               return (
                 <>
-                  <div className="relative w-56 h-56 my-2 flex items-center justify-center">
+                  <div className="relative w-56 h-56 my-2 flex items-center justify-center group">
                     {/* Bonus Extra Drop Tag Floating on Item */}
                     {hasBonus && (
                       <div className="absolute top-0 right-0 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/25 border border-emerald-400 text-emerald-300 font-mono font-black text-xs shadow-[0_0_15px_rgba(16,185,129,0.5)] animate-bounce">
@@ -98,8 +118,24 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                       src={single.image}
                       alt={single.name}
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-contain filter drop-shadow-2xl"
+                      className="w-full h-full object-contain filter drop-shadow-2xl group-hover:scale-105 transition-transform duration-200"
                     />
+
+                    {/* Quick Sell on Hover */}
+                    <div className="absolute inset-x-6 bottom-2 z-30 opacity-0 group-hover:opacity-100 transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                      <button
+                        type="button"
+                        onClick={() => handleSellIndividual(single, 0)}
+                        className="w-full py-2.5 px-4 rounded-xl btn-yellow text-black font-black text-xs uppercase flex items-center justify-center gap-1.5 shadow-[0_0_20px_rgba(250,204,21,0.6)] cursor-pointer active:scale-95"
+                      >
+                        <ShoppingBag className="w-3.5 h-3.5" />
+                        <span>
+                          {locale === 'ru'
+                            ? `Продать за ${single.priceDc.toLocaleString('ru-RU')} DC`
+                            : `Sell for ${single.priceDc.toLocaleString('ru-RU')} DC`}
+                        </span>
+                      </button>
+                    </div>
                   </div>
 
                   <div className="flex flex-col items-center gap-1.5 mb-4 w-full">
@@ -154,7 +190,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                 return (
                   <div
                     key={`${it.id}_${idx}`}
-                    className="relative rounded-2xl glass-card p-4 flex flex-col justify-between border hover:border-yellow-400/40 transition-all text-left"
+                    className="relative rounded-2xl glass-card p-4 flex flex-col justify-between border hover:border-yellow-400/50 transition-all text-left group overflow-hidden"
                     style={{ borderBottomWidth: '3px', borderBottomColor: config.color }}
                   >
                     <div className="flex items-center justify-between gap-1 mb-2">
@@ -169,12 +205,12 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                       <RarityBadge rarity={it.rarity} size="sm" />
                     </div>
 
-                    <div className="w-full h-32 flex items-center justify-center my-2">
+                    <div className="w-full h-32 flex items-center justify-center my-2 relative">
                       <img
                         src={it.image}
                         alt={it.name}
                         referrerPolicy="no-referrer"
-                        className="w-28 h-28 object-contain filter drop-shadow-lg"
+                        className="w-28 h-28 object-contain filter drop-shadow-lg group-hover:scale-105 transition-transform duration-200"
                       />
                     </div>
 
@@ -194,6 +230,25 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                           ${it.priceUsd.toFixed(2)}
                         </span>
                       </div>
+                    </div>
+
+                    {/* Quick Sell on Hover overlay for individual item */}
+                    <div className="absolute inset-x-3 bottom-3 z-30 opacity-0 group-hover:opacity-100 transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleSellIndividual(it, idx);
+                        }}
+                        className="w-full py-2.5 px-3 rounded-xl btn-yellow text-black font-black text-xs uppercase flex items-center justify-center gap-1.5 shadow-[0_0_18px_rgba(250,204,21,0.55)] cursor-pointer active:scale-95"
+                      >
+                        <ShoppingBag className="w-3.5 h-3.5" />
+                        <span>
+                          {locale === 'ru'
+                            ? `Продать за ${it.priceDc.toLocaleString('ru-RU')} DC`
+                            : `Sell for ${it.priceDc.toLocaleString('ru-RU')} DC`}
+                        </span>
+                      </button>
                     </div>
                   </div>
                 );
@@ -316,7 +371,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
             type="button"
             onClick={() => {
               sound.playClick();
-              onKeep();
+              onKeep(items);
             }}
             className="w-full py-3.5 px-4 rounded-xl glass-button text-white font-black text-sm flex items-center justify-center gap-2 hover:bg-white/15 cursor-pointer active:scale-95 transition-all"
           >
@@ -324,8 +379,8 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
             <span>
               {isMulti
                 ? locale === 'ru'
-                  ? 'Забрать всё в инвентарь'
-                  : 'Claim all to inventory'
+                  ? `Забрать всё в инвентарь (${items.length})`
+                  : `Claim all to inventory (${items.length})`
                 : locale === 'ru'
                 ? 'В инвентарь'
                 : 'Claim to inventory'}
@@ -335,7 +390,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
           <button
             type="button"
             onClick={() => {
-              onSell();
+              onSell(items);
             }}
             className="w-full py-3.5 px-4 rounded-xl btn-yellow text-black font-black text-sm flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all"
           >
