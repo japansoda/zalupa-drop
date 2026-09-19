@@ -15,6 +15,8 @@ import { RARITY_CONFIG } from '../../data/skins';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
 import { Briefcase, ExternalLink, ShoppingBag, Box, Trash2 } from 'lucide-react';
+import { getSteamMarketListingUrl, isStatTrakableItem } from '../../lib/steam';
+import { handleHorizontalWheel } from '../../components/layout/HorizontalScrollManager';
 
 export default function InventoryPage() {
   const { inventory, sellSkin, sellAllSkins } = useGameStore();
@@ -95,7 +97,7 @@ export default function InventoryPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 overflow-x-auto py-4 no-scrollbar">
+          <div onWheel={handleHorizontalWheel} className="flex items-center gap-2 overflow-x-auto py-4 no-scrollbar">
             {[
               { id: 'all', label: t('inv.tab.all') },
               { id: 'gold', label: t('inv.tab.gold') },
@@ -176,7 +178,7 @@ export default function InventoryPage() {
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-1">
-                          {item.statTrak && (
+                          {item.statTrak && isStatTrakableItem(item) && (
                             <span className="text-[9px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40">
                               ST
                             </span>
@@ -210,11 +212,11 @@ export default function InventoryPage() {
                           </div>
 
                           <a
-                            href={item.steamMarketUrl}
+                            href={getSteamMarketListingUrl(item)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-white/30 hover:text-white transition-colors"
-                            title="Открыть в Steam"
+                            title="Открыть лот в Steam"
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
                           </a>

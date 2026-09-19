@@ -14,6 +14,7 @@ import { CASES_DATABASE } from '../data/cases';
 import { sound } from '../lib/sound';
 import { useLanguage } from '../lib/i18n';
 import { ChevronRight, Search, ArrowUpDown, X } from 'lucide-react';
+import { handleHorizontalWheel } from '../components/layout/HorizontalScrollManager';
 
 const CATEGORIES = [
   { id: 'all' },
@@ -165,7 +166,7 @@ export default function HomePage() {
           </div>
 
           {/* Category Filter Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-6 no-scrollbar">
+          <div onWheel={handleHorizontalWheel} className="flex items-center gap-2 overflow-x-auto pb-4 mb-6 no-scrollbar">
             {CATEGORIES.map((cat) => {
               const isActive = selectedCategory === cat.id;
               const label = t('home.cat.' + cat.id);

@@ -12,6 +12,8 @@ import { CashbackModal } from './CashbackModal';
 import { WearBadge } from '../ui/WearBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { useLanguage } from '../../lib/i18n';
+import { isStatTrakableItem } from '../../lib/steam';
+import { handleHorizontalWheel } from '../layout/HorizontalScrollManager';
 
 export const matchesCatalogType = (skin: SkinEntity, type: string): boolean => {
   if (type === 'all') return true;
@@ -70,17 +72,17 @@ export const isActualWeapon = (skin: SkinEntity): boolean => {
 };
 
 const ITEM_TYPES = [
-  { id: 'all', label: 'Все типы' },
-  { id: 'knives', label: '★ Ножи' },
-  { id: 'gloves', label: '★ Перчатки' },
-  { id: 'snipers', label: 'Снайперские' },
-  { id: 'rifles', label: 'Винтовки' },
-  { id: 'pistols', label: 'Пистолеты' },
-  { id: 'smgs', label: 'ПП' },
-  { id: 'heavy', label: 'Тяжелое' },
-  { id: 'stickers', label: 'Наклейки' },
-  { id: 'agents', label: 'Агенты' },
-  { id: 'charms', label: 'Брелоки' },
+  { id: 'all', label: 'Все', icon: '⊞' },
+  { id: 'knives', label: 'Ножи', icon: '★' },
+  { id: 'gloves', label: 'Перчатки', icon: '🧤' },
+  { id: 'snipers', label: 'Снайперские', icon: '🎯' },
+  { id: 'rifles', label: 'Винтовки', icon: '⚡' },
+  { id: 'pistols', label: 'Пистолеты', icon: '🔫' },
+  { id: 'smgs', label: 'ПП', icon: '💥' },
+  { id: 'heavy', label: 'Тяжелое', icon: '🛡️' },
+  { id: 'stickers', label: 'Наклейки', icon: '🏷️' },
+  { id: 'agents', label: 'Агенты', icon: '👤' },
+  { id: 'charms', label: 'Брелоки', icon: '🔑' },
 ];
 
 interface RadialGaugeProps {
@@ -104,6 +106,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     consumePotionCharge,
     addToken,
     addPotion,
+    addLiveDrop,
   } = useGameStore();
   const { t, locale } = useLanguage();
 
@@ -438,6 +441,17 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       setLastResult('win');
       addToInventory([targetSkin]);
       recordUpgrade(true, targetSkin.priceDc - effectiveBetDc);
+
+      // Emit real drop to live drops ticker
+      addLiveDrop({
+        id: `upgrade_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+        user: 'Вы',
+        avatar: '',
+        skin: targetSkin,
+        caseName: locale === 'ru' ? 'Апгрейдер' : 'Upgrader',
+        timestamp: Date.now(),
+      });
+
       confetti({
         particleCount: 130,
         spread: 80,
@@ -586,6 +600,18 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     result.sort((a, b) => (catalogSort === 'asc' ? a.priceDc - b.priceDc : b.priceDc - a.priceDc));
     return result;
   }, [catalogSkins, catalogSearch, catalogRarity, catalogType, catalogSort, effectiveBetDc, maxTargetPrice]);
+
+  // Count matching skins per category based on current bet
+  const categoryCounts = useMemo(() => {
+    const minPrice = Math.max(1, effectiveBetDc);
+    const counts: Record<string, number> = {};
+    ITEM_TYPES.forEach((t) => {
+      counts[t.id] = catalogSkins.filter(
+        (s) => s.priceDc > minPrice && s.priceDc <= maxTargetPrice && matchesCatalogType(s, t.id)
+      ).length;
+    });
+    return counts;
+  }, [catalogSkins, effectiveBetDc, maxTargetPrice]);
 
   // Circular gauge constants
   const gaugeR = 100;
@@ -1356,7 +1382,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
                     <div className="w-full flex flex-col">
                       <div className="flex items-center gap-1">
-                        {item.statTrak && (
+                        {item.statTrak && isStatTrakableItem(item) && (
                           <span className="text-[8px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40 shrink-0">
                             ST
                           </span>
@@ -1417,10 +1443,16 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             </div>
           </div>
 
-          {/* Item Types Filter Pills */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-2 mb-3 no-scrollbar">
+          {/* Item Types Filter Pills with Enhanced CS2 UX */}
+          <div
+            onWheel={handleHorizontalWheel}
+            className="flex items-center gap-1.5 overflow-x-auto pb-2.5 mb-3 no-scrollbar scroll-smooth"
+          >
             {ITEM_TYPES.map((type) => {
               const isAct = catalogType === type.id;
+              const count = categoryCounts[type.id] ?? 0;
+              const label = t('type.' + type.id) || type.label;
+
               return (
                 <button
                   key={type.id}
@@ -1429,21 +1461,33 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     sound.playClick();
                     setCatalogType(type.id);
                   }}
-                  className={`relative px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap transition-colors cursor-pointer z-10 ${
-                    isAct ? 'text-black' : 'text-white/60 hover:text-white'
+                  className={`group relative flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer z-10 border ${
+                    isAct
+                      ? 'text-black border-yellow-300 shadow-[0_0_15px_rgba(250,204,21,0.35)] scale-[1.02]'
+                      : 'text-white/70 border-white/10 hover:border-white/20 hover:text-white bg-white/[0.03] hover:bg-white/[0.08]'
                   }`}
                 >
                   {isAct && (
                     <motion.div
                       layoutId="upgraderCatalogTypeIndicator"
-                      className="absolute inset-0 rounded-lg bg-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.3)] -z-10"
+                      className="absolute inset-0 rounded-xl bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-300 -z-10"
                       transition={{ type: 'spring', stiffness: 500, damping: 35 }}
                     />
                   )}
-                  {!isAct && (
-                    <div className="absolute inset-0 rounded-lg bg-white/5 hover:bg-white/10 -z-20" />
-                  )}
-                  <span className="relative z-10">{t('type.' + type.id) || type.label}</span>
+
+                  <span className={`text-xs ${isAct ? 'text-black' : 'text-yellow-400/80 group-hover:text-yellow-400'}`}>
+                    {type.icon}
+                  </span>
+                  <span className="relative z-10">{label}</span>
+                  <span
+                    className={`text-[10px] font-mono px-1.5 py-0.2 rounded-md transition-colors ${
+                      isAct
+                        ? 'bg-black/20 text-black font-black'
+                        : 'bg-black/40 text-white/40 group-hover:text-white/70'
+                    }`}
+                  >
+                    {count}
+                  </span>
                 </button>
               );
             })}
@@ -1503,7 +1547,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
                       <div className="w-full flex flex-col">
                         <div className="flex items-center gap-1">
-                          {skin.statTrak && (
+                          {skin.statTrak && isStatTrakableItem(skin) && (
                             <span className="text-[8px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40 shrink-0">
                               ST
                             </span>

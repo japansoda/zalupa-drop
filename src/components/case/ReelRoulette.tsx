@@ -12,6 +12,7 @@ import { useGameStore } from '../../store/useGameStore';
 import { Zap, Layers } from 'lucide-react';
 import { useLanguage } from '../../lib/i18n';
 import { isKnifeOrGlove, isOfficialCase, rollSpecialKnifeDrop } from '../../lib/caseSpecials';
+import { isStatTrakableItem } from '../../lib/steam';
 
 interface ReelRouletteProps {
   caseId?: string;
@@ -361,6 +362,18 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     sound.playWin(highestWinner.rarity);
     setIsSpinning(false);
     setShowModal(true);
+
+    // Immediately emit real drops to live ticker on unbox completion
+    winners.forEach((skin) => {
+      addLiveDrop({
+        id: `real_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+        user: 'Вы',
+        avatar: '',
+        skin: skin,
+        caseName: caseName,
+        timestamp: Date.now(),
+      });
+    });
   };
 
   const handleKeep = (itemsToKeep?: SkinEntity[]) => {
@@ -370,16 +383,6 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       return;
     }
     addToInventory(list);
-    list.forEach((skin) => {
-      addLiveDrop({
-        id: `user_${Date.now()}_${Math.random()}`,
-        user: 'Вы',
-        avatar: 'https://avatars.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg',
-        skin: skin,
-        caseName: caseName,
-        timestamp: Date.now(),
-      });
-    });
     setShowModal(false);
   };
 
@@ -458,7 +461,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
                     >
                       <div className="w-full flex justify-between items-center z-10">
                         <div className="flex items-center gap-1">
-                          {!showAsSpecial && skin.statTrak && (
+                          {!showAsSpecial && skin.statTrak && isStatTrakableItem(skin) && (
                             <span className="text-[9px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40">
                               ST
                             </span>

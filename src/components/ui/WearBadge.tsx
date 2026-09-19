@@ -2,6 +2,7 @@ import React from 'react';
 import { WEAR_CONFIG, STICKER_EFFECT_CONFIG } from '../../data/skins';
 import { SkinEntity } from '../../lib/types';
 import { useLanguage } from '../../lib/i18n';
+import { isWearableItem } from '../../lib/steam';
 
 interface WearBadgeProps {
   skin?: Partial<SkinEntity>;
@@ -42,6 +43,11 @@ export const WearBadge: React.FC<WearBadgeProps> = ({
         {eff.label}
       </span>
     );
+  }
+
+  // Non-wearable items (Charms, Agents, Stickers) NEVER have wear qualities
+  if (skin && !isWearableItem(skin)) {
+    return null;
   }
 
   const { t } = useLanguage();

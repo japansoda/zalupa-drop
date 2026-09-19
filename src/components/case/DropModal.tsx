@@ -12,6 +12,7 @@ import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
 import { useLanguage } from '../../lib/i18n';
+import { getSteamMarketListingUrl, isStatTrakableItem } from '../../lib/steam';
 
 interface DropModalProps {
   skin?: SkinEntity | null;
@@ -140,7 +141,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
 
                   <div className="flex flex-col items-center gap-1.5 mb-4 w-full">
                     <div className="flex items-center gap-2 mb-1 flex-wrap justify-center">
-                      {single.statTrak && (
+                      {single.statTrak && isStatTrakableItem(single) && (
                         <span className="text-xs px-2.5 py-1 rounded-full bg-amber-500/20 border border-amber-500 text-amber-400 font-mono font-black uppercase tracking-wider shadow-[0_0_8px_rgba(245,158,11,0.4)]">
                           StatTrak™
                         </span>
@@ -167,12 +168,12 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                   </div>
 
                   <a
-                    href={single.steamMarketUrl}
+                    href={getSteamMarketListingUrl(single)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs text-white/50 hover:text-white flex items-center gap-1.5 mb-4 underline-offset-4 hover:underline transition-colors"
                   >
-                    <span>{locale === 'ru' ? 'Открыть на Торговой площадке Steam' : 'View on Steam Community Market'}</span>
+                    <span>{locale === 'ru' ? 'Открыть лот на Торговой площадке Steam' : 'View listing on Steam Community Market'}</span>
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 </>
@@ -195,7 +196,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                   >
                     <div className="flex items-center justify-between gap-1 mb-2">
                       <div className="flex items-center gap-1">
-                        {it.statTrak && (
+                        {it.statTrak && isStatTrakableItem(it) && (
                           <span className="text-[9px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40">
                             ST
                           </span>

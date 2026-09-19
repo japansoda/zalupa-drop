@@ -7,6 +7,7 @@ import { RarityBadge } from '../ui/RarityBadge';
 import { WearBadge } from '../ui/WearBadge';
 import { RARITY_CONFIG } from '../../data/skins';
 import { ExternalLink } from 'lucide-react';
+import { getSteamMarketListingUrl, isStatTrakableItem, isWearableItem } from '../../lib/steam';
 
 interface CaseSkinGroupCardProps {
   variants: SkinEntity[];
@@ -54,7 +55,7 @@ export const CaseSkinGroupCard: React.FC<CaseSkinGroupCardProps> = ({ variants }
       <div className="flex items-center justify-between gap-1 z-10">
         <div className="flex items-center gap-1">
           <WearBadge skin={activeSkin} size="xs" />
-          {activeSkin.statTrak && (
+          {activeSkin.statTrak && isStatTrakableItem(activeSkin) && (
             <span className="px-1 py-0.2 rounded text-[8.5px] font-black bg-orange-500/20 text-orange-400 border border-orange-500/30 tracking-tight">
               ST™
             </span>
@@ -118,11 +119,11 @@ export const CaseSkinGroupCard: React.FC<CaseSkinGroupCardProps> = ({ variants }
           </div>
 
           <a
-            href={activeSkin.steamMarketUrl}
+            href={getSteamMarketListingUrl(activeSkin)}
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/30 hover:text-white transition-colors"
-            title="Открыть в Steam"
+            title="Открыть лот в Steam"
           >
             <ExternalLink className="w-3.5 h-3.5" />
           </a>

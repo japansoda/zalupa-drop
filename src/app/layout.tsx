@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { LanguageProvider } from "../lib/i18n";
+import { HorizontalScrollManager } from "../components/layout/HorizontalScrollManager";
 
 export const metadata: Metadata = {
   title: "ZALUPA DROP — CS2 Кейс Симулятор & Liquid Glass",
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="ru" className="dark">
       <body className="min-h-screen bg-[#090a10] text-[#e2e8f0] antialiased selection:bg-purple-600 selection:text-white">
         <LanguageProvider>
+          <HorizontalScrollManager />
           {children}
         </LanguageProvider>
       </body>

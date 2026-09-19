@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 215" width="100%" height="100%">
+  <defs>
+    <linearGradient id="groundG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="topG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="50%" stop-color="#047857" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+
+    <linearGradient id="frontG" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#047857" />
+      <stop offset="50%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#090a10" />
+    </linearGradient>
+
+    <linearGradient id="sideG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+
+    <linearGradient id="accentG" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#ffffff" />
+    </linearGradient>
+
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Drop Shadow -->
+  <ellipse cx="125" cy="195" rx="100" ry="18" fill="url(#groundG)" />
+
+  <!-- 3D Crate Body -->
+  <!-- Top Face -->
+  <polygon points="125,25 215,65 125,105 35,65" fill="url(#topG)" stroke="#334155" stroke-width="2" />
+  
+  <!-- Right Face -->
+  <polygon points="215,65 215,145 125,185 125,105" fill="url(#sideG)" stroke="#1e293b" stroke-width="2" />
+
+  <!-- Front Face -->
+  <polygon points="35,65 125,105 125,185 35,145" fill="url(#frontG)" stroke="#334155" stroke-width="2" />
+
+  <!-- Glowing Accent Stripes -->
+  <polygon points="45,85 115,117 115,123 45,91" fill="#f43f5e" opacity="0.85" filter="url(#glow)" />
+  <polygon points="135,117 205,85 205,91 135,123" fill="#f43f5e" opacity="0.6" />
+
+  <!-- Reinforced Corner Brackets -->
+  <polygon points="35,65 50,71 42,95 35,85" fill="#475569" />
+  <polygon points="215,65 200,71 208,95 215,85" fill="#334155" />
+  <polygon points="125,105 115,110 115,130 125,125" fill="#64748b" />
+  <polygon points="125,105 135,110 135,130 125,125" fill="#475569" />
+
+  <!-- Center Steel Padlock / Emblem -->
+  <circle cx="125" cy="115" r="22" fill="#0f172a" stroke="#f43f5e" stroke-width="3" filter="url(#glow)" />
+  <circle cx="125" cy="115" r="17" fill="#1e293b" stroke="#475569" stroke-width="1.5" />
+  
+  <!-- Emblem Typography / Icon -->
+  <text x="125" y="120" font-family="monospace, sans-serif" font-weight="900" font-size="11" fill="#f43f5e" text-anchor="middle">
+    LOTU
+  </text>
+</svg>

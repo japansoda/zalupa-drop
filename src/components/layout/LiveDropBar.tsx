@@ -5,23 +5,28 @@ import { useGameStore } from '../../store/useGameStore';
 import { SKINS_DATABASE, RARITY_CONFIG } from '../../data/skins';
 import { LiveDrop } from '../../lib/types';
 import { useLanguage } from '../../lib/i18n';
+import { handleHorizontalWheel } from './HorizontalScrollManager';
+import { DropCoinIcon } from '../ui/DropCoinIcon';
 
-const BOT_AVATARS = [
-  'https://avatars.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg',
-  'https://avatars.steamstatic.com/7918a36c56db36d338f654b9d034ee8b1efad932_full.jpg',
-  'https://avatars.steamstatic.com/c5c36395b2a0957279148d42d38515091763e003_full.jpg',
-  'https://avatars.steamstatic.com/6c0be1b6c6984e8ecbf27163f9cfb4fc01977759_full.jpg',
-  'https://avatars.steamstatic.com/ed9e2d755490bcab11c34a2c53a6db69f0b144bc_full.jpg',
+const SIMULATED_CASES = [
+  'Кейс «Революция»',
+  'Грёзы и кошмары',
+  'Kilowatt Case',
+  'CS:GO Weapon Case',
+  'Кейс «Разлом»',
+  'Кейс «Призма»',
+  'Кейс «Змеиный укус»',
+  'Кейс «Решающий момент»',
+  'Кейс «Звездный дракон»',
+  'Кейс «Киберпанк»',
 ];
-
-const BOT_NAMES = ['S1mple', 'm0NESY', 'ZywOo', 'donk', 'b1t', 'NiKo', 'shroud'];
-const BOT_CASES = ['Кейс «Революция»', 'Грёзы и кошмары', 'Мусорка Залупы', 'Кейс «Киловатт»', 'Олдскул Легенды'];
 
 export const LiveDropBar: React.FC = () => {
   const { liveDrops, addLiveDrop } = useGameStore();
   const { t, locale } = useLanguage();
 
   useEffect(() => {
+    // Generate background simulated drops to keep ticker lively alongside real player drops
     const interval = setInterval(() => {
       const rand = Math.random();
       let skinPool = SKINS_DATABASE;
@@ -32,21 +37,19 @@ export const LiveDropBar: React.FC = () => {
       }
 
       const randomSkin = skinPool[Math.floor(Math.random() * skinPool.length)];
-      const randomUser = BOT_NAMES[Math.floor(Math.random() * BOT_NAMES.length)];
-      const randomAvatar = BOT_AVATARS[Math.floor(Math.random() * BOT_AVATARS.length)];
-      const randomCase = BOT_CASES[Math.floor(Math.random() * BOT_CASES.length)];
+      const randomCase = SIMULATED_CASES[Math.floor(Math.random() * SIMULATED_CASES.length)];
 
       const newDrop: LiveDrop = {
         id: `sim_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
-        user: randomUser,
-        avatar: randomAvatar,
+        user: '',
+        avatar: '',
         skin: randomSkin,
         caseName: randomCase,
         timestamp: Date.now(),
       };
 
       addLiveDrop(newDrop);
-    }, 8500);
+    }, 9000);
 
     return () => clearInterval(interval);
   }, [addLiveDrop]);
@@ -61,43 +64,62 @@ export const LiveDropBar: React.FC = () => {
           </span>
         </div>
 
-        <div className="flex items-center gap-2.5 overflow-x-auto no-scrollbar scroll-smooth py-0.5">
+        <div
+          onWheel={handleHorizontalWheel}
+          className="flex items-center gap-2.5 overflow-x-auto no-scrollbar scroll-smooth py-0.5"
+        >
           {liveDrops.map((drop) => {
             const config = RARITY_CONFIG[drop.skin.rarity] || RARITY_CONFIG.milspec;
+            const isRealDrop = drop.id.startsWith('real_') || drop.id.startsWith('contract_') || drop.id.startsWith('upgrade_');
+
             return (
               <div
                 key={drop.id}
-                className="flex items-center gap-2.5 px-2.5 py-1.5 rounded-xl glass-card shrink-0 hover:border-yellow-400/50 transition-all cursor-pointer group"
+                className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-xl glass-card shrink-0 transition-all cursor-pointer group border ${
+                  isRealDrop
+                    ? 'border-yellow-400/40 bg-yellow-400/5 shadow-[0_0_12px_rgba(250,204,21,0.15)]'
+                    : 'border-white/5 hover:border-white/20'
+                }`}
                 style={{
                   borderLeftWidth: '3px',
                   borderLeftColor: config.color,
                 }}
-                title={`${drop.user} ${locale === 'ru' ? 'выбил' : 'won'} ${drop.skin.name} ${locale === 'ru' ? 'в' : 'in'} ${drop.caseName}`}
+                title={`${drop.skin.name} — ${drop.caseName}`}
               >
-                <div className="relative w-10 h-10 rounded-lg bg-black/60 overflow-hidden flex items-center justify-center p-0.5 border border-white/5">
+                {/* Skin Icon */}
+                <div className="relative w-10 h-10 rounded-lg bg-black/60 overflow-hidden flex items-center justify-center p-0.5 border border-white/5 shrink-0">
                   <img
                     src={drop.skin.image}
                     alt={drop.skin.name}
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-contain group-hover:scale-110 transition-transform"
+                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-200"
                   />
                 </div>
-                <div className="flex flex-col leading-none pr-1">
-                  <div className="flex items-center gap-1">
-                    <img src={drop.avatar} alt="user" referrerPolicy="no-referrer" className="w-3 h-3 rounded-full" />
-                    <span className="text-[10px] font-semibold text-white/50 truncate max-w-[70px]">
-                      {drop.user}
+
+                {/* Skin Details (No Avatar, No Nickname) */}
+                <div className="flex flex-col leading-tight pr-1 min-w-[90px] max-w-[140px]">
+                  <div className="flex items-center justify-between gap-1 mb-0.5">
+                    <span
+                      className="text-[11px] font-black truncate"
+                      style={{ color: config.color }}
+                    >
+                      {drop.skin.weapon}
                     </span>
+                    {isRealDrop && (
+                      <span className="text-[8px] font-black uppercase px-1 rounded bg-yellow-400 text-black shrink-0 tracking-tighter">
+                        LIVE
+                      </span>
+                    )}
                   </div>
-                  <span
-                    className="text-xs font-bold truncate max-w-[120px] mt-1"
-                    style={{ color: config.color }}
-                  >
-                    {drop.skin.weapon}
-                  </span>
-                  <span className="text-[10px] text-white/50 truncate max-w-[120px]">
+                  <span className="text-[10px] font-semibold text-white/80 truncate">
                     {drop.skin.skinName}
                   </span>
+                  <div className="flex items-center justify-between gap-1 text-[9px] text-white/40 mt-0.5">
+                    <span className="truncate max-w-[80px]">{drop.caseName}</span>
+                    <span className="font-mono text-yellow-400/80 font-bold shrink-0">
+                      {drop.skin.priceDc.toLocaleString('ru-RU')} DC
+                    </span>
+                  </div>
                 </div>
               </div>
             );
