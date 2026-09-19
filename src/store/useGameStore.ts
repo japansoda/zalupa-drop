@@ -133,23 +133,44 @@ export const useGameStore = create<GameState>()(
         if (!drop || !drop.skin || (drop.skin.priceDc || 0) < 25000) return;
 
         set((state) => {
-          if (state.liveDrops.some((d) => d.id === drop.id)) return state;
+          const isDuplicate = state.liveDrops.some(
+            (d) => d.id === drop.id || d.id === `net_${drop.id}` || `net_${d.id}` === drop.id
+          );
+          if (isDuplicate) return state;
           return {
             liveDrops: [drop, ...state.liveDrops.slice(0, 19)],
           };
         });
 
-        // Only broadcast real player drops to other tabs
-        if (
-          (drop.id.startsWith('real_') || drop.id.startsWith('contract_') || drop.id.startsWith('upgrade_')) &&
-          typeof window !== 'undefined' &&
-          'BroadcastChannel' in window
-        ) {
-          try {
-            const bc = new BroadcastChannel('zalupa_live_drops');
-            bc.postMessage(drop);
-            bc.close();
-          } catch (_) {}
+        // Broadcast real player drops to the world (other tabs and devices on Vercel)
+        const isLocalRealDrop =
+          drop.id.startsWith('real_') ||
+          drop.id.startsWith('contract_') ||
+          drop.id.startsWith('upgrade_');
+
+        if (isLocalRealDrop && typeof window !== 'undefined') {
+          // 1. Same-device local tabs
+          if ('BroadcastChannel' in window) {
+            try {
+              const bc = new BroadcastChannel('zalupa_live_drops');
+              bc.postMessage(drop);
+              bc.close();
+            } catch (_) {}
+          }
+
+          // 2. Vercel Backend storage & persistence
+          fetch('/api/live-drops', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(drop),
+          }).catch(() => {});
+
+          // 3. Direct pub/sub for instant SSE multicast
+          fetch('https://ntfy.sh/zalupa_live_drops_v2', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(drop),
+          }).catch(() => {});
         }
       },
 

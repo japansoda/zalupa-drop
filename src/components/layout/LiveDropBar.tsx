@@ -22,13 +22,17 @@ const SIMULATED_CASES = [
   'Кейс «Хранилище Перчаток»',
 ];
 
+const isOwnDrop = (drop: LiveDrop): boolean => {
+  return drop.user === 'Вы' || drop.user === 'YOU';
+};
+
 const isRealDrop = (drop: LiveDrop): boolean => {
   return (
     drop.id.startsWith('real_') ||
     drop.id.startsWith('contract_') ||
     drop.id.startsWith('upgrade_') ||
     drop.id.startsWith('net_') ||
-    drop.user === 'Вы'
+    isOwnDrop(drop)
   );
 };
 
@@ -75,7 +79,7 @@ const LiveDropCard = memo(({ drop, isUser, locale }: CardProps) => {
           >
             {drop.skin.weapon}
           </span>
-          {/* ONLY show tag for user's own drop (which is strictly >= 100k) */}
+          {/* ONLY show tag for user's own drop */}
           {isUser && (
             <span className="text-[8px] font-black uppercase px-1.5 py-0.5 rounded bg-yellow-400 text-black shrink-0 tracking-tighter">
               {locale === 'ru' ? 'ВЫ' : 'YOU'}
@@ -144,29 +148,100 @@ export const LiveDropBar: React.FC = () => {
     return { eliteGuns: guns, eliteGloves: gloves, eliteKnives: knives };
   }, []);
 
-  // Sync real drops from other tabs/users: ONLY if >= 25,000 coins and within 3-minute window
+  // Sync real drops across the network (Vercel API + ntfy.sh SSE + local BroadcastChannel)
   useEffect(() => {
-    if (typeof window === 'undefined' || !('BroadcastChannel' in window)) return;
-    try {
-      const channel = new BroadcastChannel('zalupa_live_drops');
-      channel.onmessage = (event) => {
-        const drop = event.data;
-        if (
-          drop &&
-          drop.skin &&
-          drop.skin.priceDc >= 25000 &&
-          Date.now() - (drop.timestamp || 0) < BLEND_WINDOW_MS
-        ) {
-          addLiveDrop({ ...drop, id: `net_${drop.id}` });
+    // 1. Fetch saved real drops from Vercel server on mount
+    const fetchSavedDrops = async () => {
+      try {
+        const res = await fetch('/api/live-drops', { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = await res.json();
+        if (Array.isArray(data?.drops)) {
+          const now = Date.now();
+          data.drops.forEach((drop: LiveDrop) => {
+            if (
+              drop &&
+              drop.skin &&
+              (drop.skin.priceDc || 0) >= 25000 &&
+              now - (drop.timestamp || 0) < 15 * 60 * 1000
+            ) {
+              addLiveDrop({
+                ...drop,
+                id: drop.id.startsWith('net_') ? drop.id : `net_${drop.id}`,
+                user: '', // other player, not local user
+              });
+            }
+          });
         }
-      };
-      return () => {
-        channel.close();
-      };
+      } catch (_) {}
+    };
+
+    fetchSavedDrops();
+
+    // 2. Real-time internet SSE stream for immediate drops from any device on Vercel
+    let eventSource: EventSource | null = null;
+    try {
+      if (typeof window !== 'undefined' && 'EventSource' in window) {
+        eventSource = new EventSource('https://ntfy.sh/zalupa_live_drops_v2/sse');
+        eventSource.onmessage = (event) => {
+          try {
+            const envelope = JSON.parse(event.data);
+            if (envelope.event === 'message' && envelope.message) {
+              const drop = JSON.parse(envelope.message);
+              if (
+                drop &&
+                drop.skin &&
+                (drop.skin.priceDc || 0) >= 25000 &&
+                Date.now() - (drop.timestamp || 0) < 15 * 60 * 1000
+              ) {
+                addLiveDrop({
+                  ...drop,
+                  id: drop.id.startsWith('net_') ? drop.id : `net_${drop.id}`,
+                  user: '', // other player
+                });
+              }
+            }
+          } catch (_) {}
+        };
+      }
     } catch (_) {}
+
+    // 3. Fallback poll every 8 seconds in case SSE is disrupted
+    const pollInterval = setInterval(() => {
+      fetchSavedDrops();
+    }, 8000);
+
+    // 4. Local BroadcastChannel for instant same-browser tab sync
+    let channel: BroadcastChannel | null = null;
+    if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
+      try {
+        channel = new BroadcastChannel('zalupa_live_drops');
+        channel.onmessage = (event) => {
+          const drop = event.data;
+          if (
+            drop &&
+            drop.skin &&
+            drop.skin.priceDc >= 25000 &&
+            Date.now() - (drop.timestamp || 0) < 15 * 60 * 1000
+          ) {
+            addLiveDrop({ ...drop, id: `net_${drop.id}` });
+          }
+        };
+      } catch (_) {}
+    }
+
+    return () => {
+      clearInterval(pollInterval);
+      if (eventSource) {
+        eventSource.close();
+      }
+      if (channel) {
+        channel.close();
+      }
+    };
   }, [addLiveDrop]);
 
-  // Real drops within the active 3-minute window
+  // Real drops within recent 15 minutes
   const { recentRealDrops, fakeDrops } = useMemo(() => {
     const real: LiveDrop[] = [];
     const fake: LiveDrop[] = [];
@@ -176,7 +251,7 @@ export const LiveDropBar: React.FC = () => {
       if (!d.skin || d.skin.priceDc < 25000) continue;
 
       if (isRealDrop(d)) {
-        if (now - d.timestamp < BLEND_WINDOW_MS) {
+        if (now - (d.timestamp || 0) < 15 * 60 * 1000) {
           real.push(d);
         }
       } else {
@@ -186,12 +261,18 @@ export const LiveDropBar: React.FC = () => {
     return { recentRealDrops: real, fakeDrops: fake };
   }, [liveDrops, nowTick]);
 
+  // Real drops within the active 3-minute window (for dynamic blend calculation)
+  const realDropsLast3Min = useMemo(() => {
+    const now = Date.now();
+    return recentRealDrops.filter((d) => now - (d.timestamp || 0) < BLEND_WINDOW_MS);
+  }, [recentRealDrops, nowTick]);
+
   // Working fake drop generator (frequent drops):
   // Starts empty at page reload, first drop in 1.5s, then every 6-11s.
   // Balanced distribution: 50% Rifles/Pistols/Snipers, 25% Gloves, 25% Knives!
   // If 6 or more real drops occurred in the last 3 minutes, fake drops are completely disabled.
   useEffect(() => {
-    if (recentRealDrops.length >= 6) return;
+    if (realDropsLast3Min.length >= 6) return;
 
     // First fake drop appears fast (1.5s after load), then every 6-11 seconds
     const delay = liveDrops.length === 0 ? 1500 : 6000 + Math.random() * 5000;
@@ -229,14 +310,14 @@ export const LiveDropBar: React.FC = () => {
     }, delay);
 
     return () => clearTimeout(timeoutId);
-  }, [liveDrops.length, recentRealDrops.length, eliteGuns, eliteGloves, eliteKnives, addLiveDrop]);
+  }, [liveDrops.length, realDropsLast3Min.length, eliteGuns, eliteGloves, eliteKnives, addLiveDrop]);
 
   // Dynamic 3-minute blend logic:
   // 1. If >= 6 real drops in last 3 min: ZERO fake drops shown, only real drops!
   // 2. If 0 real drops in last 3 min: show fake drops generated over time.
   // 3. If 1-5 real drops in last 3 min: real drops first, fill remaining slots up to 12 with fake drops.
   const visibleDrops = useMemo(() => {
-    if (recentRealDrops.length >= 6) {
+    if (realDropsLast3Min.length >= 6) {
       return recentRealDrops.slice(0, 12);
     }
     if (recentRealDrops.length === 0) {
@@ -244,7 +325,7 @@ export const LiveDropBar: React.FC = () => {
     }
     const remainingSlots = Math.max(0, 12 - recentRealDrops.length);
     return [...recentRealDrops, ...fakeDrops.slice(0, remainingSlots)];
-  }, [recentRealDrops, fakeDrops]);
+  }, [recentRealDrops, fakeDrops, realDropsLast3Min.length]);
 
   return (
     <div className="w-full bg-[#0a0a0d] border-b border-white/5 py-2 overflow-hidden backdrop-blur-md max-w-full select-none">
@@ -269,7 +350,7 @@ export const LiveDropBar: React.FC = () => {
           ) : (
             <AnimatePresence initial={false}>
               {visibleDrops.map((drop) => {
-                const isUser = isRealDrop(drop);
+                const isUser = isOwnDrop(drop);
                 return (
                   <motion.div
                     key={drop.id}
