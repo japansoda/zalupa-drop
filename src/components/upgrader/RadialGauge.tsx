@@ -241,32 +241,43 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       );
       const agentBucket = closeCandidates.filter((s) => matchesCatalogType(s, 'agents'));
 
-      const availableBuckets: SkinEntity[][] = [];
-      if (knifeBucket.length > 0) availableBuckets.push(knifeBucket);
-      if (gloveBucket.length > 0) availableBuckets.push(gloveBucket);
-      if (gunBucket.length > 0) availableBuckets.push(gunBucket);
-      if (agentBucket.length > 0) availableBuckets.push(agentBucket);
+      // Category priorities: Weapons (38%), Knives (38%), Gloves (20%), Agents (4%)
+      const buckets: Array<{ name: string; items: SkinEntity[]; weight: number }> = [];
+      if (gunBucket.length > 0) buckets.push({ name: 'guns', items: gunBucket, weight: 38 });
+      if (knifeBucket.length > 0) buckets.push({ name: 'knives', items: knifeBucket, weight: 38 });
+      if (gloveBucket.length > 0) buckets.push({ name: 'gloves', items: gloveBucket, weight: 20 });
+      if (agentBucket.length > 0) buckets.push({ name: 'agents', items: agentBucket, weight: 4 });
 
-      // Choose a random available category bucket to ensure diverse mix of weapons, knives, gloves
-      let pickPool: SkinEntity[] = [];
-      if (availableBuckets.length > 0) {
-        const chosenBucket = availableBuckets[Math.floor(Math.random() * availableBuckets.length)];
-        pickPool = chosenBucket;
-      } else {
-        pickPool = closeCandidates;
+      let chosenItems = closeCandidates;
+      if (buckets.length > 0) {
+        const totalWeight = buckets.reduce((acc, b) => acc + b.weight, 0);
+        let r = Math.random() * totalWeight;
+        for (const b of buckets) {
+          r -= b.weight;
+          if (r <= 0) {
+            chosenItems = b.items;
+            break;
+          }
+        }
       }
 
-      // Sort by proximity to clampedChance
-      pickPool.sort((a, b) => Math.abs(calcChance(a) - clampedChance) - Math.abs(calcChance(b) - clampedChance));
+      // Full pool across all available items in the chosen category, excluding current skin
+      const pool = chosenItems.filter((s) => s.id !== targetSkin?.id);
+      const activePool = pool.length > 0 ? pool : chosenItems;
 
-      // Take top 30 closest items in this bucket for rich variety (no longer limited to only 4 items!)
-      const topPool = pickPool.slice(0, 30);
+      // Weight by chance proximity: skins closer to clampedChance have higher probability
+      const weights = activePool.map((s) => 1 / (Math.abs(calcChance(s) - clampedChance) + 0.25));
+      const totalW = weights.reduce((acc, w) => acc + w, 0);
+      let rw = Math.random() * totalW;
+      let chosenSkin = activePool[0];
+      for (let i = 0; i < activePool.length; i++) {
+        rw -= weights[i];
+        if (rw <= 0) {
+          chosenSkin = activePool[i];
+          break;
+        }
+      }
 
-      // Filter out currently selected skin so clicking preset cycles to a DIFFERENT skin
-      const variedPool = topPool.filter((s) => s.id !== targetSkin?.id);
-      const finalPool = variedPool.length > 0 ? variedPool : topPool;
-
-      const chosenSkin = finalPool[Math.floor(Math.random() * finalPool.length)];
       if (chosenSkin) {
         setTargetSkin(chosenSkin);
         return;
@@ -283,12 +294,23 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         }
       }
 
-      pool.sort((a, b) => Math.abs(calcChance(a) - clampedChance) - Math.abs(calcChance(b) - clampedChance));
-      const topPool = pool.slice(0, 30);
-      const variedPool = topPool.filter((s) => s.id !== targetSkin?.id);
-      const finalPool = variedPool.length > 0 ? variedPool : topPool;
+      // Full pool across all matching items, excluding current skin
+      const activePool = pool.filter((s) => s.id !== targetSkin?.id);
+      const finalPool = activePool.length > 0 ? activePool : pool;
 
-      const picked = finalPool[Math.floor(Math.random() * finalPool.length)];
+      // Weight by chance proximity
+      const weights = finalPool.map((s) => 1 / (Math.abs(calcChance(s) - clampedChance) + 0.25));
+      const totalW = weights.reduce((acc, w) => acc + w, 0);
+      let rw = Math.random() * totalW;
+      let picked = finalPool[0];
+      for (let i = 0; i < finalPool.length; i++) {
+        rw -= weights[i];
+        if (rw <= 0) {
+          picked = finalPool[i];
+          break;
+        }
+      }
+
       if (picked) {
         setTargetSkin(picked);
       }
