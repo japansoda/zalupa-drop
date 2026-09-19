@@ -236,9 +236,6 @@ export const TradeUpContract: React.FC = () => {
                 <h1 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
                   {t('contract.title')}
                 </h1>
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-yellow-400 text-black shadow-sm uppercase tracking-wider">
-                  RTP 98%
-                </span>
               </div>
               <p className="text-xs text-white/50 mt-0.5">
                 {t('contract.subtitle')}
@@ -389,7 +386,7 @@ export const TradeUpContract: React.FC = () => {
               </span>
               <span className="font-mono font-black text-sm text-emerald-400 flex items-center gap-1">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                ~{expectedReturnDc.toLocaleString('ru-RU')} DC (98%)
+                ~{expectedReturnDc.toLocaleString('ru-RU')} DC
               </span>
             </div>
           </div>
@@ -463,6 +460,44 @@ export const TradeUpContract: React.FC = () => {
           </div>
         </div>
 
+        {/* Rarity Tabs with animated sliding pill */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+          {[
+            { id: 'all', label: locale === 'ru' ? 'Все' : 'All' },
+            { id: 'covert', label: locale === 'ru' ? 'Тайное' : 'Covert' },
+            { id: 'classified', label: locale === 'ru' ? 'Засекреченное' : 'Classified' },
+            { id: 'restricted', label: locale === 'ru' ? 'Запрещенное' : 'Restricted' },
+            { id: 'milspec', label: locale === 'ru' ? 'Армейское' : 'Mil-Spec' },
+          ].map((tab) => {
+            const isActive = rarityFilter === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => {
+                  sound.playClick();
+                  setRarityFilter(tab.id);
+                }}
+                className={`relative px-3 py-1 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer z-10 ${
+                  isActive ? 'text-black' : 'text-white/60 hover:text-white'
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeContractRarityTab"
+                    className="absolute inset-0 rounded-xl bg-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.3)] -z-10"
+                    transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                  />
+                )}
+                {!isActive && (
+                  <div className="absolute inset-0 rounded-xl bg-white/5 border border-white/10 -z-20" />
+                )}
+                <span className="relative z-10">{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
+
         {/* Inventory Cards */}
         {filteredInventory.length === 0 ? (
           <div className="py-16 text-center rounded-3xl glass-panel border border-white/5 flex flex-col items-center justify-center gap-3">
@@ -474,7 +509,15 @@ export const TradeUpContract: React.FC = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={rarityFilter + '_' + sortBy}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.18 }}
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3"
+            >
             {filteredInventory.map((item) => {
               const isSelected = selectedInstanceIds.includes(item.instanceId);
               const config = RARITY_CONFIG[item.rarity] || RARITY_CONFIG.milspec;
@@ -532,7 +575,8 @@ export const TradeUpContract: React.FC = () => {
                 </div>
               );
             })}
-          </div>
+            </motion.div>
+          </AnimatePresence>
         )}
       </div>
 

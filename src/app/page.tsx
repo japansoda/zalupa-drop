@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Header } from '../components/layout/Header';
 import { Footer } from '../components/layout/Footer';
 import { LiveDropBar } from '../components/layout/LiveDropBar';
@@ -178,13 +179,23 @@ export default function HomePage() {
                     sound.playClick();
                     setSelectedCategory(cat.id);
                   }}
-                  className={`px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
+                  className={`relative px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider whitespace-nowrap transition-colors cursor-pointer ${
                     isActive
-                      ? 'bg-yellow-400 text-black shadow-[0_0_15px_rgba(250,204,21,0.35)] scale-105'
-                      : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10'
+                      ? 'text-black font-black'
+                      : 'text-white/70 hover:text-white'
                   }`}
                 >
-                  {label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeCategoryTab"
+                      className="absolute inset-0 rounded-xl bg-yellow-400 shadow-[0_0_18px_rgba(250,204,21,0.4)]"
+                      transition={{ type: 'spring', stiffness: 450, damping: 32 }}
+                    />
+                  )}
+                  {!isActive && (
+                    <div className="absolute inset-0 rounded-xl border border-white/10 bg-white/5" />
+                  )}
+                  <span className="relative z-10">{label}</span>
                 </button>
               );
             })}
@@ -211,9 +222,17 @@ export default function HomePage() {
               </button>
             </div>
           ) : (
-            /* Cases Grid with progressive loading */
             <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {/* Cases Grid with progressive loading and animated tab transition */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedCategory + '_' + sortBy}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.22, ease: 'easeOut' }}
+                >
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filteredCases.slice(0, displayLimit).map((caseItem) => {
                   const isHighroller = caseItem.priceDc >= 25000;
                   const isUltra = caseItem.priceDc >= 60000;
@@ -330,28 +349,30 @@ export default function HomePage() {
                     </Link>
                   );
                 })}
-              </div>
-
-              {/* Infinite Scroll Sentinel / Status */}
-              {displayLimit < filteredCases.length && (
-                <div
-                  ref={loadMoreRef}
-                  className="py-8 flex flex-col items-center justify-center text-center gap-2"
-                >
-                  <span className="text-xs text-white/40 font-mono">
-                    {t('home.showing')} {Math.min(displayLimit, filteredCases.length)} {t('home.of')} {filteredCases.length} {t('home.items')}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setDisplayLimit((prev) => prev + 36)}
-                    className="px-6 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-white transition-all cursor-pointer"
-                  >
-                    {t('home.loadMore')}
-                  </button>
                 </div>
-              )}
-            </>
-          )}
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Infinite Scroll Sentinel / Status */}
+            {displayLimit < filteredCases.length && (
+              <div
+                ref={loadMoreRef}
+                className="py-8 flex flex-col items-center justify-center text-center gap-2"
+              >
+                <span className="text-xs text-white/40 font-mono">
+                  {t('home.showing')} {Math.min(displayLimit, filteredCases.length)} {t('home.of')} {filteredCases.length} {t('home.items')}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setDisplayLimit((prev) => prev + 36)}
+                  className="px-6 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-white transition-all cursor-pointer"
+                >
+                  {t('home.loadMore')}
+                </button>
+              </div>
+            )}
+          </>
+        )}
         </section>
       </div>
 

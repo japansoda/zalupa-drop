@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Header } from '../../components/layout/Header';
 import { Footer } from '../../components/layout/Footer';
 import { LiveDropBar } from '../../components/layout/LiveDropBar';
@@ -102,23 +103,34 @@ export default function InventoryPage() {
               { id: 'classified', label: t('inv.tab.classified') },
               { id: 'restricted', label: t('inv.tab.restricted') },
               { id: 'milspec', label: t('inv.tab.milspec') },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => {
-                  sound.playClick();
-                  setFilterRarity(tab.id);
-                }}
-                className={`px-4 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
-                  filterRarity === tab.id
-                    ? 'bg-yellow-400 text-black shadow-[0_0_12px_rgba(250,204,21,0.35)]'
-                    : 'glass-button text-white/60 hover:text-white'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
+            ].map((tab) => {
+              const isActive = filterRarity === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => {
+                    sound.playClick();
+                    setFilterRarity(tab.id);
+                  }}
+                  className={`relative px-4 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-colors cursor-pointer z-10 ${
+                    isActive ? 'text-black' : 'text-white/60 hover:text-white'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeInventoryTab"
+                      className="absolute inset-0 rounded-xl bg-yellow-400 shadow-[0_0_12px_rgba(250,204,21,0.35)] -z-10"
+                      transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                    />
+                  )}
+                  {!isActive && (
+                    <div className="absolute inset-0 rounded-xl glass-button -z-20" />
+                  )}
+                  <span className="relative z-10">{tab.label}</span>
+                </button>
+              );
+            })}
           </div>
         </section>
 
@@ -145,74 +157,83 @@ export default function InventoryPage() {
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {filteredInventory.map((item) => {
-                const config = RARITY_CONFIG[item.rarity] || RARITY_CONFIG.milspec;
-                return (
-                  <div
-                    key={item.instanceId}
-                    className="rounded-2xl glass-card p-3 flex flex-col justify-between border hover:border-yellow-400/40 transition-all group"
-                    style={{ borderBottomWidth: '3px', borderBottomColor: config.color }}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1">
-                        {item.statTrak && (
-                          <span className="text-[9px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40">
-                            ST
-                          </span>
-                        )}
-                        <WearBadge skin={item} size="xs" />
-                      </div>
-                      <RarityBadge rarity={item.rarity} size="sm" />
-                    </div>
-
-                    <div className="w-full h-28 flex items-center justify-center my-2">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        referrerPolicy="no-referrer"
-                        className="w-24 h-24 object-contain group-hover:scale-110 transition-transform filter drop-shadow-md"
-                      />
-                    </div>
-
-                    <div className="flex flex-col">
-                      <span className="text-xs font-bold text-white truncate">{item.weapon}</span>
-                      <span className="text-[11px] truncate mb-2" style={{ color: config.color }}>
-                        {item.skinName}
-                      </span>
-
-                      <div className="flex items-center justify-between pt-2 border-t border-white/5 mb-2">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={filterRarity}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.2 }}
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+              >
+                {filteredInventory.map((item) => {
+                  const config = RARITY_CONFIG[item.rarity] || RARITY_CONFIG.milspec;
+                  return (
+                    <div
+                      key={item.instanceId}
+                      className="rounded-2xl glass-card p-3 flex flex-col justify-between border hover:border-yellow-400/40 transition-all group"
+                      style={{ borderBottomWidth: '3px', borderBottomColor: config.color }}
+                    >
+                      <div className="flex items-center justify-between">
                         <div className="flex items-center gap-1">
-                          <DropCoinIcon size={14} />
-                          <span className="font-mono text-xs font-bold text-yellow-400">
-                            {item.priceDc.toLocaleString('ru-RU')}
-                          </span>
+                          {item.statTrak && (
+                            <span className="text-[9px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40">
+                              ST
+                            </span>
+                          )}
+                          <WearBadge skin={item} size="xs" />
+                        </div>
+                        <RarityBadge rarity={item.rarity} size="sm" />
+                      </div>
+
+                      <div className="w-full h-28 flex items-center justify-center my-2">
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          referrerPolicy="no-referrer"
+                          className="w-24 h-24 object-contain group-hover:scale-110 transition-transform filter drop-shadow-md"
+                        />
+                      </div>
+
+                      <div className="flex flex-col">
+                        <span className="text-xs font-bold text-white truncate">{item.weapon}</span>
+                        <span className="text-[11px] truncate mb-2" style={{ color: config.color }}>
+                          {item.skinName}
+                        </span>
+
+                        <div className="flex items-center justify-between pt-2 border-t border-white/5 mb-2">
+                          <div className="flex items-center gap-1">
+                            <DropCoinIcon size={14} />
+                            <span className="font-mono text-xs font-bold text-yellow-400">
+                              {item.priceDc.toLocaleString('ru-RU')}
+                            </span>
+                          </div>
+
+                          <a
+                            href={item.steamMarketUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-white/30 hover:text-white transition-colors"
+                            title="Открыть в Steam"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
                         </div>
 
-                        <a
-                          href={item.steamMarketUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-white/30 hover:text-white transition-colors"
-                          title="Открыть в Steam"
+                        <button
+                          type="button"
+                          onClick={() => sellSkin(item.instanceId)}
+                          className="w-full py-1.5 rounded-lg glass-button text-[11px] font-bold text-yellow-400 hover:bg-yellow-400 hover:text-black flex items-center justify-center gap-1 transition-all cursor-pointer"
                         >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </a>
+                          <ShoppingBag className="w-3 h-3" />
+                          <span>{t('inv.sell')} {item.priceDc} DC</span>
+                        </button>
                       </div>
-
-                      <button
-                        type="button"
-                        onClick={() => sellSkin(item.instanceId)}
-                        className="w-full py-1.5 rounded-lg glass-button text-[11px] font-bold text-yellow-400 hover:bg-yellow-400 hover:text-black flex items-center justify-center gap-1 transition-all cursor-pointer"
-                      >
-                        <ShoppingBag className="w-3 h-3" />
-                        <span>{t('inv.sell')} {item.priceDc} DC</span>
-                      </button>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </motion.div>
+            </AnimatePresence>
           )}
         </section>
       </div>

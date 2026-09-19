@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { SkinEntity, InventoryItem, CaseItem, SkinRarity } from '../../lib/types';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { RARITY_CONFIG } from '../../data/skins';
@@ -667,35 +667,52 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           {/* 1. LEFT CARD: Selected Input / Bet / Consumables */}
           <div className="lg:col-span-4 flex flex-col gap-3">
             <div className="flex items-center justify-between pb-2.5 border-b border-white/10 gap-2">
-              <div className="flex items-center p-1 bg-black/50 border border-white/10 rounded-xl gap-1 shrink-0">
+              <div className="relative flex items-center p-1 bg-black/50 border border-white/10 rounded-xl gap-1 shrink-0">
                 <button
                   type="button"
                   onClick={() => {
+                    sound.playClick();
                     setBetMode('skin');
                     const bet = selectedItems.reduce((s, i) => s + i.priceDc, 0);
                     if (bet > 0) autoSelectTargetSkin(targetChance, bet);
                   }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                    betMode === 'skin' ? 'bg-yellow-400 text-black shadow-sm' : 'text-white/60 hover:text-white'
+                  className={`relative px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer whitespace-nowrap z-10 ${
+                    betMode === 'skin' ? 'text-black' : 'text-white/60 hover:text-white'
                   }`}
                 >
-                  {t('upg.tab.skins')} ({selectedItems.length}/5)
+                  {betMode === 'skin' && (
+                    <motion.div
+                      layoutId="upgraderBetModeIndicator"
+                      className="absolute inset-0 rounded-lg bg-yellow-400 shadow-sm -z-10"
+                      transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                    />
+                  )}
+                  <span>{t('upg.tab.skins')} ({selectedItems.length}/5)</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => {
+                    sound.playClick();
                     setBetMode('dc');
                     if (customBetDc > 0) autoSelectTargetSkin(targetChance, customBetDc);
                   }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                    betMode === 'dc' ? 'bg-yellow-400 text-black shadow-sm' : 'text-white/60 hover:text-white'
+                  className={`relative px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer whitespace-nowrap z-10 ${
+                    betMode === 'dc' ? 'text-black' : 'text-white/60 hover:text-white'
                   }`}
                 >
-                  {t('upg.tab.balance')}
+                  {betMode === 'dc' && (
+                    <motion.div
+                      layoutId="upgraderBetModeIndicator"
+                      className="absolute inset-0 rounded-lg bg-yellow-400 shadow-sm -z-10"
+                      transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                    />
+                  )}
+                  <span>{t('upg.tab.balance')}</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => {
+                    sound.playClick();
                     setBetMode('consumables');
                     let tok = selectedToken;
                     if (!tok) {
@@ -704,10 +721,17 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     }
                     if (tok) autoSelectTargetSkin(targetChance, tok.valueDc);
                   }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
-                    betMode === 'consumables' ? 'bg-yellow-400 text-black shadow-sm' : 'text-yellow-400/80 hover:text-yellow-400'
+                  className={`relative px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap z-10 ${
+                    betMode === 'consumables' ? 'text-black' : 'text-yellow-400/80 hover:text-yellow-400'
                   }`}
                 >
+                  {betMode === 'consumables' && (
+                    <motion.div
+                      layoutId="upgraderBetModeIndicator"
+                      className="absolute inset-0 rounded-lg bg-yellow-400 shadow-sm -z-10"
+                      transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                    />
+                  )}
                   <Gift className="w-3.5 h-3.5" />
                   <span>{t('upg.tab.consumables')}</span>
                 </button>
@@ -1391,23 +1415,34 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
           {/* Item Types Filter Pills */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-2 mb-3 no-scrollbar">
-            {ITEM_TYPES.map((type) => (
-              <button
-                key={type.id}
-                type="button"
-                onClick={() => {
-                  sound.playClick();
-                  setCatalogType(type.id);
-                }}
-                className={`px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap transition-all cursor-pointer ${
-                  catalogType === type.id
-                    ? 'bg-yellow-400 text-black shadow-[0_0_10px_rgba(250,204,21,0.3)]'
-                    : 'bg-white/5 text-white/60 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                {t('type.' + type.id) || type.label}
-              </button>
-            ))}
+            {ITEM_TYPES.map((type) => {
+              const isAct = catalogType === type.id;
+              return (
+                <button
+                  key={type.id}
+                  type="button"
+                  onClick={() => {
+                    sound.playClick();
+                    setCatalogType(type.id);
+                  }}
+                  className={`relative px-2.5 py-1 rounded-lg text-[11px] font-bold whitespace-nowrap transition-colors cursor-pointer z-10 ${
+                    isAct ? 'text-black' : 'text-white/60 hover:text-white'
+                  }`}
+                >
+                  {isAct && (
+                    <motion.div
+                      layoutId="upgraderCatalogTypeIndicator"
+                      className="absolute inset-0 rounded-lg bg-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.3)] -z-10"
+                      transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+                    />
+                  )}
+                  {!isAct && (
+                    <div className="absolute inset-0 rounded-lg bg-white/5 hover:bg-white/10 -z-20" />
+                  )}
+                  <span className="relative z-10">{t('type.' + type.id) || type.label}</span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Search */}
