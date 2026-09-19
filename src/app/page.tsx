@@ -45,7 +45,7 @@ const CASE_BASE_POPULARITY: Record<string, number> = {
   chroma_case: 7300,
 };
 
-import { getCaseThemeGlow } from '../lib/caseTheme';
+import { getCaseThemeGlow, getOptimizedCaseImageUrl } from '../lib/caseTheme';
 
 export default function HomePage() {
   const { t, locale } = useLanguage();
@@ -330,11 +330,16 @@ export default function HomePage() {
                         />
 
                         <img
-                          src={caseItem.image}
+                          src={getOptimizedCaseImageUrl(caseItem.image)}
                           alt={caseItem.name}
                           loading={idx < 12 ? 'eager' : 'lazy'}
                           decoding="async"
                           referrerPolicy="no-referrer"
+                          onError={(e) => {
+                            if (e.currentTarget.src !== caseItem.image) {
+                              e.currentTarget.src = caseItem.image;
+                            }
+                          }}
                           style={{
                             filter: `drop-shadow(0 0 20px rgba(${glow.rgb}, 0.75)) drop-shadow(0 12px 22px rgba(0,0,0,0.85))`
                           }}

@@ -16,7 +16,7 @@ import { useLanguage } from '../../../lib/i18n';
 import { ArrowLeft, ShieldCheck } from 'lucide-react';
 import { CaseSpecialItemCard } from '../../../components/case/CaseSpecialItemCard';
 import { isOfficialCase, isKnifeOrGlove } from '../../../lib/caseSpecials';
-import { getCaseThemeGlow } from '../../../lib/caseTheme';
+import { getCaseThemeGlow, getOptimizedCaseImageUrl } from '../../../lib/caseTheme';
 
 export default function CaseOpenPage() {
   const params = useParams();
@@ -93,9 +93,14 @@ export default function CaseOpenPage() {
                       }}
                     />
                     <img 
-                      src={currentCase.image} 
+                      src={getOptimizedCaseImageUrl(currentCase.image)} 
                       alt={currentCase.name} 
                       referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        if (e.currentTarget.src !== currentCase.image) {
+                          e.currentTarget.src = currentCase.image;
+                        }
+                      }}
                       style={{
                         filter: `drop-shadow(0 0 16px rgba(${glow.rgb}, 0.75)) drop-shadow(0 6px 14px rgba(0,0,0,0.85))`
                       }}

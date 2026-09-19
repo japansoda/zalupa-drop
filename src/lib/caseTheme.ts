@@ -1,7 +1,20 @@
 export function getCaseThemeGlow(c: { id: string; name: string; category?: string; priceDc: number }): { rgb: string; hex: string } {
   const t = (c.id + ' ' + c.name + ' ' + (c.category || '')).toLowerCase();
-  if (t.includes('gold') || t.includes('sheikh') || t.includes('millionaire') || t.includes('oligarch') || t.includes('souvenir') || t.includes('diamond') || c.priceDc >= 25000) {
-    return { rgb: '245, 158, 11', hex: '#f59e0b' }; // Gold
+  const price = c.priceDc || 0;
+
+  // Ultra-tier (50,000+ DC, Oligarch, Sheikh, Diamond)
+  if (price >= 50000 || t.includes('sheikh') || t.includes('oligarch') || t.includes('100000') || t.includes('diamond')) {
+    return { rgb: '251, 191, 36', hex: '#fbbf24' }; // Mythic Sun Gold
+  }
+
+  // Highroller tier (25,000+ DC, Gold, Jackpot, Millionaire)
+  if (price >= 25000 || t.includes('gold') || t.includes('jackpot') || t.includes('millionaire') || t.includes('royale') || t.includes('50000')) {
+    return { rgb: '245, 158, 11', hex: '#f59e0b' }; // CS2 Amber Gold
+  }
+
+  // Specific custom themes
+  if (t.includes('dragon') || t.includes('lore') || t.includes('valhalla') || t.includes('norse') || t.includes('gods_monsters')) {
+    return { rgb: '16, 185, 129', hex: '#10b981' }; // Imperial Emerald
   }
   if (t.includes('crimson') || t.includes('redline') || t.includes('bloodsport') || t.includes('red') || t.includes('clash') || t.includes('slaughter') || t.includes('howl')) {
     return { rgb: '239, 68, 68', hex: '#ef4444' }; // Crimson Red
@@ -13,12 +26,12 @@ export function getCaseThemeGlow(c: { id: string; name: string; category?: strin
     return { rgb: '6, 182, 212', hex: '#06b6d4' }; // Frost Cyan
   }
   if (t.includes('toxic') || t.includes('hazard') || t.includes('atomic') || t.includes('gamma') || t.includes('emerald') || t.includes('green') || t.includes('zalupa')) {
-    return { rgb: '34, 197, 94', hex: '#22c55e' }; // Toxic Green
+    return { rgb: '34, 197, 94', hex: '#22c55e' }; // Toxic Biohazard Green
   }
   if (t.includes('anime') || t.includes('waifu') || t.includes('bubblegum') || t.includes('candy') || t.includes('rush')) {
     return { rgb: '244, 63, 94', hex: '#f43f5e' }; // Neon Waifu Pink
   }
-  if (t.includes('doppler') || t.includes('galaxy') || t.includes('space') || t.includes('purple') || t.includes('fantasy') || t.includes('odyssey') || t.includes('universe')) {
+  if (t.includes('doppler') || t.includes('galaxy') || t.includes('space') || t.includes('fantasy') || t.includes('odyssey') || t.includes('universe')) {
     return { rgb: '168, 85, 247', hex: '#a855f7' }; // Cosmic Purple
   }
   if (t.includes('cyber') || t.includes('neon') || t.includes('tokyo') || t.includes('matrix') || t.includes('glitch') || t.includes('samurai') || t.includes('ninja') || t.includes('synth') || t.includes('retro')) {
@@ -34,7 +47,28 @@ export function getCaseThemeGlow(c: { id: string; name: string; category?: strin
     return { rgb: '245, 158, 11', hex: '#f59e0b' }; // Glove Amber
   }
   if (c.category === 'knives' || t.includes('knife') || t.includes('bayonet') || t.includes('karambit') || t.includes('butterfly')) {
-    return { rgb: '147, 51, 234', hex: '#9333ea' }; // Knives Purple
+    return { rgb: '147, 51, 234', hex: '#9333ea' }; // Knives Royalty Purple
   }
-  return { rgb: '56, 189, 248', hex: '#38bdf8' }; // Tactical Sky Blue
+
+  // Price-based tiers for non-themed cases
+  if (price >= 10000) {
+    return { rgb: '147, 51, 234', hex: '#9333ea' }; // Rare Royalty Purple
+  }
+  if (price >= 3500) {
+    return { rgb: '56, 189, 248', hex: '#38bdf8' }; // Classified Sky Blue
+  }
+
+  // Vanilla / Normal / Budget cases -> Crisp Studio White
+  return { rgb: '255, 255, 255', hex: '#ffffff' };
+}
+
+export function getOptimizedCaseImageUrl(src: string): string {
+  if (!src) return '';
+  if (src.startsWith('/')) {
+    return src.replace('.png', '.webp');
+  }
+  if (src.includes('steamstatic.com') || src.includes('akamaihd.net') || src.includes('steamcommunity')) {
+    return `https://wsrv.nl/?url=${encodeURIComponent(src)}&w=440&output=webp&q=82`;
+  }
+  return src;
 }
