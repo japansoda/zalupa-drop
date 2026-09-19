@@ -7,9 +7,9 @@ import { LiveDrop } from '@/lib/types';
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
-const NTFY_TOPIC = 'zalupa_live_drops_v2';
+const NTFY_TOPIC = 'zalupa_live_drops_v3';
 const NTFY_URL = `https://ntfy.sh/${NTFY_TOPIC}`;
-const DISK_FILE = path.join(os.tmpdir(), 'zalupa_live_drops_v2.json');
+const DISK_FILE = path.join(os.tmpdir(), 'zalupa_live_drops_v3.json');
 const MAX_DROPS = 50;
 
 // Global memory buffer for warm serverless instances
@@ -28,7 +28,9 @@ function loadFromDisk(): LiveDrop[] {
     if (fs.existsSync(DISK_FILE)) {
       const data = fs.readFileSync(DISK_FILE, 'utf-8');
       const parsed = JSON.parse(data);
-      if (Array.isArray(parsed)) return parsed;
+      if (Array.isArray(parsed)) {
+        return parsed.filter((d) => d?.skin?.image && d?.skin?.name && (d?.skin?.priceDc || 0) >= 25000);
+      }
     }
   } catch (_) {}
   return [];
@@ -47,7 +49,7 @@ function mergeDrops(existing: LiveDrop[], incoming: LiveDrop[]): LiveDrop[] {
 
   // Add existing
   for (const d of existing) {
-    if (d && d.skin && (d.skin.priceDc || 0) >= 25000) {
+    if (d && d.skin && d.skin.image && d.skin.name && (d.skin.priceDc || 0) >= 25000) {
       const cleanId = d.id.replace(/^net_/, '');
       map.set(cleanId, d);
     }
@@ -55,7 +57,7 @@ function mergeDrops(existing: LiveDrop[], incoming: LiveDrop[]): LiveDrop[] {
 
   // Add incoming (overwrites if matching ID)
   for (const d of incoming) {
-    if (d && d.skin && (d.skin.priceDc || 0) >= 25000) {
+    if (d && d.skin && d.skin.image && d.skin.name && (d.skin.priceDc || 0) >= 25000) {
       const cleanId = d.id.replace(/^net_/, '');
       map.set(cleanId, d);
     }
@@ -84,7 +86,7 @@ async function syncFromNtfy(): Promise<LiveDrop[]> {
         const item = JSON.parse(line);
         if (item.event === 'message' && item.message) {
           const drop = JSON.parse(item.message);
-          if (drop && drop.skin && (drop.skin.priceDc || 0) >= 25000) {
+          if (drop && drop.skin && drop.skin.image && drop.skin.name && (drop.skin.priceDc || 0) >= 25000) {
             drops.push(drop);
           }
         }
@@ -134,7 +136,14 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    if (!body || !body.skin || typeof body.skin.priceDc !== 'number' || body.skin.priceDc < 25000) {
+    if (
+      !body ||
+      !body.skin ||
+      !body.skin.image ||
+      !body.skin.name ||
+      typeof body.skin.priceDc !== 'number' ||
+      body.skin.priceDc < 25000
+    ) {
       return NextResponse.json({ error: 'Invalid drop or price < 25000 DC' }, { status: 400 });
     }
 

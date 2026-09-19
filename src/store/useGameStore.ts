@@ -129,8 +129,8 @@ export const useGameStore = create<GameState>()(
       },
 
       addLiveDrop: (drop) => {
-        // Strictly only drops >= 25,000 DC can enter live drop ticker
-        if (!drop || !drop.skin || (drop.skin.priceDc || 0) < 25000) return;
+        // Strictly only valid drops >= 25,000 DC can enter live drop ticker
+        if (!drop || !drop.skin || !drop.skin.image || !drop.skin.name || (drop.skin.priceDc || 0) < 25000) return;
 
         set((state) => {
           const isDuplicate = state.liveDrops.some(
@@ -152,7 +152,7 @@ export const useGameStore = create<GameState>()(
           // 1. Same-device local tabs
           if ('BroadcastChannel' in window) {
             try {
-              const bc = new BroadcastChannel('zalupa_live_drops');
+              const bc = new BroadcastChannel('zalupa_live_drops_v3');
               bc.postMessage(drop);
               bc.close();
             } catch (_) {}
@@ -166,7 +166,7 @@ export const useGameStore = create<GameState>()(
           }).catch(() => {});
 
           // 3. Direct pub/sub for instant SSE multicast
-          fetch('https://ntfy.sh/zalupa_live_drops_v2', {
+          fetch('https://ntfy.sh/zalupa_live_drops_v3', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(drop),
