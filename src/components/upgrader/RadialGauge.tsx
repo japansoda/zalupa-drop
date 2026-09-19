@@ -322,8 +322,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     { label: '25%', chance: 25.0 },
     { label: '35%', chance: 35.0 },
     { label: '50%', chance: 50.0 },
-    { label: '70%', chance: 70.0 },
-    { label: '80%', chance: 80.0 },
+    { label: '75%', chance: 75.0 },
   ];
 
   // Quick Multiplier presets (SECONDARY)
