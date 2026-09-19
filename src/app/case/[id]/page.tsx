@@ -16,6 +16,7 @@ import { useLanguage } from '../../../lib/i18n';
 import { ArrowLeft, ShieldCheck } from 'lucide-react';
 import { CaseSpecialItemCard } from '../../../components/case/CaseSpecialItemCard';
 import { isOfficialCase, isKnifeOrGlove } from '../../../lib/caseSpecials';
+import { getCaseThemeGlow } from '../../../lib/caseTheme';
 
 export default function CaseOpenPage() {
   const params = useParams();
@@ -77,14 +78,32 @@ export default function CaseOpenPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pb-4 border-b border-white/10">
             <div className="flex items-center gap-3 sm:gap-4 text-left w-full sm:w-auto">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-black/60 border border-white/10 p-1.5 shrink-0 relative flex items-center justify-center">
-                <img 
-                  src={currentCase.image} 
-                  alt={currentCase.name} 
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(250,204,21,0.4)]" 
-                />
-              </div>
+              {(() => {
+                const glow = getCaseThemeGlow(currentCase);
+                return (
+                  <div 
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-black/60 border p-2 shrink-0 relative flex items-center justify-center overflow-visible"
+                    style={{ borderColor: `rgba(${glow.rgb}, 0.35)` }}
+                  >
+                    {/* Ambient glow behind crate */}
+                    <div
+                      className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-full blur-xl z-0 pointer-events-none opacity-80"
+                      style={{
+                        background: `radial-gradient(circle, rgba(${glow.rgb}, 0.7) 0%, rgba(${glow.rgb}, 0.25) 50%, transparent 75%)`
+                      }}
+                    />
+                    <img 
+                      src={currentCase.image} 
+                      alt={currentCase.name} 
+                      referrerPolicy="no-referrer"
+                      style={{
+                        filter: `drop-shadow(0 0 16px rgba(${glow.rgb}, 0.75)) drop-shadow(0 6px 14px rgba(0,0,0,0.85))`
+                      }}
+                      className="relative z-10 w-full h-full object-contain" 
+                    />
+                  </div>
+                );
+              })()}
               <div className="flex flex-col">
                 <h1 className="text-xl sm:text-3xl font-black text-white uppercase tracking-tight line-clamp-2">
                   {currentCase.name}

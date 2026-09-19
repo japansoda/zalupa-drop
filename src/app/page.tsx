@@ -45,46 +45,7 @@ const CASE_BASE_POPULARITY: Record<string, number> = {
   chroma_case: 7300,
 };
 
-function getCaseThemeGlow(c: { id: string; name: string; category?: string; priceDc: number }): { rgb: string; hex: string } {
-  const t = (c.id + ' ' + c.name + ' ' + (c.category || '')).toLowerCase();
-  if (t.includes('gold') || t.includes('sheikh') || t.includes('millionaire') || t.includes('oligarch') || t.includes('souvenir') || t.includes('diamond') || c.priceDc >= 25000) {
-    return { rgb: '245, 158, 11', hex: '#f59e0b' }; // Gold
-  }
-  if (t.includes('crimson') || t.includes('redline') || t.includes('bloodsport') || t.includes('red') || t.includes('clash')) {
-    return { rgb: '239, 68, 68', hex: '#ef4444' }; // Crimson Red
-  }
-  if (t.includes('fire') || t.includes('inferno') || t.includes('vulcan') || t.includes('phoenix') || t.includes('heat') || t.includes('breath')) {
-    return { rgb: '249, 115, 22', hex: '#f97316' }; // Flame Orange
-  }
-  if (t.includes('ice') || t.includes('frost') || t.includes('blizzard') || t.includes('arctic') || t.includes('water')) {
-    return { rgb: '6, 182, 212', hex: '#06b6d4' }; // Frost Cyan
-  }
-  if (t.includes('toxic') || t.includes('hazard') || t.includes('atomic') || t.includes('gamma') || t.includes('emerald') || t.includes('green') || t.includes('zalupa')) {
-    return { rgb: '34, 197, 94', hex: '#22c55e' }; // Toxic Green
-  }
-  if (t.includes('anime') || t.includes('waifu') || t.includes('bubblegum') || t.includes('candy')) {
-    return { rgb: '244, 63, 94', hex: '#f43f5e' }; // Neon Waifu Pink
-  }
-  if (t.includes('doppler') || t.includes('galaxy') || t.includes('space') || t.includes('purple') || t.includes('fantasy') || t.includes('odyssey')) {
-    return { rgb: '168, 85, 247', hex: '#a855f7' }; // Cosmic Purple
-  }
-  if (t.includes('cyber') || t.includes('neon') || t.includes('tokyo') || t.includes('matrix') || t.includes('glitch') || t.includes('samurai') || t.includes('ninja') || t.includes('synth') || t.includes('retro')) {
-    return { rgb: '217, 70, 239', hex: '#d946ef' }; // Cyber Magenta
-  }
-  if (t.includes('fade') || t.includes('spectrum') || t.includes('prisma') || t.includes('marble')) {
-    return { rgb: '192, 132, 252', hex: '#c084fc' }; // Rainbow Chroma
-  }
-  if (t.includes('asiimov') || t.includes('mecha') || t.includes('printstream') || t.includes('velocity')) {
-    return { rgb: '249, 115, 22', hex: '#f97316' }; // Asiimov Orange
-  }
-  if (t.includes('glove') || t.includes('specialist') || t.includes('driver')) {
-    return { rgb: '245, 158, 11', hex: '#f59e0b' }; // Glove Amber
-  }
-  if (c.category === 'knives' || t.includes('knife') || t.includes('bayonet') || t.includes('karambit') || t.includes('butterfly')) {
-    return { rgb: '147, 51, 234', hex: '#9333ea' }; // Knives Purple
-  }
-  return { rgb: '56, 189, 248', hex: '#38bdf8' }; // Tactical Sky Blue
-}
+import { getCaseThemeGlow } from '../lib/caseTheme';
 
 export default function HomePage() {
   const { t, locale } = useLanguage();
@@ -298,22 +259,34 @@ export default function HomePage() {
                   style={{ transform: 'translateZ(0)' }}
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {filteredCases.slice(0, displayLimit).map((caseItem) => {
+                {filteredCases.slice(0, displayLimit).map((caseItem, idx) => {
                   const isHighroller = caseItem.priceDc >= 25000;
                   const isUltra = caseItem.priceDc >= 60000;
+                  const glow = getCaseThemeGlow(caseItem);
 
                   return (
                     <Link
                       key={caseItem.id}
                       href={`/case/${caseItem.id}`}
                       onClick={() => sound.playClick()}
+                      style={{
+                        boxShadow: `0 0 25px rgba(${glow.rgb}, 0.12)`,
+                      }}
                       className={`group relative rounded-3xl glass-card p-5 flex flex-col justify-between transition-all duration-300 overflow-hidden ${
                         isUltra
-                          ? 'border border-amber-400/50 bg-gradient-to-b from-amber-500/10 via-black/50 to-black/70 shadow-[0_0_35px_rgba(251,191,36,0.25)] hover:border-amber-300 hover:shadow-[0_0_50px_rgba(251,191,36,0.45)]'
+                          ? 'border border-amber-400/50 bg-gradient-to-b from-amber-500/10 via-black/50 to-black/70 hover:border-amber-300 hover:shadow-[0_0_55px_rgba(251,191,36,0.5)]'
                           : isHighroller
-                          ? 'border border-yellow-500/35 bg-gradient-to-b from-yellow-500/5 via-black/40 to-black/60 shadow-[0_0_25px_rgba(234,179,8,0.18)] hover:border-yellow-400 hover:shadow-[0_0_40px_rgba(234,179,8,0.35)]'
-                          : 'border border-white/10 hover:border-yellow-400/50 hover:shadow-[0_0_30px_rgba(250,204,21,0.2)]'
+                          ? 'border border-yellow-500/35 bg-gradient-to-b from-yellow-500/5 via-black/40 to-black/60 hover:border-yellow-400 hover:shadow-[0_0_45px_rgba(234,179,8,0.4)]'
+                          : 'border border-white/10 hover:border-[rgba(var(--card-glow),0.6)]'
                       }`}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = `rgba(${glow.rgb}, 0.6)`;
+                        e.currentTarget.style.boxShadow = `0 0 40px rgba(${glow.rgb}, 0.38)`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = '';
+                        e.currentTarget.style.boxShadow = `0 0 25px rgba(${glow.rgb}, 0.12)`;
+                      }}
                     >
                       {/* Luxury Sheen sweep for highroller cases */}
                       {isHighroller && (
@@ -321,14 +294,14 @@ export default function HomePage() {
                       )}
 
                       {caseOpenCounts[caseItem.id] && caseOpenCounts[caseItem.id] > 0 && (
-                        <div className="absolute top-4 left-4 z-10 px-2.5 py-0.5 rounded-full font-bold text-[9px] uppercase tracking-wider bg-black/70 border border-yellow-400/40 text-yellow-400 flex items-center gap-1 shadow-md">
+                        <div className="absolute top-4 left-4 z-20 px-2.5 py-0.5 rounded-full font-bold text-[9px] uppercase tracking-wider bg-black/70 border border-yellow-400/40 text-yellow-400 flex items-center gap-1 shadow-md">
                           <Flame className="w-3 h-3 text-orange-400 fill-orange-400" />
                           <span>{caseOpenCounts[caseItem.id]} {locale === 'ru' ? 'открытий' : 'opens'}</span>
                         </div>
                       )}
 
                       {caseItem.badge && (
-                        <div className={`absolute top-4 right-4 z-10 px-3 py-1 rounded-full font-black text-[10px] uppercase tracking-wider shadow-md ${
+                        <div className={`absolute top-4 right-4 z-20 px-3 py-1 rounded-full font-black text-[10px] uppercase tracking-wider shadow-md ${
                           isUltra
                             ? 'bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 text-black shadow-[0_0_15px_rgba(251,191,36,0.6)] animate-pulse'
                             : isHighroller
@@ -339,32 +312,35 @@ export default function HomePage() {
                         </div>
                       )}
 
-                      {(() => {
-                        const glow = getCaseThemeGlow(caseItem);
-                        return (
-                          <div className="relative w-full h-44 flex items-center justify-center my-1 overflow-visible">
-                            {/* Rich Volumetric Ambient Glow for EVERY case */}
-                            <div
-                              className="absolute w-36 h-36 rounded-full blur-2xl -z-10 transition-all duration-300 group-hover:scale-135 group-hover:opacity-100 opacity-75 pointer-events-none"
-                              style={{
-                                background: `radial-gradient(circle, rgba(${glow.rgb}, 0.55) 0%, rgba(${glow.rgb}, 0.2) 50%, transparent 75%)`
-                              }}
-                            />
+                      {/* Case Visual Showcase with Rich Volumetric Color Glow */}
+                      <div className="relative w-full h-52 sm:h-56 flex items-center justify-center my-1 overflow-visible">
+                        {/* Primary Volumetric Color Core */}
+                        <div
+                          className="absolute w-40 h-40 sm:w-48 sm:h-48 rounded-full blur-2xl z-0 transition-all duration-300 group-hover:scale-125 group-hover:opacity-100 opacity-85 pointer-events-none"
+                          style={{
+                            background: `radial-gradient(circle, rgba(${glow.rgb}, 0.75) 0%, rgba(${glow.rgb}, 0.35) 45%, transparent 72%)`
+                          }}
+                        />
+                        {/* Ambient Atmospheric Horizon */}
+                        <div
+                          className="absolute w-60 h-28 rounded-full blur-3xl z-0 opacity-40 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"
+                          style={{
+                            background: `radial-gradient(ellipse, rgba(${glow.rgb}, 0.5) 0%, transparent 75%)`
+                          }}
+                        />
 
-                            <img
-                              src={caseItem.image}
-                              alt={caseItem.name}
-                              loading="lazy"
-                              decoding="async"
-                              referrerPolicy="no-referrer"
-                              style={{
-                                filter: `drop-shadow(0 0 16px rgba(${glow.rgb}, 0.6)) drop-shadow(0 8px 18px rgba(0,0,0,0.8))`
-                              }}
-                              className="w-44 h-44 sm:w-48 sm:h-48 max-w-[96%] max-h-42 object-contain group-hover:scale-110 transition-transform duration-200 z-0 select-none"
-                            />
-                          </div>
-                        );
-                      })()}
+                        <img
+                          src={caseItem.image}
+                          alt={caseItem.name}
+                          loading={idx < 12 ? 'eager' : 'lazy'}
+                          decoding="async"
+                          referrerPolicy="no-referrer"
+                          style={{
+                            filter: `drop-shadow(0 0 20px rgba(${glow.rgb}, 0.75)) drop-shadow(0 12px 22px rgba(0,0,0,0.85))`
+                          }}
+                          className="relative z-10 w-52 h-48 sm:w-60 sm:h-52 max-w-[96%] max-h-52 object-contain group-hover:scale-110 transition-transform duration-200 select-none"
+                        />
+                      </div>
 
                       <div className="flex flex-col mb-3 z-10">
                         <h3 className={`font-black text-base sm:text-lg transition-colors truncate ${
