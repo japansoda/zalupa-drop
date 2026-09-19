@@ -8,14 +8,12 @@ import { Footer } from '../../../components/layout/Footer';
 import { LiveDropBar } from '../../../components/layout/LiveDropBar';
 import { RefillModal } from '../../../components/layout/RefillModal';
 import { ReelRoulette } from '../../../components/case/ReelRoulette';
+import { CaseSkinGroupCard } from '../../../components/case/CaseSkinGroupCard';
 import { DropCoinIcon } from '../../../components/ui/DropCoinIcon';
-import { RarityBadge } from '../../../components/ui/RarityBadge';
-import { WearBadge } from '../../../components/ui/WearBadge';
 import { CASES_DATABASE } from '../../../data/cases';
-import { RARITY_CONFIG } from '../../../data/skins';
 import { sound } from '../../../lib/sound';
 import { useLanguage } from '../../../lib/i18n';
-import { ArrowLeft, ExternalLink, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ShieldCheck } from 'lucide-react';
 
 export default function CaseOpenPage() {
   const params = useParams();
@@ -23,6 +21,19 @@ export default function CaseOpenPage() {
   const { t, locale } = useLanguage();
 
   const currentCase = CASES_DATABASE.find((c) => c.id === caseId);
+
+  const groupedSkins = React.useMemo(() => {
+    if (!currentCase?.skins) return [];
+    const map = new Map<string, typeof currentCase.skins>();
+    for (const skin of currentCase.skins) {
+      const key = `${skin.weapon || ''}___${skin.skinName || skin.name}`;
+      if (!map.has(key)) {
+        map.set(key, []);
+      }
+      map.get(key)!.push(skin);
+    }
+    return Array.from(map.values());
+  }, [currentCase]);
 
   if (!currentCase) {
     return (
@@ -101,7 +112,7 @@ export default function CaseOpenPage() {
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-yellow-400" />
               <h2 className="text-xl font-black text-white uppercase tracking-tight">
-                {t('case.contents')} ({currentCase.skins.length} {t('home.items')})
+                {t('case.contents')} ({groupedSkins.length} {t('home.items')})
               </h2>
             </div>
             <span className="text-xs text-white/50">
@@ -110,56 +121,9 @@ export default function CaseOpenPage() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-            {currentCase.skins.map((skin) => {
-              const config = RARITY_CONFIG[skin.rarity] || RARITY_CONFIG.milspec;
-              return (
-                <div
-                  key={skin.id}
-                  className="rounded-2xl glass-card p-3 flex flex-col justify-between border hover:border-yellow-400/40 transition-all group"
-                  style={{ borderBottomWidth: '3px', borderBottomColor: config.color }}
-                >
-                  <div className="flex items-center justify-between">
-                    <WearBadge skin={skin} size="xs" />
-                    <RarityBadge rarity={skin.rarity} size="sm" />
-                  </div>
-
-                  <div className="w-full h-28 flex items-center justify-center my-2">
-                    <img
-                      src={skin.image}
-                      alt={skin.name}
-                      referrerPolicy="no-referrer"
-                      className="w-24 h-24 object-contain group-hover:scale-110 transition-transform"
-                    />
-                  </div>
-
-                  <div className="flex flex-col">
-                    <span className="text-xs font-bold text-white truncate">{skin.weapon}</span>
-                    <span className="text-[11px] truncate mb-2" style={{ color: config.color }}>
-                      {skin.skinName}
-                    </span>
-
-                    <div className="flex items-center justify-between pt-2 border-t border-white/5">
-                      <div className="flex items-center gap-1">
-                        <DropCoinIcon size={14} />
-                        <span className="font-mono text-xs font-bold text-yellow-400">
-                          {skin.priceDc.toLocaleString('ru-RU')}
-                        </span>
-                      </div>
-
-                      <a
-                        href={skin.steamMarketUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white/30 hover:text-white transition-colors"
-                        title="Открыть в Steam"
-                      >
-                        <ExternalLink className="w-3.5 h-3.5" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+            {groupedSkins.map((variants, idx) => (
+              <CaseSkinGroupCard key={variants[0]?.id || idx} variants={variants} />
+            ))}
           </div>
         </section>
       </div>

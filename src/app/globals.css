@@ -106,3 +106,28 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #facc15;
 }
+
+/* Highroller Luxury Sheen Animation */
+@keyframes luxurySheen {
+  0% { transform: translateX(-120%) rotate(25deg); }
+  40% { transform: translateX(220%) rotate(25deg); }
+  100% { transform: translateX(220%) rotate(25deg); }
+}
+
+.luxury-sheen {
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(251, 191, 36, 0.05) 42%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(251, 191, 36, 0.05) 58%,
+    transparent 100%
+  );
+  animation: luxurySheen 5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}

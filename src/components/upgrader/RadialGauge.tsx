@@ -666,8 +666,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           {/* 1. LEFT CARD: Selected Input / Bet / Consumables */}
           <div className="lg:col-span-4 flex flex-col gap-3">
-            <div className="flex items-center justify-between pb-2 border-b border-white/10">
-              <div className="flex items-center gap-1.5 flex-wrap">
+            <div className="flex items-center justify-between pb-2.5 border-b border-white/10 gap-2">
+              <div className="flex items-center p-1 bg-black/50 border border-white/10 rounded-xl gap-1 shrink-0">
                 <button
                   type="button"
                   onClick={() => {
@@ -675,8 +675,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     const bet = selectedItems.reduce((s, i) => s + i.priceDc, 0);
                     if (bet > 0) autoSelectTargetSkin(targetChance, bet);
                   }}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                    betMode === 'skin' ? 'bg-yellow-400 text-black' : 'text-white/60 hover:text-white'
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                    betMode === 'skin' ? 'bg-yellow-400 text-black shadow-sm' : 'text-white/60 hover:text-white'
                   }`}
                 >
                   {t('upg.tab.skins')} ({selectedItems.length}/5)
@@ -687,8 +687,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     setBetMode('dc');
                     if (customBetDc > 0) autoSelectTargetSkin(targetChance, customBetDc);
                   }}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                    betMode === 'dc' ? 'bg-yellow-400 text-black' : 'text-white/60 hover:text-white'
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                    betMode === 'dc' ? 'bg-yellow-400 text-black shadow-sm' : 'text-white/60 hover:text-white'
                   }`}
                 >
                   {t('upg.tab.balance')}
@@ -704,11 +704,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     }
                     if (tok) autoSelectTargetSkin(targetChance, tok.valueDc);
                   }}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
-                    betMode === 'consumables' ? 'bg-yellow-400 text-black' : 'text-yellow-400/80 hover:text-yellow-400'
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+                    betMode === 'consumables' ? 'bg-yellow-400 text-black shadow-sm' : 'text-yellow-400/80 hover:text-yellow-400'
                   }`}
                 >
-                  <Gift className="w-3 h-3" />
+                  <Gift className="w-3.5 h-3.5" />
                   <span>{t('upg.tab.consumables')}</span>
                 </button>
               </div>
@@ -717,7 +717,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 <button
                   type="button"
                   onClick={handleClearAllSelected}
-                  className="text-xs text-white/50 hover:text-red-400 transition-colors cursor-pointer"
+                  className="text-xs font-medium text-white/50 hover:text-red-400 transition-colors cursor-pointer px-2 py-1 shrink-0"
                 >
                   {t('upg.reset')}
                 </button>

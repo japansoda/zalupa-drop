@@ -1,85 +1,181 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 200" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 215" width="100%" height="100%">
   <defs>
-    <linearGradient id="topG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#374151" />
-      <stop offset="100%" stop-color="#1f2937" />
+    <!-- Ground Shadow Gradient -->
+    <linearGradient id="groundG_fl7uq4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
     </linearGradient>
-    <linearGradient id="leftG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#111827" />
-      <stop offset="100%" stop-color="#030712" />
+
+    <!-- 3D Crate Shading Gradients -->
+    <linearGradient id="topG_fl7uq4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#475569" />
+      <stop offset="50%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#1e293b" />
     </linearGradient>
-    <linearGradient id="rightG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1f2937" />
-      <stop offset="100%" stop-color="#111827" />
+
+    <linearGradient id="frontG_fl7uq4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#334155" />
+      <stop offset="35%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#1e293b" />
     </linearGradient>
-    <linearGradient id="accentG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#facc15" />
-      <stop offset="100%" stop-color="#facc15" stop-opacity="0.8" />
+
+    <linearGradient id="sideG_fl7uq4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
     </linearGradient>
-    <linearGradient id="metalG" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#94a3b8" />
+
+    <linearGradient id="rimG_fl7uq4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#475569" />
+      <stop offset="60%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+
+    <!-- Metal Latches & Padlock Gradients -->
+    <linearGradient id="padlockG_fl7uq4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="40%" stop-color="#94a3b8" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+
+    <linearGradient id="steelG_fl7uq4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f1f5f9" />
       <stop offset="100%" stop-color="#475569" />
     </linearGradient>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000" flood-opacity="0.65" />
+
+    <!-- Soft Drop Shadow Filter -->
+    <filter id="softShad_fl7uq4" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="7" stdDeviation="6" flood-color="#000000" flood-opacity="0.75" />
+    </filter>
+
+    <filter id="lockShad_fl7uq4" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="1" dy="3" stdDeviation="2" flood-color="#000000" flood-opacity="0.65" />
     </filter>
   </defs>
 
-  <!-- Ground Ambient Shadow -->
-  <ellipse cx="120" cy="174" rx="85" ry="18" fill="#000000" opacity="0.65" />
+  <!-- 1. Ambient Ground Contact Shadow -->
+  <ellipse cx="126" cy="186" rx="98" ry="19" fill="url(#groundG_fl7uq4)" />
 
-  <!-- LEFT FACE -->
-  <polygon points="35,80 120,122 120,172 35,130" fill="url(#leftG)" stroke="#0f1015" stroke-width="2" filter="url(#shadow)" />
+  <!-- 2. MAIN 3D CRATE ASSEMBLY (CS2 PELICAN CASE GEOMETRY) -->
+  <g filter="url(#softShad_fl7uq4)">
 
-  <!-- Left Face Structural Ribs -->
-  <polygon points="48,87 60,93 60,143 48,137" fill="#0c0d12" opacity="0.6" />
-  <polygon points="75,100 87,106 87,156 75,150" fill="#0c0d12" opacity="0.6" />
-  <polygon points="102,113 114,119 114,169 102,163" fill="#0c0d12" opacity="0.6" />
+    <!-- FRONT FACE (LEFT SIDE IN PHOTO 2) -->
+    <!-- (25, 78) -> (142, 102) -> (142, 172) -> (25, 148) -->
+    <polygon points="25,78 142,102 142,172 25,148" fill="url(#frontG_fl7uq4)" stroke="#020617" stroke-width="1.5" />
 
-  <!-- Left Side Carry Handle -->
-  <polygon points="62,118 90,132 90,138 62,124" fill="url(#metalG)" stroke="#0f1015" stroke-width="1" />
+    <!-- Front Left Vertical Bumper Column -->
+    <polygon points="29,81 37,83 37,150 29,149" fill="#000000" opacity="0.3" />
+    <polygon points="37,83 44,84 44,151 37,150" fill="#ffffff" opacity="0.12" />
 
-  <!-- RIGHT FACE (FRONT) -->
-  <polygon points="120,122 205,80 205,130 120,172" fill="url(#rightG)" stroke="#0f1015" stroke-width="2" />
+    <!-- Front Center-Right Vertical Bumper Column -->
+    <polygon points="122,100 129,101 129,169 122,168" fill="#000000" opacity="0.3" />
+    <polygon points="129,101 136,102 136,170 129,169" fill="#ffffff" opacity="0.12" />
 
-  <!-- Right Face Bevel Inset -->
-  <polygon points="128,124 197,90 197,126 128,162" fill="#0c0d12" opacity="0.4" />
+    <!-- Front Inset Center Panel (Recessed cavity for logo) -->
+    <polygon points="46,90 118,104 118,162 46,148" fill="#000000" opacity="0.12" />
 
-  <!-- Thematic Pattern Layer -->
-  
+    <!-- Subtle Military Polymer Texture Lines -->
+    <path d="M 28,140 L 33,148 M 132,162 L 138,169 M 38,94 L 41,100" stroke="#000000" opacity="0.35" stroke-width="1" stroke-linecap="round" />
 
-  <!-- Hazard Stripes Option -->
-  
+    <!-- RIGHT FACE (SIDE IN PHOTO 2) -->
+    <!-- (142, 102) -> (218, 64) -> (218, 134) -> (142, 172) -->
+    <polygon points="142,102 218,64 218,134 142,172" fill="url(#sideG_fl7uq4)" stroke="#020617" stroke-width="1.5" />
 
-  <!-- Dual Metal Latches / Locks -->
-  <!-- Latch 1 -->
-  <polygon points="142,108 152,103 152,116 142,121" fill="url(#metalG)" stroke="#000" stroke-width="1" />
-  <polygon points="144,112 150,109 150,128 144,131" fill="#f1f5f9" stroke="#000" stroke-width="0.75" />
-  <!-- Latch 2 -->
-  <polygon points="172,93 182,88 182,101 172,106" fill="url(#metalG)" stroke="#000" stroke-width="1" />
-  <polygon points="174,97 180,94 180,113 174,116" fill="#f1f5f9" stroke="#000" stroke-width="0.75" />
+    <!-- Right Corner Shadow (Seam AO) -->
+    <polygon points="142,102 147,100 147,170 142,172" fill="#000000" opacity="0.45" />
 
-  <!-- Digital LED Status Option -->
-  
+    <!-- DIAGONAL HAZARD STRIPES ON RIGHT SIDE (Photo 2) -->
+    
+    <g opacity="0.45">
+      <polygon points="166,146 180,139 214,103 200,110" fill="#09090b" />
+      <polygon points="182,152 196,145 218,122 204,129" fill="#09090b" />
+    </g>
+    
 
-  <!-- Front Central Thematic Emblem -->
-  <g transform="translate(160, 134) scale(0.9)">
-    <polygon points="0,-12 4,-3 14,-3 6,3 9,12 0,6 -9,12 -6,3 -14,-3 -4,-3" fill="#facc15" stroke="#000" stroke-width="0.8" />
+    <!-- RIGHT SIDE RECESSED CARRY HANDLE (Photo 2) -->
+    <!-- Outer Bezel -->
+    <polygon points="163,88 198,71 198,93 163,110" fill="#18181b" stroke="#09090b" stroke-width="1.2" />
+    <!-- Inner Dark Cavity -->
+    <polygon points="166,90 195,76 195,90 166,104" fill="#09090b" />
+    <!-- Metal Bar Inside -->
+    <polygon points="171,92 190,83 190,88 171,97" fill="url(#steelG_fl7uq4)" stroke="#000000" stroke-width="0.8" />
+
+    <!-- TOP OVERHANGING LID (LID RIM + TOP SURFACE) -->
+    <!-- Lid Lower Rim Skirt (Photo 2 overhanging lip) -->
+    <polygon points="21,75 142,100 142,108 21,83" fill="url(#rimG_fl7uq4)" stroke="#020617" stroke-width="1.2" />
+    <polygon points="142,100 223,60 223,68 142,108" fill="#0f172a" stroke="#020617" stroke-width="1.2" />
+
+    <!-- Lid Rim Bottom Lip Ambient Shadow -->
+    <polygon points="22,83 142,108 142,111 22,86" fill="#000000" opacity="0.55" />
+    <polygon points="142,108 223,68 223,71 142,111" fill="#000000" opacity="0.65" />
+
+    <!-- TOP LID SURFACE (RHOMBUS WITH BEVELS) -->
+    <polygon points="98,34 223,60 142,100 21,75" fill="url(#topG_fl7uq4)" stroke="#020617" stroke-width="1.5" />
+
+    <!-- Top Surface Inner Inset Bevel -->
+    <polygon points="98,40 212,63 139,95 32,73" fill="#000000" opacity="0.1" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1" />
+
+    <!-- 4 LONGITUDINAL REINFORCEMENT RIBS ON TOP LID (Photo 2) -->
+    <!-- Rib 1 -->
+    <polygon points="85,46 190,68 188,71 83,49" fill="#94a3b8" opacity="0.35" />
+    <polygon points="83,49 188,71 186,73 81,51" fill="#000000" opacity="0.45" />
+
+    <!-- Rib 2 -->
+    <polygon points="72,55 177,77 175,80 70,58" fill="#94a3b8" opacity="0.35" />
+    <polygon points="70,58 175,80 173,82 68,60" fill="#000000" opacity="0.45" />
+
+    <!-- Rib 3 -->
+    <polygon points="59,64 164,86 162,89 57,67" fill="#94a3b8" opacity="0.35" />
+    <polygon points="57,67 162,89 160,91 55,69" fill="#000000" opacity="0.45" />
+
+    <!-- Rib 4 -->
+    <polygon points="46,73 151,95 149,98 44,76" fill="#94a3b8" opacity="0.35" />
+    <polygon points="44,76 149,98 147,100 42,78" fill="#000000" opacity="0.45" />
+
+    <!-- Silver Corner Rivets on Lid Rim (Photo 2) -->
+    <circle cx="27" cy="80" r="1.5" fill="#f1f5f9" stroke="#334155" stroke-width="0.7" />
+    <circle cx="136" cy="103" r="1.5" fill="#f1f5f9" stroke="#334155" stroke-width="0.7" />
+    <circle cx="148" cy="103" r="1.5" fill="#f1f5f9" stroke="#334155" stroke-width="0.7" />
+    <circle cx="217" cy="65" r="1.5" fill="#f1f5f9" stroke="#334155" stroke-width="0.7" />
+
+    <!-- FRONT DUAL HEAVY-DUTY LATCHES -->
+    <!-- Latch 1 (Left: X ~ 50) -->
+    <polygon points="48,78 57,80 57,98 48,96" fill="url(#steelG_fl7uq4)" stroke="#09090b" stroke-width="1" />
+    <polygon points="50,83 55,84 55,94 50,93" fill="#cbd5e1" />
+
+    <!-- Latch 2 (Right: X ~ 130) -->
+    <polygon points="126,94 135,96 135,114 126,112" fill="url(#steelG_fl7uq4)" stroke="#09090b" stroke-width="1" />
+    <polygon points="128,99 133,100 133,110 128,109" fill="#cbd5e1" />
+
+    <!-- DIGITAL LED COUNTER (Optional StatTrak style) -->
+    
+
+    <!-- FRONT CENTRAL EMBLEM & THEMATIC LABEL (Photo 2) -->
+    <g transform="translate(83, 118)">
+      <!-- Central Graphic / Icon -->
+      <g transform="translate(0, -6)">
+        <path d="M-10,10 L10,-10 M-10,-10 L10,10" stroke="#facc15" stroke-width="3" stroke-linecap="round" />
+            <circle cx="0" cy="0" r="4.5" fill="#ef4444" />
+      </g>
+
+      <!-- Label Box with Case Name (Rotated along perspective angle 11.6 deg) -->
+      
+      <g transform="rotate(11.6) translate(0, 16)">
+        <rect x="-28" y="-7" width="56" height="14" rx="2" fill="#09090b" stroke="#e2e8f0" stroke-width="1.4" />
+        <text x="0" y="3.5" font-family="'Impact', 'Arial Black', sans-serif" font-size="8" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="1.2">DAGGERS</text>
+      </g>
+      
+    </g>
+
+    <!-- HANGING METAL PADLOCK ON RIGHT LATCH (Photo 2) -->
+    <g transform="translate(136, 108)" filter="url(#lockShad_fl7uq4)">
+      <!-- Padlock Silver Curved Shackle Loop -->
+      <path d="M 3,0 C 3,-5 9,-5 9,0 L 9,5 L 7,5 L 7,0 C 7,-3 5,-3 5,0 L 5,5 L 3,5 Z" fill="url(#steelG_fl7uq4)" stroke="#1e293b" stroke-width="0.8" />
+      <!-- Padlock Metal Body -->
+      <rect x="1" y="4" width="10" height="12" rx="1.5" fill="url(#padlockG_fl7uq4)" stroke="#0f172a" stroke-width="0.9" />
+      <!-- Padlock Keyhole -->
+      <circle cx="6" cy="9" r="1.2" fill="#09090b" />
+      <polygon points="5.4,9 6.6,9 6.2,13 5.8,13" fill="#09090b" />
+    </g>
+
   </g>
-
-  <!-- TOP FACE (LID) -->
-  <polygon points="120,38 205,80 120,122 35,80" fill="url(#topG)" stroke="#0f1015" stroke-width="2" />
-
-  <!-- Top Inset Panel -->
-  <polygon points="120,48 190,82 120,114 50,82" fill="#151720" opacity="0.65" stroke="#facc15" stroke-opacity="0.4" stroke-width="1" />
-
-  <!-- Top Corner Brackets -->
-  <polygon points="120,38 128,42 120,46 112,42" fill="url(#metalG)" stroke="#000" stroke-width="0.7" />
-  <polygon points="205,80 197,76 195,82 203,86" fill="url(#metalG)" stroke="#000" stroke-width="0.7" />
-  <polygon points="120,122 128,118 120,114 112,118" fill="url(#metalG)" stroke="#000" stroke-width="0.7" />
-  <polygon points="35,80 43,76 45,82 37,86" fill="url(#metalG)" stroke="#000" stroke-width="0.7" />
-
-  <!-- Top Central Handle Grip -->
-  <polygon points="105,74 135,88 135,78 105,64" fill="url(#accentG)" stroke="#000" stroke-width="1" />
-  <polygon points="109,72 131,83 131,76 109,65" fill="#000" opacity="0.4" />
 </svg>
