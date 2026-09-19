@@ -40,7 +40,7 @@ export default function AdminPage() {
 
   const { balance, inventory, stats, addBalance, addLiveDrop } = useGameStore();
 
-  // Track active sessions / live online via BroadcastChannel heartbeat
+  // Track active sessions / live online via API polling + SSE across all devices
   const [liveOnlineCount, setLiveOnlineCount] = useState<number>(1);
 
   // Check existing session auth on mount
@@ -51,31 +51,80 @@ export default function AdminPage() {
     }
   }, []);
 
-  // Real-time online users heartbeat
+  // Real-time online users presence tracker
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    let peerCount = 1;
-    const channel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('zalupa_presence_channel') : null;
+    const activeSessions = new Map<string, number>();
 
-    if (channel) {
-      // Send ping to other active tabs/sessions
-      channel.postMessage({ type: 'PING', id: Math.random() });
-
-      channel.onmessage = (e) => {
-        if (e.data?.type === 'PING') {
-          channel.postMessage({ type: 'PONG', id: Math.random() });
-          peerCount = Math.max(peerCount, 2);
-          setLiveOnlineCount(peerCount);
-        } else if (e.data?.type === 'PONG') {
-          peerCount += 1;
-          setLiveOnlineCount(peerCount);
+    const updateCount = () => {
+      const now = Date.now();
+      for (const [id, time] of activeSessions.entries()) {
+        if (now - time > 25000) {
+          activeSessions.delete(id);
         }
-      };
+      }
+      setLiveOnlineCount(Math.max(1, activeSessions.size));
+    };
+
+    // 1. Poll Vercel presence API every 4s
+    const pollPresence = async () => {
+      try {
+        const res = await fetch('/api/presence', { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          if (typeof data.online === 'number') {
+            setLiveOnlineCount(Math.max(1, Math.max(data.online, activeSessions.size)));
+          }
+        }
+      } catch (_) {}
+    };
+
+    pollPresence();
+    const pollTimer = setInterval(pollPresence, 4000);
+
+    // 2. Real-time pubsub stream for instant heartbeat across all devices
+    let eventSource: EventSource | null = null;
+    try {
+      if ('EventSource' in window) {
+        eventSource = new EventSource('https://ntfy.sh/zalupa_presence_v3/sse');
+        eventSource.onmessage = (e) => {
+          try {
+            const envelope = JSON.parse(e.data);
+            if (envelope.event === 'message' && envelope.message) {
+              const ping = JSON.parse(envelope.message);
+              if (ping?.sessionId) {
+                activeSessions.set(ping.sessionId, Date.now());
+                updateCount();
+              }
+            }
+          } catch (_) {}
+        };
+      }
+    } catch (_) {}
+
+    // 3. Same-device local BroadcastChannel
+    let channel: BroadcastChannel | null = null;
+    if ('BroadcastChannel' in window) {
+      try {
+        channel = new BroadcastChannel('zalupa_presence_v3');
+        channel.onmessage = (e) => {
+          if (e.data?.sessionId) {
+            activeSessions.set(e.data.sessionId, Date.now());
+            updateCount();
+          }
+        };
+      } catch (_) {}
     }
 
+    // Prune ticker every 5s
+    const pruneTimer = setInterval(updateCount, 5000);
+
     return () => {
-      channel?.close();
+      clearInterval(pollTimer);
+      clearInterval(pruneTimer);
+      if (eventSource) eventSource.close();
+      if (channel) channel.close();
     };
   }, []);
 

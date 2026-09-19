@@ -106,16 +106,6 @@ export const LiveDropBar: React.FC = () => {
   const { liveDrops, addLiveDrop } = useGameStore();
   const { t, locale } = useLanguage();
 
-  // Clock tick to update 3-minute window expiration
-  const [nowTick, setNowTick] = useState<number>(() => Date.now());
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setNowTick(Date.now());
-    }, 10000); // Check expiration every 10s
-    return () => clearInterval(timer);
-  }, []);
-
   // Categorized pools for diverse drop generation (50% guns, 25% gloves, 25% knives, strictly >= 25,000 DC)
   const { eliteGuns, eliteGloves, eliteKnives } = useMemo(() => {
     const guns: typeof SKINS_DATABASE = [];
@@ -209,27 +199,29 @@ export const LiveDropBar: React.FC = () => {
     };
   }, [addLiveDrop]);
 
-  // Real drops within the active 3-minute window (for dynamic blend calculation)
-  const realDropsLast3Min = useMemo(() => {
-    const now = Date.now();
-    return liveDrops.filter((d) => isRealDrop(d) && now - (d.timestamp || 0) < BLEND_WINDOW_MS);
-  }, [liveDrops, nowTick]);
-
-  // Working fake drop generator:
-  // Starts empty on reload. First drop in 1.5s, then every 6-11s (or 10-15s if real drops present).
-  // If 6 or more real drops occurred in the last 3 minutes, fake drops are completely disabled.
+  // Bulletproof self-scheduling fake drop generator:
+  // Starts empty on reload. First drop in 1.5s, then every 5-9s (or 7-11s when 1-5 real drops present).
+  // Only shuts off if 6 or more real drops occurred in the last 3 minutes!
   useEffect(() => {
-    if (realDropsLast3Min.length >= 6) return;
+    let timerId: NodeJS.Timeout | null = null;
+    let isCancelled = false;
 
-    // Dynamic rate: faster when no real drops (6-11s), slower blend when real drops exist (10-15s)
-    const delay =
-      liveDrops.length === 0
-        ? 1500
-        : realDropsLast3Min.length > 0
-        ? 10000 + Math.random() * 5000
-        : 6000 + Math.random() * 5000;
+    const tick = () => {
+      if (isCancelled) return;
 
-    const timeoutId = setTimeout(() => {
+      const state = useGameStore.getState();
+      const currentDrops = state.liveDrops;
+      const now = Date.now();
+      const realCount = currentDrops.filter(
+        (d) => isRealDrop(d) && now - (d.timestamp || 0) < BLEND_WINDOW_MS
+      ).length;
+
+      // Only shut off fake drops if >= 6 real drops in the last 3 minutes!
+      if (realCount >= 6) {
+        timerId = setTimeout(tick, 4000);
+        return;
+      }
+
       // Pick balanced skin: 50% guns, 25% gloves, 25% knives
       const roll = Math.random();
       let pool = eliteGuns;
@@ -241,28 +233,44 @@ export const LiveDropBar: React.FC = () => {
         pool = eliteKnives;
       } else if (eliteGuns.length > 0) {
         pool = eliteGuns;
-      } else {
-        return;
       }
 
-      const randomSkin = pool[Math.floor(Math.random() * pool.length)];
-      const randomCase = SIMULATED_CASES[Math.floor(Math.random() * SIMULATED_CASES.length)];
-      const timestamp = Date.now();
+      if (pool.length > 0) {
+        const randomSkin = pool[Math.floor(Math.random() * pool.length)];
+        const randomCase = SIMULATED_CASES[Math.floor(Math.random() * SIMULATED_CASES.length)];
+        const timestamp = Date.now();
 
-      const newDrop: LiveDrop = {
-        id: `sim_${timestamp}_${Math.random().toString(36).substring(2, 6)}`,
-        user: '',
-        avatar: '',
-        skin: randomSkin,
-        caseName: randomCase,
-        timestamp,
-      };
+        const newDrop: LiveDrop = {
+          id: `sim_${timestamp}_${Math.random().toString(36).substring(2, 6)}`,
+          user: '',
+          avatar: '',
+          skin: randomSkin,
+          caseName: randomCase,
+          timestamp,
+        };
 
-      addLiveDrop(newDrop);
-    }, delay);
+        state.addLiveDrop(newDrop);
+      }
 
-    return () => clearTimeout(timeoutId);
-  }, [liveDrops.length, realDropsLast3Min.length, eliteGuns, eliteGloves, eliteKnives, addLiveDrop]);
+      // Dynamic blend:
+      // If 1-5 real drops: 7-11 seconds (smoothly blended with real drops!)
+      // If 0 real drops: 5-9 seconds
+      const nextDelay = realCount > 0
+        ? 7000 + Math.random() * 4000
+        : 5000 + Math.random() * 4000;
+
+      timerId = setTimeout(tick, nextDelay);
+    };
+
+    // First fake drop appears in 1.5s if empty, or in 4s
+    const initialDelay = useGameStore.getState().liveDrops.length === 0 ? 1500 : 4000;
+    timerId = setTimeout(tick, initialDelay);
+
+    return () => {
+      isCancelled = true;
+      if (timerId) clearTimeout(timerId);
+    };
+  }, [eliteGuns, eliteGloves, eliteKnives]);
 
   // Strict chronological left-to-right flow:
   // Newest drop always enters on the left, pushing older drops smoothly to the right!
