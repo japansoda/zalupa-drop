@@ -77,12 +77,12 @@ export default function CaseOpenPage() {
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pb-4 border-b border-white/10">
             <div className="flex items-center gap-3 sm:gap-4 text-left w-full sm:w-auto">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-black/60 border border-white/10 p-2 shrink-0">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-black/60 border border-white/10 p-1.5 shrink-0 relative flex items-center justify-center">
                 <img 
                   src={currentCase.image} 
                   alt={currentCase.name} 
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-contain" 
+                  className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(250,204,21,0.4)]" 
                 />
               </div>
               <div className="flex flex-col">
