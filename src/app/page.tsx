@@ -13,7 +13,8 @@ import { SkinImage } from '../components/ui/SkinImage';
 import { CASES_DATABASE } from '../data/cases';
 import { sound } from '../lib/sound';
 import { useLanguage } from '../lib/i18n';
-import { ChevronRight, Search, ArrowUpDown, X } from 'lucide-react';
+import { useGameStore } from '../store/useGameStore';
+import { ChevronRight, Search, ArrowUpDown, X, Flame } from 'lucide-react';
 import { handleHorizontalWheel } from '../components/layout/HorizontalScrollManager';
 
 const CATEGORIES = [
@@ -27,8 +28,26 @@ const CATEGORIES = [
   { id: 'stickers' },
 ];
 
+const CASE_BASE_POPULARITY: Record<string, number> = {
+  revolution_case: 9500,
+  dreams_and_nightmares: 9200,
+  kilowatt_case: 8900,
+  clutch_case: 8600,
+  fracture_case: 8100,
+  snakebite_case: 7900,
+  recoil_case: 7700,
+  case_50_knife: 9800,
+  case_all_gloves: 9400,
+  case_agents_cs2: 8500,
+  csgo_weapon_case: 8300,
+  glove_case: 8000,
+  gamma_case: 7500,
+  chroma_case: 7300,
+};
+
 export default function HomePage() {
   const { t, locale } = useLanguage();
+  const caseOpenCounts = useGameStore((state) => state.caseOpenCounts);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortBy, setSortBy] = useState<'popular' | 'asc' | 'desc' | 'alpha'>('popular');
@@ -63,7 +82,13 @@ export default function HomePage() {
     }
 
     // Sort
-    if (sortBy === 'asc') {
+    if (sortBy === 'popular') {
+      list.sort((a, b) => {
+        const popA = (caseOpenCounts[a.id] || 0) * 100 + (CASE_BASE_POPULARITY[a.id] || (a.category === 'custom' ? 5000 : 3500) + (a.priceDc < 2000 ? 1000 : 0));
+        const popB = (caseOpenCounts[b.id] || 0) * 100 + (CASE_BASE_POPULARITY[b.id] || (b.category === 'custom' ? 5000 : 3500) + (b.priceDc < 2000 ? 1000 : 0));
+        return popB - popA;
+      });
+    } else if (sortBy === 'asc') {
       list.sort((a, b) => a.priceDc - b.priceDc);
     } else if (sortBy === 'desc') {
       list.sort((a, b) => b.priceDc - a.priceDc);
@@ -72,7 +97,7 @@ export default function HomePage() {
     }
 
     return list;
-  }, [selectedCategory, searchQuery, sortBy, locale]);
+  }, [selectedCategory, searchQuery, sortBy, locale, caseOpenCounts]);
 
   // Reset limit on filter changes
   useEffect(() => {
@@ -96,7 +121,7 @@ export default function HomePage() {
   }, [filteredCases.length]);
 
   return (
-    <main className="min-h-screen flex flex-col justify-between bg-[#08080a]">
+    <main className="min-h-screen flex flex-col justify-between bg-[#08080a] max-w-full overflow-x-hidden">
       <div>
         <Header />
         <LiveDropBar />
@@ -252,6 +277,13 @@ export default function HomePage() {
                       {/* Luxury Sheen sweep for highroller cases */}
                       {isHighroller && (
                         <div className="luxury-sheen opacity-40 group-hover:opacity-85 transition-opacity" />
+                      )}
+
+                      {caseOpenCounts[caseItem.id] && caseOpenCounts[caseItem.id] > 0 && (
+                        <div className="absolute top-4 left-4 z-10 px-2.5 py-0.5 rounded-full font-bold text-[9px] uppercase tracking-wider bg-black/70 border border-yellow-400/40 text-yellow-400 flex items-center gap-1 shadow-md">
+                          <Flame className="w-3 h-3 text-orange-400 fill-orange-400" />
+                          <span>{caseOpenCounts[caseItem.id]} {locale === 'ru' ? 'открытий' : 'opens'}</span>
+                        </div>
                       )}
 
                       {caseItem.badge && (

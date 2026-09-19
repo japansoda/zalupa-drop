@@ -16,7 +16,7 @@ export default function UpgraderPage() {
   const { t } = useLanguage();
 
   return (
-    <main className="min-h-screen flex flex-col justify-between">
+    <main className="min-h-screen flex flex-col justify-between max-w-full overflow-x-hidden">
       <div>
         <Header />
         <LiveDropBar />

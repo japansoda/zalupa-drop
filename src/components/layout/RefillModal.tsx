@@ -108,13 +108,13 @@ export const RefillModal: React.FC = () => {
   const totalTokensOwned = Object.values(tokens).reduce((a, b) => a + b, 0);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md overflow-x-hidden">
       <motion.div 
         initial={{ scale: 0.94, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.94, opacity: 0 }}
         transition={{ duration: 0.16 }}
-        className="relative w-full max-w-3xl glass-panel rounded-3xl border border-yellow-400/30 p-5 sm:p-6 shadow-[0_0_60px_rgba(0,0,0,0.95)] max-h-[90vh] overflow-y-auto no-scrollbar"
+        className="relative w-full max-w-2xl glass-panel rounded-2xl sm:rounded-3xl border border-yellow-400/30 p-3.5 sm:p-6 shadow-[0_0_60px_rgba(0,0,0,0.95)] max-h-[88vh] sm:max-h-[90vh] overflow-y-auto overflow-x-hidden no-scrollbar"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Success Splash Notification (Bottom) */}
@@ -124,41 +124,41 @@ export const RefillModal: React.FC = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 16 }}
-              className="absolute inset-x-6 bottom-4 z-30 p-3 rounded-2xl bg-emerald-950/95 border border-emerald-400 flex items-center justify-center gap-2 shadow-2xl"
+              className="absolute inset-x-3 sm:inset-x-6 bottom-3 z-30 p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-emerald-950/95 border border-emerald-400 flex items-center justify-center gap-2 shadow-2xl"
             >
-              <Sparkles className="w-5 h-5 text-emerald-400 animate-spin" />
-              <span className="text-emerald-300 font-black text-sm font-mono">
-                +{successAnimation.toLocaleString('ru-RU')} DC {locale === 'ru' ? 'успешно начислено на баланс!' : 'successfully added!'}
+              <Sparkles className="w-4 h-4 text-emerald-400 animate-spin shrink-0" />
+              <span className="text-emerald-300 font-black text-xs sm:text-sm font-mono truncate">
+                +{successAnimation.toLocaleString('ru-RU')} DC {locale === 'ru' ? 'успешно начислено!' : 'added!'}
               </span>
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* Top Header */}
-        <div className="flex items-center justify-between gap-4 pb-4 mb-4 border-b border-white/10">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-yellow-400/15 border border-yellow-400/30 flex items-center justify-center shrink-0">
-              <DropCoinIcon size={24} />
+        <div className="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-white/10">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-yellow-400/15 border border-yellow-400/30 flex items-center justify-center shrink-0">
+              <DropCoinIcon size={20} />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="text-lg sm:text-xl font-black uppercase text-white tracking-tight">
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5">
+                <h3 className="text-base sm:text-xl font-black uppercase text-white tracking-tight truncate">
                   {t('refill.title')}
                 </h3>
-                <span className="px-2 py-0.5 rounded-full text-[9px] font-black bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase">
+                <span className="px-1.5 py-0.5 rounded-full text-[8px] sm:text-[9px] font-black bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase shrink-0">
                   МГНОВЕННО
                 </span>
               </div>
-              <p className="text-xs text-white/50">
-                {locale === 'ru' ? 'Выберите желаемый номинал для начисления DC' : 'Select desired amount to refill DC'}
+              <p className="text-[10px] sm:text-xs text-white/50 truncate">
+                {locale === 'ru' ? 'Начисление виртуальных монет' : 'Instant free DC refill'}
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/70 border border-white/15">
-              <DropCoinIcon size={16} />
-              <span className="font-mono font-black text-yellow-400 text-sm">
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-black/70 border border-white/15">
+              <DropCoinIcon size={14} />
+              <span className="font-mono font-black text-yellow-400 text-xs sm:text-sm whitespace-nowrap">
                 {balance.toLocaleString('ru-RU')} DC
               </span>
             </div>
@@ -169,15 +169,15 @@ export const RefillModal: React.FC = () => {
                 sound.playClick();
                 setRefillOpen(false);
               }}
-              className="text-white/40 hover:text-white w-8 h-8 rounded-xl glass-button flex items-center justify-center transition-colors cursor-pointer"
+              className="text-white/40 hover:text-white w-7 h-7 sm:w-8 sm:h-8 rounded-xl glass-button flex items-center justify-center transition-colors cursor-pointer shrink-0"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* Spacious 8-Tier Cards Grid (4 cols x 2 rows) */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-4">
+        {/* Compact Responsive 8-Tier Cards Grid (2 cols on mobile x 4 cols on tablet+) */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 my-2 sm:my-3">
           {REFILL_TIERS.map((tier) => {
             const styles = THEME_STYLES[tier.theme];
             return (
@@ -185,25 +185,25 @@ export const RefillModal: React.FC = () => {
                 key={tier.amount}
                 type="button"
                 onClick={() => triggerRewardAnimation(tier.amount)}
-                className={`p-3.5 rounded-2xl flex flex-col justify-between items-center text-center border transition-all cursor-pointer group hover:scale-[1.02] active:scale-95 h-24 sm:h-26 relative overflow-hidden ${styles.border} ${styles.bg}`}
+                className={`p-2.5 sm:p-3 rounded-xl sm:rounded-2xl flex flex-col justify-between items-center text-center border transition-all cursor-pointer group hover:scale-[1.02] active:scale-95 h-20 sm:h-24 relative overflow-hidden ${styles.border} ${styles.bg}`}
               >
                 <div className="w-full flex items-center justify-between">
-                  <span className={`text-[9px] px-2 py-0.5 rounded-md border uppercase font-black tracking-wider ${styles.badge}`}>
+                  <span className={`text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded border uppercase font-black tracking-wider ${styles.badge}`}>
                     {tier.badge}
                   </span>
-                  <span className="text-[9px] font-bold text-white/40 uppercase group-hover:text-white/80 transition-colors">
+                  <span className="text-[8px] sm:text-[9px] font-bold text-white/40 uppercase group-hover:text-white/80 transition-colors">
                     +{tier.label}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-center gap-2 my-auto">
-                  <DropCoinIcon size={22} />
-                  <span className={`font-mono font-black text-base sm:text-lg ${styles.text}`}>
+                <div className="flex items-center justify-center gap-1.5 my-auto">
+                  <DropCoinIcon size={18} />
+                  <span className={`font-mono font-black text-sm sm:text-base ${styles.text}`}>
                     +{tier.label}
                   </span>
                 </div>
 
-                <span className="text-[9px] font-bold text-white/30 uppercase tracking-wider group-hover:text-yellow-400 transition-colors">
+                <span className="text-[8px] sm:text-[9px] font-bold text-white/30 uppercase tracking-wider group-hover:text-yellow-400 transition-colors">
                   {locale === 'ru' ? 'Получить' : 'Claim'}
                 </span>
               </button>
@@ -212,22 +212,22 @@ export const RefillModal: React.FC = () => {
         </div>
 
         {/* Free Consumables & Boosters Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-1 sm:mb-2">
           <button
             type="button"
             onClick={handleGetPotions}
-            className="px-4 py-2.5 rounded-2xl flex items-center justify-between border border-emerald-500/30 bg-emerald-950/20 hover:border-emerald-400 hover:bg-emerald-900/30 transition-all cursor-pointer group active:scale-98"
+            className="px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl flex items-center justify-between border border-emerald-500/30 bg-emerald-950/20 hover:border-emerald-400 hover:bg-emerald-900/30 transition-all cursor-pointer group active:scale-98 min-w-0"
           >
-            <div className="flex items-center gap-3">
-              <span className="text-xl">🧪</span>
-              <div className="flex flex-col text-left leading-tight">
-                <span className="font-bold text-xs sm:text-sm text-emerald-400 group-hover:text-emerald-300">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="text-lg sm:text-xl shrink-0">🧪</span>
+              <div className="flex flex-col text-left leading-tight min-w-0">
+                <span className="font-bold text-xs sm:text-sm text-emerald-400 group-hover:text-emerald-300 truncate">
                   +3 Зелья удачи
                 </span>
-                <span className="text-[10px] text-white/40 mt-0.5">+15% шанс на ценный дроп</span>
+                <span className="text-[9px] sm:text-[10px] text-white/40 mt-0.5 truncate">+15% шанс на ценный дроп</span>
               </div>
             </div>
-            <div className="px-2.5 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 font-mono font-bold text-xs text-emerald-300">
+            <div className="px-2 py-0.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 font-mono font-bold text-[11px] sm:text-xs text-emerald-300 shrink-0 ml-2">
               {potionsCount} шт.
             </div>
           </button>
@@ -235,18 +235,18 @@ export const RefillModal: React.FC = () => {
           <button
             type="button"
             onClick={handleGetTokens}
-            className="px-4 py-2.5 rounded-2xl flex items-center justify-between border border-yellow-500/30 bg-yellow-950/20 hover:border-yellow-400 hover:bg-yellow-900/30 transition-all cursor-pointer group active:scale-98"
+            className="px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl flex items-center justify-between border border-yellow-500/30 bg-yellow-950/20 hover:border-yellow-400 hover:bg-yellow-900/30 transition-all cursor-pointer group active:scale-98 min-w-0"
           >
-            <div className="flex items-center gap-3">
-              <span className="text-xl">🎟️</span>
-              <div className="flex flex-col text-left leading-tight">
-                <span className="font-bold text-xs sm:text-sm text-yellow-400 group-hover:text-yellow-300">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="text-lg sm:text-xl shrink-0">🎟️</span>
+              <div className="flex flex-col text-left leading-tight min-w-0">
+                <span className="font-bold text-xs sm:text-sm text-yellow-400 group-hover:text-yellow-300 truncate">
                   +1 Все жетоны апгрейда
                 </span>
-                <span className="text-[10px] text-white/40 mt-0.5">Мультипликаторы 2x, 3x, 5x, 10x</span>
+                <span className="text-[9px] sm:text-[10px] text-white/40 mt-0.5 truncate">Мультипликаторы 2x, 3x, 5x, 10x</span>
               </div>
             </div>
-            <div className="px-2.5 py-1 rounded-lg bg-yellow-500/15 border border-yellow-500/30 font-mono font-bold text-xs text-yellow-300">
+            <div className="px-2 py-0.5 rounded-lg bg-yellow-500/15 border border-yellow-500/30 font-mono font-bold text-[11px] sm:text-xs text-yellow-300 shrink-0 ml-2">
               {totalTokensOwned} шт.
             </div>
           </button>

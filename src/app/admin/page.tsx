@@ -189,8 +189,7 @@ export default function AdminPage() {
               <span>Авторизоваться</span>
             </button>
 
-            <div className="flex items-center justify-between text-[11px] text-white/40 pt-2 border-t border-white/5">
-              <span>Пароль по умолчанию: <strong className="text-yellow-400 font-mono">admin777</strong></span>
+            <div className="flex items-center justify-end text-[11px] text-white/40 pt-2 border-t border-white/5">
               <Link href="/" className="hover:text-white transition-colors flex items-center gap-1">
                 <ArrowLeft className="w-3 h-3" /> На сайт
               </Link>

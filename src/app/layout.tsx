@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" className="dark">
-      <body className="min-h-screen bg-[#090a10] text-[#e2e8f0] antialiased selection:bg-purple-600 selection:text-white pb-20 md:pb-0">
+      <body className="min-h-screen bg-[#090a10] text-[#e2e8f0] antialiased selection:bg-purple-600 selection:text-white pb-20 md:pb-0 overflow-x-hidden max-w-full">
         <LanguageProvider>
           <HorizontalScrollManager />
           {children}

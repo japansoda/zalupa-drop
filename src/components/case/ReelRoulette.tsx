@@ -91,10 +91,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       return caseId && isOfficialCase(caseId) && isKnifeOrGlove(last) ? rollSpecialKnifeDrop(caseId) : last;
     }
 
-    // 3. Guaranteed 98.0% RTP for ALL cases:
-    // Target EV = 0.98 * casePriceDc.
-    // Solves alpha power exponent via binary search so expected drop return is strictly 98%!
-    const targetEV = Math.max(10, casePriceDc * 0.98);
+    // 3. Boosted 105.0% RTP for ALL cases ("подкрутка шансов"):
+    // Target EV = 1.05 * casePriceDc.
+    // Solves alpha power exponent via binary search so expected drop return is generously 105%!
+    const targetEV = Math.max(15, casePriceDc * 1.05);
     const prices = caseSkins.map((s) => Math.max(1, s.priceDc));
     const minP = Math.min(...prices);
     const maxP = Math.max(...prices);
@@ -102,18 +102,15 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     let weights: number[];
 
     if (targetEV <= minP) {
-      // Even cheapest skin is >= 98% of case price (super value case)
       weights = caseSkins.map(() => 1);
     } else if (targetEV >= maxP) {
-      // Target EV exceeds max skin -> weight towards highest items
       weights = prices.map((p) => Math.pow(p / maxP, 2));
     } else {
-      // Binary search for exact 98% RTP alpha exponent
       let low = 0.01;
       let high = 4.0;
       let bestW = prices.map(() => 1);
 
-      for (let iter = 0; iter < 22; iter++) {
+      for (let iter = 0; iter < 24; iter++) {
         const mid = (low + high) / 2;
         const w = prices.map((p) => Math.pow(1 / p, mid));
         const sumW = w.reduce((a, b) => a + b, 0);
@@ -138,6 +135,23 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
         break;
       }
       rnd -= weights[i];
+    }
+
+    // Extra luck boost roll ("подкрутка"):
+    // 12% base chance (28% if luck potion is active) to promote drop to top-tier/classified/covert/gold!
+    const hasPotion = useGameStore.getState().activePotionCharges > 0;
+    const luckyRoll = Math.random();
+    const luckyThreshold = hasPotion ? 0.28 : 0.12;
+    if (luckyRoll < luckyThreshold) {
+      const topTier = caseSkins.filter(
+        (s) => s.rarity === 'gold' || s.rarity === 'covert' || s.rarity === 'classified' || s.priceDc >= casePriceDc
+      );
+      if (topTier.length > 0) {
+        selected = topTier[Math.floor(Math.random() * topTier.length)];
+        if (hasPotion) {
+          useGameStore.getState().consumePotionCharge();
+        }
+      }
     }
 
     if (caseId && isOfficialCase(caseId) && isKnifeOrGlove(selected)) {
@@ -170,14 +184,14 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       }
     }
 
-    // Authentic CS2 reel visual distribution:
-    // Common items dominate (78%), Restricted (16%), Classified (4.5%), Covert (1.2%), Gold (0.3%)
+    // Authentic CS2 reel visual distribution with boosted exciting tease:
+    // Common items (68%), Restricted (18%), Classified (8%), Covert (4%), Gold (2%)
     const bucketWeights: { bucket: keyof typeof buckets; weight: number }[] = [
-      { bucket: 'common', weight: 78 },
-      { bucket: 'restricted', weight: 16 },
-      { bucket: 'classified', weight: 4.5 },
-      { bucket: 'covert', weight: 1.2 },
-      { bucket: 'gold', weight: 0.3 },
+      { bucket: 'common', weight: 68 },
+      { bucket: 'restricted', weight: 18 },
+      { bucket: 'classified', weight: 8 },
+      { bucket: 'covert', weight: 4 },
+      { bucket: 'gold', weight: 2 },
     ];
 
     const active = bucketWeights.filter((b) => buckets[b.bucket].length > 0);
@@ -232,6 +246,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     const deducted = deductBalance(totalCost);
     if (!deducted) return;
 
+    if (caseId) {
+      useGameStore.getState().recordCaseOpen(caseId, openCount);
+    }
+
     sound.playClick();
     setIsSpinning(true);
     setIsRevealed(false);
@@ -281,6 +299,20 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
         sound.playWin(highestWinner.rarity);
         setIsSpinning(false);
         setShowModal(true);
+
+        // Immediately emit real drops to live ticker
+        winners.forEach((skin) => {
+          if (skin.priceDc >= 500 || skin.rarity === 'covert' || skin.rarity === 'gold' || skin.rarity === 'extraordinary' || skin.rarity === 'classified') {
+            addLiveDrop({
+              id: `real_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+              user: 'Вы',
+              avatar: '',
+              skin: skin,
+              caseName: caseName,
+              timestamp: Date.now(),
+            });
+          }
+        });
       }, 350);
       return;
     }
@@ -362,7 +394,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
 
     // Immediately emit real drops to live ticker (only expensive/valuable items)
     winners.forEach((skin) => {
-      if (skin.priceDc >= 750 || skin.rarity === 'covert' || skin.rarity === 'gold' || skin.rarity === 'extraordinary') {
+      if (skin.priceDc >= 500 || skin.rarity === 'covert' || skin.rarity === 'gold' || skin.rarity === 'extraordinary' || skin.rarity === 'classified') {
         addLiveDrop({
           id: `real_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
           user: 'Вы',

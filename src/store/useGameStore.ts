@@ -17,6 +17,10 @@ interface GameState {
   potionsCount: number;
   activePotionCharges: number;
 
+  // Case open popularity tracking
+  caseOpenCounts: Record<string, number>;
+  recordCaseOpen: (caseId: string, count?: number) => void;
+
   // Actions
   addBalance: (amount: number) => void;
   deductBalance: (amount: number) => boolean;
@@ -37,10 +41,42 @@ interface GameState {
   consumePotionCharge: () => boolean;
 }
 
-const INITIAL_BOT_NAMES = [
-  'S1mple_CS', 'ZywOo_God', 'm0NESY_Peak', 'Donk_Rush', 'B1t_Headshot',
-  'KennyS_Flick', 'NiKo_Deagle', 'Ropz_Lurk', 'Device_Clutch', 'Shroud99'
+const INITIAL_SKIN_IDS = [
+  'skin-4f8d99d09ded', // AWP | Dragon Lore
+  'skin-8aacf99e7f2f', // M4A4 | Howl
+  'skin-2599a8720f89', // AK-47 | Fire Serpent
+  'skin-d466b1683b88', // ★ Bayonet | Doppler
+  'skin-25bbf8e641c1', // ★ Specialist Gloves | Fade
+  'skin-b14c9f234bc5', // AK-47 | Vulcan
+  'skin-5a39103af835', // AWP | Printstream
+  'skin-921a5a81c48a', // AK-47 | Wild Lotus
 ];
+
+const INITIAL_CASES = [
+  'Кейс «Революция»',
+  'Грёзы и кошмары',
+  'Кейс «Легенда Howl»',
+  'Кейс «Галактика Допплер»',
+  'Кейс «Хранилище Перчаток»',
+  'Кейс «Дикий Лотос»',
+  'Кейс «Градиентный Раш»',
+  'Kilowatt Case',
+];
+
+const buildInitialDrops = (): LiveDrop[] => {
+  const now = Date.now();
+  return INITIAL_SKIN_IDS.map((id, index) => {
+    const skin = SKINS_DATABASE.find((s) => s.id === id) || SKINS_DATABASE[index * 40] || SKINS_DATABASE[0];
+    return {
+      id: `fake_init_${index + 1}`,
+      user: '',
+      avatar: '',
+      skin,
+      caseName: INITIAL_CASES[index % INITIAL_CASES.length],
+      timestamp: now - (index + 1) * 32000,
+    };
+  });
+};
 
 export const useGameStore = create<GameState>()(
   persist(
@@ -49,6 +85,7 @@ export const useGameStore = create<GameState>()(
       inventory: [],
       soundEnabled: true,
       isRefillOpen: false,
+      caseOpenCounts: {},
       tokens: {
         token_consumer: 1,
         token_industrial: 1,
@@ -62,32 +99,7 @@ export const useGameStore = create<GameState>()(
         upgradesLost: 0,
         crashWonDc: 0,
       },
-      liveDrops: [
-        {
-          id: 'init_1',
-          user: 'm0NESY_Peak',
-          avatar: 'https://avatars.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg',
-          skin: SKINS_DATABASE.find(s => s.id === 'knife_butterfly_doppler') || SKINS_DATABASE[0],
-          caseName: 'Кейс «Революция»',
-          timestamp: Date.now() - 35000,
-        },
-        {
-          id: 'init_2',
-          user: 'S1mple_CS',
-          avatar: 'https://avatars.steamstatic.com/7918a36c56db36d338f654b9d034ee8b1efad932_full.jpg',
-          skin: SKINS_DATABASE.find(s => s.id === 'm4a1s_printstream') || SKINS_DATABASE[1],
-          caseName: 'Грёзы и кошмары',
-          timestamp: Date.now() - 85000,
-        },
-        {
-          id: 'init_3',
-          user: 'Donk_Rush',
-          avatar: 'https://avatars.steamstatic.com/c5c36395b2a0957279148d42d38515091763e003_full.jpg',
-          skin: SKINS_DATABASE.find(s => s.id === 'ak47_the_empress') || SKINS_DATABASE[2],
-          caseName: 'Мусорка Залупы',
-          timestamp: Date.now() - 140000,
-        }
-      ],
+      liveDrops: buildInitialDrops(),
 
       addBalance: (amount) => {
         set((state) => ({ balance: Math.max(0, state.balance + Math.floor(amount)) }));
@@ -253,6 +265,15 @@ export const useGameStore = create<GameState>()(
         set((state) => ({ activePotionCharges: Math.max(0, state.activePotionCharges - 1) }));
         return true;
       },
+
+      recordCaseOpen: (caseId: string, count = 1) => {
+        set((state) => ({
+          caseOpenCounts: {
+            ...state.caseOpenCounts,
+            [caseId]: (state.caseOpenCounts[caseId] || 0) + count,
+          },
+        }));
+      },
     }),
     {
       name: 'zalupa_drop_state_v1',
@@ -265,6 +286,7 @@ export const useGameStore = create<GameState>()(
         tokens: state.tokens,
         potionsCount: state.potionsCount,
         activePotionCharges: state.activePotionCharges,
+        caseOpenCounts: state.caseOpenCounts,
       }),
     }
   )

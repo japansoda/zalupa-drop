@@ -15,6 +15,18 @@
   --rarity-contraband: #eab308;
 }
 
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-text-size-adjust: 100%;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #08080a;
   color: #f3f4f6;
@@ -24,6 +36,14 @@ body {
     radial-gradient(circle at 50% -10%, rgba(250, 204, 21, 0.05), transparent 50%),
     radial-gradient(circle at 90% 80%, rgba(250, 204, 21, 0.03), transparent 45%);
   background-attachment: fixed;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Glass Panels: Deep Black/White/Yellow */

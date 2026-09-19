@@ -9,7 +9,7 @@ import { TradeUpContract } from '../../components/contract/TradeUpContract';
 
 export default function ContractPage() {
   return (
-    <main className="min-h-screen flex flex-col justify-between bg-[#08080a]">
+    <main className="min-h-screen flex flex-col justify-between bg-[#08080a] max-w-full overflow-x-hidden">
       <div>
         <Header />
         <LiveDropBar />
