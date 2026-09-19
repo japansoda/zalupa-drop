@@ -15,7 +15,7 @@ import { sound } from '../../../lib/sound';
 import { useLanguage } from '../../../lib/i18n';
 import { ArrowLeft, ShieldCheck } from 'lucide-react';
 import { CaseSpecialItemCard } from '../../../components/case/CaseSpecialItemCard';
-import { isOfficialCase, getCaseKnifePool, isKnifeOrGlove } from '../../../lib/caseSpecials';
+import { isOfficialCase, isKnifeOrGlove } from '../../../lib/caseSpecials';
 
 export default function CaseOpenPage() {
   const params = useParams();
@@ -25,10 +25,6 @@ export default function CaseOpenPage() {
   const currentCase = CASES_DATABASE.find((c) => c.id === caseId);
 
   const isOfficial = Boolean(currentCase && isOfficialCase(currentCase.id, currentCase.category));
-  const knifePool = React.useMemo(() => {
-    if (!currentCase || !isOfficial) return [];
-    return getCaseKnifePool(currentCase.id);
-  }, [currentCase, isOfficial]);
 
   const groupedSkins = React.useMemo(() => {
     if (!currentCase?.skins) return [];
@@ -129,7 +125,7 @@ export default function CaseOpenPage() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {isOfficial && (
-              <CaseSpecialItemCard caseId={currentCase.id} knifePool={knifePool} />
+              <CaseSpecialItemCard caseId={currentCase.id} />
             )}
             {groupedSkins.map((variants, idx) => (
               <CaseSkinGroupCard key={variants[0]?.id || idx} variants={variants} />
