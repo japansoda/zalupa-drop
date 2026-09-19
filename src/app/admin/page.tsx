@@ -539,17 +539,17 @@ export default function AdminPage() {
                     user: 'Вы',
                     avatar: '',
                     skin: {
-                      id: 'test_drop_howl',
-                      name: 'M4A4 | Howl (Factory New)',
+                      id: 'skin-8aacf99e7f2f',
+                      name: 'M4A4 | Howl',
                       weapon: 'M4A4',
                       skinName: 'Howl',
                       rarity: 'contraband',
                       wear: 'FN',
                       wearLabel: 'Прямо с завода',
-                      image: 'https://community.cloudflare.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhjxszfjTwW09izh4-GkvP9Jrafw2lU6ccp0rqVpon32wbs-0A4YmD3do-RegE-NA7T_Vm4xuzng57u7czMy3U16SE8pSGKR9vWb3E/360fx360f',
-                      priceUsd: 4500,
+                      image: 'https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afVSKP-EAm6extF6ueZhW2exwkl2tmTXwt39eCiUPQR2DMN4TOVetUK8xoLgM-K341eM2otDnC6okGoXufBz_TAB',
+                      priceUsd: 4200,
                       priceDc: 350000,
-                      steamMarketUrl: 'https://steamcommunity.com/market/listings/730/M4A4%20%7C%20Howl%20%28Factory%20New%29',
+                      steamMarketUrl: 'https://steamcommunity.com/market/listings/730/M4A4%20%7C%20Howl%20(Factory%20New)',
                     },
                     caseName: 'Кейс «Легенда Howl»',
                     timestamp: Date.now(),
@@ -557,8 +557,12 @@ export default function AdminPage() {
                 }}
                 className="w-full py-3 rounded-xl btn-yellow text-black font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer active:scale-95"
               >
-                <Sparkles className="w-4 h-4" />
-                Пуш дропа M4A4 Howl (350,000 DC)
+                <img
+                  src="https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afVSKP-EAm6extF6ueZhW2exwkl2tmTXwt39eCiUPQR2DMN4TOVetUK8xoLgM-K341eM2otDnC6okGoXufBz_TAB"
+                  alt="M4A4 Howl"
+                  className="w-5 h-5 object-contain shrink-0"
+                />
+                <span>Пуш дропа M4A4 Howl (350,000 DC)</span>
               </button>
             </div>
 

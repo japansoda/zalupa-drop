@@ -112,10 +112,14 @@ export const LiveDropBar: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Filter pool: strictly firearms & knives >= 25,000 DC (NO STICKERS, NO CHARMS, NO DUPLICATE GLOVES)
-  const expensiveWeapons = useMemo(() => {
-    return SKINS_DATABASE.filter((s) => {
-      if (!s || !s.image || !s.weapon) return false;
+  // Categorized pools for diverse drop generation (50% guns, 25% gloves, 25% knives, strictly >= 25,000 DC)
+  const { eliteGuns, eliteGloves, eliteKnives } = useMemo(() => {
+    const guns: typeof SKINS_DATABASE = [];
+    const gloves: typeof SKINS_DATABASE = [];
+    const knives: typeof SKINS_DATABASE = [];
+
+    for (const s of SKINS_DATABASE) {
+      if (!s || !s.image || !s.weapon || s.priceDc < 25000) continue;
       const w = s.weapon.toLowerCase();
       if (
         w.includes('sticker') ||
@@ -125,10 +129,19 @@ export const LiveDropBar: React.FC = () => {
         w.includes('брелок') ||
         s.name.includes('Spruce DDPAT')
       ) {
-        return false;
+        continue;
       }
-      return s.priceDc >= 25000;
-    });
+
+      if (w.includes('knife') || w.includes('bayonet') || w.includes('karambit') || w.includes('daggers')) {
+        knives.push(s);
+      } else if (w.includes('gloves') || w.includes('wraps')) {
+        gloves.push(s);
+      } else {
+        guns.push(s);
+      }
+    }
+
+    return { eliteGuns: guns, eliteGloves: gloves, eliteKnives: knives };
   }, []);
 
   // Sync real drops from other tabs/users: ONLY if >= 25,000 coins and within 3-minute window
@@ -175,16 +188,31 @@ export const LiveDropBar: React.FC = () => {
 
   // Working fake drop generator (frequent drops):
   // Starts empty at page reload, first drop in 1.5s, then every 6-11s.
+  // Balanced distribution: 50% Rifles/Pistols/Snipers, 25% Gloves, 25% Knives!
   // If 6 or more real drops occurred in the last 3 minutes, fake drops are completely disabled.
   useEffect(() => {
     if (recentRealDrops.length >= 6) return;
-    if (expensiveWeapons.length === 0) return;
 
     // First fake drop appears fast (1.5s after load), then every 6-11 seconds
     const delay = liveDrops.length === 0 ? 1500 : 6000 + Math.random() * 5000;
 
     const timeoutId = setTimeout(() => {
-      const randomSkin = expensiveWeapons[Math.floor(Math.random() * expensiveWeapons.length)];
+      // Pick balanced skin: 50% guns, 25% gloves, 25% knives
+      const roll = Math.random();
+      let pool = eliteGuns;
+      if (roll < 0.50 && eliteGuns.length > 0) {
+        pool = eliteGuns;
+      } else if (roll < 0.75 && eliteGloves.length > 0) {
+        pool = eliteGloves;
+      } else if (eliteKnives.length > 0) {
+        pool = eliteKnives;
+      } else if (eliteGuns.length > 0) {
+        pool = eliteGuns;
+      } else {
+        return;
+      }
+
+      const randomSkin = pool[Math.floor(Math.random() * pool.length)];
       const randomCase = SIMULATED_CASES[Math.floor(Math.random() * SIMULATED_CASES.length)];
       const timestamp = Date.now();
 
@@ -201,7 +229,7 @@ export const LiveDropBar: React.FC = () => {
     }, delay);
 
     return () => clearTimeout(timeoutId);
-  }, [liveDrops.length, recentRealDrops.length, expensiveWeapons, addLiveDrop]);
+  }, [liveDrops.length, recentRealDrops.length, eliteGuns, eliteGloves, eliteKnives, addLiveDrop]);
 
   // Dynamic 3-minute blend logic:
   // 1. If >= 6 real drops in last 3 min: ZERO fake drops shown, only real drops!
