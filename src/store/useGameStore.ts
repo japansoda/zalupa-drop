@@ -65,7 +65,7 @@ export const useGameStore = create<GameState>()(
         crashWonDc: 0,
       },
       liveDrops: [],
-      fakeDropsEnabled: true,
+      fakeDropsEnabled: typeof window !== 'undefined' ? localStorage.getItem('zalupa_fake_drops_enabled') !== 'false' : true,
 
       addBalance: (amount) => {
         set((state) => ({ balance: Math.max(0, state.balance + Math.floor(amount)) }));
@@ -178,6 +178,11 @@ export const useGameStore = create<GameState>()(
       },
 
       setFakeDropsEnabled: (enabled) => {
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.setItem('zalupa_fake_drops_enabled', String(enabled));
+          } catch (e) {}
+        }
         set({ fakeDropsEnabled: enabled });
       },
 
@@ -281,6 +286,7 @@ export const useGameStore = create<GameState>()(
         potionsCount: state.potionsCount,
         activePotionCharges: state.activePotionCharges,
         caseOpenCounts: state.caseOpenCounts,
+        fakeDropsEnabled: state.fakeDropsEnabled,
       }),
     }
   )

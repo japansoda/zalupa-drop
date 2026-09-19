@@ -141,11 +141,22 @@ export const LiveDropBar: React.FC = () => {
   // Real-time synchronization for new drops (ntfy.sh SSE + local BroadcastChannel)
   // No preloading of old historical drops: fresh start on reload
   useEffect(() => {
-    // Sync initial fake drops configuration from server
+    // Sync fake drops configuration from server, respecting local override
     fetch('/api/live-drops', { cache: 'no-store' })
       .then((r) => r.json())
       .then((data) => {
-        if (typeof data.fakeDropsEnabled === 'boolean') {
+        const localSaved = typeof window !== 'undefined' ? localStorage.getItem('zalupa_fake_drops_enabled') : null;
+        if (localSaved === 'false') {
+          // If locally explicitly turned off, ensure store is off and sync server if server restarted with true
+          useGameStore.getState().setFakeDropsEnabled(false);
+          if (data?.fakeDropsEnabled === true) {
+            fetch('/api/live-drops', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ action: 'setFakeDrops', enabled: false }),
+            }).catch(() => {});
+          }
+        } else if (typeof data?.fakeDropsEnabled === 'boolean') {
           useGameStore.getState().setFakeDropsEnabled(data.fakeDropsEnabled);
         }
       })
