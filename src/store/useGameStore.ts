@@ -129,8 +129,8 @@ export const useGameStore = create<GameState>()(
       },
 
       addLiveDrop: (drop) => {
-        // Strictly only drops >= 100,000 DC can enter live drop ticker
-        if (!drop || !drop.skin || (drop.skin.priceDc || 0) < 100000) return;
+        // Strictly only drops >= 25,000 DC can enter live drop ticker
+        if (!drop || !drop.skin || (drop.skin.priceDc || 0) < 25000) return;
 
         set((state) => {
           if (state.liveDrops.some((d) => d.id === drop.id)) return state;

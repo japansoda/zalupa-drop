@@ -112,7 +112,7 @@ export const LiveDropBar: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Filter pool: strictly firearms & knives >= 100,000 DC (NO STICKERS, NO CHARMS, NO DUPLICATE GLOVES)
+  // Filter pool: strictly firearms & knives >= 25,000 DC (NO STICKERS, NO CHARMS, NO DUPLICATE GLOVES)
   const expensiveWeapons = useMemo(() => {
     return SKINS_DATABASE.filter((s) => {
       if (!s || !s.image || !s.weapon) return false;
@@ -127,11 +127,11 @@ export const LiveDropBar: React.FC = () => {
       ) {
         return false;
       }
-      return s.priceDc >= 100000;
+      return s.priceDc >= 25000;
     });
   }, []);
 
-  // Sync real drops from other tabs/users: ONLY if >= 100,000 coins and within 3-minute window
+  // Sync real drops from other tabs/users: ONLY if >= 25,000 coins and within 3-minute window
   useEffect(() => {
     if (typeof window === 'undefined' || !('BroadcastChannel' in window)) return;
     try {
@@ -141,7 +141,7 @@ export const LiveDropBar: React.FC = () => {
         if (
           drop &&
           drop.skin &&
-          drop.skin.priceDc >= 100000 &&
+          drop.skin.priceDc >= 25000 &&
           Date.now() - (drop.timestamp || 0) < BLEND_WINDOW_MS
         ) {
           addLiveDrop({ ...drop, id: `net_${drop.id}` });
@@ -160,7 +160,7 @@ export const LiveDropBar: React.FC = () => {
     const now = Date.now();
 
     for (const d of liveDrops) {
-      if (!d.skin || d.skin.priceDc < 100000) continue;
+      if (!d.skin || d.skin.priceDc < 25000) continue;
 
       if (isRealDrop(d)) {
         if (now - d.timestamp < BLEND_WINDOW_MS) {
@@ -173,15 +173,15 @@ export const LiveDropBar: React.FC = () => {
     return { recentRealDrops: real, fakeDrops: fake };
   }, [liveDrops, nowTick]);
 
-  // Working fake drop generator:
-  // Starts empty at page reload, then drops appear over time.
+  // Working fake drop generator (frequent drops):
+  // Starts empty at page reload, first drop in 1.5s, then every 6-11s.
   // If 6 or more real drops occurred in the last 3 minutes, fake drops are completely disabled.
   useEffect(() => {
     if (recentRealDrops.length >= 6) return;
     if (expensiveWeapons.length === 0) return;
 
-    // First fake drop appears fast (3.5s after load), then every 14-22s
-    const delay = liveDrops.length === 0 ? 3500 : 14000 + Math.random() * 8000;
+    // First fake drop appears fast (1.5s after load), then every 6-11 seconds
+    const delay = liveDrops.length === 0 ? 1500 : 6000 + Math.random() * 5000;
 
     const timeoutId = setTimeout(() => {
       const randomSkin = expensiveWeapons[Math.floor(Math.random() * expensiveWeapons.length)];

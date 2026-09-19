@@ -300,9 +300,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
         setIsSpinning(false);
         setShowModal(true);
 
-        // Immediately emit real drops to live ticker (ONLY from 100,000 DC!)
+        // Immediately emit real drops to live ticker (ONLY from 25,000 DC!)
         winners.forEach((skin) => {
-          if (skin.priceDc >= 100000) {
+          if (skin.priceDc >= 25000) {
             addLiveDrop({
               id: `real_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
               user: 'Вы',
@@ -392,9 +392,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     setIsSpinning(false);
     setShowModal(true);
 
-    // Immediately emit real drops to live ticker (ONLY from 100,000 DC!)
+    // Immediately emit real drops to live ticker (ONLY from 25,000 DC!)
     winners.forEach((skin) => {
-      if (skin.priceDc >= 100000) {
+      if (skin.priceDc >= 25000) {
         addLiveDrop({
           id: `real_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
           user: 'Вы',

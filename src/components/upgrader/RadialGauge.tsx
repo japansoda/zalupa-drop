@@ -442,8 +442,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       addToInventory([targetSkin]);
       recordUpgrade(true, targetSkin.priceDc - effectiveBetDc);
 
-      // Emit real drop to live drops ticker (strictly >= 100,000 DC)
-      if (targetSkin.priceDc >= 100000) {
+      // Emit real drop to live drops ticker (strictly >= 25,000 DC)
+      if (targetSkin.priceDc >= 25000) {
         addLiveDrop({
           id: `upgrade_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
           user: 'Вы',
