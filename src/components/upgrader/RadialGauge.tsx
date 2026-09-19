@@ -204,25 +204,69 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     }
     if (candidates.length === 0) return;
 
-    // Only exclude low-tier junk stickers/charms (< 15,000 DC) from general recommendations;
-    // expensive high-tier Katowice stickers and rare collectibles (> 15,000 DC) are fully included!
     if (typeToMatch === 'all') {
-      const filtered = candidates.filter((s) => s.priceDc >= 15000 || isActualWeapon(s));
-      if (filtered.length > 0) {
-        candidates = filtered;
+      // 1. Prioritize core items: Knives, Weapons, Gloves, and Agents
+      const coreCandidates = candidates.filter((s) => {
+        return (
+          matchesCatalogType(s, 'knives') ||
+          matchesCatalogType(s, 'gloves') ||
+          matchesCatalogType(s, 'agents') ||
+          isActualWeapon(s)
+        );
+      });
+
+      // If core items exist in this price segment, strictly use core items!
+      // Only fall back to stickers/charms if there are ZERO core items in this price range.
+      const pool = coreCandidates.length > 0 ? coreCandidates : candidates;
+
+      // Sort pool by closeness to ideal target price
+      const sorted = [...pool].sort(
+        (a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice)
+      );
+
+      // Take top closest candidates (top 16)
+      const topSlice = sorted.slice(0, 16);
+
+      // Separate into balanced category buckets: knives, gloves, agents, weapons
+      const knifeBucket = topSlice.filter((s) => matchesCatalogType(s, 'knives'));
+      const gloveBucket = topSlice.filter((s) => matchesCatalogType(s, 'gloves'));
+      const agentBucket = topSlice.filter((s) => matchesCatalogType(s, 'agents'));
+      const gunBucket = topSlice.filter(
+        (s) => isActualWeapon(s) && !matchesCatalogType(s, 'knives') && !matchesCatalogType(s, 'gloves')
+      );
+
+      const availableBuckets: SkinEntity[][] = [];
+      if (knifeBucket.length > 0) availableBuckets.push(knifeBucket);
+      if (gloveBucket.length > 0) availableBuckets.push(gloveBucket);
+      if (agentBucket.length > 0) availableBuckets.push(agentBucket);
+      if (gunBucket.length > 0) availableBuckets.push(gunBucket);
+
+      if (availableBuckets.length > 0) {
+        // Randomly pick a category bucket among available, ensuring diverse mix
+        const chosenBucket = availableBuckets[Math.floor(Math.random() * availableBuckets.length)];
+        const chosenSkin = chosenBucket[Math.floor(Math.random() * Math.min(2, chosenBucket.length))];
+        if (chosenSkin) {
+          setTargetSkin(chosenSkin);
+          return;
+        }
       }
-    }
 
-    // Sort all candidates by absolute distance to ideal target price
-    const sorted = [...candidates].sort(
-      (a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice)
-    );
-
-    // Pick among top 8 closest items to idealPrice for good variety without breaking requested odds
-    const topCandidates = sorted.slice(0, 8);
-    const picked = topCandidates[Math.floor(Math.random() * Math.min(4, topCandidates.length))];
-    if (picked) {
-      setTargetSkin(picked);
+      // Fallback if no specific bucket was found
+      const fallbackPicked = topSlice[Math.floor(Math.random() * Math.min(4, topSlice.length))];
+      if (fallbackPicked) {
+        setTargetSkin(fallbackPicked);
+        return;
+      }
+    } else {
+      // Specific category tab active
+      const sorted = [...candidates].sort(
+        (a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice)
+      );
+      const topCandidates = sorted.slice(0, 8);
+      const picked = topCandidates[Math.floor(Math.random() * Math.min(4, topCandidates.length))];
+      if (picked) {
+        setTargetSkin(picked);
+      }
     }
   };
 
