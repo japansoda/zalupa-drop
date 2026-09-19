@@ -13,6 +13,8 @@ export const MobileNav: React.FC = () => {
   const { inventory, setRefillOpen } = useGameStore();
   const { t } = useLanguage();
 
+  if (pathname?.startsWith('/admin')) return null;
+
   const navItems = [
     { href: '/', label: t('nav.cases') || 'Кейсы', icon: Box },
     { href: '/upgrader', label: t('nav.upgrader') || 'Апгрейд', icon: Zap },

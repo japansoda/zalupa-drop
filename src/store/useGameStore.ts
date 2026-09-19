@@ -157,11 +157,16 @@ export const useGameStore = create<GameState>()(
         set((state) => {
           if (state.liveDrops.some((d) => d.id === drop.id)) return state;
           return {
-            liveDrops: [drop, ...state.liveDrops.slice(0, 24)],
+            liveDrops: [drop, ...state.liveDrops.slice(0, 14)],
           };
         });
 
-        if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
+        // Only broadcast real player drops to other tabs
+        if (
+          (drop.id.startsWith('real_') || drop.id.startsWith('contract_') || drop.id.startsWith('upgrade_')) &&
+          typeof window !== 'undefined' &&
+          'BroadcastChannel' in window
+        ) {
           try {
             const bc = new BroadcastChannel('zalupa_live_drops');
             bc.postMessage(drop);

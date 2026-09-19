@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad_body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181926" />
+      <stop offset="40%" stop-color="#12131c" />
+      <stop offset="100%" stop-color="#08090f" />
+    </linearGradient>
+    <linearGradient id="grad_accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="50%" stop-color="#1d4ed8" />
+      <stop offset="100%" stop-color="#facc15" />
+    </linearGradient>
+    <radialGradient id="grad_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.5" />
+      <stop offset="60%" stop-color="#1d4ed8" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <circle cx="256" cy="256" r="230" fill="url(#grad_glow)" />
+
+  <g transform="translate(0, 10)">
+    <!-- Base crate shadow -->
+    <ellipse cx="256" cy="425" rx="190" ry="28" fill="#000000" opacity="0.75" filter="url(#glow)" />
+
+    <!-- 3D Crate Body -->
+    <path d="M76 170 L256 90 L436 170 L436 360 L256 440 L76 360 Z" fill="url(#grad_body)" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2" />
+
+    <!-- Top facet -->
+    <path d="M76 170 L256 90 L436 170 L256 250 Z" fill="#202234" opacity="0.9" />
+    <!-- Left facet -->
+    <path d="M76 170 L256 250 L256 440 L76 360 Z" fill="#13141f" />
+    <!-- Right facet -->
+    <path d="M256 250 L436 170 L436 360 L256 440 Z" fill="#0b0c14" />
+
+    <!-- Neon Accent Straps -->
+    <path d="M126 148 L256 206 L386 148" fill="none" stroke="url(#grad_accent)" stroke-width="8" filter="url(#glow)" stroke-linecap="round" />
+    <path d="M126 230 L256 288 L386 230" fill="none" stroke="url(#grad_accent)" stroke-width="6" opacity="0.8" />
+    <path d="M126 310 L256 368 L386 310" fill="none" stroke="url(#grad_accent)" stroke-width="6" opacity="0.6" />
+
+    <!-- Vertical Side Pillars -->
+    <line x1="256" y1="250" x2="256" y2="440" stroke="url(#grad_accent)" stroke-width="4" opacity="0.9" />
+    <line x1="76" y1="170" x2="76" y2="360" stroke="#ffffff" stroke-width="2" opacity="0.2" />
+    <line x1="436" y1="170" x2="436" y2="360" stroke="#ffffff" stroke-width="2" opacity="0.2" />
+
+    <!-- Center Emblem Badge -->
+    <polygon points="256,155 310,185 310,245 256,275 202,245 202,185" fill="#090a12" stroke="url(#grad_accent)" stroke-width="3.5" filter="url(#glow)" />
+
+    <!-- Icon Graphic in center badge -->
+    <text x="256" y="224" font-family="sans-serif" font-size="28" font-weight="900" fill="#facc15" text-anchor="middle" filter="url(#glow)">🏛️</text>
+
+    <!-- Corner Metallic Brackets -->
+    <circle cx="95" cy="180" r="4" fill="#2563eb" />
+    <circle cx="417" cy="180" r="4" fill="#2563eb" />
+    <circle cx="256" cy="105" r="4" fill="#facc15" />
+    <circle cx="256" cy="425" r="4" fill="#1d4ed8" />
+  </g>
+</svg>

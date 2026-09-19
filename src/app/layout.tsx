@@ -3,6 +3,7 @@ import "./globals.css";
 import { LanguageProvider } from "../lib/i18n";
 import { HorizontalScrollManager } from "../components/layout/HorizontalScrollManager";
 import { MobileNav } from "../components/layout/MobileNav";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "ZALUPA DROP — CS2 Кейс Симулятор & Liquid Glass",
@@ -24,6 +25,7 @@ export default function RootLayout({
           <HorizontalScrollManager />
           {children}
           <MobileNav />
+          <Analytics />
         </LanguageProvider>
       </body>
     </html>

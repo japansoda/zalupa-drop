@@ -75,9 +75,9 @@ export default function CaseOpenPage() {
             <span>{t('case.back')}</span>
           </Link>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-white/10">
-            <div className="flex items-center gap-4 text-center sm:text-left">
-              <div className="w-16 h-16 rounded-2xl bg-black/60 border border-white/10 p-2 shrink-0">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pb-4 border-b border-white/10">
+            <div className="flex items-center gap-3 sm:gap-4 text-left w-full sm:w-auto">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-black/60 border border-white/10 p-2 shrink-0">
                 <img 
                   src={currentCase.image} 
                   alt={currentCase.name} 
@@ -85,18 +85,21 @@ export default function CaseOpenPage() {
                   className="w-full h-full object-contain" 
                 />
               </div>
-              <div>
-                <h1 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
+              <div className="flex flex-col">
+                <h1 className="text-xl sm:text-3xl font-black text-white uppercase tracking-tight line-clamp-2">
                   {currentCase.name}
                 </h1>
+                {currentCase.subtitle && (
+                  <p className="text-xs text-white/50 line-clamp-1">{currentCase.subtitle}</p>
+                )}
               </div>
             </div>
 
-            <div className="flex items-center gap-2 px-5 py-2.5 rounded-2xl glass-panel border border-white/10">
+            <div className="flex items-center justify-between w-full sm:w-auto gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-2xl glass-panel border border-white/10 shrink-0">
               <span className="text-xs text-white/60 font-bold">{t('case.openCost')}</span>
               <div className="flex items-center gap-1.5">
                 <DropCoinIcon size={20} />
-                <span className="font-mono font-black text-lg text-yellow-400">
+                <span className="font-mono font-black text-base sm:text-lg text-yellow-400">
                   {currentCase.priceDc.toLocaleString('ru-RU')} DC
                 </span>
               </div>
@@ -104,7 +107,7 @@ export default function CaseOpenPage() {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+        <section className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
           <ReelRoulette
             caseId={currentCase.id}
             caseSkins={currentCase.skins}
@@ -113,17 +116,17 @@ export default function CaseOpenPage() {
           />
         </section>
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-          <div className="flex items-center justify-between mb-6 pb-2 border-b border-white/10">
+        <section className="max-w-7xl mx-auto px-3 sm:px-6 py-6 sm:py-10">
+          <div className="flex items-center justify-between mb-4 sm:mb-6 pb-2 border-b border-white/10">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-yellow-400" />
-              <h2 className="text-xl font-black text-white uppercase tracking-tight">
+              <h2 className="text-lg sm:text-xl font-black text-white uppercase tracking-tight">
                 {t('case.contents')} ({groupedSkins.length + (isOfficial ? 1 : 0)} {t('home.items')})
               </h2>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 sm:gap-4">
             {isOfficial && (
               <CaseSpecialItemCard caseId={currentCase.id} />
             )}

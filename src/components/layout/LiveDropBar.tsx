@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState, useMemo, memo } from 'react';
 import { useGameStore } from '../../store/useGameStore';
 import { SKINS_DATABASE, RARITY_CONFIG } from '../../data/skins';
 import { LiveDrop } from '../../lib/types';
@@ -14,25 +14,110 @@ const SIMULATED_CASES = [
   'Kilowatt Case',
   'CS:GO Weapon Case',
   'Кейс «Разлом»',
-  'Кейс «Призма»',
-  'Кейс «Змеиный укус»',
-  'Кейс «Решающий момент»',
-  'Кейс «Звездный дракон»',
-  'Кейс «Киберпанк»',
+  'Кейс «Легенда Howl»',
+  'Кейс «Градиентный Раш»',
+  'Кейс «Галактика Допплер»',
+  'Кейс «Дикий Лотос»',
+  'Кейс «Хранилище Перчаток»',
 ];
+
+// Memoized single card to eliminate rendering lag on ticker updates
+interface CardProps {
+  drop: LiveDrop;
+  isUser: boolean;
+  locale: string;
+}
+
+const LiveDropCard = memo(({ drop, isUser, locale }: CardProps) => {
+  const config = RARITY_CONFIG[drop.skin.rarity] || RARITY_CONFIG.milspec;
+
+  return (
+    <div
+      className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-xl glass-card shrink-0 transition-transform group border ${
+        isUser
+          ? 'border-yellow-400/60 bg-yellow-400/10 shadow-[0_0_12px_rgba(250,204,21,0.2)]'
+          : 'border-white/5 hover:border-white/20'
+      }`}
+      style={{
+        borderLeftWidth: '3px',
+        borderLeftColor: config.color,
+      }}
+      title={`${drop.skin.name} — ${drop.caseName}`}
+    >
+      {/* Skin Icon */}
+      <div className="relative w-10 h-10 rounded-lg bg-black/60 overflow-hidden flex items-center justify-center p-0.5 border border-white/5 shrink-0">
+        <img
+          src={drop.skin.image}
+          alt={drop.skin.name}
+          loading="lazy"
+          referrerPolicy="no-referrer"
+          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-150"
+        />
+      </div>
+
+      {/* Skin Details */}
+      <div className="flex flex-col leading-tight pr-1 min-w-[95px] max-w-[145px]">
+        <div className="flex items-center justify-between gap-1 mb-0.5">
+          <span
+            className="text-[11px] font-black truncate"
+            style={{ color: config.color }}
+          >
+            {drop.skin.weapon}
+          </span>
+          {/* ONLY show tag for user's own drop, NO OTHER TAGS allowed */}
+          {isUser && (
+            <span className="text-[8px] font-black uppercase px-1.5 py-0.5 rounded bg-yellow-400 text-black shrink-0 tracking-tighter">
+              {locale === 'ru' ? 'ВЫ' : 'YOU'}
+            </span>
+          )}
+        </div>
+        <span className="text-[10px] font-semibold text-white/80 truncate">
+          {drop.skin.skinName}
+        </span>
+        <div className="flex items-center justify-between gap-1 text-[9px] text-white/40 mt-0.5">
+          <span className="truncate max-w-[80px]">{drop.caseName}</span>
+          <span className="font-mono text-yellow-400/90 font-bold shrink-0">
+            {drop.skin.priceDc.toLocaleString('ru-RU')} DC
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+});
+
+LiveDropCard.displayName = 'LiveDropCard';
 
 export const LiveDropBar: React.FC = () => {
   const { liveDrops, addLiveDrop } = useGameStore();
   const { t, locale } = useLanguage();
 
-  // Listen to real drops from other tabs / sessions
+  // Timestamp of the latest real player drop
+  const lastRealDropRef = useRef<number>(Date.now());
+
+  // Filter pool: strictly firearms & knives >= 100,000 DC (NO STICKERS, NO CHARMS)
+  const expensiveWeapons = useMemo(() => {
+    return SKINS_DATABASE.filter((s) => {
+      const w = (s.weapon || '').toLowerCase();
+      if (w === 'sticker' || w === 'charm' || w === 'patch' || w.includes('наклейка') || w.includes('брелок')) return false;
+      return s.priceDc >= 100000 || s.rarity === 'gold' || s.rarity === 'covert';
+    });
+  }, []);
+
+  // Sync real drops from other tabs/users: ONLY if >= 100,000 coins and within current time (<60s ago)
   useEffect(() => {
     if (typeof window === 'undefined' || !('BroadcastChannel' in window)) return;
     try {
       const channel = new BroadcastChannel('zalupa_live_drops');
       channel.onmessage = (event) => {
-        if (event.data && event.data.skin) {
-          addLiveDrop({ ...event.data, id: `net_${event.data.id}` });
+        const drop = event.data;
+        if (
+          drop &&
+          drop.skin &&
+          drop.skin.priceDc >= 100000 &&
+          Math.abs(Date.now() - (drop.timestamp || 0)) < 60000
+        ) {
+          lastRealDropRef.current = Date.now();
+          addLiveDrop({ ...drop, id: `net_${drop.id}` });
         }
       };
       return () => {
@@ -41,34 +126,47 @@ export const LiveDropBar: React.FC = () => {
     } catch (_) {}
   }, [addLiveDrop]);
 
-  // Background feed: strictly expensive items & simulated other active players
+  // Track user's own real drops to reset inactivity timer
   useEffect(() => {
-    const expensiveSkins = SKINS_DATABASE.filter(
-      (s) => s.priceDc >= 850 || s.rarity === 'gold' || s.rarity === 'covert' || s.rarity === 'extraordinary'
+    const hasRecentReal = liveDrops.some(
+      (d) => (d.id.startsWith('real_') || d.user === 'Вы') && Date.now() - d.timestamp < 60000
     );
+    if (hasRecentReal) {
+      lastRealDropRef.current = Date.now();
+    }
+  }, [liveDrops]);
 
+  // Dynamic slow mode: ONLY fires if NO real drop has happened for > 60 seconds.
+  // When active, adds a single drop very slowly (every 50s) to keep ticker alive without lag.
+  useEffect(() => {
     const interval = setInterval(() => {
-      if (expensiveSkins.length === 0) return;
-      const randomSkin = expensiveSkins[Math.floor(Math.random() * expensiveSkins.length)];
+      const now = Date.now();
+      const timeSinceReal = now - lastRealDropRef.current;
+
+      // If less than 1 minute since last real drop, do nothing (wait)
+      if (timeSinceReal < 60000) return;
+
+      if (expensiveWeapons.length === 0) return;
+      const randomSkin = expensiveWeapons[Math.floor(Math.random() * expensiveWeapons.length)];
       const randomCase = SIMULATED_CASES[Math.floor(Math.random() * SIMULATED_CASES.length)];
 
-      const isOtherPlayer = Math.random() < 0.65; // 65% are simulated active player unboxings
       const newDrop: LiveDrop = {
-        id: isOtherPlayer
-          ? `player_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`
-          : `sim_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
-        user: isOtherPlayer ? (locale === 'ru' ? 'Игрок' : 'Player') : '',
+        id: `slow_sim_${now}_${Math.random().toString(36).substr(2, 5)}`,
+        user: '', // No tag
         avatar: '',
         skin: randomSkin,
         caseName: randomCase,
-        timestamp: Date.now(),
+        timestamp: now,
       };
 
       addLiveDrop(newDrop);
-    }, 8500);
+    }, 50000); // Slow mode: 50 seconds interval
 
     return () => clearInterval(interval);
-  }, [addLiveDrop, locale]);
+  }, [addLiveDrop, expensiveWeapons]);
+
+  // Only render up to 12 items to prevent memory bloat and scroll stuttering
+  const visibleDrops = useMemo(() => liveDrops.slice(0, 12), [liveDrops]);
 
   return (
     <div className="w-full bg-[#0a0a0d] border-b border-white/5 py-2 overflow-hidden backdrop-blur-md">
@@ -82,76 +180,16 @@ export const LiveDropBar: React.FC = () => {
 
         <div
           onWheel={handleHorizontalWheel}
-          className="flex items-center gap-2.5 overflow-x-auto no-scrollbar scroll-smooth py-0.5"
+          className="flex items-center gap-2.5 overflow-x-auto no-scrollbar scroll-smooth py-0.5 will-change-scroll"
         >
-          {liveDrops.map((drop) => {
-            const config = RARITY_CONFIG[drop.skin.rarity] || RARITY_CONFIG.milspec;
-            const isUserDrop = drop.id.startsWith('real_') || drop.user === 'Вы';
-            const isOtherPlayerDrop =
-              drop.id.startsWith('player_') ||
-              drop.id.startsWith('net_') ||
-              drop.id.startsWith('contract_') ||
-              drop.id.startsWith('upgrade_');
-
-            return (
-              <div
-                key={drop.id}
-                className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-xl glass-card shrink-0 transition-all cursor-pointer group border ${
-                  isUserDrop
-                    ? 'border-yellow-400/60 bg-yellow-400/10 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
-                    : isOtherPlayerDrop
-                    ? 'border-emerald-500/40 bg-emerald-950/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]'
-                    : 'border-white/5 hover:border-white/20'
-                }`}
-                style={{
-                  borderLeftWidth: '3px',
-                  borderLeftColor: config.color,
-                }}
-                title={`${drop.skin.name} — ${drop.caseName}`}
-              >
-                {/* Skin Icon */}
-                <div className="relative w-10 h-10 rounded-lg bg-black/60 overflow-hidden flex items-center justify-center p-0.5 border border-white/5 shrink-0">
-                  <img
-                    src={drop.skin.image}
-                    alt={drop.skin.name}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-200"
-                  />
-                </div>
-
-                {/* Skin Details */}
-                <div className="flex flex-col leading-tight pr-1 min-w-[95px] max-w-[145px]">
-                  <div className="flex items-center justify-between gap-1 mb-0.5">
-                    <span
-                      className="text-[11px] font-black truncate"
-                      style={{ color: config.color }}
-                    >
-                      {drop.skin.weapon}
-                    </span>
-                    {isUserDrop ? (
-                      <span className="text-[8px] font-black uppercase px-1 rounded bg-yellow-400 text-black shrink-0 tracking-tighter">
-                        {locale === 'ru' ? 'ВЫ' : 'YOU'}
-                      </span>
-                    ) : isOtherPlayerDrop ? (
-                      <span className="text-[8px] font-black uppercase px-1 rounded bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 shrink-0 tracking-tighter flex items-center gap-0.5">
-                        <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
-                        LIVE
-                      </span>
-                    ) : null}
-                  </div>
-                  <span className="text-[10px] font-semibold text-white/80 truncate">
-                    {drop.skin.skinName}
-                  </span>
-                  <div className="flex items-center justify-between gap-1 text-[9px] text-white/40 mt-0.5">
-                    <span className="truncate max-w-[80px]">{drop.caseName}</span>
-                    <span className="font-mono text-yellow-400/90 font-bold shrink-0">
-                      {drop.skin.priceDc.toLocaleString('ru-RU')} DC
-                    </span>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {visibleDrops.map((drop) => (
+            <LiveDropCard
+              key={drop.id}
+              drop={drop}
+              isUser={drop.id.startsWith('real_') || drop.user === 'Вы'}
+              locale={locale}
+            />
+          ))}
         </div>
       </div>
     </div>
