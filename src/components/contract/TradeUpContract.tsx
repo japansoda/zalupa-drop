@@ -237,9 +237,6 @@ export const TradeUpContract: React.FC = () => {
                   {t('contract.title')}
                 </h1>
               </div>
-              <p className="text-xs text-white/50 mt-0.5">
-                {t('contract.subtitle')}
-              </p>
             </div>
           </div>
 

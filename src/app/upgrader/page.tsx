@@ -31,9 +31,6 @@ export default function UpgraderPage() {
                 <h1 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
                   {t('upg.pageTitle')}
                 </h1>
-                <p className="text-xs text-white/50 mt-0.5">
-                  {t('upg.pageSubtitle')}
-                </p>
               </div>
             </div>
           </div>

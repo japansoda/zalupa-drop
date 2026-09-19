@@ -245,12 +245,11 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     const jitter2 = (Math.random() - 0.5) * (ITEM_WIDTH * 0.7);
     const targetX2 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset + jitter2);
 
-    const tickInterval = setInterval(() => {
+    let rafId: number;
+    const updateSoundTick = () => {
       const elapsed = (Date.now() - startTime) / 1000;
-      if (elapsed >= duration) {
-        clearInterval(tickInterval);
-        return;
-      }
+      if (elapsed >= duration) return;
+
       const progress = elapsed / duration;
       const easeProgress = 1 - Math.pow(1 - progress, 3);
       const currentPos = Math.abs(targetX0 * easeProgress);
@@ -260,7 +259,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
         sound.playTick(0.8 + (1 - progress) * 0.4);
         lastSoundTickPos.current = itemsPassed;
       }
-    }, 30);
+      rafId = requestAnimationFrame(updateSoundTick);
+    };
+    rafId = requestAnimationFrame(updateSoundTick);
 
     const animPromises = [
       controls0.start({
@@ -288,8 +289,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     }
 
     await Promise.all(animPromises);
-
-    clearInterval(tickInterval);
+    cancelAnimationFrame(rafId);
 
     // Single win sound of highest rarity
     const highestWinner = winners.reduce((prev, curr) => {
@@ -352,19 +352,23 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
               <motion.div
                 animate={animControls[reelIdx]}
                 className="flex gap-3 will-change-transform"
-                style={{ width: `${(reels[reelIdx] || []).length * (ITEM_WIDTH + ITEM_GAP)}px` }}
+                style={{ 
+                  width: `${(reels[reelIdx] || []).length * (ITEM_WIDTH + ITEM_GAP)}px`,
+                  transform: 'translateZ(0)'
+                }}
               >
                 {(reels[reelIdx] || []).map((skin, idx) => {
                   const config = RARITY_CONFIG[skin.rarity] || RARITY_CONFIG.milspec;
                   return (
                     <div
                       key={`${skin.id}_${idx}`}
-                      className="relative rounded-2xl glass-card shrink-0 flex flex-col items-center justify-between p-3 select-none overflow-hidden"
+                      className="relative rounded-2xl bg-[#11121a] border border-white/10 shrink-0 flex flex-col items-center justify-between p-3 select-none overflow-hidden"
                       style={{
                         width: `${ITEM_WIDTH}px`,
                         height: openCount > 1 ? '180px' : '210px',
                         borderBottomWidth: '4px',
                         borderBottomColor: config.color,
+                        transform: 'translateZ(0)',
                       }}
                     >
                       <div className="w-full flex justify-between items-center z-10">

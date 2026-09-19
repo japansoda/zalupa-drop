@@ -1085,6 +1085,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               <motion.div
                 animate={needleControls}
                 className="absolute w-full h-full flex items-center justify-center pointer-events-none z-10"
+                style={{ transformOrigin: 'center center', willChange: 'transform' }}
               >
                 <div className="relative w-full h-4 flex items-center justify-end pr-1.5">
                   <svg

@@ -80,9 +80,6 @@ export default function CaseOpenPage() {
                 <h1 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
                   {currentCase.name}
                 </h1>
-                <p className="text-xs text-white/50 mt-0.5">
-                  {currentCase.subtitle}
-                </p>
               </div>
             </div>
 
@@ -115,9 +112,6 @@ export default function CaseOpenPage() {
                 {t('case.contents')} ({groupedSkins.length} {t('home.items')})
               </h2>
             </div>
-            <span className="text-xs text-white/50">
-              {t('case.fairOdds')}
-            </span>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">

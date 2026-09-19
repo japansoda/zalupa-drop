@@ -119,9 +119,6 @@ export default function HomePage() {
                 <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight flex items-center gap-3">
                   <span>{t('home.title')}</span>
                 </h2>
-                <p className="text-xs text-white/50">
-                  {t('home.catalogDesc')}
-                </p>
               </div>
             </div>
 
@@ -227,10 +224,11 @@ export default function HomePage() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={selectedCategory + '_' + sortBy}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -15 }}
-                  transition={{ duration: 0.22, ease: 'easeOut' }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                  style={{ transform: 'translateZ(0)' }}
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filteredCases.slice(0, displayLimit).map((caseItem) => {
@@ -290,15 +288,12 @@ export default function HomePage() {
                         />
                       </div>
 
-                      <div className="flex flex-col mb-4 z-10">
-                        <h3 className={`font-black text-lg transition-colors truncate ${
+                      <div className="flex flex-col mb-3 z-10">
+                        <h3 className={`font-black text-base sm:text-lg transition-colors truncate ${
                           isHighroller ? 'text-white group-hover:text-amber-300' : 'text-white group-hover:text-yellow-400'
                         }`}>
                           {caseItem.name}
                         </h3>
-                        <p className="text-xs text-white/50 line-clamp-1 mt-0.5">
-                          {caseItem.subtitle}
-                        </p>
                       </div>
 
                       <div className="flex items-center gap-1.5 py-2 border-t border-b border-white/5 mb-4 overflow-hidden z-10">
