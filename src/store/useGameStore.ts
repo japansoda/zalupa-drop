@@ -30,6 +30,8 @@ interface GameState {
   sellSkin: (instanceId: string) => number;
   sellAllSkins: () => number;
   addLiveDrop: (drop: LiveDrop) => void;
+  fakeDropsEnabled: boolean;
+  setFakeDropsEnabled: (enabled: boolean) => void;
   toggleSound: () => void;
   setRefillOpen: (open: boolean) => void;
   recordUpgrade: (won: boolean, profitDc: number) => void;
@@ -63,6 +65,7 @@ export const useGameStore = create<GameState>()(
         crashWonDc: 0,
       },
       liveDrops: [],
+      fakeDropsEnabled: true,
 
       addBalance: (amount) => {
         set((state) => ({ balance: Math.max(0, state.balance + Math.floor(amount)) }));
@@ -172,6 +175,10 @@ export const useGameStore = create<GameState>()(
             body: JSON.stringify(drop),
           }).catch(() => {});
         }
+      },
+
+      setFakeDropsEnabled: (enabled) => {
+        set({ fakeDropsEnabled: enabled });
       },
 
       toggleSound: () => {

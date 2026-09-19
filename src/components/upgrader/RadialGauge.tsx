@@ -13,7 +13,6 @@ import { WearBadge } from '../ui/WearBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
-import { handleHorizontalWheel } from '../layout/HorizontalScrollManager';
 
 export const matchesCatalogType = (skin: SkinEntity, type: string): boolean => {
   if (type === 'all') return true;
@@ -135,6 +134,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const [catalogSearch, setCatalogSearch] = useState('');
   const [catalogRarity, setCatalogRarity] = useState('all');
   const [catalogType, setCatalogType] = useState('all');
+  const [catalogWeapon, setCatalogWeapon] = useState('all');
   const [catalogSort, setCatalogSort] = useState<'asc' | 'desc'>('asc');
 
   // Infinite scroll for catalog
@@ -183,7 +183,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   // Reset catalog limit when filters change
   useEffect(() => {
     setCatalogLimit(60);
-  }, [catalogSearch, catalogRarity, catalogType, catalogSort, effectiveBetDc, maxTargetPrice]);
+  }, [catalogSearch, catalogRarity, catalogType, catalogWeapon, catalogSort, effectiveBetDc, maxTargetPrice]);
 
   // Auto-Select target skin when bet or target chance changes
   const autoSelectTargetSkin = (desiredChance: number, currentBet: number, forceType?: string) => {
@@ -219,32 +219,34 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       // Only fall back to stickers/charms if there are ZERO core items in this price range.
       const pool = coreCandidates.length > 0 ? coreCandidates : candidates;
 
-      // Sort pool by closeness to ideal target price
-      const sorted = [...pool].sort(
-        (a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice)
-      );
-
-      // Take top closest candidates (top 16)
-      const topSlice = sorted.slice(0, 16);
-
-      // Separate into balanced category buckets: knives, gloves, agents, weapons
-      const knifeBucket = topSlice.filter((s) => matchesCatalogType(s, 'knives'));
-      const gloveBucket = topSlice.filter((s) => matchesCatalogType(s, 'gloves'));
-      const agentBucket = topSlice.filter((s) => matchesCatalogType(s, 'agents'));
-      const gunBucket = topSlice.filter(
+      // Group into balanced category buckets FIRST: knives, gloves, weapons (guns), and agents.
+      // Sorting each bucket individually guarantees that expensive weapons (e.g. Howl, Dragon Lore, Fire Serpent)
+      // are given equal chance to be picked, instead of being drowned out by thousands of knives and gloves.
+      const knifeBucket = pool.filter((s) => matchesCatalogType(s, 'knives'));
+      const gloveBucket = pool.filter((s) => matchesCatalogType(s, 'gloves'));
+      const gunBucket = pool.filter(
         (s) => isActualWeapon(s) && !matchesCatalogType(s, 'knives') && !matchesCatalogType(s, 'gloves')
       );
+      const agentBucket = pool.filter((s) => matchesCatalogType(s, 'agents'));
+
+      const sortByCloseness = (list: SkinEntity[]) =>
+        [...list].sort((a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice));
+
+      const sortedKnives = sortByCloseness(knifeBucket);
+      const sortedGloves = sortByCloseness(gloveBucket);
+      const sortedGuns = sortByCloseness(gunBucket);
+      const sortedAgents = sortByCloseness(agentBucket);
 
       const availableBuckets: SkinEntity[][] = [];
-      if (knifeBucket.length > 0) availableBuckets.push(knifeBucket);
-      if (gloveBucket.length > 0) availableBuckets.push(gloveBucket);
-      if (agentBucket.length > 0) availableBuckets.push(agentBucket);
-      if (gunBucket.length > 0) availableBuckets.push(gunBucket);
+      if (sortedKnives.length > 0) availableBuckets.push(sortedKnives);
+      if (sortedGloves.length > 0) availableBuckets.push(sortedGloves);
+      if (sortedGuns.length > 0) availableBuckets.push(sortedGuns);
+      if (sortedAgents.length > 0) availableBuckets.push(sortedAgents);
 
       if (availableBuckets.length > 0) {
-        // Randomly pick a category bucket among available, ensuring diverse mix
+        // Randomly pick a category bucket among available, ensuring diverse mix (Guns, Knives, Gloves, Agents)
         const chosenBucket = availableBuckets[Math.floor(Math.random() * availableBuckets.length)];
-        const chosenSkin = chosenBucket[Math.floor(Math.random() * Math.min(2, chosenBucket.length))];
+        const chosenSkin = chosenBucket[Math.floor(Math.random() * Math.min(4, chosenBucket.length))];
         if (chosenSkin) {
           setTargetSkin(chosenSkin);
           return;
@@ -252,14 +254,27 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       }
 
       // Fallback if no specific bucket was found
-      const fallbackPicked = topSlice[Math.floor(Math.random() * Math.min(4, topSlice.length))];
+      const sortedFallback = [...pool].sort(
+        (a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice)
+      );
+      const fallbackPicked = sortedFallback[Math.floor(Math.random() * Math.min(4, sortedFallback.length))];
       if (fallbackPicked) {
         setTargetSkin(fallbackPicked);
         return;
       }
     } else {
-      // Specific category tab active
-      const sorted = [...candidates].sort(
+      // Specific category tab active (or filtered by weapon)
+      let pool = candidates;
+      if (catalogWeapon !== 'all') {
+        const weaponMatches = candidates.filter(
+          (s) => s.weapon.toLowerCase() === catalogWeapon.toLowerCase()
+        );
+        if (weaponMatches.length > 0) {
+          pool = weaponMatches;
+        }
+      }
+
+      const sorted = [...pool].sort(
         (a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice)
       );
       const topCandidates = sorted.slice(0, 8);
@@ -640,12 +655,40 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       // Filter by item type
       if (!matchesCatalogType(skin, catalogType)) return false;
 
+      // Filter by specific weapon model if chosen
+      if (catalogWeapon !== 'all') {
+        if (skin.weapon.toLowerCase() !== catalogWeapon.toLowerCase()) return false;
+      }
+
       return true;
     });
 
     result.sort((a, b) => (catalogSort === 'asc' ? a.priceDc - b.priceDc : b.priceDc - a.priceDc));
     return result;
-  }, [catalogSkins, catalogSearch, catalogRarity, catalogType, catalogSort, effectiveBetDc, maxTargetPrice]);
+  }, [catalogSkins, catalogSearch, catalogRarity, catalogType, catalogWeapon, catalogSort, effectiveBetDc, maxTargetPrice]);
+
+  // Dynamic list of unique weapons present in the catalog matching current bet and catalogType
+  const availableWeapons = useMemo(() => {
+    const minPrice = Math.max(1, effectiveBetDc);
+    const matching = catalogSkins.filter(
+      (s) =>
+        s.priceDc > minPrice &&
+        s.priceDc <= maxTargetPrice &&
+        matchesCatalogType(s, catalogType)
+    );
+
+    const counts = new Map<string, number>();
+    for (const s of matching) {
+      const w = s.weapon?.trim();
+      if (w) {
+        counts.set(w, (counts.get(w) || 0) + 1);
+      }
+    }
+
+    return Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([name, count]) => ({ name, count }));
+  }, [catalogSkins, effectiveBetDc, maxTargetPrice, catalogType]);
 
   // Count matching skins per category based on current bet
   const categoryCounts = useMemo(() => {
@@ -1489,11 +1532,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             </div>
           </div>
 
-          {/* Item Types Filter Pills with Enhanced CS2 UX */}
-          <div
-            onWheel={handleHorizontalWheel}
-            className="flex items-center gap-1.5 overflow-x-auto pb-2.5 mb-3 no-scrollbar scroll-smooth"
-          >
+          {/* Item Types Filter Pills - Multi-Row Flex Wrap (No horizontal scroll) */}
+          <div className="flex flex-wrap items-center gap-1.5 mb-3">
             {ITEM_TYPES.map((type) => {
               const isAct = catalogType === type.id;
               const count = categoryCounts[type.id] ?? 0;
@@ -1506,8 +1546,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   onClick={() => {
                     sound.playClick();
                     setCatalogType(type.id);
+                    setCatalogWeapon('all');
                   }}
-                  className={`group relative flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer z-10 border ${
+                  className={`group relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer z-10 border ${
                     isAct
                       ? 'text-black border-yellow-300 shadow-[0_0_15px_rgba(250,204,21,0.35)] scale-[1.02]'
                       : 'text-white/70 border-white/10 hover:border-white/20 hover:text-white bg-white/[0.03] hover:bg-white/[0.08]'
@@ -1538,6 +1579,116 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               );
             })}
           </div>
+
+          {/* Weapon / Model Subcategories (No horizontal scroll, mobile-first responsive design) */}
+          {availableWeapons.length > 1 && (
+            <div className="p-2.5 rounded-2xl bg-black/40 border border-white/10 mb-3.5 flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-bold text-white/60 uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="text-yellow-400">⚡</span>
+                  <span>{locale === 'ru' ? 'Модель / Оружие' : 'Model / Weapon'}</span>
+                  <span className="text-white/30 font-mono text-[10px]">({availableWeapons.length})</span>
+                </span>
+                {catalogWeapon !== 'all' && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.playClick();
+                      setCatalogWeapon('all');
+                    }}
+                    className="text-[10px] text-yellow-400 hover:underline font-bold transition-colors cursor-pointer"
+                  >
+                    {locale === 'ru' ? 'Сбросить (Все)' : 'Reset (All)'}
+                  </button>
+                )}
+              </div>
+
+              {/* Mobile View: Clean Native Select for fast thumb-friendly selection */}
+              <div className="block sm:hidden">
+                <select
+                  value={catalogWeapon}
+                  onChange={(e) => {
+                    sound.playClick();
+                    setCatalogWeapon(e.target.value);
+                  }}
+                  className="w-full bg-[#13141f] border border-white/15 rounded-xl px-3 py-2 text-xs font-bold text-white outline-none cursor-pointer"
+                >
+                  <option value="all">
+                    {locale === 'ru' ? 'Все модели оружия' : 'All weapon models'} ({availableWeapons.reduce((acc, w) => acc + w.count, 0)} шт.)
+                  </option>
+                  {availableWeapons.map((w) => (
+                    <option key={w.name} value={w.name}>
+                      {w.name} ({w.count} шт.)
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Desktop & Tablet View: Wrapping Chips (Top 8) + Overflow Dropdown */}
+              <div className="hidden sm:flex flex-wrap items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playClick();
+                    setCatalogWeapon('all');
+                  }}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border ${
+                    catalogWeapon === 'all'
+                      ? 'bg-yellow-400 text-black border-yellow-300 font-black shadow-sm'
+                      : 'bg-white/5 text-white/60 hover:text-white border-white/10'
+                  }`}
+                >
+                  {locale === 'ru' ? 'Все' : 'All'} ({availableWeapons.reduce((acc, w) => acc + w.count, 0)})
+                </button>
+
+                {availableWeapons.slice(0, 8).map((w) => {
+                  const isSel = catalogWeapon.toLowerCase() === w.name.toLowerCase();
+                  return (
+                    <button
+                      key={w.name}
+                      type="button"
+                      onClick={() => {
+                        sound.playClick();
+                        setCatalogWeapon(isSel ? 'all' : w.name);
+                      }}
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border flex items-center gap-1 ${
+                        isSel
+                          ? 'bg-yellow-400 text-black border-yellow-300 font-black shadow-sm'
+                          : 'bg-white/5 text-white/70 hover:text-white border-white/10 hover:border-white/25'
+                      }`}
+                    >
+                      <span>{w.name}</span>
+                      <span className={`text-[10px] font-mono ${isSel ? 'text-black/80 font-black' : 'text-white/40'}`}>
+                        {w.count}
+                      </span>
+                    </button>
+                  );
+                })}
+
+                {availableWeapons.length > 8 && (
+                  <select
+                    value={availableWeapons.slice(8).some((w) => w.name.toLowerCase() === catalogWeapon.toLowerCase()) ? catalogWeapon : ''}
+                    onChange={(e) => {
+                      sound.playClick();
+                      setCatalogWeapon(e.target.value || 'all');
+                    }}
+                    className="bg-black/60 border border-white/15 text-xs text-white/80 rounded-lg px-2.5 py-1 outline-none cursor-pointer hover:border-white/30"
+                  >
+                    <option value="">
+                      {locale === 'ru'
+                        ? `+ Еще ${availableWeapons.length - 8} моделей...`
+                        : `+ More ${availableWeapons.length - 8} models...`}
+                    </option>
+                    {availableWeapons.slice(8).map((w) => (
+                      <option key={w.name} value={w.name}>
+                        {w.name} ({w.count})
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Search */}
           <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-black/40 border border-white/10 mb-4">

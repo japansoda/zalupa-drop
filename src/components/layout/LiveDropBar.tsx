@@ -141,6 +141,16 @@ export const LiveDropBar: React.FC = () => {
   // Real-time synchronization for new drops (ntfy.sh SSE + local BroadcastChannel)
   // No preloading of old historical drops: fresh start on reload
   useEffect(() => {
+    // Sync initial fake drops configuration from server
+    fetch('/api/live-drops', { cache: 'no-store' })
+      .then((r) => r.json())
+      .then((data) => {
+        if (typeof data.fakeDropsEnabled === 'boolean') {
+          useGameStore.getState().setFakeDropsEnabled(data.fakeDropsEnabled);
+        }
+      })
+      .catch(() => {});
+
     let eventSource: EventSource | null = null;
     try {
       if (typeof window !== 'undefined' && 'EventSource' in window) {
@@ -149,7 +159,15 @@ export const LiveDropBar: React.FC = () => {
           try {
             const envelope = JSON.parse(event.data);
             if (envelope.event === 'message' && envelope.message) {
-              const drop = JSON.parse(envelope.message);
+              const msg = JSON.parse(envelope.message);
+
+              // Server config broadcast
+              if (msg?.type === 'CONFIG' && typeof msg.fakeDropsEnabled === 'boolean') {
+                useGameStore.getState().setFakeDropsEnabled(msg.fakeDropsEnabled);
+                return;
+              }
+
+              const drop = msg;
               if (
                 drop &&
                 drop.skin &&
@@ -201,7 +219,7 @@ export const LiveDropBar: React.FC = () => {
 
   // Bulletproof self-scheduling fake drop generator:
   // Starts empty on reload. First drop in 1.5s, then every 5-9s (or 7-11s when 1-5 real drops present).
-  // Only shuts off if 6 or more real drops occurred in the last 3 minutes!
+  // Only shuts off if 6 or more real drops occurred in the last 3 minutes OR if disabled globally in Admin!
   useEffect(() => {
     let timerId: NodeJS.Timeout | null = null;
     let isCancelled = false;
@@ -210,6 +228,13 @@ export const LiveDropBar: React.FC = () => {
       if (isCancelled) return;
 
       const state = useGameStore.getState();
+
+      // Check if admin globally disabled fake drops
+      if (!state.fakeDropsEnabled) {
+        timerId = setTimeout(tick, 4000);
+        return;
+      }
+
       const currentDrops = state.liveDrops;
       const now = Date.now();
       const realCount = currentDrops.filter(

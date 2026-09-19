@@ -7,7 +7,7 @@ import { PresenceTracker } from "../components/layout/PresenceTracker";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
-  title: "ZALUPA DROP — CS2 Кейс Симулятор & Liquid Glass",
+  title: "ZALUPA DROP — CS2 Кейс Симулятор",
   description: "Премиальный симулятор открытия CS2 кейсов, апгрейдер и краш на виртуальную валюту DropCoin (DC)",
   icons: {
     icon: "/logo.png",

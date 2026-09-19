@@ -38,7 +38,43 @@ export default function AdminPage() {
   const [loginError, setLoginError] = useState<string>('');
   const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'cases' | 'controls'>('overview');
 
-  const { balance, inventory, stats, addBalance, addLiveDrop } = useGameStore();
+  const { balance, inventory, stats, addBalance, addLiveDrop, fakeDropsEnabled, setFakeDropsEnabled } = useGameStore();
+
+  const [isTogglingFakeDrops, setIsTogglingFakeDrops] = useState<boolean>(false);
+
+  // Sync fakeDropsEnabled status from server on mount
+  useEffect(() => {
+    fetch('/api/live-drops', { cache: 'no-store' })
+      .then((res) => res.json())
+      .then((data) => {
+        if (typeof data.fakeDropsEnabled === 'boolean') {
+          setFakeDropsEnabled(data.fakeDropsEnabled);
+        }
+      })
+      .catch(() => {});
+  }, [setFakeDropsEnabled]);
+
+  const handleToggleFakeDrops = async () => {
+    sound.playClick();
+    setIsTogglingFakeDrops(true);
+    const nextVal = !fakeDropsEnabled;
+    setFakeDropsEnabled(nextVal);
+
+    try {
+      const res = await fetch('/api/live-drops', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'setFakeDrops', enabled: nextVal }),
+      });
+      if (!res.ok) {
+        setFakeDropsEnabled(!nextVal);
+      }
+    } catch (_) {
+      setFakeDropsEnabled(!nextVal);
+    } finally {
+      setIsTogglingFakeDrops(false);
+    }
+  };
 
   // Track active sessions / live online via API polling + SSE across all devices
   const [liveOnlineCount, setLiveOnlineCount] = useState<number>(1);
@@ -343,9 +379,20 @@ export default function AdminPage() {
                   </span>
                   <span className="text-xs text-white/40">активных сессий</span>
                 </div>
-                <span className="text-[10px] text-emerald-400/80 mt-2 font-mono">
-                  ● Синхронизация в реальном времени
-                </span>
+                <div className="flex items-center justify-between mt-2 pt-2 border-t border-white/5">
+                  <span className="text-[10px] text-emerald-400/80 font-mono">
+                    ● Синхронизация в реальном времени
+                  </span>
+                  <span
+                    className={`text-[9px] font-mono font-black px-2 py-0.5 rounded-full border ${
+                      fakeDropsEnabled
+                        ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+                        : 'bg-red-500/20 text-red-400 border-red-500/30'
+                    }`}
+                  >
+                    Фейк: {fakeDropsEnabled ? 'ВКЛ' : 'ВЫКЛ'}
+                  </span>
+                </div>
               </div>
 
               <div className="p-5 rounded-2xl glass-panel border border-white/10 flex flex-col justify-between">
@@ -637,6 +684,57 @@ export default function AdminPage() {
                 <DollarSign className="w-4 h-4" />
                 +1,000,000 DropCoin на баланс
               </button>
+            </div>
+
+            {/* Global Fake Drops Controller */}
+            <div className="p-6 rounded-2xl glass-panel border border-white/10 flex flex-col justify-between md:col-span-2">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-sm font-black uppercase text-white/80 flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-yellow-400" />
+                    Глобальное управление фейк-дропами (Live-Лента)
+                  </h3>
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-mono font-black border ${
+                      fakeDropsEnabled
+                        ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40 shadow-[0_0_12px_rgba(16,185,129,0.3)]'
+                        : 'bg-red-500/20 text-red-400 border-red-500/40 shadow-[0_0_12px_rgba(239,68,68,0.3)]'
+                    }`}
+                  >
+                    {fakeDropsEnabled ? '● АКТИВНЫ (ПО УМОЛЧАНИЮ)' : '○ ОТКЛЮЧЕНЫ'}
+                  </span>
+                </div>
+                <p className="text-xs text-white/50 mb-4">
+                  Включает или полностью отключает генерацию фейковых дропов для <b>всех посетителей сайта</b> в реальном времени.
+                  Настройка сохраняется на сервере и мгновенно распространяется на все устройства через Server-Sent Events.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-3">
+                <button
+                  type="button"
+                  disabled={isTogglingFakeDrops}
+                  onClick={handleToggleFakeDrops}
+                  className={`w-full sm:w-auto px-6 py-3 rounded-xl font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95 border ${
+                    fakeDropsEnabled
+                      ? 'border-red-500/40 bg-red-950/30 hover:bg-red-900/50 text-red-300'
+                      : 'border-emerald-500/40 bg-emerald-950/30 hover:bg-emerald-900/50 text-emerald-300'
+                  }`}
+                >
+                  <Activity className="w-4 h-4" />
+                  <span>
+                    {isTogglingFakeDrops
+                      ? 'Обновление конфигурации...'
+                      : fakeDropsEnabled
+                      ? 'Отключить фейк-дропы для всех'
+                      : 'Включить фейк-дропы для всех'}
+                  </span>
+                </button>
+
+                <span className="text-[11px] text-white/40 font-mono">
+                  Статус: {fakeDropsEnabled ? 'Трансляция фейк-дропов включена' : 'Трансляция приостановлена (только настоящие дропы)'}
+                </span>
+              </div>
             </div>
           </div>
         )}

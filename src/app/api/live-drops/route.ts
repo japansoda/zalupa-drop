@@ -10,16 +10,38 @@ export const runtime = 'nodejs';
 const NTFY_TOPIC = 'zalupa_live_drops_v3';
 const NTFY_URL = `https://ntfy.sh/${NTFY_TOPIC}`;
 const DISK_FILE = path.join(os.tmpdir(), 'zalupa_live_drops_v3.json');
+const SETTINGS_FILE = path.join(os.tmpdir(), 'zalupa_settings_v1.json');
 const MAX_DROPS = 50;
 
 // Global memory buffer for warm serverless instances
 const globalStore = globalThis as unknown as {
   __liveDropsBuffer?: LiveDrop[];
   __lastNtfySync?: number;
+  __fakeDropsEnabled?: boolean;
 };
 
 if (!globalStore.__liveDropsBuffer) {
   globalStore.__liveDropsBuffer = [];
+}
+
+function loadSettings(): { fakeDropsEnabled: boolean } {
+  try {
+    if (fs.existsSync(SETTINGS_FILE)) {
+      const data = JSON.parse(fs.readFileSync(SETTINGS_FILE, 'utf-8'));
+      if (typeof data.fakeDropsEnabled === 'boolean') return data;
+    }
+  } catch (_) {}
+  return { fakeDropsEnabled: true };
+}
+
+function saveSettings(settings: { fakeDropsEnabled: boolean }) {
+  try {
+    fs.writeFileSync(SETTINGS_FILE, JSON.stringify(settings), 'utf-8');
+  } catch (_) {}
+}
+
+if (globalStore.__fakeDropsEnabled === undefined) {
+  globalStore.__fakeDropsEnabled = loadSettings().fakeDropsEnabled;
 }
 
 // Helper to safely load from local disk file
@@ -125,6 +147,7 @@ export async function GET() {
   return NextResponse.json({
     success: true,
     drops: memory,
+    fakeDropsEnabled: globalStore.__fakeDropsEnabled ?? true,
   }, {
     headers: {
       'Cache-Control': 'no-store, no-cache, must-revalidate',
@@ -135,6 +158,25 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+
+    // Admin toggle for fake drops
+    if (body?.action === 'setFakeDrops') {
+      const enabled = Boolean(body.enabled);
+      globalStore.__fakeDropsEnabled = enabled;
+      saveSettings({ fakeDropsEnabled: enabled });
+
+      // Broadcast config change to all connected clients via ntfy
+      fetch(NTFY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'CONFIG', fakeDropsEnabled: enabled }),
+      }).catch(() => {});
+
+      return NextResponse.json({
+        success: true,
+        fakeDropsEnabled: enabled,
+      });
+    }
 
     if (
       !body ||
