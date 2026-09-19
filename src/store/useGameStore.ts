@@ -22,6 +22,7 @@ interface GameState {
   deductBalance: (amount: number) => boolean;
   refillDemoBalance: (amount?: number) => void;
   addToInventory: (skins: SkinEntity[]) => void;
+  removeFromInventory: (instanceIds: string[]) => void;
   sellSkin: (instanceId: string) => number;
   sellAllSkins: () => number;
   addLiveDrop: (drop: LiveDrop) => void;
@@ -118,6 +119,13 @@ export const useGameStore = create<GameState>()(
             casesOpened: state.stats.casesOpened + skins.length,
             totalWonDc: state.stats.totalWonDc + skins.reduce((acc, s) => acc + s.priceDc, 0),
           },
+        }));
+      },
+
+      removeFromInventory: (instanceIds) => {
+        const idSet = new Set(instanceIds);
+        set((state) => ({
+          inventory: state.inventory.filter((i) => !idSet.has(i.instanceId)),
         }));
       },
 

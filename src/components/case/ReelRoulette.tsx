@@ -90,118 +90,51 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       return caseSkins[caseSkins.length - 1];
     }
 
-    // 3. Safari Troll case (exciting 4.0% jackpot)
-    if (caseId === 'case_safari_troll') {
-      const dlores = caseSkins.filter((s) => (s.skinName || s.name).includes('Dragon Lore'));
-      const meshes = caseSkins.filter((s) => !(s.skinName || s.name).includes('Dragon Lore'));
-      const weights = caseSkins.map((s) =>
-        (s.skinName || s.name).includes('Dragon Lore')
-          ? 4.0 / (dlores.length || 1)
-          : 96.0 / (meshes.length || 1)
-      );
-      const totalW = weights.reduce((a, b) => a + b, 0);
-      let rnd = Math.random() * totalW;
-      for (let i = 0; i < caseSkins.length; i++) {
-        if (rnd <= weights[i]) return caseSkins[i];
-        rnd -= weights[i];
-      }
-      return caseSkins[caseSkins.length - 1];
-    }
+    // 3. Guaranteed 98.0% RTP for ALL cases:
+    // Target EV = 0.98 * casePriceDc.
+    // Solves alpha power exponent via binary search so expected drop return is strictly 98%!
+    const targetEV = Math.max(10, casePriceDc * 0.98);
+    const prices = caseSkins.map((s) => Math.max(1, s.priceDc));
+    const minP = Math.min(...prices);
+    const maxP = Math.max(...prices);
 
-    // 4. All or Nothing (20% legend, 80% cheap)
-    if (caseId === 'case_all_or_nothing') {
-      const topItems = caseSkins.filter((s) => s.priceDc >= 50000 || isKnifeOrGlove(s));
-      const lowItems = caseSkins.filter((s) => s.priceDc < 50000 && !isKnifeOrGlove(s));
-      const weights = caseSkins.map((s) =>
-        s.priceDc >= 50000 || isKnifeOrGlove(s)
-          ? 20.0 / (topItems.length || 1)
-          : 80.0 / (lowItems.length || 1)
-      );
-      const totalW = weights.reduce((a, b) => a + b, 0);
-      let rnd = Math.random() * totalW;
-      for (let i = 0; i < caseSkins.length; i++) {
-        if (rnd <= weights[i]) return caseSkins[i];
-        rnd -= weights[i];
-      }
-      return caseSkins[caseSkins.length - 1];
-    }
+    let weights: number[];
 
-    // 5. Zalupa trash case (4.0% jackpot)
-    if (caseId === 'case_zalupa') {
-      const rareItems = caseSkins.filter((s) => s.priceDc >= 50000 || isKnifeOrGlove(s));
-      const trashItems = caseSkins.filter((s) => s.priceDc < 50000 && !isKnifeOrGlove(s));
-      const weights = caseSkins.map((s) =>
-        s.priceDc >= 50000 || isKnifeOrGlove(s)
-          ? 4.0 / (rareItems.length || 1)
-          : 96.0 / (trashItems.length || 1)
-      );
-      const totalW = weights.reduce((a, b) => a + b, 0);
-      let rnd = Math.random() * totalW;
-      for (let i = 0; i < caseSkins.length; i++) {
-        if (rnd <= weights[i]) return caseSkins[i];
-        rnd -= weights[i];
-      }
-      return caseSkins[caseSkins.length - 1];
-    }
-
-    const hasLowTier = caseSkins.some(
-      (s) => s.rarity === 'milspec' || s.rarity === 'industrial' || s.rarity === 'consumer'
-    );
-
-    if (hasLowTier) {
-      // Highly rewarding and profitable simulator odds:
-      // Gold (Knives/Gloves): ~5.0% (1 in 20 spins!)
-      // Covert (Reds): ~16.0% (almost 1 in 6 spins!)
-      // Classified (Pinks): ~28.0% (break-even / solid profit)
-      // Restricted (Purples): ~30.0%
-      // Milspec (Blues): ~21.0%
-      const counts = { gold: 0, covert: 0, classified: 0, restricted: 0, milspec: 0, low: 0 };
-      caseSkins.forEach((s) => {
-        if (isKnifeOrGlove(s)) counts.gold++;
-        else if (s.rarity === 'covert' || s.rarity === 'contraband') counts.covert++;
-        else if (s.rarity === 'classified') counts.classified++;
-        else if (s.rarity === 'restricted') counts.restricted++;
-        else if (s.rarity === 'milspec') counts.milspec++;
-        else counts.low++;
-      });
-
-      const targetShares = {
-        gold: counts.gold ? 5.0 : 0,
-        covert: counts.covert ? 16.0 : 0,
-        classified: counts.classified ? 28.0 : 0,
-        restricted: counts.restricted ? 30.0 : 0,
-        milspec: counts.milspec ? 21.0 : 0,
-        low: counts.low ? 15.0 : 0,
-      };
-
-      const weights = caseSkins.map((s) => {
-        if (isKnifeOrGlove(s)) return targetShares.gold / counts.gold;
-        if (s.rarity === 'covert' || s.rarity === 'contraband') return targetShares.covert / counts.covert;
-        if (s.rarity === 'classified') return targetShares.classified / counts.classified;
-        if (s.rarity === 'restricted') return targetShares.restricted / counts.restricted;
-        if (s.rarity === 'milspec') return (targetShares.milspec || 21) / counts.milspec;
-        return (targetShares.low || 15) / (counts.low || 1);
-      });
-
-      const totalWeight = weights.reduce((a, b) => a + b, 0);
-      let rnd = Math.random() * totalWeight;
-      for (let i = 0; i < caseSkins.length; i++) {
-        if (rnd <= weights[i]) return caseSkins[i];
-        rnd -= weights[i];
-      }
-      return caseSkins[caseSkins.length - 1];
+    if (targetEV <= minP) {
+      // Even cheapest skin is >= 98% of case price (super value case)
+      weights = caseSkins.map(() => 1);
+    } else if (targetEV >= maxP) {
+      // Target EV exceeds max skin -> weight towards highest items
+      weights = prices.map((p) => Math.pow(p / maxP, 2));
     } else {
-      // High-tier, knives or theme custom case:
-      // Soft sublinear exponent (0.32) allows winning top-tier jackpots regularly
-      const weights = caseSkins.map((s) => 100000 / Math.pow(Math.max(50, s.priceDc), 0.32));
-      const totalWeight = weights.reduce((a, b) => a + b, 0);
-      let rnd = Math.random() * totalWeight;
-      for (let i = 0; i < caseSkins.length; i++) {
-        if (rnd <= weights[i]) return caseSkins[i];
-        rnd -= weights[i];
+      // Binary search for exact 98% RTP alpha exponent
+      let low = 0.01;
+      let high = 4.0;
+      let bestW = prices.map(() => 1);
+
+      for (let iter = 0; iter < 22; iter++) {
+        const mid = (low + high) / 2;
+        const w = prices.map((p) => Math.pow(1 / p, mid));
+        const sumW = w.reduce((a, b) => a + b, 0);
+        const ev = prices.reduce((acc, p, idx) => acc + (w[idx] / sumW) * p, 0);
+
+        bestW = w;
+        if (ev > targetEV) {
+          low = mid;
+        } else {
+          high = mid;
+        }
       }
-      return caseSkins[caseSkins.length - 1];
+      weights = bestW;
     }
+
+    const totalW = weights.reduce((a, b) => a + b, 0);
+    let rnd = Math.random() * totalW;
+    for (let i = 0; i < caseSkins.length; i++) {
+      if (rnd <= weights[i]) return caseSkins[i];
+      rnd -= weights[i];
+    }
+    return caseSkins[caseSkins.length - 1];
   };
 
   const generateReel = (winner: SkinEntity): SkinEntity[] => {

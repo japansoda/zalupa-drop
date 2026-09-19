@@ -34,7 +34,7 @@ export const RefillModal: React.FC = () => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
       <div 
-        className="relative w-full max-w-md glass-panel rounded-2xl border border-yellow-400/30 p-6 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden"
+        className="relative w-full max-w-lg glass-panel rounded-2xl border border-yellow-400/30 p-6 shadow-[0_0_50px_rgba(0,0,0,0.8)] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -114,26 +114,42 @@ export const RefillModal: React.FC = () => {
           </div>
         </div>
 
-        {/* DC Currency Refill Buttons */}
-        <div className="grid grid-cols-2 gap-2.5 mb-4">
-          {[
-            { label: '+5 000 DC', amount: 5000, desc: t('refill.warmup') },
-            { label: '+10 000 DC', amount: 10000, desc: t('refill.standard') },
-            { label: '+50 000 DC', amount: 50000, desc: t('refill.highroller') },
-            { label: '+100 000 DC', amount: 100000, desc: t('refill.unlimited') },
-          ].map((item) => (
-            <button
-              key={item.label}
-              type="button"
-              onClick={() => handleRefill(item.amount)}
-              className="glass-card p-3 rounded-xl flex flex-col items-center justify-center border border-white/10 hover:border-yellow-400 hover:bg-yellow-400/10 transition-all text-center cursor-pointer group active:scale-95"
-            >
-              <span className="font-black text-sm text-yellow-400 group-hover:text-yellow-300">
-                {item.label}
-              </span>
-              <span className="text-[10px] text-white/50 mt-0.5">{item.desc}</span>
-            </button>
-          ))}
+        {/* DC Currency Refill Buttons - Up to 5 Million DC */}
+        <div className="mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs font-bold text-white/70 uppercase tracking-wider">
+              {locale === 'ru' ? 'Выберите сумму пополнения:' : 'Choose refill amount:'}
+            </span>
+            <span className="text-[10px] text-yellow-400/80 font-mono">До 5 000 000 DC</span>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
+            {[
+              { label: '+10 000', amount: 10000, badge: 'СТАРТ' },
+              { label: '+50 000', amount: 50000, badge: 'ИГРОК' },
+              { label: '+100 000', amount: 100000, badge: 'ПРОФИ' },
+              { label: '+250 000', amount: 250000, badge: 'БОСС' },
+              { label: '+500 000', amount: 500000, badge: 'ХАЙРОЛЛ' },
+              { label: '+1 000 000', amount: 1000000, badge: 'МИЛЛИОН' },
+              { label: '+2 500 000', amount: 2500000, badge: 'ОЛИГАРХ' },
+              { label: '+5 000 000', amount: 5000000, badge: 'МАКС' },
+            ].map((item) => (
+              <button
+                key={item.amount}
+                type="button"
+                onClick={() => handleRefill(item.amount)}
+                className="glass-card p-2.5 rounded-xl flex flex-col items-center justify-center border border-white/10 hover:border-yellow-400 hover:bg-yellow-400/10 transition-all text-center cursor-pointer group active:scale-95 relative overflow-hidden"
+              >
+                <span className="text-[9px] font-black px-1.5 py-0.2 rounded-full bg-yellow-400/15 text-yellow-400 mb-1 border border-yellow-400/20">
+                  {item.badge}
+                </span>
+                <span className="font-black text-xs text-yellow-400 group-hover:text-yellow-300 font-mono">
+                  {item.label}
+                </span>
+                <span className="text-[9px] text-white/40">DC</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="p-3 rounded-xl bg-yellow-400/5 border border-yellow-400/20 flex gap-2.5 text-xs text-yellow-200/80 leading-relaxed">

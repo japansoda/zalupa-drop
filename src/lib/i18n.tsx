@@ -10,6 +10,7 @@ const translations: Record<Locale, Record<string, string>> = {
     // Nav
     'nav.cases': 'Кейсы',
     'nav.upgrader': 'Апгрейдер',
+    'nav.contract': 'Контракты',
     'nav.crash': 'Краш',
     'nav.inventory': 'Инвентарь',
     'nav.topup': 'Пополнить',
@@ -171,7 +172,25 @@ const translations: Record<Locale, Record<string, string>> = {
     'inv.tab.restricted': 'Запрещенное',
     'inv.tab.milspec': 'Армейское',
 
-    // Crash
+    // Contract
+    'contract.title': 'Контракт обмена CS2',
+    'contract.subtitle': 'Положи от 3 до 10 скинов и подпиши контракт на новый предмет',
+    'contract.sign': 'ПОДПИСАТЬ КОНТРАКТ',
+    'contract.signing': 'ПОДПИСАНИЕ...',
+    'contract.totalValue': 'Стоимость контракта',
+    'contract.expectedRtp': 'Честный RTP 98%',
+    'contract.fillCheapest': 'Заполнить дешевыми',
+    'contract.clear': 'Очистить',
+    'contract.slots': 'Слоты контракта',
+    'contract.emptySlot': 'Пустой слот',
+    'contract.noItems': 'В инвентаре нет предметов. Откройте пару кейсов!',
+    'contract.needMin': 'Добавьте минимум 3 скина для подписания',
+    'contract.won': 'Получен предмет по контракту!',
+    'contract.toInventory': 'В инвентарь',
+    'contract.sell': 'Продать за',
+    'contract.potential': 'Диапазон выигрыша',
+
+    // Crash (legacy)
     'crash.title': 'Краш',
     'crash.subtitle': 'Успей забрать виртуальные DC до того, как множитель крашнется',
     'crash.bet': 'Размер ставки:',
@@ -258,6 +277,7 @@ const translations: Record<Locale, Record<string, string>> = {
     // Nav
     'nav.cases': 'Cases',
     'nav.upgrader': 'Upgrader',
+    'nav.contract': 'Contracts',
     'nav.crash': 'Crash',
     'nav.inventory': 'Inventory',
     'nav.topup': 'Top Up',
@@ -419,7 +439,25 @@ const translations: Record<Locale, Record<string, string>> = {
     'inv.tab.restricted': 'Restricted',
     'inv.tab.milspec': 'Mil-Spec',
 
-    // Crash
+    // Contract
+    'contract.title': 'CS2 Trade-Up Contract',
+    'contract.subtitle': 'Deposit 3 to 10 skins and sign the contract for a new weapon',
+    'contract.sign': 'SIGN CONTRACT',
+    'contract.signing': 'SIGNING...',
+    'contract.totalValue': 'Contract Value',
+    'contract.expectedRtp': 'Fair 98% RTP',
+    'contract.fillCheapest': 'Fill Cheapest',
+    'contract.clear': 'Clear',
+    'contract.slots': 'Contract Slots',
+    'contract.emptySlot': 'Empty Slot',
+    'contract.noItems': 'No skins in inventory. Open a few cases!',
+    'contract.needMin': 'Add at least 3 skins to sign',
+    'contract.won': 'Contract item acquired!',
+    'contract.toInventory': 'To Inventory',
+    'contract.sell': 'Sell for',
+    'contract.potential': 'Outcome Range',
+
+    // Crash (legacy)
     'crash.title': 'Crash',
     'crash.subtitle': 'Cash out virtual DC before the multiplier crashes',
     'crash.bet': 'Bet amount:',
