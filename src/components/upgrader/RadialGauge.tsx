@@ -182,8 +182,13 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
   // Reset catalog limit when filters change
   useEffect(() => {
-    setCatalogLimit(60);
+    setCatalogLimit(100);
   }, [catalogSearch, catalogRarity, catalogType, catalogWeapon, catalogSort, effectiveBetDc, maxTargetPrice]);
+
+  // Reset catalogWeapon when catalogType changes
+  useEffect(() => {
+    setCatalogWeapon('all');
+  }, [catalogType]);
 
   // Auto-Select target skin when bet or target chance changes
   const autoSelectTargetSkin = (desiredChance: number, currentBet: number, forceType?: string) => {
@@ -191,82 +196,86 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     const clampedChance = Math.min(80, Math.max(1, desiredChance));
     const typeToMatch = forceType !== undefined ? forceType : catalogType;
 
-    // Ideal target price based on 95% RTP
-    const idealPrice = Math.min(maxTargetPrice, (currentBet / (clampedChance / 100)) * 0.95);
-
-    let candidates = catalogSkins.filter(
+    // Filter all skins that are eligible by bet price and category
+    let allEligible = catalogSkins.filter(
       (s) => s.priceDc > currentBet && s.priceDc <= maxTargetPrice && matchesCatalogType(s, typeToMatch)
     );
-    if (candidates.length === 0) {
-      candidates = catalogSkins.filter(
+    if (allEligible.length === 0) {
+      allEligible = catalogSkins.filter(
         (s) => s.priceDc > currentBet && s.priceDc <= maxTargetPrice
       );
     }
-    if (candidates.length === 0) return;
+    if (allEligible.length === 0) return;
+
+    // Precise formula for actual resulting chance on gauge
+    const calcChance = (s: SkinEntity) => Math.min(80, (currentBet / s.priceDc) * 95);
+
+    // Filter candidates strictly matching requested chance within tolerance
+    // (Prevents offering 80% items when user clicks 35% or 50%)
+    let tolerance = Math.max(1.5, clampedChance * 0.16);
+    let closeCandidates = allEligible.filter(
+      (s) => Math.abs(calcChance(s) - clampedChance) <= tolerance
+    );
+
+    // If no skins in tight tolerance, widen tolerance
+    if (closeCandidates.length === 0) {
+      tolerance = Math.max(3.0, clampedChance * 0.35);
+      closeCandidates = allEligible.filter(
+        (s) => Math.abs(calcChance(s) - clampedChance) <= tolerance
+      );
+    }
+
+    // If still none, sort by closest chance and take top 50
+    if (closeCandidates.length === 0) {
+      closeCandidates = [...allEligible]
+        .sort((a, b) => Math.abs(calcChance(a) - clampedChance) - Math.abs(calcChance(b) - clampedChance))
+        .slice(0, 50);
+    }
 
     if (typeToMatch === 'all') {
-      // 1. Prioritize core items: Knives, Weapons, Gloves, and Agents
-      const coreCandidates = candidates.filter((s) => {
-        return (
-          matchesCatalogType(s, 'knives') ||
-          matchesCatalogType(s, 'gloves') ||
-          matchesCatalogType(s, 'agents') ||
-          isActualWeapon(s)
-        );
-      });
-
-      // If core items exist in this price segment, strictly use core items!
-      // Only fall back to stickers/charms if there are ZERO core items in this price range.
-      const pool = coreCandidates.length > 0 ? coreCandidates : candidates;
-
-      // Group into balanced category buckets FIRST: knives, gloves, weapons (guns), and agents.
-      // Sorting each bucket individually guarantees that expensive weapons (e.g. Howl, Dragon Lore, Fire Serpent)
-      // are given equal chance to be picked, instead of being drowned out by thousands of knives and gloves.
-      const knifeBucket = pool.filter((s) => matchesCatalogType(s, 'knives'));
-      const gloveBucket = pool.filter((s) => matchesCatalogType(s, 'gloves'));
-      const gunBucket = pool.filter(
+      // 1. Group matching candidates into diverse category buckets: knives, gloves, weapons (guns), agents
+      const knifeBucket = closeCandidates.filter((s) => matchesCatalogType(s, 'knives'));
+      const gloveBucket = closeCandidates.filter((s) => matchesCatalogType(s, 'gloves'));
+      const gunBucket = closeCandidates.filter(
         (s) => isActualWeapon(s) && !matchesCatalogType(s, 'knives') && !matchesCatalogType(s, 'gloves')
       );
-      const agentBucket = pool.filter((s) => matchesCatalogType(s, 'agents'));
-
-      const sortByCloseness = (list: SkinEntity[]) =>
-        [...list].sort((a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice));
-
-      const sortedKnives = sortByCloseness(knifeBucket);
-      const sortedGloves = sortByCloseness(gloveBucket);
-      const sortedGuns = sortByCloseness(gunBucket);
-      const sortedAgents = sortByCloseness(agentBucket);
+      const agentBucket = closeCandidates.filter((s) => matchesCatalogType(s, 'agents'));
 
       const availableBuckets: SkinEntity[][] = [];
-      if (sortedKnives.length > 0) availableBuckets.push(sortedKnives);
-      if (sortedGloves.length > 0) availableBuckets.push(sortedGloves);
-      if (sortedGuns.length > 0) availableBuckets.push(sortedGuns);
-      if (sortedAgents.length > 0) availableBuckets.push(sortedAgents);
+      if (knifeBucket.length > 0) availableBuckets.push(knifeBucket);
+      if (gloveBucket.length > 0) availableBuckets.push(gloveBucket);
+      if (gunBucket.length > 0) availableBuckets.push(gunBucket);
+      if (agentBucket.length > 0) availableBuckets.push(agentBucket);
 
+      // Choose a random available category bucket to ensure diverse mix of weapons, knives, gloves
+      let pickPool: SkinEntity[] = [];
       if (availableBuckets.length > 0) {
-        // Randomly pick a category bucket among available, ensuring diverse mix (Guns, Knives, Gloves, Agents)
         const chosenBucket = availableBuckets[Math.floor(Math.random() * availableBuckets.length)];
-        const chosenSkin = chosenBucket[Math.floor(Math.random() * Math.min(4, chosenBucket.length))];
-        if (chosenSkin) {
-          setTargetSkin(chosenSkin);
-          return;
-        }
+        pickPool = chosenBucket;
+      } else {
+        pickPool = closeCandidates;
       }
 
-      // Fallback if no specific bucket was found
-      const sortedFallback = [...pool].sort(
-        (a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice)
-      );
-      const fallbackPicked = sortedFallback[Math.floor(Math.random() * Math.min(4, sortedFallback.length))];
-      if (fallbackPicked) {
-        setTargetSkin(fallbackPicked);
+      // Sort by proximity to clampedChance
+      pickPool.sort((a, b) => Math.abs(calcChance(a) - clampedChance) - Math.abs(calcChance(b) - clampedChance));
+
+      // Take top 30 closest items in this bucket for rich variety (no longer limited to only 4 items!)
+      const topPool = pickPool.slice(0, 30);
+
+      // Filter out currently selected skin so clicking preset cycles to a DIFFERENT skin
+      const variedPool = topPool.filter((s) => s.id !== targetSkin?.id);
+      const finalPool = variedPool.length > 0 ? variedPool : topPool;
+
+      const chosenSkin = finalPool[Math.floor(Math.random() * finalPool.length)];
+      if (chosenSkin) {
+        setTargetSkin(chosenSkin);
         return;
       }
     } else {
       // Specific category tab active (or filtered by weapon)
-      let pool = candidates;
+      let pool = closeCandidates;
       if (catalogWeapon !== 'all') {
-        const weaponMatches = candidates.filter(
+        const weaponMatches = closeCandidates.filter(
           (s) => s.weapon.toLowerCase() === catalogWeapon.toLowerCase()
         );
         if (weaponMatches.length > 0) {
@@ -274,11 +283,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         }
       }
 
-      const sorted = [...pool].sort(
-        (a, b) => Math.abs(a.priceDc - idealPrice) - Math.abs(b.priceDc - idealPrice)
-      );
-      const topCandidates = sorted.slice(0, 8);
-      const picked = topCandidates[Math.floor(Math.random() * Math.min(4, topCandidates.length))];
+      pool.sort((a, b) => Math.abs(calcChance(a) - clampedChance) - Math.abs(calcChance(b) - clampedChance));
+      const topPool = pool.slice(0, 30);
+      const variedPool = topPool.filter((s) => s.id !== targetSkin?.id);
+      const finalPool = variedPool.length > 0 ? variedPool : topPool;
+
+      const picked = finalPool[Math.floor(Math.random() * finalPool.length)];
       if (picked) {
         setTargetSkin(picked);
       }
