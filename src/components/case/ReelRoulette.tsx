@@ -92,10 +92,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       return caseId && isOfficialCase(caseId) && isKnifeOrGlove(last) ? rollSpecialKnifeDrop(caseId) : last;
     }
 
-    // 3. Boosted 105.0% RTP for ALL cases ("подкрутка шансов"):
-    // Target EV = 1.05 * casePriceDc.
-    // Solves alpha power exponent via binary search so expected drop return is generously 105%!
-    const targetEV = Math.max(15, casePriceDc * 1.05);
+    // 3. Calibrated 98.0% RTP for ALL cases:
+    // Target EV = 0.98 * casePriceDc.
+    // Solves alpha power exponent via binary search so expected drop return is strictly 98%!
+    const targetEV = Math.max(15, casePriceDc * 0.98);
     const prices = caseSkins.map((s) => Math.max(1, s.priceDc));
     const minP = Math.min(...prices);
     const maxP = Math.max(...prices);
@@ -138,20 +138,15 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       rnd -= weights[i];
     }
 
-    // Extra luck boost roll ("подкрутка"):
-    // 12% base chance (28% if luck potion is active) to promote drop to top-tier/classified/covert/gold!
+    // Extra luck boost roll when Luck Potion is active:
     const hasPotion = useGameStore.getState().activePotionCharges > 0;
-    const luckyRoll = Math.random();
-    const luckyThreshold = hasPotion ? 0.28 : 0.12;
-    if (luckyRoll < luckyThreshold) {
+    if (hasPotion && Math.random() < 0.25) {
       const topTier = caseSkins.filter(
         (s) => s.rarity === 'gold' || s.rarity === 'covert' || s.rarity === 'classified' || s.priceDc >= casePriceDc
       );
       if (topTier.length > 0) {
         selected = topTier[Math.floor(Math.random() * topTier.length)];
-        if (hasPotion) {
-          useGameStore.getState().consumePotionCharge();
-        }
+        useGameStore.getState().consumePotionCharge();
       }
     }
 

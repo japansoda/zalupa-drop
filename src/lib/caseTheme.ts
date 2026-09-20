@@ -13,10 +13,10 @@ export function getCaseThemeGlow(c: { id: string; name: string; category?: strin
   }
 
   // Specific custom themes
-  if (t.includes('dragon') || t.includes('lore') || t.includes('valhalla') || t.includes('norse') || t.includes('gods_monsters')) {
+  if (t.includes('dragon') || t.includes('lore') || t.includes('valhalla') || t.includes('norse') || t.includes('lotus') || t.includes('gods_monsters')) {
     return { rgb: '16, 185, 129', hex: '#10b981' }; // Imperial Emerald
   }
-  if (t.includes('crimson') || t.includes('redline') || t.includes('bloodsport') || t.includes('red') || t.includes('clash') || t.includes('slaughter') || t.includes('howl')) {
+  if (t.includes('crimson') || t.includes('redline') || t.includes('bloodsport') || t.includes('red') || t.includes('clash') || t.includes('slaughter') || t.includes('howl') || t.includes('autotronic') || t.includes('racing') || t.includes('racer')) {
     return { rgb: '239, 68, 68', hex: '#ef4444' }; // Crimson Red
   }
   if (t.includes('fire') || t.includes('inferno') || t.includes('vulcan') || t.includes('phoenix') || t.includes('heat') || t.includes('breath') || t.includes('blaze')) {
