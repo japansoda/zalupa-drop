@@ -31,10 +31,13 @@ export interface SkinEntity {
 export interface CaseItem {
   id: string;
   name: string;
+  nameEn?: string;
   subtitle: string;
+  subtitleEn?: string;
   image: string;
   priceDc: number;
   badge?: string;
+  badgeEn?: string;
   category?: 'official' | 'custom' | 'knives' | 'budget' | 'highroller' | 'weapons' | 'stickers';
   skins: SkinEntity[];
 }

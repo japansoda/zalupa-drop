@@ -13,18 +13,19 @@ interface TierOption {
   amount: number;
   label: string;
   badge: string;
+  badgeEn: string;
   theme: 'blue' | 'purple' | 'pink' | 'red' | 'gold' | 'cyan' | 'emerald' | 'legend';
 }
 
 const REFILL_TIERS: TierOption[] = [
-  { amount: 10000, label: '10 000', badge: 'СТАРТ', theme: 'blue' },
-  { amount: 50000, label: '50 000', badge: 'ТАКТИК', theme: 'purple' },
-  { amount: 100000, label: '100 000', badge: 'ПРОФИ', theme: 'pink' },
-  { amount: 250000, label: '250 000', badge: 'ЭЛИТА', theme: 'red' },
-  { amount: 500000, label: '500 000', badge: 'ХАЙРОЛЛ', theme: 'gold' },
-  { amount: 1000000, label: '1 000 000', badge: 'МАГНАТ', theme: 'cyan' },
-  { amount: 2500000, label: '2 500 000', badge: 'ОЛИГАРХ', theme: 'emerald' },
-  { amount: 5000000, label: '5 000 000', badge: 'MAX CS2', theme: 'legend' },
+  { amount: 10000, label: '10 000', badge: 'СТАРТ', badgeEn: 'START', theme: 'blue' },
+  { amount: 50000, label: '50 000', badge: 'ТАКТИК', badgeEn: 'TACTIC', theme: 'purple' },
+  { amount: 100000, label: '100 000', badge: 'ПРОФИ', badgeEn: 'PRO', theme: 'pink' },
+  { amount: 250000, label: '250 000', badge: 'ЭЛИТА', badgeEn: 'ELITE', theme: 'red' },
+  { amount: 500000, label: '500 000', badge: 'ХАЙРОЛЛ', badgeEn: 'HIGHROLL', theme: 'gold' },
+  { amount: 1000000, label: '1 000 000', badge: 'МАГНАТ', badgeEn: 'TYCOON', theme: 'cyan' },
+  { amount: 2500000, label: '2 500 000', badge: 'ОЛИГАРХ', badgeEn: 'OLIGARCH', theme: 'emerald' },
+  { amount: 5000000, label: '5 000 000', badge: 'MAX CS2', badgeEn: 'MAX CS2', theme: 'legend' },
 ];
 
 const THEME_STYLES: Record<TierOption['theme'], { border: string; bg: string; text: string; badge: string }> = {
@@ -146,7 +147,7 @@ export const RefillModal: React.FC = () => {
                   {t('refill.title')}
                 </h3>
                 <span className="px-1.5 py-0.5 rounded-full text-[8px] sm:text-[9px] font-black bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase shrink-0">
-                  МГНОВЕННО
+                  {locale === 'ru' ? 'МГНОВЕННО' : 'INSTANT'}
                 </span>
               </div>
               <p className="text-[10px] sm:text-xs text-white/50 truncate">
@@ -189,7 +190,7 @@ export const RefillModal: React.FC = () => {
               >
                 <div className="w-full flex items-center justify-between">
                   <span className={`text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded border uppercase font-black tracking-wider ${styles.badge}`}>
-                    {tier.badge}
+                    {locale === 'ru' ? tier.badge : tier.badgeEn}
                   </span>
                   <span className="text-[8px] sm:text-[9px] font-bold text-white/40 uppercase group-hover:text-white/80 transition-colors">
                     +{tier.label}
@@ -222,13 +223,15 @@ export const RefillModal: React.FC = () => {
               <span className="text-lg sm:text-xl shrink-0">🧪</span>
               <div className="flex flex-col text-left leading-tight min-w-0">
                 <span className="font-bold text-xs sm:text-sm text-emerald-400 group-hover:text-emerald-300 truncate">
-                  +3 Зелья удачи
+                  {locale === 'ru' ? '+3 Зелья удачи' : '+3 Luck Potions'}
                 </span>
-                <span className="text-[9px] sm:text-[10px] text-white/40 mt-0.5 truncate">+15% шанс на ценный дроп</span>
+                <span className="text-[9px] sm:text-[10px] text-white/40 mt-0.5 truncate">
+                  {locale === 'ru' ? '+15% шанс на ценный дроп' : '+15% chance & profit boost'}
+                </span>
               </div>
             </div>
             <div className="px-2 py-0.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 font-mono font-bold text-[11px] sm:text-xs text-emerald-300 shrink-0 ml-2">
-              {potionsCount} шт.
+              {potionsCount} {locale === 'ru' ? 'шт.' : 'pcs'}
             </div>
           </button>
 
@@ -241,13 +244,15 @@ export const RefillModal: React.FC = () => {
               <span className="text-lg sm:text-xl shrink-0">🎟️</span>
               <div className="flex flex-col text-left leading-tight min-w-0">
                 <span className="font-bold text-xs sm:text-sm text-yellow-400 group-hover:text-yellow-300 truncate">
-                  +1 Все жетоны апгрейда
+                  {locale === 'ru' ? '+1 Все жетоны апгрейда' : '+1 All Upgrade Tokens'}
                 </span>
-                <span className="text-[9px] sm:text-[10px] text-white/40 mt-0.5 truncate">Мультипликаторы 2x, 3x, 5x, 10x</span>
+                <span className="text-[9px] sm:text-[10px] text-white/40 mt-0.5 truncate">
+                  {locale === 'ru' ? 'Мультипликаторы 2x, 3x, 5x, 10x' : 'Multipliers 2x, 3x, 5x, 10x'}
+                </span>
               </div>
             </div>
             <div className="px-2 py-0.5 rounded-lg bg-yellow-500/15 border border-yellow-500/30 font-mono font-bold text-[11px] sm:text-xs text-yellow-300 shrink-0 ml-2">
-              {totalTokensOwned} шт.
+              {totalTokensOwned} {locale === 'ru' ? 'шт.' : 'pcs'}
             </div>
           </button>
         </div>

@@ -8,12 +8,14 @@ import { RARITY_CONFIG } from '../../data/skins';
 import { ExternalLink } from 'lucide-react';
 import { SkinImage } from '../ui/SkinImage';
 import { getSteamMarketListingUrl } from '../../lib/steam';
+import { useLanguage } from '../../lib/i18n';
 
 interface CaseSkinGroupCardProps {
   variants: SkinEntity[];
 }
 
 export const CaseSkinGroupCard: React.FC<CaseSkinGroupCardProps> = ({ variants }) => {
+  const { locale } = useLanguage();
   const baseSkin = variants[0];
   const config = RARITY_CONFIG[baseSkin.rarity] || RARITY_CONFIG.milspec;
 
@@ -64,7 +66,7 @@ export const CaseSkinGroupCard: React.FC<CaseSkinGroupCardProps> = ({ variants }
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/30 hover:text-white transition-colors"
-            title="Открыть лот в Steam"
+            title={locale === 'ru' ? 'Открыть лот в Steam' : 'View listing on Steam'}
           >
             <ExternalLink className="w-3.5 h-3.5" />
           </a>

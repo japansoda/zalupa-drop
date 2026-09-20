@@ -284,7 +284,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                 {locale === 'ru' ? 'ДОПОЛНИТЕЛЬНЫЙ ДРОП' : 'EXTRA BONUS DROP'}
               </span>
               <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/80 text-[10px] font-mono font-black text-emerald-300 shrink-0">
-                +БОНУС
+                {locale === 'ru' ? '+БОНУС' : '+BONUS'}
               </span>
               <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
             </div>
@@ -315,7 +315,9 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                       </span>
                     </div>
                     <span className="text-[11px] text-white/50 mt-0.5 truncate">
-                      {locale === 'ru' ? '+15% к шансу в апгрейдере (3 раза)' : '+15% upgrader chance (3 spins)'}
+                      {locale === 'ru' 
+                        ? 'Универсальная удача на 3 действия: кейсы, апгрейдер, контракты' 
+                        : 'Universal luck for 3 actions: cases, upgrader, contracts'}
                     </span>
                   </div>
                 </div>

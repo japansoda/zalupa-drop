@@ -12,7 +12,7 @@ import { CaseSkinGroupCard } from '../../../components/case/CaseSkinGroupCard';
 import { DropCoinIcon } from '../../../components/ui/DropCoinIcon';
 import { CASES_DATABASE } from '../../../data/cases';
 import { sound } from '../../../lib/sound';
-import { useLanguage } from '../../../lib/i18n';
+import { useLanguage, getCaseName, getCaseSubtitle } from '../../../lib/i18n';
 import { ArrowLeft, ShieldCheck } from 'lucide-react';
 import { CaseSpecialItemCard } from '../../../components/case/CaseSpecialItemCard';
 import { isOfficialCase, isKnifeOrGlove } from '../../../lib/caseSpecials';
@@ -94,7 +94,7 @@ export default function CaseOpenPage() {
                     />
                     <img 
                       src={getOptimizedCaseImageUrl(currentCase.image)} 
-                      alt={currentCase.name} 
+                      alt={getCaseName(currentCase, locale)} 
                       referrerPolicy="no-referrer"
                       onError={(e) => {
                         if (e.currentTarget.src !== currentCase.image) {
@@ -111,10 +111,10 @@ export default function CaseOpenPage() {
               })()}
               <div className="flex flex-col">
                 <h1 className="text-xl sm:text-3xl font-black text-white uppercase tracking-tight line-clamp-2">
-                  {currentCase.name}
+                  {getCaseName(currentCase, locale)}
                 </h1>
                 {currentCase.subtitle && (
-                  <p className="text-xs text-white/50 line-clamp-1">{currentCase.subtitle}</p>
+                  <p className="text-xs text-white/50 line-clamp-1">{getCaseSubtitle(currentCase, locale)}</p>
                 )}
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function CaseOpenPage() {
             caseId={currentCase.id}
             caseSkins={currentCase.skins}
             casePriceDc={currentCase.priceDc}
-            caseName={currentCase.name}
+            caseName={getCaseName(currentCase, locale)}
           />
         </section>
 

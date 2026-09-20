@@ -8,7 +8,7 @@ import { RARITY_CONFIG } from '../../data/skins';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { SkinImage } from '../ui/SkinImage';
 import { sound } from '../../lib/sound';
-import { useLanguage } from '../../lib/i18n';
+import { useLanguage, getCaseName } from '../../lib/i18n';
 import { Gift, FastForward, Check, Sparkles, Ticket, FlaskConical } from 'lucide-react';
 
 interface CashbackModalProps {
@@ -177,7 +177,7 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
             : awardedToken
             ? (t('token.' + awardedToken.rarity) || awardedToken.name)
             : caseItem
-            ? `${t('cashback.spinningCase')} «${caseItem.name}»`
+            ? `${t('cashback.spinningCase')} «${getCaseName(caseItem, locale)}»`
             : t('cashback.badgeCase')}
         </h3>
         <p className="text-xs text-white/50 mb-6">

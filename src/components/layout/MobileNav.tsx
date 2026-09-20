@@ -10,21 +10,21 @@ import { useLanguage } from '../../lib/i18n';
 
 export const MobileNav: React.FC = () => {
   const pathname = usePathname();
+  const { t, locale } = useLanguage();
   const { inventory, setRefillOpen } = useGameStore();
-  const { t } = useLanguage();
 
   if (pathname?.startsWith('/admin')) return null;
 
   const navItems = [
-    { href: '/', label: t('nav.cases') || 'Кейсы', icon: Box },
-    { href: '/upgrader', label: t('nav.upgrader') || 'Апгрейд', icon: Zap },
-    { href: '/contract', label: t('nav.contract') || 'Контракт', icon: FileText },
-    { href: '/inventory', label: t('nav.inventory') || 'Инвентарь', icon: Briefcase, count: inventory.length },
+    { href: '/', label: t('nav.cases') || (locale === 'ru' ? 'Кейсы' : 'Cases'), icon: Box },
+    { href: '/upgrader', label: t('nav.upgrader') || (locale === 'ru' ? 'Апгрейд' : 'Upgrader'), icon: Zap },
+    { href: '/contract', label: t('nav.contract') || (locale === 'ru' ? 'Контракт' : 'Contract'), icon: FileText },
+    { href: '/inventory', label: t('nav.inventory') || (locale === 'ru' ? 'Инвентарь' : 'Inventory'), icon: Briefcase, count: inventory.length },
   ];
 
   return (
     <nav 
-      aria-label="Мобильная навигация"
+      aria-label={locale === 'ru' ? 'Мобильная навигация' : 'Mobile navigation'}
       className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-[#08080a]/95 backdrop-blur-xl border-t border-white/10 px-2 py-1.5 flex items-center justify-around shadow-[0_-8px_30px_rgba(0,0,0,0.8)] pb-[calc(env(safe-area-inset-bottom,0px)+6px)]"
     >
       {navItems.map((item) => {
@@ -73,7 +73,7 @@ export const MobileNav: React.FC = () => {
           <Plus className="w-4 h-4 text-emerald-300 stroke-[3]" />
         </div>
         <span className="text-[10px] text-emerald-300 tracking-tight leading-none">
-          {t('nav.topup') || 'Пополнить'}
+          {t('nav.topup') || (locale === 'ru' ? 'Пополнить' : 'Top Up')}
         </span>
       </button>
     </nav>

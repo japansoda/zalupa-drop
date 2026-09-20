@@ -30,7 +30,7 @@ export const Header: React.FC = () => {
           href="/" 
           onClick={() => sound.playClick()}
           className="flex items-center group py-0.5 shrink-0"
-          title="ZALUPA DROP — Главная"
+          title={locale === 'ru' ? 'ZALUPA DROP — Главная' : 'ZALUPA DROP — Home'}
         >
           <LogoSvg 
             size="md" 

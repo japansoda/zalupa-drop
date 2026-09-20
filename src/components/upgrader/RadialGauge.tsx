@@ -1646,11 +1646,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   className="w-full bg-[#13141f] border border-white/15 rounded-xl px-3 py-2 text-xs font-bold text-white outline-none cursor-pointer"
                 >
                   <option value="all">
-                    {locale === 'ru' ? 'Все модели оружия' : 'All weapon models'} ({availableWeapons.reduce((acc, w) => acc + w.count, 0)} шт.)
+                    {locale === 'ru' ? 'Все модели оружия' : 'All weapon models'} ({availableWeapons.reduce((acc, w) => acc + w.count, 0)} {locale === 'ru' ? 'шт.' : 'items'})
                   </option>
                   {availableWeapons.map((w) => (
                     <option key={w.name} value={w.name}>
-                      {w.name} ({w.count} шт.)
+                      {w.name} ({w.count} {locale === 'ru' ? 'шт.' : 'items'})
                     </option>
                   ))}
                 </select>

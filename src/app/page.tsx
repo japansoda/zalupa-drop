@@ -11,7 +11,7 @@ import { DropCoinIcon } from '../components/ui/DropCoinIcon';
 import { SkinImage } from '../components/ui/SkinImage';
 import { CASES_DATABASE } from '../data/cases';
 import { sound } from '../lib/sound';
-import { useLanguage } from '../lib/i18n';
+import { useLanguage, getCaseName, getCaseBadge } from '../lib/i18n';
 import { useGameStore } from '../store/useGameStore';
 import { ChevronRight, Search, ArrowUpDown, X, Flame } from 'lucide-react';
 import { handleHorizontalWheel } from '../components/layout/HorizontalScrollManager';
@@ -77,7 +77,9 @@ export default function HomePage() {
       list = list.filter(
         (c) =>
           c.name.toLowerCase().includes(q) ||
+          (c.nameEn && c.nameEn.toLowerCase().includes(q)) ||
           c.subtitle.toLowerCase().includes(q) ||
+          (c.subtitleEn && c.subtitleEn.toLowerCase().includes(q)) ||
           (c.skins && c.skins.some((s) => s.name.toLowerCase().includes(q) || s.skinName.toLowerCase().includes(q)))
       );
     }
@@ -94,7 +96,7 @@ export default function HomePage() {
     } else if (sortBy === 'desc') {
       list.sort((a, b) => b.priceDc - a.priceDc);
     } else if (sortBy === 'alpha') {
-      list.sort((a, b) => a.name.localeCompare(b.name, locale === 'ru' ? 'ru' : 'en'));
+      list.sort((a, b) => getCaseName(a, locale).localeCompare(getCaseName(b, locale), locale === 'ru' ? 'ru' : 'en'));
     }
 
     return list;
@@ -298,7 +300,7 @@ export default function HomePage() {
                             ? 'bg-gradient-to-r from-yellow-400 to-amber-400 text-black shadow-[0_0_8px_rgba(234,179,8,0.35)]'
                             : 'bg-yellow-400 text-black'
                         }`}>
-                          {caseItem.badge}
+                          {getCaseBadge(caseItem.badge, caseItem.badgeEn, locale)}
                         </div>
                       )}
 
@@ -314,7 +316,7 @@ export default function HomePage() {
 
                         <img
                           src={getOptimizedCaseImageUrl(caseItem.image)}
-                          alt={caseItem.name}
+                          alt={getCaseName(caseItem, locale)}
                           loading={idx < 18 ? 'eager' : 'lazy'}
                           decoding="async"
                           referrerPolicy="no-referrer"
@@ -335,7 +337,7 @@ export default function HomePage() {
                         <h3 className={`font-black text-xs sm:text-sm transition-colors truncate ${
                           isHighroller ? 'text-white group-hover:text-amber-300' : 'text-white group-hover:text-yellow-400'
                         }`}>
-                          {caseItem.name}
+                          {getCaseName(caseItem, locale)}
                         </h3>
                       </div>
 

@@ -21,7 +21,7 @@ export const CaseSpecialItemCard: React.FC<CaseSpecialItemCardProps> = () => {
           ★ SPECIAL
         </span>
         <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full text-yellow-400 bg-yellow-400/15 border border-yellow-400/40">
-          ★ РЕДКИЙ ОСОБЫЙ
+          {locale === 'ru' ? '★ РЕДКИЙ ОСОБЫЙ' : '★ RARE SPECIAL'}
         </span>
       </div>
 
@@ -30,7 +30,7 @@ export const CaseSpecialItemCard: React.FC<CaseSpecialItemCardProps> = () => {
         <div className="absolute inset-0 bg-radial from-yellow-500/15 to-transparent blur-xl pointer-events-none" />
         <img
           src="/images/special_item.png"
-          alt="★ Редкий особый предмет"
+          alt={locale === 'ru' ? '★ Редкий особый предмет' : '★ Rare Special Item'}
           className="w-32 h-20 sm:w-34 sm:h-22 object-contain group-hover:scale-108 transition-transform duration-300 drop-shadow-[0_0_15px_rgba(250,204,21,0.45)] z-10"
         />
       </div>

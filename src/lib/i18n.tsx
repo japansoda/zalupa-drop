@@ -599,3 +599,40 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 };
 
 export const useLanguage = () => useContext(LanguageContext);
+
+export function getCaseName(c?: { name: string; nameEn?: string } | null, locale: Locale = 'ru'): string {
+  if (!c) return '';
+  if (locale === 'en' && c.nameEn) {
+    return c.nameEn;
+  }
+  return c.name;
+}
+
+export function getCaseSubtitle(c?: { subtitle?: string; subtitleEn?: string } | null, locale: Locale = 'ru'): string {
+  if (!c) return '';
+  if (locale === 'en' && c.subtitleEn) {
+    return c.subtitleEn;
+  }
+  return c.subtitle || '';
+}
+
+export function getCaseBadge(badge?: string, badgeEn?: string, locale: Locale = 'ru'): string {
+  if (!badge) return '';
+  if (locale === 'en') {
+    if (badgeEn) return badgeEn;
+    const BADGE_MAP: Record<string, string> = {
+      'ХИТ': 'HOT',
+      'НОВИНКА': 'NEW',
+      'ТОП': 'TOP',
+      'МАЖОР': 'VIP',
+      'ОСОБЫЙ': 'SPECIAL',
+      'ХАЛЯВА': 'FREE',
+      'РИСК': 'RISK',
+      '10% НОЖ': '10% KNIFE',
+      '50% ШАНС': '50% CHANCE',
+      '100% НОЖ': '100% KNIFE',
+    };
+    return BADGE_MAP[badge] || badge;
+  }
+  return badge;
+}

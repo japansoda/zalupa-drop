@@ -3,38 +3,55 @@ import { SkinRarity } from './types';
 export interface UpgradeToken {
   id: string;
   name: string;
+  nameEn: string;
   rarity: SkinRarity;
   valueDc: number;
   maxTargetDc: number;
 }
 
 export const UPGRADE_TOKENS: UpgradeToken[] = [
-  { id: 'token_consumer', name: 'Ширпотреб Токен', rarity: 'consumer', valueDc: 500, maxTargetDc: 2000 },
-  { id: 'token_industrial', name: 'Промышленный Токен', rarity: 'industrial', valueDc: 1500, maxTargetDc: 5000 },
-  { id: 'token_milspec', name: 'Армейский Токен', rarity: 'milspec', valueDc: 5000, maxTargetDc: 15000 },
-  { id: 'token_restricted', name: 'Запрещенный Токен', rarity: 'restricted', valueDc: 15000, maxTargetDc: 35000 },
-  { id: 'token_classified', name: 'Засекреченный Токен', rarity: 'classified', valueDc: 35000, maxTargetDc: 65000 },
-  { id: 'token_covert', name: '★ Тайный Токен', rarity: 'covert', valueDc: 70000, maxTargetDc: 85000 },
-  { id: 'token_gold', name: '★ Золотой Токен', rarity: 'gold', valueDc: 100000, maxTargetDc: 120000 },
+  { id: 'token_consumer', name: 'Ширпотреб Токен', nameEn: 'Consumer Token', rarity: 'consumer', valueDc: 500, maxTargetDc: 2000 },
+  { id: 'token_industrial', name: 'Промышленный Токен', nameEn: 'Industrial Token', rarity: 'industrial', valueDc: 1500, maxTargetDc: 5000 },
+  { id: 'token_milspec', name: 'Армейский Токен', nameEn: 'Mil-Spec Token', rarity: 'milspec', valueDc: 5000, maxTargetDc: 15000 },
+  { id: 'token_restricted', name: 'Запрещенный Токен', nameEn: 'Restricted Token', rarity: 'restricted', valueDc: 15000, maxTargetDc: 35000 },
+  { id: 'token_classified', name: 'Засекреченный Токен', nameEn: 'Classified Token', rarity: 'classified', valueDc: 35000, maxTargetDc: 65000 },
+  { id: 'token_covert', name: '★ Тайный Токен', nameEn: '★ Covert Token', rarity: 'covert', valueDc: 70000, maxTargetDc: 85000 },
+  { id: 'token_gold', name: '★ Золотой Токен', nameEn: '★ Gold Token', rarity: 'gold', valueDc: 100000, maxTargetDc: 120000 },
 ];
 
 export interface LuckPotion {
   id: 'potion_luck';
   name: 'Зелье удачи';
+  nameEn: 'Luck Potion';
   rarity: 'contraband';
   charges: number;
   bonusChancePercent: number;
   description: string;
+  descriptionEn: string;
 }
 
 export const LUCK_POTION: LuckPotion = {
   id: 'potion_luck',
   name: 'Зелье удачи',
+  nameEn: 'Luck Potion',
   rarity: 'contraband',
   charges: 3,
   bonusChancePercent: 15,
   description: 'Универсальная удача на 3 действия: кейсы, апгрейдер и контракты',
+  descriptionEn: 'Universal luck for 3 actions: cases, upgrader and contracts',
 };
+
+export function getTokenName(token: UpgradeToken, locale: 'ru' | 'en' = 'ru'): string {
+  return locale === 'en' ? token.nameEn : token.name;
+}
+
+export function getPotionName(locale: 'ru' | 'en' = 'ru'): string {
+  return locale === 'en' ? LUCK_POTION.nameEn : LUCK_POTION.name;
+}
+
+export function getPotionDesc(locale: 'ru' | 'en' = 'ru'): string {
+  return locale === 'en' ? LUCK_POTION.descriptionEn : LUCK_POTION.description;
+}
 
 // Roll drop from opening a case
 export function rollCaseBonusDrop(): { token?: UpgradeToken; potion?: boolean } {

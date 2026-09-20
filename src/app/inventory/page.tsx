@@ -268,7 +268,7 @@ export default function InventoryPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-white/30 hover:text-white transition-colors"
-                            title="Открыть лот в Steam"
+                            title={locale === 'ru' ? 'Открыть лот в Steam' : 'View listing on Steam'}
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
                           </a>

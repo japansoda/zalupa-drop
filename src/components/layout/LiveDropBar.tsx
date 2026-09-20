@@ -6,8 +6,28 @@ import { useGameStore } from '../../store/useGameStore';
 import { SKINS_DATABASE, RARITY_CONFIG } from '../../data/skins';
 import { LiveDrop } from '../../lib/types';
 import { useLanguage } from '../../lib/i18n';
+import allCasesData from '../../data/all_cases.json';
 
 const BLEND_WINDOW_MS = 3 * 60 * 1000; // 3 minutes dynamic window
+
+const CASE_EN_MAP: Record<string, string> = {
+  'Контракт обмена': 'Trade-Up',
+  'Апгрейдер': 'Upgrader',
+  'Кейс «Революция»': 'Revolution Case',
+  'Грёзы и кошмары': 'Dreams & Nightmares',
+  'Кейс «Разлом»': 'Fracture Case',
+  'Кейс «Легенда Howl»': 'Howl Legend Case',
+  'Кейс «Градиентный Раш»': 'Fade Rush Case',
+  'Кейс «Галактика Допплер»': 'Doppler Galaxy Case',
+  'Кейс «Дикий Лотос»': 'Wild Lotus Case',
+  'Кейс «Хранилище Перчаток»': 'Glove Vault Case',
+};
+
+(allCasesData as any[]).forEach((c) => {
+  if (c.name && c.nameEn) {
+    CASE_EN_MAP[c.name] = c.nameEn;
+  }
+});
 
 const SIMULATED_CASES = [
   'Кейс «Революция»',
@@ -93,7 +113,9 @@ const LiveDropCard = memo(({ drop, isUser, locale }: CardProps) => {
           {drop.skin.skinName}
         </span>
         <div className="flex items-center justify-between gap-1 text-[8px] text-white/40 mt-0.5">
-          <span className="truncate max-w-[70px]">{drop.caseName}</span>
+          <span className="truncate max-w-[70px]">
+            {locale === 'en' ? (CASE_EN_MAP[drop.caseName] || drop.caseName) : drop.caseName}
+          </span>
           <span className="font-mono text-yellow-400/90 font-bold shrink-0">
             {drop.skin.priceDc.toLocaleString('ru-RU')} DC
           </span>

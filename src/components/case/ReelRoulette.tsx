@@ -63,7 +63,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
 
   const pickWeightedSkin = (isPotionBoosted: boolean = false): SkinEntity => {
     // 1. Exact 10% knife cases
-    if (caseId === 'case_10_knife' || caseName.includes('10% Нож')) {
+    if (caseId === 'case_10_knife' || caseName.includes('10% Нож') || caseName.includes('10% Knife')) {
       const knives = caseSkins.filter(isKnifeOrGlove);
       const others = caseSkins.filter((s) => !isKnifeOrGlove(s));
       const weights = caseSkins.map((s) =>
@@ -83,7 +83,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     }
 
     // 2. Exact 50% knife cases
-    if (caseId === 'case_50_knife' || caseName.includes('50% Нож')) {
+    if (caseId === 'case_50_knife' || caseName.includes('50% Нож') || caseName.includes('50% Knife')) {
       const knives = caseSkins.filter(isKnifeOrGlove);
       const others = caseSkins.filter((s) => !isKnifeOrGlove(s));
       const weights = caseSkins.map((s) =>
@@ -313,7 +313,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
           if (skin.priceDc >= 25000) {
             addLiveDrop({
               id: `real_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
-              user: 'Вы',
+              user: locale === 'ru' ? 'Вы' : 'YOU',
               avatar: '',
               skin: skin,
               caseName: caseName,
@@ -405,7 +405,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       if (skin.priceDc >= 25000) {
         addLiveDrop({
           id: `real_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
-          user: 'Вы',
+          user: locale === 'ru' ? 'Вы' : 'YOU',
           avatar: '',
           skin: skin,
           caseName: caseName,
@@ -480,7 +480,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
                   const config = RARITY_CONFIG[displayRarity] || RARITY_CONFIG.milspec;
                   const displayImage = showAsSpecial ? '/images/special_item.png' : skin.image;
                   const displayWeapon = showAsSpecial ? '★' : skin.weapon;
-                  const displaySkinName = showAsSpecial ? 'Редкий особый предмет' : skin.skinName;
+                  const displaySkinName = showAsSpecial ? (locale === 'en' ? '★ Rare Special Item' : '★ Редкий особый предмет') : skin.skinName;
 
                   return (
                     <div
@@ -516,7 +516,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
                           className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full"
                           style={{ color: config.color, backgroundColor: config.bg }}
                         >
-                          {showAsSpecial ? '★ РЕДКИЙ ОСОБЫЙ' : config.label}
+                          {showAsSpecial 
+                            ? (locale === 'en' ? '★ RARE SPECIAL' : '★ РЕДКИЙ ОСОБЫЙ') 
+                            : (t('rarity.' + skin.rarity) || config.label)}
                         </span>
                       </div>
 
