@@ -24,7 +24,7 @@ export const RarityBadge: React.FC<RarityBadgeProps> = ({ rarity, size = 'sm' })
   return (
     <span
       className={`inline-flex items-center font-black rounded-full uppercase tracking-wider select-none shrink-0 shadow-sm ${
-        isGold ? 'text-black' : 'text-white'
+        isGold ? 'text-black' : 'text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]'
       } ${sizeClasses}`}
       style={{
         backgroundColor: config.color,

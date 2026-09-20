@@ -33,7 +33,9 @@ export const WearBadge: React.FC<WearBadgeProps> = ({
 
     return (
       <span
-        className={`inline-flex items-center font-mono font-black rounded-full uppercase tracking-wider text-white shadow-sm select-none shrink-0 ${sizeClasses}`}
+        className={`inline-flex items-center font-mono font-black rounded-full uppercase tracking-wider ${
+          eff.label === 'GOLD' ? 'text-black' : 'text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)]'
+        } shadow-sm select-none shrink-0 ${sizeClasses}`}
         style={{
           backgroundColor: eff.color,
           boxShadow: `0 0 8px ${eff.color}40`,
@@ -62,7 +64,7 @@ export const WearBadge: React.FC<WearBadgeProps> = ({
   if (showFullLabel) {
     return (
       <span
-        className="inline-flex items-center font-mono font-black text-[10px] px-2.5 py-0.5 rounded-full text-white uppercase tracking-wider shadow-sm select-none shrink-0"
+        className="inline-flex items-center font-mono font-black text-[10px] px-2.5 py-0.5 rounded-full text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)] uppercase tracking-wider shadow-sm select-none shrink-0"
         style={{
           backgroundColor: wearConfig.color,
           boxShadow: `0 0 10px ${wearConfig.color}40`,
@@ -82,7 +84,7 @@ export const WearBadge: React.FC<WearBadgeProps> = ({
 
   return (
     <span
-      className={`inline-flex items-center font-mono font-black rounded-full text-white uppercase tracking-wider select-none shrink-0 shadow-sm ${sizeClasses}`}
+      className={`inline-flex items-center font-mono font-black rounded-full text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)] uppercase tracking-wider select-none shrink-0 shadow-sm ${sizeClasses}`}
       style={{
         backgroundColor: wearConfig.color,
         boxShadow: `0 0 8px ${wearConfig.color}40`,

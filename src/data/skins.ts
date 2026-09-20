@@ -15,13 +15,13 @@ export const RARITY_CONFIG = {
   contraband: { label: 'Контрабанда', color: '#eab308', bg: 'rgba(234, 179, 8, 0.15)', border: 'rgba(234, 179, 8, 0.6)' },
 };
 
-// Wear qualities with distinct shades of green (top condition) and red (worn condition)
+// Wear qualities with deep, high-contrast tactical tones ensuring crisp white text readability
 export const WEAR_CONFIG: Record<string, { label: string; short: string; color: string; bg: string; border: string }> = {
-  FN: { label: 'Прямо с завода', short: 'FN', color: '#10b981', bg: 'rgba(16, 185, 129, 0.25)', border: '#10b981' },
-  MW: { label: 'Немного поношенное', short: 'MW', color: '#84cc16', bg: 'rgba(132, 204, 22, 0.25)', border: '#84cc16' },
-  FT: { label: 'После полевых испытаний', short: 'FT', color: '#eab308', bg: 'rgba(234, 179, 8, 0.25)', border: '#eab308' },
-  WW: { label: 'Поношенное', short: 'WW', color: '#f97316', bg: 'rgba(249, 115, 22, 0.25)', border: '#f97316' },
-  BS: { label: 'Закаленное в боях', short: 'BS', color: '#ef4444', bg: 'rgba(239, 68, 68, 0.25)', border: '#ef4444' },
+  FN: { label: 'Прямо с завода', short: 'FN', color: '#047857', bg: 'rgba(4, 120, 87, 0.25)', border: '#047857' },
+  MW: { label: 'Немного поношенное', short: 'MW', color: '#4d7c0f', bg: 'rgba(77, 124, 15, 0.25)', border: '#4d7c0f' },
+  FT: { label: 'После полевых испытаний', short: 'FT', color: '#b45309', bg: 'rgba(180, 83, 9, 0.25)', border: '#b45309' },
+  WW: { label: 'Поношенное', short: 'WW', color: '#c2410c', bg: 'rgba(194, 65, 12, 0.25)', border: '#c2410c' },
+  BS: { label: 'Закаленное в боях', short: 'BS', color: '#b91c1c', bg: 'rgba(185, 28, 28, 0.25)', border: '#b91c1c' },
 };
 
 // Sticker special effects badges

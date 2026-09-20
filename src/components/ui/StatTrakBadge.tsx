@@ -12,7 +12,7 @@ export const StatTrakBadge: React.FC<StatTrakBadgeProps> = ({ size = 'xs', class
 
   return (
     <span
-      className={`inline-flex items-center font-mono font-black tracking-wider rounded-full text-white bg-[#ea580c] shadow-[0_0_8px_rgba(234,88,12,0.4)] select-none shrink-0 uppercase ${sizeClasses} ${className}`}
+      className={`inline-flex items-center font-mono font-black tracking-wider rounded-full text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)] bg-[#ea580c] shadow-[0_0_8px_rgba(234,88,12,0.4)] select-none shrink-0 uppercase ${sizeClasses} ${className}`}
       title="StatTrak™"
     >
       ST™
