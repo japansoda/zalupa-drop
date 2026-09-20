@@ -30,7 +30,17 @@ const MAX_SLOTS = 10;
 const MIN_ITEMS = 3;
 
 export const TradeUpContract: React.FC = () => {
-  const { inventory, removeFromInventory, addToInventory, sellSkin, addLiveDrop } = useGameStore();
+  const { 
+    inventory, 
+    removeFromInventory, 
+    addToInventory, 
+    sellSkin, 
+    addLiveDrop, 
+    activePotionCharges, 
+    consumePotionCharge, 
+    potionsCount, 
+    drinkPotion 
+  } = useGameStore();
   const { t, locale } = useLanguage();
 
   const [selectedInstanceIds, setSelectedInstanceIds] = useState<string[]>([]);
@@ -56,8 +66,9 @@ export const TradeUpContract: React.FC = () => {
     return selectedItems.reduce((acc, item) => acc + item.priceDc, 0);
   }, [selectedItems]);
 
-  // Expected 98% RTP return
-  const expectedReturnDc = Math.round(totalInputDc * 0.98);
+  // Expected return: 98% base RTP, or boosted +35% if Luck Potion is active
+  const hasPotion = activePotionCharges > 0;
+  const expectedReturnDc = Math.round(totalInputDc * (hasPotion ? 1.35 : 0.98));
 
   // Filtered available inventory
   const filteredInventory = useMemo(() => {
@@ -110,9 +121,14 @@ export const TradeUpContract: React.FC = () => {
     setSelectedInstanceIds([]);
   };
 
-  // Sign contract logic with calibrated 98% RTP
+  // Sign contract logic with calibrated 98% RTP (or boosted 135% if potion is active)
   const handleSignContract = async () => {
     if (selectedItems.length < MIN_ITEMS || isSigning || totalInputDc <= 0) return;
+
+    const isPotionUsed = activePotionCharges > 0;
+    if (isPotionUsed) {
+      consumePotionCharge();
+    }
 
     setIsSigning(true);
     sound.playClick();
@@ -123,12 +139,14 @@ export const TradeUpContract: React.FC = () => {
       sound.playCashout();
     }, 600);
 
-    // 2. Select winning skin with exact 98% RTP
-    const targetEV = Math.max(10, totalInputDc * 0.98);
+    // 2. Select winning skin: 98% base RTP or boosted 135% with Luck Potion
+    const targetEV = Math.max(10, totalInputDc * (isPotionUsed ? 1.35 : 0.98));
 
     // Filter candidate reward pool: exclude stickers/agents, prefer weapons & knives
-    const minCandidatePrice = Math.max(5, Math.round(totalInputDc * 0.25));
-    const maxCandidatePrice = Math.max(100, Math.round(totalInputDc * 4.5));
+    const minCandidatePrice = isPotionUsed 
+      ? Math.max(10, Math.round(totalInputDc * 1.05)) 
+      : Math.max(5, Math.round(totalInputDc * 0.25));
+    const maxCandidatePrice = Math.max(100, Math.round(totalInputDc * (isPotionUsed ? 6.0 : 4.5)));
 
     let candidates = SKINS_DATABASE.filter(
       (s) =>
@@ -385,11 +403,36 @@ export const TradeUpContract: React.FC = () => {
               <span className="text-[11px] text-white/50 uppercase tracking-wider font-semibold">
                 {t('contract.expectedRtp')}
               </span>
-              <span className="font-mono font-black text-sm text-emerald-400 flex items-center gap-1">
+              <span className={`font-mono font-black text-sm flex items-center gap-1 ${hasPotion ? 'text-emerald-300 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'text-emerald-400'}`}>
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 ~{expectedReturnDc.toLocaleString('ru-RU')} DC
+                {hasPotion && <span className="text-[10px] font-black uppercase text-emerald-300 bg-emerald-500/20 px-1.5 py-0.2 rounded border border-emerald-400/40 ml-1">+35% УДАЧА</span>}
               </span>
             </div>
+          </div>
+
+          {/* Luck Potion status / drink button */}
+          <div className="flex items-center gap-2">
+            {activePotionCharges > 0 ? (
+              <div
+                className="px-3 py-2 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-black text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.25)] animate-pulse select-none"
+                title={locale === 'ru' ? 'Зелье удачи активно: контракт принесет лучший профит' : 'Luck Potion active: best contract profit'}
+              >
+                <span>🧪</span>
+                <span>{locale === 'ru' ? `Удача активна (${activePotionCharges} зар.)` : `Luck Active (${activePotionCharges} chg)`}</span>
+              </div>
+            ) : potionsCount > 0 ? (
+              <button
+                type="button"
+                onClick={() => drinkPotion()}
+                className="px-3.5 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 font-black text-xs flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 shadow-[0_0_10px_rgba(16,185,129,0.2)]"
+                title={locale === 'ru' ? `Выпить зелье удачи (+3 заряда). В наличии: ${potionsCount}` : `Drink Luck Potion (+3 charges). In stock: ${potionsCount}`}
+              >
+                <span>🧪</span>
+                <span>{locale === 'ru' ? `Выпить зелье` : `Drink Potion`}</span>
+                <span className="bg-emerald-500/30 px-1.5 py-0.2 rounded text-[10px]">x{potionsCount}</span>
+              </button>
+            ) : null}
           </div>
 
           {/* Main Action Button */}

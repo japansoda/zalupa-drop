@@ -13,8 +13,11 @@ export function getCaseThemeGlow(c: { id: string; name: string; category?: strin
   }
 
   // Specific custom themes
-  if (t.includes('dragon') || t.includes('lore') || t.includes('valhalla') || t.includes('norse') || t.includes('lotus') || t.includes('gods_monsters')) {
-    return { rgb: '16, 185, 129', hex: '#10b981' }; // Imperial Emerald
+  if (t.includes('anubis') || t.includes('egypt') || t.includes('arabesque') || t.includes('emperor')) {
+    return { rgb: '251, 191, 36', hex: '#fbbf24' }; // Egyptian Pharaoh Gold
+  }
+  if (t.includes('dragon') || t.includes('lore') || t.includes('lotus') || t.includes('gods_monsters') || t.includes('serpent') || t.includes('jungle')) {
+    return { rgb: '16, 185, 129', hex: '#10b981' }; // Imperial Emerald / Aztec Green
   }
   if (t.includes('crimson') || t.includes('redline') || t.includes('bloodsport') || t.includes('red') || t.includes('clash') || t.includes('slaughter') || t.includes('howl') || t.includes('autotronic') || t.includes('racing') || t.includes('racer')) {
     return { rgb: '239, 68, 68', hex: '#ef4444' }; // Crimson Red
@@ -22,8 +25,11 @@ export function getCaseThemeGlow(c: { id: string; name: string; category?: strin
   if (t.includes('fire') || t.includes('inferno') || t.includes('vulcan') || t.includes('phoenix') || t.includes('heat') || t.includes('breath') || t.includes('blaze')) {
     return { rgb: '249, 115, 22', hex: '#f97316' }; // Flame Orange
   }
-  if (t.includes('ice') || t.includes('frost') || t.includes('blizzard') || t.includes('arctic') || t.includes('water') || t.includes('ocean')) {
-    return { rgb: '6, 182, 212', hex: '#06b6d4' }; // Frost Cyan
+  if (t.includes('ice') || t.includes('frost') || t.includes('blizzard') || t.includes('arctic') || t.includes('water') || t.includes('ocean') || t.includes('valhalla') || t.includes('norse')) {
+    return { rgb: '6, 182, 212', hex: '#06b6d4' }; // Frost Cyan / Runic Frost
+  }
+  if (t.includes('superconductor') || t.includes('kilowatt') || t.includes('electric') || t.includes('quantum')) {
+    return { rgb: '14, 165, 233', hex: '#0ea5e9' }; // High Voltage Electric Blue
   }
   if (t.includes('toxic') || t.includes('hazard') || t.includes('atomic') || t.includes('gamma') || t.includes('emerald') || t.includes('green') || t.includes('zalupa')) {
     return { rgb: '34, 197, 94', hex: '#22c55e' }; // Toxic Biohazard Green
@@ -36,6 +42,9 @@ export function getCaseThemeGlow(c: { id: string; name: string; category?: strin
   }
   if (t.includes('cyber') || t.includes('neon') || t.includes('tokyo') || t.includes('matrix') || t.includes('glitch') || t.includes('samurai') || t.includes('ninja') || t.includes('synth') || t.includes('retro')) {
     return { rgb: '217, 70, 239', hex: '#d946ef' }; // Cyber Magenta
+  }
+  if (t.includes('sniper') || t.includes('stealth') || t.includes('tactical') || t.includes('military') || t.includes('scout')) {
+    return { rgb: '52, 211, 153', hex: '#34d399' }; // Stealth Tactical Mint
   }
   if (t.includes('fade') || t.includes('spectrum') || t.includes('prisma') || t.includes('marble')) {
     return { rgb: '192, 132, 252', hex: '#c084fc' }; // Rainbow Chroma

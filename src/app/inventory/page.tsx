@@ -20,8 +20,8 @@ import { getSteamMarketListingUrl, isStatTrakableItem } from '../../lib/steam';
 import { handleHorizontalWheel } from '../../components/layout/HorizontalScrollManager';
 
 export default function InventoryPage() {
-  const { inventory, sellSkin, sellAllSkins } = useGameStore();
-  const { t } = useLanguage();
+  const { inventory, sellSkin, sellAllSkins, potionsCount, activePotionCharges, drinkPotion } = useGameStore();
+  const { t, locale } = useLanguage();
   const [filterRarity, setFilterRarity] = useState<string>('all');
 
   const totalValueDc = inventory.reduce((acc, item) => acc + item.priceDc, 0);
@@ -94,6 +94,57 @@ export default function InventoryPage() {
                   <Trash2 className="w-4 h-4" />
                   <span>{t('inv.sellAll')} ({totalValueDc.toLocaleString('ru-RU')} DC)</span>
                 </button>
+              )}
+            </div>
+          </div>
+
+          {/* Consumables & Luck Potion section */}
+          <div className="my-4 p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-black/50 to-[#11121a] border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-[0_0_20px_rgba(16,185,129,0.12)]">
+            <div className="flex items-center gap-3 w-full sm:w-auto">
+              <div className="w-11 h-11 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-xl shrink-0 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                🧪
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <span className="font-black text-sm text-white uppercase tracking-tight">
+                    {locale === 'ru' ? 'Зелье удачи' : 'Luck Potion'}
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full text-[9px] font-black bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 uppercase">
+                    {locale === 'ru' ? 'Универсальное' : 'Universal'}
+                  </span>
+                </div>
+                <p className="text-[11px] text-white/50 line-clamp-1">
+                  {locale === 'ru' 
+                    ? 'Дает +3 заряда удачи на всё: кейсы (тайное/ножи), апгрейдер (+15% к шансу), контракты (лучший исход)' 
+                    : 'Grants +3 universal charges: cases (covert/knives), upgrader (+15% chance), contracts (best outcome)'}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/10">
+              <div className="flex flex-col text-left sm:text-right">
+                <span className="text-[10px] text-white/40 uppercase font-bold">
+                  {locale === 'ru' ? 'Активные заряды' : 'Active Charges'}
+                </span>
+                <span className={`font-mono font-black text-sm ${activePotionCharges > 0 ? 'text-emerald-300 animate-pulse' : 'text-white/40'}`}>
+                  {activePotionCharges > 0 ? `${activePotionCharges} / 3 зар.` : (locale === 'ru' ? 'Нет' : 'None')}
+                </span>
+              </div>
+
+              {potionsCount > 0 ? (
+                <button
+                  type="button"
+                  onClick={() => drinkPotion()}
+                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-500 text-black font-black text-xs uppercase flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:brightness-110 active:scale-95 transition-all cursor-pointer"
+                >
+                  <span>🧪</span>
+                  <span>{locale === 'ru' ? 'Выпить (+3 зар.)' : 'Drink (+3 chg)'}</span>
+                  <span className="bg-black/30 px-1.5 py-0.5 rounded text-[10px]">x{potionsCount}</span>
+                </button>
+              ) : (
+                <div className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/40 text-xs font-bold flex items-center gap-1.5">
+                  <span>{locale === 'ru' ? 'В наличии: 0' : 'In stock: 0'}</span>
+                </div>
               )}
             </div>
           </div>

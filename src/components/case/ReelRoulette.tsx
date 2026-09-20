@@ -29,7 +29,17 @@ const WIN_INDEX = 45;
 const REEL_SIZE = 55;
 
 export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, casePriceDc, caseName }) => {
-  const { balance, deductBalance, addToInventory, addBalance, addLiveDrop } = useGameStore();
+  const { 
+    balance, 
+    deductBalance, 
+    addToInventory, 
+    addBalance, 
+    addLiveDrop, 
+    activePotionCharges, 
+    consumePotionCharge, 
+    potionsCount, 
+    drinkPotion 
+  } = useGameStore();
   const { t, locale } = useLanguage();
   const [openCount, setOpenCount] = useState<1 | 2 | 3>(1);
   const [isSpinning, setIsSpinning] = useState(false);
@@ -51,7 +61,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
   const controls2 = useAnimation();
   const lastSoundTickPos = useRef<number>(0);
 
-  const pickWeightedSkin = (): SkinEntity => {
+  const pickWeightedSkin = (isPotionBoosted: boolean = false): SkinEntity => {
     // 1. Exact 10% knife cases
     if (caseId === 'case_10_knife' || caseName.includes('10% Нож')) {
       const knives = caseSkins.filter(isKnifeOrGlove);
@@ -138,15 +148,13 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       rnd -= weights[i];
     }
 
-    // Extra luck boost roll when Luck Potion is active:
-    const hasPotion = useGameStore.getState().activePotionCharges > 0;
-    if (hasPotion && Math.random() < 0.25) {
+    // Extra luck boost roll when Luck Potion charge is active on this roll:
+    if (isPotionBoosted) {
       const topTier = caseSkins.filter(
         (s) => s.rarity === 'gold' || s.rarity === 'covert' || s.rarity === 'classified' || s.priceDc >= casePriceDc
       );
-      if (topTier.length > 0) {
+      if (topTier.length > 0 && Math.random() < 0.50) {
         selected = topTier[Math.floor(Math.random() * topTier.length)];
-        useGameStore.getState().consumePotionCharge();
       }
     }
 
@@ -270,7 +278,11 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     // Pick winners for each reel and roll wear & StatTrak
     const winners: SkinEntity[] = [];
     for (let i = 0; i < openCount; i++) {
-      const baseSkin = pickWeightedSkin();
+      const hasCharge = useGameStore.getState().activePotionCharges > 0;
+      if (hasCharge) {
+        useGameStore.getState().consumePotionCharge();
+      }
+      const baseSkin = pickWeightedSkin(hasCharge);
       winners.push(rollWearAndStatTrak(baseSkin));
     }
     setWinningSkins(winners);
@@ -564,6 +576,28 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
             ))}
           </div>
         </div>
+
+        {/* Universal Luck Potion Pill / Quick Drink Button */}
+        {activePotionCharges > 0 ? (
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-bold text-xs shadow-[0_0_15px_rgba(16,185,129,0.25)] animate-pulse select-none">
+            <span className="text-sm">🧪</span>
+            <span>
+              {locale === 'ru'
+                ? `Зелье удачи активно (${activePotionCharges} зар.) — повышенный шанс на тайное/ножи!`
+                : `Luck Potion active (${activePotionCharges} chg) — boosted covert/knives!`}
+            </span>
+          </div>
+        ) : potionsCount > 0 ? (
+          <button
+            type="button"
+            onClick={() => drinkPotion()}
+            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 font-black text-xs transition-all cursor-pointer active:scale-95 shadow-[0_0_10px_rgba(16,185,129,0.2)]"
+          >
+            <span>🧪</span>
+            <span>{locale === 'ru' ? 'Выпить зелье удачи (+3 зар.)' : 'Drink Luck Potion (+3 chg)'}</span>
+            <span className="bg-emerald-500/30 px-1.5 py-0.2 rounded text-[10px]">x{potionsCount}</span>
+          </button>
+        ) : null}
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
           <label className="flex items-center gap-2 text-xs font-bold text-white/60 cursor-pointer select-none">
