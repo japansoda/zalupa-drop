@@ -9,6 +9,7 @@ import { sound } from '../../lib/sound';
 import { DropModal } from './DropModal';
 import { WearBadge } from '../ui/WearBadge';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
+import { RarityBadge } from '../ui/RarityBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { useGameStore } from '../../store/useGameStore';
 import { Zap, Layers } from 'lucide-react';
@@ -504,19 +505,18 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
                           {!showAsSpecial && skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
                           {!showAsSpecial && <WearBadge skin={skin} size="xs" />}
                           {showAsSpecial && (
-                            <span className="text-[8.5px] font-black text-yellow-300 bg-yellow-500/20 px-1 py-0.5 rounded border border-yellow-500/30">
+                            <span className="text-[9px] font-black font-mono tracking-wider px-2 py-0.5 rounded-full text-white bg-[#ea580c] shadow-[0_0_8px_rgba(234,88,12,0.4)] uppercase">
                               ★
                             </span>
                           )}
                         </div>
-                        <span
-                          className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full"
-                          style={{ color: config.color, backgroundColor: config.bg }}
-                        >
-                          {showAsSpecial 
-                            ? (locale === 'en' ? '★ RARE SPECIAL' : '★ РЕДКИЙ ОСОБЫЙ') 
-                            : (t('rarity.' + skin.rarity) || config.label)}
-                        </span>
+                        {showAsSpecial ? (
+                          <span className="text-[9.5px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full text-black bg-[#facc15] shadow-[0_0_10px_rgba(250,204,21,0.4)]">
+                            ★ {locale === 'en' ? 'SPECIAL' : 'ОСОБЫЙ'}
+                          </span>
+                        ) : (
+                          <RarityBadge rarity={skin.rarity} size="sm" />
+                        )}
                       </div>
 
                       <div className={`relative ${
@@ -577,32 +577,26 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
             </div>
           </div>
 
-          {/* Universal Luck Potion Tactical HUD Chip */}
+          {/* Universal Luck Potion Indicator */}
           {activePotionCharges > 0 ? (
             <div 
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 border border-emerald-500/40 text-emerald-300 font-bold text-xs select-none shadow-[0_0_12px_rgba(16,185,129,0.15)]"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl glass-panel border border-white/10 text-white select-none text-xs"
               title={locale === 'ru' 
                 ? `Зелье удачи активно! Осталось ${activePotionCharges} — повышенный шанс на тайное и ножи!`
                 : `Luck Potion active! ${activePotionCharges} left — boosted covert and knives!`}
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-              </span>
               <span>🧪</span>
-              <span className="font-mono font-black text-white">{activePotionCharges}/3</span>
-              <span className="text-[11px] text-emerald-400/90 font-bold hidden xs:inline">{locale === 'ru' ? 'Удача' : 'Luck'}</span>
+              <span className="font-mono font-bold text-emerald-400">{activePotionCharges}/3</span>
             </div>
           ) : potionsCount > 0 ? (
             <button
               type="button"
               onClick={() => drinkPotion()}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl glass-button text-white/80 hover:text-emerald-300 hover:border-emerald-400/40 font-bold text-xs transition-all cursor-pointer active:scale-95"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl glass-button border border-white/10 text-white/80 hover:text-white font-bold text-xs transition-all cursor-pointer active:scale-95"
               title={locale === 'ru' ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount}` : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
             >
               <span>🧪</span>
-              <span>{locale === 'ru' ? 'Выпить зелье' : 'Drink potion'}</span>
-              <span className="font-mono text-[10px] text-yellow-400 bg-white/5 border border-white/10 px-1.5 py-0.2 rounded font-bold">x{potionsCount}</span>
+              <span className="font-mono text-[10px] text-zinc-400 bg-white/5 border border-white/10 px-1.5 py-0.2 rounded font-bold">x{potionsCount}</span>
             </button>
           ) : null}
         </div>

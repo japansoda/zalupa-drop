@@ -973,16 +973,13 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     </div>
 
                     {activePotionCharges > 0 ? (
-                      <div className="flex items-center justify-between p-1.5 rounded-lg bg-black/60 border border-emerald-500/30 text-[11px] font-bold text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.15)]">
+                      <div className="flex items-center justify-between p-2 rounded-lg glass-panel border border-white/10 text-xs font-bold text-white shadow-sm">
                         <span className="flex items-center gap-1.5">
-                          <span className="relative flex h-1.5 w-1.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
-                          </span>
-                          {t('upg.potionActive')}
+                          <span>🧪</span>
+                          <span>{t('upg.potionActive')}</span>
                         </span>
-                        <span className="font-mono font-black text-white">
-                          {activePotionCharges}/3 {t('upg.potionCharges')}
+                        <span className="font-mono font-black text-emerald-400">
+                          {activePotionCharges}/3
                         </span>
                       </div>
                     ) : (
@@ -1356,6 +1353,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   </span>
                   <div className="flex items-center gap-2 mt-1">
                     <span className="text-xs text-white/50">{targetSkin.weapon}</span>
+                    {targetSkin.statTrak && isStatTrakableItem(targetSkin) && <StatTrakBadge size="sm" />}
                     <WearBadge skin={targetSkin} size="sm" showFullLabel />
                   </div>
                 </div>
@@ -1493,10 +1491,18 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     }`}
                   >
                     {isSelected && (
-                      <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
+                      <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
                         <Check className="w-3.5 h-3.5 stroke-[3]" />
                       </div>
                     )}
+
+                    {/* Top Badges Row */}
+                    <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
+                      <div className="flex items-center gap-1">
+                        {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
+                        <WearBadge skin={item} size="xs" />
+                      </div>
+                    </div>
 
                     <div className="w-full h-24 sm:h-28 flex items-center justify-center my-1">
                       <SkinImage
@@ -1508,17 +1514,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     </div>
 
                     <div className="w-full flex flex-col">
-                      <div className="flex items-center gap-1">
-                        {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
-                        <span className="text-[11px] font-black text-white truncate">
-                          {item.skinName || item.name}
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between text-[9px] text-white/40">
-                        <span className="truncate">{item.weapon}</span>
-                        <WearBadge skin={item} size="xs" />
-                      </div>
-                      <span className="text-[11px] font-mono font-black text-yellow-400 mt-1">
+                      <span className="text-[11px] font-black text-white truncate">
+                        {item.skinName || item.name}
+                      </span>
+                      <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
+                      <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
                         {item.priceDc.toLocaleString('ru-RU')} DC
                       </span>
                     </div>
@@ -1762,10 +1762,18 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       }`}
                     >
                       {isSelected && (
-                        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
+                        <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
                           <Check className="w-3.5 h-3.5 stroke-[3]" />
                         </div>
                       )}
+
+                      {/* Top Badges Row */}
+                      <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
+                        <div className="flex items-center gap-1">
+                          {skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
+                          <WearBadge skin={skin} size="xs" />
+                        </div>
+                      </div>
 
                       <div className="w-full h-24 sm:h-28 flex items-center justify-center my-1">
                         <SkinImage
@@ -1777,17 +1785,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       </div>
 
                       <div className="w-full flex flex-col">
-                        <div className="flex items-center gap-1">
-                          {skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
-                          <span className="text-[11px] font-black text-white truncate">
-                            {skin.skinName || skin.name}
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between text-[9px] text-white/40">
-                          <span className="truncate">{skin.weapon}</span>
-                          <WearBadge skin={skin} size="xs" />
-                        </div>
-                        <span className="text-[11px] font-mono font-black text-yellow-400 mt-1">
+                        <span className="text-[11px] font-black text-white truncate">
+                          {skin.skinName || skin.name}
+                        </span>
+                        <span className="text-[9px] text-white/40 truncate">{skin.weapon}</span>
+                        <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
                           {skin.priceDc.toLocaleString('ru-RU')} DC
                         </span>
                       </div>

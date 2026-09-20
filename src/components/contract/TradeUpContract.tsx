@@ -8,9 +8,11 @@ import { SKINS_DATABASE, RARITY_CONFIG } from '../../data/skins';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { RarityBadge } from '../ui/RarityBadge';
 import { WearBadge } from '../ui/WearBadge';
+import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
+import { isStatTrakableItem } from '../../lib/steam';
 import { 
   FileText, 
   Sparkles, 
@@ -306,14 +308,18 @@ export const TradeUpContract: React.FC = () => {
                 >
                   {/* Slot Number Badge */}
                   <div className="w-full flex items-center justify-between text-[10px] text-white/40 font-mono">
-                    <span>#{index + 1}</span>
+                    <div className="flex items-center gap-1">
+                      <span>#{index + 1}</span>
+                      {item && item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
+                      {item && <WearBadge skin={item} size="xs" />}
+                    </div>
                     {item && (
                       <button
                         type="button"
                         onClick={() => toggleItem(item.instanceId)}
                         disabled={isSigning}
                         className="w-5 h-5 rounded-full bg-black/60 hover:bg-red-500/30 text-white/50 hover:text-red-400 flex items-center justify-center transition-colors cursor-pointer"
-                        title="Убрать из слота"
+                        title={locale === 'ru' ? 'Убрать из слота' : 'Remove from slot'}
                       >
                         <X className="w-3 h-3" />
                       </button>
@@ -407,9 +413,8 @@ export const TradeUpContract: React.FC = () => {
                 <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>~{expectedReturnDc.toLocaleString('ru-RU')} DC</span>
                 {hasPotion && (
-                  <span className="font-mono text-[10px] font-bold text-emerald-400 bg-zinc-950/80 border border-emerald-500/30 px-2 py-0.5 rounded-md inline-flex items-center gap-1 ml-1.5 shadow-sm">
-                    <span>🧪</span>
-                    <span>+35%</span>
+                  <span className="font-mono text-xs font-bold text-emerald-400 ml-1.5">
+                    (🧪 +35%)
                   </span>
                 )}
               </span>
@@ -420,26 +425,22 @@ export const TradeUpContract: React.FC = () => {
           <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
             {activePotionCharges > 0 ? (
               <div
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-950/80 border border-emerald-500/30 text-emerald-300 font-mono text-xs select-none shadow-sm"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl glass-panel border border-white/10 text-white select-none text-xs shadow-sm"
                 title={locale === 'ru' ? 'Зелье удачи активно' : 'Luck Potion active'}
               >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                </span>
                 <span>🧪</span>
-                <span className="font-bold text-white">{activePotionCharges}/3</span>
+                <span className="font-mono font-bold text-emerald-400">{activePotionCharges}/3</span>
               </div>
             ) : potionsCount > 0 ? (
               <button
                 type="button"
                 onClick={() => drinkPotion()}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-white/10 hover:border-emerald-400/40 text-white/90 text-xs font-bold transition-all cursor-pointer active:scale-95"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl glass-button border border-white/10 text-white/80 hover:text-white font-bold text-xs transition-all cursor-pointer active:scale-95"
                 title={locale === 'ru' ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount}` : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
               >
                 <span>🧪</span>
                 <span>{locale === 'ru' ? 'Выпить' : 'Drink'}</span>
-                <span className="font-mono text-[10px] text-yellow-400 bg-black/40 px-1.5 py-0.5 rounded font-bold">x{potionsCount}</span>
+                <span className="font-mono text-[10px] text-zinc-400 bg-white/5 border border-white/10 px-1.5 py-0.5 rounded font-bold">x{potionsCount}</span>
               </button>
             ) : null}
 
@@ -594,7 +595,10 @@ export const TradeUpContract: React.FC = () => {
                   )}
 
                   <div className="flex items-center justify-between z-10">
-                    <WearBadge skin={item} size="xs" />
+                    <div className="flex items-center gap-1">
+                      {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
+                      <WearBadge skin={item} size="xs" />
+                    </div>
                     <RarityBadge rarity={item.rarity} size="sm" />
                   </div>
 
@@ -677,13 +681,14 @@ export const TradeUpContract: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-2 mb-6">
+                {wonSkin.statTrak && isStatTrakableItem(wonSkin) && <StatTrakBadge size="sm" />}
                 <WearBadge skin={wonSkin} size="sm" showFullLabel />
                 <RarityBadge rarity={wonSkin.rarity} size="sm" />
               </div>
 
               <div className="p-3 rounded-2xl bg-black/60 border border-white/10 flex items-center gap-2 mb-6">
                 <span className="text-xs text-white/50 uppercase font-semibold">
-                  Стоимость:
+                  {locale === 'ru' ? 'Стоимость:' : 'Value:'}
                 </span>
                 <DropCoinIcon size={20} />
                 <span className="font-mono font-black text-lg text-yellow-400">

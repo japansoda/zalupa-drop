@@ -29,6 +29,7 @@ export const CaseSkinGroupCard: React.FC<CaseSkinGroupCardProps> = ({ variants }
 
   const hasStatTrak = variants.some((v) => v.statTrak) || isStatTrakableItem(baseSkin);
   const isWearable = isWearableItem(baseSkin);
+  const detectedWear = baseSkin.wear || variants.find((v) => v.wear)?.wear || (isWearable ? 'FN' : '');
 
   return (
     <div
@@ -39,7 +40,7 @@ export const CaseSkinGroupCard: React.FC<CaseSkinGroupCardProps> = ({ variants }
       <div className="flex items-center justify-between gap-1 z-10 min-h-[22px]">
         <div className="flex items-center gap-1">
           {hasStatTrak && <StatTrakBadge size="xs" />}
-          {isWearable && <WearBadge skin={baseSkin} size="xs" />}
+          {isWearable && detectedWear && <WearBadge wear={detectedWear} size="xs" />}
         </div>
         <RarityBadge rarity={baseSkin.rarity} size="sm" />
       </div>

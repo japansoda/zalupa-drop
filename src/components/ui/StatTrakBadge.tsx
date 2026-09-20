@@ -8,11 +8,11 @@ interface StatTrakBadgeProps {
 }
 
 export const StatTrakBadge: React.FC<StatTrakBadgeProps> = ({ size = 'xs', className = '' }) => {
-  const sizeClasses = size === 'sm' ? 'text-[9.5px] px-1.5 py-0.5' : 'text-[8.5px] px-1.5 py-0.2';
+  const sizeClasses = size === 'sm' ? 'text-[9.5px] px-2.5 py-0.5' : 'text-[9px] px-2 py-0.5';
 
   return (
     <span
-      className={`inline-flex items-center font-mono font-black tracking-tight rounded bg-[#1c0f06] border border-[#ff7a00]/35 text-[#ff7a00] shadow-[0_0_6px_rgba(255,122,0,0.25)] select-none shrink-0 ${sizeClasses} ${className}`}
+      className={`inline-flex items-center font-mono font-black tracking-wider rounded-full text-white bg-[#ea580c] shadow-[0_0_8px_rgba(234,88,12,0.4)] select-none shrink-0 uppercase ${sizeClasses} ${className}`}
       title="StatTrak™"
     >
       ST™

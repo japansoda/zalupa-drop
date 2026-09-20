@@ -13,27 +13,24 @@ export const RarityBadge: React.FC<RarityBadgeProps> = ({ rarity, size = 'sm' })
   const { t } = useLanguage();
 
   const sizeClasses = {
-    sm: 'text-[10px] px-2 py-0.5',
-    md: 'text-xs px-2.5 py-1',
-    lg: 'text-sm px-3 py-1.5',
+    sm: 'text-[9.5px] px-2.5 py-0.5',
+    md: 'text-xs px-3 py-1',
+    lg: 'text-sm px-3.5 py-1.5',
   }[size];
 
   const label = t('rarity.' + rarity) || config.label;
+  const isGold = rarity === 'gold' || rarity === 'contraband';
 
   return (
     <span
-      className={`inline-flex items-center font-medium rounded-full uppercase tracking-wider backdrop-blur-md border ${sizeClasses}`}
+      className={`inline-flex items-center font-black rounded-full uppercase tracking-wider select-none shrink-0 shadow-sm ${
+        isGold ? 'text-black' : 'text-white'
+      } ${sizeClasses}`}
       style={{
-        backgroundColor: config.bg,
-        borderColor: config.border,
-        color: config.color,
-        boxShadow: `0 0 10px ${config.color}33`,
+        backgroundColor: config.color,
+        boxShadow: `0 0 10px ${config.color}40`,
       }}
     >
-      <span
-        className="w-1.5 h-1.5 rounded-full mr-1.5 animate-pulse"
-        style={{ backgroundColor: config.color }}
-      />
       {label}
     </span>
   );

@@ -7,6 +7,9 @@ import { UpgradeToken } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { SkinImage } from '../ui/SkinImage';
+import { StatTrakBadge } from '../ui/StatTrakBadge';
+import { WearBadge } from '../ui/WearBadge';
+import { RarityBadge } from '../ui/RarityBadge';
 import { sound } from '../../lib/sound';
 import { useLanguage, getCaseName } from '../../lib/i18n';
 import { Gift, FastForward, Check, Sparkles, Ticket, FlaskConical } from 'lucide-react';
@@ -313,16 +316,13 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                 </div>
               ) : winningSkin ? (
                 <>
-                  {/* StatTrak badge */}
-                  {winningSkin.statTrak && (
-                    <div className="absolute top-4 left-4 px-2.5 py-0.5 rounded-md bg-amber-500/20 border border-amber-500 text-amber-400 font-mono font-black text-[10px] uppercase tracking-wider">
-                      StatTrak™
-                    </div>
-                  )}
-
-                  {/* Wear Badge */}
-                  <div className="absolute top-4 right-4 px-2.5 py-0.5 rounded-md bg-black/60 border border-white/10 text-white/80 font-bold text-[10px]">
-                    {winningSkin.wearLabel || winningSkin.wear}
+                  {/* Badges */}
+                  <div className="absolute top-4 left-4 flex items-center gap-1.5">
+                    {winningSkin.statTrak && <StatTrakBadge size="sm" />}
+                    <WearBadge skin={winningSkin} size="sm" showFullLabel />
+                  </div>
+                  <div className="absolute top-4 right-4">
+                    <RarityBadge rarity={winningSkin.rarity} size="sm" />
                   </div>
 
                   {/* Big Image */}

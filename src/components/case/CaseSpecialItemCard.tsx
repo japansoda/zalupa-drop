@@ -17,11 +17,11 @@ export const CaseSpecialItemCard: React.FC<CaseSpecialItemCardProps> = () => {
     >
       {/* Top Header */}
       <div className="flex items-center justify-between gap-1 z-10">
-        <span className="px-1.5 py-0.5 rounded text-[8.5px] font-black bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 uppercase tracking-wider">
-          ★ SPECIAL
+        <span className="text-[9px] font-black font-mono tracking-wider px-2 py-0.5 rounded-full text-white bg-[#ea580c] shadow-[0_0_8px_rgba(234,88,12,0.4)] uppercase">
+          ★
         </span>
-        <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full text-yellow-400 bg-yellow-400/15 border border-yellow-400/40">
-          {locale === 'ru' ? '★ РЕДКИЙ ОСОБЫЙ' : '★ RARE SPECIAL'}
+        <span className="text-[9.5px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full text-black bg-[#facc15] shadow-[0_0_10px_rgba(250,204,21,0.4)]">
+          {locale === 'ru' ? '★ ОСОБЫЙ' : '★ SPECIAL'}
         </span>
       </div>
 

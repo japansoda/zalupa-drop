@@ -17,11 +17,11 @@ export const RARITY_CONFIG = {
 
 // Wear qualities with distinct shades of green (top condition) and red (worn condition)
 export const WEAR_CONFIG: Record<string, { label: string; short: string; color: string; bg: string; border: string }> = {
-  FN: { label: 'Прямо с завода', short: 'FN', color: '#10b981', bg: 'rgba(16, 185, 129, 0.18)', border: 'rgba(16, 185, 129, 0.45)' },
-  MW: { label: 'Немного поношенное', short: 'MW', color: '#84cc16', bg: 'rgba(132, 204, 22, 0.18)', border: 'rgba(132, 204, 22, 0.45)' },
-  FT: { label: 'После полевых испытаний', short: 'FT', color: '#a3e635', bg: 'rgba(163, 230, 53, 0.18)', border: 'rgba(163, 230, 53, 0.45)' },
-  WW: { label: 'Поношенное', short: 'WW', color: '#f87171', bg: 'rgba(248, 113, 113, 0.18)', border: 'rgba(248, 113, 113, 0.45)' },
-  BS: { label: 'Закаленное в боях', short: 'BS', color: '#ef4444', bg: 'rgba(239, 68, 68, 0.22)', border: 'rgba(239, 68, 68, 0.55)' },
+  FN: { label: 'Прямо с завода', short: 'FN', color: '#10b981', bg: 'rgba(16, 185, 129, 0.25)', border: '#10b981' },
+  MW: { label: 'Немного поношенное', short: 'MW', color: '#84cc16', bg: 'rgba(132, 204, 22, 0.25)', border: '#84cc16' },
+  FT: { label: 'После полевых испытаний', short: 'FT', color: '#eab308', bg: 'rgba(234, 179, 8, 0.25)', border: '#eab308' },
+  WW: { label: 'Поношенное', short: 'WW', color: '#f97316', bg: 'rgba(249, 115, 22, 0.25)', border: '#f97316' },
+  BS: { label: 'Закаленное в боях', short: 'BS', color: '#ef4444', bg: 'rgba(239, 68, 68, 0.25)', border: '#ef4444' },
 };
 
 // Sticker special effects badges

@@ -26,18 +26,17 @@ export const WearBadge: React.FC<WearBadgeProps> = ({
   if (effect && STICKER_EFFECT_CONFIG[effect]) {
     const eff = STICKER_EFFECT_CONFIG[effect];
     const sizeClasses = {
-      xs: 'text-[8.5px] px-1.5 py-0.2',
-      sm: 'text-[9.5px] px-2 py-0.5',
-      md: 'text-xs px-2.5 py-1',
+      xs: 'text-[9px] px-2 py-0.5',
+      sm: 'text-[10px] px-2.5 py-0.5',
+      md: 'text-xs px-3 py-1',
     }[size];
 
     return (
       <span
-        className={`inline-flex items-center font-mono font-black rounded tracking-wider border shadow-sm select-none shrink-0 ${sizeClasses}`}
+        className={`inline-flex items-center font-mono font-black rounded-full uppercase tracking-wider text-white shadow-sm select-none shrink-0 ${sizeClasses}`}
         style={{
-          color: eff.color,
-          backgroundColor: eff.bg,
-          borderColor: eff.border,
+          backgroundColor: eff.color,
+          boxShadow: `0 0 8px ${eff.color}40`,
         }}
       >
         {eff.label}
@@ -63,7 +62,11 @@ export const WearBadge: React.FC<WearBadgeProps> = ({
   if (showFullLabel) {
     return (
       <span
-        className="inline-flex items-center font-mono font-medium text-[10.5px] px-2 py-0.5 rounded-md bg-zinc-900/90 border border-white/10 text-zinc-300 shadow-sm tracking-tight select-none shrink-0"
+        className="inline-flex items-center font-mono font-black text-[10px] px-2.5 py-0.5 rounded-full text-white uppercase tracking-wider shadow-sm select-none shrink-0"
+        style={{
+          backgroundColor: wearConfig.color,
+          boxShadow: `0 0 10px ${wearConfig.color}40`,
+        }}
         title={label}
       >
         {label}
@@ -72,14 +75,18 @@ export const WearBadge: React.FC<WearBadgeProps> = ({
   }
 
   const sizeClasses = {
-    xs: 'text-[8.5px] px-1.5 py-0.2',
-    sm: 'text-[9.5px] px-1.5 py-0.5',
-    md: 'text-xs px-2 py-0.5',
+    xs: 'text-[9px] px-2 py-0.5',
+    sm: 'text-[10px] px-2.5 py-0.5',
+    md: 'text-xs px-3 py-1',
   }[size];
 
   return (
     <span
-      className={`inline-flex items-center font-mono font-bold rounded bg-zinc-950/80 border border-white/10 text-zinc-300 select-none shrink-0 ${sizeClasses}`}
+      className={`inline-flex items-center font-mono font-black rounded-full text-white uppercase tracking-wider select-none shrink-0 shadow-sm ${sizeClasses}`}
+      style={{
+        backgroundColor: wearConfig.color,
+        boxShadow: `0 0 8px ${wearConfig.color}40`,
+      }}
       title={label}
     >
       {wearConfig.short}
