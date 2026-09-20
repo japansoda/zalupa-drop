@@ -415,22 +415,27 @@ export const TradeUpContract: React.FC = () => {
           <div className="flex items-center gap-2">
             {activePotionCharges > 0 ? (
               <div
-                className="px-3 py-2 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-black text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.25)] animate-pulse select-none"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 border border-emerald-500/40 text-emerald-300 font-bold text-xs select-none shadow-[0_0_12px_rgba(16,185,129,0.15)]"
                 title={locale === 'ru' ? 'Зелье удачи активно: контракт принесет лучший профит' : 'Luck Potion active: best contract profit'}
               >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
                 <span>🧪</span>
-                <span>{locale === 'ru' ? `Удача: ${activePotionCharges}` : `Luck: ${activePotionCharges}`}</span>
+                <span className="font-mono font-black text-white">{activePotionCharges}/3</span>
+                <span className="text-[11px] text-emerald-400/90 font-bold hidden xs:inline">{locale === 'ru' ? 'Удача' : 'Luck'}</span>
               </div>
             ) : potionsCount > 0 ? (
               <button
                 type="button"
                 onClick={() => drinkPotion()}
-                className="px-3.5 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 font-black text-xs flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 shadow-[0_0_10px_rgba(16,185,129,0.2)]"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl glass-button text-white/80 hover:text-emerald-300 hover:border-emerald-400/40 font-bold text-xs transition-all cursor-pointer active:scale-95"
                 title={locale === 'ru' ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount}` : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
               >
                 <span>🧪</span>
-                <span>{locale === 'ru' ? `Выпить зелье` : `Drink Potion`}</span>
-                <span className="bg-emerald-500/30 px-1.5 py-0.2 rounded text-[10px]">x{potionsCount}</span>
+                <span>{locale === 'ru' ? 'Выпить зелье' : 'Drink Potion'}</span>
+                <span className="font-mono text-[10px] text-yellow-400 bg-white/5 border border-white/10 px-1.5 py-0.2 rounded font-bold">x{potionsCount}</span>
               </button>
             ) : null}
           </div>

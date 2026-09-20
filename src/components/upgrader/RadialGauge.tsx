@@ -957,27 +957,30 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 /* CONSUMABLES TAB: POTIONS & TOKENS */
                 <div className="flex flex-col h-full justify-between overflow-y-auto pr-1 gap-2.5">
                   {/* Luck Potion Row */}
-                  <div className="p-2.5 rounded-xl bg-[#091a13] border border-emerald-500/40 flex flex-col gap-1.5 shadow-sm">
+                  <div className="p-2.5 rounded-xl bg-black/40 border border-white/10 flex flex-col gap-1.5 shadow-sm">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-base animate-pulse">🧪</span>
-                        <span className="text-xs font-black text-emerald-300">{t('upg.potionTitle')}</span>
-                        <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                        <span className="text-base">🧪</span>
+                        <span className="text-xs font-black text-white">{t('upg.potionTitle')}</span>
+                        <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
                           {t('upg.contraband')}
                         </span>
                       </div>
-                      <span className="text-xs font-mono font-black text-white">
+                      <span className="text-xs font-mono font-black text-white/60">
                         {locale === 'ru' ? `${potionsCount} шт.` : `${potionsCount} pcs.`}
                       </span>
                     </div>
 
                     {activePotionCharges > 0 ? (
-                      <div className="flex items-center justify-between p-1.5 rounded-lg bg-emerald-900/50 border border-emerald-400/40 text-[11px] font-bold text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.3)]">
-                        <span className="flex items-center gap-1">
-                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                      <div className="flex items-center justify-between p-1.5 rounded-lg bg-black/60 border border-emerald-500/30 text-[11px] font-bold text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.15)]">
+                        <span className="flex items-center gap-1.5">
+                          <span className="relative flex h-1.5 w-1.5">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                          </span>
                           {t('upg.potionActive')}
                         </span>
-                        <span className="font-mono font-black">
+                        <span className="font-mono font-black text-white">
                           {activePotionCharges}/3 {t('upg.potionCharges')}
                         </span>
                       </div>
@@ -990,7 +993,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                         disabled={potionsCount <= 0}
                         className={`w-full py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                           potionsCount > 0
-                            ? 'bg-emerald-500 hover:bg-emerald-400 text-black shadow-[0_0_12px_rgba(16,185,129,0.4)] active:scale-95'
+                            ? 'btn-yellow text-black active:scale-95'
                             : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
                         }`}
                       >

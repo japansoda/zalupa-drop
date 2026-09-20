@@ -551,55 +551,64 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
       </div>
 
       {/* Opening Multiplier Selectors (x1, x2, x3) and Actions */}
-      <div className="flex flex-col items-center gap-5 mt-8 w-full max-w-xl">
-        <div className="flex items-center gap-3">
-          <span className="text-xs font-bold text-white/50 uppercase tracking-wider flex items-center gap-1.5">
-            <Layers className="w-3.5 h-3.5 text-yellow-400" />
-            {t('case.count')}
-          </span>
-          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-black/60 border border-white/10">
-            {([1, 2, 3] as const).map((cnt) => (
-              <button
-                key={cnt}
-                type="button"
-                disabled={isSpinning}
-                onClick={() => {
-                  sound.playClick();
-                  setOpenCount(cnt);
-                }}
-                className={`px-4 py-1.5 rounded-lg font-black text-xs uppercase tracking-wider transition-all cursor-pointer ${
-                  openCount === cnt
-                    ? 'bg-yellow-400 text-black shadow-[0_0_12px_rgba(250,204,21,0.4)] scale-105'
-                    : 'text-white/60 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                x{cnt}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Universal Luck Potion Pill / Quick Drink Button */}
-        {activePotionCharges > 0 ? (
-          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-bold text-xs shadow-[0_0_15px_rgba(16,185,129,0.25)] animate-pulse select-none">
-            <span className="text-sm">🧪</span>
-            <span>
-              {locale === 'ru'
-                ? `Зелье удачи активно: ${activePotionCharges} — повышенный шанс на тайное и ножи!`
-                : `Luck Potion active: ${activePotionCharges} — boosted covert and knives!`}
+      <div className="flex flex-col items-center gap-4 mt-6 w-full max-w-xl">
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold text-white/50 uppercase tracking-wider flex items-center gap-1.5">
+              <Layers className="w-3.5 h-3.5 text-yellow-400" />
+              {t('case.count')}
             </span>
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-black/60 border border-white/10">
+              {([1, 2, 3] as const).map((cnt) => (
+                <button
+                  key={cnt}
+                  type="button"
+                  disabled={isSpinning}
+                  onClick={() => {
+                    sound.playClick();
+                    setOpenCount(cnt);
+                  }}
+                  className={`px-4 py-1.5 rounded-lg font-black text-xs uppercase tracking-wider transition-all cursor-pointer ${
+                    openCount === cnt
+                      ? 'bg-yellow-400 text-black shadow-[0_0_12px_rgba(250,204,21,0.4)] scale-105'
+                      : 'text-white/60 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  x{cnt}
+                </button>
+              ))}
+            </div>
           </div>
-        ) : potionsCount > 0 ? (
-          <button
-            type="button"
-            onClick={() => drinkPotion()}
-            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 font-black text-xs transition-all cursor-pointer active:scale-95 shadow-[0_0_10px_rgba(16,185,129,0.2)]"
-          >
-            <span>🧪</span>
-            <span>{locale === 'ru' ? 'Выпить зелье удачи +3' : 'Drink Luck Potion +3'}</span>
-            <span className="bg-emerald-500/30 px-1.5 py-0.2 rounded text-[10px]">x{potionsCount}</span>
-          </button>
-        ) : null}
+
+          {/* Universal Luck Potion Tactical HUD Chip */}
+          {activePotionCharges > 0 ? (
+            <div 
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 border border-emerald-500/40 text-emerald-300 font-bold text-xs select-none shadow-[0_0_12px_rgba(16,185,129,0.15)]"
+              title={locale === 'ru' 
+                ? `Зелье удачи активно! Осталось ${activePotionCharges} — повышенный шанс на тайное и ножи!`
+                : `Luck Potion active! ${activePotionCharges} left — boosted covert and knives!`}
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              </span>
+              <span>🧪</span>
+              <span className="font-mono font-black text-white">{activePotionCharges}/3</span>
+              <span className="text-[11px] text-emerald-400/90 font-bold hidden xs:inline">{locale === 'ru' ? 'Удача' : 'Luck'}</span>
+            </div>
+          ) : potionsCount > 0 ? (
+            <button
+              type="button"
+              onClick={() => drinkPotion()}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl glass-button text-white/80 hover:text-emerald-300 hover:border-emerald-400/40 font-bold text-xs transition-all cursor-pointer active:scale-95"
+              title={locale === 'ru' ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount}` : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
+            >
+              <span>🧪</span>
+              <span>{locale === 'ru' ? 'Выпить зелье' : 'Drink potion'}</span>
+              <span className="font-mono text-[10px] text-yellow-400 bg-white/5 border border-white/10 px-1.5 py-0.2 rounded font-bold">x{potionsCount}</span>
+            </button>
+          ) : null}
+        </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
           <label className="flex items-center gap-2 text-xs font-bold text-white/60 cursor-pointer select-none">

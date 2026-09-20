@@ -98,36 +98,36 @@ export default function InventoryPage() {
             </div>
           </div>
 
-          {/* Consumables & Luck Potion section */}
-          <div className="my-4 p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-black/50 to-[#11121a] border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-[0_0_20px_rgba(16,185,129,0.12)]">
-            <div className="flex items-center gap-3 w-full sm:w-auto">
-              <div className="w-11 h-11 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-xl shrink-0 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+          {/* Consumables Tactical Rack */}
+          <div className="my-3 p-2.5 sm:p-3 rounded-2xl glass-panel border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+            <div className="flex items-center gap-3 w-full sm:w-auto min-w-0">
+              <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-lg shrink-0 shadow-inner">
                 🧪
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="font-black text-sm text-white uppercase tracking-tight">
+                  <span className="font-black text-xs sm:text-sm text-white uppercase tracking-tight truncate">
                     {locale === 'ru' ? 'Зелье удачи' : 'Luck Potion'}
                   </span>
-                  <span className="px-2 py-0.5 rounded-full text-[9px] font-black bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 uppercase">
-                    {locale === 'ru' ? 'Универсальное' : 'Universal'}
+                  <span className="px-1.5 py-0.5 rounded text-[8.5px] font-mono font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 uppercase shrink-0">
+                    ★ {locale === 'ru' ? 'Контрабанда' : 'Contraband'}
                   </span>
                 </div>
-                <p className="text-[11px] text-white/50 line-clamp-1">
+                <p className="text-[11px] text-white/40 truncate">
                   {locale === 'ru' 
-                    ? 'Дает +3 заряда удачи на всё: кейсы тайное и ножи, апгрейдер +15% к шансу, контракты лучший исход' 
-                    : 'Grants +3 universal charges: cases covert and knives, upgrader +15% chance, contracts best outcome'}
+                    ? '+15% шанс на тайное и ножи, авто-профит в контрактах и апгрейдере' 
+                    : '+15% chance for covert & knives, boosted contracts & upgrader'}
                 </p>
               </div>
             </div>
 
             <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/10">
-              <div className="flex flex-col text-left sm:text-right">
-                <span className="text-[10px] text-white/40 uppercase font-bold">
-                  {locale === 'ru' ? 'Активные заряды' : 'Active Charges'}
+              <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-xl bg-black/50 border border-white/10">
+                <span className="text-[10px] text-white/40 uppercase font-bold tracking-wider">
+                  {locale === 'ru' ? 'Заряды' : 'Charges'}:
                 </span>
-                <span className={`font-mono font-black text-sm ${activePotionCharges > 0 ? 'text-emerald-300 animate-pulse' : 'text-white/40'}`}>
-                  {activePotionCharges > 0 ? `${activePotionCharges} / 3` : (locale === 'ru' ? 'Нет' : 'None')}
+                <span className={`font-mono font-black text-xs ${activePotionCharges > 0 ? 'text-emerald-300' : 'text-white/30'}`}>
+                  {activePotionCharges > 0 ? `${activePotionCharges} / 3` : '0 / 3'}
                 </span>
               </div>
 
@@ -135,16 +135,16 @@ export default function InventoryPage() {
                 <button
                   type="button"
                   onClick={() => drinkPotion()}
-                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-500 text-black font-black text-xs uppercase flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:brightness-110 active:scale-95 transition-all cursor-pointer"
+                  className="px-3.5 py-1.5 rounded-xl btn-yellow text-black font-black text-xs uppercase flex items-center gap-1.5 shadow-[0_0_15px_rgba(250,204,21,0.25)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
                   <span>🧪</span>
                   <span>{locale === 'ru' ? 'Выпить +3' : 'Drink +3'}</span>
-                  <span className="bg-black/30 px-1.5 py-0.5 rounded text-[10px]">x{potionsCount}</span>
+                  <span className="bg-black/20 px-1 py-0.2 rounded text-[10px]">x{potionsCount}</span>
                 </button>
               ) : (
-                <div className="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-white/40 text-xs font-bold flex items-center gap-1.5">
-                  <span>{locale === 'ru' ? 'В наличии: 0' : 'In stock: 0'}</span>
-                </div>
+                <span className="text-[11px] font-mono text-white/30 px-2 py-1 select-none">
+                  {locale === 'ru' ? 'В наличии: 0' : 'In stock: 0'}
+                </span>
               )}
             </div>
           </div>

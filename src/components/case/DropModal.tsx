@@ -277,13 +277,13 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
 
         {/* ── EXTRA BONUS DROP SHOWCASE (ЗЕЛЬЯ И ТОКЕНЫ КАК ДОП. ДРОП) ── */}
         {hasBonus && bonusConsumables && (
-          <div className="w-full mb-5 p-4 rounded-2xl bg-gradient-to-r from-emerald-950/60 via-[#0d1512]/90 to-emerald-950/60 border border-emerald-400/50 shadow-[0_0_25px_rgba(16,185,129,0.25)] flex flex-col items-center gap-3 relative overflow-hidden">
+          <div className="w-full mb-5 p-4 rounded-2xl bg-[#0d0f16] border border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.12)] flex flex-col items-center gap-3 relative overflow-hidden">
             <div className="flex items-center justify-center gap-2 text-center">
               <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
               <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-emerald-300">
                 {locale === 'ru' ? 'ДОПОЛНИТЕЛЬНЫЙ ДРОП' : 'EXTRA BONUS DROP'}
               </span>
-              <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/80 text-[10px] font-mono font-black text-emerald-300 shrink-0">
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] font-mono font-black text-emerald-300 shrink-0">
                 {locale === 'ru' ? '+БОНУС' : '+BONUS'}
               </span>
               <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
@@ -292,9 +292,9 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
             <div className="flex flex-wrap items-center justify-center gap-3 w-full">
               {/* Luck Potion Bonus Card */}
               {bonusConsumables.potions > 0 && (
-                <div className="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#091f15] border border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)] text-left w-full sm:max-w-md group">
-                  <div className="relative w-12 h-12 rounded-xl bg-emerald-900/60 border border-emerald-400 flex items-center justify-center shrink-0 shadow-inner">
-                    <FlaskConical className="w-6 h-6 text-emerald-400 animate-pulse" />
+                <div className="flex items-center gap-3.5 p-3 rounded-xl bg-black/60 border border-emerald-500/30 shadow-md text-left w-full sm:max-w-md group">
+                  <div className="relative w-11 h-11 rounded-xl bg-emerald-950/40 border border-emerald-500/30 flex items-center justify-center shrink-0">
+                    <FlaskConical className="w-5 h-5 text-emerald-400" />
                   </div>
                   <div className="flex flex-col min-w-0 flex-1">
                     <div className="flex items-center gap-2">
