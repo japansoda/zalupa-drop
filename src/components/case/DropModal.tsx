@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import confetti from 'canvas-confetti';
-import { ExternalLink, Check, ShoppingBag, Sparkles, Gift, Ticket, FlaskConical } from 'lucide-react';
+import { ExternalLink, Check, ShoppingBag, Ticket, FlaskConical } from 'lucide-react';
 import { SkinEntity } from '../../lib/types';
 import { UpgradeToken } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
@@ -86,7 +86,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
         } glass-panel rounded-3xl p-6 sm:p-8 border border-yellow-400/40 overflow-hidden flex flex-col items-center text-center shadow-2xl my-auto`}
       >
         <div className="flex items-center gap-2 mb-3">
-          <Sparkles className="w-5 h-5 text-yellow-400 animate-spin" />
+          <span className="text-yellow-400 text-sm">✦</span>
           <span className="text-xs uppercase font-black tracking-widest text-white/70">
             {isMulti
               ? locale === 'ru'
@@ -96,7 +96,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
               ? 'ВЫ ВЫБИЛИ ПРЕДМЕТ!'
               : 'YOU WON AN ITEM!'}
           </span>
-          <Sparkles className="w-5 h-5 text-yellow-400 animate-spin" />
+          <span className="text-yellow-400 text-sm">✦</span>
         </div>
 
         {/* Single item display */}
@@ -108,12 +108,11 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
               return (
                 <>
                   <div className="relative w-56 h-56 my-2 flex items-center justify-center group">
-                    {/* Bonus Extra Drop Tag Floating on Item */}
+                    {/* Bonus Extra Drop Tag */}
                     {hasBonus && (
-                      <div className="absolute top-0 right-0 z-20 flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/25 border border-emerald-400 text-emerald-300 font-mono font-black text-xs shadow-[0_0_15px_rgba(16,185,129,0.5)] animate-bounce">
-                        <Gift className="w-3.5 h-3.5 text-emerald-400" />
-                        <span>{locale === 'ru' ? '+ДОП. ДРОП' : '+EXTRA DROP'}</span>
+                      <div className="absolute top-0 right-0 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-black text-black bg-yellow-400 shadow-sm">
                         <span>{bonusConsumables?.potions ? '🧪' : '🎟️'}</span>
+                        <span>+{locale === 'ru' ? 'БОНУС' : 'BONUS'}</span>
                       </div>
                     )}
 
@@ -268,25 +267,23 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
           </div>
         )}
 
-        {/* ── EXTRA BONUS DROP SHOWCASE (ЗЕЛЬЯ И ТОКЕНЫ КАК ДОП. ДРОП) ── */}
+        {/* ── EXTRA BONUS DROP SHOWCASE ── */}
         {hasBonus && bonusConsumables && (
-          <div className="w-full mb-5 p-4 rounded-2xl bg-[#0d0f16] border border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.12)] flex flex-col items-center gap-3 relative overflow-hidden">
+          <div className="w-full mb-5 p-4 rounded-2xl glass-panel border border-white/10 flex flex-col items-center gap-3">
             <div className="flex items-center justify-center gap-2 text-center">
-              <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-emerald-300">
-                {locale === 'ru' ? 'ДОПОЛНИТЕЛЬНЫЙ ДРОП' : 'EXTRA BONUS DROP'}
+              <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-white/70">
+                {locale === 'ru' ? 'ДОПОЛНИТЕЛЬНЫЙ ДРОП' : 'BONUS DROP'}
               </span>
-              <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] font-mono font-black text-emerald-300 shrink-0">
-                {locale === 'ru' ? '+БОНУС' : '+BONUS'}
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-black text-black bg-yellow-400 shadow-sm">
+                +{(bonusConsumables.potions || 0) + (bonusConsumables.tokens?.length || 0)}
               </span>
-              <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-3 w-full">
               {/* Luck Potion Bonus Card */}
               {bonusConsumables.potions > 0 && (
-                <div className="flex items-center gap-3.5 p-3 rounded-xl bg-black/60 border border-emerald-500/30 shadow-md text-left w-full sm:max-w-md group">
-                  <div className="relative w-11 h-11 rounded-xl bg-emerald-950/40 border border-emerald-500/30 flex items-center justify-center shrink-0">
+                <div className="flex items-center gap-3 p-3 rounded-xl glass-card border border-white/10 text-left w-full sm:max-w-md">
+                  <div className="w-10 h-10 rounded-lg bg-emerald-950/60 flex items-center justify-center shrink-0">
                     <FlaskConical className="w-5 h-5 text-emerald-400" />
                   </div>
                   <div className="flex flex-col min-w-0 flex-1">
@@ -294,23 +291,12 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                       <span className="text-sm font-black text-white">
                         {locale === 'ru' ? 'Зелье удачи' : 'Luck Potion'}
                       </span>
-                      <span className="text-[10px] font-mono font-black text-emerald-300 bg-emerald-500/20 px-1.5 py-0.5 rounded border border-emerald-400/40">
+                      <span className="text-[10px] font-mono font-black text-white/60 bg-white/5 px-1.5 py-0.5 rounded">
                         x{bonusConsumables.potions}
                       </span>
                     </div>
-                    <div className="flex items-center gap-2 mt-0.5">
-                      <span className="text-[11px] text-amber-400 font-bold">
-                        {locale === 'ru' ? '★ Контрабанда' : '★ Contraband'}
-                      </span>
-                      <span className="text-white/20">•</span>
-                      <span className="text-xs font-mono font-bold text-emerald-400">
-                        +15%
-                      </span>
-                    </div>
-                    <span className="text-[11px] text-white/50 mt-0.5 truncate">
-                      {locale === 'ru' 
-                        ? 'Универсальная удача на 3 действия: кейсы, апгрейдер, контракты' 
-                        : 'Universal luck for 3 actions: cases, upgrader, contracts'}
+                    <span className="text-[11px] text-white/40 mt-0.5">
+                      +15% · {locale === 'ru' ? '3 действия' : '3 actions'}
                     </span>
                   </div>
                 </div>
@@ -322,37 +308,28 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                 return (
                   <div
                     key={`${tok.id}_${idx}`}
-                    className="flex items-center gap-3.5 p-3.5 rounded-xl bg-[#12131c] border text-left shadow-md transition-all w-full sm:max-w-md"
-                    style={{ borderColor: rConf.color, boxShadow: `0 0 15px ${rConf.color}35` }}
+                    className="flex items-center gap-3 p-3 rounded-xl glass-card border border-white/10 text-left w-full sm:max-w-md"
+                    style={{ borderBottomWidth: '3px', borderBottomColor: rConf.color }}
                   >
                     <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border"
-                      style={{ backgroundColor: `${rConf.color}15`, borderColor: rConf.color }}
+                      className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: `${rConf.color}15` }}
                     >
-                      <Ticket className="w-6 h-6" style={{ color: rConf.color }} />
+                      <Ticket className="w-5 h-5" style={{ color: rConf.color }} />
                     </div>
                     <div className="flex flex-col min-w-0 flex-1">
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-black text-white truncate">
                           {t('token.' + tok.rarity) || tok.name}
                         </span>
-                        <span className="text-[10px] font-mono font-black text-yellow-400 bg-yellow-400/10 px-1.5 py-0.5 rounded border border-yellow-400/30">
+                        <span className="text-[10px] font-mono font-black text-white/60 bg-white/5 px-1.5 py-0.5 rounded">
                           x1
                         </span>
                       </div>
-                      <div className="flex items-center gap-2 mt-0.5">
-                        <span className="text-[11px] font-bold" style={{ color: rConf.color }}>
-                          {t('rarity.' + tok.rarity) || rConf.label}
-                        </span>
-                        <span className="text-white/20">•</span>
-                        <span className="text-xs font-mono font-bold text-yellow-400">
-                          +{tok.valueDc.toLocaleString('ru-RU')} DC
-                        </span>
-                      </div>
-                      <span className="text-[11px] text-white/50 mt-0.5 truncate">
-                        {locale === 'ru'
-                          ? `Цель для апгрейда: до ${tok.maxTargetDc.toLocaleString('ru-RU')} DC`
-                          : `Upgrade target: up to ${tok.maxTargetDc.toLocaleString('ru-RU')} DC`}
+                      <span className="text-[11px] text-white/40 mt-0.5">
+                        +{tok.valueDc.toLocaleString('ru-RU')} DC · {locale === 'ru'
+                          ? `до ${tok.maxTargetDc.toLocaleString('ru-RU')} DC`
+                          : `up to ${tok.maxTargetDc.toLocaleString('ru-RU')} DC`}
                       </span>
                     </div>
                   </div>

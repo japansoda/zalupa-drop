@@ -14,21 +14,14 @@ export const PresenceTracker: React.FC = () => {
     }
 
     const sendHeartbeat = () => {
-      // 1. Next.js API route on Vercel
+      // Server-side presence tracking
       fetch('/api/presence', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId }),
       }).catch(() => {});
 
-      // 2. Real-time pubsub for instant cross-device notification to admin
-      fetch('https://ntfy.sh/zalupa_presence_v3', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sessionId, timestamp: Date.now() }),
-      }).catch(() => {});
-
-      // 3. Local BroadcastChannel for same-device tabs
+      // Local BroadcastChannel for same-device tabs
       if ('BroadcastChannel' in window) {
         try {
           const bc = new BroadcastChannel('zalupa_presence_v3');
