@@ -84,7 +84,11 @@ export const useGameStore = create<GameState>()(
       },
 
       addToInventory: (skins) => {
-        const newItems: InventoryItem[] = skins.map((skin) => ({
+        const safeSkins = skins.filter((skin) => {
+          const img = skin?.image || '';
+          return !img.startsWith('file:') && !img.includes('file://') && !img.includes('C:/') && !img.includes('C:\\');
+        });
+        const newItems: InventoryItem[] = safeSkins.map((skin) => ({
           ...skin,
           instanceId: `${skin.id}_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`,
           obtainedAt: Date.now(),
@@ -95,7 +99,7 @@ export const useGameStore = create<GameState>()(
           stats: {
             ...state.stats,
             casesOpened: state.stats.casesOpened + skins.length,
-            totalWonDc: state.stats.totalWonDc + skins.reduce((acc, s) => acc + s.priceDc, 0),
+            totalWonDc: state.stats.totalWonDc + safeSkins.reduce((acc, s) => acc + s.priceDc, 0),
           },
         }));
       },
@@ -134,6 +138,9 @@ export const useGameStore = create<GameState>()(
       addLiveDrop: (drop) => {
         // Strictly only valid drops >= 25,000 DC can enter live drop ticker
         if (!drop || !drop.skin || !drop.skin.image || !drop.skin.name || (drop.skin.priceDc || 0) < 25000) return;
+
+        const img = drop.skin.image;
+        if (img.startsWith('file:') || img.includes('file://') || img.includes('C:/') || img.includes('C:\\')) return;
 
         set((state) => {
           const isDuplicate = state.liveDrops.some(
@@ -277,6 +284,21 @@ export const useGameStore = create<GameState>()(
     {
       name: 'zalupa_drop_state_v1',
       storage: createJSONStorage(() => localStorage),
+      onRehydrateStorage: () => (state) => {
+        if (!state) return;
+        if (Array.isArray(state.inventory)) {
+          state.inventory = state.inventory.filter((item) => {
+            const img = item?.image || '';
+            return !img.startsWith('file:') && !img.includes('file://') && !img.includes('C:/') && !img.includes('C:\\');
+          });
+        }
+        if (Array.isArray(state.liveDrops)) {
+          state.liveDrops = state.liveDrops.filter((d) => {
+            const img = d?.skin?.image || '';
+            return !img.startsWith('file:') && !img.includes('file://') && !img.includes('C:/') && !img.includes('C:\\');
+          });
+        }
+      },
       partialize: (state) => ({
         balance: state.balance,
         inventory: state.inventory,

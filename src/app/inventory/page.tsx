@@ -10,6 +10,7 @@ import { RefillModal } from '../../components/layout/RefillModal';
 import { RarityBadge } from '../../components/ui/RarityBadge';
 import { WearBadge } from '../../components/ui/WearBadge';
 import { DropCoinIcon } from '../../components/ui/DropCoinIcon';
+import { SkinImage } from '../../components/ui/SkinImage';
 import { useGameStore } from '../../store/useGameStore';
 import { RARITY_CONFIG } from '../../data/skins';
 import { sound } from '../../lib/sound';
@@ -189,10 +190,10 @@ export default function InventoryPage() {
                       </div>
 
                       <div className="w-full h-28 flex items-center justify-center my-2">
-                        <img
+                        <SkinImage
                           src={item.image}
                           alt={item.name}
-                          referrerPolicy="no-referrer"
+                          size={120}
                           className="w-24 h-24 object-contain group-hover:scale-110 transition-transform filter drop-shadow-md"
                         />
                       </div>

@@ -9,6 +9,7 @@ import { RARITY_CONFIG } from '../../data/skins';
 import { RarityBadge } from '../ui/RarityBadge';
 import { WearBadge } from '../ui/WearBadge';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
+import { SkinImage } from '../ui/SkinImage';
 import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
 import { useLanguage } from '../../lib/i18n';
@@ -115,10 +116,10 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                       </div>
                     )}
 
-                    <img
+                    <SkinImage
                       src={single.image}
                       alt={single.name}
-                      referrerPolicy="no-referrer"
+                      size={280}
                       className="w-full h-full object-contain filter drop-shadow-2xl group-hover:scale-105 transition-transform duration-200"
                     />
 
@@ -207,10 +208,10 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                     </div>
 
                     <div className="w-full h-32 flex items-center justify-center my-2 relative">
-                      <img
+                      <SkinImage
                         src={it.image}
                         alt={it.name}
-                        referrerPolicy="no-referrer"
+                        size={140}
                         className="w-28 h-28 object-contain filter drop-shadow-lg group-hover:scale-105 transition-transform duration-200"
                       />
                     </div>

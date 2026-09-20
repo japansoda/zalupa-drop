@@ -8,7 +8,6 @@ import { Footer } from '../components/layout/Footer';
 import { LiveDropBar } from '../components/layout/LiveDropBar';
 import { RefillModal } from '../components/layout/RefillModal';
 import { DropCoinIcon } from '../components/ui/DropCoinIcon';
-import { LogoSvg } from '../components/ui/LogoSvg';
 import { SkinImage } from '../components/ui/SkinImage';
 import { CASES_DATABASE } from '../data/cases';
 import { sound } from '../lib/sound';
@@ -128,33 +127,24 @@ export default function HomePage() {
         <Header />
         <LiveDropBar />
 
-        {/* Hero Section with Big Logo */}
-        <section className="relative overflow-hidden py-6 sm:py-10 px-4">
-          <div className="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
-            <div className="py-2">
-              <LogoSvg size="xl" className="w-80 sm:w-[480px] md:w-[600px] h-auto drop-shadow-[0_0_40px_rgba(250,204,21,0.3)] hover:scale-105 transition-transform duration-300" />
-            </div>
-          </div>
-        </section>
-
         {/* Cases Catalog Section */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+        <section className="max-w-7xl mx-auto px-3 sm:px-6 py-2 sm:py-3">
           {/* Header & Title */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-white/10">
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-8 rounded-full bg-yellow-400" />
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-3 pb-2.5 border-b border-white/10">
+            <div className="flex items-center gap-2.5">
+              <div className="w-2 h-6 rounded-full bg-yellow-400" />
               <div>
-                <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight flex items-center gap-3">
+                <h2 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight flex items-center gap-2.5">
                   <span>{t('home.title')}</span>
                 </h2>
               </div>
             </div>
 
             {/* Search & Sort Controls */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2">
               {/* Search input */}
-              <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-black/60 border border-white/10 focus-within:border-yellow-400 transition-colors w-full sm:w-64">
-                <Search className="w-4 h-4 text-white/40" />
+              <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-black/60 border border-white/10 focus-within:border-yellow-400 transition-colors w-full sm:w-56">
+                <Search className="w-3.5 h-3.5 text-white/40" />
                 <input
                   type="text"
                   placeholder={t('home.search')}
@@ -173,7 +163,7 @@ export default function HomePage() {
               </div>
 
               {/* Sort dropdown */}
-              <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-black/60 border border-white/10">
+              <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-black/60 border border-white/10">
                 <ArrowUpDown className="w-3.5 h-3.5 text-yellow-400" />
                 <select
                   value={sortBy}
@@ -193,7 +183,7 @@ export default function HomePage() {
           </div>
 
           {/* Category Filter Tabs */}
-          <div onWheel={handleHorizontalWheel} className="flex items-center gap-2 overflow-x-auto pb-4 mb-6 no-scrollbar">
+          <div onWheel={handleHorizontalWheel} className="flex items-center gap-1.5 overflow-x-auto pb-2 mb-3.5 no-scrollbar">
             {CATEGORIES.map((cat) => {
               const isActive = selectedCategory === cat.id;
               const label = t('home.cat.' + cat.id);
@@ -204,7 +194,7 @@ export default function HomePage() {
                     sound.playClick();
                     setSelectedCategory(cat.id);
                   }}
-                  className={`relative px-4 py-2 rounded-xl font-bold text-xs uppercase tracking-wider whitespace-nowrap transition-colors cursor-pointer ${
+                  className={`relative px-3 py-1.5 rounded-lg font-bold text-[11px] uppercase tracking-wider whitespace-nowrap transition-colors cursor-pointer ${
                     isActive
                       ? 'text-black font-black'
                       : 'text-white/70 hover:text-white'
@@ -213,12 +203,12 @@ export default function HomePage() {
                   {isActive && (
                     <motion.div
                       layoutId="activeCategoryTab"
-                      className="absolute inset-0 rounded-xl bg-yellow-400 shadow-[0_0_18px_rgba(250,204,21,0.4)]"
+                      className="absolute inset-0 rounded-lg bg-yellow-400 shadow-[0_0_12px_rgba(250,204,21,0.35)]"
                       transition={{ type: 'spring', stiffness: 450, damping: 32 }}
                     />
                   )}
                   {!isActive && (
-                    <div className="absolute inset-0 rounded-xl border border-white/10 bg-white/5" />
+                    <div className="absolute inset-0 rounded-lg border border-white/10 bg-white/5" />
                   )}
                   <span className="relative z-10">{label}</span>
                 </button>
@@ -258,7 +248,7 @@ export default function HomePage() {
                   transition={{ duration: 0.15 }}
                   style={{ transform: 'translateZ(0)' }}
                 >
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5 sm:gap-3">
                 {filteredCases.slice(0, displayLimit).map((caseItem, idx) => {
                   const isHighroller = caseItem.priceDc >= 25000;
                   const isUltra = caseItem.priceDc >= 60000;
@@ -270,22 +260,22 @@ export default function HomePage() {
                       href={`/case/${caseItem.id}`}
                       onClick={() => sound.playClick()}
                       style={{
-                        boxShadow: `0 0 25px rgba(${glow.rgb}, 0.12)`,
+                        boxShadow: `0 0 16px rgba(${glow.rgb}, 0.1)`,
                       }}
-                      className={`group relative rounded-3xl glass-card p-5 flex flex-col justify-between transition-all duration-300 overflow-hidden ${
+                      className={`group relative rounded-2xl glass-card p-3 sm:p-3.5 flex flex-col justify-between transition-all duration-200 overflow-hidden ${
                         isUltra
-                          ? 'border border-amber-400/50 bg-gradient-to-b from-amber-500/10 via-black/50 to-black/70 hover:border-amber-300 hover:shadow-[0_0_55px_rgba(251,191,36,0.5)]'
+                          ? 'border border-amber-400/50 bg-gradient-to-b from-amber-500/10 via-black/50 to-black/70 hover:border-amber-300 hover:shadow-[0_0_35px_rgba(251,191,36,0.4)]'
                           : isHighroller
-                          ? 'border border-yellow-500/35 bg-gradient-to-b from-yellow-500/5 via-black/40 to-black/60 hover:border-yellow-400 hover:shadow-[0_0_45px_rgba(234,179,8,0.4)]'
-                          : 'border border-white/10 hover:border-[rgba(var(--card-glow),0.6)]'
+                          ? 'border border-yellow-500/35 bg-gradient-to-b from-yellow-500/5 via-black/40 to-black/60 hover:border-yellow-400 hover:shadow-[0_0_30px_rgba(234,179,8,0.35)]'
+                          : 'border border-white/10 hover:border-[rgba(var(--card-glow),0.55)]'
                       }`}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = `rgba(${glow.rgb}, 0.6)`;
-                        e.currentTarget.style.boxShadow = `0 0 40px rgba(${glow.rgb}, 0.38)`;
+                        e.currentTarget.style.borderColor = `rgba(${glow.rgb}, 0.55)`;
+                        e.currentTarget.style.boxShadow = `0 0 28px rgba(${glow.rgb}, 0.3)`;
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.borderColor = '';
-                        e.currentTarget.style.boxShadow = `0 0 25px rgba(${glow.rgb}, 0.12)`;
+                        e.currentTarget.style.boxShadow = `0 0 16px rgba(${glow.rgb}, 0.1)`;
                       }}
                     >
                       {/* Luxury Sheen sweep for highroller cases */}
@@ -294,45 +284,38 @@ export default function HomePage() {
                       )}
 
                       {caseOpenCounts[caseItem.id] && caseOpenCounts[caseItem.id] > 0 && (
-                        <div className="absolute top-4 left-4 z-20 px-2.5 py-0.5 rounded-full font-bold text-[9px] uppercase tracking-wider bg-black/70 border border-yellow-400/40 text-yellow-400 flex items-center gap-1 shadow-md">
-                          <Flame className="w-3 h-3 text-orange-400 fill-orange-400" />
-                          <span>{caseOpenCounts[caseItem.id]} {locale === 'ru' ? 'открытий' : 'opens'}</span>
+                        <div className="absolute top-2.5 left-2.5 z-20 px-2 py-0.5 rounded-full font-bold text-[8px] uppercase tracking-wider bg-black/80 border border-yellow-400/40 text-yellow-400 flex items-center gap-1 shadow">
+                          <Flame className="w-2.5 h-2.5 text-orange-400 fill-orange-400" />
+                          <span>{caseOpenCounts[caseItem.id]}</span>
                         </div>
                       )}
 
                       {caseItem.badge && (
-                        <div className={`absolute top-4 right-4 z-20 px-3 py-1 rounded-full font-black text-[10px] uppercase tracking-wider shadow-md ${
+                        <div className={`absolute top-2.5 right-2.5 z-20 px-2 py-0.5 rounded-full font-black text-[8.5px] uppercase tracking-wider shadow ${
                           isUltra
-                            ? 'bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 text-black shadow-[0_0_15px_rgba(251,191,36,0.6)] animate-pulse'
+                            ? 'bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 text-black shadow-[0_0_10px_rgba(251,191,36,0.5)]'
                             : isHighroller
-                            ? 'bg-gradient-to-r from-yellow-400 to-amber-400 text-black shadow-[0_0_10px_rgba(234,179,8,0.4)]'
+                            ? 'bg-gradient-to-r from-yellow-400 to-amber-400 text-black shadow-[0_0_8px_rgba(234,179,8,0.35)]'
                             : 'bg-yellow-400 text-black'
                         }`}>
                           {caseItem.badge}
                         </div>
                       )}
 
-                      {/* Case Visual Showcase with Rich Volumetric Color Glow */}
-                      <div className="relative w-full h-52 sm:h-56 flex items-center justify-center my-1 overflow-visible">
-                        {/* Primary Volumetric Color Core */}
+                      {/* Case Visual Showcase with Compact Volumetric Glow */}
+                      <div className="relative w-full h-32 sm:h-36 flex items-center justify-center my-0.5 overflow-visible">
+                        {/* Core Volumetric Glow */}
                         <div
-                          className="absolute w-40 h-40 sm:w-48 sm:h-48 rounded-full blur-2xl z-0 transition-all duration-300 group-hover:scale-125 group-hover:opacity-100 opacity-85 pointer-events-none"
+                          className="absolute w-24 h-24 sm:w-28 sm:h-28 rounded-full blur-xl z-0 transition-all duration-300 group-hover:scale-115 group-hover:opacity-100 opacity-80 pointer-events-none"
                           style={{
-                            background: `radial-gradient(circle, rgba(${glow.rgb}, 0.75) 0%, rgba(${glow.rgb}, 0.35) 45%, transparent 72%)`
-                          }}
-                        />
-                        {/* Ambient Atmospheric Horizon */}
-                        <div
-                          className="absolute w-60 h-28 rounded-full blur-3xl z-0 opacity-40 group-hover:opacity-80 transition-opacity duration-300 pointer-events-none"
-                          style={{
-                            background: `radial-gradient(ellipse, rgba(${glow.rgb}, 0.5) 0%, transparent 75%)`
+                            background: `radial-gradient(circle, rgba(${glow.rgb}, 0.75) 0%, rgba(${glow.rgb}, 0.25) 50%, transparent 72%)`
                           }}
                         />
 
                         <img
                           src={getOptimizedCaseImageUrl(caseItem.image)}
                           alt={caseItem.name}
-                          loading={idx < 12 ? 'eager' : 'lazy'}
+                          loading={idx < 18 ? 'eager' : 'lazy'}
                           decoding="async"
                           referrerPolicy="no-referrer"
                           onError={(e) => {
@@ -341,63 +324,66 @@ export default function HomePage() {
                             }
                           }}
                           style={{
-                            filter: `drop-shadow(0 0 20px rgba(${glow.rgb}, 0.75)) drop-shadow(0 12px 22px rgba(0,0,0,0.85))`
+                            filter: `drop-shadow(0 0 14px rgba(${glow.rgb}, 0.65)) drop-shadow(0 8px 16px rgba(0,0,0,0.85))`
                           }}
-                          className="relative z-10 w-52 h-48 sm:w-60 sm:h-52 max-w-[96%] max-h-52 object-contain group-hover:scale-110 transition-transform duration-200 select-none"
+                          className="relative z-10 w-32 h-28 sm:w-36 sm:h-32 max-h-32 object-contain group-hover:scale-108 transition-transform duration-200 select-none"
                         />
                       </div>
 
-                      <div className="flex flex-col mb-3 z-10">
-                        <h3 className={`font-black text-base sm:text-lg transition-colors truncate ${
+                      {/* Case Name */}
+                      <div className="flex flex-col mb-1.5 z-10">
+                        <h3 className={`font-black text-xs sm:text-sm transition-colors truncate ${
                           isHighroller ? 'text-white group-hover:text-amber-300' : 'text-white group-hover:text-yellow-400'
                         }`}>
                           {caseItem.name}
                         </h3>
                       </div>
 
-                      <div className="flex items-center gap-1.5 py-2 border-t border-b border-white/5 mb-4 overflow-hidden z-10">
-                        {caseItem.skins.slice(0, 5).map((skin, i) => (
+                      {/* Skin Previews (4 mini items) */}
+                      <div className="flex items-center gap-1 py-1.5 border-t border-b border-white/5 mb-2.5 overflow-hidden z-10">
+                        {caseItem.skins.slice(0, 4).map((skin, i) => (
                           <div
                             key={i}
-                            className="w-9 h-9 rounded-lg bg-black/60 border border-white/10 p-1 shrink-0 flex items-center justify-center relative"
+                            className="w-6 h-6 sm:w-7 sm:h-7 rounded bg-black/60 border border-white/10 p-0.5 shrink-0 flex items-center justify-center relative"
                             title={skin.name}
                           >
                             <SkinImage 
                               src={skin.image} 
                               alt={skin.name} 
-                              size={64}
+                              size={48}
                               className="w-full h-full object-contain" 
                             />
                             {skin.statTrak && (
-                              <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_4px_#f59e0b]" />
+                              <div className="absolute top-0.5 right-0.5 w-1 h-1 rounded-full bg-amber-500 shadow-[0_0_3px_#f59e0b]" />
                             )}
                           </div>
                         ))}
-                        {caseItem.skins.length > 5 && (
-                          <span className="text-[10px] text-white/50 font-bold ml-1">
-                            +{caseItem.skins.length - 5}
+                        {caseItem.skins.length > 4 && (
+                          <span className="text-[9px] text-white/50 font-bold ml-0.5">
+                            +{caseItem.skins.length - 4}
                           </span>
                         )}
                       </div>
 
+                      {/* Price & Action */}
                       <div className="flex items-center justify-between z-10">
-                        <div className="flex items-center gap-1.5">
-                          <DropCoinIcon size={20} />
-                          <span className={`font-mono font-black text-lg transition-colors ${
+                        <div className="flex items-center gap-1">
+                          <DropCoinIcon size={15} />
+                          <span className={`font-mono font-black text-xs sm:text-sm transition-colors ${
                             isHighroller
-                              ? 'text-amber-300 group-hover:text-yellow-300 drop-shadow-[0_0_8px_rgba(251,191,36,0.4)]'
+                              ? 'text-amber-300 group-hover:text-yellow-300 drop-shadow-[0_0_6px_rgba(251,191,36,0.35)]'
                               : 'text-white group-hover:text-yellow-400'
                           }`}>
                             {caseItem.priceDc.toLocaleString('ru-RU')} DC
                           </span>
                         </div>
 
-                        <div className={`w-9 h-9 rounded-xl border flex items-center justify-center transition-all ${
+                        <div className={`w-7 h-7 rounded-lg border flex items-center justify-center transition-all ${
                           isHighroller
                             ? 'bg-amber-400/10 border-amber-400/30 text-amber-300 group-hover:bg-amber-400 group-hover:text-black'
                             : 'bg-white/5 border-white/10 text-white group-hover:bg-yellow-400 group-hover:text-black'
                         }`}>
-                          <ChevronRight className="w-4 h-4" />
+                          <ChevronRight className="w-3.5 h-3.5" />
                         </div>
                       </div>
                     </Link>

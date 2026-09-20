@@ -6,6 +6,7 @@ import { SkinEntity, CaseItem } from '../../lib/types';
 import { UpgradeToken } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
+import { SkinImage } from '../ui/SkinImage';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
 import { Gift, FastForward, Check, Sparkles, Ticket, FlaskConical } from 'lucide-react';
@@ -216,10 +217,10 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                       }}
                     >
                       <div className="w-16 h-16 flex items-center justify-center my-auto">
-                        <img
+                        <SkinImage
                           src={item.image}
                           alt={item.name}
-                          referrerPolicy="no-referrer"
+                          size={80}
                           className="w-full h-full object-contain"
                         />
                       </div>
@@ -326,10 +327,10 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
 
                   {/* Big Image */}
                   <div className="relative w-36 h-36 flex items-center justify-center my-3">
-                    <img
+                    <SkinImage
                       src={winningSkin.image}
                       alt={winningSkin.name}
-                      referrerPolicy="no-referrer"
+                      size={180}
                       className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] animate-pulse"
                     />
                   </div>

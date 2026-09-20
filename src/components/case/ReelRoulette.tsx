@@ -8,6 +8,7 @@ import { RARITY_CONFIG } from '../../data/skins';
 import { sound } from '../../lib/sound';
 import { DropModal } from './DropModal';
 import { WearBadge } from '../ui/WearBadge';
+import { SkinImage } from '../ui/SkinImage';
 import { useGameStore } from '../../store/useGameStore';
 import { Zap, Layers } from 'lucide-react';
 import { useLanguage } from '../../lib/i18n';
@@ -517,10 +518,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
                           ? (openCount > 1 ? 'w-24 h-20' : 'w-28 h-24') 
                           : (openCount > 1 ? 'w-24 h-24' : 'w-28 h-28')
                       } my-auto flex items-center justify-center z-10`}>
-                        <img
+                        <SkinImage
                           src={displayImage}
                           alt={displayWeapon}
-                          referrerPolicy="no-referrer"
+                          size={120}
                           className={`w-full h-full object-contain filter drop-shadow-md ${
                             showAsSpecial ? 'drop-shadow-[0_0_15px_rgba(250,204,21,0.55)]' : ''
                           }`}

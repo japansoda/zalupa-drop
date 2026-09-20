@@ -6,6 +6,7 @@ import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { RarityBadge } from '../ui/RarityBadge';
 import { RARITY_CONFIG } from '../../data/skins';
 import { ExternalLink } from 'lucide-react';
+import { SkinImage } from '../ui/SkinImage';
 import { getSteamMarketListingUrl } from '../../lib/steam';
 
 interface CaseSkinGroupCardProps {
@@ -34,10 +35,10 @@ export const CaseSkinGroupCard: React.FC<CaseSkinGroupCardProps> = ({ variants }
 
       {/* Central Skin Image with Smooth Zoom */}
       <div className="w-full h-28 flex items-center justify-center my-2 relative">
-        <img
+        <SkinImage
           src={baseSkin.image}
           alt={baseSkin.name}
-          referrerPolicy="no-referrer"
+          size={120}
           className="w-24 h-24 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-md"
         />
       </div>

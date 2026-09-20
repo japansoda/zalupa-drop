@@ -23,7 +23,7 @@ export const SkinImage: React.FC<SkinImageProps> = ({
   const [stage, setStage] = useState<number>(0);
   const [loaded, setLoaded] = useState<boolean>(false);
 
-  if (!src) {
+  if (!src || src.startsWith('file:') || src.includes('file://') || src.includes('C:/') || src.includes('C:\\')) {
     return <div className={`bg-white/5 ${className}`} style={style} />;
   }
 

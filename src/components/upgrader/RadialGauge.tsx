@@ -918,10 +918,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                           >
                             <X className="w-3 h-3" />
                           </button>
-                          <img
+                          <SkinImage
                             src={item.image}
                             alt={item.name}
-                            referrerPolicy="no-referrer"
+                            size={64}
                             className="w-12 h-12 object-contain"
                           />
                           <span className="text-[10px] text-white font-black truncate w-full text-center mt-1">
@@ -1339,10 +1339,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
               {targetSkin ? (
                 <div className="flex flex-col items-center justify-center my-auto">
-                  <img
+                  <SkinImage
                     src={targetSkin.image}
                     alt={targetSkin.name}
-                    referrerPolicy="no-referrer"
+                    size={180}
                     className="w-32 h-32 object-contain filter drop-shadow-[0_0_20px_rgba(0,0,0,0.8)]"
                   />
                   <span className="font-black text-white text-base text-center line-clamp-1 mt-1">
@@ -1493,10 +1493,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     )}
 
                     <div className="w-16 h-16 flex items-center justify-center my-1">
-                      <img
+                      <SkinImage
                         src={item.image}
                         alt={item.name}
-                        referrerPolicy="no-referrer"
+                        size={80}
                         className="w-full h-full object-contain"
                       />
                     </div>
@@ -1766,10 +1766,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       )}
 
                       <div className="w-16 h-16 flex items-center justify-center my-1">
-                        <img
+                        <SkinImage
                           src={skin.image}
                           alt={skin.name}
-                          referrerPolicy="no-referrer"
+                          size={80}
                           className="w-full h-full object-contain"
                         />
                       </div>

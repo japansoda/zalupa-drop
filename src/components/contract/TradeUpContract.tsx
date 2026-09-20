@@ -8,6 +8,7 @@ import { SKINS_DATABASE, RARITY_CONFIG } from '../../data/skins';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { RarityBadge } from '../ui/RarityBadge';
 import { WearBadge } from '../ui/WearBadge';
+import { SkinImage } from '../ui/SkinImage';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
 import { 
@@ -305,9 +306,10 @@ export const TradeUpContract: React.FC = () => {
                     <>
                       {/* Skin Image */}
                       <div className="w-full h-16 sm:h-20 flex items-center justify-center my-1">
-                        <img
+                        <SkinImage
                           src={item.image}
                           alt={item.name}
+                          size={100}
                           className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md group-hover:scale-105 transition-transform"
                         />
                       </div>
@@ -545,9 +547,10 @@ export const TradeUpContract: React.FC = () => {
                   </div>
 
                   <div className="w-full h-24 flex items-center justify-center my-1.5">
-                    <img
+                    <SkinImage
                       src={item.image}
                       alt={item.name}
+                      size={120}
                       className="w-20 h-20 object-contain group-hover:scale-110 transition-transform drop-shadow-md"
                     />
                   </div>
@@ -612,9 +615,10 @@ export const TradeUpContract: React.FC = () => {
                       (RARITY_CONFIG[wonSkin.rarity] || RARITY_CONFIG.milspec).color,
                   }}
                 />
-                <img
+                <SkinImage
                   src={wonSkin.image}
                   alt={wonSkin.name}
+                  size={200}
                   className="w-40 h-40 object-contain drop-shadow-2xl z-10 animate-bounce"
                   style={{ animationDuration: '3s' }}
                 />

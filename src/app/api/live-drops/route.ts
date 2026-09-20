@@ -44,6 +44,13 @@ if (globalStore.__fakeDropsEnabled === undefined) {
   globalStore.__fakeDropsEnabled = loadSettings().fakeDropsEnabled;
 }
 
+function isSafeImageUrl(img: string | undefined | null): boolean {
+  if (!img || typeof img !== 'string') return false;
+  const s = img.trim();
+  if (s.startsWith('file:') || s.includes('file://') || s.includes('C:/') || s.includes('C:\\')) return false;
+  return s.startsWith('/') || s.startsWith('http://') || s.startsWith('https://') || s.startsWith('data:');
+}
+
 // Helper to safely load from local disk file
 function loadFromDisk(): LiveDrop[] {
   try {
@@ -51,7 +58,7 @@ function loadFromDisk(): LiveDrop[] {
       const data = fs.readFileSync(DISK_FILE, 'utf-8');
       const parsed = JSON.parse(data);
       if (Array.isArray(parsed)) {
-        return parsed.filter((d) => d?.skin?.image && d?.skin?.name && (d?.skin?.priceDc || 0) >= 25000);
+        return parsed.filter((d) => d?.skin?.name && isSafeImageUrl(d?.skin?.image) && (d?.skin?.priceDc || 0) >= 25000);
       }
     }
   } catch (_) {}
@@ -71,7 +78,7 @@ function mergeDrops(existing: LiveDrop[], incoming: LiveDrop[]): LiveDrop[] {
 
   // Add existing
   for (const d of existing) {
-    if (d && d.skin && d.skin.image && d.skin.name && (d.skin.priceDc || 0) >= 25000) {
+    if (d && d.skin && d.skin.name && isSafeImageUrl(d.skin.image) && (d.skin.priceDc || 0) >= 25000) {
       const cleanId = d.id.replace(/^net_/, '');
       map.set(cleanId, d);
     }
@@ -79,7 +86,7 @@ function mergeDrops(existing: LiveDrop[], incoming: LiveDrop[]): LiveDrop[] {
 
   // Add incoming (overwrites if matching ID)
   for (const d of incoming) {
-    if (d && d.skin && d.skin.image && d.skin.name && (d.skin.priceDc || 0) >= 25000) {
+    if (d && d.skin && d.skin.name && isSafeImageUrl(d.skin.image) && (d.skin.priceDc || 0) >= 25000) {
       const cleanId = d.id.replace(/^net_/, '');
       map.set(cleanId, d);
     }
@@ -108,7 +115,7 @@ async function syncFromNtfy(): Promise<LiveDrop[]> {
         const item = JSON.parse(line);
         if (item.event === 'message' && item.message) {
           const drop = JSON.parse(item.message);
-          if (drop && drop.skin && drop.skin.image && drop.skin.name && (drop.skin.priceDc || 0) >= 25000) {
+          if (drop && drop.skin && drop.skin.name && isSafeImageUrl(drop.skin.image) && (drop.skin.priceDc || 0) >= 25000) {
             drops.push(drop);
           }
         }
@@ -181,7 +188,7 @@ export async function POST(req: NextRequest) {
     if (
       !body ||
       !body.skin ||
-      !body.skin.image ||
+      !isSafeImageUrl(body.skin.image) ||
       !body.skin.name ||
       typeof body.skin.priceDc !== 'number' ||
       body.skin.priceDc < 25000

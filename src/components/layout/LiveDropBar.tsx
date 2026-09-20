@@ -45,24 +45,27 @@ interface CardProps {
 
 const LiveDropCard = memo(({ drop, isUser, locale }: CardProps) => {
   const config = RARITY_CONFIG[drop.skin.rarity] || RARITY_CONFIG.milspec;
+  const rawImg = drop.skin?.image || '';
+  const isDangerousPath = !rawImg || rawImg.startsWith('file:') || rawImg.includes('file://') || rawImg.includes('C:/') || rawImg.includes('C:\\');
+  const safeImg = isDangerousPath ? '/logo.png' : rawImg;
 
   return (
     <div
-      className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-xl glass-card shrink-0 transition-transform group border ${
+      className={`flex items-center gap-2 px-2 py-1 rounded-lg glass-card shrink-0 transition-transform group border ${
         isUser
-          ? 'border-yellow-400/60 bg-yellow-400/10 shadow-[0_0_12px_rgba(250,204,21,0.2)]'
+          ? 'border-yellow-400/60 bg-yellow-400/10 shadow-[0_0_10px_rgba(250,204,21,0.2)]'
           : 'border-white/5 hover:border-white/20'
       }`}
       style={{
-        borderLeftWidth: '3px',
+        borderLeftWidth: '2.5px',
         borderLeftColor: config.color,
       }}
       title={`${drop.skin.name} — ${drop.caseName}`}
     >
       {/* Skin Icon */}
-      <div className="relative w-10 h-10 rounded-lg bg-black/60 overflow-hidden flex items-center justify-center p-0.5 border border-white/5 shrink-0">
+      <div className="relative w-8 h-8 rounded-md bg-black/60 overflow-hidden flex items-center justify-center p-0.5 border border-white/5 shrink-0">
         <img
-          src={drop.skin.image}
+          src={safeImg}
           alt={drop.skin.name}
           loading="lazy"
           referrerPolicy="no-referrer"
@@ -71,26 +74,26 @@ const LiveDropCard = memo(({ drop, isUser, locale }: CardProps) => {
       </div>
 
       {/* Skin Details */}
-      <div className="flex flex-col leading-tight pr-1 min-w-[95px] max-w-[145px]">
+      <div className="flex flex-col leading-tight pr-1 min-w-[85px] max-w-[130px]">
         <div className="flex items-center justify-between gap-1 mb-0.5">
           <span
-            className="text-[11px] font-black truncate"
+            className="text-[10px] font-black truncate"
             style={{ color: config.color }}
           >
             {drop.skin.weapon}
           </span>
           {/* ONLY show tag for user's own drop */}
           {isUser && (
-            <span className="text-[8px] font-black uppercase px-1.5 py-0.5 rounded bg-yellow-400 text-black shrink-0 tracking-tighter">
+            <span className="text-[7px] font-black uppercase px-1 py-0.2 rounded bg-yellow-400 text-black shrink-0 tracking-tighter">
               {locale === 'ru' ? 'ВЫ' : 'YOU'}
             </span>
           )}
         </div>
-        <span className="text-[10px] font-semibold text-white/80 truncate">
+        <span className="text-[9px] font-semibold text-white/80 truncate">
           {drop.skin.skinName}
         </span>
-        <div className="flex items-center justify-between gap-1 text-[9px] text-white/40 mt-0.5">
-          <span className="truncate max-w-[80px]">{drop.caseName}</span>
+        <div className="flex items-center justify-between gap-1 text-[8px] text-white/40 mt-0.5">
+          <span className="truncate max-w-[70px]">{drop.caseName}</span>
           <span className="font-mono text-yellow-400/90 font-bold shrink-0">
             {drop.skin.priceDc.toLocaleString('ru-RU')} DC
           </span>
@@ -315,11 +318,11 @@ export const LiveDropBar: React.FC = () => {
   }, [liveDrops]);
 
   return (
-    <div className="w-full bg-[#0a0a0d] border-b border-white/5 py-2 overflow-hidden backdrop-blur-md max-w-full select-none">
-      <div className="max-w-7xl mx-auto px-4 flex items-center gap-3">
-        <div className="flex items-center gap-1.5 shrink-0 pr-3 border-r border-white/10">
-          <span className="w-2 h-2 rounded-full bg-yellow-400 animate-ping" />
-          <span className="text-[11px] font-black text-white/60 tracking-wider uppercase">
+    <div className="w-full bg-[#0a0a0d] border-b border-white/5 py-1 overflow-hidden backdrop-blur-md max-w-full select-none">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 shrink-0 pr-2.5 border-r border-white/10">
+          <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-ping" />
+          <span className="text-[10px] font-black text-white/60 tracking-wider uppercase">
             {t('live.drops')}
           </span>
         </div>
@@ -328,7 +331,7 @@ export const LiveDropBar: React.FC = () => {
         {/* Mobile: touch swipeable (overflow-x-auto) */}
         <div
           data-no-wheel="true"
-          className="flex items-center gap-2.5 overflow-x-auto md:overflow-x-hidden no-scrollbar no-wheel-scroll py-0.5 max-w-full min-h-[52px]"
+          className="flex items-center gap-2 overflow-x-auto md:overflow-x-hidden no-scrollbar no-wheel-scroll py-0.5 max-w-full min-h-[42px]"
         >
           {visibleDrops.length === 0 ? (
             <div className="flex items-center gap-2 text-xs text-white/30 font-medium italic animate-pulse py-1 pl-1">
