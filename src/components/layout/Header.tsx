@@ -96,30 +96,25 @@ export const Header: React.FC = () => {
           {/* Universal Luck Potion Status & Quick Drink */}
           {activePotionCharges > 0 ? (
             <div
-              className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg bg-[#0e1612] border border-emerald-500/35 text-emerald-300 font-bold text-xs flex items-center gap-1.5 shadow-[0_0_10px_rgba(16,185,129,0.15)] shrink-0 select-none"
+              className="h-7.5 sm:h-8.5 px-2.5 rounded-lg glass-panel border border-white/10 flex items-center gap-1.5 shrink-0 select-none"
               title={locale === 'ru' 
                 ? `Зелье удачи активно! Осталось ${activePotionCharges} — работает на кейсы, апгрейдер и контракты` 
                 : `Luck Potion active! ${activePotionCharges} left — works on cases, upgrader & contracts`}
             >
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
-              </span>
               <span className="text-xs">🧪</span>
-              <span className="font-mono font-black text-xs text-white">{activePotionCharges}</span>
+              <span className="font-mono font-bold text-xs text-emerald-400">{activePotionCharges}</span>
             </div>
           ) : potionsCount > 0 ? (
             <button
               type="button"
               onClick={() => drinkPotion()}
-              className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg glass-button hover:border-emerald-400/40 text-white/70 hover:text-emerald-300 font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 shrink-0"
+              className="h-7.5 sm:h-8.5 px-2.5 rounded-lg glass-button hover:border-white/20 text-white/80 hover:text-white font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 shrink-0"
               title={locale === 'ru' 
                 ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount} шт.` 
                 : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
             >
               <span className="text-xs">🧪</span>
-              <span className="hidden sm:inline text-xs">{locale === 'ru' ? 'Зелье' : 'Potion'}</span>
-              <span className="font-mono text-[10px] text-yellow-400 bg-white/5 border border-white/10 px-1 py-0.2 rounded font-bold">x{potionsCount}</span>
+              <span className="font-mono text-[10px] text-zinc-400 bg-white/5 border border-white/10 px-1 py-0.2 rounded font-bold">x{potionsCount}</span>
             </button>
           ) : null}
 

@@ -8,6 +8,7 @@ import { UpgradeToken } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
 import { RarityBadge } from '../ui/RarityBadge';
 import { WearBadge } from '../ui/WearBadge';
+import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { SkinImage } from '../ui/SkinImage';
 import { sound } from '../../lib/sound';
@@ -142,11 +143,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
 
                   <div className="flex flex-col items-center gap-1.5 mb-4 w-full">
                     <div className="flex items-center gap-2 mb-1 flex-wrap justify-center">
-                      {single.statTrak && isStatTrakableItem(single) && (
-                        <span className="text-xs px-2.5 py-1 rounded-full bg-amber-500/20 border border-amber-500 text-amber-400 font-mono font-black uppercase tracking-wider shadow-[0_0_8px_rgba(245,158,11,0.4)]">
-                          StatTrak™
-                        </span>
-                      )}
+                      {single.statTrak && isStatTrakableItem(single) && <StatTrakBadge size="sm" />}
                       <RarityBadge rarity={single.rarity} size="md" />
                       <WearBadge skin={single} size="sm" showFullLabel />
                     </div>
@@ -197,11 +194,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                   >
                     <div className="flex items-center justify-between gap-1 mb-2">
                       <div className="flex items-center gap-1">
-                        {it.statTrak && isStatTrakableItem(it) && (
-                          <span className="text-[9px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40">
-                            ST
-                          </span>
-                        )}
+                        {it.statTrak && isStatTrakableItem(it) && <StatTrakBadge size="xs" />}
                         <WearBadge skin={it} size="xs" />
                       </div>
                       <RarityBadge rarity={it.rarity} size="sm" />

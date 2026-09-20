@@ -9,6 +9,7 @@ import { LiveDropBar } from '../../components/layout/LiveDropBar';
 import { RefillModal } from '../../components/layout/RefillModal';
 import { RarityBadge } from '../../components/ui/RarityBadge';
 import { WearBadge } from '../../components/ui/WearBadge';
+import { StatTrakBadge } from '../../components/ui/StatTrakBadge';
 import { DropCoinIcon } from '../../components/ui/DropCoinIcon';
 import { SkinImage } from '../../components/ui/SkinImage';
 import { useGameStore } from '../../store/useGameStore';
@@ -230,11 +231,7 @@ export default function InventoryPage() {
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-1">
-                          {item.statTrak && isStatTrakableItem(item) && (
-                            <span className="text-[9px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40">
-                              ST
-                            </span>
-                          )}
+                          {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
                           <WearBadge skin={item} size="xs" />
                         </div>
                         <RarityBadge rarity={item.rarity} size="sm" />

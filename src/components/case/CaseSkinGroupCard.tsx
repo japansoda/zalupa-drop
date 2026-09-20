@@ -4,10 +4,12 @@ import React from 'react';
 import { SkinEntity } from '../../lib/types';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { RarityBadge } from '../ui/RarityBadge';
+import { WearBadge } from '../ui/WearBadge';
+import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { RARITY_CONFIG } from '../../data/skins';
 import { ExternalLink } from 'lucide-react';
 import { SkinImage } from '../ui/SkinImage';
-import { getSteamMarketListingUrl } from '../../lib/steam';
+import { getSteamMarketListingUrl, isStatTrakableItem, isWearableItem } from '../../lib/steam';
 import { useLanguage } from '../../lib/i18n';
 
 interface CaseSkinGroupCardProps {
@@ -25,13 +27,20 @@ export const CaseSkinGroupCard: React.FC<CaseSkinGroupCardProps> = ({ variants }
     .replace(/\s*\((Factory New|Minimal Wear|Field-Tested|Well-Worn|Battle-Scarred|Прямо с завода|Немного поношенное|После полевых испытаний|Поношенное|Закаленное в боях)\)$/i, '')
     .trim();
 
+  const hasStatTrak = variants.some((v) => v.statTrak) || isStatTrakableItem(baseSkin);
+  const isWearable = isWearableItem(baseSkin);
+
   return (
     <div
       className="rounded-2xl glass-card p-3 flex flex-col justify-between border hover:border-yellow-400/40 transition-all group relative overflow-hidden"
       style={{ borderBottomWidth: '3px', borderBottomColor: config.color }}
     >
-      {/* Top Header: Rarity Badge Only (No wear or ST shown in drop list) */}
-      <div className="flex items-center justify-end gap-1 z-10">
+      {/* Top Header: Quality & StatTrak on Left, Rarity on Right (Same as Upgrader & Inventory) */}
+      <div className="flex items-center justify-between gap-1 z-10 min-h-[22px]">
+        <div className="flex items-center gap-1">
+          {hasStatTrak && <StatTrakBadge size="xs" />}
+          {isWearable && <WearBadge skin={baseSkin} size="xs" />}
+        </div>
         <RarityBadge rarity={baseSkin.rarity} size="sm" />
       </div>
 

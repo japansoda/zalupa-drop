@@ -13,7 +13,7 @@ import { CASES_DATABASE } from '../data/cases';
 import { sound } from '../lib/sound';
 import { useLanguage, getCaseName, getCaseBadge } from '../lib/i18n';
 import { useGameStore } from '../store/useGameStore';
-import { ChevronRight, Search, ArrowUpDown, X, Flame } from 'lucide-react';
+import { ChevronRight, Search, ArrowUpDown, X } from 'lucide-react';
 import { handleHorizontalWheel } from '../components/layout/HorizontalScrollManager';
 
 const CATEGORIES = [
@@ -285,12 +285,7 @@ export default function HomePage() {
                         <div className="luxury-sheen opacity-40 group-hover:opacity-85 transition-opacity" />
                       )}
 
-                      {caseOpenCounts[caseItem.id] && caseOpenCounts[caseItem.id] > 0 && (
-                        <div className="absolute top-2.5 left-2.5 z-20 px-2 py-0.5 rounded-md font-mono text-[9px] font-bold bg-zinc-950/80 backdrop-blur-md border border-white/10 text-zinc-200 flex items-center gap-1 shadow-sm">
-                          <Flame className="w-2.5 h-2.5 text-amber-400 fill-amber-400/90" />
-                          <span>{caseOpenCounts[caseItem.id]}</span>
-                        </div>
-                      )}
+
 
                       {caseItem.badge && (
                         <div className={`absolute top-2.5 right-2.5 z-20 px-2 py-0.5 rounded-full font-black text-[8.5px] uppercase tracking-wider shadow ${

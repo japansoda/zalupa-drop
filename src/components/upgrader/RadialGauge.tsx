@@ -10,6 +10,7 @@ import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, Shi
 import confetti from 'canvas-confetti';
 import { CashbackModal } from './CashbackModal';
 import { WearBadge } from '../ui/WearBadge';
+import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
@@ -893,7 +894,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             </div>
 
             {/* Input card box */}
-            <div className="h-68 rounded-2xl bg-black/40 border border-white/10 p-3 flex flex-col justify-between">
+            <div className="min-h-[350px] sm:h-[360px] rounded-2xl bg-black/40 border border-white/10 p-3 flex flex-col justify-between">
               {betMode === 'skin' ? (
                 selectedItems.length === 0 ? (
                   <div className="h-full flex flex-col items-center justify-center text-center p-4">
@@ -905,7 +906,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   </div>
                 ) : (
                   <div className="flex flex-col h-full justify-between">
-                    <div className="grid grid-cols-3 gap-2 overflow-y-auto max-h-48 pr-1">
+                    <div className="grid grid-cols-3 gap-2 overflow-y-auto max-h-60 pr-1">
                       {selectedItems.map((item) => (
                         <div
                           key={item.instanceId}
@@ -1326,7 +1327,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
             {/* Target Skin Preview Card */}
             <div
-              className="h-68 rounded-2xl border p-4 flex flex-col justify-between relative overflow-hidden transition-all"
+              className="min-h-[350px] sm:h-[360px] rounded-2xl border p-4 flex flex-col justify-between relative overflow-hidden transition-all"
               style={{
                 backgroundColor: targetConfig.bg,
                 borderColor: targetConfig.border,
@@ -1348,14 +1349,14 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     src={targetSkin.image}
                     alt={targetSkin.name}
                     size={260}
-                    className="w-48 h-36 sm:w-56 sm:h-40 object-contain filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-300"
+                    className="w-48 h-32 sm:w-56 sm:h-36 object-contain filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-300"
                   />
-                  <span className="font-black text-white text-base text-center line-clamp-1 mt-1">
+                  <span className="font-black text-white text-base text-center line-clamp-1 mt-2">
                     {targetSkin.name}
                   </span>
-                  <div className="flex items-center gap-2 mt-0.5">
+                  <div className="flex items-center gap-2 mt-1">
                     <span className="text-xs text-white/50">{targetSkin.weapon}</span>
-                    <WearBadge skin={targetSkin} size="xs" showFullLabel />
+                    <WearBadge skin={targetSkin} size="sm" showFullLabel />
                   </div>
                 </div>
               ) : (
@@ -1365,7 +1366,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 </div>
               )}
 
-              <div className="flex items-center justify-between pt-2 border-t border-white/10">
+              <div className="flex items-center justify-between pt-3 border-t border-white/10">
                 <span className="text-xs text-white/60">{t('upg.target')}</span>
                 <div className="flex items-center gap-1 font-mono font-black text-yellow-400 text-base">
                   <DropCoinIcon size={18} />
@@ -1508,11 +1509,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
                     <div className="w-full flex flex-col">
                       <div className="flex items-center gap-1">
-                        {item.statTrak && isStatTrakableItem(item) && (
-                          <span className="text-[8px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40 shrink-0">
-                            ST
-                          </span>
-                        )}
+                        {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
                         <span className="text-[11px] font-black text-white truncate">
                           {item.skinName || item.name}
                         </span>
@@ -1781,11 +1778,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
                       <div className="w-full flex flex-col">
                         <div className="flex items-center gap-1">
-                          {skin.statTrak && isStatTrakableItem(skin) && (
-                            <span className="text-[8px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40 shrink-0">
-                              ST
-                            </span>
-                          )}
+                          {skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
                           <span className="text-[11px] font-black text-white truncate">
                             {skin.skinName || skin.name}
                           </span>

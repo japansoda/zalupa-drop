@@ -26,14 +26,14 @@ export const WearBadge: React.FC<WearBadgeProps> = ({
   if (effect && STICKER_EFFECT_CONFIG[effect]) {
     const eff = STICKER_EFFECT_CONFIG[effect];
     const sizeClasses = {
-      xs: 'text-[9px] px-1.5 py-0.5',
-      sm: 'text-[10px] px-2 py-0.5',
+      xs: 'text-[8.5px] px-1.5 py-0.2',
+      sm: 'text-[9.5px] px-2 py-0.5',
       md: 'text-xs px-2.5 py-1',
     }[size];
 
     return (
       <span
-        className={`inline-flex items-center font-black rounded-md tracking-wider border shadow-sm ${sizeClasses}`}
+        className={`inline-flex items-center font-mono font-black rounded tracking-wider border shadow-sm select-none shrink-0 ${sizeClasses}`}
         style={{
           color: eff.color,
           backgroundColor: eff.bg,
@@ -60,23 +60,29 @@ export const WearBadge: React.FC<WearBadgeProps> = ({
 
   const label = t('wear.' + wearCode) || wearConfig.label;
 
+  if (showFullLabel) {
+    return (
+      <span
+        className="inline-flex items-center font-mono font-medium text-[10.5px] px-2 py-0.5 rounded-md bg-zinc-900/90 border border-white/10 text-zinc-300 shadow-sm tracking-tight select-none shrink-0"
+        title={label}
+      >
+        {label}
+      </span>
+    );
+  }
+
   const sizeClasses = {
-    xs: 'text-[9px] px-1.5 py-0.5',
-    sm: 'text-[10px] px-2 py-0.5',
-    md: 'text-xs px-2.5 py-1',
+    xs: 'text-[8.5px] px-1.5 py-0.2',
+    sm: 'text-[9.5px] px-1.5 py-0.5',
+    md: 'text-xs px-2 py-0.5',
   }[size];
 
   return (
     <span
-      className={`inline-flex items-center font-bold font-mono rounded-md tracking-wider border ${sizeClasses}`}
-      style={{
-        color: wearConfig.color,
-        backgroundColor: wearConfig.bg,
-        borderColor: wearConfig.border,
-      }}
+      className={`inline-flex items-center font-mono font-bold rounded bg-zinc-950/80 border border-white/10 text-zinc-300 select-none shrink-0 ${sizeClasses}`}
       title={label}
     >
-      {showFullLabel ? label : wearConfig.short}
+      {wearConfig.short}
     </span>
   );
 };

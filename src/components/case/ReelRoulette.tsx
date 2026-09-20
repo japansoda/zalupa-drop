@@ -8,6 +8,7 @@ import { RARITY_CONFIG } from '../../data/skins';
 import { sound } from '../../lib/sound';
 import { DropModal } from './DropModal';
 import { WearBadge } from '../ui/WearBadge';
+import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { useGameStore } from '../../store/useGameStore';
 import { Zap, Layers } from 'lucide-react';
@@ -500,11 +501,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
                     >
                       <div className="w-full flex justify-between items-center z-10">
                         <div className="flex items-center gap-1">
-                          {!showAsSpecial && skin.statTrak && isStatTrakableItem(skin) && (
-                            <span className="text-[9px] font-mono font-black text-amber-400 bg-amber-500/20 px-1 py-0.5 rounded border border-amber-500/40">
-                              ST
-                            </span>
-                          )}
+                          {!showAsSpecial && skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
                           {!showAsSpecial && <WearBadge skin={skin} size="xs" />}
                           {showAsSpecial && (
                             <span className="text-[8.5px] font-black text-yellow-300 bg-yellow-500/20 px-1 py-0.5 rounded border border-yellow-500/30">
