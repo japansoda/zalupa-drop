@@ -115,8 +115,8 @@ export default function InventoryPage() {
                 </div>
                 <p className="text-[11px] text-white/50 line-clamp-1">
                   {locale === 'ru' 
-                    ? 'Дает +3 заряда удачи на всё: кейсы (тайное/ножи), апгрейдер (+15% к шансу), контракты (лучший исход)' 
-                    : 'Grants +3 universal charges: cases (covert/knives), upgrader (+15% chance), contracts (best outcome)'}
+                    ? 'Дает +3 заряда удачи на всё: кейсы тайное и ножи, апгрейдер +15% к шансу, контракты лучший исход' 
+                    : 'Grants +3 universal charges: cases covert and knives, upgrader +15% chance, contracts best outcome'}
                 </p>
               </div>
             </div>
@@ -127,7 +127,7 @@ export default function InventoryPage() {
                   {locale === 'ru' ? 'Активные заряды' : 'Active Charges'}
                 </span>
                 <span className={`font-mono font-black text-sm ${activePotionCharges > 0 ? 'text-emerald-300 animate-pulse' : 'text-white/40'}`}>
-                  {activePotionCharges > 0 ? `${activePotionCharges} / 3 зар.` : (locale === 'ru' ? 'Нет' : 'None')}
+                  {activePotionCharges > 0 ? `${activePotionCharges} / 3` : (locale === 'ru' ? 'Нет' : 'None')}
                 </span>
               </div>
 
@@ -138,7 +138,7 @@ export default function InventoryPage() {
                   className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-teal-500 text-black font-black text-xs uppercase flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:brightness-110 active:scale-95 transition-all cursor-pointer"
                 >
                   <span>🧪</span>
-                  <span>{locale === 'ru' ? 'Выпить (+3 зар.)' : 'Drink (+3 chg)'}</span>
+                  <span>{locale === 'ru' ? 'Выпить +3' : 'Drink +3'}</span>
                   <span className="bg-black/30 px-1.5 py-0.5 rounded text-[10px]">x{potionsCount}</span>
                 </button>
               ) : (

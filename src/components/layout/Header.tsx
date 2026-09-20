@@ -98,11 +98,11 @@ export const Header: React.FC = () => {
             <div
               className="flex items-center gap-1 px-2 py-1 rounded-lg bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-black text-[10px] sm:text-[11px] shadow-[0_0_12px_rgba(16,185,129,0.3)] animate-pulse shrink-0 select-none"
               title={locale === 'ru' 
-                ? `Зелье удачи активно! Осталось ${activePotionCharges} зар. (работает на кейсы, апгрейдер и контракты)` 
-                : `Luck Potion active! ${activePotionCharges} charges left (works on cases, upgrader & contracts)`}
+                ? `Зелье удачи активно! Осталось ${activePotionCharges} — работает на кейсы, апгрейдер и контракты` 
+                : `Luck Potion active! ${activePotionCharges} left — works on cases, upgrader & contracts`}
             >
               <span>🧪</span>
-              <span className="font-mono">{activePotionCharges} зар.</span>
+              <span className="font-mono">{activePotionCharges}</span>
             </div>
           ) : potionsCount > 0 ? (
             <button
@@ -110,8 +110,8 @@ export const Header: React.FC = () => {
               onClick={() => drinkPotion()}
               className="flex items-center gap-1 px-2 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 font-black text-[10px] sm:text-[11px] transition-all cursor-pointer active:scale-95 shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.2)]"
               title={locale === 'ru' 
-                ? `Выпить зелье удачи (+3 универсальных заряда). В наличии: ${potionsCount} шт.` 
-                : `Drink Luck Potion (+3 universal charges). In stock: ${potionsCount}`}
+                ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount} шт.` 
+                : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
             >
               <span>🧪</span>
               <span className="hidden xs:inline">{locale === 'ru' ? 'Зелье' : 'Potion'}</span>

@@ -583,8 +583,8 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
             <span className="text-sm">🧪</span>
             <span>
               {locale === 'ru'
-                ? `Зелье удачи активно (${activePotionCharges} зар.) — повышенный шанс на тайное/ножи!`
-                : `Luck Potion active (${activePotionCharges} chg) — boosted covert/knives!`}
+                ? `Зелье удачи активно: ${activePotionCharges} — повышенный шанс на тайное и ножи!`
+                : `Luck Potion active: ${activePotionCharges} — boosted covert and knives!`}
             </span>
           </div>
         ) : potionsCount > 0 ? (
@@ -594,7 +594,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
             className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 font-black text-xs transition-all cursor-pointer active:scale-95 shadow-[0_0_10px_rgba(16,185,129,0.2)]"
           >
             <span>🧪</span>
-            <span>{locale === 'ru' ? 'Выпить зелье удачи (+3 зар.)' : 'Drink Luck Potion (+3 chg)'}</span>
+            <span>{locale === 'ru' ? 'Выпить зелье удачи +3' : 'Drink Luck Potion +3'}</span>
             <span className="bg-emerald-500/30 px-1.5 py-0.2 rounded text-[10px]">x{potionsCount}</span>
           </button>
         ) : null}

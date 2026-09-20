@@ -419,14 +419,14 @@ export const TradeUpContract: React.FC = () => {
                 title={locale === 'ru' ? 'Зелье удачи активно: контракт принесет лучший профит' : 'Luck Potion active: best contract profit'}
               >
                 <span>🧪</span>
-                <span>{locale === 'ru' ? `Удача активна (${activePotionCharges} зар.)` : `Luck Active (${activePotionCharges} chg)`}</span>
+                <span>{locale === 'ru' ? `Удача: ${activePotionCharges}` : `Luck: ${activePotionCharges}`}</span>
               </div>
             ) : potionsCount > 0 ? (
               <button
                 type="button"
                 onClick={() => drinkPotion()}
                 className="px-3.5 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/30 border border-emerald-400/40 text-emerald-300 font-black text-xs flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 shadow-[0_0_10px_rgba(16,185,129,0.2)]"
-                title={locale === 'ru' ? `Выпить зелье удачи (+3 заряда). В наличии: ${potionsCount}` : `Drink Luck Potion (+3 charges). In stock: ${potionsCount}`}
+                title={locale === 'ru' ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount}` : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
               >
                 <span>🧪</span>
                 <span>{locale === 'ru' ? `Выпить зелье` : `Drink Potion`}</span>

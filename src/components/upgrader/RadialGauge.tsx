@@ -1256,12 +1256,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 {activePotionCharges > 0 && isPotionUsed && potionBonus > 0 ? (
                   <div className="flex items-center gap-1 mt-1 px-2.5 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500 text-[10px] font-black text-emerald-300 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]">
                     <span>
-                      🧪 +{potionBonus % 1 === 0 ? potionBonus.toFixed(0) : potionBonus.toFixed(1)}% {locale === 'ru' ? 'Зелье' : 'Potion'} ({activePotionCharges}/3)
+                      🧪 +{potionBonus % 1 === 0 ? potionBonus.toFixed(0) : potionBonus.toFixed(1)}% {locale === 'ru' ? 'Зелье' : 'Potion'} {activePotionCharges}/3
                     </span>
                   </div>
                 ) : activePotionCharges > 0 && isBaseAtMax ? (
                   <div className="flex items-center gap-1 mt-1 px-2.5 py-0.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-[9px] font-bold text-emerald-400/80 shadow-[0_0_8px_rgba(16,185,129,0.2)]">
-                    <span>{t('upg.potionSaved')} ({activePotionCharges}/3)</span>
+                    <span>{t('upg.potionSaved')} {activePotionCharges}/3</span>
                   </div>
                 ) : (
                   <span

@@ -33,7 +33,7 @@ export const LUCK_POTION: LuckPotion = {
   rarity: 'contraband',
   charges: 3,
   bonusChancePercent: 15,
-  description: '+15% к шансу на следующие 3 апгрейда',
+  description: 'Универсальная удача на 3 действия: кейсы, апгрейдер и контракты',
 };
 
 // Roll drop from opening a case
