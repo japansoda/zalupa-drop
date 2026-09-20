@@ -921,8 +921,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                           <SkinImage
                             src={item.image}
                             alt={item.name}
-                            size={64}
-                            className="w-12 h-12 object-contain"
+                            size={100}
+                            className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md"
                           />
                           <span className="text-[10px] text-white font-black truncate w-full text-center mt-1">
                             {item.skinName || item.name}
@@ -1257,14 +1257,16 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   {chance < 1 ? chance.toFixed(2) : chance.toFixed(1)}%
                 </span>
                 {activePotionCharges > 0 && isPotionUsed && potionBonus > 0 ? (
-                  <div className="flex items-center gap-1 mt-1 px-2.5 py-0.5 rounded-full bg-emerald-950/90 border border-emerald-500 text-[10px] font-black text-emerald-300 animate-pulse shadow-[0_0_10px_rgba(16,185,129,0.5)]">
-                    <span>
-                      🧪 +{potionBonus % 1 === 0 ? potionBonus.toFixed(0) : potionBonus.toFixed(1)}% {locale === 'ru' ? 'Зелье' : 'Potion'} {activePotionCharges}/3
-                    </span>
+                  <div className="flex items-center gap-1 mt-1 font-mono text-[11px] font-bold text-emerald-400 tracking-tight">
+                    <span>🧪</span>
+                    <span>+{potionBonus % 1 === 0 ? potionBonus.toFixed(0) : potionBonus.toFixed(1)}%</span>
+                    <span className="text-emerald-500/60">·</span>
+                    <span className="text-zinc-300">{activePotionCharges}/3</span>
                   </div>
                 ) : activePotionCharges > 0 && isBaseAtMax ? (
-                  <div className="flex items-center gap-1 mt-1 px-2.5 py-0.5 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-[9px] font-bold text-emerald-400/80 shadow-[0_0_8px_rgba(16,185,129,0.2)]">
-                    <span>{t('upg.potionSaved')} {activePotionCharges}/3</span>
+                  <div className="flex items-center gap-1 mt-1 font-mono text-[10px] font-semibold text-emerald-400/80">
+                    <span>{t('upg.potionSaved')}</span>
+                    <span className="text-zinc-400">{activePotionCharges}/3</span>
                   </div>
                 ) : (
                   <span
@@ -1345,8 +1347,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   <SkinImage
                     src={targetSkin.image}
                     alt={targetSkin.name}
-                    size={180}
-                    className="w-32 h-32 object-contain filter drop-shadow-[0_0_20px_rgba(0,0,0,0.8)]"
+                    size={260}
+                    className="w-48 h-36 sm:w-56 sm:h-40 object-contain filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-300"
                   />
                   <span className="font-black text-white text-base text-center line-clamp-1 mt-1">
                     {targetSkin.name}
@@ -1495,12 +1497,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       </div>
                     )}
 
-                    <div className="w-16 h-16 flex items-center justify-center my-1">
+                    <div className="w-full h-24 sm:h-28 flex items-center justify-center my-1">
                       <SkinImage
                         src={item.image}
                         alt={item.name}
-                        size={80}
-                        className="w-full h-full object-contain"
+                        size={140}
+                        className="w-full h-20 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
                       />
                     </div>
 
@@ -1768,12 +1770,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                         </div>
                       )}
 
-                      <div className="w-16 h-16 flex items-center justify-center my-1">
+                      <div className="w-full h-24 sm:h-28 flex items-center justify-center my-1">
                         <SkinImage
                           src={skin.image}
                           alt={skin.name}
-                          size={80}
-                          className="w-full h-full object-contain"
+                          size={140}
+                          className="w-full h-20 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
                         />
                       </div>
 

@@ -207,12 +207,12 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                       <RarityBadge rarity={it.rarity} size="sm" />
                     </div>
 
-                    <div className="w-full h-32 flex items-center justify-center my-2 relative">
+                    <div className="w-full h-36 sm:h-40 flex items-center justify-center my-2 relative">
                       <SkinImage
                         src={it.image}
                         alt={it.name}
-                        size={140}
-                        className="w-28 h-28 object-contain filter drop-shadow-lg group-hover:scale-105 transition-transform duration-200"
+                        size={180}
+                        className="w-full h-32 sm:h-36 object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-200"
                       />
                     </div>
 

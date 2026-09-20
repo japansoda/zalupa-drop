@@ -524,13 +524,13 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
 
                       <div className={`relative ${
                         showAsSpecial 
-                          ? (openCount > 1 ? 'w-24 h-20' : 'w-28 h-24') 
-                          : (openCount > 1 ? 'w-24 h-24' : 'w-28 h-28')
+                          ? (openCount > 1 ? 'w-28 h-20' : 'w-36 h-28') 
+                          : (openCount > 1 ? 'w-28 h-24' : 'w-36 h-32')
                       } my-auto flex items-center justify-center z-10`}>
                         <SkinImage
                           src={displayImage}
                           alt={displayWeapon}
-                          size={120}
+                          size={160}
                           className={`w-full h-full object-contain filter drop-shadow-md ${
                             showAsSpecial ? 'drop-shadow-[0_0_15px_rgba(250,204,21,0.55)]' : ''
                           }`}

@@ -323,12 +323,12 @@ export const TradeUpContract: React.FC = () => {
                   {item ? (
                     <>
                       {/* Skin Image */}
-                      <div className="w-full h-16 sm:h-20 flex items-center justify-center my-1">
+                      <div className="w-full h-24 sm:h-28 flex items-center justify-center my-1">
                         <SkinImage
                           src={item.image}
                           alt={item.name}
-                          size={100}
-                          className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md group-hover:scale-105 transition-transform"
+                          size={160}
+                          className="w-full h-20 sm:h-24 object-contain filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.85)] group-hover:scale-110 transition-transform duration-300"
                         />
                       </div>
 
@@ -403,42 +403,45 @@ export const TradeUpContract: React.FC = () => {
               <span className="text-[11px] text-white/50 uppercase tracking-wider font-semibold">
                 {t('contract.expectedRtp')}
               </span>
-              <span className={`font-mono font-black text-sm flex items-center gap-1 ${hasPotion ? 'text-emerald-300 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'text-emerald-400'}`}>
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                ~{expectedReturnDc.toLocaleString('ru-RU')} DC
-                {hasPotion && <span className="text-[10px] font-black uppercase text-emerald-300 bg-emerald-500/20 px-1.5 py-0.2 rounded border border-emerald-400/40 ml-1">+35% УДАЧА</span>}
+              <span className={`font-mono font-black text-sm flex items-center gap-1.5 ${hasPotion ? 'text-emerald-300 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'text-emerald-400'}`}>
+                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>~{expectedReturnDc.toLocaleString('ru-RU')} DC</span>
+                {hasPotion && (
+                  <span className="font-mono text-[10px] font-bold text-emerald-400 bg-zinc-950/80 border border-emerald-500/30 px-2 py-0.5 rounded-md inline-flex items-center gap-1 ml-1.5 shadow-sm">
+                    <span>🧪</span>
+                    <span>+35%</span>
+                  </span>
+                )}
               </span>
             </div>
           </div>
 
-          {/* Luck Potion status / drink button */}
-          <div className="flex items-center gap-2">
+          {/* Action cluster: Potion pill + Main Action Button */}
+          <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
             {activePotionCharges > 0 ? (
               <div
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 border border-emerald-500/40 text-emerald-300 font-bold text-xs select-none shadow-[0_0_12px_rgba(16,185,129,0.15)]"
-                title={locale === 'ru' ? 'Зелье удачи активно: контракт принесет лучший профит' : 'Luck Potion active: best contract profit'}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-950/80 border border-emerald-500/30 text-emerald-300 font-mono text-xs select-none shadow-sm"
+                title={locale === 'ru' ? 'Зелье удачи активно' : 'Luck Potion active'}
               >
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                 </span>
                 <span>🧪</span>
-                <span className="font-mono font-black text-white">{activePotionCharges}/3</span>
-                <span className="text-[11px] text-emerald-400/90 font-bold hidden xs:inline">{locale === 'ru' ? 'Удача' : 'Luck'}</span>
+                <span className="font-bold text-white">{activePotionCharges}/3</span>
               </div>
             ) : potionsCount > 0 ? (
               <button
                 type="button"
                 onClick={() => drinkPotion()}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl glass-button text-white/80 hover:text-emerald-300 hover:border-emerald-400/40 font-bold text-xs transition-all cursor-pointer active:scale-95"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-white/10 hover:border-emerald-400/40 text-white/90 text-xs font-bold transition-all cursor-pointer active:scale-95"
                 title={locale === 'ru' ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount}` : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
               >
                 <span>🧪</span>
-                <span>{locale === 'ru' ? 'Выпить зелье' : 'Drink Potion'}</span>
-                <span className="font-mono text-[10px] text-yellow-400 bg-white/5 border border-white/10 px-1.5 py-0.2 rounded font-bold">x{potionsCount}</span>
+                <span>{locale === 'ru' ? 'Выпить' : 'Drink'}</span>
+                <span className="font-mono text-[10px] text-yellow-400 bg-black/40 px-1.5 py-0.5 rounded font-bold">x{potionsCount}</span>
               </button>
             ) : null}
-          </div>
 
           {/* Main Action Button */}
           <button
@@ -462,6 +465,7 @@ export const TradeUpContract: React.FC = () => {
           </button>
         </div>
       </div>
+    </div>
 
       {/* 2. INVENTORY SELECTION GRID */}
       <div className="flex flex-col gap-4">
@@ -594,12 +598,12 @@ export const TradeUpContract: React.FC = () => {
                     <RarityBadge rarity={item.rarity} size="sm" />
                   </div>
 
-                  <div className="w-full h-24 flex items-center justify-center my-1.5">
+                  <div className="w-full h-32 sm:h-36 flex items-center justify-center my-1.5">
                     <SkinImage
                       src={item.image}
                       alt={item.name}
-                      size={120}
-                      className="w-20 h-20 object-contain group-hover:scale-110 transition-transform drop-shadow-md"
+                      size={160}
+                      className="w-full h-28 sm:h-32 object-contain group-hover:scale-115 transition-transform duration-300 filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]"
                     />
                   </div>
 
@@ -655,9 +659,9 @@ export const TradeUpContract: React.FC = () => {
                 {wonSkin.name}
               </h3>
 
-              <div className="w-48 h-48 flex items-center justify-center my-4 relative">
+              <div className="w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center my-4 relative">
                 <div
-                  className="absolute inset-0 rounded-full blur-2xl opacity-40"
+                  className="absolute inset-0 rounded-full blur-3xl opacity-45"
                   style={{
                     backgroundColor:
                       (RARITY_CONFIG[wonSkin.rarity] || RARITY_CONFIG.milspec).color,
@@ -666,8 +670,8 @@ export const TradeUpContract: React.FC = () => {
                 <SkinImage
                   src={wonSkin.image}
                   alt={wonSkin.name}
-                  size={200}
-                  className="w-40 h-40 object-contain drop-shadow-2xl z-10 animate-bounce"
+                  size={260}
+                  className="w-56 h-56 sm:w-64 sm:h-64 object-contain filter drop-shadow-[0_16px_36px_rgba(0,0,0,0.9)] z-10 animate-bounce"
                   style={{ animationDuration: '3s' }}
                 />
               </div>

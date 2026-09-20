@@ -36,12 +36,12 @@ export const CaseSkinGroupCard: React.FC<CaseSkinGroupCardProps> = ({ variants }
       </div>
 
       {/* Central Skin Image with Smooth Zoom */}
-      <div className="w-full h-28 flex items-center justify-center my-2 relative">
+      <div className="w-full h-36 sm:h-40 flex items-center justify-center my-2 relative">
         <SkinImage
           src={baseSkin.image}
           alt={baseSkin.name}
-          size={120}
-          className="w-24 h-24 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-md"
+          size={180}
+          className="w-full h-32 sm:h-36 object-contain group-hover:scale-115 transition-transform duration-300 filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.8)]"
         />
       </div>
 

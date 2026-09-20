@@ -286,8 +286,8 @@ export default function HomePage() {
                       )}
 
                       {caseOpenCounts[caseItem.id] && caseOpenCounts[caseItem.id] > 0 && (
-                        <div className="absolute top-2.5 left-2.5 z-20 px-2 py-0.5 rounded-full font-bold text-[8px] uppercase tracking-wider bg-black/80 border border-yellow-400/40 text-yellow-400 flex items-center gap-1 shadow">
-                          <Flame className="w-2.5 h-2.5 text-orange-400 fill-orange-400" />
+                        <div className="absolute top-2.5 left-2.5 z-20 px-2 py-0.5 rounded-md font-mono text-[9px] font-bold bg-zinc-950/80 backdrop-blur-md border border-white/10 text-zinc-200 flex items-center gap-1 shadow-sm">
+                          <Flame className="w-2.5 h-2.5 text-amber-400 fill-amber-400/90" />
                           <span>{caseOpenCounts[caseItem.id]}</span>
                         </div>
                       )}
