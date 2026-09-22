@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Volume2, VolumeX, Plus, Briefcase, Zap, FileText, Box } from 'lucide-react';
+import { Volume2, VolumeX, Plus, Briefcase, Zap, FileText, Box, FlaskConical, ShieldCheck } from 'lucide-react';
 import { useGameStore } from '../../store/useGameStore';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { LogoSvg } from '../ui/LogoSvg';
@@ -93,28 +93,28 @@ export const Header: React.FC = () => {
             {soundEnabled ? <Volume2 className="w-3.5 h-3.5 text-yellow-400" /> : <VolumeX className="w-3.5 h-3.5 text-white/30" />}
           </button>
 
-          {/* Universal Luck Potion Status & Quick Drink */}
+          {/* Consumables: единый стиль пилюль под дизайн сайта */}
           {activePotionCharges > 0 ? (
             <div
-              className="h-7.5 sm:h-8.5 px-2.5 rounded-lg glass-panel border border-emerald-500/30 bg-emerald-500/10 flex items-center gap-1.5 shrink-0 select-none shadow-[0_0_10px_rgba(16,185,129,0.2)]"
-              title={locale === 'ru' 
-                ? `Зелье удачи активно! Осталось ${activePotionCharges} — работает на кейсы, апгрейдер и контракты` 
+              className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg glass-panel border border-emerald-500/30 bg-emerald-500/10 flex items-center gap-1 sm:gap-1.5 shrink-0 select-none shadow-[0_0_10px_rgba(16,185,129,0.2)]"
+              title={locale === 'ru'
+                ? `Зелье удачи активно! Осталось ${activePotionCharges} — работает на кейсы, апгрейдер и контракты`
                 : `Luck Potion active! ${activePotionCharges} left — works on cases, upgrader & contracts`}
             >
-              <span className="text-xs">🧪</span>
-              <span className="font-mono font-bold text-xs text-emerald-400">{activePotionCharges}</span>
+              <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="font-mono font-bold text-xs text-emerald-400">x{activePotionCharges}</span>
             </div>
           ) : potionsCount > 0 ? (
             <button
               type="button"
               onClick={() => drinkPotion()}
-              className="h-7.5 sm:h-8.5 px-2.5 rounded-lg glass-button hover:border-emerald-500/30 text-white/80 hover:text-white font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 shrink-0"
-              title={locale === 'ru' 
-                ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount} шт.` 
+              className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg glass-panel border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-white/80 hover:text-white font-bold text-xs flex items-center gap-1 sm:gap-1.5 transition-all cursor-pointer active:scale-95 shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.2)]"
+              title={locale === 'ru'
+                ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount} шт.`
                 : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
             >
-              <span className="text-xs">🧪</span>
-              <span className="font-mono text-[10px] text-emerald-400/90 bg-emerald-500/10 border border-emerald-500/20 px-1 py-0.2 rounded font-bold">x{potionsCount}</span>
+              <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="font-mono font-bold text-xs text-emerald-400">x{potionsCount}</span>
             </button>
           ) : null}
 
@@ -122,11 +122,11 @@ export const Header: React.FC = () => {
           {saveTokensCount > 0 && (
             <div
               className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg glass-panel border border-yellow-500/30 bg-yellow-500/10 flex items-center gap-1 sm:gap-1.5 shrink-0 select-none shadow-[0_0_10px_rgba(234,179,8,0.2)]"
-              title={locale === 'ru' 
-                ? `Жетон сохранения: ${saveTokensCount} шт. Защищает 1 скин в апгрейдере от сгорания при неудаче` 
+              title={locale === 'ru'
+                ? `Жетон сохранения: ${saveTokensCount} шт. Защищает 1 скин в апгрейдере от сгорания при неудаче`
                 : `Guardian Aegis: ${saveTokensCount} pcs. Protects 1 skin from burning in upgrader on failure`}
             >
-              <span className="text-xs">🪽</span>
+              <ShieldCheck className="w-3.5 h-3.5 text-yellow-400" />
               <span className="font-mono font-bold text-xs text-yellow-400">x{saveTokensCount}</span>
             </div>
           )}
@@ -135,11 +135,11 @@ export const Header: React.FC = () => {
           {zeusCount > 0 && (
             <div
               className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg glass-panel border border-sky-500/30 bg-sky-500/10 flex items-center gap-1 sm:gap-1.5 shrink-0 select-none shadow-[0_0_10px_rgba(56,189,248,0.2)]"
-              title={locale === 'ru' 
-                ? `Zeus x27: ${zeusCount} шт. Стреляет молнией в стрелку апгрейдера: реролл + 5% шанс` 
-                : `Zeus x27: ${zeusCount} pcs. Fires lightning at upgrader arrow: reroll + 5% chance`}
+              title={locale === 'ru'
+                ? `Zeus x27: ${zeusCount} шт. Молния в стрелку: реролл + удача (апгрейдер и кейсы)`
+                : `Zeus x27: ${zeusCount} pcs. Lightning strike: reroll + luck (upgrader & cases)`}
             >
-              <span className="text-xs">⚡</span>
+              <Zap className="w-3.5 h-3.5 text-sky-400" />
               <span className="font-mono font-bold text-xs text-sky-400">x{zeusCount}</span>
             </div>
           )}

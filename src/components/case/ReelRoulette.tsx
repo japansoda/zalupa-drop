@@ -12,7 +12,7 @@ import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { RarityBadge } from '../ui/RarityBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { useGameStore } from '../../store/useGameStore';
-import { Zap, Layers } from 'lucide-react';
+import { Zap, Layers, FlaskConical } from 'lucide-react';
 import { useLanguage } from '../../lib/i18n';
 import { isOfficialCase, isKnifeOrGlove, rollSpecialKnifeDrop } from '../../lib/caseSpecials';
 import { isStatTrakableItem } from '../../lib/steam';
@@ -348,6 +348,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     };
 
     const finishSpin = (finalWinners: SkinEntity[]) => {
+      // Синяя полоса гаснет СРАЗУ после спина — возврат к обычному состоянию
+      setZeusUsedThisSpin(false);
+      setZeusStriking(false);
+      spinResolveRef.current = null;
       setIsRevealed(true);
       const highestWinner = finalWinners.reduce((prev, curr) => {
         const rank = (s: SkinEntity) =>
@@ -357,8 +361,6 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
 
       sound.playWin(highestWinner.rarity);
       setIsSpinning(false);
-      setZeusStriking(false);
-      spinResolveRef.current = null;
       setShowModal(true);
 
       // Immediately emit real drops to live ticker (ONLY from 25,000 DC!)
@@ -530,24 +532,66 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
         {`
           @keyframes caseZeusFlicker {
             0%, 100% { opacity: 1; }
-            10% { opacity: 0.55; }
-            20% { opacity: 1; }
-            40% { opacity: 0.7; }
-            60% { opacity: 1; }
-            75% { opacity: 0.6; }
-            90% { opacity: 1; }
+            8% { opacity: 0.5; }
+            16% { opacity: 1; }
+            30% { opacity: 0.65; }
+            45% { opacity: 1; }
+            62% { opacity: 0.55; }
+            78% { opacity: 1; }
+          }
+          @keyframes caseZeusGlow {
+            0%, 100% { filter: drop-shadow(0 0 6px #38bdf8) drop-shadow(0 0 16px #38bdf8); }
+            50% { filter: drop-shadow(0 0 12px #e0f2fe) drop-shadow(0 0 28px #38bdf8); }
+          }
+          @keyframes caseZeusBoltFlow {
+            0% { stroke-dashoffset: 0; opacity: 1; }
+            50% { opacity: 0.55; }
+            100% { stroke-dashoffset: -28; opacity: 1; }
+          }
+          @keyframes caseZeusPulse {
+            0% { top: -18%; opacity: 0; }
+            15% { opacity: 1; }
+            85% { opacity: 1; }
+            100% { top: 105%; opacity: 0; }
           }
           @keyframes caseZeusSpark {
-            0%, 100% { transform: scale(0.7) rotate(-10deg); opacity: 0.4; }
-            50% { transform: scale(1.3) rotate(10deg); opacity: 1; }
+            0%, 100% { transform: scale(0.65) rotate(-12deg); opacity: 0.35; }
+            50% { transform: scale(1.35) rotate(10deg); opacity: 1; }
           }
           .case-zeus-stripe {
-            animation: caseZeusFlicker 0.8s linear infinite;
+            animation: caseZeusFlicker 0.7s linear infinite;
+          }
+          .case-zeus-glow {
+            animation: caseZeusGlow 0.6s ease-in-out infinite, caseZeusFlicker 0.7s linear infinite;
+          }
+          .case-zeus-bolt {
+            animation: caseZeusBoltFlow 0.45s linear infinite;
+          }
+          .case-zeus-pulse {
+            animation: caseZeusPulse 1.1s ease-in infinite;
           }
           .case-zeus-spark {
             animation: caseZeusSpark ease-in-out infinite;
             transform-origin: center;
             transform-box: fill-box;
+          }
+          @keyframes casePotionRise {
+            0% { transform: translateY(110%) translateX(0) scale(0.7); opacity: 0; }
+            12% { opacity: 0.9; }
+            50% { transform: translateY(45%) translateX(6px) scale(1); opacity: 0.75; }
+            85% { opacity: 0.5; }
+            100% { transform: translateY(-25%) translateX(-6px) scale(1.15); opacity: 0; }
+          }
+          @keyframes casePotionGlowPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+          }
+          .case-potion-bubble {
+            animation: casePotionRise linear infinite;
+            will-change: transform, opacity;
+          }
+          .case-potion-glow {
+            animation: casePotionGlowPulse 2.4s ease-in-out infinite;
           }
         `}
       </style>
@@ -557,31 +601,104 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           <div
             key={reelIdx}
             className={`relative w-full rounded-3xl p-3 glass-panel border shadow-2xl overflow-hidden transition-colors duration-300 ${
-              isZeusCharged ? 'border-sky-400/50 shadow-[0_0_35px_rgba(56,189,248,0.35)]' : 'border-white/10'
+              isZeusCharged
+                ? 'border-sky-400/50 shadow-[0_0_35px_rgba(56,189,248,0.35)]'
+                : activePotionCharges > 0
+                ? 'border-emerald-400/40 shadow-[0_0_30px_rgba(16,185,129,0.22)]'
+                : 'border-white/10'
             }`}
           >
-            {/* Center Winner Indicator — синяя с молниями при Zeus */}
+            {/* Зелье удачи активно — слегка зеленоватый фон */}
+            {activePotionCharges > 0 && (
+              <div className="case-potion-glow absolute inset-0 z-0 pointer-events-none bg-gradient-to-t from-emerald-500/[0.13] via-emerald-500/[0.05] to-transparent" />
+            )}
+            {/* Пузырьки вверх при активном зелье */}
+            {activePotionCharges > 0 && (
+              <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden" aria-hidden>
+                {Array.from({ length: 12 }).map((__, bi) => {
+                  const seed = (reelIdx * 37 + bi * 17) % 100;
+                  const left = (seed * 0.9 + 3) % 96;
+                  const size = 5 + (seed % 9);
+                  const delay = ((seed % 40) / 10).toFixed(2);
+                  const dur = (3.2 + ((seed * 7) % 28) / 10).toFixed(2);
+                  return (
+                    <span
+                      key={bi}
+                      className="case-potion-bubble absolute bottom-0 rounded-full"
+                      style={{
+                        left: `${left.toFixed(1)}%`,
+                        width: size,
+                        height: size,
+                        animationDelay: `${delay}s`,
+                        animationDuration: `${dur}s`,
+                        background: 'radial-gradient(circle at 32% 30%, rgba(236,253,245,0.95) 0%, rgba(110,231,183,0.75) 28%, rgba(16,185,129,0.35) 62%, rgba(16,185,129,0.08) 100%)',
+                        boxShadow: '0 0 8px rgba(52,211,153,0.55)',
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            )}
+            {/* Center Winner Indicator — обычная жёлтая / синяя с живыми молниями при Zeus */}
             <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-6 z-30 pointer-events-none flex flex-col justify-between items-center py-0.5">
               {isZeusCharged ? (
                 <>
-                  <div className="case-zeus-stripe w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[14px] border-t-sky-400 filter drop-shadow-[0_0_12px_#38bdf8]" />
-                  <div className="relative w-[3px] h-full">
-                    <div className="case-zeus-stripe absolute inset-0 bg-sky-400 opacity-95 shadow-[0_0_16px_#38bdf8]" />
-                    <svg viewBox="0 0 12 60" className="absolute -left-[7px] top-1/2 -translate-y-1/2 w-[20px] h-[60px] filter drop-shadow-[0_0_6px_#38bdf8]" preserveAspectRatio="none">
+                  {/* Верхняя стрелка: слоёный наконечник с ядром-молнией */}
+                  <div className="relative w-6 h-[18px] flex items-start justify-center">
+                    <svg viewBox="0 0 24 18" className="case-zeus-glow w-6 h-[18px]">
+                      <polygon points="12,18 2,2 22,2" fill="#38bdf8" stroke="#e0f2fe" strokeWidth="1.5" strokeLinejoin="round" />
+                      <polygon points="12,15 7,5 17,5" fill="#bae6fd" opacity="0.9" />
+                      <path d="M 12 4 L 10.4 9.5 L 12.4 9.5 L 11 15" fill="none" stroke="#ffffff" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="case-zeus-stripe" />
+                    </svg>
+                  </div>
+                  {/* Вертикаль: внешнее свечение + синее ядро + белое горячее ядро + бегущая молния + пульс */}
+                  <div className="relative flex-1 w-[10px] flex justify-center">
+                    <div className="case-zeus-stripe absolute inset-y-0 w-[10px] bg-sky-400/25 blur-[5px]" />
+                    <div className="case-zeus-stripe absolute inset-y-0 w-[3px] bg-sky-400 opacity-95 shadow-[0_0_16px_#38bdf8]" />
+                    <div className="case-zeus-glow absolute inset-y-0 w-[1px] bg-white opacity-90" />
+                    {/* Бегущая по полосе молния (dash-flow) */}
+                    <svg viewBox="0 0 14 100" className="absolute inset-y-0 left-1/2 -translate-x-1/2 h-full w-[14px] filter drop-shadow-[0_0_7px_#38bdf8]" preserveAspectRatio="none">
                       <path
-                        d="M 7 2 L 4 20 L 8 20 L 5 32 L 8 32 L 6 45 L 9 30 L 6 30 L 9 14 L 5 14 Z"
+                        d="M 8 0 L 4.5 22 L 8.5 22 L 5 45 L 9 45 L 6 68 L 9.5 55 L 6.5 55 L 10 30 L 6 30 L 9.5 10 Z"
                         fill="none"
-                        stroke="#e0f2fe"
-                        strokeWidth="1.6"
+                        stroke="#f0f9ff"
+                        strokeWidth="1.7"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="case-zeus-stripe"
+                        strokeDasharray="7 5"
+                        className="case-zeus-bolt"
+                      />
+                      <path
+                        d="M 8 0 L 4.5 22 L 8.5 22 L 5 45 L 9 45 L 6 68 L 9.5 55 L 6.5 55 L 10 30 L 6 30 L 9.5 10 Z"
+                        fill="none"
+                        stroke="#38bdf8"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        opacity="0.45"
                       />
                     </svg>
-                    <span className="case-zeus-spark absolute -left-2 top-[12%] text-[11px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0s', animationDuration: '0.55s' }}>⚡</span>
-                    <span className="case-zeus-spark absolute -right-2 bottom-[14%] text-[11px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0.25s', animationDuration: '0.65s' }}>⚡</span>
+                    {/* Бегущий энергетический сгусток сверху вниз */}
+                    <div className="absolute left-1/2 -translate-x-1/2 w-[6px] h-[16px] rounded-full bg-gradient-to-b from-white via-sky-200 to-transparent blur-[0.5px] shadow-[0_0_12px_#e0f2fe] case-zeus-pulse" />
+                    {/* Боковые искры-молнии */}
+                    <svg viewBox="0 0 10 14" className="case-zeus-spark absolute -left-[9px] top-[10%] w-[10px] h-[14px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0s', animationDuration: '0.5s' }}>
+                      <path d="M 6 1 L 2.5 8 L 5.5 8 L 4 13" fill="none" stroke="#fefce8" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <svg viewBox="0 0 10 14" className="case-zeus-spark absolute -right-[9px] top-[38%] w-[10px] h-[14px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0.18s', animationDuration: '0.6s' }}>
+                      <path d="M 4 1 L 7.5 8 L 4.5 8 L 6 13" fill="none" stroke="#bae6fd" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <svg viewBox="0 0 10 14" className="case-zeus-spark absolute -left-[9px] bottom-[12%] w-[10px] h-[14px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0.32s', animationDuration: '0.55s' }}>
+                      <path d="M 6 1 L 2.5 8 L 5.5 8 L 4 13" fill="none" stroke="#e0f2fe" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                   </div>
-                  <div className="case-zeus-stripe w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[14px] border-b-sky-400 filter drop-shadow-[0_0_12px_#38bdf8]" />
+                  {/* Нижняя стрелка — зеркально верхней */}
+                  <div className="relative w-6 h-[18px] flex items-end justify-center">
+                    <svg viewBox="0 0 24 18" className="case-zeus-glow w-6 h-[18px]">
+                      <polygon points="12,0 2,16 22,16" fill="#38bdf8" stroke="#e0f2fe" strokeWidth="1.5" strokeLinejoin="round" />
+                      <polygon points="12,3 7,13 17,13" fill="#bae6fd" opacity="0.9" />
+                      <path d="M 12 3 L 13.6 8.5 L 11.6 8.5 L 13 14" fill="none" stroke="#ffffff" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="case-zeus-stripe" />
+                    </svg>
+                  </div>
                 </>
               ) : (
                 <>
@@ -592,25 +709,46 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
               )}
             </div>
 
-            {/* Zeus lightning flash overlay */}
+            {/* Zeus lightning flash overlay — тройной разряд */}
             {zeusStriking && (
               <div className="absolute inset-0 z-40 pointer-events-none flex items-center justify-center bg-sky-500/10 animate-in fade-in zoom-in duration-150">
-                <svg viewBox="0 0 200 120" className="w-2/3 h-2/3 filter drop-shadow-[0_0_25px_#38bdf8]">
+                <svg viewBox="0 0 200 120" className="case-zeus-glow w-2/3 h-2/3 filter drop-shadow-[0_0_25px_#38bdf8]">
                   <path
-                    d="M 100 5 L 88 45 L 108 42 L 82 80 L 105 76 L 95 115"
+                    d="M 100 2 L 86 45 L 108 42 L 80 82 L 106 77 L 94 118"
                     stroke="#38bdf8"
-                    strokeWidth="5"
+                    strokeWidth="6"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    opacity="0.85"
                   />
                   <path
-                    d="M 100 5 L 88 45 L 108 42 L 82 80 L 105 76 L 95 115"
+                    d="M 100 2 L 86 45 L 108 42 L 80 82 L 106 77 L 94 118"
                     stroke="#ffffff"
-                    strokeWidth="2.2"
+                    strokeWidth="2.4"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    strokeDasharray="10 4"
+                    className="case-zeus-bolt"
+                  />
+                  <path
+                    d="M 132 8 L 124 34 L 136 32 L 122 62"
+                    stroke="#bae6fd"
+                    strokeWidth="2.5"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="case-zeus-stripe"
+                  />
+                  <path
+                    d="M 68 8 L 76 34 L 64 32 L 78 62"
+                    stroke="#bae6fd"
+                    strokeWidth="2.5"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="case-zeus-stripe"
                   />
                 </svg>
               </div>
@@ -736,26 +874,26 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             </div>
           </div>
 
-          {/* Universal Luck Potion Indicator */}
+          {/* Universal Luck Potion Indicator — единый стиль пилюль сайта */}
           {activePotionCharges > 0 ? (
-            <div 
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl glass-panel border border-white/10 text-white select-none text-xs"
-              title={locale === 'ru' 
+            <div
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg glass-panel border border-emerald-500/30 bg-emerald-500/10 text-white select-none text-xs shadow-[0_0_10px_rgba(16,185,129,0.2)]"
+              title={locale === 'ru'
                 ? `Зелье удачи активно! Осталось ${activePotionCharges} — повышенный шанс на тайное и ножи!`
                 : `Luck Potion active! ${activePotionCharges} left — boosted covert and knives!`}
             >
-              <span>🧪</span>
-              <span className="font-mono font-bold text-emerald-400">{activePotionCharges}/3</span>
+              <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="font-mono font-bold text-xs text-emerald-400">{activePotionCharges}/3</span>
             </div>
           ) : potionsCount > 0 ? (
             <button
               type="button"
               onClick={() => drinkPotion()}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl glass-button border border-white/10 text-white/80 hover:text-white font-bold text-xs transition-all cursor-pointer active:scale-95"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg glass-panel border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-white/80 hover:text-white font-bold text-xs transition-all cursor-pointer active:scale-95 shadow-[0_0_10px_rgba(16,185,129,0.2)]"
               title={locale === 'ru' ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount}` : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
             >
-              <span>🧪</span>
-              <span className="font-mono text-[10px] text-zinc-400 bg-white/5 border border-white/10 px-1.5 py-0.2 rounded font-bold">x{potionsCount}</span>
+              <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="font-mono font-bold text-xs text-emerald-400">x{potionsCount}</span>
             </button>
           ) : null}
         </div>

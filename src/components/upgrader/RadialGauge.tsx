@@ -1300,19 +1300,34 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       }
                       @keyframes zeusFlicker {
                         0%, 100% { opacity: 1; }
-                        8% { opacity: 0.55; }
+                        8% { opacity: 0.5; }
                         16% { opacity: 1; }
-                        32% { opacity: 0.7; }
-                        48% { opacity: 1; }
-                        64% { opacity: 0.6; }
-                        80% { opacity: 1; }
+                        30% { opacity: 0.65; }
+                        45% { opacity: 1; }
+                        62% { opacity: 0.55; }
+                        78% { opacity: 1; }
+                      }
+                      @keyframes zeusGlow {
+                        0%, 100% { filter: drop-shadow(0 0 6px #38bdf8) drop-shadow(0 0 16px #38bdf8); }
+                        50% { filter: drop-shadow(0 0 12px #e0f2fe) drop-shadow(0 0 28px #38bdf8); }
+                      }
+                      @keyframes zeusBoltFlow {
+                        0% { stroke-dashoffset: 0; opacity: 1; }
+                        50% { opacity: 0.55; }
+                        100% { stroke-dashoffset: -24; opacity: 1; }
                       }
                       @keyframes zeusSparkFloat {
-                        0%, 100% { transform: scale(0.7) rotate(-8deg); opacity: 0.4; }
-                        50% { transform: scale(1.25) rotate(8deg); opacity: 1; }
+                        0%, 100% { transform: scale(0.65) rotate(-10deg); opacity: 0.35; }
+                        50% { transform: scale(1.35) rotate(10deg); opacity: 1; }
                       }
                       .zeus-electric-arc {
-                        animation: zeusFlicker 0.9s linear infinite;
+                        animation: zeusFlicker 0.7s linear infinite;
+                      }
+                      .zeus-electric-glow {
+                        animation: zeusGlow 0.6s ease-in-out infinite, zeusFlicker 0.7s linear infinite;
+                      }
+                      .zeus-bolt-flow {
+                        animation: zeusBoltFlow 0.45s linear infinite;
                       }
                       .zeus-spark-item {
                         animation: zeusSparkFloat ease-in-out infinite;
@@ -1321,7 +1336,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       }
                       @keyframes zeusArrowCharge {
                         0%, 100% { filter: drop-shadow(0 0 6px #38bdf8) drop-shadow(0 0 18px #38bdf8); }
-                        50% { filter: drop-shadow(0 0 14px #e0f2fe) drop-shadow(0 0 30px #38bdf8); }
+                        50% { filter: drop-shadow(0 0 14px #e0f2fe) drop-shadow(0 0 32px #38bdf8); }
                       }
                       .zeus-arrow-charged {
                         animation: zeusArrowCharge 0.5s ease-in-out infinite;
@@ -1417,7 +1432,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   </g>
                 )}
 
-                {/* Zeus Electric Sky-Blue Wings with lightning effects */}
+                {/* Zeus Electric Sky-Blue Wings with live lightning */}
                 {zeusBonus > 0 && (
                   <g className="transition-all duration-300 pointer-events-none">
                     {/* Base blue wings */}
@@ -1431,7 +1446,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       strokeDasharray={`${zeusArcLen} ${gaugeC}`}
                       strokeLinecap="butt"
                       transform={`rotate(${leftZeusStartDeg}, 120, 120)`}
-                      className="zeus-electric-arc filter drop-shadow-[0_0_15px_#38bdf8] transition-all duration-300"
+                      className="zeus-electric-glow transition-all duration-300"
                     />
                     <circle
                       cx="120"
@@ -1443,9 +1458,36 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       strokeDasharray={`${zeusArcLen} ${gaugeC}`}
                       strokeLinecap="butt"
                       transform={`rotate(${rightZeusStartDeg}, 120, 120)`}
-                      className="zeus-electric-arc filter drop-shadow-[0_0_15px_#38bdf8] transition-all duration-300"
+                      className="zeus-electric-glow transition-all duration-300"
                     />
-                    {/* Floating lightning sparks on blue wings */}
+                    {/* Bright hot core confined strictly to wings */}
+                    <circle
+                      cx="120"
+                      cy="120"
+                      r={gaugeR}
+                      fill="none"
+                      stroke="#e0f2fe"
+                      strokeWidth="2.5"
+                      strokeDasharray={`${zeusArcLen} ${gaugeC}`}
+                      strokeLinecap="butt"
+                      transform={`rotate(${leftZeusStartDeg}, 120, 120)`}
+                      className="zeus-electric-arc"
+                      opacity="0.9"
+                    />
+                    <circle
+                      cx="120"
+                      cy="120"
+                      r={gaugeR}
+                      fill="none"
+                      stroke="#e0f2fe"
+                      strokeWidth="2.5"
+                      strokeDasharray={`${zeusArcLen} ${gaugeC}`}
+                      strokeLinecap="butt"
+                      transform={`rotate(${rightZeusStartDeg}, 120, 120)`}
+                      className="zeus-electric-arc"
+                      opacity="0.9"
+                    />
+                    {/* Floating lightning sparks on blue wings — dual layer + flow */}
                     {(() => {
                       const sparks: Array<{ id: string; cx: number; cy: number; s: number; delay: string; dur: string }> = [];
                       const midLeft = leftZeusStartDeg + (halfZeus * 3.6) / 2;
@@ -1458,7 +1500,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                             id: `zeus-spark-${wi}-${k}`,
                             cx: Number((120 + rr * Math.cos(a)).toFixed(1)),
                             cy: Number((120 + rr * Math.sin(a)).toFixed(1)),
-                            s: 7 + (k % 2) * 3,
+                            s: 8 + (k % 2) * 3,
                             delay: `${(wi * 0.3 + k * 0.18).toFixed(2)}s`,
                             dur: `${(0.5 + k * 0.14).toFixed(2)}s`,
                           });
@@ -1467,13 +1509,24 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       return sparks.map((sp) => (
                         <g key={sp.id} className="zeus-spark-item" style={{ animationDelay: sp.delay, animationDuration: sp.dur }}>
                           <path
-                            d={`M ${sp.cx} ${sp.cy - sp.s / 2} L ${sp.cx - sp.s * 0.28} ${sp.cy} L ${sp.cx + sp.s * 0.12} ${sp.cy} L ${sp.cx} ${sp.cy + sp.s / 2}`}
-                            stroke="#fefce8"
-                            strokeWidth="1.8"
+                            d={`M ${sp.cx} ${sp.cy - sp.s / 2} L ${sp.cx - sp.s * 0.32} ${sp.cy - sp.s * 0.1} L ${sp.cx + sp.s * 0.1} ${sp.cy + sp.s * 0.05} L ${sp.cx} ${sp.cy + sp.s / 2}`}
+                            stroke="#38bdf8"
+                            strokeWidth="3"
                             fill="none"
                             strokeLinecap="round"
                             strokeLinejoin="round"
+                            opacity="0.55"
                             className="filter drop-shadow-[0_0_6px_#38bdf8]"
+                          />
+                          <path
+                            d={`M ${sp.cx} ${sp.cy - sp.s / 2} L ${sp.cx - sp.s * 0.32} ${sp.cy - sp.s * 0.1} L ${sp.cx + sp.s * 0.1} ${sp.cy + sp.s * 0.05} L ${sp.cx} ${sp.cy + sp.s / 2}`}
+                            stroke="#ffffff"
+                            strokeWidth="1.5"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeDasharray="3 2"
+                            className="zeus-bolt-flow filter drop-shadow-[0_0_6px_#e0f2fe]"
                           />
                         </g>
                       ));
@@ -1482,25 +1535,46 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 )}
               </svg>
 
-              {/* Zeus Lightning Bolt Strike Animation */}
+              {/* Zeus Lightning Bolt Strike Animation — тройной живой разряд */}
               {zeusStriking && (
                 <div className="absolute inset-0 pointer-events-none z-30 flex items-center justify-center animate-in fade-in zoom-in duration-150">
-                  <svg viewBox="0 0 240 240" className="w-full h-full filter drop-shadow-[0_0_25px_#38bdf8]">
+                  <svg viewBox="0 0 240 240" className="zeus-electric-glow w-full h-full filter drop-shadow-[0_0_25px_#38bdf8]">
                     <path
-                      d="M 120 15 L 105 85 L 140 80 L 100 150 L 135 145 L 120 220"
+                      d="M 120 8 L 103 85 L 140 79 L 99 152 L 136 146 L 119 224"
                       stroke="#38bdf8"
-                      strokeWidth="5"
+                      strokeWidth="6"
                       fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      opacity="0.9"
                     />
                     <path
-                      d="M 120 15 L 105 85 L 140 80 L 100 150 L 135 145 L 120 220"
+                      d="M 120 8 L 103 85 L 140 79 L 99 152 L 136 146 L 119 224"
                       stroke="#ffffff"
                       strokeWidth="2.5"
                       fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      strokeDasharray="12 5"
+                      className="zeus-bolt-flow"
+                    />
+                    <path
+                      d="M 165 30 L 152 75 L 168 72 L 150 120"
+                      stroke="#bae6fd"
+                      strokeWidth="3"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="zeus-electric-arc"
+                    />
+                    <path
+                      d="M 75 30 L 88 75 L 72 72 L 90 120"
+                      stroke="#bae6fd"
+                      strokeWidth="3"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="zeus-electric-arc"
                     />
                   </svg>
                 </div>
@@ -1516,52 +1590,87 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   {(zeusUsedThisSpin || zeusStriking) ? (
                     <div className="relative">
                       <svg
-                        className="w-8 h-8 transition-all duration-300 scale-110 zeus-arrow-charged"
+                        className="w-9 h-9 transition-all duration-300 scale-110 zeus-arrow-charged"
                         viewBox="0 0 24 24"
                         fill="none"
                       >
+                        {/* Внешнее электрическое свечение стрелки */}
+                        <polygon
+                          points="2,12 20,4 20,20"
+                          fill="#38bdf8"
+                          stroke="#38bdf8"
+                          strokeWidth="4"
+                          strokeLinejoin="round"
+                          opacity="0.35"
+                          className="zeus-electric-arc"
+                        />
                         <polygon
                           points="2,12 20,4 20,20"
                           fill="#38bdf8"
                           stroke="#e0f2fe"
-                          strokeWidth="2"
+                          strokeWidth="1.8"
                           strokeLinejoin="round"
                         />
-                        {/* Mini lightning etched into arrow */}
+                        <polygon
+                          points="6,12 17,7 17,17"
+                          fill="#bae6fd"
+                          opacity="0.85"
+                        />
+                        {/* Живая молния внутри стрелки */}
                         <path
-                          d="M 13 7 L 10.5 12 L 13.5 12 L 11 17"
+                          d="M 13.5 6.5 L 10.8 11.5 L 13.4 11.5 L 10.8 17.5"
                           stroke="#ffffff"
-                          strokeWidth="1.4"
+                          strokeWidth="1.6"
                           fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          className="zeus-electric-arc"
+                          strokeDasharray="4 2"
+                          className="zeus-bolt-flow filter drop-shadow-[0_0_4px_#ffffff]"
                         />
                       </svg>
-                      {/* Crackling sparks around electrified arrow */}
-                      <svg viewBox="0 0 32 32" className="absolute -inset-2 w-12 h-12 -left-2 -top-4 pointer-events-none">
+                      {/* Трещащие разряды вокруг наэлектризованной стрелки */}
+                      <svg viewBox="0 0 36 36" className="absolute -inset-2 w-14 h-14 -left-2 -top-5 pointer-events-none">
                         <path
-                          d="M 24 2 L 21 9 L 25 9 L 20 18"
-                          stroke="#fefce8"
+                          d="M 26 2 L 22.5 10 L 27 10 L 21.5 21"
+                          stroke="#38bdf8"
+                          strokeWidth="2.6"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          opacity="0.6"
+                        />
+                        <path
+                          d="M 26 2 L 22.5 10 L 27 10 L 21.5 21"
+                          stroke="#ffffff"
+                          strokeWidth="1.2"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeDasharray="3 2"
+                          className="zeus-bolt-flow filter drop-shadow-[0_0_6px_#e0f2fe]"
+                        />
+                        <path
+                          d="M 9 24 L 12.5 27.5 L 10 30.5"
+                          stroke="#bae6fd"
                           strokeWidth="1.6"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="zeus-spark-item filter drop-shadow-[0_0_5px_#38bdf8]"
+                          style={{ animationDelay: '0.2s', animationDuration: '0.55s' }}
+                        />
+                        <path
+                          d="M 28 24 L 25 28 L 28 30"
+                          stroke="#fefce8"
+                          strokeWidth="1.4"
                           fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           className="zeus-spark-item filter drop-shadow-[0_0_6px_#38bdf8]"
                           style={{ animationDelay: '0s', animationDuration: '0.5s' }}
                         />
-                        <path
-                          d="M 8 22 L 11 25 L 9 28"
-                          stroke="#bae6fd"
-                          strokeWidth="1.4"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="zeus-spark-item filter drop-shadow-[0_0_5px_#38bdf8]"
-                          style={{ animationDelay: '0.25s', animationDuration: '0.6s' }}
-                        />
                       </svg>
-                      <span className="absolute right-0 -top-2 text-xs animate-ping">⚡</span>
+                      <span className="zeus-spark-item absolute right-0 -top-2.5 text-sm filter drop-shadow-[0_0_8px_#38bdf8]" style={{ animationDuration: '0.45s' }}>⚡</span>
                     </div>
                   ) : (
                     <svg
