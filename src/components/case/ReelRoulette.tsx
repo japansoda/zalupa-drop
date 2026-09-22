@@ -39,16 +39,18 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   caseImage,
   caseId,
 }) => {
-  const { 
-    balance, 
-    deductBalance, 
-    addToInventory, 
-    addBalance, 
-    addLiveDrop, 
-    activePotionCharges, 
-    consumePotionCharge, 
-    potionsCount, 
-    drinkPotion 
+  const {
+    balance,
+    deductBalance,
+    addToInventory,
+    addBalance,
+    addLiveDrop,
+    activePotionCharges,
+    consumePotionCharge,
+    potionsCount,
+    drinkPotion,
+    zeusCount,
+    useZeus,
   } = useGameStore();
   const { t, locale } = useLanguage();
   const [openCount, setOpenCount] = useState<1 | 2 | 3>(1);
@@ -72,7 +74,27 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   const controls2 = useAnimation();
   const lastSoundTickPos = useRef<number>(0);
 
-  const pickWeightedSkin = (isPotionBoosted: boolean = false): SkinEntity => {
+  // Zeus reroll state (same as upgrader: press only mid-spin)
+  const [zeusUsedThisSpin, setZeusUsedThisSpin] = useState(false);
+  const [zeusStriking, setZeusStriking] = useState(false);
+  const spinResolveRef = useRef<(() => void) | null>(null);
+
+  const canPressZeus =
+    isSpinning && !isRevealed && !zeusUsedThisSpin && !zeusStriking && zeusCount > 0 && !fastOpen;
+
+  const handleActivateZeus = () => {
+    if (!canPressZeus) return;
+    useZeus();
+    setZeusUsedThisSpin(true);
+    setZeusStriking(true);
+    sound.playZeusShock();
+    if (spinResolveRef.current) {
+      spinResolveRef.current();
+      spinResolveRef.current = null;
+    }
+  };
+
+  const pickWeightedSkin = (isPotionBoosted: boolean = false, isZeusBoosted: boolean = false): SkinEntity => {
     // 1. Exact 10% knife cases
     if (caseId === 'case_10_knife' || caseName.includes('10% Нож') || caseName.includes('10% Knife')) {
       const knives = caseSkins.filter(isKnifeOrGlove);
@@ -113,10 +135,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       return caseId && isOfficialCase(caseId) && isKnifeOrGlove(last) ? rollSpecialKnifeDrop(caseId) : last;
     }
 
-    // 3. Calibrated 98.0% RTP for ALL cases:
-    // Target EV = 0.98 * casePriceDc.
-    // Solves alpha power exponent via binary search so expected drop return is strictly 98%!
-    const targetEV = Math.max(15, casePriceDc * 0.98);
+    // 3. Calibrated 98.5% RTP for ALL cases:
+    // Target EV = 0.985 * casePriceDc.
+    // Solves alpha power exponent via binary search so expected drop return is strictly 98.5%!
+    const targetEV = Math.max(15, casePriceDc * 0.985);
     const prices = caseSkins.map((s) => Math.max(1, s.priceDc));
     const minP = Math.min(...prices);
     const maxP = Math.max(...prices);
@@ -165,6 +187,16 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
         (s) => s.rarity === 'gold' || s.rarity === 'covert' || s.rarity === 'classified' || s.priceDc >= casePriceDc
       );
       if (topTier.length > 0 && Math.random() < 0.50) {
+        selected = topTier[Math.floor(Math.random() * topTier.length)];
+      }
+    }
+
+    // Zeus small luck: reroll bonus — modest top-tier upgrade chance (~28%)
+    if (isZeusBoosted) {
+      const topTier = caseSkins.filter(
+        (s) => s.rarity === 'gold' || s.rarity === 'covert' || s.rarity === 'classified' || s.priceDc >= casePriceDc
+      );
+      if (topTier.length > 0 && Math.random() < 0.28) {
         selected = topTier[Math.floor(Math.random() * topTier.length)];
       }
     }
@@ -269,6 +301,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     setIsSpinning(true);
     setIsRevealed(false);
     setShowModal(false);
+    setZeusUsedThisSpin(false);
+    setZeusStriking(false);
+    spinResolveRef.current = null;
 
     // Roll bonus consumables for each opened case (low chance)
     let droppedPotions = 0;
@@ -291,144 +326,176 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     }
     setBonusConsumables({ potions: droppedPotions, saveTokens: droppedSaveTokens, zeus: droppedZeus });
 
-    // Pick winners for each reel and roll wear & StatTrak
-    const winners: SkinEntity[] = [];
-    for (let i = 0; i < openCount; i++) {
-      const hasCharge = useGameStore.getState().activePotionCharges > 0;
-      if (hasCharge) {
-        useGameStore.getState().consumePotionCharge();
+    const spinOpenCount = openCount;
+
+    const rollWinners = (isZeusReroll: boolean): SkinEntity[] => {
+      const out: SkinEntity[] = [];
+      for (let i = 0; i < spinOpenCount; i++) {
+        if (!isZeusReroll) {
+          const hasCharge = useGameStore.getState().activePotionCharges > 0;
+          if (hasCharge) {
+            useGameStore.getState().consumePotionCharge();
+          }
+          const baseSkin = pickWeightedSkin(hasCharge, false);
+          out.push(rollWearAndStatTrak(baseSkin));
+        } else {
+          // Zeus reroll: small luck boost, potion charges NOT consumed again
+          const baseSkin = pickWeightedSkin(false, true);
+          out.push(rollWearAndStatTrak(baseSkin));
+        }
       }
-      const baseSkin = pickWeightedSkin(hasCharge);
-      winners.push(rollWearAndStatTrak(baseSkin));
-    }
+      return out;
+    };
+
+    const finishSpin = (finalWinners: SkinEntity[]) => {
+      setIsRevealed(true);
+      const highestWinner = finalWinners.reduce((prev, curr) => {
+        const rank = (s: SkinEntity) =>
+          s.rarity === 'gold' ? 6 : s.rarity === 'covert' ? 5 : s.rarity === 'classified' ? 4 : s.rarity === 'restricted' ? 3 : 2;
+        return rank(curr) > rank(prev) ? curr : prev;
+      }, finalWinners[0]);
+
+      sound.playWin(highestWinner.rarity);
+      setIsSpinning(false);
+      setZeusStriking(false);
+      spinResolveRef.current = null;
+      setShowModal(true);
+
+      // Immediately emit real drops to live ticker (ONLY from 25,000 DC!)
+      finalWinners.forEach((skin) => {
+        if (skin.priceDc >= 25000) {
+          addLiveDrop({
+            id: `real_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
+            user: locale === 'ru' ? 'Вы' : 'YOU',
+            avatar: '',
+            skin: skin,
+            caseName: caseName,
+            timestamp: Date.now(),
+          });
+        }
+      });
+    };
+
+    // Initial roll
+    let winners = rollWinners(false);
     setWinningSkins(winners);
 
     // Build new reels
-    const newReels = [...reels];
-    for (let i = 0; i < openCount; i++) {
-      newReels[i] = generateReel(winners[i]);
-    }
-    setReels(newReels);
+    const buildReels = (ws: SkinEntity[]) => {
+      const nr = [...reels];
+      for (let i = 0; i < spinOpenCount; i++) {
+        nr[i] = generateReel(ws[i]);
+      }
+      return nr;
+    };
+    setReels(buildReels(winners));
+    // Let React paint new reels before measuring/animating
+    await new Promise<void>((r) => setTimeout(r, 60));
 
     if (fastOpen) {
       setTimeout(() => {
-        setIsRevealed(true);
-        // Play single win sound of highest rarity
-        const highestWinner = winners.reduce((prev, curr) => {
-          const rank = (s: SkinEntity) =>
-            s.rarity === 'gold' ? 6 : s.rarity === 'covert' ? 5 : s.rarity === 'classified' ? 4 : s.rarity === 'restricted' ? 3 : 2;
-          return rank(curr) > rank(prev) ? curr : prev;
-        }, winners[0]);
-
-        sound.playWin(highestWinner.rarity);
-        setIsSpinning(false);
-        setShowModal(true);
-
-        // Immediately emit real drops to live ticker (ONLY from 25,000 DC!)
-        winners.forEach((skin) => {
-          if (skin.priceDc >= 25000) {
-            addLiveDrop({
-              id: `real_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
-              user: locale === 'ru' ? 'Вы' : 'YOU',
-              avatar: '',
-              skin: skin,
-              caseName: caseName,
-              timestamp: Date.now(),
-            });
-          }
-        });
+        finishSpin(winners);
       }, 350);
       return;
     }
 
-    const containerWidth = containerRef0.current?.offsetWidth || 800;
-    const centerOffset = containerWidth / 2;
+    // Animate with Zeus interrupt support (same as upgrader: press mid-spin -> reroll)
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const containerWidth = containerRef0.current?.offsetWidth || 800;
+      const centerOffset = containerWidth / 2;
 
-    // Reset positions
-    controls0.set({ x: 0 });
-    controls1.set({ x: 0 });
-    controls2.set({ x: 0 });
+      // Reset positions
+      controls0.set({ x: 0 });
+      controls1.set({ x: 0 });
+      controls2.set({ x: 0 });
 
-    const duration = 6.0;
-    const startTime = Date.now();
-    lastSoundTickPos.current = 0;
+      const duration = 6.0;
+      const startTime = Date.now();
+      lastSoundTickPos.current = 0;
 
-    // Perfect centering without jitter so all 1, 2, or 3 reels align dead center under the arrow
-    const targetX0 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset);
-    const targetX1 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset);
-    const targetX2 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset);
+      // Perfect centering without jitter so all 1, 2, or 3 reels align dead center under the arrow
+      const targetX0 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset);
+      const targetX1 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset);
+      const targetX2 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset);
 
-    let rafId: number;
-    const updateSoundTick = () => {
-      const elapsed = (Date.now() - startTime) / 1000;
-      if (elapsed >= duration) return;
+      let rafId = 0;
+      let rafCancelled = false;
+      const updateSoundTick = () => {
+        if (rafCancelled) return;
+        const elapsed = (Date.now() - startTime) / 1000;
+        if (elapsed >= duration) return;
 
-      const progress = elapsed / duration;
-      const easeProgress = 1 - Math.pow(1 - progress, 3);
-      const currentPos = Math.abs(targetX0 * easeProgress);
+        const progress = elapsed / duration;
+        const easeProgress = 1 - Math.pow(1 - progress, 3);
+        const currentPos = Math.abs(targetX0 * easeProgress);
 
-      const itemsPassed = Math.floor(currentPos / (ITEM_WIDTH + ITEM_GAP));
-      if (itemsPassed > lastSoundTickPos.current) {
-        sound.playTick(0.8 + (1 - progress) * 0.4);
-        lastSoundTickPos.current = itemsPassed;
-      }
+        const itemsPassed = Math.floor(currentPos / (ITEM_WIDTH + ITEM_GAP));
+        if (itemsPassed > lastSoundTickPos.current) {
+          sound.playTick(0.8 + (1 - progress) * 0.4);
+          lastSoundTickPos.current = itemsPassed;
+        }
+        rafId = requestAnimationFrame(updateSoundTick);
+      };
       rafId = requestAnimationFrame(updateSoundTick);
-    };
-    rafId = requestAnimationFrame(updateSoundTick);
 
-    const animPromises = [
-      controls0.start({
-        x: targetX0,
-        transition: { duration, ease: [0.12, 0.8, 0.15, 1] },
-      }),
-    ];
+      const animPromises = [
+        controls0.start({
+          x: targetX0,
+          transition: { duration, ease: [0.12, 0.8, 0.15, 1] },
+        }),
+      ];
 
-    if (openCount >= 2) {
-      animPromises.push(
-        controls1.start({
-          x: targetX1,
-          transition: { duration: duration + 0.05, ease: [0.12, 0.8, 0.15, 1] },
-        })
-      );
-    }
-
-    if (openCount >= 3) {
-      animPromises.push(
-        controls2.start({
-          x: targetX2,
-          transition: { duration: duration + 0.1, ease: [0.12, 0.8, 0.15, 1] },
-        })
-      );
-    }
-
-    await Promise.all(animPromises);
-    cancelAnimationFrame(rafId);
-    setIsRevealed(true);
-
-    // Single win sound of highest rarity
-    const highestWinner = winners.reduce((prev, curr) => {
-      const rank = (s: SkinEntity) =>
-        s.rarity === 'gold' ? 6 : s.rarity === 'covert' ? 5 : s.rarity === 'classified' ? 4 : s.rarity === 'restricted' ? 3 : 2;
-      return rank(curr) > rank(prev) ? curr : prev;
-    }, winners[0]);
-
-    sound.playWin(highestWinner.rarity);
-    setIsSpinning(false);
-    setShowModal(true);
-
-    // Immediately emit real drops to live ticker (ONLY from 25,000 DC!)
-    winners.forEach((skin) => {
-      if (skin.priceDc >= 25000) {
-        addLiveDrop({
-          id: `real_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
-          user: locale === 'ru' ? 'Вы' : 'YOU',
-          avatar: '',
-          skin: skin,
-          caseName: caseName,
-          timestamp: Date.now(),
-        });
+      if (spinOpenCount >= 2) {
+        animPromises.push(
+          controls1.start({
+            x: targetX1,
+            transition: { duration: duration + 0.05, ease: [0.12, 0.8, 0.15, 1] },
+          })
+        );
       }
-    });
+
+      if (spinOpenCount >= 3) {
+        animPromises.push(
+          controls2.start({
+            x: targetX2,
+            transition: { duration: duration + 0.1, ease: [0.12, 0.8, 0.15, 1] },
+          })
+        );
+      }
+
+      const zeusInterrupt = new Promise<'zeus'>((resolve) => {
+        spinResolveRef.current = () => resolve('zeus');
+      });
+
+      const result = await Promise.race([
+        Promise.all(animPromises).then(() => 'done' as const),
+        zeusInterrupt,
+      ]);
+
+      rafCancelled = true;
+      cancelAnimationFrame(rafId);
+
+      if (result === 'zeus') {
+        // Zeus pressed mid-spin: stop reels, lightning flash, reroll with small luck
+        try {
+          controls0.stop();
+          controls1.stop();
+          controls2.stop();
+        } catch {}
+        await new Promise<void>((r) => setTimeout(r, 650));
+        setZeusStriking(false);
+        winners = rollWinners(true);
+        setWinningSkins(winners);
+        setReels(buildReels(winners));
+        await new Promise<void>((r) => setTimeout(r, 60));
+        continue;
+      }
+
+      spinResolveRef.current = null;
+      finishSpin(winners);
+      break;
+    }
   };
 
   const handleKeep = (itemsToKeep?: SkinEntity[]) => {
@@ -455,21 +522,99 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
 
   const animControls = [controls0, controls1, controls2];
 
+  const isZeusCharged = zeusUsedThisSpin || zeusStriking;
+
   return (
     <div className="w-full flex flex-col items-center">
+      <style>
+        {`
+          @keyframes caseZeusFlicker {
+            0%, 100% { opacity: 1; }
+            10% { opacity: 0.55; }
+            20% { opacity: 1; }
+            40% { opacity: 0.7; }
+            60% { opacity: 1; }
+            75% { opacity: 0.6; }
+            90% { opacity: 1; }
+          }
+          @keyframes caseZeusSpark {
+            0%, 100% { transform: scale(0.7) rotate(-10deg); opacity: 0.4; }
+            50% { transform: scale(1.3) rotate(10deg); opacity: 1; }
+          }
+          .case-zeus-stripe {
+            animation: caseZeusFlicker 0.8s linear infinite;
+          }
+          .case-zeus-spark {
+            animation: caseZeusSpark ease-in-out infinite;
+            transform-origin: center;
+            transform-box: fill-box;
+          }
+        `}
+      </style>
       {/* Multi-reel display */}
       <div className="w-full max-w-5xl flex flex-col gap-4">
         {Array.from({ length: openCount }).map((_, reelIdx) => (
           <div
             key={reelIdx}
-            className="relative w-full rounded-3xl p-3 glass-panel border border-white/10 shadow-2xl overflow-hidden"
+            className={`relative w-full rounded-3xl p-3 glass-panel border shadow-2xl overflow-hidden transition-colors duration-300 ${
+              isZeusCharged ? 'border-sky-400/50 shadow-[0_0_35px_rgba(56,189,248,0.35)]' : 'border-white/10'
+            }`}
           >
-            {/* Center Winner Indicator */}
+            {/* Center Winner Indicator — синяя с молниями при Zeus */}
             <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-6 z-30 pointer-events-none flex flex-col justify-between items-center py-0.5">
-              <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[14px] border-t-yellow-400 filter drop-shadow-[0_0_10px_#facc15]" />
-              <div className="w-[2px] h-full bg-yellow-400 opacity-90 shadow-[0_0_12px_#facc15]" />
-              <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[14px] border-b-yellow-400 filter drop-shadow-[0_0_10px_#facc15]" />
+              {isZeusCharged ? (
+                <>
+                  <div className="case-zeus-stripe w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[14px] border-t-sky-400 filter drop-shadow-[0_0_12px_#38bdf8]" />
+                  <div className="relative w-[3px] h-full">
+                    <div className="case-zeus-stripe absolute inset-0 bg-sky-400 opacity-95 shadow-[0_0_16px_#38bdf8]" />
+                    <svg viewBox="0 0 12 60" className="absolute -left-[7px] top-1/2 -translate-y-1/2 w-[20px] h-[60px] filter drop-shadow-[0_0_6px_#38bdf8]" preserveAspectRatio="none">
+                      <path
+                        d="M 7 2 L 4 20 L 8 20 L 5 32 L 8 32 L 6 45 L 9 30 L 6 30 L 9 14 L 5 14 Z"
+                        fill="none"
+                        stroke="#e0f2fe"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="case-zeus-stripe"
+                      />
+                    </svg>
+                    <span className="case-zeus-spark absolute -left-2 top-[12%] text-[11px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0s', animationDuration: '0.55s' }}>⚡</span>
+                    <span className="case-zeus-spark absolute -right-2 bottom-[14%] text-[11px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0.25s', animationDuration: '0.65s' }}>⚡</span>
+                  </div>
+                  <div className="case-zeus-stripe w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[14px] border-b-sky-400 filter drop-shadow-[0_0_12px_#38bdf8]" />
+                </>
+              ) : (
+                <>
+                  <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[14px] border-t-yellow-400 filter drop-shadow-[0_0_10px_#facc15]" />
+                  <div className="w-[2px] h-full bg-yellow-400 opacity-90 shadow-[0_0_12px_#facc15]" />
+                  <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[14px] border-b-yellow-400 filter drop-shadow-[0_0_10px_#facc15]" />
+                </>
+              )}
             </div>
+
+            {/* Zeus lightning flash overlay */}
+            {zeusStriking && (
+              <div className="absolute inset-0 z-40 pointer-events-none flex items-center justify-center bg-sky-500/10 animate-in fade-in zoom-in duration-150">
+                <svg viewBox="0 0 200 120" className="w-2/3 h-2/3 filter drop-shadow-[0_0_25px_#38bdf8]">
+                  <path
+                    d="M 100 5 L 88 45 L 108 42 L 82 80 L 105 76 L 95 115"
+                    stroke="#38bdf8"
+                    strokeWidth="5"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M 100 5 L 88 45 L 108 42 L 82 80 L 105 76 L 95 115"
+                    stroke="#ffffff"
+                    strokeWidth="2.2"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            )}
 
             <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#08080a] to-transparent z-20 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#08080a] to-transparent z-20 pointer-events-none" />
@@ -629,22 +774,50 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             </span>
           </label>
 
-          <button
-            type="button"
-            onClick={startSpin}
-            disabled={isSpinning}
-            className={`w-full sm:w-auto px-10 py-4 rounded-2xl btn-yellow text-black font-black text-base uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all ${
-              isSpinning ? 'opacity-50 cursor-not-allowed' : ''
-            }`}
-          >
-            <span>
-              {isSpinning
-                ? t('case.openingAction')
-                : locale === 'ru'
-                ? `Открыть ${openCount > 1 ? `${openCount} кейса` : 'кейс'} за ${totalCost.toLocaleString('ru-RU')} DC`
-                : `Open ${openCount > 1 ? `${openCount} cases` : 'case'} for ${totalCost.toLocaleString('ru-RU')} DC`}
-            </span>
-          </button>
+          {isSpinning ? (
+            // Во время спина кнопка Открыть заменяется кнопкой Zeus (только если есть Zeus)
+            canPressZeus || zeusUsedThisSpin || zeusStriking ? (
+              <button
+                type="button"
+                onClick={handleActivateZeus}
+                disabled={!canPressZeus}
+                className={`w-full sm:w-auto px-10 py-4 rounded-2xl font-black text-base uppercase tracking-wider flex items-center justify-center gap-2 border-2 transition-all ${
+                  canPressZeus
+                    ? 'bg-sky-500 hover:bg-sky-400 text-black border-sky-200 shadow-[0_0_35px_rgba(56,189,248,0.7)] cursor-pointer active:scale-95 animate-pulse'
+                    : 'bg-sky-500/20 border-sky-400/50 text-sky-300 cursor-default'
+                }`}
+              >
+                <span className={canPressZeus ? 'animate-bounce inline-block' : 'inline-block'}>⚡</span>
+                <span>
+                  {zeusUsedThisSpin || zeusStriking
+                    ? (locale === 'ru' ? 'Zeus бьёт! Перекрут...' : 'Zeus strikes! Rerolling...')
+                    : (locale === 'ru' ? `Вжать Zeus! · ${zeusCount} шт.` : `Hit Zeus! · ${zeusCount}`)}
+                </span>
+                <span className={canPressZeus ? 'animate-bounce inline-block' : 'inline-block'}>⚡</span>
+              </button>
+            ) : (
+              <button
+                type="button"
+                disabled
+                className="w-full sm:w-auto px-10 py-4 rounded-2xl btn-yellow text-black font-black text-base uppercase tracking-wider flex items-center justify-center gap-2 opacity-50 cursor-not-allowed"
+              >
+                <span>{t('case.openingAction')}</span>
+              </button>
+            )
+          ) : (
+            <button
+              type="button"
+              onClick={startSpin}
+              disabled={isSpinning}
+              className="w-full sm:w-auto px-10 py-4 rounded-2xl btn-yellow text-black font-black text-base uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all"
+            >
+              <span>
+                {locale === 'ru'
+                  ? `Открыть ${openCount > 1 ? `${openCount} кейса` : 'кейс'} за ${totalCost.toLocaleString('ru-RU')} DC`
+                  : `Open ${openCount > 1 ? `${openCount} cases` : 'case'} for ${totalCost.toLocaleString('ru-RU')} DC`}
+              </span>
+            </button>
+          )}
         </div>
       </div>
 
