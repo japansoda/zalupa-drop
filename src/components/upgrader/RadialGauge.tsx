@@ -1307,19 +1307,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                         64% { opacity: 0.6; }
                         80% { opacity: 1; }
                       }
-                      @keyframes zeusDashFlow {
-                        0% { stroke-dashoffset: 0; }
-                        100% { stroke-dashoffset: -48; }
-                      }
                       @keyframes zeusSparkFloat {
                         0%, 100% { transform: scale(0.7) rotate(-8deg); opacity: 0.4; }
                         50% { transform: scale(1.25) rotate(8deg); opacity: 1; }
                       }
                       .zeus-electric-arc {
                         animation: zeusFlicker 0.9s linear infinite;
-                      }
-                      .zeus-electric-dash {
-                        animation: zeusDashFlow 0.6s linear infinite, zeusFlicker 0.9s linear infinite;
                       }
                       .zeus-spark-item {
                         animation: zeusSparkFloat ease-in-out infinite;
@@ -1451,60 +1444,6 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       strokeLinecap="butt"
                       transform={`rotate(${rightZeusStartDeg}, 120, 120)`}
                       className="zeus-electric-arc filter drop-shadow-[0_0_15px_#38bdf8] transition-all duration-300"
-                    />
-                    {/* Electric lightning overlay: thin bright jagged dashes flowing over blue bar */}
-                    <circle
-                      cx="120"
-                      cy="120"
-                      r={gaugeR}
-                      fill="none"
-                      stroke="#e0f2fe"
-                      strokeWidth="3"
-                      strokeDasharray="6 10 2 10"
-                      strokeLinecap="round"
-                      transform={`rotate(${leftZeusStartDeg}, 120, 120)`}
-                      className="zeus-electric-dash"
-                      opacity="0.95"
-                    />
-                    <circle
-                      cx="120"
-                      cy="120"
-                      r={gaugeR}
-                      fill="none"
-                      stroke="#e0f2fe"
-                      strokeWidth="3"
-                      strokeDasharray="6 10 2 10"
-                      strokeLinecap="round"
-                      transform={`rotate(${rightZeusStartDeg}, 120, 120)`}
-                      className="zeus-electric-dash"
-                      opacity="0.95"
-                    />
-                    {/* Outer crackling halo */}
-                    <circle
-                      cx="120"
-                      cy="120"
-                      r={gaugeR}
-                      fill="none"
-                      stroke="#38bdf8"
-                      strokeWidth="1.5"
-                      strokeDasharray="2 14 4 14"
-                      strokeLinecap="round"
-                      transform={`rotate(${leftZeusStartDeg - 1}, 120, 120)`}
-                      className="zeus-electric-dash"
-                      opacity="0.8"
-                    />
-                    <circle
-                      cx="120"
-                      cy="120"
-                      r={gaugeR}
-                      fill="none"
-                      stroke="#38bdf8"
-                      strokeWidth="1.5"
-                      strokeDasharray="2 14 4 14"
-                      strokeLinecap="round"
-                      transform={`rotate(${rightZeusStartDeg - 1}, 120, 120)`}
-                      className="zeus-electric-dash"
-                      opacity="0.8"
                     />
                     {/* Floating lightning sparks on blue wings */}
                     {(() => {
@@ -1730,14 +1669,6 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       : t('upg.upgradeBtn')}
                   </span>
                 </button>
-              )}
-              {/* Подсказка про Zeus во время спина (только если есть Zeus и спин ещё не с Zeus) */}
-              {!isUpgrading && zeusCount > 0 && (
-                <div className="text-center text-[11px] text-sky-300/70 font-bold">
-                  {locale === 'ru'
-                    ? `⚡ Zeus x27 (${zeusCount} шт.): жми кнопку вместо «Улучшить», когда спин уже идёт`
-                    : `⚡ Zeus x27 (${zeusCount}): hit the button instead of Upgrade mid-spin`}
-                </div>
               )}
             </div>
           </div>
