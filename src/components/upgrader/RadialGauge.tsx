@@ -1310,8 +1310,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                         78% { opacity: 1; }
                       }
                       @keyframes zeusGlow {
-                        0%, 100% { filter: drop-shadow(0 0 6px #38bdf8) drop-shadow(0 0 16px #38bdf8); }
-                        50% { filter: drop-shadow(0 0 12px #e0f2fe) drop-shadow(0 0 28px #38bdf8); }
+                        0%, 100% { opacity: 1; }
+                        50% { opacity: 0.72; }
                       }
                       @keyframes zeusBoltFlow {
                         0% { stroke-dashoffset: 0; opacity: 1; }
@@ -1337,8 +1337,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                         transform-box: fill-box;
                       }
                       @keyframes zeusArrowCharge {
-                        0%, 100% { filter: drop-shadow(0 0 6px #38bdf8) drop-shadow(0 0 18px #38bdf8); }
-                        50% { filter: drop-shadow(0 0 14px #e0f2fe) drop-shadow(0 0 32px #38bdf8); }
+                        0%, 100% { opacity: 1; }
+                        50% { opacity: 0.78; }
                       }
                       .zeus-arrow-charged {
                         animation: zeusArrowCharge 0.5s ease-in-out infinite;
@@ -1448,7 +1448,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       strokeDasharray={`${zeusArcLen} ${gaugeC}`}
                       strokeLinecap="butt"
                       transform={`rotate(${leftZeusStartDeg}, 120, 120)`}
-                      className="zeus-electric-glow transition-all duration-300"
+                      className="zeus-electric-glow filter drop-shadow-[0_0_15px_#38bdf8] transition-all duration-300"
                     />
                     <circle
                       cx="120"
@@ -1460,7 +1460,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       strokeDasharray={`${zeusArcLen} ${gaugeC}`}
                       strokeLinecap="butt"
                       transform={`rotate(${rightZeusStartDeg}, 120, 120)`}
-                      className="zeus-electric-glow transition-all duration-300"
+                      className="zeus-electric-glow filter drop-shadow-[0_0_15px_#38bdf8] transition-all duration-300"
                     />
                     {/* Floating lightning bolts riding the blue wings */}
                     {(() => {
@@ -1609,7 +1609,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   {(zeusUsedThisSpin || zeusStriking) ? (
                     <div className="relative">
                       <svg
-                        className="w-9 h-9 transition-all duration-300 scale-110 zeus-arrow-charged"
+                        className="w-9 h-9 transition-all duration-300 scale-110 zeus-arrow-charged filter drop-shadow-[0_0_14px_#38bdf8]"
                         viewBox="0 0 24 24"
                         fill="none"
                       >

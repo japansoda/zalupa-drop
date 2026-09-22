@@ -539,20 +539,16 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             62% { opacity: 0.55; }
             78% { opacity: 1; }
           }
-          @keyframes caseZeusGlow {
-            0%, 100% { filter: drop-shadow(0 0 6px #38bdf8) drop-shadow(0 0 16px #38bdf8); }
-            50% { filter: drop-shadow(0 0 12px #e0f2fe) drop-shadow(0 0 28px #38bdf8); }
-          }
           @keyframes caseZeusBoltFlow {
             0% { stroke-dashoffset: 0; opacity: 1; }
             50% { opacity: 0.55; }
             100% { stroke-dashoffset: -28; opacity: 1; }
           }
           @keyframes caseZeusPulse {
-            0% { top: -18%; opacity: 0; }
+            0% { transform: translateY(-20px); opacity: 0; }
             15% { opacity: 1; }
             85% { opacity: 1; }
-            100% { top: 105%; opacity: 0; }
+            100% { transform: translateY(250px); opacity: 0; }
           }
           @keyframes caseZeusSpark {
             0%, 100% { transform: scale(0.65) rotate(-12deg); opacity: 0.35; }
@@ -562,7 +558,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             animation: caseZeusFlicker 0.7s linear infinite;
           }
           .case-zeus-glow {
-            animation: caseZeusGlow 0.6s ease-in-out infinite, caseZeusFlicker 0.7s linear infinite;
+            animation: caseZeusFlicker 0.7s linear infinite;
           }
           .case-zeus-bolt {
             animation: caseZeusBoltFlow 0.45s linear infinite;
@@ -576,12 +572,12 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             transform-box: fill-box;
           }
           @keyframes casePotionRise {
-            0% { top: 104%; transform: translateX(0) scale(0.7); opacity: 0; }
-            10% { opacity: 0.9; }
-            35% { transform: translateX(7px) scale(1); opacity: 0.8; }
-            65% { transform: translateX(-7px) scale(1.05); opacity: 0.7; }
-            88% { opacity: 0.55; }
-            100% { top: -6%; transform: translateX(4px) scale(1.15); opacity: 0; }
+            0% { transform: translateY(0) translateX(0) scale(0.7); opacity: 0; }
+            10% { opacity: 0.85; }
+            35% { transform: translateY(-110px) translateX(7px) scale(1); opacity: 0.75; }
+            65% { transform: translateY(-200px) translateX(-7px) scale(1.05); opacity: 0.65; }
+            88% { opacity: 0.5; }
+            100% { transform: translateY(-320px) translateX(4px) scale(1.15); opacity: 0; }
           }
           @keyframes casePotionGlowPulse {
             0%, 100% { opacity: 0.55; }
@@ -589,7 +585,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           }
           .case-potion-bubble {
             animation: casePotionRise linear infinite;
-            will-change: top, transform, opacity;
+            will-change: transform, opacity;
           }
           .case-potion-glow {
             animation: casePotionGlowPulse 2.4s ease-in-out infinite;
@@ -619,28 +615,27 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                 }}
               />
             )}
-            {/* Пузырьки вверх при активном зелье — летят до самого верха */}
+            {/* Пузырьки вверх при активном зелье — фон ЗА карточками, летят до самого верха */}
             {activePotionCharges > 0 && (
-              <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden" aria-hidden>
-                {Array.from({ length: 14 }).map((__, bi) => {
+              <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden>
+                {Array.from({ length: 8 }).map((__, bi) => {
                   const seed = (reelIdx * 37 + bi * 17) % 100;
                   const left = (seed * 0.9 + 2) % 96;
                   const size = 5 + (seed % 10);
                   const delay = ((seed % 40) / 10).toFixed(2);
-                  const dur = (3.6 + ((seed * 7) % 30) / 10).toFixed(2);
+                  const dur = (3.8 + ((seed * 7) % 30) / 10).toFixed(2);
                   return (
                     <span
                       key={bi}
                       className="case-potion-bubble absolute rounded-full"
                       style={{
                         left: `${left.toFixed(1)}%`,
-                        top: '104%',
+                        bottom: '-14px',
                         width: size,
                         height: size,
                         animationDelay: `${delay}s`,
                         animationDuration: `${dur}s`,
-                        background: 'radial-gradient(circle at 32% 30%, rgba(236,253,245,0.95) 0%, rgba(110,231,183,0.75) 28%, rgba(16,185,129,0.35) 62%, rgba(16,185,129,0.08) 100%)',
-                        boxShadow: '0 0 8px rgba(52,211,153,0.55)',
+                        background: 'radial-gradient(circle at 32% 30%, rgba(236,253,245,0.9) 0%, rgba(110,231,183,0.55) 35%, rgba(16,185,129,0.22) 70%, transparent 100%)',
                       }}
                     />
                   );
@@ -661,8 +656,8 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                   </div>
                   {/* Вертикаль: внешнее свечение + синее ядро + белое горячее ядро + бегущая молния + пульс */}
                   <div className="relative flex-1 w-[10px] flex justify-center">
-                    <div className="case-zeus-stripe absolute inset-y-0 w-[10px] bg-sky-400/25 blur-[5px]" />
-                    <div className="case-zeus-stripe absolute inset-y-0 w-[3px] bg-sky-400 opacity-95 shadow-[0_0_16px_#38bdf8]" />
+                    <div className="case-zeus-stripe absolute inset-y-0 w-[10px] bg-sky-400/20" />
+                    <div className="case-zeus-stripe absolute inset-y-0 w-[3px] bg-sky-400 opacity-95" />
                     <div className="case-zeus-glow absolute inset-y-0 w-[1px] bg-white opacity-90" />
                     {/* Бегущая по полосе молния (dash-flow) */}
                     <svg viewBox="0 0 14 100" className="absolute inset-y-0 left-1/2 -translate-x-1/2 h-full w-[14px] filter drop-shadow-[0_0_7px_#38bdf8]" preserveAspectRatio="none">
@@ -687,7 +682,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                       />
                     </svg>
                     {/* Бегущий энергетический сгусток сверху вниз */}
-                    <div className="absolute left-1/2 -translate-x-1/2 w-[6px] h-[16px] rounded-full bg-gradient-to-b from-white via-sky-200 to-transparent blur-[0.5px] shadow-[0_0_12px_#e0f2fe] case-zeus-pulse" />
+                    <div className="absolute left-1/2 top-0 -ml-[3px] w-[6px] h-[16px] rounded-full bg-gradient-to-b from-white via-sky-200 to-transparent case-zeus-pulse" />
                     {/* Боковые искры-молнии */}
                     <svg viewBox="0 0 10 14" className="case-zeus-spark absolute -left-[9px] top-[10%] w-[10px] h-[14px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0s', animationDuration: '0.5s' }}>
                       <path d="M 6 1 L 2.5 8 L 5.5 8 L 4 13" fill="none" stroke="#fefce8" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -765,7 +760,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#08080a] to-transparent z-20 pointer-events-none" />
             <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#08080a] to-transparent z-20 pointer-events-none" />
 
-            <div ref={reelIdx === 0 ? containerRef0 : undefined} className="relative w-full overflow-hidden py-3">
+            <div ref={reelIdx === 0 ? containerRef0 : undefined} className="relative z-[1] w-full overflow-hidden py-3">
               <motion.div
                 animate={animControls[reelIdx]}
                 className="flex gap-3 will-change-transform"
