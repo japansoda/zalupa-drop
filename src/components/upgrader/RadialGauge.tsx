@@ -1184,7 +1184,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   <div className="p-2 rounded-xl bg-black/40 border border-sky-500/20 flex flex-col gap-1 shadow-sm">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-base">⚡</span>
+                        <svg viewBox="0 0 10 14" className="w-4 h-4 text-sky-400" aria-hidden>
+                          <path d="M 6 1 L 2.5 8 L 5.5 8 L 4 13" fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinejoin="round" />
+                        </svg>
                         <span className="text-xs font-black text-white">Zeus x27</span>
                         <span className="text-[8.5px] font-black px-1.5 py-0.2 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30">
                           +5%
@@ -1213,12 +1215,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     >
                       <span>
                         {zeusUsedThisSpin
-                          ? (locale === 'ru' ? '⚡ Zeus использован (+5%)' : '⚡ Zeus Used (+5%)')
+                          ? (locale === 'ru' ? 'Zeus использован (+5%)' : 'Zeus Used (+5%)')
                           : canPressZeus
-                          ? (locale === 'ru' ? '⚡ Вжать Zeus! (+5% перекрут)' : '⚡ Hit Zeus! (+5% reroll)')
+                          ? (locale === 'ru' ? 'Вжать Zeus! (+5% перекрут)' : 'Hit Zeus! (+5% reroll)')
                           : zeusCount <= 0
-                          ? (locale === 'ru' ? '⚡ Нет Zeus' : '⚡ No Zeus')
-                          : (locale === 'ru' ? '⚡ Жми во время спина' : '⚡ Press mid-spin')}
+                          ? (locale === 'ru' ? 'Нет Zeus' : 'No Zeus')
+                          : (locale === 'ru' ? 'Жми во время спина' : 'Press mid-spin')}
                       </span>
                     </button>
                   </div>
@@ -1460,33 +1462,50 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       transform={`rotate(${rightZeusStartDeg}, 120, 120)`}
                       className="zeus-electric-glow transition-all duration-300"
                     />
-                    {/* Bright hot core confined strictly to wings */}
-                    <circle
-                      cx="120"
-                      cy="120"
-                      r={gaugeR}
-                      fill="none"
-                      stroke="#e0f2fe"
-                      strokeWidth="2.5"
-                      strokeDasharray={`${zeusArcLen} ${gaugeC}`}
-                      strokeLinecap="butt"
-                      transform={`rotate(${leftZeusStartDeg}, 120, 120)`}
-                      className="zeus-electric-arc"
-                      opacity="0.9"
-                    />
-                    <circle
-                      cx="120"
-                      cy="120"
-                      r={gaugeR}
-                      fill="none"
-                      stroke="#e0f2fe"
-                      strokeWidth="2.5"
-                      strokeDasharray={`${zeusArcLen} ${gaugeC}`}
-                      strokeLinecap="butt"
-                      transform={`rotate(${rightZeusStartDeg}, 120, 120)`}
-                      className="zeus-electric-arc"
-                      opacity="0.9"
-                    />
+                    {/* Floating lightning bolts riding the blue wings */}
+                    {(() => {
+                      // Короткие ломанные разряды вдоль каждого крыла (строго внутри сегмента)
+                      const riders: Array<{ id: string; d: string; delay: string }> = [];
+                      [leftZeusStartDeg, rightZeusStartDeg].forEach((startDeg, wi) => {
+                        const span = halfZeus * 3.6;
+                        const steps = 5;
+                        let d = '';
+                        for (let s = 0; s <= steps; s++) {
+                          const ang = ((startDeg + (span * s) / steps) * Math.PI) / 180;
+                          const jag = s % 2 === 0 ? 2.5 : -2.5;
+                          const rr = gaugeR + jag;
+                          const x = (120 + rr * Math.cos(ang)).toFixed(1);
+                          const y = (120 + rr * Math.sin(ang)).toFixed(1);
+                          d += `${s === 0 ? 'M' : 'L'} ${x} ${y} `;
+                        }
+                        riders.push({ id: `zeus-rider-${wi}`, d: d.trim(), delay: `${(wi * 0.22).toFixed(2)}s` });
+                      });
+                      return riders.map((r) => (
+                        <g key={r.id}>
+                          <path
+                            d={r.d}
+                            stroke="#38bdf8"
+                            strokeWidth="5"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            opacity="0.4"
+                            className="filter drop-shadow-[0_0_8px_#38bdf8]"
+                          />
+                          <path
+                            d={r.d}
+                            stroke="#ffffff"
+                            strokeWidth="1.8"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeDasharray="6 4"
+                            className="zeus-bolt-flow filter drop-shadow-[0_0_6px_#e0f2fe]"
+                            style={{ animationDelay: r.delay }}
+                          />
+                        </g>
+                      ));
+                    })()}
                     {/* Floating lightning sparks on blue wings — dual layer + flow */}
                     {(() => {
                       const sparks: Array<{ id: string; cx: number; cy: number; s: number; delay: string; dur: string }> = [];
@@ -1670,7 +1689,16 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                           style={{ animationDelay: '0s', animationDuration: '0.5s' }}
                         />
                       </svg>
-                      <span className="zeus-spark-item absolute right-0 -top-2.5 text-sm filter drop-shadow-[0_0_8px_#38bdf8]" style={{ animationDuration: '0.45s' }}>⚡</span>
+                      {/* SVG-молния вместо эмодзи над стрелкой */}
+                      <svg viewBox="0 0 10 14" className="zeus-spark-item absolute right-0 -top-3 w-[11px] h-[15px] filter drop-shadow-[0_0_8px_#38bdf8]" style={{ animationDuration: '0.45s' }}>
+                        <path
+                          d="M 6 1 L 2.5 8 L 5.5 8 L 4 13"
+                          fill="#e0f2fe"
+                          stroke="#ffffff"
+                          strokeWidth="1"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     </div>
                   ) : (
                     <svg
@@ -1711,7 +1739,15 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
                 {zeusUsedThisSpin && zeusBonus > 0 && (
                   <div className="flex items-center gap-1 mt-0.5 font-mono text-[10px] font-bold text-sky-400 tracking-tight">
-                    <span className="zeus-spark-item inline-block">⚡</span>
+                    <svg viewBox="0 0 10 14" className="zeus-spark-item inline-block w-[9px] h-[12px] filter drop-shadow-[0_0_5px_#38bdf8]" style={{ animationDuration: '0.5s' }}>
+                      <path
+                        d="M 6 1 L 2.5 8 L 5.5 8 L 4 13"
+                        fill="#38bdf8"
+                        stroke="#e0f2fe"
+                        strokeWidth="1"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                     <span>+{zeusBonus}% Zeus</span>
                   </div>
                 )}
@@ -1742,13 +1778,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                         : 'bg-sky-500/20 border-sky-400/50 text-sky-300 cursor-default'
                     }`}
                   >
-                    <span className={canPressZeus ? 'animate-bounce inline-block' : 'inline-block'}>⚡</span>
                     <span>
                       {zeusUsedThisSpin || zeusStriking
                         ? (locale === 'ru' ? 'Zeus бьёт! Перекрут...' : 'Zeus strikes! Rerolling...')
                         : (locale === 'ru' ? `Вжать Zeus! (+5%) · ${zeusCount} шт.` : `Hit Zeus! (+5%) · ${zeusCount}`)}
                     </span>
-                    <span className={canPressZeus ? 'animate-bounce inline-block' : 'inline-block'}>⚡</span>
                   </button>
                 ) : (
                   <button

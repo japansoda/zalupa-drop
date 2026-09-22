@@ -576,19 +576,20 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             transform-box: fill-box;
           }
           @keyframes casePotionRise {
-            0% { transform: translateY(110%) translateX(0) scale(0.7); opacity: 0; }
-            12% { opacity: 0.9; }
-            50% { transform: translateY(45%) translateX(6px) scale(1); opacity: 0.75; }
-            85% { opacity: 0.5; }
-            100% { transform: translateY(-25%) translateX(-6px) scale(1.15); opacity: 0; }
+            0% { top: 104%; transform: translateX(0) scale(0.7); opacity: 0; }
+            10% { opacity: 0.9; }
+            35% { transform: translateX(7px) scale(1); opacity: 0.8; }
+            65% { transform: translateX(-7px) scale(1.05); opacity: 0.7; }
+            88% { opacity: 0.55; }
+            100% { top: -6%; transform: translateX(4px) scale(1.15); opacity: 0; }
           }
           @keyframes casePotionGlowPulse {
-            0%, 100% { opacity: 0.5; }
+            0%, 100% { opacity: 0.55; }
             50% { opacity: 1; }
           }
           .case-potion-bubble {
             animation: casePotionRise linear infinite;
-            will-change: transform, opacity;
+            will-change: top, transform, opacity;
           }
           .case-potion-glow {
             animation: casePotionGlowPulse 2.4s ease-in-out infinite;
@@ -608,25 +609,32 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                 : 'border-white/10'
             }`}
           >
-            {/* Зелье удачи активно — слегка зеленоватый фон */}
+            {/* Зелье удачи активно — зелень выше, до верха окна спина */}
             {activePotionCharges > 0 && (
-              <div className="case-potion-glow absolute inset-0 z-0 pointer-events-none bg-gradient-to-t from-emerald-500/[0.13] via-emerald-500/[0.05] to-transparent" />
+              <div
+                className="case-potion-glow absolute inset-0 z-0 pointer-events-none"
+                style={{
+                  background:
+                    'linear-gradient(to top, rgba(16,185,129,0.24) 0%, rgba(16,185,129,0.13) 45%, rgba(16,185,129,0.06) 70%, rgba(16,185,129,0.015) 88%, transparent 100%)',
+                }}
+              />
             )}
-            {/* Пузырьки вверх при активном зелье */}
+            {/* Пузырьки вверх при активном зелье — летят до самого верха */}
             {activePotionCharges > 0 && (
               <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden" aria-hidden>
-                {Array.from({ length: 12 }).map((__, bi) => {
+                {Array.from({ length: 14 }).map((__, bi) => {
                   const seed = (reelIdx * 37 + bi * 17) % 100;
-                  const left = (seed * 0.9 + 3) % 96;
-                  const size = 5 + (seed % 9);
+                  const left = (seed * 0.9 + 2) % 96;
+                  const size = 5 + (seed % 10);
                   const delay = ((seed % 40) / 10).toFixed(2);
-                  const dur = (3.2 + ((seed * 7) % 28) / 10).toFixed(2);
+                  const dur = (3.6 + ((seed * 7) % 30) / 10).toFixed(2);
                   return (
                     <span
                       key={bi}
-                      className="case-potion-bubble absolute bottom-0 rounded-full"
+                      className="case-potion-bubble absolute rounded-full"
                       style={{
                         left: `${left.toFixed(1)}%`,
+                        top: '104%',
                         width: size,
                         height: size,
                         animationDelay: `${delay}s`,
@@ -925,13 +933,11 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                     : 'bg-sky-500/20 border-sky-400/50 text-sky-300 cursor-default'
                 }`}
               >
-                <span className={canPressZeus ? 'animate-bounce inline-block' : 'inline-block'}>⚡</span>
                 <span>
                   {zeusUsedThisSpin || zeusStriking
                     ? (locale === 'ru' ? 'Zeus бьёт! Перекрут...' : 'Zeus strikes! Rerolling...')
                     : (locale === 'ru' ? `Вжать Zeus! · ${zeusCount} шт.` : `Hit Zeus! · ${zeusCount}`)}
                 </span>
-                <span className={canPressZeus ? 'animate-bounce inline-block' : 'inline-block'}>⚡</span>
               </button>
             ) : (
               <button
