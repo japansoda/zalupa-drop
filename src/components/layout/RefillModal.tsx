@@ -6,7 +6,6 @@ import { X, Sparkles } from 'lucide-react';
 import { useGameStore } from '../../store/useGameStore';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { sound } from '../../lib/sound';
-import { UPGRADE_TOKENS } from '../../lib/consumables';
 import { useLanguage } from '../../lib/i18n';
 
 interface TierOption {
@@ -80,7 +79,7 @@ const THEME_STYLES: Record<TierOption['theme'], { border: string; bg: string; te
 };
 
 export const RefillModal: React.FC = () => {
-  const { isRefillOpen, setRefillOpen, refillDemoBalance, balance, addPotion, addToken, potionsCount, tokens } = useGameStore();
+  const { isRefillOpen, setRefillOpen, refillDemoBalance, balance, addPotion, addSaveToken, addZeus, potionsCount, saveTokensCount, zeusCount } = useGameStore();
   const { t, locale } = useLanguage();
 
   const [successAnimation, setSuccessAnimation] = useState<number | null>(null);
@@ -101,12 +100,15 @@ export const RefillModal: React.FC = () => {
     addPotion(3);
   };
 
-  const handleGetTokens = () => {
-    sound.playReward();
-    UPGRADE_TOKENS.forEach((tok) => addToken(tok.id, 1));
+  const handleGetSaveTokens = () => {
+    sound.playAngelicChime();
+    addSaveToken(1);
   };
 
-  const totalTokensOwned = Object.values(tokens).reduce((a, b) => a + b, 0);
+  const handleGetZeus = () => {
+    sound.playZeusShock();
+    addZeus(1);
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md overflow-x-hidden">
@@ -213,46 +215,70 @@ export const RefillModal: React.FC = () => {
         </div>
 
         {/* Free Consumables & Boosters Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-1 sm:mb-2">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5 mb-1 sm:mb-2">
+          {/* Luck Potions */}
           <button
             type="button"
             onClick={handleGetPotions}
-            className="px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl flex items-center justify-between border border-emerald-500/30 bg-emerald-950/20 hover:border-emerald-400 hover:bg-emerald-900/30 transition-all cursor-pointer group active:scale-98 min-w-0"
+            className="px-2.5 py-2 rounded-xl flex items-center justify-between border border-emerald-500/30 bg-emerald-950/20 hover:border-emerald-400 hover:bg-emerald-900/30 transition-all cursor-pointer group active:scale-98 min-w-0"
           >
-            <div className="flex items-center gap-2.5 min-w-0">
-              <span className="text-lg sm:text-xl shrink-0">🧪</span>
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="text-lg shrink-0">🧪</span>
               <div className="flex flex-col text-left leading-tight min-w-0">
-                <span className="font-bold text-xs sm:text-sm text-emerald-400 group-hover:text-emerald-300 truncate">
+                <span className="font-bold text-xs text-emerald-400 group-hover:text-emerald-300 truncate">
                   {locale === 'ru' ? '+3 Зелья удачи' : '+3 Luck Potions'}
                 </span>
-                <span className="text-[9px] sm:text-[10px] text-white/40 mt-0.5 truncate">
-                  {locale === 'ru' ? '+15% шанс на ценный дроп' : '+15% chance & profit boost'}
+                <span className="text-[8.5px] text-white/40 mt-0.5 truncate">
+                  +15% {locale === 'ru' ? 'удача' : 'luck'}
                 </span>
               </div>
             </div>
-            <div className="px-2 py-0.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 font-mono font-bold text-[11px] sm:text-xs text-emerald-300 shrink-0 ml-2">
+            <div className="px-1.5 py-0.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 font-mono font-bold text-[10px] text-emerald-300 shrink-0 ml-1.5">
               {potionsCount} {locale === 'ru' ? 'шт.' : 'pcs'}
             </div>
           </button>
 
+          {/* Guardian Aegis / Save Tokens */}
           <button
             type="button"
-            onClick={handleGetTokens}
-            className="px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl flex items-center justify-between border border-yellow-500/30 bg-yellow-950/20 hover:border-yellow-400 hover:bg-yellow-900/30 transition-all cursor-pointer group active:scale-98 min-w-0"
+            onClick={handleGetSaveTokens}
+            className="px-2.5 py-2 rounded-xl flex items-center justify-between border border-yellow-500/30 bg-yellow-950/20 hover:border-yellow-400 hover:bg-yellow-900/30 transition-all cursor-pointer group active:scale-98 min-w-0"
           >
-            <div className="flex items-center gap-2.5 min-w-0">
-              <span className="text-lg sm:text-xl shrink-0">🎟️</span>
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="text-lg shrink-0">🪽</span>
               <div className="flex flex-col text-left leading-tight min-w-0">
-                <span className="font-bold text-xs sm:text-sm text-yellow-400 group-hover:text-yellow-300 truncate">
-                  {locale === 'ru' ? '+1 Все жетоны апгрейда' : '+1 All Upgrade Tokens'}
+                <span className="font-bold text-xs text-yellow-400 group-hover:text-yellow-300 truncate">
+                  {locale === 'ru' ? '+1 Жетон оберега' : '+1 Guardian Aegis'}
                 </span>
-                <span className="text-[9px] sm:text-[10px] text-white/40 mt-0.5 truncate">
-                  {locale === 'ru' ? 'Мультипликаторы 2x, 3x, 5x, 10x' : 'Multipliers 2x, 3x, 5x, 10x'}
+                <span className="text-[8.5px] text-white/40 mt-0.5 truncate">
+                  {locale === 'ru' ? 'Защита от сгорания' : 'Burn Protection'}
                 </span>
               </div>
             </div>
-            <div className="px-2 py-0.5 rounded-lg bg-yellow-500/15 border border-yellow-500/30 font-mono font-bold text-[11px] sm:text-xs text-yellow-300 shrink-0 ml-2">
-              {totalTokensOwned} {locale === 'ru' ? 'шт.' : 'pcs'}
+            <div className="px-1.5 py-0.5 rounded-lg bg-yellow-500/15 border border-yellow-500/30 font-mono font-bold text-[10px] text-yellow-300 shrink-0 ml-1.5">
+              {saveTokensCount} {locale === 'ru' ? 'шт.' : 'pcs'}
+            </div>
+          </button>
+
+          {/* Zeus x27 */}
+          <button
+            type="button"
+            onClick={handleGetZeus}
+            className="px-2.5 py-2 rounded-xl flex items-center justify-between border border-sky-500/30 bg-sky-950/20 hover:border-sky-400 hover:bg-sky-900/30 transition-all cursor-pointer group active:scale-98 min-w-0"
+          >
+            <div className="flex items-center gap-2 min-w-0">
+              <span className="text-lg shrink-0">⚡</span>
+              <div className="flex flex-col text-left leading-tight min-w-0">
+                <span className="font-bold text-xs text-sky-400 group-hover:text-sky-300 truncate">
+                  +1 Zeus x27
+                </span>
+                <span className="text-[8.5px] text-white/40 mt-0.5 truncate">
+                  {locale === 'ru' ? 'Электрошок +5%' : 'Electro shock +5%'}
+                </span>
+              </div>
+            </div>
+            <div className="px-1.5 py-0.5 rounded-lg bg-sky-500/15 border border-sky-500/30 font-mono font-bold text-[10px] text-sky-300 shrink-0 ml-1.5">
+              {zeusCount} {locale === 'ru' ? 'шт.' : 'pcs'}
             </div>
           </button>
         </div>

@@ -12,7 +12,7 @@ import { useLanguage } from '../../lib/i18n';
 
 export const Header: React.FC = () => {
   const pathname = usePathname();
-  const { balance, inventory, soundEnabled, toggleSound, setRefillOpen, potionsCount, activePotionCharges, drinkPotion } = useGameStore();
+  const { balance, inventory, soundEnabled, toggleSound, setRefillOpen, potionsCount, activePotionCharges, drinkPotion, saveTokensCount, zeusCount } = useGameStore();
   const { locale, setLocale, t } = useLanguage();
 
   const navLinks = [
@@ -96,7 +96,7 @@ export const Header: React.FC = () => {
           {/* Universal Luck Potion Status & Quick Drink */}
           {activePotionCharges > 0 ? (
             <div
-              className="h-7.5 sm:h-8.5 px-2.5 rounded-lg glass-panel border border-white/10 flex items-center gap-1.5 shrink-0 select-none"
+              className="h-7.5 sm:h-8.5 px-2.5 rounded-lg glass-panel border border-emerald-500/30 bg-emerald-500/10 flex items-center gap-1.5 shrink-0 select-none shadow-[0_0_10px_rgba(16,185,129,0.2)]"
               title={locale === 'ru' 
                 ? `Зелье удачи активно! Осталось ${activePotionCharges} — работает на кейсы, апгрейдер и контракты` 
                 : `Luck Potion active! ${activePotionCharges} left — works on cases, upgrader & contracts`}
@@ -108,15 +108,41 @@ export const Header: React.FC = () => {
             <button
               type="button"
               onClick={() => drinkPotion()}
-              className="h-7.5 sm:h-8.5 px-2.5 rounded-lg glass-button hover:border-white/20 text-white/80 hover:text-white font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 shrink-0"
+              className="h-7.5 sm:h-8.5 px-2.5 rounded-lg glass-button hover:border-emerald-500/30 text-white/80 hover:text-white font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer active:scale-95 shrink-0"
               title={locale === 'ru' 
                 ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount} шт.` 
                 : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
             >
               <span className="text-xs">🧪</span>
-              <span className="font-mono text-[10px] text-zinc-400 bg-white/5 border border-white/10 px-1 py-0.2 rounded font-bold">x{potionsCount}</span>
+              <span className="font-mono text-[10px] text-emerald-400/90 bg-emerald-500/10 border border-emerald-500/20 px-1 py-0.2 rounded font-bold">x{potionsCount}</span>
             </button>
           ) : null}
+
+          {/* Guardian Aegis / Save Token Badge */}
+          {saveTokensCount > 0 && (
+            <div
+              className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg glass-panel border border-yellow-500/30 bg-yellow-500/10 flex items-center gap-1 sm:gap-1.5 shrink-0 select-none shadow-[0_0_10px_rgba(234,179,8,0.2)]"
+              title={locale === 'ru' 
+                ? `Жетон сохранения: ${saveTokensCount} шт. Защищает 1 скин в апгрейдере от сгорания при неудаче` 
+                : `Guardian Aegis: ${saveTokensCount} pcs. Protects 1 skin from burning in upgrader on failure`}
+            >
+              <span className="text-xs">🪽</span>
+              <span className="font-mono font-bold text-xs text-yellow-400">x{saveTokensCount}</span>
+            </div>
+          )}
+
+          {/* Zeus x27 Tactical Shock Badge */}
+          {zeusCount > 0 && (
+            <div
+              className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg glass-panel border border-sky-500/30 bg-sky-500/10 flex items-center gap-1 sm:gap-1.5 shrink-0 select-none shadow-[0_0_10px_rgba(56,189,248,0.2)]"
+              title={locale === 'ru' 
+                ? `Zeus x27: ${zeusCount} шт. Стреляет молнией в стрелку апгрейдера: реролл + 5% шанс` 
+                : `Zeus x27: ${zeusCount} pcs. Fires lightning at upgrader arrow: reroll + 5% chance`}
+            >
+              <span className="text-xs">⚡</span>
+              <span className="font-mono font-bold text-xs text-sky-400">x{zeusCount}</span>
+            </div>
+          )}
 
           {/* Balance Widget: on mobile tapping balance opens refill modal */}
           <div 

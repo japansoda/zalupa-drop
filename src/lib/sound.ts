@@ -54,6 +54,27 @@ class SoundController {
     osc.stop(ctx.currentTime + 0.04);
   }
 
+  public playError() {
+    if (!this.enabled) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(140, ctx.currentTime);
+    osc.frequency.setValueAtTime(110, ctx.currentTime + 0.08);
+
+    gain.gain.setValueAtTime(0.08, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.18);
+  }
+
   public playTick(pitchRatio: number = 1) {
     if (!this.enabled) return;
     const ctx = this.getContext();
@@ -405,6 +426,77 @@ class SoundController {
       osc.start(ctx.currentTime + idx * 0.07);
       osc.stop(ctx.currentTime + idx * 0.07 + 0.38);
     });
+  }
+
+  /**
+   * Angelic celestial chime / choir harmonic synthesized chord for Save Token
+   */
+  public playAngelicChime() {
+    if (!this.enabled) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    // Harmonic celestial frequencies: C5, E5, G5, B5, C6, E6
+    const freqs = [523.25, 659.25, 783.99, 987.77, 1046.5, 1318.51];
+    freqs.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      const startTime = ctx.currentTime + idx * 0.06;
+      osc.frequency.setValueAtTime(freq, startTime);
+      osc.detune.setValueAtTime((Math.random() - 0.5) * 8, startTime);
+
+      gain.gain.setValueAtTime(0.001, startTime);
+      gain.gain.exponentialRampToValueAtTime(0.12, startTime + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 1.2);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(startTime);
+      osc.stop(startTime + 1.25);
+    });
+  }
+
+  /**
+   * High-voltage lightning discharge / taser spark sound for Zeus x27
+   */
+  public playZeusShock() {
+    if (!this.enabled) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    // 1. High-voltage crackle noise
+    const noise = ctx.createBufferSource();
+    noise.buffer = this.getNoiseBuffer(ctx);
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(3400, ctx.currentTime);
+    filter.Q.setValueAtTime(4.0, ctx.currentTime);
+
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.25, ctx.currentTime);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+
+    noise.connect(filter);
+    filter.connect(noiseGain);
+    noiseGain.connect(ctx.destination);
+    noise.start();
+
+    // 2. Heavy electric arc zap oscillator
+    const osc = ctx.createOscillator();
+    const oscGain = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(750, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(65, ctx.currentTime + 0.4);
+
+    oscGain.gain.setValueAtTime(0.2, ctx.currentTime);
+    oscGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
+
+    osc.connect(oscGain);
+    oscGain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.42);
   }
 }
 

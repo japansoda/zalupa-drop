@@ -12,8 +12,9 @@ interface GameState {
   stats: UserStats;
   isRefillOpen: boolean;
 
-  // Consumables (tokens & luck potion)
-  tokens: Record<string, number>;
+  // Consumables (save tokens, zeus, luck potion)
+  saveTokensCount: number;
+  zeusCount: number;
   potionsCount: number;
   activePotionCharges: number;
 
@@ -36,8 +37,10 @@ interface GameState {
   setRefillOpen: (open: boolean) => void;
   recordUpgrade: (won: boolean, profitDc: number) => void;
   recordCrash: (profitDc: number) => void;
-  addToken: (tokenId: string, count?: number) => void;
-  useToken: (tokenId: string) => boolean;
+  addSaveToken: (count?: number) => void;
+  useSaveToken: () => boolean;
+  addZeus: (count?: number) => void;
+  useZeus: () => boolean;
   addPotion: (count?: number) => void;
   drinkPotion: () => boolean;
   consumePotionCharge: () => boolean;
@@ -51,10 +54,8 @@ export const useGameStore = create<GameState>()(
       soundEnabled: true,
       isRefillOpen: false,
       caseOpenCounts: {},
-      tokens: {
-        token_consumer: 1,
-        token_industrial: 1,
-      },
+      saveTokensCount: 1,
+      zeusCount: 1,
       potionsCount: 1,
       activePotionCharges: 0,
       stats: {
@@ -223,30 +224,25 @@ export const useGameStore = create<GameState>()(
         }));
       },
 
-      addToken: (tokenId, count = 1) => {
-        set((state) => {
-          const current = state.tokens[tokenId] || 0;
-          return {
-            tokens: {
-              ...state.tokens,
-              [tokenId]: current + count,
-            },
-          };
-        });
+      addSaveToken: (count = 1) => {
+        set((state) => ({ saveTokensCount: state.saveTokensCount + count }));
       },
 
-      useToken: (tokenId) => {
-        const current = get().tokens[tokenId] || 0;
+      useSaveToken: () => {
+        const current = get().saveTokensCount;
         if (current <= 0) return false;
-        set((state) => {
-          const updated = { ...state.tokens };
-          if (updated[tokenId] <= 1) {
-            delete updated[tokenId];
-          } else {
-            updated[tokenId] -= 1;
-          }
-          return { tokens: updated };
-        });
+        set((state) => ({ saveTokensCount: state.saveTokensCount - 1 }));
+        return true;
+      },
+
+      addZeus: (count = 1) => {
+        set((state) => ({ zeusCount: state.zeusCount + count }));
+      },
+
+      useZeus: () => {
+        const current = get().zeusCount;
+        if (current <= 0) return false;
+        set((state) => ({ zeusCount: state.zeusCount - 1 }));
         return true;
       },
 
@@ -304,7 +300,8 @@ export const useGameStore = create<GameState>()(
         inventory: state.inventory,
         soundEnabled: state.soundEnabled,
         stats: state.stats,
-        tokens: state.tokens,
+        saveTokensCount: state.saveTokensCount,
+        zeusCount: state.zeusCount,
         potionsCount: state.potionsCount,
         activePotionCharges: state.activePotionCharges,
         caseOpenCounts: state.caseOpenCounts,

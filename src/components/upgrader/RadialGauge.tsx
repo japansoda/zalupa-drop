@@ -90,22 +90,26 @@ interface RadialGaugeProps {
   catalogSkins: SkinEntity[];
 }
 
-import { UPGRADE_TOKENS, UpgradeToken, rollConsolationToken, LUCK_POTION } from '../../lib/consumables';
+import { LUCK_POTION, SAVE_TOKEN, ZEUS_ITEM, rollConsolationPrize } from '../../lib/consumables';
 
 export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkins }) => {
   const {
     balance,
     deductBalance,
     addToInventory,
+    removeFromInventory,
     recordUpgrade,
-    tokens,
     potionsCount,
     activePotionCharges,
     drinkPotion,
-    useToken,
     consumePotionCharge,
-    addToken,
+    saveTokensCount,
+    useSaveToken,
+    zeusCount,
+    useZeus,
     addPotion,
+    addSaveToken,
+    addZeus,
     addLiveDrop,
   } = useGameStore();
   const { t, locale } = useLanguage();
@@ -113,7 +117,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const [selectedItems, setSelectedItems] = useState<InventoryItem[]>([]);
   const [customBetDc, setCustomBetDc] = useState<number>(1000);
   const [betMode, setBetMode] = useState<'skin' | 'dc' | 'consumables'>('skin');
-  const [selectedToken, setSelectedToken] = useState<UpgradeToken | null>(null);
+  const [protectedInstanceId, setProtectedInstanceId] = useState<string | null>(null);
+  const [isZeusActive, setIsZeusActive] = useState<boolean>(false);
+  const [zeusStriking, setZeusStriking] = useState<boolean>(false);
 
   const [targetChance, setTargetChance] = useState<number>(50);
   const [targetSkin, setTargetSkin] = useState<SkinEntity | null>(null);
@@ -125,8 +131,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     isOpen: boolean;
     caseItem?: CaseItem;
     skin?: SkinEntity;
-    awardedToken?: UpgradeToken;
-    awardedPotion?: boolean;
+    awardedConsumable?: 'potion' | 'save_token' | 'zeus';
     lostAmount: number;
   } | null>(null);
 
@@ -168,19 +173,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     if (betMode === 'skin') {
       return selectedItems.reduce((sum, item) => sum + item.priceDc, 0);
     }
-    if (betMode === 'consumables') {
-      return selectedToken ? selectedToken.valueDc : 0;
-    }
     return customBetDc;
-  }, [betMode, selectedItems, selectedToken, customBetDc]);
+  }, [betMode, selectedItems, customBetDc]);
 
-  // Max target price restriction (tokens have target limit)
-  const maxTargetPrice = useMemo(() => {
-    if (betMode === 'consumables' && selectedToken) {
-      return selectedToken.maxTargetDc;
-    }
-    return Infinity;
-  }, [betMode, selectedToken]);
+  // Max target price restriction (infinite since tokens removed)
+  const maxTargetPrice = Infinity;
 
   // Reset catalog limit when filters change
   useEffect(() => {
@@ -318,14 +315,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       autoSelectTargetSkin(50, inventory[0].priceDc);
     } else if (betMode === 'dc' && !targetSkin) {
       autoSelectTargetSkin(targetChance, customBetDc);
-    } else if (betMode === 'consumables' && !selectedToken) {
-      const firstOwnedToken = UPGRADE_TOKENS.find(tok => (tokens[tok.id] || 0) > 0);
-      if (firstOwnedToken) {
-        setSelectedToken(firstOwnedToken);
-        autoSelectTargetSkin(50, firstOwnedToken.valueDc);
-      }
     }
-  }, [inventory, betMode, tokens]);
+  }, [inventory, betMode]);
 
   // When effectiveBetDc changes, ensure targetSkin is valid
   useEffect(() => {
@@ -356,11 +347,18 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     return Math.min(15, Math.max(0, remainingTo80));
   }, [isPotionUsed, baseChance]);
 
-  // Total chance displayed and used for roll (strictly max 80% with potion included)
+  // Zeus x27 tactical shock bonus (+5% max, strictly clamped to 80%)
+  const zeusBonus = useMemo(() => {
+    if (!isZeusActive) return 0;
+    const remainingTo80 = Number((80 - baseChance - potionBonus).toFixed(2));
+    return Math.min(5, Math.max(0, remainingTo80));
+  }, [isZeusActive, baseChance, potionBonus]);
+
+  // Total chance displayed and used for roll (strictly max 80% with potion & zeus included)
   const chance = useMemo(() => {
     if (baseChance <= 0) return 0;
-    return Math.min(80, Number((baseChance + potionBonus).toFixed(2)));
-  }, [baseChance, potionBonus]);
+    return Math.min(80, Number((baseChance + potionBonus + zeusBonus).toFixed(2)));
+  }, [baseChance, potionBonus, zeusBonus]);
 
   // Risk label
   const riskLabel = useMemo(() => {
@@ -437,7 +435,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     autoSelectTargetSkin(desiredChance, effectiveBetDc);
   };
 
-  // Guard check: strictly disallow spinning without skins / bet / token
+  // Guard check: strictly disallow spinning without skins / bet
   const canUpgrade = useMemo(() => {
     if (isUpgrading || !targetSkin) return false;
     if (betMode === 'skin') {
@@ -446,35 +444,53 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     if (betMode === 'dc') {
       return customBetDc > 0 && balance >= customBetDc;
     }
-    if (betMode === 'consumables') {
-      return selectedToken !== null && (tokens[selectedToken.id] || 0) > 0 && effectiveBetDc > 0;
-    }
     return false;
-  }, [isUpgrading, targetSkin, betMode, selectedItems, effectiveBetDc, customBetDc, balance, selectedToken, tokens]);
+  }, [isUpgrading, targetSkin, betMode, selectedItems, effectiveBetDc, customBetDc, balance]);
+
+  const handleActivateZeus = async () => {
+    if (isUpgrading || isZeusActive || zeusCount <= 0) return;
+    setZeusStriking(true);
+    sound.playZeusShock();
+    useZeus();
+    setIsZeusActive(true);
+
+    // Re-spin needle animation as lightning strikes it
+    await needleControls.start({
+      rotate: [0, 360, 720, 1080],
+      transition: { duration: 0.85, ease: [0.12, 0.85, 0.18, 1] },
+    });
+    setZeusStriking(false);
+  };
+
+  const handleToggleProtect = (instanceId: string) => {
+    if (isUpgrading) return;
+    if (protectedInstanceId === instanceId) {
+      sound.playClick();
+      setProtectedInstanceId(null);
+    } else {
+      if (saveTokensCount <= 0) {
+        sound.playError();
+        return;
+      }
+      sound.playAngelicChime();
+      setProtectedInstanceId(instanceId);
+    }
+  };
 
   // Perform Upgrade Spin
   const handleStartUpgrade = async () => {
     if (!canUpgrade || !targetSkin || effectiveBetDc <= 0) return;
 
     const currentLostAmount = effectiveBetDc;
+    const wasProtected = protectedInstanceId && selectedItems.some((i) => i.instanceId === protectedInstanceId);
 
-    if (betMode === 'skin') {
-      if (selectedItems.length === 0) return;
-      const idsToRemove = new Set(selectedItems.map((i) => i.instanceId));
-      useGameStore.setState((state) => ({
-        inventory: state.inventory.filter((i) => !idsToRemove.has(i.instanceId)),
-      }));
-    } else if (betMode === 'dc') {
+    if (betMode === 'dc') {
       if (balance < customBetDc) {
         useGameStore.getState().setRefillOpen(true);
         return;
       }
       const deducted = deductBalance(customBetDc);
       if (!deducted) return;
-    } else if (betMode === 'consumables' && selectedToken) {
-      // Consume 1 token from inventory
-      const used = useToken(selectedToken.id);
-      if (!used) return;
     }
 
     sound.playClick();
@@ -501,7 +517,6 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     const totalRotation = 360 * 5 + targetAngle;
     const duration = 4.2;
 
-    // Aerodynamic continuous WHOOSH spin sound (no crackling clicks)
     sound.startSpinWhoosh(duration);
 
     await needleControls.set({ rotate: 0 });
@@ -527,6 +542,16 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       addToInventory([targetSkin]);
       recordUpgrade(true, targetSkin.priceDc - effectiveBetDc);
 
+      // On win: ALL bet skins are consumed (including protected skin)
+      if (betMode === 'skin') {
+        const idsToRemove = selectedItems.map((i) => i.instanceId);
+        removeFromInventory(idsToRemove);
+        setSelectedItems([]);
+      }
+
+      setIsZeusActive(false);
+      setProtectedInstanceId(null);
+
       // Emit real drop to live drops ticker (strictly >= 25,000 DC)
       if (targetSkin.priceDc >= 25000) {
         addLiveDrop({
@@ -550,110 +575,100 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       setLastResult('lose');
       recordUpgrade(false, -effectiveBetDc);
 
-      // ── CONSOLATION PRIZE (Кешбэк / Утешительный приз) ──
-      // Triggers on losses >= 500 DC
-      const shouldTriggerConsolation =
-        currentLostAmount >= 2000 ? Math.random() < 0.85 :
-        currentLostAmount >= 1000 ? Math.random() < 0.65 :
-        currentLostAmount >= 500 ? Math.random() < 0.40 : false;
-
-      if (shouldTriggerConsolation) {
-        // 1. Зелье удачи (Контрабанда): ОЧЕНЬ РЕДКО, и ТОЛЬКО если сумма проигрыша >= 10 000 DC!
-        // Шанс плавно растет от 1.0% (при 10к) до 3% (при 100к+)
-        let awardedPotion = false;
-        if (currentLostAmount >= 10000) {
-          const potionChance = Math.min(0.03, 0.01 + ((currentLostAmount - 10000) / 200000) * 0.02);
-          if (Math.random() < potionChance) {
-            awardedPotion = true;
+      if (betMode === 'skin') {
+        if (wasProtected) {
+          // Remove all items EXCEPT the protected one
+          const burnedIds = selectedItems
+            .filter((i) => i.instanceId !== protectedInstanceId)
+            .map((i) => i.instanceId);
+          if (burnedIds.length > 0) {
+            removeFromInventory(burnedIds);
           }
-        }
+          // Consume 1 save token
+          useSaveToken();
+          sound.playAngelicChime();
 
-        if (awardedPotion) {
+          // Keep protected item in inventory & selection
+          const savedItem = selectedItems.find((i) => i.instanceId === protectedInstanceId);
+          setSelectedItems(savedItem ? [savedItem] : []);
+        } else {
+          const idsToRemove = selectedItems.map((i) => i.instanceId);
+          removeFromInventory(idsToRemove);
+          setSelectedItems([]);
+        }
+      }
+
+      setIsZeusActive(false);
+      setProtectedInstanceId(null);
+
+      // ── CONSOLATION PRIZE (Кешбэк / Утешительный приз) ──
+      // 1. Very rare consumable consolation prize (Save Token, Zeus, Potion)
+      const consPrize = rollConsolationPrize(currentLostAmount);
+      if (consPrize) {
+        if (consPrize.saveToken) {
           setCashbackModal({
             isOpen: true,
-            awardedPotion: true,
+            awardedConsumable: 'save_token',
             lostAmount: currentLostAmount,
           });
-        } else {
-          // 2. Основной пул утешительного приза:
-          // Кейсы падают ЧАЩЕ ВСЕГО (~76%), а Токены — РЕДКО (~24%)
-          const rollType = Math.random();
-          const isCasePrize = rollType < 0.76;
+        } else if (consPrize.zeus) {
+          setCashbackModal({
+            isOpen: true,
+            awardedConsumable: 'zeus',
+            lostAmount: currentLostAmount,
+          });
+        } else if (consPrize.potion) {
+          setCashbackModal({
+            isOpen: true,
+            awardedConsumable: 'potion',
+            lostAmount: currentLostAmount,
+          });
+        }
+      } else {
+        // 2. Standard Case Consolation for losses >= 500 DC
+        const shouldTriggerConsolation =
+          currentLostAmount >= 2000 ? Math.random() < 0.85 :
+          currentLostAmount >= 1000 ? Math.random() < 0.65 :
+          currentLostAmount >= 500 ? Math.random() < 0.40 : false;
 
-          if (isCasePrize) {
-            // КЕЙС: Выбираем дешевый кейс (кешбэк 10-12% от суммы проигрыша, максимум 2 500 DC)
-            const casesList = allCasesJson as CaseItem[];
-            const validCases = casesList.filter((c) => c.skins && c.skins.length > 0);
+        if (shouldTriggerConsolation) {
+          const casesList = allCasesJson as CaseItem[];
+          const validCases = casesList.filter((c) => c.skins && c.skins.length > 0);
 
-            const maxCasePrice = Math.min(2500, Math.max(300, Math.floor(currentLostAmount * 0.12)));
-            // Предпочитаем оружейные кейсы (не капсулы и не сувенирные наборы за 100k+)
-            let casePool = validCases.filter(
-              (c) => c.priceDc <= maxCasePrice && !c.name.includes('Capsule') && !c.name.includes('Package')
-            );
-            if (casePool.length === 0) {
-              casePool = validCases.filter((c) => c.priceDc <= maxCasePrice);
-            }
-            if (casePool.length === 0) {
-              casePool = validCases.filter((c) => c.priceDc <= 1000);
-            }
+          const maxCasePrice = Math.min(2500, Math.max(300, Math.floor(currentLostAmount * 0.12)));
+          let casePool = validCases.filter(
+            (c) => c.priceDc <= maxCasePrice && !c.name.includes('Capsule') && !c.name.includes('Package')
+          );
+          if (casePool.length === 0) {
+            casePool = validCases.filter((c) => c.priceDc <= maxCasePrice);
+          }
+          if (casePool.length === 0) {
+            casePool = validCases.filter((c) => c.priceDc <= 1000);
+          }
 
-            const selectedCase = casePool[Math.floor(Math.random() * casePool.length)];
+          const selectedCase = casePool[Math.floor(Math.random() * casePool.length)];
 
-            if (selectedCase && selectedCase.skins.length > 0) {
-              // КЕШБЭК НЕ ДОЛЖЕН ОКУПАТЬ АПГРЕЙД!
-              // Дроп со скина составляет скромную долю от проигрыша (до 15% от проигранной суммы)
-              const maxDropPrice = Math.max(30, Math.floor(currentLostAmount * 0.15));
-              let candidateSkins = selectedCase.skins.filter((s) => s.priceDc <= maxDropPrice);
-              if (candidateSkins.length === 0) {
-                const cheapest = selectedCase.skins.reduce(
-                  (min, s) => (s.priceDc < min.priceDc ? s : min),
-                  selectedCase.skins[0]
-                );
-                candidateSkins = [cheapest];
-              }
-
-              const cashbackDrop = candidateSkins[Math.floor(Math.random() * candidateSkins.length)];
-              setCashbackModal({
-                isOpen: true,
-                caseItem: selectedCase,
-                skin: cashbackDrop,
-                lostAmount: currentLostAmount,
-              });
-            }
-          } else {
-            // ТОКЕН (Редко): Редкость токена зависит от суммы проигрыша
-            let tokenPrize: UpgradeToken;
-            const tRoll = Math.random() * 100;
-
-            if (currentLostAmount < 3000) {
-              // Ширпотреб (85%) / Промышленный (15%)
-              tokenPrize = tRoll < 15 ? UPGRADE_TOKENS[1] : UPGRADE_TOKENS[0];
-            } else if (currentLostAmount < 10000) {
-              // Промышленный (60%) / Армейский (40%)
-              tokenPrize = tRoll < 40 ? UPGRADE_TOKENS[2] : UPGRADE_TOKENS[1];
-            } else if (currentLostAmount < 25000) {
-              // Армейский (60%) / Запрещенный (40%)
-              tokenPrize = tRoll < 40 ? UPGRADE_TOKENS[3] : UPGRADE_TOKENS[2];
-            } else if (currentLostAmount < 60000) {
-              // Запрещенный (50%) / Засекреченный (50%)
-              tokenPrize = tRoll < 50 ? UPGRADE_TOKENS[4] : UPGRADE_TOKENS[3];
-            } else {
-              // Засекреченный (45%) / Тайный (40%) / Золотой (15%)
-              tokenPrize = tRoll < 15 ? UPGRADE_TOKENS[6] : tRoll < 55 ? UPGRADE_TOKENS[5] : UPGRADE_TOKENS[4];
+          if (selectedCase && selectedCase.skins.length > 0) {
+            const maxDropPrice = Math.max(30, Math.floor(currentLostAmount * 0.15));
+            let candidateSkins = selectedCase.skins.filter((s) => s.priceDc <= maxDropPrice);
+            if (candidateSkins.length === 0) {
+              const cheapest = selectedCase.skins.reduce(
+                (min, s) => (s.priceDc < min.priceDc ? s : min),
+                selectedCase.skins[0]
+              );
+              candidateSkins = [cheapest];
             }
 
+            const cashbackDrop = candidateSkins[Math.floor(Math.random() * candidateSkins.length)];
             setCashbackModal({
               isOpen: true,
-              awardedToken: tokenPrize,
+              caseItem: selectedCase,
+              skin: cashbackDrop,
               lostAmount: currentLostAmount,
             });
           }
         }
       }
-    }
-
-    if (betMode === 'skin') {
-      setSelectedItems([]);
     }
   };
 
@@ -735,10 +750,16 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const halfPotion = potionBonus / 2;
   const wingArcLen = halfPotion > 0 ? (halfPotion / 100) * gaugeC : 0;
 
+  // Zeus electric wings calculations (+5% bonus, electric cyan wings)
+  const halfZeus = zeusBonus / 2;
+  const zeusArcLen = halfZeus > 0 ? (halfZeus / 100) * gaugeC : 0;
+
   // Symmetrical layout: Winning sector centered at bottom (90 deg)
   const baseStartDeg = 90 - (baseChance * 1.8);
   const leftWingStartDeg = baseStartDeg - (halfPotion * 3.6);
   const rightWingStartDeg = 90 + (baseChance * 1.8);
+  const leftZeusStartDeg = leftWingStartDeg - (halfZeus * 3.6);
+  const rightZeusStartDeg = rightWingStartDeg + (wingArcLen > 0 ? halfPotion * 3.6 : 0);
 
   // Bubbles strictly inside potion wings
   const potionBubbles = useMemo(() => {
@@ -852,12 +873,6 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   onClick={() => {
                     sound.playClick();
                     setBetMode('consumables');
-                    let tok = selectedToken;
-                    if (!tok) {
-                      tok = UPGRADE_TOKENS.find(t => (tokens[t.id] || 0) > 0) || null;
-                      if (tok) setSelectedToken(tok);
-                    }
-                    if (tok) autoSelectTargetSkin(targetChance, tok.valueDc);
                   }}
                   className={`relative px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 whitespace-nowrap z-10 ${
                     betMode === 'consumables' ? 'text-black' : 'text-yellow-400/80 hover:text-yellow-400'
@@ -899,39 +914,120 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   </div>
                 ) : (
                   <div className="flex flex-col h-full justify-between">
-                    <div className="grid grid-cols-3 gap-2 py-1">
-                      {selectedItems.map((item) => (
-                        <div
-                          key={item.instanceId}
-                          onClick={() => handleRemoveSelectedItem(item.instanceId)}
-                          className="relative rounded-xl bg-[#13141c] border border-white/10 hover:border-red-500/60 hover:bg-red-500/5 p-1.5 h-[105px] flex flex-col items-center justify-between group cursor-pointer transition-all"
-                          title={locale === 'ru' ? 'Нажмите, чтобы убрать скин' : 'Click to remove skin'}
-                        >
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleRemoveSelectedItem(item.instanceId);
-                            }}
-                            className="absolute top-1 right-1 w-5 h-5 rounded-full bg-red-500/90 hover:bg-red-500 text-white flex items-center justify-center text-xs shadow-md transition-opacity cursor-pointer z-10"
-                            aria-label="Remove item"
+                    <div className="grid grid-cols-3 gap-2 py-1 overflow-visible">
+                      {selectedItems.map((item) => {
+                        const isProtected = protectedInstanceId === item.instanceId;
+                        return (
+                          <div
+                            key={item.instanceId}
+                            onClick={() => handleRemoveSelectedItem(item.instanceId)}
+                            className={`relative rounded-xl p-1.5 h-[105px] flex flex-col items-center justify-between group cursor-pointer transition-all ${
+                              isProtected
+                                ? 'bg-yellow-500/15 border-2 border-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.5)] z-20'
+                                : 'bg-[#13141c] border border-white/10 hover:border-red-500/60 hover:bg-red-500/5'
+                            }`}
+                            title={locale === 'ru' ? 'Нажмите, чтобы убрать скин' : 'Click to remove skin'}
                           >
-                            <X className="w-3.5 h-3.5" />
-                          </button>
-                          <SkinImage
-                            src={item.image}
-                            alt={item.name}
-                            size={100}
-                            className="w-14 h-12 sm:w-16 sm:h-14 object-contain drop-shadow-md group-hover:scale-95 transition-transform"
-                          />
-                          <span className="text-[10px] text-white font-black truncate w-full text-center mt-0.5">
-                            {item.skinName || item.name}
-                          </span>
-                          <span className="text-[10px] font-mono font-black text-yellow-400">
-                            {item.priceDc.toLocaleString('ru-RU')} DC
-                          </span>
-                        </div>
-                      ))}
+                            {/* Halo (Нимб) */}
+                            {isProtected && (
+                              <motion.div
+                                animate={{ y: [-2, 2, -2], opacity: [0.9, 1, 0.9] }}
+                                transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+                                className="absolute -top-3 left-1/2 -translate-x-1/2 pointer-events-none z-30"
+                              >
+                                <div className="w-10 h-2.5 rounded-full border-2 border-yellow-300 bg-yellow-400/20 shadow-[0_0_10px_#facc15]" />
+                              </motion.div>
+                            )}
+
+                            {/* Left Angel Wing */}
+                            {isProtected && (
+                              <motion.div
+                                animate={{ rotate: [-3, 4, -3], y: [-1, 1, -1] }}
+                                transition={{ repeat: Infinity, duration: 2.4, ease: 'easeInOut' }}
+                                className="absolute -left-5 top-1/2 -translate-y-1/2 w-6 h-12 pointer-events-none z-20 filter drop-shadow-[0_0_8px_rgba(250,204,21,0.9)]"
+                              >
+                                <svg viewBox="0 0 40 60" fill="none" className="w-full h-full text-yellow-300">
+                                  <path
+                                    d="M38 30C28 20 20 8 10 2C6 0 2 3 2 7C2 15 10 28 14 36C8 38 4 43 5 47C6 52 14 55 22 53C28 51 34 42 38 30Z"
+                                    fill="#facc15"
+                                    stroke="#fef08a"
+                                    strokeWidth="1.5"
+                                  />
+                                </svg>
+                              </motion.div>
+                            )}
+
+                            {/* Right Angel Wing */}
+                            {isProtected && (
+                              <motion.div
+                                animate={{ rotate: [3, -4, 3], y: [-1, 1, -1] }}
+                                transition={{ repeat: Infinity, duration: 2.4, ease: 'easeInOut' }}
+                                className="absolute -right-5 top-1/2 -translate-y-1/2 w-6 h-12 pointer-events-none z-20 filter drop-shadow-[0_0_8px_rgba(250,204,21,0.9)]"
+                              >
+                                <svg viewBox="0 0 40 60" fill="none" className="w-full h-full text-yellow-300">
+                                  <path
+                                    d="M2 30C12 20 20 8 30 2C34 0 38 3 38 7C38 15 30 28 26 36C32 38 36 43 35 47C34 52 26 55 18 53C12 51 6 42 2 30Z"
+                                    fill="#facc15"
+                                    stroke="#fef08a"
+                                    strokeWidth="1.5"
+                                  />
+                                </svg>
+                              </motion.div>
+                            )}
+
+                            {/* Protect / Unprotect Button */}
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleToggleProtect(item.instanceId);
+                              }}
+                              className={`absolute top-1 left-1 px-1 py-0.5 rounded text-[9px] font-black flex items-center gap-0.5 transition-all z-20 cursor-pointer ${
+                                isProtected
+                                  ? 'bg-yellow-400 text-black shadow-md'
+                                  : saveTokensCount > 0
+                                  ? 'bg-yellow-400/20 text-yellow-300 hover:bg-yellow-400 hover:text-black border border-yellow-400/40'
+                                  : 'hidden'
+                              }`}
+                              title={
+                                isProtected
+                                  ? (locale === 'ru' ? 'Снять защиту оберега' : 'Remove protection')
+                                  : (locale === 'ru' ? 'Защитить жетоном сохранения' : 'Protect with Guardian Aegis')
+                              }
+                            >
+                              <span>🪽</span>
+                              {isProtected && <span className="text-[7.5px] uppercase tracking-tighter">Спасён</span>}
+                            </button>
+
+                            {/* Remove button */}
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                if (isProtected) setProtectedInstanceId(null);
+                                handleRemoveSelectedItem(item.instanceId);
+                              }}
+                              className="absolute top-1 right-1 w-5 h-5 rounded-full bg-red-500/90 hover:bg-red-500 text-white flex items-center justify-center text-xs shadow-md transition-opacity cursor-pointer z-20"
+                              aria-label="Remove item"
+                            >
+                              <X className="w-3.5 h-3.5" />
+                            </button>
+
+                            <SkinImage
+                              src={item.image}
+                              alt={item.name}
+                              size={100}
+                              className="w-14 h-12 sm:w-16 sm:h-14 object-contain drop-shadow-md group-hover:scale-95 transition-transform"
+                            />
+                            <span className="text-[10px] text-white font-black truncate w-full text-center mt-0.5">
+                              {item.skinName || item.name}
+                            </span>
+                            <span className="text-[10px] font-mono font-black text-yellow-400">
+                              {item.priceDc.toLocaleString('ru-RU')} DC
+                            </span>
+                          </div>
+                        );
+                      })}
 
                       {Array.from({ length: 5 - selectedItems.length }).map((_, idx) => (
                         <div
@@ -954,26 +1050,26 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   </div>
                 )
               ) : betMode === 'consumables' ? (
-                /* CONSUMABLES TAB: POTIONS & TOKENS */
-                <div className="flex flex-col h-full justify-between overflow-y-auto pr-1 gap-2.5">
-                  {/* Luck Potion Row */}
-                  <div className="p-2.5 rounded-xl bg-black/40 border border-white/10 flex flex-col gap-1.5 shadow-sm">
+                /* CONSUMABLES TAB: POTIONS, SAVE TOKENS & ZEUS */
+                <div className="flex flex-col h-full justify-between overflow-y-auto pr-1 gap-2">
+                  {/* 1. Luck Potion Row */}
+                  <div className="p-2 rounded-xl bg-black/40 border border-emerald-500/20 flex flex-col gap-1 shadow-sm">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
                         <span className="text-base">🧪</span>
-                        <span className="text-xs font-black text-white">{t('upg.potionTitle')}</span>
-                        <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
-                          {t('upg.contraband')}
+                        <span className="text-xs font-black text-white">{locale === 'ru' ? 'Зелье удачи' : 'Luck Potion'}</span>
+                        <span className="text-[8.5px] font-black px-1.5 py-0.2 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                          +15%
                         </span>
                       </div>
-                      <span className="text-xs font-mono font-black text-white/60">
+                      <span className="text-[11px] font-mono font-black text-emerald-400">
                         {locale === 'ru' ? `${potionsCount} шт.` : `${potionsCount} pcs.`}
                       </span>
                     </div>
 
                     {activePotionCharges > 0 ? (
-                      <div className="flex items-center justify-between p-2 rounded-lg glass-panel border border-white/10 text-xs font-bold text-white shadow-sm">
-                        <span className="flex items-center gap-1.5">
+                      <div className="flex items-center justify-between p-1.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-xs font-bold text-emerald-300 shadow-sm">
+                        <span className="flex items-center gap-1 text-[11px]">
                           <span>🧪</span>
                           <span>{t('upg.potionActive')}</span>
                         </span>
@@ -984,13 +1080,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     ) : (
                       <button
                         type="button"
-                        onClick={() => {
-                          drinkPotion();
-                        }}
+                        onClick={() => drinkPotion()}
                         disabled={potionsCount <= 0}
-                        className={`w-full py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                        className={`w-full py-1 rounded-lg text-xs font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1 ${
                           potionsCount > 0
-                            ? 'btn-yellow text-black active:scale-95'
+                            ? 'bg-emerald-500 hover:bg-emerald-400 text-black active:scale-95 shadow-[0_0_12px_rgba(16,185,129,0.3)]'
                             : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
                         }`}
                       >
@@ -999,63 +1093,88 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     )}
                   </div>
 
-                  {/* Tokens Row */}
-                  <div className="flex flex-col gap-1 flex-1">
-                    <div className="flex items-center justify-between mb-0.5">
-                      <span className="text-[11px] font-bold text-white/70">{t('upg.myTokens')}</span>
-                      {selectedToken && (
-                        <span className="text-[10px] text-yellow-400 font-mono font-bold">
-                          +{selectedToken.valueDc.toLocaleString('ru-RU')} DC
+                  {/* 2. Guardian Aegis (Жетон сохранения) Row */}
+                  <div className="p-2 rounded-xl bg-black/40 border border-yellow-500/20 flex flex-col gap-1 shadow-sm">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-base">🪽</span>
+                        <span className="text-xs font-black text-white">{locale === 'ru' ? 'Жетон сохранения' : 'Guardian Aegis'}</span>
+                        <span className="text-[8.5px] font-black px-1.5 py-0.2 rounded bg-yellow-500/15 text-yellow-300 border border-yellow-500/30">
+                          {locale === 'ru' ? 'Оберег' : 'Shield'}
                         </span>
-                      )}
-                    </div>
-
-                    {UPGRADE_TOKENS.filter((tok) => (tokens[tok.id] || 0) > 0).length === 0 ? (
-                      <div className="p-3 text-center text-[11px] text-white/40 border border-dashed border-white/10 rounded-xl">
-                        {t('upg.noTokensOwned')}
                       </div>
+                      <span className="text-[11px] font-mono font-black text-yellow-400">
+                        {locale === 'ru' ? `${saveTokensCount} шт.` : `${saveTokensCount} pcs.`}
+                      </span>
+                    </div>
+                    <p className="text-[9.5px] text-white/50 leading-tight">
+                      {locale === 'ru'
+                        ? 'Дарует 1 предмету ангельские крылья и нимб. Не сгорает при неудаче!'
+                        : 'Grants 1 item wings and halo. Will not burn on failure!'}
+                    </p>
+                    {selectedItems.length > 0 ? (
+                      <button
+                        type="button"
+                        onClick={() => handleToggleProtect(selectedItems[0].instanceId)}
+                        disabled={saveTokensCount <= 0 && !protectedInstanceId}
+                        className={`w-full py-1 rounded-lg text-xs font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1 ${
+                          protectedInstanceId
+                            ? 'bg-yellow-400/20 text-yellow-300 border border-yellow-400/50'
+                            : saveTokensCount > 0
+                            ? 'btn-yellow text-black active:scale-95 shadow-[0_0_12px_rgba(250,204,21,0.3)]'
+                            : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
+                        }`}
+                      >
+                        <span>
+                          {protectedInstanceId
+                            ? (locale === 'ru' ? '🪽 Скин защищён' : '🪽 Skin Protected')
+                            : (locale === 'ru' ? '🪽 Защитить выбранный скин' : '🪽 Protect Selected Skin')}
+                        </span>
+                      </button>
                     ) : (
-                      <div className="flex flex-col gap-1 overflow-y-auto max-h-28 pr-1">
-                        {UPGRADE_TOKENS.filter((tok) => (tokens[tok.id] || 0) > 0).map((token) => {
-                          const isSel = selectedToken?.id === token.id;
-                          const rConf = RARITY_CONFIG[token.rarity];
-                          const count = tokens[token.id] || 0;
-
-                          return (
-                            <button
-                              key={token.id}
-                              type="button"
-                              onClick={() => {
-                                sound.playClick();
-                                setSelectedToken(token);
-                                autoSelectTargetSkin(targetChance, token.valueDc);
-                              }}
-                              className={`flex items-center justify-between p-1.5 rounded-xl border transition-all cursor-pointer text-left ${
-                                isSel
-                                  ? 'border-yellow-400 bg-yellow-400/15 shadow-[0_0_10px_rgba(250,204,21,0.25)]'
-                                  : 'border-white/10 bg-black/40 hover:border-white/20'
-                              }`}
-                            >
-                              <div className="flex items-center gap-1.5">
-                                <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: rConf.color }} />
-                                <div className="flex flex-col">
-                                  <div className="flex items-center gap-1">
-                                    <span className="text-xs font-black text-white">{t('token.' + token.rarity) || token.name}</span>
-                                    <span className="text-[10px] font-mono text-yellow-400 font-bold">x{count}</span>
-                                  </div>
-                                  <span className="text-[9px] text-white/40">
-                                    {t('upg.targetUpTo')} {token.maxTargetDc.toLocaleString('ru-RU')} DC
-                                  </span>
-                                </div>
-                              </div>
-                              <span className="font-mono font-black text-xs text-yellow-400">
-                                +{token.valueDc.toLocaleString('ru-RU')} DC
-                              </span>
-                            </button>
-                          );
-                        })}
+                      <div className="text-[9.5px] text-center text-white/40 italic py-0.5">
+                        {locale === 'ru' ? 'Выберите скин в инвентаре для защиты' : 'Select a skin to protect'}
                       </div>
                     )}
+                  </div>
+
+                  {/* 3. Zeus x27 Tactical Shock Row */}
+                  <div className="p-2 rounded-xl bg-black/40 border border-sky-500/20 flex flex-col gap-1 shadow-sm">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-base">⚡</span>
+                        <span className="text-xs font-black text-white">Zeus x27</span>
+                        <span className="text-[8.5px] font-black px-1.5 py-0.2 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30">
+                          +5%
+                        </span>
+                      </div>
+                      <span className="text-[11px] font-mono font-black text-sky-400">
+                        {locale === 'ru' ? `${zeusCount} шт.` : `${zeusCount} pcs.`}
+                      </span>
+                    </div>
+                    <p className="text-[9.5px] text-white/50 leading-tight">
+                      {locale === 'ru'
+                        ? 'Электрошок стрелки барабана, мгновенный реролл и +5% к шансу!'
+                        : 'Shock arrow with lightning, instant reroll and +5% chance!'}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={handleActivateZeus}
+                      disabled={zeusCount <= 0 || isZeusActive || isUpgrading}
+                      className={`w-full py-1 rounded-lg text-xs font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1 ${
+                        isZeusActive
+                          ? 'bg-sky-500/20 text-sky-300 border border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)]'
+                          : zeusCount > 0
+                          ? 'bg-sky-500 hover:bg-sky-400 text-black active:scale-95 shadow-[0_0_12px_rgba(56,189,248,0.3)]'
+                          : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
+                      }`}
+                    >
+                      <span>
+                        {isZeusActive
+                          ? (locale === 'ru' ? '⚡ Zeus активен (+5%)' : '⚡ Zeus Active (+5%)')
+                          : (locale === 'ru' ? '⚡ Активировать Zeus (+5%)' : '⚡ Activate Zeus (+5%)')}
+                      </span>
+                    </button>
                   </div>
                 </div>
               ) : (
@@ -1223,7 +1342,61 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     ))}
                   </g>
                 )}
+
+                {/* Zeus Electric Sky-Blue Wings (Adjoins winning sector with electric glow) */}
+                {zeusBonus > 0 && (
+                  <g className="transition-all duration-300 pointer-events-none">
+                    <circle
+                      cx="120"
+                      cy="120"
+                      r={gaugeR}
+                      fill="none"
+                      stroke="#0284c7"
+                      strokeWidth="18"
+                      strokeDasharray={`${zeusArcLen} ${gaugeC}`}
+                      strokeLinecap="butt"
+                      transform={`rotate(${leftZeusStartDeg}, 120, 120)`}
+                      className="filter drop-shadow-[0_0_15px_#38bdf8] transition-all duration-300"
+                    />
+                    <circle
+                      cx="120"
+                      cy="120"
+                      r={gaugeR}
+                      fill="none"
+                      stroke="#0284c7"
+                      strokeWidth="18"
+                      strokeDasharray={`${zeusArcLen} ${gaugeC}`}
+                      strokeLinecap="butt"
+                      transform={`rotate(${rightZeusStartDeg}, 120, 120)`}
+                      className="filter drop-shadow-[0_0_15px_#38bdf8] transition-all duration-300"
+                    />
+                  </g>
+                )}
               </svg>
+
+              {/* Zeus Lightning Bolt Strike Animation */}
+              {zeusStriking && (
+                <div className="absolute inset-0 pointer-events-none z-30 flex items-center justify-center animate-in fade-in zoom-in duration-150">
+                  <svg viewBox="0 0 240 240" className="w-full h-full filter drop-shadow-[0_0_25px_#38bdf8]">
+                    <path
+                      d="M 120 15 L 105 85 L 140 80 L 100 150 L 135 145 L 120 220"
+                      stroke="#38bdf8"
+                      strokeWidth="5"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M 120 15 L 105 85 L 140 80 L 100 150 L 135 145 L 120 220"
+                      stroke="#ffffff"
+                      strokeWidth="2.5"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              )}
 
               {/* Rotating Pointer Needle with inward-pointing arrow */}
               <motion.div
@@ -1233,18 +1406,25 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               >
                 <div className="relative w-full h-4 flex items-center justify-end pr-1.5">
                   <svg
-                    className="w-7 h-7 drop-shadow-[0_0_12px_rgba(250,204,21,0.95)]"
+                    className={`w-7 h-7 transition-all duration-300 ${
+                      isZeusActive || zeusStriking
+                        ? 'filter drop-shadow-[0_0_20px_#38bdf8] scale-110'
+                        : 'filter drop-shadow-[0_0_12px_rgba(250,204,21,0.95)]'
+                    }`}
                     viewBox="0 0 24 24"
                     fill="none"
                   >
                     <polygon
                       points="2,12 20,4 20,20"
-                      fill="#FACC15"
-                      stroke="#FFFFFF"
+                      fill={isZeusActive || zeusStriking ? '#38bdf8' : '#FACC15'}
+                      stroke={isZeusActive || zeusStriking ? '#e0f2fe' : '#FFFFFF'}
                       strokeWidth="2"
                       strokeLinejoin="round"
                     />
                   </svg>
+                  {(isZeusActive || zeusStriking) && (
+                    <span className="absolute right-0 -top-2 text-xs animate-ping">⚡</span>
+                  )}
                 </div>
               </motion.div>
 
@@ -1265,7 +1445,16 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     <span>{t('upg.potionSaved')}</span>
                     <span className="text-zinc-400">{activePotionCharges}/3</span>
                   </div>
-                ) : (
+                ) : null}
+
+                {isZeusActive && zeusBonus > 0 && (
+                  <div className="flex items-center gap-1 mt-0.5 font-mono text-[10px] font-bold text-sky-400 tracking-tight">
+                    <span>⚡</span>
+                    <span>+{zeusBonus}% Zeus</span>
+                  </div>
+                )}
+
+                {potionBonus === 0 && zeusBonus === 0 && (
                   <span
                     className="text-[11px] font-bold mt-1 max-w-[120px] leading-tight"
                     style={{ color: riskLabel.color }}
@@ -1277,7 +1466,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             </div>
 
             {/* Action CTA Button */}
-            <div className="mt-4 w-full max-w-xs">
+            <div className="mt-4 w-full max-w-xs flex flex-col gap-2">
               <button
                 type="button"
                 onClick={handleStartUpgrade}
@@ -1293,13 +1482,32 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     ? t('upg.spinning')
                     : betMode === 'skin' && selectedItems.length === 0
                     ? t('upg.selectSkinsBtn')
-                    : betMode === 'consumables' && !selectedToken
-                    ? t('upg.selectTokenBtn')
                     : !targetSkin
                     ? t('upg.selectTargetBtn')
                     : t('upg.upgradeBtn')}
                 </span>
               </button>
+
+              {/* Zeus x27 Quick Action Button */}
+              {(zeusCount > 0 || isZeusActive) && (
+                <button
+                  type="button"
+                  onClick={handleActivateZeus}
+                  disabled={isUpgrading || isZeusActive || zeusStriking}
+                  className={`w-full py-2.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 border ${
+                    isZeusActive
+                      ? 'bg-sky-500/20 border-sky-400 text-sky-300 shadow-[0_0_20px_rgba(56,189,248,0.4)] cursor-default'
+                      : 'bg-sky-950/40 hover:bg-sky-900/50 border-sky-500/40 hover:border-sky-400 text-sky-200 cursor-pointer active:scale-95 shadow-[0_0_15px_rgba(56,189,248,0.2)]'
+                  }`}
+                >
+                  <span className={isZeusActive ? 'animate-pulse' : ''}>⚡</span>
+                  <span>
+                    {isZeusActive
+                      ? (locale === 'ru' ? 'Zeus активен: +5% и реролл' : 'Zeus Active: +5% & Reroll')
+                      : (locale === 'ru' ? `Zeus x27 (+5%) · ${zeusCount} шт.` : `Zeus x27 (+5%) · ${zeusCount} pcs`)}
+                  </span>
+                </button>
+              )}
             </div>
           </div>
 
@@ -1843,14 +2051,15 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           isOpen={cashbackModal.isOpen}
           caseItem={cashbackModal.caseItem}
           winningSkin={cashbackModal.skin}
-          awardedToken={cashbackModal.awardedToken}
-          awardedPotion={cashbackModal.awardedPotion}
+          awardedConsumable={cashbackModal.awardedConsumable}
           lostAmount={cashbackModal.lostAmount}
           onClaim={() => {
-            if (cashbackModal.awardedPotion) {
+            if (cashbackModal.awardedConsumable === 'potion') {
               addPotion(1);
-            } else if (cashbackModal.awardedToken) {
-              addToken(cashbackModal.awardedToken.id);
+            } else if (cashbackModal.awardedConsumable === 'save_token') {
+              addSaveToken(1);
+            } else if (cashbackModal.awardedConsumable === 'zeus') {
+              addZeus(1);
             } else if (cashbackModal.skin) {
               addToInventory([cashbackModal.skin]);
             }

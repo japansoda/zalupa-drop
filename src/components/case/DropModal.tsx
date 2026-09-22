@@ -2,9 +2,8 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import confetti from 'canvas-confetti';
-import { ExternalLink, Check, ShoppingBag, Ticket, FlaskConical } from 'lucide-react';
+import { ExternalLink, Check, ShoppingBag, FlaskConical, ShieldCheck, Zap } from 'lucide-react';
 import { SkinEntity } from '../../lib/types';
-import { UpgradeToken } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
 import { RarityBadge } from '../ui/RarityBadge';
 import { WearBadge } from '../ui/WearBadge';
@@ -19,7 +18,7 @@ import { getSteamMarketListingUrl, isStatTrakableItem } from '../../lib/steam';
 interface DropModalProps {
   skin?: SkinEntity | null;
   skins?: SkinEntity[];
-  bonusConsumables?: { tokens: UpgradeToken[]; potions: number };
+  bonusConsumables?: { potions: number; saveTokens: number; zeus: number };
   onKeep: (remaining?: SkinEntity[]) => void;
   onSell: (remaining?: SkinEntity[]) => void;
 }
@@ -47,7 +46,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
   );
 
   const hasBonus = Boolean(
-    bonusConsumables && (bonusConsumables.tokens.length > 0 || bonusConsumables.potions > 0)
+    bonusConsumables && ((bonusConsumables.potions || 0) + (bonusConsumables.saveTokens || 0) + (bonusConsumables.zeus || 0) > 0)
   );
 
   useEffect(() => {
@@ -275,7 +274,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                 {locale === 'ru' ? 'ДОПОЛНИТЕЛЬНЫЙ ДРОП' : 'BONUS DROP'}
               </span>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-black text-black bg-yellow-400 shadow-sm">
-                +{(bonusConsumables.potions || 0) + (bonusConsumables.tokens?.length || 0)}
+                +{(bonusConsumables.potions || 0) + (bonusConsumables.saveTokens || 0) + (bonusConsumables.zeus || 0)}
               </span>
             </div>
 
@@ -302,39 +301,59 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                 </div>
               )}
 
-              {/* Token Bonus Cards */}
-              {bonusConsumables.tokens.map((tok, idx) => {
-                const rConf = RARITY_CONFIG[tok.rarity] || RARITY_CONFIG.milspec;
-                return (
-                  <div
-                    key={`${tok.id}_${idx}`}
-                    className="flex items-center gap-3 p-3 rounded-xl glass-card border border-white/10 text-left w-full sm:max-w-md"
-                    style={{ borderBottomWidth: '3px', borderBottomColor: rConf.color }}
-                  >
-                    <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
-                      style={{ backgroundColor: `${rConf.color}15` }}
-                    >
-                      <Ticket className="w-5 h-5" style={{ color: rConf.color }} />
-                    </div>
-                    <div className="flex flex-col min-w-0 flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-black text-white truncate">
-                          {t('token.' + tok.rarity) || tok.name}
-                        </span>
-                        <span className="text-[10px] font-mono font-black text-white/60 bg-white/5 px-1.5 py-0.5 rounded">
-                          x1
-                        </span>
-                      </div>
-                      <span className="text-[11px] text-white/40 mt-0.5">
-                        +{tok.valueDc.toLocaleString('ru-RU')} DC · {locale === 'ru'
-                          ? `до ${tok.maxTargetDc.toLocaleString('ru-RU')} DC`
-                          : `up to ${tok.maxTargetDc.toLocaleString('ru-RU')} DC`}
+              {/* Save Token (Guardian Aegis) Bonus Card */}
+              {bonusConsumables.saveTokens > 0 && (
+                <div
+                  className="flex items-center gap-3 p-3 rounded-xl glass-card border border-white/10 text-left w-full sm:max-w-md"
+                  style={{ borderBottomWidth: '3px', borderBottomColor: '#facc15' }}
+                >
+                  <div className="w-10 h-10 rounded-lg bg-yellow-500/15 flex items-center justify-center shrink-0 text-xl">
+                    🪽
+                  </div>
+                  <div className="flex flex-col min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-black text-white truncate">
+                        {locale === 'ru' ? 'Жетон сохранения' : 'Guardian Aegis'}
+                      </span>
+                      <span className="text-[10px] font-mono font-black text-yellow-400 bg-yellow-400/10 px-1.5 py-0.5 rounded border border-yellow-400/20">
+                        x{bonusConsumables.saveTokens}
                       </span>
                     </div>
+                    <span className="text-[11px] text-white/40 mt-0.5">
+                      {locale === 'ru'
+                        ? 'Ангельские крылья и нимб · Скин не сгорает при неудаче'
+                        : 'Angelic wings & halo · Skin is saved on failure'}
+                    </span>
                   </div>
-                );
-              })}
+                </div>
+              )}
+
+              {/* Zeus x27 Bonus Card */}
+              {bonusConsumables.zeus > 0 && (
+                <div
+                  className="flex items-center gap-3 p-3 rounded-xl glass-card border border-white/10 text-left w-full sm:max-w-md"
+                  style={{ borderBottomWidth: '3px', borderBottomColor: '#38bdf8' }}
+                >
+                  <div className="w-10 h-10 rounded-lg bg-sky-500/15 flex items-center justify-center shrink-0">
+                    <Zap className="w-5 h-5 text-sky-400" />
+                  </div>
+                  <div className="flex flex-col min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-black text-white truncate">
+                        Zeus x27
+                      </span>
+                      <span className="text-[10px] font-mono font-black text-sky-400 bg-sky-400/10 px-1.5 py-0.5 rounded border border-sky-400/20">
+                        x{bonusConsumables.zeus}
+                      </span>
+                    </div>
+                    <span className="text-[11px] text-white/40 mt-0.5">
+                      {locale === 'ru'
+                        ? 'Молния по стрелке · Реролл барабана и +5% удачи'
+                        : 'Lightning bolt strike · Arrow reroll and +5% luck'}
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}

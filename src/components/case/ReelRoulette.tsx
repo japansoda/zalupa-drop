@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { SkinEntity } from '../../lib/types';
-import { rollCaseBonusDrop, UpgradeToken } from '../../lib/consumables';
+import { rollCaseBonusDrop } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
 import { sound } from '../../lib/sound';
 import { DropModal } from './DropModal';
@@ -19,18 +19,26 @@ import { isStatTrakableItem } from '../../lib/steam';
 import { rollWearAndStatTrak } from '../../lib/dropRoll';
 
 interface ReelRouletteProps {
-  caseId?: string;
   caseSkins: SkinEntity[];
   casePriceDc: number;
   caseName: string;
+  caseImage?: string;
+  caseId?: string;
 }
 
+const REEL_SIZE = 55;
+const WINNER_INDEX = 48;
+const WIN_INDEX = WINNER_INDEX;
 const ITEM_WIDTH = 180;
 const ITEM_GAP = 12;
-const WIN_INDEX = 45;
-const REEL_SIZE = 55;
 
-export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, casePriceDc, caseName }) => {
+export const ReelRoulette: React.FC<ReelRouletteProps> = ({
+  caseSkins,
+  casePriceDc,
+  caseName,
+  caseImage,
+  caseId,
+}) => {
   const { 
     balance, 
     deductBalance, 
@@ -51,9 +59,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
   // Up to 3 reels
   const [reels, setReels] = useState<SkinEntity[][]>([[], [], []]);
   const [winningSkins, setWinningSkins] = useState<SkinEntity[]>([]);
-  const [bonusConsumables, setBonusConsumables] = useState<{ tokens: UpgradeToken[]; potions: number }>({
-    tokens: [],
+  const [bonusConsumables, setBonusConsumables] = useState<{ potions: number; saveTokens: number; zeus: number }>({
     potions: 0,
+    saveTokens: 0,
+    zeus: 0,
   });
   const [showModal, setShowModal] = useState(false);
 
@@ -261,21 +270,26 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({ caseId, caseSkins, c
     setIsRevealed(false);
     setShowModal(false);
 
-    // Roll bonus consumables for each opened case
-    const droppedTokens: UpgradeToken[] = [];
+    // Roll bonus consumables for each opened case (low chance)
     let droppedPotions = 0;
+    let droppedSaveTokens = 0;
+    let droppedZeus = 0;
     for (let i = 0; i < openCount; i++) {
       const bonus = rollCaseBonusDrop();
-      if (bonus.token) {
-        droppedTokens.push(bonus.token);
-        useGameStore.getState().addToken(bonus.token.id);
-      }
       if (bonus.potion) {
         droppedPotions++;
         useGameStore.getState().addPotion(1);
       }
+      if (bonus.saveToken) {
+        droppedSaveTokens++;
+        useGameStore.getState().addSaveToken(1);
+      }
+      if (bonus.zeus) {
+        droppedZeus++;
+        useGameStore.getState().addZeus(1);
+      }
     }
-    setBonusConsumables({ tokens: droppedTokens, potions: droppedPotions });
+    setBonusConsumables({ potions: droppedPotions, saveTokens: droppedSaveTokens, zeus: droppedZeus });
 
     // Pick winners for each reel and roll wear & StatTrak
     const winners: SkinEntity[] = [];

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { SkinEntity, CaseItem } from '../../lib/types';
-import { UpgradeToken } from '../../lib/consumables';
+import { LUCK_POTION, SAVE_TOKEN, ZEUS_ITEM } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { SkinImage } from '../ui/SkinImage';
@@ -12,14 +12,13 @@ import { WearBadge } from '../ui/WearBadge';
 import { RarityBadge } from '../ui/RarityBadge';
 import { sound } from '../../lib/sound';
 import { useLanguage, getCaseName } from '../../lib/i18n';
-import { Gift, FastForward, Check, Sparkles, Ticket, FlaskConical } from 'lucide-react';
+import { Gift, FastForward, Check, Sparkles, FlaskConical, ShieldAlert, Zap } from 'lucide-react';
 
 interface CashbackModalProps {
   isOpen: boolean;
   caseItem?: CaseItem;
   winningSkin?: SkinEntity;
-  awardedToken?: UpgradeToken;
-  awardedPotion?: boolean;
+  awardedConsumable?: 'potion' | 'save_token' | 'zeus';
   lostAmount: number;
   onClaim: () => void;
   onClose: () => void;
@@ -34,8 +33,7 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
   isOpen,
   caseItem,
   winningSkin,
-  awardedToken,
-  awardedPotion,
+  awardedConsumable,
   lostAmount,
   onClaim,
   onClose,
@@ -57,17 +55,16 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
       return;
     }
 
-    if (awardedPotion && !winningSkin) {
+    if (awardedConsumable && !winningSkin) {
       setIsSpinning(false);
       setIsRevealed(true);
-      sound.playConsolation(true);
-      return;
-    }
-
-    if (awardedToken && !winningSkin) {
-      setIsSpinning(false);
-      setIsRevealed(true);
-      sound.playConsolation(false);
+      if (awardedConsumable === 'potion') {
+        sound.playConsolation(true);
+      } else if (awardedConsumable === 'save_token') {
+        sound.playAngelicChime();
+      } else if (awardedConsumable === 'zeus') {
+        sound.playZeusShock();
+      }
       return;
     }
 
@@ -133,7 +130,7 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
       clearInterval(tickInterval);
       if (spinTimerRef.current) clearTimeout(spinTimerRef.current);
     };
-  }, [isOpen, caseItem, winningSkin, awardedToken]);
+  }, [isOpen, caseItem, winningSkin, awardedConsumable]);
 
   const revealDrop = () => {
     if (spinTimerRef.current) clearTimeout(spinTimerRef.current);
@@ -148,13 +145,16 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
 
   if (!isOpen) return null;
 
-  const rConf = awardedPotion
-    ? RARITY_CONFIG.contraband
-    : awardedToken
-    ? RARITY_CONFIG[awardedToken.rarity] || RARITY_CONFIG.milspec
-    : winningSkin
-    ? RARITY_CONFIG[winningSkin.rarity] || RARITY_CONFIG.milspec
-    : RARITY_CONFIG.milspec;
+  const rConf =
+    awardedConsumable === 'potion'
+      ? RARITY_CONFIG.contraband
+      : awardedConsumable === 'save_token'
+      ? { color: '#eab308', bg: 'rgba(234, 179, 8, 0.15)', border: 'rgba(234, 179, 8, 0.4)', label: '★ ЗОЛОТО' }
+      : awardedConsumable === 'zeus'
+      ? { color: '#38bdf8', bg: 'rgba(56, 189, 248, 0.15)', border: 'rgba(56, 189, 248, 0.4)', label: '★ TACTICAL' }
+      : winningSkin
+      ? RARITY_CONFIG[winningSkin.rarity] || RARITY_CONFIG.milspec
+      : RARITY_CONFIG.milspec;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
@@ -166,19 +166,23 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
         <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/15 border border-yellow-400/30 text-yellow-400 text-xs font-black uppercase tracking-wider mb-2">
           <Gift className="w-3.5 h-3.5" />
           <span>
-            {awardedPotion
-              ? t('cashback.badgePotion')
-              : awardedToken
-              ? t('cashback.badgeToken')
+            {awardedConsumable === 'potion'
+              ? (locale === 'ru' ? 'ЗЕЛЬЕ УДАЧИ' : 'LUCK POTION')
+              : awardedConsumable === 'save_token'
+              ? (locale === 'ru' ? 'ЖЕТОН СОХРАНЕНИЯ' : 'GUARDIAN AEGIS')
+              : awardedConsumable === 'zeus'
+              ? 'ZEUS x27'
               : t('cashback.badgeCase')}
           </span>
         </div>
 
         <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight mb-1">
-          {awardedPotion
+          {awardedConsumable === 'potion'
             ? (locale === 'ru' ? 'Зелье удачи' : 'Luck Potion')
-            : awardedToken
-            ? (t('token.' + awardedToken.rarity) || awardedToken.name)
+            : awardedConsumable === 'save_token'
+            ? (locale === 'ru' ? 'Жетон сохранения' : 'Guardian Aegis')
+            : awardedConsumable === 'zeus'
+            ? 'Zeus x27'
             : caseItem
             ? `${t('cashback.spinningCase')} «${getCaseName(caseItem, locale)}»`
             : t('cashback.badgeCase')}
@@ -265,8 +269,8 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                 boxShadow: `0 0 35px ${rConf.color}40`,
               }}
             >
-              {/* Card Body */}
-              {awardedPotion ? (
+              {/* Consumable or Skin Card Body */}
+              {awardedConsumable === 'potion' ? (
                 <div className="w-full flex flex-col items-center my-4">
                   <div className="w-20 h-20 rounded-2xl bg-emerald-950/70 border-2 border-emerald-400 flex items-center justify-center mb-3 shadow-[0_0_30px_rgba(16,185,129,0.5)]">
                     <FlaskConical className="w-10 h-10 text-emerald-400 animate-pulse" />
@@ -286,32 +290,45 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                     {locale === 'ru' ? 'Сверхредкий утешительный приз за крупный проигрыш!' : 'Ultra-rare consolation reward for major loss!'}
                   </p>
                 </div>
-              ) : awardedToken ? (
+              ) : awardedConsumable === 'save_token' ? (
                 <div className="w-full flex flex-col items-center my-4">
-                  <div
-                    className="w-20 h-20 rounded-2xl flex items-center justify-center mb-3 border-2 shadow-lg"
-                    style={{
-                      backgroundColor: `${rConf.color}15`,
-                      borderColor: rConf.color,
-                      boxShadow: `0 0 25px ${rConf.color}40`,
-                    }}
-                  >
-                    <Ticket className="w-10 h-10" style={{ color: rConf.color }} />
+                  <div className="w-20 h-20 rounded-2xl bg-yellow-950/70 border-2 border-yellow-400 flex items-center justify-center mb-3 shadow-[0_0_35px_rgba(250,204,21,0.5)] relative">
+                    <span className="text-4xl animate-bounce">🪽</span>
+                    <div className="absolute -top-3 w-10 h-3 rounded-full border-2 border-yellow-300 shadow-[0_0_15px_#fde047] pointer-events-none" />
                   </div>
                   <h4 className="font-black text-2xl text-white tracking-tight">
-                    {t('token.' + awardedToken.rarity) || awardedToken.name}
+                    {locale === 'ru' ? 'Жетон сохранения' : 'Guardian Aegis'}
                   </h4>
-                  <p className="text-xs font-bold mt-1 uppercase tracking-wider" style={{ color: rConf.color }}>
-                    {t('rarity.' + awardedToken.rarity) || rConf.label}
+                  <p className="text-xs font-black mt-1 uppercase tracking-wider text-yellow-400">
+                    {locale === 'ru' ? '★ ЗОЛОТОЙ ОБЕРЕГ' : '★ GUARDIAN BLESSING'}
                   </p>
-                  <div className="flex items-center justify-center gap-1.5 mt-3 px-4 py-2 rounded-xl bg-black/60 border border-white/10">
-                    <DropCoinIcon size={20} />
-                    <span className="font-mono font-black text-yellow-400 text-xl">
-                      +{awardedToken.valueDc.toLocaleString('ru-RU')} DC
+                  <div className="flex items-center justify-center gap-1.5 mt-3 px-4 py-2 rounded-xl bg-yellow-950/40 border border-yellow-400/40 shadow-inner">
+                    <span className="font-mono font-bold text-yellow-300 text-sm">
+                      {locale === 'ru' ? 'Спасает предмет от сгорания при поражении' : 'Protects item from burning on failure'}
                     </span>
                   </div>
                   <p className="text-xs text-white/50 mt-2">
-                    {t('cashback.maxTarget')} {awardedToken.maxTargetDc.toLocaleString('ru-RU')} DC
+                    {locale === 'ru' ? 'Дарует ангельские крылья и нимб выбранному скину в апгрейдере.' : 'Bestows angelic wings and halo in upgrader.'}
+                  </p>
+                </div>
+              ) : awardedConsumable === 'zeus' ? (
+                <div className="w-full flex flex-col items-center my-4">
+                  <div className="w-20 h-20 rounded-2xl bg-sky-950/70 border-2 border-sky-400 flex items-center justify-center mb-3 shadow-[0_0_35px_rgba(56,189,248,0.5)]">
+                    <Zap className="w-10 h-10 text-sky-400 animate-pulse" />
+                  </div>
+                  <h4 className="font-black text-2xl text-white tracking-tight">
+                    Zeus x27
+                  </h4>
+                  <p className="text-xs font-black mt-1 uppercase tracking-wider text-sky-400">
+                    {locale === 'ru' ? '★ ТАКТИЧЕСКИЙ ШОКЕР' : '★ TACTICAL STUN'}
+                  </p>
+                  <div className="flex items-center justify-center gap-1.5 mt-3 px-4 py-2 rounded-xl bg-sky-950/40 border border-sky-400/40 shadow-inner">
+                    <span className="font-mono font-black text-sky-300 text-base">
+                      {locale === 'ru' ? 'Электрошок стрелки + Реролл (+5% шанс)' : 'Electric Shock + Reroll (+5% chance)'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-white/50 mt-2">
+                    {locale === 'ru' ? 'Выстреливает электрическим разрядом в колесо апгрейдера!' : 'Discharges lightning into the upgrader wheel!'}
                   </p>
                 </div>
               ) : winningSkin ? (
@@ -341,7 +358,7 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                       {winningSkin.name}
                     </h4>
                     <p className="text-xs text-white/60 mt-0.5" style={{ color: rConf.color }}>
-                      {t('rarity.' + winningSkin.rarity) || rConf.label}
+                      {t('rarity.' + winningSkin.rarity) || (rConf as any).label}
                     </p>
                     <div className="flex items-center justify-center gap-1.5 mt-3">
                       <DropCoinIcon size={20} />
@@ -362,10 +379,8 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
             >
               <Check className="w-5 h-5 stroke-[3]" />
               <span>
-                {awardedPotion
-                  ? t('cashback.claimPotion')
-                  : awardedToken
-                  ? t('cashback.claimToken')
+                {awardedConsumable
+                  ? (locale === 'ru' ? 'Забрать расходник' : 'Claim Consumable')
                   : t('cashback.claimSkin')}
               </span>
             </button>

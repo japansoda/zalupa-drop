@@ -1,49 +1,42 @@
-import { SkinRarity } from './types';
-
-export interface UpgradeToken {
+export interface ConsumableItem {
   id: string;
   name: string;
   nameEn: string;
-  rarity: SkinRarity;
-  valueDc: number;
-  maxTargetDc: number;
-}
-
-export const UPGRADE_TOKENS: UpgradeToken[] = [
-  { id: 'token_consumer', name: 'Ширпотреб Токен', nameEn: 'Consumer Token', rarity: 'consumer', valueDc: 500, maxTargetDc: 2000 },
-  { id: 'token_industrial', name: 'Промышленный Токен', nameEn: 'Industrial Token', rarity: 'industrial', valueDc: 1500, maxTargetDc: 5000 },
-  { id: 'token_milspec', name: 'Армейский Токен', nameEn: 'Mil-Spec Token', rarity: 'milspec', valueDc: 5000, maxTargetDc: 15000 },
-  { id: 'token_restricted', name: 'Запрещенный Токен', nameEn: 'Restricted Token', rarity: 'restricted', valueDc: 15000, maxTargetDc: 35000 },
-  { id: 'token_classified', name: 'Засекреченный Токен', nameEn: 'Classified Token', rarity: 'classified', valueDc: 35000, maxTargetDc: 65000 },
-  { id: 'token_covert', name: '★ Тайный Токен', nameEn: '★ Covert Token', rarity: 'covert', valueDc: 70000, maxTargetDc: 85000 },
-  { id: 'token_gold', name: '★ Золотой Токен', nameEn: '★ Gold Token', rarity: 'gold', valueDc: 100000, maxTargetDc: 120000 },
-];
-
-export interface LuckPotion {
-  id: 'potion_luck';
-  name: 'Зелье удачи';
-  nameEn: 'Luck Potion';
-  rarity: 'contraband';
-  charges: number;
-  bonusChancePercent: number;
+  rarity: 'contraband' | 'gold' | 'covert';
   description: string;
   descriptionEn: string;
+  icon: string;
 }
 
-export const LUCK_POTION: LuckPotion = {
+export const LUCK_POTION: ConsumableItem = {
   id: 'potion_luck',
   name: 'Зелье удачи',
   nameEn: 'Luck Potion',
   rarity: 'contraband',
-  charges: 3,
-  bonusChancePercent: 15,
-  description: 'Универсальная удача на 3 действия: кейсы, апгрейдер и контракты',
-  descriptionEn: 'Universal luck for 3 actions: cases, upgrader and contracts',
+  description: 'Универсальная удача на 3 действия (+15%): кейсы, апгрейдер и контракты',
+  descriptionEn: 'Universal luck for 3 actions (+15%): cases, upgrader and contracts',
+  icon: '🧪',
 };
 
-export function getTokenName(token: UpgradeToken, locale: 'ru' | 'en' = 'ru'): string {
-  return locale === 'en' ? token.nameEn : token.name;
-}
+export const SAVE_TOKEN: ConsumableItem = {
+  id: 'save_token',
+  name: 'Жетон сохранения',
+  nameEn: 'Guardian Aegis',
+  rarity: 'gold',
+  description: 'Дарует предмету ангельские крылья и нимб. При неудаче в апгрейдере защищённый скин не сгорает!',
+  descriptionEn: 'Grants angelic wings and halo. In case of upgrade failure, the protected skin will not burn!',
+  icon: '🪽',
+};
+
+export const ZEUS_ITEM: ConsumableItem = {
+  id: 'zeus_charge',
+  name: 'Zeus x27',
+  nameEn: 'Zeus x27',
+  rarity: 'covert',
+  description: 'Стреляет молнией в стрелку барабана, электризует её, даёт реролл и +5% к шансу апгрейда!',
+  descriptionEn: 'Fires lightning at the arrow, electrifies it, grants a reroll and +5% upgrade chance!',
+  icon: '⚡',
+};
 
 export function getPotionName(locale: 'ru' | 'en' = 'ru'): string {
   return locale === 'en' ? LUCK_POTION.nameEn : LUCK_POTION.name;
@@ -53,55 +46,70 @@ export function getPotionDesc(locale: 'ru' | 'en' = 'ru'): string {
   return locale === 'en' ? LUCK_POTION.descriptionEn : LUCK_POTION.description;
 }
 
-// Roll drop from opening a case
-export function rollCaseBonusDrop(): { token?: UpgradeToken; potion?: boolean } {
-  // Rare bonus drop: only 5.5% overall chance to get ANY bonus drop on opening a case
-  if (Math.random() > 0.055) {
+export function getSaveTokenName(locale: 'ru' | 'en' = 'ru'): string {
+  return locale === 'en' ? SAVE_TOKEN.nameEn : SAVE_TOKEN.name;
+}
+
+export function getSaveTokenDesc(locale: 'ru' | 'en' = 'ru'): string {
+  return locale === 'en' ? SAVE_TOKEN.descriptionEn : SAVE_TOKEN.description;
+}
+
+export function getZeusName(locale: 'ru' | 'en' = 'ru'): string {
+  return locale === 'en' ? ZEUS_ITEM.nameEn : ZEUS_ITEM.name;
+}
+
+export function getZeusDesc(locale: 'ru' | 'en' = 'ru'): string {
+  return locale === 'en' ? ZEUS_ITEM.descriptionEn : ZEUS_ITEM.description;
+}
+
+/**
+ * Roll rare bonus drop from opening a case.
+ * Very low overall chance (approx 2.5%) for extra consumables.
+ */
+export function rollCaseBonusDrop(): {
+  potion?: boolean;
+  saveToken?: boolean;
+  zeus?: boolean;
+} {
+  // Low chance overall to get ANY bonus drop on opening a case: 2.8%
+  if (Math.random() > 0.028) {
     return {};
   }
 
-  // Luck Potion is Contraband rarity — extremely rare (~3% of bonus drops -> ~0.16% per case opening)
-  if (Math.random() < 0.03) {
+  const roll = Math.random();
+  if (roll < 0.25) {
+    // 25% of bonus drops -> Luck Potion
     return { potion: true };
-  }
-
-  // Otherwise, roll an Upgrade Token with rarity weighting (higher rarity = much rarer)
-  const roll = Math.random() * 100;
-  let token: UpgradeToken;
-  if (roll < 0.1) {
-    // 0.1% -> ★ Gold Token
-    token = UPGRADE_TOKENS[6];
-  } else if (roll < 0.5) {
-    // 0.4% -> ★ Covert Token
-    token = UPGRADE_TOKENS[5];
-  } else if (roll < 1.8) {
-    // 1.3% -> Classified Token
-    token = UPGRADE_TOKENS[4];
-  } else if (roll < 6.0) {
-    // 4.2% -> Restricted Token
-    token = UPGRADE_TOKENS[3];
-  } else if (roll < 16.0) {
-    // 10% -> Mil-Spec Token
-    token = UPGRADE_TOKENS[2];
-  } else if (roll < 42.0) {
-    // 26% -> Industrial Token
-    token = UPGRADE_TOKENS[1];
+  } else if (roll < 0.60) {
+    // 35% of bonus drops -> Save Token (Guardian Aegis)
+    return { saveToken: true };
   } else {
-    // 58% -> Consumer Token
-    token = UPGRADE_TOKENS[0];
+    // 40% of bonus drops -> Zeus x27
+    return { zeus: true };
   }
-
-  return { token };
 }
 
-// Roll token for consolation prize in upgrader
-export function rollConsolationToken(): UpgradeToken {
-  const roll = Math.random() * 100;
-  if (roll < 0.5) return UPGRADE_TOKENS[6]; // Gold
-  if (roll < 2.0) return UPGRADE_TOKENS[5]; // Covert
-  if (roll < 6.0) return UPGRADE_TOKENS[4]; // Classified
-  if (roll < 16.0) return UPGRADE_TOKENS[3]; // Restricted
-  if (roll < 38.0) return UPGRADE_TOKENS[2]; // Milspec
-  if (roll < 70.0) return UPGRADE_TOKENS[1]; // Industrial
-  return UPGRADE_TOKENS[0]; // Consumer
+/**
+ * Roll consolation prize in upgrader on high-price loss.
+ * Very low chance (2-5%) and only on losses >= 2,500 DC.
+ */
+export function rollConsolationPrize(lostAmount: number): {
+  potion?: boolean;
+  saveToken?: boolean;
+  zeus?: boolean;
+} | null {
+  if (lostAmount < 2500) return null;
+
+  // Scales gently with lost amount: 2% base up to 5.5% on 100,000 DC
+  const chance = Math.min(0.055, 0.02 + (lostAmount / 100000) * 0.035);
+  if (Math.random() > chance) return null;
+
+  const roll = Math.random();
+  if (roll < 0.30) {
+    return { potion: true };
+  } else if (roll < 0.65) {
+    return { saveToken: true };
+  } else {
+    return { zeus: true };
+  }
 }
