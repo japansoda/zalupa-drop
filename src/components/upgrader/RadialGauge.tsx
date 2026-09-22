@@ -899,12 +899,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   </div>
                 ) : (
                   <div className="flex flex-col h-full justify-between">
-                    <div className="grid grid-cols-3 gap-2 overflow-y-auto max-h-60 pr-1">
+                    <div className="grid grid-cols-3 gap-2 py-1">
                       {selectedItems.map((item) => (
                         <div
                           key={item.instanceId}
                           onClick={() => handleRemoveSelectedItem(item.instanceId)}
-                          className="relative rounded-xl bg-[#13141c] border border-white/10 hover:border-red-500/60 hover:bg-red-500/5 p-2 flex flex-col items-center justify-between group cursor-pointer transition-all"
+                          className="relative rounded-xl bg-[#13141c] border border-white/10 hover:border-red-500/60 hover:bg-red-500/5 p-1.5 h-[105px] flex flex-col items-center justify-between group cursor-pointer transition-all"
                           title={locale === 'ru' ? 'Нажмите, чтобы убрать скин' : 'Click to remove skin'}
                         >
                           <button
@@ -922,9 +922,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                             src={item.image}
                             alt={item.name}
                             size={100}
-                            className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md group-hover:scale-95 transition-transform"
+                            className="w-14 h-12 sm:w-16 sm:h-14 object-contain drop-shadow-md group-hover:scale-95 transition-transform"
                           />
-                          <span className="text-[10px] text-white font-black truncate w-full text-center mt-1">
+                          <span className="text-[10px] text-white font-black truncate w-full text-center mt-0.5">
                             {item.skinName || item.name}
                           </span>
                           <span className="text-[10px] font-mono font-black text-yellow-400">
@@ -936,7 +936,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       {Array.from({ length: 5 - selectedItems.length }).map((_, idx) => (
                         <div
                           key={idx}
-                          className="rounded-xl border border-dashed border-white/10 flex flex-col items-center justify-center h-20 text-white/20"
+                          className="rounded-xl border border-dashed border-white/10 flex flex-col items-center justify-center h-[105px] text-white/20"
                         >
                           <Plus className="w-4 h-4" />
                           <span className="text-[9px] mt-0.5">{t('upg.slot')}</span>
@@ -1355,9 +1355,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               {targetSkin ? (
                 <div className="flex flex-col items-center justify-center my-auto">
                   <SkinImage
+                    key={targetSkin.id}
                     src={targetSkin.image}
                     alt={targetSkin.name}
-                    size={260}
+                    size={280}
+                    priority={true}
                     className="w-48 h-32 sm:w-56 sm:h-36 object-contain filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-300"
                   />
                   <span className="font-black text-white text-base text-center line-clamp-1 mt-2">
