@@ -118,8 +118,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const [customBetDc, setCustomBetDc] = useState<number>(1000);
   const [betMode, setBetMode] = useState<'skin' | 'dc' | 'consumables'>('skin');
   const [protectedInstanceId, setProtectedInstanceId] = useState<string | null>(null);
-  const [isZeusActive, setIsZeusActive] = useState<boolean>(false);
   const [zeusStriking, setZeusStriking] = useState<boolean>(false);
+  const [isSpinning, setIsSpinning] = useState<boolean>(false);
+  const [zeusUsedThisSpin, setZeusUsedThisSpin] = useState<boolean>(false);
+  const spinResolveRef = useRef<(() => void) | null>(null);
 
   const [targetChance, setTargetChance] = useState<number>(50);
   const [targetSkin, setTargetSkin] = useState<SkinEntity | null>(null);
@@ -349,10 +351,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
   // Zeus x27 tactical shock bonus (+5% max, strictly clamped to 80%)
   const zeusBonus = useMemo(() => {
-    if (!isZeusActive) return 0;
+    if (!zeusUsedThisSpin) return 0;
     const remainingTo80 = Number((80 - baseChance - potionBonus).toFixed(2));
     return Math.min(5, Math.max(0, remainingTo80));
-  }, [isZeusActive, baseChance, potionBonus]);
+  }, [zeusUsedThisSpin, baseChance, potionBonus]);
 
   // Total chance displayed and used for roll (strictly max 80% with potion & zeus included)
   const chance = useMemo(() => {
@@ -447,19 +449,21 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     return false;
   }, [isUpgrading, targetSkin, betMode, selectedItems, effectiveBetDc, customBetDc, balance]);
 
-  const handleActivateZeus = async () => {
-    if (isUpgrading || isZeusActive || zeusCount <= 0) return;
+  // Zeus: можно прожать ТОЛЬКО когда спин уже идёт и ещё не завершился.
+  // Просто прерывает текущий спин и запускает перекрут (+5% к шансу).
+  const canPressZeus = isSpinning && isUpgrading && !zeusUsedThisSpin && !zeusStriking && zeusCount > 0;
+  const handleActivateZeus = () => {
+    if (!canPressZeus) return;
+    // Consume zeus and interrupt current spin for re-spin
+    useZeus();
+    setZeusUsedThisSpin(true);
     setZeusStriking(true);
     sound.playZeusShock();
-    useZeus();
-    setIsZeusActive(true);
-
-    // Re-spin needle animation as lightning strikes it
-    await needleControls.start({
-      rotate: [0, 360, 720, 1080],
-      transition: { duration: 0.85, ease: [0.12, 0.85, 0.18, 1] },
-    });
-    setZeusStriking(false);
+    // Interrupt current spin — spinResolveRef triggers re-spin in handleStartUpgrade
+    if (spinResolveRef.current) {
+      spinResolveRef.current();
+      spinResolveRef.current = null;
+    }
   };
 
   const handleToggleProtect = (instanceId: string) => {
@@ -482,7 +486,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     if (!canUpgrade || !targetSkin || effectiveBetDc <= 0) return;
 
     const currentLostAmount = effectiveBetDc;
-    const wasProtected = protectedInstanceId && selectedItems.some((i) => i.instanceId === protectedInstanceId);
+    const wasProtected = Boolean(protectedInstanceId && selectedItems.some((i) => i.instanceId === protectedInstanceId));
 
     if (betMode === 'dc') {
       if (balance < customBetDc) {
@@ -495,40 +499,67 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
     sound.playClick();
     setIsUpgrading(true);
+    setIsSpinning(true);
     setLastResult(null);
+    setZeusUsedThisSpin(false);
 
     // Save whether potion was actually used to boost this roll
     const potionWasUsed = isPotionUsed && potionBonus > 0;
 
-    // Math: Winning sector is centered at bottom (90 deg)
-    const span = chance * 3.6;
-    const halfSpan = span / 2;
-    const isWin = Math.random() * 100 <= chance;
+    // Helper: run a spin with given chance, returns isWin
+    const doSpin = async (spinChance: number): Promise<boolean> => {
+      const span = spinChance * 3.6;
+      const halfSpan = span / 2;
+      const isWin = Math.random() * 100 <= spinChance;
 
-    let targetAngle: number;
-    if (isWin) {
-      targetAngle = 90 - halfSpan + Math.random() * span;
-    } else {
-      const loseSpan = 360 - span;
-      targetAngle = 90 + halfSpan + Math.random() * loseSpan;
-    }
+      let targetAngle: number;
+      if (isWin) {
+        targetAngle = 90 - halfSpan + Math.random() * span;
+      } else {
+        const loseSpan = 360 - span;
+        targetAngle = 90 + halfSpan + Math.random() * loseSpan;
+      }
 
-    // Spin 5 full revolutions + targetAngle
-    const totalRotation = 360 * 5 + targetAngle;
-    const duration = 4.2;
+      const totalRotation = 360 * 5 + targetAngle;
+      const duration = 4.2;
 
-    sound.startSpinWhoosh(duration);
+      sound.startSpinWhoosh(duration);
+      await needleControls.set({ rotate: 0 });
 
-    await needleControls.set({ rotate: 0 });
-    await needleControls.start({
-      rotate: totalRotation,
-      transition: {
-        duration: duration,
-        ease: [0.12, 0.85, 0.18, 1],
-      },
-    });
+      // Race: spin animation vs zeus interrupt
+      const spinPromise = needleControls.start({
+        rotate: totalRotation,
+        transition: { duration, ease: [0.12, 0.85, 0.18, 1] },
+      });
+      const zeusInterrupt = new Promise<'zeus'>((resolve) => {
+        spinResolveRef.current = () => resolve('zeus');
+      });
 
-    sound.stopSpinWhoosh();
+      const result = await Promise.race([
+        spinPromise.then(() => 'done' as const),
+        zeusInterrupt,
+      ]);
+
+      sound.stopSpinWhoosh();
+
+      if (result === 'zeus') {
+        // Zeus interrupted — stop needle, show lightning, then re-spin
+        await needleControls.stop();
+        // Lightning strike animation (brief pause)
+        await new Promise<void>((r) => setTimeout(r, 600));
+        setZeusStriking(false);
+        // Re-spin with boosted chance (+5%)
+        const boostedChance = Math.min(80, spinChance + 5);
+        return doSpin(boostedChance);
+      }
+
+      spinResolveRef.current = null;
+      return isWin;
+    };
+
+    const isWin = await doSpin(chance);
+
+    setIsSpinning(false);
     setIsUpgrading(false);
 
     // Consume 1 potion charge ONLY IF potion was actually used
@@ -542,6 +573,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       addToInventory([targetSkin]);
       recordUpgrade(true, targetSkin.priceDc - effectiveBetDc);
 
+      // Сохранение тратится даже при выигрыше, если предмет был защищён
+      if (wasProtected) {
+        useSaveToken();
+      }
+
       // On win: ALL bet skins are consumed (including protected skin)
       if (betMode === 'skin') {
         const idsToRemove = selectedItems.map((i) => i.instanceId);
@@ -549,7 +585,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         setSelectedItems([]);
       }
 
-      setIsZeusActive(false);
+      setZeusUsedThisSpin(false);
+      setZeusStriking(false);
       setProtectedInstanceId(null);
 
       // Emit real drop to live drops ticker (strictly >= 25,000 DC)
@@ -598,10 +635,15 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         }
       }
 
-      setIsZeusActive(false);
+      setZeusStriking(false);
+      setZeusUsedThisSpin(false);
       setProtectedInstanceId(null);
 
       // ── CONSOLATION PRIZE (Кешбэк / Утешительный приз) ──
+      // Если проигрыш был с сохранением предмета — утешительного приза НЕ будет
+      if (wasProtected) {
+        return;
+      }
       // 1. Very rare consumable consolation prize (Save Token, Zeus, Potion)
       const consPrize = rollConsolationPrize(currentLostAmount);
       if (consPrize) {
@@ -1154,25 +1196,29 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     </div>
                     <p className="text-[9.5px] text-white/50 leading-tight">
                       {locale === 'ru'
-                        ? 'Электрошок стрелки барабана, мгновенный реролл и +5% к шансу!'
-                        : 'Shock arrow with lightning, instant reroll and +5% chance!'}
+                        ? 'Жми Zeus только во время спина — перекрут и +5% к шансу!'
+                        : 'Press Zeus only mid-spin — reroll and +5% chance!'}
                     </p>
                     <button
                       type="button"
                       onClick={handleActivateZeus}
-                      disabled={zeusCount <= 0 || isZeusActive || isUpgrading}
-                      className={`w-full py-1 rounded-lg text-xs font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1 ${
-                        isZeusActive
-                          ? 'bg-sky-500/20 text-sky-300 border border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)]'
-                          : zeusCount > 0
-                          ? 'bg-sky-500 hover:bg-sky-400 text-black active:scale-95 shadow-[0_0_12px_rgba(56,189,248,0.3)]'
+                      disabled={!canPressZeus}
+                      className={`w-full py-1 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1 ${
+                        zeusUsedThisSpin
+                          ? 'bg-sky-500/20 text-sky-300 border border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)] cursor-default'
+                          : canPressZeus
+                          ? 'bg-sky-500 hover:bg-sky-400 text-black active:scale-95 shadow-[0_0_12px_rgba(56,189,248,0.3)] cursor-pointer'
                           : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
                       }`}
                     >
                       <span>
-                        {isZeusActive
-                          ? (locale === 'ru' ? '⚡ Zeus активен (+5%)' : '⚡ Zeus Active (+5%)')
-                          : (locale === 'ru' ? '⚡ Активировать Zeus (+5%)' : '⚡ Activate Zeus (+5%)')}
+                        {zeusUsedThisSpin
+                          ? (locale === 'ru' ? '⚡ Zeus использован (+5%)' : '⚡ Zeus Used (+5%)')
+                          : canPressZeus
+                          ? (locale === 'ru' ? '⚡ Вжать Zeus! (+5% перекрут)' : '⚡ Hit Zeus! (+5% reroll)')
+                          : zeusCount <= 0
+                          ? (locale === 'ru' ? '⚡ Нет Zeus' : '⚡ No Zeus')
+                          : (locale === 'ru' ? '⚡ Жми во время спина' : '⚡ Press mid-spin')}
                       </span>
                     </button>
                   </div>
@@ -1251,6 +1297,41 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                         animation: potionBubblePulse ease-in-out infinite;
                         transform-origin: center;
                         transform-box: fill-box;
+                      }
+                      @keyframes zeusFlicker {
+                        0%, 100% { opacity: 1; }
+                        8% { opacity: 0.55; }
+                        16% { opacity: 1; }
+                        32% { opacity: 0.7; }
+                        48% { opacity: 1; }
+                        64% { opacity: 0.6; }
+                        80% { opacity: 1; }
+                      }
+                      @keyframes zeusDashFlow {
+                        0% { stroke-dashoffset: 0; }
+                        100% { stroke-dashoffset: -48; }
+                      }
+                      @keyframes zeusSparkFloat {
+                        0%, 100% { transform: scale(0.7) rotate(-8deg); opacity: 0.4; }
+                        50% { transform: scale(1.25) rotate(8deg); opacity: 1; }
+                      }
+                      .zeus-electric-arc {
+                        animation: zeusFlicker 0.9s linear infinite;
+                      }
+                      .zeus-electric-dash {
+                        animation: zeusDashFlow 0.6s linear infinite, zeusFlicker 0.9s linear infinite;
+                      }
+                      .zeus-spark-item {
+                        animation: zeusSparkFloat ease-in-out infinite;
+                        transform-origin: center;
+                        transform-box: fill-box;
+                      }
+                      @keyframes zeusArrowCharge {
+                        0%, 100% { filter: drop-shadow(0 0 6px #38bdf8) drop-shadow(0 0 18px #38bdf8); }
+                        50% { filter: drop-shadow(0 0 14px #e0f2fe) drop-shadow(0 0 30px #38bdf8); }
+                      }
+                      .zeus-arrow-charged {
+                        animation: zeusArrowCharge 0.5s ease-in-out infinite;
                       }
                     `}
                   </style>
@@ -1343,9 +1424,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   </g>
                 )}
 
-                {/* Zeus Electric Sky-Blue Wings (Adjoins winning sector with electric glow) */}
+                {/* Zeus Electric Sky-Blue Wings with lightning effects */}
                 {zeusBonus > 0 && (
                   <g className="transition-all duration-300 pointer-events-none">
+                    {/* Base blue wings */}
                     <circle
                       cx="120"
                       cy="120"
@@ -1356,7 +1438,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       strokeDasharray={`${zeusArcLen} ${gaugeC}`}
                       strokeLinecap="butt"
                       transform={`rotate(${leftZeusStartDeg}, 120, 120)`}
-                      className="filter drop-shadow-[0_0_15px_#38bdf8] transition-all duration-300"
+                      className="zeus-electric-arc filter drop-shadow-[0_0_15px_#38bdf8] transition-all duration-300"
                     />
                     <circle
                       cx="120"
@@ -1368,8 +1450,95 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       strokeDasharray={`${zeusArcLen} ${gaugeC}`}
                       strokeLinecap="butt"
                       transform={`rotate(${rightZeusStartDeg}, 120, 120)`}
-                      className="filter drop-shadow-[0_0_15px_#38bdf8] transition-all duration-300"
+                      className="zeus-electric-arc filter drop-shadow-[0_0_15px_#38bdf8] transition-all duration-300"
                     />
+                    {/* Electric lightning overlay: thin bright jagged dashes flowing over blue bar */}
+                    <circle
+                      cx="120"
+                      cy="120"
+                      r={gaugeR}
+                      fill="none"
+                      stroke="#e0f2fe"
+                      strokeWidth="3"
+                      strokeDasharray="6 10 2 10"
+                      strokeLinecap="round"
+                      transform={`rotate(${leftZeusStartDeg}, 120, 120)`}
+                      className="zeus-electric-dash"
+                      opacity="0.95"
+                    />
+                    <circle
+                      cx="120"
+                      cy="120"
+                      r={gaugeR}
+                      fill="none"
+                      stroke="#e0f2fe"
+                      strokeWidth="3"
+                      strokeDasharray="6 10 2 10"
+                      strokeLinecap="round"
+                      transform={`rotate(${rightZeusStartDeg}, 120, 120)`}
+                      className="zeus-electric-dash"
+                      opacity="0.95"
+                    />
+                    {/* Outer crackling halo */}
+                    <circle
+                      cx="120"
+                      cy="120"
+                      r={gaugeR}
+                      fill="none"
+                      stroke="#38bdf8"
+                      strokeWidth="1.5"
+                      strokeDasharray="2 14 4 14"
+                      strokeLinecap="round"
+                      transform={`rotate(${leftZeusStartDeg - 1}, 120, 120)`}
+                      className="zeus-electric-dash"
+                      opacity="0.8"
+                    />
+                    <circle
+                      cx="120"
+                      cy="120"
+                      r={gaugeR}
+                      fill="none"
+                      stroke="#38bdf8"
+                      strokeWidth="1.5"
+                      strokeDasharray="2 14 4 14"
+                      strokeLinecap="round"
+                      transform={`rotate(${rightZeusStartDeg - 1}, 120, 120)`}
+                      className="zeus-electric-dash"
+                      opacity="0.8"
+                    />
+                    {/* Floating lightning sparks on blue wings */}
+                    {(() => {
+                      const sparks: Array<{ id: string; cx: number; cy: number; s: number; delay: string; dur: string }> = [];
+                      const midLeft = leftZeusStartDeg + (halfZeus * 3.6) / 2;
+                      const midRight = rightZeusStartDeg + (halfZeus * 3.6) / 2;
+                      [midLeft, midRight].forEach((ang, wi) => {
+                        [0, 1, 2].forEach((k) => {
+                          const a = (ang + (k - 1) * 2.2) * Math.PI / 180;
+                          const rr = gaugeR + (k % 2 === 0 ? 11 : -11);
+                          sparks.push({
+                            id: `zeus-spark-${wi}-${k}`,
+                            cx: Number((120 + rr * Math.cos(a)).toFixed(1)),
+                            cy: Number((120 + rr * Math.sin(a)).toFixed(1)),
+                            s: 7 + (k % 2) * 3,
+                            delay: `${(wi * 0.3 + k * 0.18).toFixed(2)}s`,
+                            dur: `${(0.5 + k * 0.14).toFixed(2)}s`,
+                          });
+                        });
+                      });
+                      return sparks.map((sp) => (
+                        <g key={sp.id} className="zeus-spark-item" style={{ animationDelay: sp.delay, animationDuration: sp.dur }}>
+                          <path
+                            d={`M ${sp.cx} ${sp.cy - sp.s / 2} L ${sp.cx - sp.s * 0.28} ${sp.cy} L ${sp.cx + sp.s * 0.12} ${sp.cy} L ${sp.cx} ${sp.cy + sp.s / 2}`}
+                            stroke="#fefce8"
+                            strokeWidth="1.8"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="filter drop-shadow-[0_0_6px_#38bdf8]"
+                          />
+                        </g>
+                      ));
+                    })()}
                   </g>
                 )}
               </svg>
@@ -1398,32 +1567,77 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 </div>
               )}
 
-              {/* Rotating Pointer Needle with inward-pointing arrow */}
+              {/* Rotating Pointer Needle with inward-pointing arrow + Zeus lightning */}
               <motion.div
                 animate={needleControls}
                 className="absolute w-full h-full flex items-center justify-center pointer-events-none z-10"
                 style={{ transformOrigin: 'center center', willChange: 'transform' }}
               >
                 <div className="relative w-full h-4 flex items-center justify-end pr-1.5">
-                  <svg
-                    className={`w-7 h-7 transition-all duration-300 ${
-                      isZeusActive || zeusStriking
-                        ? 'filter drop-shadow-[0_0_20px_#38bdf8] scale-110'
-                        : 'filter drop-shadow-[0_0_12px_rgba(250,204,21,0.95)]'
-                    }`}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <polygon
-                      points="2,12 20,4 20,20"
-                      fill={isZeusActive || zeusStriking ? '#38bdf8' : '#FACC15'}
-                      stroke={isZeusActive || zeusStriking ? '#e0f2fe' : '#FFFFFF'}
-                      strokeWidth="2"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  {(isZeusActive || zeusStriking) && (
-                    <span className="absolute right-0 -top-2 text-xs animate-ping">⚡</span>
+                  {(zeusUsedThisSpin || zeusStriking) ? (
+                    <div className="relative">
+                      <svg
+                        className="w-8 h-8 transition-all duration-300 scale-110 zeus-arrow-charged"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <polygon
+                          points="2,12 20,4 20,20"
+                          fill="#38bdf8"
+                          stroke="#e0f2fe"
+                          strokeWidth="2"
+                          strokeLinejoin="round"
+                        />
+                        {/* Mini lightning etched into arrow */}
+                        <path
+                          d="M 13 7 L 10.5 12 L 13.5 12 L 11 17"
+                          stroke="#ffffff"
+                          strokeWidth="1.4"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="zeus-electric-arc"
+                        />
+                      </svg>
+                      {/* Crackling sparks around electrified arrow */}
+                      <svg viewBox="0 0 32 32" className="absolute -inset-2 w-12 h-12 -left-2 -top-4 pointer-events-none">
+                        <path
+                          d="M 24 2 L 21 9 L 25 9 L 20 18"
+                          stroke="#fefce8"
+                          strokeWidth="1.6"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="zeus-spark-item filter drop-shadow-[0_0_6px_#38bdf8]"
+                          style={{ animationDelay: '0s', animationDuration: '0.5s' }}
+                        />
+                        <path
+                          d="M 8 22 L 11 25 L 9 28"
+                          stroke="#bae6fd"
+                          strokeWidth="1.4"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="zeus-spark-item filter drop-shadow-[0_0_5px_#38bdf8]"
+                          style={{ animationDelay: '0.25s', animationDuration: '0.6s' }}
+                        />
+                      </svg>
+                      <span className="absolute right-0 -top-2 text-xs animate-ping">⚡</span>
+                    </div>
+                  ) : (
+                    <svg
+                      className="w-7 h-7 transition-all duration-300 filter drop-shadow-[0_0_12px_rgba(250,204,21,0.95)]"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <polygon
+                        points="2,12 20,4 20,20"
+                        fill="#FACC15"
+                        stroke="#FFFFFF"
+                        strokeWidth="2"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   )}
                 </div>
               </motion.div>
@@ -1447,9 +1661,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   </div>
                 ) : null}
 
-                {isZeusActive && zeusBonus > 0 && (
+                {zeusUsedThisSpin && zeusBonus > 0 && (
                   <div className="flex items-center gap-1 mt-0.5 font-mono text-[10px] font-bold text-sky-400 tracking-tight">
-                    <span>⚡</span>
+                    <span className="zeus-spark-item inline-block">⚡</span>
                     <span>+{zeusBonus}% Zeus</span>
                   </div>
                 )}
@@ -1465,48 +1679,65 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               </div>
             </div>
 
-            {/* Action CTA Button */}
+            {/* Action CTA Button: Upgrade заменяется кнопкой Zeus во время спина */}
             <div className="mt-4 w-full max-w-xs flex flex-col gap-2">
-              <button
-                type="button"
-                onClick={handleStartUpgrade}
-                disabled={!canUpgrade}
-                className={`w-full py-4 rounded-2xl font-black text-base sm:text-lg uppercase tracking-wider transition-all cursor-pointer active:scale-95 shadow-lg flex items-center justify-center gap-2 ${
-                  !canUpgrade
-                    ? 'bg-white/10 text-white/30 cursor-not-allowed border border-white/5'
-                    : 'bg-yellow-400 hover:bg-yellow-300 text-black shadow-[0_0_30px_rgba(250,204,21,0.4)]'
-                }`}
-              >
-                <span>
-                  {isUpgrading
-                    ? t('upg.spinning')
-                    : betMode === 'skin' && selectedItems.length === 0
-                    ? t('upg.selectSkinsBtn')
-                    : !targetSkin
-                    ? t('upg.selectTargetBtn')
-                    : t('upg.upgradeBtn')}
-                </span>
-              </button>
-
-              {/* Zeus x27 Quick Action Button */}
-              {(zeusCount > 0 || isZeusActive) && (
+              {isUpgrading ? (
+                // Во время спина: если есть Zeus — показываем кнопку Zeus вместо "Улучшить"
+                canPressZeus || zeusUsedThisSpin || zeusStriking ? (
+                  <button
+                    type="button"
+                    onClick={handleActivateZeus}
+                    disabled={!canPressZeus}
+                    className={`w-full py-4 rounded-2xl font-black text-base sm:text-lg uppercase tracking-wider transition-all flex items-center justify-center gap-2 border-2 ${
+                      canPressZeus
+                        ? 'bg-sky-500 hover:bg-sky-400 text-black border-sky-200 shadow-[0_0_35px_rgba(56,189,248,0.7)] cursor-pointer active:scale-95 animate-pulse'
+                        : 'bg-sky-500/20 border-sky-400/50 text-sky-300 cursor-default'
+                    }`}
+                  >
+                    <span className={canPressZeus ? 'animate-bounce inline-block' : 'inline-block'}>⚡</span>
+                    <span>
+                      {zeusUsedThisSpin || zeusStriking
+                        ? (locale === 'ru' ? 'Zeus бьёт! Перекрут...' : 'Zeus strikes! Rerolling...')
+                        : (locale === 'ru' ? `Вжать Zeus! (+5%) · ${zeusCount} шт.` : `Hit Zeus! (+5%) · ${zeusCount}`)}
+                    </span>
+                    <span className={canPressZeus ? 'animate-bounce inline-block' : 'inline-block'}>⚡</span>
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    disabled
+                    className="w-full py-4 rounded-2xl font-black text-base sm:text-lg uppercase tracking-wider bg-white/10 text-white/30 cursor-not-allowed border border-white/5 flex items-center justify-center gap-2"
+                  >
+                    <span>{t('upg.spinning')}</span>
+                  </button>
+                )
+              ) : (
                 <button
                   type="button"
-                  onClick={handleActivateZeus}
-                  disabled={isUpgrading || isZeusActive || zeusStriking}
-                  className={`w-full py-2.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 border ${
-                    isZeusActive
-                      ? 'bg-sky-500/20 border-sky-400 text-sky-300 shadow-[0_0_20px_rgba(56,189,248,0.4)] cursor-default'
-                      : 'bg-sky-950/40 hover:bg-sky-900/50 border-sky-500/40 hover:border-sky-400 text-sky-200 cursor-pointer active:scale-95 shadow-[0_0_15px_rgba(56,189,248,0.2)]'
+                  onClick={handleStartUpgrade}
+                  disabled={!canUpgrade}
+                  className={`w-full py-4 rounded-2xl font-black text-base sm:text-lg uppercase tracking-wider transition-all cursor-pointer active:scale-95 shadow-lg flex items-center justify-center gap-2 ${
+                    !canUpgrade
+                      ? 'bg-white/10 text-white/30 cursor-not-allowed border border-white/5'
+                      : 'bg-yellow-400 hover:bg-yellow-300 text-black shadow-[0_0_30px_rgba(250,204,21,0.4)]'
                   }`}
                 >
-                  <span className={isZeusActive ? 'animate-pulse' : ''}>⚡</span>
                   <span>
-                    {isZeusActive
-                      ? (locale === 'ru' ? 'Zeus активен: +5% и реролл' : 'Zeus Active: +5% & Reroll')
-                      : (locale === 'ru' ? `Zeus x27 (+5%) · ${zeusCount} шт.` : `Zeus x27 (+5%) · ${zeusCount} pcs`)}
+                    {betMode === 'skin' && selectedItems.length === 0
+                      ? t('upg.selectSkinsBtn')
+                      : !targetSkin
+                      ? t('upg.selectTargetBtn')
+                      : t('upg.upgradeBtn')}
                   </span>
                 </button>
+              )}
+              {/* Подсказка про Zeus во время спина (только если есть Zeus и спин ещё не с Zeus) */}
+              {!isUpgrading && zeusCount > 0 && (
+                <div className="text-center text-[11px] text-sky-300/70 font-bold">
+                  {locale === 'ru'
+                    ? `⚡ Zeus x27 (${zeusCount} шт.): жми кнопку вместо «Улучшить», когда спин уже идёт`
+                    : `⚡ Zeus x27 (${zeusCount}): hit the button instead of Upgrade mid-spin`}
+                </div>
               )}
             </div>
           </div>
