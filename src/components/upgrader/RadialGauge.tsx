@@ -141,6 +141,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   // Infinite scroll for catalog
   const [catalogLimit, setCatalogLimit] = useState(60);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  const recentPicksRef = useRef<string[]>([]);
 
 
 
@@ -211,110 +212,102 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     // Precise formula for actual resulting chance on gauge
     const calcChance = (s: SkinEntity) => Math.min(80, (currentBet / s.priceDc) * 95);
 
-    // Filter candidates strictly matching requested chance within tolerance
-    // (Prevents offering 80% items when user clicks 35% or 50%)
-    let tolerance = Math.max(1.5, clampedChance * 0.16);
+    // Filter candidates matching requested chance within reasonable tolerance
+    // (Broad enough to encompass all wear qualities: FN, MW, FT, WW, BS, and StatTrak)
+    let tolerance = Math.max(2.5, clampedChance * 0.25);
     let closeCandidates = allEligible.filter(
       (s) => Math.abs(calcChance(s) - clampedChance) <= tolerance
     );
 
-    // If no skins in tight tolerance, widen tolerance
-    if (closeCandidates.length === 0) {
-      tolerance = Math.max(3.0, clampedChance * 0.35);
+    // If few skins in tolerance, widen tolerance
+    if (closeCandidates.length < 5) {
+      tolerance = Math.max(4.5, clampedChance * 0.45);
       closeCandidates = allEligible.filter(
         (s) => Math.abs(calcChance(s) - clampedChance) <= tolerance
       );
     }
 
-    // If still none, sort by closest chance and take top 50
+    // If still none, sort by closest chance and take top 100
     if (closeCandidates.length === 0) {
       closeCandidates = [...allEligible]
         .sort((a, b) => Math.abs(calcChance(a) - clampedChance) - Math.abs(calcChance(b) - clampedChance))
-        .slice(0, 50);
+        .slice(0, 100);
     }
 
+    // Exclude recently shown skins to guarantee cycling through NEW skins and qualities
+    const recentSet = new Set(recentPicksRef.current);
+    let candidatePool = closeCandidates.filter((s) => !recentSet.has(s.id) && s.id !== targetSkin?.id);
+    if (candidatePool.length === 0) {
+      // If history exhausted, prune older half and re-filter
+      recentPicksRef.current = recentPicksRef.current.slice(-15);
+      const prunedSet = new Set(recentPicksRef.current);
+      candidatePool = closeCandidates.filter((s) => !prunedSet.has(s.id) && s.id !== targetSkin?.id);
+      if (candidatePool.length === 0) {
+        candidatePool = closeCandidates.filter((s) => s.id !== targetSkin?.id);
+      }
+    }
+    if (candidatePool.length === 0) {
+      candidatePool = closeCandidates;
+    }
+
+    let chosenSkin: SkinEntity | null = null;
+
     if (typeToMatch === 'all') {
-      // 1. Group matching candidates into diverse category buckets: knives, gloves, weapons (guns), agents
-      const knifeBucket = closeCandidates.filter((s) => matchesCatalogType(s, 'knives'));
-      const gloveBucket = closeCandidates.filter((s) => matchesCatalogType(s, 'gloves'));
-      const gunBucket = closeCandidates.filter(
+      // Group matching candidates into diverse category buckets: weapons, knives, gloves, stickers/charms/agents
+      const knifeBucket = candidatePool.filter((s) => matchesCatalogType(s, 'knives'));
+      const gloveBucket = candidatePool.filter((s) => matchesCatalogType(s, 'gloves'));
+      const gunBucket = candidatePool.filter(
         (s) => isActualWeapon(s) && !matchesCatalogType(s, 'knives') && !matchesCatalogType(s, 'gloves')
       );
-      const agentBucket = closeCandidates.filter((s) => matchesCatalogType(s, 'agents'));
+      const miscBucket = candidatePool.filter(
+        (s) => !isActualWeapon(s) || matchesCatalogType(s, 'stickers') || matchesCatalogType(s, 'charms') || matchesCatalogType(s, 'agents')
+      );
 
-      // Category priorities: Weapons (38%), Knives (38%), Gloves (20%), Agents (4%)
+      // Category distribution: Guns (45%), Knives (30%), Gloves (15%), Misc (10%)
       const buckets: Array<{ name: string; items: SkinEntity[]; weight: number }> = [];
-      if (gunBucket.length > 0) buckets.push({ name: 'guns', items: gunBucket, weight: 38 });
-      if (knifeBucket.length > 0) buckets.push({ name: 'knives', items: knifeBucket, weight: 38 });
-      if (gloveBucket.length > 0) buckets.push({ name: 'gloves', items: gloveBucket, weight: 20 });
-      if (agentBucket.length > 0) buckets.push({ name: 'agents', items: agentBucket, weight: 4 });
+      if (gunBucket.length > 0) buckets.push({ name: 'guns', items: gunBucket, weight: 45 });
+      if (knifeBucket.length > 0) buckets.push({ name: 'knives', items: knifeBucket, weight: 30 });
+      if (gloveBucket.length > 0) buckets.push({ name: 'gloves', items: gloveBucket, weight: 15 });
+      if (miscBucket.length > 0) buckets.push({ name: 'misc', items: miscBucket, weight: 10 });
 
-      let chosenItems = closeCandidates;
+      let chosenBucketItems = candidatePool;
       if (buckets.length > 0) {
         const totalWeight = buckets.reduce((acc, b) => acc + b.weight, 0);
         let r = Math.random() * totalWeight;
         for (const b of buckets) {
           r -= b.weight;
           if (r <= 0) {
-            chosenItems = b.items;
+            chosenBucketItems = b.items;
             break;
           }
         }
       }
 
-      // Full pool across all available items in the chosen category, excluding current skin
-      const pool = chosenItems.filter((s) => s.id !== targetSkin?.id);
-      const activePool = pool.length > 0 ? pool : chosenItems;
-
-      // Weight by chance proximity: skins closer to clampedChance have higher probability
-      const weights = activePool.map((s) => 1 / (Math.abs(calcChance(s) - clampedChance) + 0.25));
-      const totalW = weights.reduce((acc, w) => acc + w, 0);
-      let rw = Math.random() * totalW;
-      let chosenSkin = activePool[0];
-      for (let i = 0; i < activePool.length; i++) {
-        rw -= weights[i];
-        if (rw <= 0) {
-          chosenSkin = activePool[i];
-          break;
-        }
-      }
-
-      if (chosenSkin) {
-        setTargetSkin(chosenSkin);
-        return;
-      }
+      // Pick uniformly at random from the bucket to ensure all wear qualities (FN, MW, FT, WW, BS) appear equally
+      const randomIndex = Math.floor(Math.random() * chosenBucketItems.length);
+      chosenSkin = chosenBucketItems[randomIndex] || chosenBucketItems[0];
     } else {
-      // Specific category tab active (or filtered by weapon)
-      let pool = closeCandidates;
+      // Specific category tab active
+      let tabPool = candidatePool;
       if (catalogWeapon !== 'all') {
-        const weaponMatches = closeCandidates.filter(
+        const weaponMatches = candidatePool.filter(
           (s) => s.weapon.toLowerCase() === catalogWeapon.toLowerCase()
         );
         if (weaponMatches.length > 0) {
-          pool = weaponMatches;
+          tabPool = weaponMatches;
         }
       }
 
-      // Full pool across all matching items, excluding current skin
-      const activePool = pool.filter((s) => s.id !== targetSkin?.id);
-      const finalPool = activePool.length > 0 ? activePool : pool;
+      const randomIndex = Math.floor(Math.random() * tabPool.length);
+      chosenSkin = tabPool[randomIndex] || tabPool[0];
+    }
 
-      // Weight by chance proximity
-      const weights = finalPool.map((s) => 1 / (Math.abs(calcChance(s) - clampedChance) + 0.25));
-      const totalW = weights.reduce((acc, w) => acc + w, 0);
-      let rw = Math.random() * totalW;
-      let picked = finalPool[0];
-      for (let i = 0; i < finalPool.length; i++) {
-        rw -= weights[i];
-        if (rw <= 0) {
-          picked = finalPool[i];
-          break;
-        }
+    if (chosenSkin) {
+      recentPicksRef.current.push(chosenSkin.id);
+      if (recentPicksRef.current.length > 60) {
+        recentPicksRef.current.shift();
       }
-
-      if (picked) {
-        setTargetSkin(picked);
-      }
+      setTargetSkin(chosenSkin);
     }
   };
 
@@ -910,20 +903,26 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       {selectedItems.map((item) => (
                         <div
                           key={item.instanceId}
-                          className="relative rounded-xl bg-[#13141c] border border-white/10 p-2 flex flex-col items-center justify-between group hover:border-yellow-400/50 transition-all"
+                          onClick={() => handleRemoveSelectedItem(item.instanceId)}
+                          className="relative rounded-xl bg-[#13141c] border border-white/10 hover:border-red-500/60 hover:bg-red-500/5 p-2 flex flex-col items-center justify-between group cursor-pointer transition-all"
+                          title={locale === 'ru' ? 'Нажмите, чтобы убрать скин' : 'Click to remove skin'}
                         >
                           <button
                             type="button"
-                            onClick={() => handleRemoveSelectedItem(item.instanceId)}
-                            className="absolute top-1 right-1 w-4 h-4 rounded-full bg-red-500/80 hover:bg-red-500 text-white flex items-center justify-center text-[10px] opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleRemoveSelectedItem(item.instanceId);
+                            }}
+                            className="absolute top-1 right-1 w-5 h-5 rounded-full bg-red-500/90 hover:bg-red-500 text-white flex items-center justify-center text-xs shadow-md transition-opacity cursor-pointer z-10"
+                            aria-label="Remove item"
                           >
-                            <X className="w-3 h-3" />
+                            <X className="w-3.5 h-3.5" />
                           </button>
                           <SkinImage
                             src={item.image}
                             alt={item.name}
                             size={100}
-                            className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md"
+                            className="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md group-hover:scale-95 transition-transform"
                           />
                           <span className="text-[10px] text-white font-black truncate w-full text-center mt-1">
                             {item.skinName || item.name}
@@ -1332,12 +1331,25 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             >
               <div className="flex items-center justify-between text-xs">
                 <span className="font-bold text-white/60 uppercase">{t('upg.targetItem')}</span>
-                <span
-                  className="font-black px-2 py-0.5 rounded-full text-[10px]"
-                  style={{ backgroundColor: targetConfig.border, color: '#FFFFFF' }}
-                >
-                  {targetConfig.label}
-                </span>
+                <div className="flex items-center gap-2">
+                  {targetSkin && (
+                    <button
+                      type="button"
+                      onClick={() => setTargetSkin(null)}
+                      className="px-2 py-0.5 rounded-lg bg-white/5 hover:bg-red-500/15 border border-white/10 hover:border-red-500/30 text-[11px] font-bold text-white/50 hover:text-red-400 transition-all flex items-center gap-1 cursor-pointer"
+                      title={locale === 'ru' ? 'Убрать целевой скин' : 'Remove target skin'}
+                    >
+                      <X className="w-3 h-3" />
+                      <span>{t('upg.reset')}</span>
+                    </button>
+                  )}
+                  <span
+                    className="font-black px-2 py-0.5 rounded-full text-[10px]"
+                    style={{ backgroundColor: targetConfig.border, color: '#FFFFFF' }}
+                  >
+                    {targetConfig.label}
+                  </span>
+                </div>
               </div>
 
               {targetSkin ? (
@@ -1430,6 +1442,18 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 );
               })}
             </div>
+
+            {/* Reroll Button: Pick another skin and quality for current chance */}
+            <button
+              type="button"
+              onClick={() => autoSelectTargetSkin(targetChance, effectiveBetDc)}
+              disabled={isUpgrading || effectiveBetDc <= 0}
+              className="px-3 py-1.5 ml-1 rounded-xl text-xs font-black bg-white/5 hover:bg-yellow-400/20 text-white/80 hover:text-yellow-400 border border-white/10 hover:border-yellow-400/40 transition-all cursor-pointer flex items-center gap-1.5 shrink-0"
+              title={locale === 'ru' ? 'Выбрать другой скин и качество на этот же шанс' : 'Reroll another skin & quality with this chance'}
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>{locale === 'ru' ? 'Другой скин' : 'Reroll'}</span>
+            </button>
           </div>
         </div>
       </div>
