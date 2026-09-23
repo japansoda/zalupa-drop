@@ -542,7 +542,7 @@ export default function AdminPage() {
               <div className="flex flex-col gap-4">
                 <div>
                   <div className="flex justify-between text-xs font-bold mb-1.5">
-                    <span>📱 Смартфоны & Планшеты (Mobile)</span>
+                    <span className="flex items-center gap-1.5"><Smartphone className="w-3.5 h-3.5 text-yellow-400" /> Смартфоны & Планшеты (Mobile)</span>
                     <span className="font-mono text-yellow-400">62.4%</span>
                   </div>
                   <div className="w-full h-2.5 rounded-full bg-white/10 overflow-hidden">
@@ -553,7 +553,7 @@ export default function AdminPage() {
 
                 <div>
                   <div className="flex justify-between text-xs font-bold mb-1.5">
-                    <span>💻 Настольные ПК (Desktop)</span>
+                    <span className="flex items-center gap-1.5"><Monitor className="w-3.5 h-3.5 text-cyan-400" /> Настольные ПК (Desktop)</span>
                     <span className="font-mono text-cyan-400">37.6%</span>
                   </div>
                   <div className="w-full h-2.5 rounded-full bg-white/10 overflow-hidden">

@@ -15,7 +15,7 @@ export const LUCK_POTION: ConsumableItem = {
   rarity: 'contraband',
   description: 'Универсальная удача на 3 действия (+15%): кейсы, апгрейдер и контракты',
   descriptionEn: 'Universal luck for 3 actions (+15%): cases, upgrader and contracts',
-  icon: '🧪',
+  icon: 'FlaskConical',
 };
 
 export const SAVE_TOKEN: ConsumableItem = {
@@ -25,7 +25,7 @@ export const SAVE_TOKEN: ConsumableItem = {
   rarity: 'gold',
   description: 'Дарует предмету ангельские крылья и нимб. При неудаче в апгрейдере защищённый скин не сгорает!',
   descriptionEn: 'Grants angelic wings and halo. In case of upgrade failure, the protected skin will not burn!',
-  icon: '🪽',
+  icon: 'ShieldCheck',
 };
 
 export const ZEUS_ITEM: ConsumableItem = {
@@ -35,7 +35,7 @@ export const ZEUS_ITEM: ConsumableItem = {
   rarity: 'covert',
   description: 'Стреляет молнией в стрелку барабана, электризует её, даёт реролл и +5% к шансу апгрейда!',
   descriptionEn: 'Fires lightning at the arrow, electrifies it, grants a reroll and +5% upgrade chance!',
-  icon: '⚡',
+  icon: 'Zap',
 };
 
 export function getPotionName(locale: 'ru' | 'en' = 'ru'): string {

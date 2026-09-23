@@ -344,11 +344,12 @@ export default function HomePage() {
                             className="w-6 h-6 sm:w-7 sm:h-7 rounded bg-black/60 border border-white/10 p-0.5 shrink-0 flex items-center justify-center relative"
                             title={skin.name}
                           >
-                            <SkinImage 
-                              src={skin.image} 
-                              alt={skin.name} 
+                            <SkinImage
+                              src={skin.image}
+                              alt={skin.name}
                               size={48}
-                              className="w-full h-full object-contain" 
+                              thumb
+                              className="w-full h-full object-contain"
                             />
                             {skin.statTrak && (
                               <div className="absolute top-0.5 right-0.5 w-1 h-1 rounded-full bg-amber-500 shadow-[0_0_3px_#f59e0b]" />

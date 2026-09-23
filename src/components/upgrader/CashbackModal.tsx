@@ -12,7 +12,7 @@ import { WearBadge } from '../ui/WearBadge';
 import { RarityBadge } from '../ui/RarityBadge';
 import { sound } from '../../lib/sound';
 import { useLanguage, getCaseName } from '../../lib/i18n';
-import { Gift, FastForward, Check, Sparkles, FlaskConical, ShieldAlert, Zap } from 'lucide-react';
+import { Gift, FastForward, Check, Sparkles, FlaskConical, ShieldAlert, ShieldCheck, Zap } from 'lucide-react';
 
 interface CashbackModalProps {
   isOpen: boolean;
@@ -293,7 +293,7 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
               ) : awardedConsumable === 'save_token' ? (
                 <div className="w-full flex flex-col items-center my-4">
                   <div className="w-20 h-20 rounded-2xl bg-yellow-950/70 border-2 border-yellow-400 flex items-center justify-center mb-3 shadow-[0_0_35px_rgba(250,204,21,0.5)] relative">
-                    <span className="text-4xl animate-bounce">🪽</span>
+                    <ShieldCheck className="w-10 h-10 text-yellow-400 animate-bounce" />
                     <div className="absolute -top-3 w-10 h-3 rounded-full border-2 border-yellow-300 shadow-[0_0_15px_#fde047] pointer-events-none" />
                   </div>
                   <h4 className="font-black text-2xl text-white tracking-tight">

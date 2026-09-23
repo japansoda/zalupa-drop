@@ -16,7 +16,7 @@ import { useGameStore } from '../../store/useGameStore';
 import { RARITY_CONFIG } from '../../data/skins';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
-import { Briefcase, ExternalLink, ShoppingBag, Box, Trash2 } from 'lucide-react';
+import { Briefcase, ExternalLink, ShoppingBag, Box, Trash2, FlaskConical } from 'lucide-react';
 import { getSteamMarketListingUrl, isStatTrakableItem } from '../../lib/steam';
 import { handleHorizontalWheel } from '../../components/layout/HorizontalScrollManager';
 
@@ -102,8 +102,8 @@ export default function InventoryPage() {
           {/* Consumables Tactical Rack */}
           <div className="my-3 p-2.5 sm:p-3 rounded-2xl glass-panel border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
             <div className="flex items-center gap-3 w-full sm:w-auto min-w-0">
-              <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-lg shrink-0 shadow-inner">
-                🧪
+              <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center shrink-0 shadow-inner">
+                <FlaskConical className="w-4.5 h-4.5 text-amber-400" />
               </div>
               <div className="flex flex-col min-w-0">
                 <div className="flex items-center gap-2">
@@ -138,7 +138,7 @@ export default function InventoryPage() {
                   onClick={() => drinkPotion()}
                   className="px-3.5 py-1.5 rounded-xl btn-yellow text-black font-black text-xs uppercase flex items-center gap-1.5 shadow-[0_0_15px_rgba(250,204,21,0.25)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
-                  <span>🧪</span>
+                  <FlaskConical className="w-3.5 h-3.5" />
                   <span>{locale === 'ru' ? 'Выпить +3' : 'Drink +3'}</span>
                   <span className="bg-black/20 px-1 py-0.2 rounded text-[10px]">x{potionsCount}</span>
                 </button>

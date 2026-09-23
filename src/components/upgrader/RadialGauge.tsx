@@ -6,7 +6,7 @@ import { RARITY_CONFIG } from '../../data/skins';
 import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
 import allCasesJson from '../../data/all_cases.json';
-import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, ShieldCheck, Percent } from 'lucide-react';
+import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, ShieldCheck, Percent, LayoutGrid, Sword, Hand, Crosshair, Zap, Target, Flame, Shield, Sticker, User, KeyRound, FlaskConical } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CashbackModal } from './CashbackModal';
 import { WearBadge } from '../ui/WearBadge';
@@ -72,17 +72,17 @@ export const isActualWeapon = (skin: SkinEntity): boolean => {
 };
 
 const ITEM_TYPES = [
-  { id: 'all', label: 'Все', icon: '⊞' },
-  { id: 'knives', label: 'Ножи', icon: '★' },
-  { id: 'gloves', label: 'Перчатки', icon: '🧤' },
-  { id: 'snipers', label: 'Снайперские', icon: '🎯' },
-  { id: 'rifles', label: 'Винтовки', icon: '⚡' },
-  { id: 'pistols', label: 'Пистолеты', icon: '🔫' },
-  { id: 'smgs', label: 'ПП', icon: '💥' },
-  { id: 'heavy', label: 'Тяжелое', icon: '🛡️' },
-  { id: 'stickers', label: 'Наклейки', icon: '🏷️' },
-  { id: 'agents', label: 'Агенты', icon: '👤' },
-  { id: 'charms', label: 'Брелоки', icon: '🔑' },
+  { id: 'all', label: 'Все', icon: LayoutGrid },
+  { id: 'knives', label: 'Ножи', icon: Sword },
+  { id: 'gloves', label: 'Перчатки', icon: Hand },
+  { id: 'snipers', label: 'Снайперские', icon: Crosshair },
+  { id: 'rifles', label: 'Винтовки', icon: Zap },
+  { id: 'pistols', label: 'Пистолеты', icon: Target },
+  { id: 'smgs', label: 'ПП', icon: Flame },
+  { id: 'heavy', label: 'Тяжелое', icon: Shield },
+  { id: 'stickers', label: 'Наклейки', icon: Sticker },
+  { id: 'agents', label: 'Агенты', icon: User },
+  { id: 'charms', label: 'Брелоки', icon: KeyRound },
 ];
 
 interface RadialGaugeProps {
@@ -1037,7 +1037,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                                   : (locale === 'ru' ? 'Защитить жетоном сохранения' : 'Protect with Guardian Aegis')
                               }
                             >
-                              <span>🪽</span>
+                              <ShieldCheck className="w-3 h-3" />
                               {isProtected && <span className="text-[7.5px] uppercase tracking-tighter">Спасён</span>}
                             </button>
 
@@ -1098,7 +1098,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   <div className="p-2 rounded-xl bg-black/40 border border-emerald-500/20 flex flex-col gap-1 shadow-sm">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-base">🧪</span>
+                        <FlaskConical className="w-4 h-4 text-emerald-400" />
                         <span className="text-xs font-black text-white">{locale === 'ru' ? 'Зелье удачи' : 'Luck Potion'}</span>
                         <span className="text-[8.5px] font-black px-1.5 py-0.2 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
                           +15%
@@ -1112,7 +1112,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     {activePotionCharges > 0 ? (
                       <div className="flex items-center justify-between p-1.5 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-xs font-bold text-emerald-300 shadow-sm">
                         <span className="flex items-center gap-1 text-[11px]">
-                          <span>🧪</span>
+                          <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
                           <span>{t('upg.potionActive')}</span>
                         </span>
                         <span className="font-mono font-black text-emerald-400">
@@ -1139,7 +1139,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   <div className="p-2 rounded-xl bg-black/40 border border-yellow-500/20 flex flex-col gap-1 shadow-sm">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-base">🪽</span>
+                        <ShieldCheck className="w-4 h-4 text-yellow-400" />
                         <span className="text-xs font-black text-white">{locale === 'ru' ? 'Жетон сохранения' : 'Guardian Aegis'}</span>
                         <span className="text-[8.5px] font-black px-1.5 py-0.2 rounded bg-yellow-500/15 text-yellow-300 border border-yellow-500/30">
                           {locale === 'ru' ? 'Оберег' : 'Shield'}
@@ -1167,10 +1167,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                             : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
                         }`}
                       >
-                        <span>
+                        <span className="flex items-center justify-center gap-1">
+                          <ShieldCheck className="w-3.5 h-3.5" />
                           {protectedInstanceId
-                            ? (locale === 'ru' ? '🪽 Скин защищён' : '🪽 Skin Protected')
-                            : (locale === 'ru' ? '🪽 Защитить выбранный скин' : '🪽 Protect Selected Skin')}
+                            ? (locale === 'ru' ? 'Скин защищён' : 'Skin Protected')
+                            : (locale === 'ru' ? 'Защитить выбранный скин' : 'Protect Selected Skin')}
                         </span>
                       </button>
                     ) : (
@@ -1184,9 +1185,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   <div className="p-2 rounded-xl bg-black/40 border border-sky-500/20 flex flex-col gap-1 shadow-sm">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
-                        <svg viewBox="0 0 10 14" className="w-4 h-4 text-sky-400" aria-hidden>
-                          <path d="M 6 1 L 2.5 8 L 5.5 8 L 4 13" fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinejoin="round" />
-                        </svg>
+                        <Zap className="w-4 h-4 text-sky-400" />
                         <span className="text-xs font-black text-white">Zeus x27</span>
                         <span className="text-[8.5px] font-black px-1.5 py-0.2 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30">
                           +5%
@@ -1725,13 +1724,14 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 </span>
                 {activePotionCharges > 0 && isPotionUsed && potionBonus > 0 ? (
                   <div className="flex items-center gap-1 mt-1 font-mono text-[11px] font-bold text-emerald-400 tracking-tight">
-                    <span>🧪</span>
+                    <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
                     <span>+{potionBonus % 1 === 0 ? potionBonus.toFixed(0) : potionBonus.toFixed(1)}%</span>
                     <span className="text-emerald-500/60">·</span>
                     <span className="text-zinc-300">{activePotionCharges}/3</span>
                   </div>
                 ) : activePotionCharges > 0 && isBaseAtMax ? (
                   <div className="flex items-center gap-1 mt-1 font-mono text-[10px] font-semibold text-emerald-400/80">
+                    <FlaskConical className="w-3 h-3 text-emerald-400/80" />
                     <span>{t('upg.potionSaved')}</span>
                     <span className="text-zinc-400">{activePotionCharges}/3</span>
                   </div>
@@ -2135,8 +2135,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     />
                   )}
 
-                  <span className={`text-xs ${isAct ? 'text-black' : 'text-yellow-400/80 group-hover:text-yellow-400'}`}>
-                    {type.icon}
+                  <span className={`${isAct ? 'text-black' : 'text-yellow-400/80 group-hover:text-yellow-400'}`}>
+                    {(() => {
+                      const TypeIcon = type.icon;
+                      return <TypeIcon className="w-3.5 h-3.5" />;
+                    })()}
                   </span>
                   <span className="relative z-10">{label}</span>
                   <span
@@ -2158,7 +2161,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             <div className="p-2.5 rounded-2xl bg-black/40 border border-white/10 mb-3.5 flex flex-col gap-2">
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-bold text-white/60 uppercase tracking-wider flex items-center gap-1.5">
-                  <span className="text-yellow-400">⚡</span>
+                  <Zap className="w-3.5 h-3.5 text-yellow-400" />
                   <span>{locale === 'ru' ? 'Модель / Оружие' : 'Model / Weapon'}</span>
                   <span className="text-white/30 font-mono text-[10px]">({availableWeapons.length})</span>
                 </span>

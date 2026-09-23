@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import confetti from 'canvas-confetti';
-import { ExternalLink, Check, ShoppingBag, FlaskConical, ShieldCheck, Zap } from 'lucide-react';
+import { ExternalLink, Check, ShoppingBag, FlaskConical, ShieldCheck, Zap, Sparkles, Ticket } from 'lucide-react';
 import { SkinEntity } from '../../lib/types';
 import { RARITY_CONFIG } from '../../data/skins';
 import { RarityBadge } from '../ui/RarityBadge';
@@ -85,7 +85,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
         } glass-panel rounded-3xl p-6 sm:p-8 border border-yellow-400/40 overflow-hidden flex flex-col items-center text-center shadow-2xl my-auto`}
       >
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-yellow-400 text-sm">✦</span>
+          <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
           <span className="text-xs uppercase font-black tracking-widest text-white/70">
             {isMulti
               ? locale === 'ru'
@@ -95,7 +95,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
               ? 'ВЫ ВЫБИЛИ ПРЕДМЕТ!'
               : 'YOU WON AN ITEM!'}
           </span>
-          <span className="text-yellow-400 text-sm">✦</span>
+          <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
         </div>
 
         {/* Single item display */}
@@ -110,7 +110,11 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                     {/* Bonus Extra Drop Tag */}
                     {hasBonus && (
                       <div className="absolute top-0 right-0 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-black text-black bg-yellow-400 shadow-sm">
-                        <span>{bonusConsumables?.potions ? '🧪' : '🎟️'}</span>
+                        {bonusConsumables?.potions ? (
+                          <FlaskConical className="w-3.5 h-3.5" />
+                        ) : (
+                          <Ticket className="w-3.5 h-3.5" />
+                        )}
                         <span>+{locale === 'ru' ? 'БОНУС' : 'BONUS'}</span>
                       </div>
                     )}
@@ -307,8 +311,8 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                   className="flex items-center gap-3 p-3 rounded-xl glass-card border border-white/10 text-left w-full sm:max-w-md"
                   style={{ borderBottomWidth: '3px', borderBottomColor: '#facc15' }}
                 >
-                  <div className="w-10 h-10 rounded-lg bg-yellow-500/15 flex items-center justify-center shrink-0 text-xl">
-                    🪽
+                  <div className="w-10 h-10 rounded-lg bg-yellow-500/15 flex items-center justify-center shrink-0">
+                    <ShieldCheck className="w-5 h-5 text-yellow-400" />
                   </div>
                   <div className="flex flex-col min-w-0 flex-1">
                     <div className="flex items-center gap-2">

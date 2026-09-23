@@ -25,7 +25,8 @@ import {
   ExternalLink,
   ShieldCheck,
   Zap,
-  RotateCcw
+  RotateCcw,
+  FlaskConical
 } from 'lucide-react';
 
 const MAX_SLOTS = 10;
@@ -413,8 +414,8 @@ export const TradeUpContract: React.FC = () => {
                 <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>~{expectedReturnDc.toLocaleString('ru-RU')} DC</span>
                 {hasPotion && (
-                  <span className="font-mono text-xs font-bold text-emerald-400 ml-1.5">
-                    (🧪 +35%)
+                  <span className="font-mono text-xs font-bold text-emerald-400 ml-1.5 flex items-center gap-1">
+                    (<FlaskConical className="w-3 h-3" /> +35%)
                   </span>
                 )}
               </span>
@@ -428,7 +429,7 @@ export const TradeUpContract: React.FC = () => {
                 className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl glass-panel border border-white/10 text-white select-none text-xs shadow-sm"
                 title={locale === 'ru' ? 'Зелье удачи активно' : 'Luck Potion active'}
               >
-                <span>🧪</span>
+                <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
                 <span className="font-mono font-bold text-emerald-400">{activePotionCharges}/3</span>
               </div>
             ) : potionsCount > 0 ? (
@@ -438,7 +439,7 @@ export const TradeUpContract: React.FC = () => {
                 className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl glass-button border border-white/10 text-white/80 hover:text-white font-bold text-xs transition-all cursor-pointer active:scale-95"
                 title={locale === 'ru' ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount}` : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
               >
-                <span>🧪</span>
+                <FlaskConical className="w-3.5 h-3.5" />
                 <span>{locale === 'ru' ? 'Выпить' : 'Drink'}</span>
                 <span className="font-mono text-[10px] text-zinc-400 bg-white/5 border border-white/10 px-1.5 py-0.5 rounded font-bold">x{potionsCount}</span>
               </button>

@@ -9,6 +9,8 @@ interface SkinImageProps {
   size?: number;
   style?: React.CSSProperties;
   priority?: boolean;
+  /** Tiny thumbnails (case preview strips etc.): fetch pre-resized WebP first, cheap skeleton */
+  thumb?: boolean;
 }
 
 export const SkinImage: React.FC<SkinImageProps> = ({
@@ -18,6 +20,7 @@ export const SkinImage: React.FC<SkinImageProps> = ({
   size = 220,
   style,
   priority = false,
+  thumb = false,
 }) => {
   const [prevSrc, setPrevSrc] = useState(src);
   const [stage, setStage] = useState<number>(0);
@@ -53,6 +56,17 @@ export const SkinImage: React.FC<SkinImageProps> = ({
     const isSteam = src.includes('steamstatic.com') || src.includes('akamaihd.net') || src.includes('steamcommunity');
     if (!isSteam) return src;
 
+    // Thumbnails: pre-resized lightweight WebP first (few KB instead of full-size originals)
+    if (thumb) {
+      if (stage === 0) {
+        return `https://wsrv.nl/?url=${encodeURIComponent(src)}&w=${size * 2}&output=webp&q=60`;
+      }
+      if (stage === 1) {
+        return src;
+      }
+      return `/api/img?url=${encodeURIComponent(src)}`;
+    }
+
     // Direct Steam Akamai/Cloudflare CDN gives ultra-fast <100ms loading without slow Dutch proxy delay
     if (priority || stage === 0) {
       return src;
@@ -68,9 +82,13 @@ export const SkinImage: React.FC<SkinImageProps> = ({
   return (
     <div className={`relative flex items-center justify-center overflow-hidden ${className}`} style={style}>
       {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-6 h-6 rounded-full border-2 border-yellow-400/20 border-t-yellow-400/80 animate-spin" />
-        </div>
+        thumb ? (
+          <div className="absolute inset-0 bg-white/5 animate-pulse pointer-events-none" />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="w-6 h-6 rounded-full border-2 border-yellow-400/20 border-t-yellow-400/80 animate-spin" />
+          </div>
+        )
       )}
       <img
         key={src}
