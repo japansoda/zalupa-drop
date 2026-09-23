@@ -24,7 +24,7 @@ export const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 w-full glass-panel border-b border-white/10 bg-[#08080a]/95 max-w-full overflow-hidden">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 h-13 sm:h-15 flex items-center justify-between gap-2 sm:gap-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 min-h-13 sm:h-15 py-1 sm:py-0 flex items-center justify-between gap-2 sm:gap-4">
         {/* Sleek SVG Logo */}
         <Link 
           href="/" 
@@ -68,8 +68,8 @@ export const Header: React.FC = () => {
           })}
         </nav>
 
-        {/* Controls & Balance */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+        {/* Controls & Balance — на мобильном расходники уходят второй строкой, баланс всегда в первой */}
+        <div className="flex min-w-0 flex-1 flex-wrap items-center justify-end gap-x-1.5 gap-y-1 sm:flex-none sm:flex-nowrap sm:gap-2.5">
           {/* Language Switcher */}
           <button
             type="button"
@@ -93,7 +93,9 @@ export const Header: React.FC = () => {
             {soundEnabled ? <Volume2 className="w-3.5 h-3.5 text-yellow-400" /> : <VolumeX className="w-3.5 h-3.5 text-white/30" />}
           </button>
 
-          {/* Consumables: единый стиль пилюль под дизайн сайта */}
+          {/* Consumables: на мобильном — вторая строка справа, на десктопе — в ряд */}
+          {(activePotionCharges > 0 || potionsCount > 0 || saveTokensCount > 0 || zeusCount > 0) && (
+          <div className="order-4 flex basis-full items-center justify-end gap-1.5 sm:order-none sm:basis-auto sm:justify-start">
           {activePotionCharges > 0 ? (
             <div
               className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg glass-panel border border-emerald-500/30 bg-emerald-500/10 flex items-center gap-1 sm:gap-1.5 shrink-0 select-none shadow-[0_0_10px_rgba(16,185,129,0.2)]"
@@ -143,15 +145,15 @@ export const Header: React.FC = () => {
               <span className="font-mono font-bold text-xs text-sky-400">x{zeusCount}</span>
             </div>
           )}
-
-          {/* Balance Widget: on mobile tapping balance opens refill modal */}
-          <div 
+          </div>
+          )}
+          <div
             onClick={() => {
               sound.playClick();
               setRefillOpen(true);
             }}
             title={t('nav.topup.title')}
-            className="flex items-center glass-panel rounded-lg px-2 sm:pl-3 sm:pr-1.5 py-1 border border-white/10 gap-1.5 sm:gap-2.5 shrink-0 cursor-pointer sm:cursor-default active:scale-95 sm:active:scale-100 transition-all"
+            className="order-3 sm:order-none flex items-center glass-panel rounded-lg px-2 sm:pl-3 sm:pr-1.5 py-1 border border-white/10 gap-1.5 sm:gap-2.5 shrink-0 cursor-pointer sm:cursor-default active:scale-95 sm:active:scale-100 transition-all"
           >
             <div className="flex items-center gap-1 sm:gap-1.5">
               <DropCoinIcon size={16} />
