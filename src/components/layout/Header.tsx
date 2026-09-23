@@ -98,25 +98,31 @@ export const Header: React.FC = () => {
           <div className="order-4 flex basis-full items-center justify-end gap-1.5 sm:order-none sm:basis-auto sm:justify-start">
           {activePotionCharges > 0 ? (
             <div
-              className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg glass-panel border border-emerald-500/30 bg-emerald-500/10 flex items-center gap-1 sm:gap-1.5 shrink-0 select-none shadow-[0_0_10px_rgba(16,185,129,0.2)]"
+              className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg glass-panel border border-emerald-400/60 bg-emerald-500/15 flex items-center gap-1 sm:gap-1.5 shrink-0 select-none shadow-[0_0_14px_rgba(16,185,129,0.35)]"
               title={locale === 'ru'
-                ? `Зелье удачи активно! Осталось ${activePotionCharges} — работает на кейсы, апгрейдер и контракты`
-                : `Luck Potion active! ${activePotionCharges} left — works on cases, upgrader & contracts`}
+                ? `Зелье удачи ДЕЙСТВУЕТ! Осталось ${activePotionCharges} — работает на кейсы, апгрейдер и контракты`
+                : `Luck Potion ACTIVE! ${activePotionCharges} left — works on cases, upgrader & contracts`}
             >
-              <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="font-mono font-bold text-xs text-emerald-400">{activePotionCharges}</span>
+              <FlaskConical className="w-3.5 h-3.5 text-emerald-300" />
+              <span className="flex flex-col items-center leading-none">
+                <span className="font-mono font-bold text-xs text-emerald-300 drop-shadow-[0_0_6px_rgba(52,211,153,0.9)]">{activePotionCharges}</span>
+                <span className="mt-[3px] h-[2px] w-5 rounded-full bg-emerald-400 shadow-[0_0_6px_2px_rgba(52,211,153,0.8)] animate-pulse" />
+              </span>
             </div>
           ) : potionsCount > 0 ? (
             <button
               type="button"
               onClick={() => drinkPotion()}
-              className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg glass-panel border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-white/80 hover:text-white font-bold text-xs flex items-center gap-1 sm:gap-1.5 transition-all cursor-pointer active:scale-95 shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.2)]"
+              className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg glass-panel border border-white/10 bg-white/[0.03] hover:border-emerald-500/40 hover:bg-emerald-500/10 text-white/60 hover:text-white font-bold text-xs flex items-center gap-1 sm:gap-1.5 transition-all cursor-pointer active:scale-95 shrink-0"
               title={locale === 'ru'
-                ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount} шт.`
-                : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
+                ? `Зелье НЕ действует. Нажми чтобы выпить: +3 заряда. В наличии: ${potionsCount} шт.`
+                : `Potion NOT active. Click to drink: +3 charges. In stock: ${potionsCount}`}
             >
-              <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="font-mono font-bold text-xs text-emerald-400">{potionsCount}</span>
+              <FlaskConical className="w-3.5 h-3.5 text-white/40" />
+              <span className="flex flex-col items-center leading-none">
+                <span className="font-mono font-bold text-xs text-white/50">{potionsCount}</span>
+                <span className="mt-[3px] h-[2px] w-5 rounded-full bg-white/10" />
+              </span>
             </button>
           ) : null}
 
