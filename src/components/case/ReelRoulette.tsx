@@ -108,7 +108,6 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   const ropeLinkRefs = useRef<Array<SVGPathElement | null>>([]);
   const ropeHookRefs = useRef<Array<SVGGElement | null>>([]);
   const ropeWrapRefs = useRef<Array<HTMLDivElement | null>>([]);
-  const velSamplesRef = useRef<Array<{ x: number; t: number }>>([]);
   const hookResolveRef = useRef<(() => void) | null>(null);
   const hookTargetRef = useRef<{ reelIdx: number; itemIdx: number } | null>(null);
   const frozenXRef = useRef<number[]>([0, 0, 0]);
@@ -489,7 +488,6 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     setHookResult(null);
     setHookSparks(null);
     setHookPicked(null);
-    velSamplesRef.current = [];
     stopRopeLoop();
     hookTargetRef.current = null;
     hookResolveRef.current = null;
@@ -731,16 +729,6 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
         const cardCenter = itemIdx * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2;
         ropeDimsRef.current = { w: containerW, h: containerRef0.current?.offsetHeight || 220 };
         ropeReelRef.current = reelIdx;
-        // Скорость ленты в момент зацепа — для быстрого плавного гашения
-        const samples = velSamplesRef.current;
-        let velocity = -260;
-        if (samples.length >= 2) {
-          const a = samples[0];
-          const b = samples[samples.length - 1];
-          const dt = Math.max(16, b.t - a.t);
-          velocity = (b.x - a.x) / dt;
-          if (!isFinite(velocity) || velocity > -20) velocity = -160;
-        }
         // Цепь долетает до карты (rope loop сам тянет конец к карте)
         await new Promise<void>((r) => setTimeout(r, 600));
         const hooked = Math.random() < 0.5;
@@ -763,29 +751,22 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             winners = newWinners;
             setWinningSkins(newWinners);
           }
-          const brakeDist = Math.max(-260, Math.min(-30, velocity * 0.42));
-          const braking = [];
-          for (let i = 0; i < spinOpenCount; i++) {
-            const from = frozenXRef.current[i];
-            braking.push(
-              ctrls[i].start({
-                x: from + brakeDist,
-                transition: { duration: 0.38, ease: [0.25, 0.8, 0.35, 1] },
-              })
-            );
-          }
-          await Promise.all(braking);
+          const hookTx = -(itemIdx * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook);
+          const hookDist = Math.abs(hookTx - frozenXRef.current[reelIdx]);
+          // Одно fluid-движение: резкий рывок цепи и плавная посадка.
+          // Длительность от дистанции — и рядом, и далеко едет естественно.
+          const glideDur = Math.max(0.9, Math.min(2.1, 0.85 + hookDist / 5200));
           const glides = [];
           for (let i = 0; i < spinOpenCount; i++) {
             const tx = -((i === reelIdx ? itemIdx : WIN_INDEX) * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook);
             glides.push(
               ctrls[i].start({
                 x: tx,
-                transition: { duration: i === reelIdx ? 1.3 : 1.0, ease: [0.3, 0.65, 0.3, 1] },
+                transition: { duration: glideDur, ease: [0.2, 0.9, 0.25, 1] },
               })
             );
           }
-          sound.startSpinWhoosh(1.4);
+          sound.startSpinWhoosh(glideDur);
           await Promise.all(glides);
           sound.stopSpinWhoosh();
           setHookFlying(false);
@@ -799,6 +780,12 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           ropeModeRef.current = 'retract';
           setHookResult('slipped');
           sound.playHookSlip();
+          // Старт с места: быстрый разгон и мягкая посадка точно в цель.
+          // ease [0.5,0,0.2,1] — нулевая скорость на старте и на финише.
+          const remain = Math.abs(
+            -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook) - frozenXRef.current[0]
+          );
+          const resumeDur = Math.max(0.9, Math.min(2.0, 0.8 + remain / 6000));
           const resume = [];
           for (let i = 0; i < spinOpenCount; i++) {
             const tx = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook);
@@ -806,7 +793,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             resume.push(
               ctrls[i].start({
                 x: tx,
-                transition: { duration: 1.7, ease: [0.55, 0.05, 0.35, 1] },
+                transition: { duration: resumeDur, ease: [0.5, 0, 0.2, 1] },
               })
             );
           }
@@ -931,6 +918,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           <div
             key={reelIdx}
             onMouseMove={(e) => handleReelMouseMove(reelIdx, e)}
+            onPointerUp={handleCardPointerUp}
+            onPointerCancel={() => {
+              tapDownRef.current = null;
+            }}
             className={`relative w-full rounded-3xl p-3 glass-panel border shadow-2xl overflow-hidden transition-colors duration-300 ${
               isZeusCharged
                 ? 'border-sky-400/50 shadow-[0_0_35px_rgba(56,189,248,0.35)]'
@@ -1131,15 +1122,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                 animate={animControls[reelIdx]}
                 onUpdate={(latest) => {
                   const v = (latest as { x?: unknown }).x;
-                  if (typeof v === 'number') {
-                    liveXRef.current[reelIdx] = v;
-                    const s = velSamplesRef.current;
-                    const now = Date.now();
-                    if (s.length === 0 || now - s[s.length - 1].t > 30) {
-                      s.push({ x: v, t: now });
-                      if (s.length > 5) s.shift();
-                    }
-                  }
+                  if (typeof v === 'number') liveXRef.current[reelIdx] = v;
                 }}
                 className="flex gap-3 will-change-transform"
                 style={{
@@ -1167,7 +1150,6 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                     <div
                       key={`${skin.id}_${idx}`}
                       onPointerDown={(e) => handleCardPointerDown(reelIdx, idx, e)}
-                      onPointerUp={handleCardPointerUp}
                       onPointerCancel={() => {
                         tapDownRef.current = null;
                       }}
