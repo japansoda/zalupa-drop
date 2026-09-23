@@ -783,13 +783,15 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         const kind = interruptKindRef.current;
         interruptKindRef.current = null;
         if (kind === 'hook') {
-          // Крюк зацепился: исход ЧЁТКО зависит от того, где стрелка сейчас.
-          // Стрелка в секторе победы — победа (довод точно в точку крюка
-          // кратчайшим путём), иначе — поражение прямо там, где встала.
+          // Крюк зацепился: исход ЧЁТКО зависит от точки прицела.
+          // Точка крюка в секторе победы — победа (довод стрелки точно
+          // в неё кратчайшим путём), иначе — поражение, стрелка встаёт.
+          // (Проверять позицию стрелки в момент срыва нельзя: за 550ms
+          // полёта цепи она уходит на сотни градусов — исход был бы лотереей.)
           await needleControls.stop();
           await new Promise<void>((r) => setTimeout(r, 350));
-          const stoppedNorm = ((needleAngleRef.current % 360) + 360) % 360;
-          const distToWin = Math.min(Math.abs(stoppedNorm - 90), 360 - Math.abs(stoppedNorm - 90));
+          const normHookAim = ((hookAngleRef.current % 360) + 360) % 360;
+          const distToWin = Math.min(Math.abs(normHookAim - 90), 360 - Math.abs(normHookAim - 90));
           const hookedWin = distToWin <= halfSpan;
           if (!hookedWin) {
             // Мимо сектора победы — проигрыш, стрелка остаётся на месте
@@ -798,7 +800,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             spinResolveRef.current = null;
             return false;
           }
-          const normHook = ((hookAngleRef.current % 360) + 360) % 360;
+          const normHook = normHookAim;
           const cur = needleAngleRef.current;
           const curNorm = ((cur % 360) + 360) % 360;
           let delta = (normHook - curNorm + 360) % 360;
