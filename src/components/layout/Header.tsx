@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Volume2, VolumeX, Plus, Briefcase, Zap, FileText, Box, FlaskConical, ShieldCheck } from 'lucide-react';
+import { Volume2, VolumeX, Plus, Briefcase, Zap, FileText, Box, FlaskConical, ShieldCheck, Anchor } from 'lucide-react';
 import { useGameStore } from '../../store/useGameStore';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { LogoSvg } from '../ui/LogoSvg';
@@ -12,7 +12,7 @@ import { useLanguage } from '../../lib/i18n';
 
 export const Header: React.FC = () => {
   const pathname = usePathname();
-  const { balance, inventory, soundEnabled, toggleSound, setRefillOpen, potionsCount, activePotionCharges, drinkPotion, saveTokensCount, zeusCount } = useGameStore();
+  const { balance, inventory, soundEnabled, toggleSound, setRefillOpen, potionsCount, activePotionCharges, drinkPotion, saveTokensCount, zeusCount, hookCount } = useGameStore();
   const { locale, setLocale, t } = useLanguage();
 
   const navLinks = [
@@ -94,7 +94,7 @@ export const Header: React.FC = () => {
           </button>
 
           {/* Consumables: на мобильном — вторая строка справа, на десктопе — в ряд */}
-          {(activePotionCharges > 0 || potionsCount > 0 || saveTokensCount > 0 || zeusCount > 0) && (
+          {(activePotionCharges > 0 || potionsCount > 0 || saveTokensCount > 0 || zeusCount > 0 || hookCount > 0) && (
           <div className="order-4 flex basis-full items-center justify-end gap-1.5 sm:order-none sm:basis-auto sm:justify-start">
           {activePotionCharges > 0 ? (
             <div
@@ -143,6 +143,19 @@ export const Header: React.FC = () => {
             >
               <Zap className="w-3.5 h-3.5 text-sky-400" />
               <span className="font-mono font-bold text-xs text-sky-400">x{zeusCount}</span>
+            </div>
+          )}
+
+          {/* Grappling Hook Badge */}
+          {hookCount > 0 && (
+            <div
+              className="h-7.5 sm:h-8.5 px-2 sm:px-2.5 rounded-lg glass-panel border border-orange-500/30 bg-orange-500/10 flex items-center gap-1 sm:gap-1.5 shrink-0 select-none shadow-[0_0_10px_rgba(249,115,22,0.2)]"
+              title={locale === 'ru'
+                ? `Крюк-кошка: ${hookCount} шт. Зацеп за предмет mid-spin 50/50 (кейсы и апгрейдер)`
+                : `Grappling Hook: ${hookCount} pcs. Mid-spin hook 50/50 (cases & upgrader)`}
+            >
+              <Anchor className="w-3.5 h-3.5 text-orange-400" />
+              <span className="font-mono font-bold text-xs text-orange-400">x{hookCount}</span>
             </div>
           )}
           </div>

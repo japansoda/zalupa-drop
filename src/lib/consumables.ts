@@ -2,7 +2,7 @@ export interface ConsumableItem {
   id: string;
   name: string;
   nameEn: string;
-  rarity: 'contraband' | 'gold' | 'covert';
+  rarity: 'contraband' | 'gold' | 'covert' | 'classified';
   description: string;
   descriptionEn: string;
   icon: string;
@@ -38,6 +38,16 @@ export const ZEUS_ITEM: ConsumableItem = {
   icon: 'Zap',
 };
 
+export const HOOK_ITEM: ConsumableItem = {
+  id: 'grappling_hook',
+  name: 'Крюк-кошка',
+  nameEn: 'Grappling Hook',
+  rarity: 'classified',
+  description: 'Во время прокрута зацепись за карточку предмета (или полоску шанса): 50/50 — притянет выигрыш или сорвётся!',
+  descriptionEn: 'Mid-spin, hook an item card (or the chance arc): 50/50 — drags the win in or slips off!',
+  icon: 'Anchor',
+};
+
 export function getPotionName(locale: 'ru' | 'en' = 'ru'): string {
   return locale === 'en' ? LUCK_POTION.nameEn : LUCK_POTION.name;
 }
@@ -62,6 +72,14 @@ export function getZeusDesc(locale: 'ru' | 'en' = 'ru'): string {
   return locale === 'en' ? ZEUS_ITEM.descriptionEn : ZEUS_ITEM.description;
 }
 
+export function getHookName(locale: 'ru' | 'en' = 'ru'): string {
+  return locale === 'en' ? HOOK_ITEM.nameEn : HOOK_ITEM.name;
+}
+
+export function getHookDesc(locale: 'ru' | 'en' = 'ru'): string {
+  return locale === 'en' ? HOOK_ITEM.descriptionEn : HOOK_ITEM.description;
+}
+
 /**
  * Roll rare bonus drop from opening a case.
  * Very low overall chance (approx 2.5%) for extra consumables.
@@ -70,6 +88,7 @@ export function rollCaseBonusDrop(): {
   potion?: boolean;
   saveToken?: boolean;
   zeus?: boolean;
+  hook?: boolean;
 } {
   // Low chance overall to get ANY bonus drop on opening a case: 2.8%
   if (Math.random() > 0.028) {
@@ -77,15 +96,18 @@ export function rollCaseBonusDrop(): {
   }
 
   const roll = Math.random();
-  if (roll < 0.25) {
-    // 25% of bonus drops -> Luck Potion
+  if (roll < 0.22) {
+    // 22% of bonus drops -> Luck Potion
     return { potion: true };
-  } else if (roll < 0.60) {
-    // 35% of bonus drops -> Save Token (Guardian Aegis)
+  } else if (roll < 0.52) {
+    // 30% of bonus drops -> Save Token (Guardian Aegis)
     return { saveToken: true };
-  } else {
-    // 40% of bonus drops -> Zeus x27
+  } else if (roll < 0.85) {
+    // 33% of bonus drops -> Zeus x27
     return { zeus: true };
+  } else {
+    // 15% of bonus drops -> Grappling Hook
+    return { hook: true };
   }
 }
 
@@ -97,6 +119,7 @@ export function rollConsolationPrize(lostAmount: number): {
   potion?: boolean;
   saveToken?: boolean;
   zeus?: boolean;
+  hook?: boolean;
 } | null {
   if (lostAmount < 2500) return null;
 
@@ -105,11 +128,13 @@ export function rollConsolationPrize(lostAmount: number): {
   if (Math.random() > chance) return null;
 
   const roll = Math.random();
-  if (roll < 0.30) {
+  if (roll < 0.25) {
     return { potion: true };
-  } else if (roll < 0.65) {
+  } else if (roll < 0.55) {
     return { saveToken: true };
-  } else {
+  } else if (roll < 0.85) {
     return { zeus: true };
+  } else {
+    return { hook: true };
   }
 }

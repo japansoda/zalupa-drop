@@ -12,7 +12,7 @@ import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { RarityBadge } from '../ui/RarityBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { useGameStore } from '../../store/useGameStore';
-import { Zap, Layers, FlaskConical } from 'lucide-react';
+import { Zap, Layers, FlaskConical, Anchor } from 'lucide-react';
 import { useLanguage } from '../../lib/i18n';
 import { isOfficialCase, isKnifeOrGlove, rollSpecialKnifeDrop } from '../../lib/caseSpecials';
 import { isStatTrakableItem } from '../../lib/steam';
@@ -51,6 +51,8 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     drinkPotion,
     zeusCount,
     useZeus,
+    hookCount,
+    useHook,
   } = useGameStore();
   const { t, locale } = useLanguage();
   const [openCount, setOpenCount] = useState<1 | 2 | 3>(1);
@@ -61,10 +63,11 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   // Up to 3 reels
   const [reels, setReels] = useState<SkinEntity[][]>([[], [], []]);
   const [winningSkins, setWinningSkins] = useState<SkinEntity[]>([]);
-  const [bonusConsumables, setBonusConsumables] = useState<{ potions: number; saveTokens: number; zeus: number }>({
+  const [bonusConsumables, setBonusConsumables] = useState<{ potions: number; saveTokens: number; zeus: number; hooks: number }>({
     potions: 0,
     saveTokens: 0,
     zeus: 0,
+    hooks: 0,
   });
   const [showModal, setShowModal] = useState(false);
 
@@ -79,8 +82,27 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   const [zeusStriking, setZeusStriking] = useState(false);
   const spinResolveRef = useRef<(() => void) | null>(null);
 
+  // Potion BG snapshot: фон держится весь спин, даже если заряды кончились mid-spin
+  const [potionBgSnapshot, setPotionBgSnapshot] = useState(false);
+  const showPotionBg = activePotionCharges > 0 || (isSpinning && potionBgSnapshot);
+
+  // Grappling Hook state (объявлен раньше Zeus из-за взаимных гардов)
+  const [hookArmed, setHookArmed] = useState(false);
+  const [hookUsedThisSpin, setHookUsedThisSpin] = useState(false);
+  const [hookFlying, setHookFlying] = useState(false);
+  const [hookResult, setHookResult] = useState<'hooked' | 'slipped' | null>(null);
+  const [hookChain, setHookChain] = useState<{ reelIdx: number; x: number; y: number; w: number; h: number } | null>(null);
+  const [hookPicked, setHookPicked] = useState<{ reelIdx: number; itemIdx: number } | null>(null);
+  const hookResolveRef = useRef<(() => void) | null>(null);
+  const hookTargetRef = useRef<{ reelIdx: number; itemIdx: number } | null>(null);
+  const frozenXRef = useRef<number[]>([0, 0, 0]);
+  const liveXRef = useRef<number[]>([0, 0, 0]);
+  const rafIdRef = useRef(0);
+  const rafCancelRef = useRef(false);
+  const reelsRef = useRef<SkinEntity[][]>([[], [], []]);
+
   const canPressZeus =
-    isSpinning && !isRevealed && !zeusUsedThisSpin && !zeusStriking && zeusCount > 0 && !fastOpen;
+    isSpinning && !isRevealed && !zeusUsedThisSpin && !zeusStriking && !hookUsedThisSpin && !hookArmed && !hookFlying && zeusCount > 0 && !fastOpen;
 
   const handleActivateZeus = () => {
     if (!canPressZeus) return;
@@ -91,6 +113,37 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     if (spinResolveRef.current) {
       spinResolveRef.current();
       spinResolveRef.current = null;
+    }
+  };
+
+  const canPressHook =
+    isSpinning && !isRevealed && !hookUsedThisSpin && !hookFlying && !zeusUsedThisSpin && !zeusStriking && hookCount > 0 && !fastOpen;
+
+  const handleArmHook = () => {
+    if (hookUsedThisSpin || hookFlying) return;
+    if (hookArmed) {
+      sound.playClick();
+      setHookArmed(false);
+      return;
+    }
+    if (!canPressHook) return;
+    sound.playClick();
+    setHookArmed(true);
+  };
+
+  const handleCardClick = (reelIdx: number, itemIdx: number) => {
+    if (!hookArmed || hookUsedThisSpin || hookFlying || !isSpinning || isRevealed) return;
+    if (reelIdx >= openCount) return;
+    useHook();
+    setHookUsedThisSpin(true);
+    setHookArmed(false);
+    setHookFlying(true);
+    setHookPicked({ reelIdx, itemIdx });
+    sound.playClick();
+    hookTargetRef.current = { reelIdx, itemIdx };
+    if (hookResolveRef.current) {
+      hookResolveRef.current();
+      hookResolveRef.current = null;
     }
   };
 
@@ -279,6 +332,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       initial2.push(rollWearAndStatTrak(pickVisualTapeSkin(caseSkins)));
     }
     setReels([initial0, initial1, initial2]);
+    reelsRef.current = [initial0, initial1, initial2];
   }, [caseSkins]);
 
   const totalCost = casePriceDc * openCount;
@@ -304,11 +358,22 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     setZeusUsedThisSpin(false);
     setZeusStriking(false);
     spinResolveRef.current = null;
+    setHookArmed(false);
+    setHookUsedThisSpin(false);
+    setHookFlying(false);
+    setHookResult(null);
+    setHookChain(null);
+    setHookPicked(null);
+    hookTargetRef.current = null;
+    hookResolveRef.current = null;
+    // Снапшот зелья ДО списания зарядов — фон живёт весь спин
+    setPotionBgSnapshot(useGameStore.getState().activePotionCharges > 0);
 
     // Roll bonus consumables for each opened case (low chance)
     let droppedPotions = 0;
     let droppedSaveTokens = 0;
     let droppedZeus = 0;
+    let droppedHooks = 0;
     for (let i = 0; i < openCount; i++) {
       const bonus = rollCaseBonusDrop();
       if (bonus.potion) {
@@ -323,8 +388,12 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
         droppedZeus++;
         useGameStore.getState().addZeus(1);
       }
+      if (bonus.hook) {
+        droppedHooks++;
+        useGameStore.getState().addHook(1);
+      }
     }
-    setBonusConsumables({ potions: droppedPotions, saveTokens: droppedSaveTokens, zeus: droppedZeus });
+    setBonusConsumables({ potions: droppedPotions, saveTokens: droppedSaveTokens, zeus: droppedZeus, hooks: droppedHooks });
 
     const spinOpenCount = openCount;
 
@@ -348,10 +417,19 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     };
 
     const finishSpin = (finalWinners: SkinEntity[]) => {
-      // Синяя полоса гаснет СРАЗУ после спина — возврат к обычному состоянию
+      // Синяя полоса гаснет СРАЗУ после спина — возврат к обычному состоянию.
+      // Фон зелья тоже пропадает только сейчас (а не когда кончились заряды).
       setZeusUsedThisSpin(false);
       setZeusStriking(false);
       spinResolveRef.current = null;
+      setPotionBgSnapshot(false);
+      setHookArmed(false);
+      setHookChain(null);
+      setHookFlying(false);
+      setTimeout(() => {
+        setHookResult(null);
+        setHookPicked(null);
+      }, 1500);
       setIsRevealed(true);
       const highestWinner = finalWinners.reduce((prev, curr) => {
         const rank = (s: SkinEntity) =>
@@ -384,13 +462,15 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
 
     // Build new reels
     const buildReels = (ws: SkinEntity[]) => {
-      const nr = [...reels];
+      const nr = [...reelsRef.current];
       for (let i = 0; i < spinOpenCount; i++) {
         nr[i] = generateReel(ws[i]);
       }
       return nr;
     };
-    setReels(buildReels(winners));
+    const builtReels = buildReels(winners);
+    reelsRef.current = builtReels;
+    setReels(builtReels);
     // Let React paint new reels before measuring/animating
     await new Promise<void>((r) => setTimeout(r, 60));
 
@@ -421,10 +501,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       const targetX1 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset);
       const targetX2 = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerOffset);
 
-      let rafId = 0;
-      let rafCancelled = false;
+      rafCancelRef.current = false;
       const updateSoundTick = () => {
-        if (rafCancelled) return;
+        if (rafCancelRef.current) return;
         const elapsed = (Date.now() - startTime) / 1000;
         if (elapsed >= duration) return;
 
@@ -437,9 +516,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           sound.playTick(0.8 + (1 - progress) * 0.4);
           lastSoundTickPos.current = itemsPassed;
         }
-        rafId = requestAnimationFrame(updateSoundTick);
+        rafIdRef.current = requestAnimationFrame(updateSoundTick);
       };
-      rafId = requestAnimationFrame(updateSoundTick);
+      rafIdRef.current = requestAnimationFrame(updateSoundTick);
 
       const animPromises = [
         controls0.start({
@@ -469,14 +548,18 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       const zeusInterrupt = new Promise<'zeus'>((resolve) => {
         spinResolveRef.current = () => resolve('zeus');
       });
+      const hookInterrupt = new Promise<'hook'>((resolve) => {
+        hookResolveRef.current = () => resolve('hook');
+      });
 
       const result = await Promise.race([
         Promise.all(animPromises).then(() => 'done' as const),
         zeusInterrupt,
+        hookInterrupt,
       ]);
 
-      rafCancelled = true;
-      cancelAnimationFrame(rafId);
+      rafCancelRef.current = true;
+      cancelAnimationFrame(rafIdRef.current);
 
       if (result === 'zeus') {
         // Zeus pressed mid-spin: stop reels, lightning flash, reroll with small luck
@@ -485,16 +568,106 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           controls1.stop();
           controls2.stop();
         } catch {}
+        hookResolveRef.current = null;
         await new Promise<void>((r) => setTimeout(r, 650));
         setZeusStriking(false);
         winners = rollWinners(true);
         setWinningSkins(winners);
-        setReels(buildReels(winners));
+        const rebuilt = buildReels(winners);
+        reelsRef.current = rebuilt;
+        setReels(rebuilt);
         await new Promise<void>((r) => setTimeout(r, 60));
         continue;
       }
 
+      if (result === 'hook') {
+        // Крюк вцепился в карту: лента стынет, цепь летит, 50/50
+        const target = hookTargetRef.current;
+        hookTargetRef.current = null;
+        spinResolveRef.current = null;
+        try {
+          controls0.stop();
+          controls1.stop();
+          controls2.stop();
+        } catch {}
+        if (!target) {
+          setHookFlying(false);
+          setHookChain(null);
+          finishSpin(winners);
+          break;
+        }
+        const { reelIdx, itemIdx } = target;
+        frozenXRef.current = [...liveXRef.current];
+        const containerW = containerRef0.current?.offsetWidth || 800;
+        const containerH = containerRef0.current?.offsetHeight || 220;
+        const centerHook = containerW / 2;
+        const cardCenter = itemIdx * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2;
+        setHookChain({
+          reelIdx,
+          x: cardCenter + frozenXRef.current[reelIdx],
+          y: containerH / 2,
+          w: containerW,
+          h: containerH,
+        });
+        // Цепь долетает до карты
+        await new Promise<void>((r) => setTimeout(r, 600));
+        const hooked = Math.random() < 0.5;
+        const ctrls = [controls0, controls1, controls2];
+        if (hooked) {
+          // Зацепилась: карта становится выигрышем, плавный довод под стрелку
+          setHookResult('hooked');
+          const skin = (reelsRef.current[reelIdx] || [])[itemIdx];
+          if (skin) {
+            const newWinners = [...winners];
+            newWinners[reelIdx] = skin;
+            winners = newWinners;
+            setWinningSkins(newWinners);
+          }
+          const glides = [];
+          for (let i = 0; i < spinOpenCount; i++) {
+            const tx = -((i === reelIdx ? itemIdx : WIN_INDEX) * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook);
+            ctrls[i].set({ x: frozenXRef.current[i] });
+            glides.push(
+              ctrls[i].start({
+                x: tx,
+                transition: { duration: i === reelIdx ? 1.5 : 1.1, ease: [0.25, 0.7, 0.3, 1] },
+              })
+            );
+          }
+          sound.startSpinWhoosh(1.5);
+          await Promise.all(glides);
+          sound.stopSpinWhoosh();
+          setHookFlying(false);
+          setHookChain(null);
+          finishSpin(winners);
+          break;
+        } else {
+          // Сорвалась: цепь отлетает, спин продолжается с frozen-позиций
+          await new Promise<void>((r) => setTimeout(r, 250));
+          setHookFlying(false);
+          setHookChain(null);
+          setHookResult('slipped');
+          sound.playTick(0.6);
+          const resume = [];
+          for (let i = 0; i < spinOpenCount; i++) {
+            const tx = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook);
+            ctrls[i].set({ x: frozenXRef.current[i] });
+            resume.push(
+              ctrls[i].start({
+                x: tx,
+                transition: { duration: 2.0, ease: [0.12, 0.8, 0.15, 1] },
+              })
+            );
+          }
+          setTimeout(() => setHookResult(null), 1500);
+          await Promise.all(resume);
+          finishSpin(winners);
+          break;
+        }
+      }
+
       spinResolveRef.current = null;
+      hookResolveRef.current = null;
       finishSpin(winners);
       break;
     }
@@ -571,6 +744,13 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             transform-origin: center;
             transform-box: fill-box;
           }
+          @keyframes caseHookChainDraw {
+            from { stroke-dashoffset: 400; }
+            to { stroke-dashoffset: 0; }
+          }
+          .case-hook-chain-draw {
+            animation: caseHookChainDraw 0.55s ease-out forwards;
+          }
           @keyframes casePotionRise {
             0% { transform: translateY(0) translateX(0) scale(0.7); opacity: 0; }
             10% { opacity: 0.85; }
@@ -600,13 +780,13 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             className={`relative w-full rounded-3xl p-3 glass-panel border shadow-2xl overflow-hidden transition-colors duration-300 ${
               isZeusCharged
                 ? 'border-sky-400/50 shadow-[0_0_35px_rgba(56,189,248,0.35)]'
-                : activePotionCharges > 0
+                : showPotionBg
                 ? 'border-emerald-400/40 shadow-[0_0_30px_rgba(16,185,129,0.22)]'
                 : 'border-white/10'
             }`}
           >
             {/* Зелье удачи активно — зелень выше, до верха окна спина */}
-            {activePotionCharges > 0 && (
+            {showPotionBg && (
               <div
                 className="case-potion-glow absolute inset-0 z-0 pointer-events-none"
                 style={{
@@ -615,8 +795,8 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                 }}
               />
             )}
-            {/* Пузырьки вверх при активном зелье — фон ЗА карточками, летят до самого верха */}
-            {activePotionCharges > 0 && (
+            {/* Пузырьки и клевер вверх при активном зелье — фон ЗА карточками, летят до самого верха */}
+            {showPotionBg && (
               <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden>
                 {Array.from({ length: 8 }).map((__, bi) => {
                   const seed = (reelIdx * 37 + bi * 17) % 100;
@@ -638,6 +818,38 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                         background: 'radial-gradient(circle at 32% 30%, rgba(236,253,245,0.9) 0%, rgba(110,231,183,0.55) 35%, rgba(16,185,129,0.22) 70%, transparent 100%)',
                       }}
                     />
+                  );
+                })}
+                {/* Частицы четырёхлистного клевера — тот же дешёвый rise, только transform+opacity */}
+                {Array.from({ length: 5 }).map((__, ci) => {
+                  const seed = (reelIdx * 53 + ci * 29 + 11) % 100;
+                  const left = (seed * 1.1 + 4) % 94;
+                  const size = 9 + (seed % 6);
+                  const delay = ((seed % 50) / 10).toFixed(2);
+                  const dur = (4.6 + ((seed * 5) % 24) / 10).toFixed(2);
+                  return (
+                    <svg
+                      key={`clover-${ci}`}
+                      viewBox="0 0 20 20"
+                      className="case-potion-bubble absolute"
+                      style={{
+                        left: `${left.toFixed(1)}%`,
+                        bottom: '-16px',
+                        width: size,
+                        height: size,
+                        animationDelay: `${delay}s`,
+                        animationDuration: `${dur}s`,
+                      }}
+                    >
+                      <g fill="#34d399" opacity="0.85">
+                        <circle cx="7" cy="7" r="3.6" />
+                        <circle cx="13" cy="7" r="3.6" />
+                        <circle cx="7" cy="13" r="3.6" />
+                        <circle cx="13" cy="13" r="3.6" />
+                      </g>
+                      <path d="M10 12 C10 15 11.5 17 14 18" fill="none" stroke="#10b981" strokeWidth="1.6" strokeLinecap="round" />
+                      <circle cx="7.6" cy="6.4" r="1" fill="#ecfdf5" opacity="0.9" />
+                    </svg>
                   );
                 })}
               </div>
@@ -763,8 +975,12 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             <div ref={reelIdx === 0 ? containerRef0 : undefined} className="relative z-[1] w-full overflow-hidden py-3">
               <motion.div
                 animate={animControls[reelIdx]}
+                onUpdate={(latest) => {
+                  const v = (latest as { x?: unknown }).x;
+                  if (typeof v === 'number') liveXRef.current[reelIdx] = v;
+                }}
                 className="flex gap-3 will-change-transform"
-                style={{ 
+                style={{
                   width: `${(reels[reelIdx] || []).length * (ITEM_WIDTH + ITEM_GAP)}px`,
                   transform: 'translateZ(0)'
                 }}
@@ -784,12 +1000,18 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                   const displayWeapon = showAsSpecial ? '★' : skin.weapon;
                   const displaySkinName = showAsSpecial ? (locale === 'en' ? '★ Rare Special Item' : '★ Редкий особый предмет') : skin.skinName;
 
+                  const isHookPicked = hookPicked?.reelIdx === reelIdx && hookPicked?.itemIdx === idx;
                   return (
                     <div
                       key={`${skin.id}_${idx}`}
+                      onClick={() => handleCardClick(reelIdx, idx)}
                       className={`relative rounded-2xl bg-[#11121a] border shrink-0 flex flex-col items-center justify-between p-3 select-none overflow-hidden transition-all ${
-                        showAsSpecial
+                        isHookPicked
+                          ? 'border-orange-400 shadow-[0_0_22px_rgba(249,115,22,0.6)]'
+                          : showAsSpecial
                           ? 'border-yellow-400/50 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
+                          : hookArmed
+                          ? 'border-white/10 cursor-pointer hover:border-orange-400/80 hover:shadow-[0_0_18px_rgba(249,115,22,0.45)]'
                           : 'border-white/10'
                       }`}
                       style={{
@@ -842,6 +1064,52 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                   );
                 })}
               </motion.div>
+              {/* Цепь крюка: от стрелки сверху к выбранной карте */}
+              {hookChain && hookChain.reelIdx === reelIdx && (() => {
+                const sx = hookChain.w / 2;
+                const sy = 2;
+                const ex = hookChain.x;
+                const ey = hookChain.y;
+                const len = Math.max(60, Math.hypot(ex - sx, ey - sy));
+                const ang = (Math.atan2(ey - sy, ex - sx) * 180) / Math.PI;
+                const d = `M ${sx.toFixed(1)} ${sy} L ${ex.toFixed(1)} ${ey.toFixed(1)}`;
+                return (
+                  <div className="absolute inset-0 z-30 pointer-events-none">
+                    <svg viewBox={`0 0 ${hookChain.w} ${hookChain.h}`} className="w-full h-full">
+                      <path d={d} stroke="#7c2d12" strokeWidth="7" fill="none" strokeLinecap="round" opacity="0.6" />
+                      <path
+                        d={d}
+                        stroke="#fdba74"
+                        strokeWidth="3"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeDasharray={len.toFixed(0)}
+                        className="case-hook-chain-draw"
+                      />
+                      <path
+                        d={d}
+                        stroke="#fff7ed"
+                        strokeWidth="1.3"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeDasharray="5 5"
+                        className="case-zeus-bolt"
+                        opacity="0.9"
+                      />
+                      <g
+                        transform={`translate(${ex.toFixed(1)} ${ey.toFixed(1)}) rotate(${(ang + 90).toFixed(1)})`}
+                        className="filter drop-shadow-[0_0_9px_#fb923c]"
+                      >
+                        <circle cx="0" cy="-10" r="2.6" fill="none" stroke="#fdba74" strokeWidth="2.4" />
+                        <path d="M 0 -8 L 0 6" stroke="#fdba74" strokeWidth="3" strokeLinecap="round" />
+                        <path d="M 0 6 C -0.5 2, -5 1, -8 -2.5 M -8 -2.5 L -5.4 -2.1 M -8 -2.5 L -7.4 0.6" fill="none" stroke="#fdba74" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M 0 6 C 0.5 2, 5 1, 8 -2.5 M 8 -2.5 L 5.4 -2.1 M 8 -2.5 L 7.4 0.6" fill="none" stroke="#fdba74" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M 0 6 L 0 10.5" stroke="#fff7ed" strokeWidth="1.5" strokeLinecap="round" />
+                      </g>
+                    </svg>
+                  </div>
+                );
+              })()}
             </div>
           </div>
         ))}
@@ -954,6 +1222,34 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                 {locale === 'ru'
                   ? `Открыть ${openCount > 1 ? `${openCount} кейса` : 'кейс'} за ${totalCost.toLocaleString('ru-RU')} DC`
                   : `Open ${openCount > 1 ? `${openCount} cases` : 'case'} for ${totalCost.toLocaleString('ru-RU')} DC`}
+              </span>
+            </button>
+          )}
+          {/* Крюк-кошка во время спина — клик по карте на ленте, 50/50 */}
+          {isSpinning && (hookCount > 0 || hookArmed || hookUsedThisSpin || hookFlying) && (
+            <button
+              type="button"
+              onClick={handleArmHook}
+              disabled={!canPressHook && !hookArmed}
+              className={`w-full sm:w-auto px-8 py-3 rounded-2xl font-black text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 border-2 ${
+                hookArmed
+                  ? 'bg-orange-400 text-black border-orange-200 shadow-[0_0_25px_rgba(249,115,22,0.7)] cursor-pointer active:scale-95 animate-pulse'
+                  : canPressHook
+                  ? 'bg-orange-950/40 hover:bg-orange-900/50 border-orange-500/40 hover:border-orange-400 text-orange-200 cursor-pointer active:scale-95'
+                  : 'bg-orange-500/10 border-orange-500/30 text-orange-300/70 cursor-default'
+              }`}
+            >
+              <Anchor className={`w-4 h-4 ${hookArmed ? 'animate-bounce' : ''}`} />
+              <span>
+                {hookUsedThisSpin || hookFlying
+                  ? hookResult === 'slipped'
+                    ? (locale === 'ru' ? 'Сорвался!' : 'Slipped!')
+                    : hookResult === 'hooked'
+                    ? (locale === 'ru' ? 'Зацепился!' : 'Latched!')
+                    : (locale === 'ru' ? 'Крюк летит...' : 'Hook flying...')
+                  : hookArmed
+                  ? (locale === 'ru' ? 'Кликни по карте!' : 'Click a card!')
+                  : (locale === 'ru' ? `Крюк-кошка 50/50 · ${hookCount} шт.` : `Grappling Hook 50/50 · ${hookCount}`)}
               </span>
             </button>
           )}

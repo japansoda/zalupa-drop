@@ -12,13 +12,13 @@ import { WearBadge } from '../ui/WearBadge';
 import { RarityBadge } from '../ui/RarityBadge';
 import { sound } from '../../lib/sound';
 import { useLanguage, getCaseName } from '../../lib/i18n';
-import { Gift, FastForward, Check, Sparkles, FlaskConical, ShieldAlert, ShieldCheck, Zap } from 'lucide-react';
+import { Gift, FastForward, Check, Sparkles, FlaskConical, ShieldAlert, ShieldCheck, Zap, Anchor } from 'lucide-react';
 
 interface CashbackModalProps {
   isOpen: boolean;
   caseItem?: CaseItem;
   winningSkin?: SkinEntity;
-  awardedConsumable?: 'potion' | 'save_token' | 'zeus';
+  awardedConsumable?: 'potion' | 'save_token' | 'zeus' | 'hook';
   lostAmount: number;
   onClaim: () => void;
   onClose: () => void;
@@ -64,6 +64,8 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
         sound.playAngelicChime();
       } else if (awardedConsumable === 'zeus') {
         sound.playZeusShock();
+      } else if (awardedConsumable === 'hook') {
+        sound.playReward();
       }
       return;
     }
@@ -152,6 +154,8 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
       ? { color: '#eab308', bg: 'rgba(234, 179, 8, 0.15)', border: 'rgba(234, 179, 8, 0.4)', label: '★ ЗОЛОТО' }
       : awardedConsumable === 'zeus'
       ? { color: '#38bdf8', bg: 'rgba(56, 189, 248, 0.15)', border: 'rgba(56, 189, 248, 0.4)', label: '★ TACTICAL' }
+      : awardedConsumable === 'hook'
+      ? { color: '#fb923c', bg: 'rgba(249, 115, 22, 0.15)', border: 'rgba(249, 115, 22, 0.4)', label: '★ HOOK' }
       : winningSkin
       ? RARITY_CONFIG[winningSkin.rarity] || RARITY_CONFIG.milspec
       : RARITY_CONFIG.milspec;
@@ -172,6 +176,8 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
               ? (locale === 'ru' ? 'ЖЕТОН СОХРАНЕНИЯ' : 'GUARDIAN AEGIS')
               : awardedConsumable === 'zeus'
               ? 'ZEUS x27'
+              : awardedConsumable === 'hook'
+              ? (locale === 'ru' ? 'КРЮК-КОШКА' : 'GRAPPLING HOOK')
               : t('cashback.badgeCase')}
           </span>
         </div>
@@ -183,6 +189,8 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
             ? (locale === 'ru' ? 'Жетон сохранения' : 'Guardian Aegis')
             : awardedConsumable === 'zeus'
             ? 'Zeus x27'
+            : awardedConsumable === 'hook'
+            ? (locale === 'ru' ? 'Крюк-кошка' : 'Grappling Hook')
             : caseItem
             ? `${t('cashback.spinningCase')} «${getCaseName(caseItem, locale)}»`
             : t('cashback.badgeCase')}
@@ -329,6 +337,26 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                   </div>
                   <p className="text-xs text-white/50 mt-2">
                     {locale === 'ru' ? 'Выстреливает электрическим разрядом в колесо апгрейдера!' : 'Discharges lightning into the upgrader wheel!'}
+                  </p>
+                </div>
+              ) : awardedConsumable === 'hook' ? (
+                <div className="w-full flex flex-col items-center my-4">
+                  <div className="w-20 h-20 rounded-2xl bg-orange-950/70 border-2 border-orange-400 flex items-center justify-center mb-3 shadow-[0_0_35px_rgba(249,115,22,0.5)]">
+                    <Anchor className="w-10 h-10 text-orange-400 animate-pulse" />
+                  </div>
+                  <h4 className="font-black text-2xl text-white tracking-tight">
+                    {locale === 'ru' ? 'Крюк-кошка' : 'Grappling Hook'}
+                  </h4>
+                  <p className="text-xs font-black mt-1 uppercase tracking-wider text-orange-400">
+                    {locale === 'ru' ? '★ ЗАЦЕП 50/50' : '★ 50/50 HOOK'}
+                  </p>
+                  <div className="flex items-center justify-center gap-1.5 mt-3 px-4 py-2 rounded-xl bg-orange-950/40 border border-orange-400/40 shadow-inner">
+                    <span className="font-mono font-black text-orange-300 text-base">
+                      {locale === 'ru' ? 'Зацеп за предмет · Притяни выигрыш' : 'Hook an item · Drag the win in'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-white/50 mt-2">
+                    {locale === 'ru' ? 'Бросай крюк mid-spin в кейсах и апгрейдере!' : 'Throw it mid-spin in cases & upgrader!'}
                   </p>
                 </div>
               ) : winningSkin ? (

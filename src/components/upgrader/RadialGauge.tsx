@@ -6,7 +6,7 @@ import { RARITY_CONFIG } from '../../data/skins';
 import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
 import allCasesJson from '../../data/all_cases.json';
-import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, ShieldCheck, Percent, LayoutGrid, Sword, Hand, Crosshair, Zap, Target, Flame, Shield, Sticker, User, KeyRound, FlaskConical } from 'lucide-react';
+import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, ShieldCheck, Percent, LayoutGrid, Sword, Hand, Crosshair, Zap, Target, Flame, Shield, Sticker, User, KeyRound, FlaskConical, Anchor } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CashbackModal } from './CashbackModal';
 import { WearBadge } from '../ui/WearBadge';
@@ -110,6 +110,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     addPotion,
     addSaveToken,
     addZeus,
+    hookCount,
+    useHook,
+    addHook,
     addLiveDrop,
   } = useGameStore();
   const { t, locale } = useLanguage();
@@ -133,7 +136,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     isOpen: boolean;
     caseItem?: CaseItem;
     skin?: SkinEntity;
-    awardedConsumable?: 'potion' | 'save_token' | 'zeus';
+    awardedConsumable?: 'potion' | 'save_token' | 'zeus' | 'hook';
     lostAmount: number;
   } | null>(null);
 
@@ -449,20 +452,88 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     return false;
   }, [isUpgrading, targetSkin, betMode, selectedItems, effectiveBetDc, customBetDc, balance]);
 
+  // Grappling Hook state (объявлен раньше Zeus из-за взаимных гардов)
+  const [hookArmed, setHookArmed] = useState(false);
+  const [hookUsedThisSpin, setHookUsedThisSpin] = useState(false);
+  const [hookChain, setHookChain] = useState<{ angleDeg: number } | null>(null);
+  const [hookFlying, setHookFlying] = useState(false);
+  const [hookResult, setHookResult] = useState<'hooked' | 'slipped' | null>(null);
+  const interruptKindRef = useRef<'zeus' | 'hook' | null>(null);
+
   // Zeus: можно прожать ТОЛЬКО когда спин уже идёт и ещё не завершился.
   // Просто прерывает текущий спин и запускает перекрут (+5% к шансу).
-  const canPressZeus = isSpinning && isUpgrading && !zeusUsedThisSpin && !zeusStriking && zeusCount > 0;
+  const canPressZeus = isSpinning && isUpgrading && !zeusUsedThisSpin && !zeusStriking && !hookUsedThisSpin && !hookArmed && !hookFlying && zeusCount > 0;
   const handleActivateZeus = () => {
     if (!canPressZeus) return;
     // Consume zeus and interrupt current spin for re-spin
     useZeus();
     setZeusUsedThisSpin(true);
     setZeusStriking(true);
+    interruptKindRef.current = 'zeus';
     sound.playZeusShock();
     // Interrupt current spin — spinResolveRef triggers re-spin in handleStartUpgrade
     if (spinResolveRef.current) {
       spinResolveRef.current();
       spinResolveRef.current = null;
+    }
+  };
+
+  // Grappling Hook: во время спина вооружить, кликнуть по полоске шанса —
+  // цепь летит к точке, 50/50: зацепилась (плавный довод стрелки в победу)
+  // или сорвалась (спин продолжается как шёл).
+  const canPressHook = isSpinning && isUpgrading && !hookUsedThisSpin && !hookFlying && !zeusUsedThisSpin && !zeusStriking && hookCount > 0;
+
+  const handleArmHook = () => {
+    if (hookUsedThisSpin || hookFlying) return;
+    if (hookArmed) {
+      sound.playClick();
+      setHookArmed(false);
+      return;
+    }
+    if (!canPressHook) return;
+    sound.playClick();
+    setHookArmed(true);
+  };
+
+  const handleArcClick = (e: React.MouseEvent<SVGSVGElement>) => {
+    if (!hookArmed || hookUsedThisSpin || hookFlying || !isSpinning) return;
+    const svg = e.currentTarget;
+    const rect = svg.getBoundingClientRect();
+    // Перевод в координаты viewBox 0 0 240 240
+    const x = ((e.clientX - rect.left) / rect.width) * 240;
+    const y = ((e.clientY - rect.top) / rect.height) * 240;
+    const dx = x - 120;
+    const dy = y - 120;
+    const dist = Math.hypot(dx, dy);
+    // Принимаем клики возле кольца барабана (иначе всё равно цепляем ближайшую точку)
+    if (dist < 30) return;
+    const angleDeg = (Math.atan2(dy, dx) * 180) / Math.PI;
+    useHook();
+    setHookUsedThisSpin(true);
+    setHookArmed(false);
+    setHookChain({ angleDeg });
+    setHookFlying(true);
+    sound.playClick();
+    const hooked = Math.random() < 0.5;
+    if (hooked) {
+      // Даём цепи долететь, затем прерываем спин и доводим стрелку в победу
+      setTimeout(() => {
+        setHookResult('hooked');
+        interruptKindRef.current = 'hook';
+        if (spinResolveRef.current) {
+          spinResolveRef.current();
+          spinResolveRef.current = null;
+        }
+      }, 550);
+    } else {
+      // Срыв: цепь отлетает, спин продолжается нетронутым
+      setTimeout(() => {
+        setHookFlying(false);
+        setHookChain(null);
+        setHookResult('slipped');
+        sound.playTick(0.6);
+        setTimeout(() => setHookResult(null), 1400);
+      }, 750);
     }
   };
 
@@ -502,6 +573,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     setIsSpinning(true);
     setLastResult(null);
     setZeusUsedThisSpin(false);
+    setHookArmed(false);
+    setHookUsedThisSpin(false);
+    setHookChain(null);
+    setHookFlying(false);
+    setHookResult(null);
+    interruptKindRef.current = null;
 
     // Save whether potion was actually used to boost this roll
     const potionWasUsed = isPotionUsed && potionBonus > 0;
@@ -526,23 +603,41 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       sound.startSpinWhoosh(duration);
       await needleControls.set({ rotate: 0 });
 
-      // Race: spin animation vs zeus interrupt
+      // Race: spin animation vs zeus/hook interrupt
       const spinPromise = needleControls.start({
         rotate: totalRotation,
         transition: { duration, ease: [0.12, 0.85, 0.18, 1] },
       });
-      const zeusInterrupt = new Promise<'zeus'>((resolve) => {
-        spinResolveRef.current = () => resolve('zeus');
+      const consumableInterrupt = new Promise<'interrupt'>((resolve) => {
+        spinResolveRef.current = () => resolve('interrupt');
       });
 
       const result = await Promise.race([
         spinPromise.then(() => 'done' as const),
-        zeusInterrupt,
+        consumableInterrupt,
       ]);
 
       sound.stopSpinWhoosh();
 
-      if (result === 'zeus') {
+      if (result === 'interrupt') {
+        const kind = interruptKindRef.current;
+        interruptKindRef.current = null;
+        if (kind === 'hook') {
+          // Крюк зацепился: останавливаем стрелку и ПЛАВНО доводим её в сектор победы
+          await needleControls.stop();
+          await new Promise<void>((r) => setTimeout(r, 350));
+          const winAngle = 90 - halfSpan + Math.random() * span;
+          sound.startSpinWhoosh(1.6);
+          await needleControls.start({
+            rotate: 360 * 5 + winAngle,
+            transition: { duration: 1.6, ease: [0.25, 0.7, 0.3, 1] },
+          });
+          sound.stopSpinWhoosh();
+          setHookFlying(false);
+          setHookChain(null);
+          spinResolveRef.current = null;
+          return true;
+        }
         // Zeus interrupted — stop needle, show lightning, then re-spin
         await needleControls.stop();
         // Lightning strike animation (brief pause)
@@ -587,6 +682,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
       setZeusUsedThisSpin(false);
       setZeusStriking(false);
+      setHookArmed(false);
+      setHookFlying(false);
+      setHookChain(null);
+      setTimeout(() => setHookResult(null), 1500);
       setProtectedInstanceId(null);
 
       // Emit real drop to live drops ticker (strictly >= 25,000 DC)
@@ -637,6 +736,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
       setZeusStriking(false);
       setZeusUsedThisSpin(false);
+      setHookArmed(false);
+      setHookFlying(false);
+      setHookChain(null);
+      setTimeout(() => setHookResult(null), 1500);
       setProtectedInstanceId(null);
 
       // ── CONSOLATION PRIZE (Кешбэк / Утешительный приз) ──
@@ -663,6 +766,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           setCashbackModal({
             isOpen: true,
             awardedConsumable: 'potion',
+            lostAmount: currentLostAmount,
+          });
+        } else if (consPrize.hook) {
+          setCashbackModal({
+            isOpen: true,
+            awardedConsumable: 'hook',
             lostAmount: currentLostAmount,
           });
         }
@@ -1223,6 +1332,51 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       </span>
                     </button>
                   </div>
+
+                  {/* 4. Grappling Hook Row */}
+                  <div className="p-2 rounded-xl bg-black/40 border border-orange-500/20 flex flex-col gap-1 shadow-sm">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <Anchor className="w-4 h-4 text-orange-400" />
+                        <span className="text-xs font-black text-white">{locale === 'ru' ? 'Крюк-кошка' : 'Grappling Hook'}</span>
+                        <span className="text-[8.5px] font-black px-1.5 py-0.2 rounded bg-orange-500/15 text-orange-300 border border-orange-500/30">
+                          50/50
+                        </span>
+                      </div>
+                      <span className="text-[11px] font-mono font-black text-orange-400">
+                        {locale === 'ru' ? `${hookCount} шт.` : `${hookCount} pcs.`}
+                      </span>
+                    </div>
+                    <p className="text-[9.5px] text-white/50 leading-tight">
+                      {locale === 'ru'
+                        ? 'Во время спина зацепи полоску шанса — притянет победу или сорвётся!'
+                        : 'Hook the chance arc mid-spin — drags the win or slips!'}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={handleArmHook}
+                      disabled={!canPressHook && !hookArmed}
+                      className={`w-full py-1 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1 ${
+                        hookUsedThisSpin
+                          ? 'bg-orange-500/20 text-orange-300 border border-orange-400 cursor-default'
+                          : hookArmed
+                          ? 'bg-orange-400 text-black border border-orange-200 shadow-[0_0_12px_rgba(249,115,22,0.5)] cursor-pointer active:scale-95 animate-pulse'
+                          : canPressHook
+                          ? 'bg-orange-500 hover:bg-orange-400 text-black active:scale-95 shadow-[0_0_12px_rgba(249,115,22,0.3)] cursor-pointer'
+                          : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
+                      }`}
+                    >
+                      <span>
+                        {hookUsedThisSpin
+                          ? (locale === 'ru' ? 'Крюк использован' : 'Hook Used')
+                          : hookArmed
+                          ? (locale === 'ru' ? 'Кликни по полоске шанса!' : 'Click the chance arc!')
+                          : hookCount <= 0
+                          ? (locale === 'ru' ? 'Нет крюков' : 'No Hooks')
+                          : (locale === 'ru' ? 'Жми во время спина' : 'Press mid-spin')}
+                      </span>
+                    </button>
+                  </div>
                 </div>
               ) : (
                 /* DC BET MODE */
@@ -1279,8 +1433,13 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               {/* Top pointer notch / mark */}
               <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#2b2d3d] border border-white/20 rotate-45 z-20 shadow-md" />
 
-              {/* SVG Arc Track */}
-              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 240 240">
+              {/* SVG Arc Track (клик по кольцу — точка зацепа крюка) */}
+              <svg
+                className="absolute inset-0 w-full h-full"
+                viewBox="0 0 240 240"
+                onClick={handleArcClick}
+                style={hookArmed ? { cursor: 'crosshair' } : undefined}
+              >
                 <defs>
                   <style>
                     {`
@@ -1341,6 +1500,13 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       }
                       .zeus-arrow-charged {
                         animation: zeusArrowCharge 0.5s ease-in-out infinite;
+                      }
+                      @keyframes hookChainDraw {
+                        from { stroke-dashoffset: 130; }
+                        to { stroke-dashoffset: 0; }
+                      }
+                      .hook-chain-draw {
+                        animation: hookChainDraw 0.5s ease-out forwards;
                       }
                     `}
                   </style>
@@ -1551,6 +1717,71 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     })()}
                   </g>
                 )}
+
+                {/* Зона клика по кольцу когда крюк вооружён */}
+                {hookArmed && (
+                  <circle
+                    cx="120"
+                    cy="120"
+                    r={gaugeR}
+                    fill="none"
+                    stroke="transparent"
+                    strokeWidth="36"
+                    style={{ cursor: 'crosshair' }}
+                  />
+                )}
+
+                {/* Цепь крюка: от центра к точке зацепа + крюк-кошка */}
+                {hookChain && (() => {
+                  const rad = (hookChain.angleDeg * Math.PI) / 180;
+                  const px = 120 + gaugeR * Math.cos(rad);
+                  const py = 120 + gaugeR * Math.sin(rad);
+                  const d = `M 120 120 L ${px.toFixed(1)} ${py.toFixed(1)}`;
+                  return (
+                    <g className="pointer-events-none">
+                      {/* Тень цепи */}
+                      <path
+                        d={d}
+                        stroke="#7c2d12"
+                        strokeWidth="5"
+                        fill="none"
+                        strokeLinecap="round"
+                        opacity="0.6"
+                      />
+                      {/* Звенья цепи (прорисовка вылетом) */}
+                      <path
+                        d={d}
+                        stroke="#fdba74"
+                        strokeWidth="2.6"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeDasharray="130"
+                        className="hook-chain-draw"
+                      />
+                      <path
+                        d={d}
+                        stroke="#fff7ed"
+                        strokeWidth="1.2"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeDasharray="4 4"
+                        className="zeus-bolt-flow"
+                        opacity="0.9"
+                      />
+                      {/* Крюк-кошка на конце */}
+                      <g
+                        transform={`translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(${(hookChain.angleDeg + 90).toFixed(1)})`}
+                        className="filter drop-shadow-[0_0_8px_#fb923c]"
+                      >
+                        <circle cx="0" cy="-9" r="2.4" fill="none" stroke="#fdba74" strokeWidth="2.2" />
+                        <path d="M 0 -7 L 0 5" stroke="#fdba74" strokeWidth="2.6" strokeLinecap="round" />
+                        <path d="M 0 5 C -0.5 1.5, -4.5 0.5, -7 -2.5 M -7 -2.5 L -4.8 -2.2 M -7 -2.5 L -6.6 0.2" fill="none" stroke="#fdba74" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M 0 5 C 0.5 1.5, 4.5 0.5, 7 -2.5 M 7 -2.5 L 4.8 -2.2 M 7 -2.5 L 6.6 0.2" fill="none" stroke="#fdba74" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M 0 5 L 0 9" stroke="#fff7ed" strokeWidth="1.4" strokeLinecap="round" />
+                      </g>
+                    </g>
+                  );
+                })()}
               </svg>
 
               {/* Zeus Lightning Bolt Strike Animation — тройной живой разряд */}
@@ -1813,6 +2044,38 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   </span>
                 </button>
               )}
+              {/* Крюк-кошка во время спина — вторая кнопка под Zeus/спиннером */}
+              {isUpgrading && (hookCount > 0 || hookArmed || hookUsedThisSpin || hookFlying) && (
+                <button
+                  type="button"
+                  onClick={handleArmHook}
+                  disabled={!canPressHook && !hookArmed}
+                  className={`w-full py-2.5 px-4 rounded-xl font-black text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 border ${
+                    hookArmed
+                      ? 'bg-orange-400 text-black border-orange-200 shadow-[0_0_25px_rgba(249,115,22,0.7)] cursor-pointer active:scale-95 animate-pulse'
+                      : canPressHook
+                      ? 'bg-orange-950/40 hover:bg-orange-900/50 border-orange-500/40 hover:border-orange-400 text-orange-200 cursor-pointer active:scale-95'
+                      : 'bg-orange-500/10 border-orange-500/30 text-orange-300/70 cursor-default'
+                  }`}
+                >
+                  <Anchor className={`w-4 h-4 ${hookArmed ? 'animate-bounce' : ''}`} />
+                  <span>
+                    {hookUsedThisSpin || hookFlying
+                      ? hookResult === 'slipped'
+                        ? (locale === 'ru' ? 'Сорвался!' : 'Slipped!')
+                        : (locale === 'ru' ? 'Крюк летит...' : 'Hook flying...')
+                      : hookArmed
+                      ? (locale === 'ru' ? 'Кликни по полоске шанса!' : 'Click the chance arc!')
+                      : (locale === 'ru' ? `Крюк-кошка 50/50 · ${hookCount} шт.` : `Grappling Hook 50/50 · ${hookCount}`)}
+                  </span>
+                </button>
+              )}
+              {/* Результат крюка */}
+              {hookResult === 'hooked' && !isUpgrading && (
+                <div className="text-center text-xs font-black text-orange-300">
+                  {locale === 'ru' ? 'Крюк зацепился!' : 'Hook latched!'}
+                </div>
+              )}
             </div>
           </div>
 
@@ -2009,7 +2272,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           </div>
 
           {/* Inventory Grid */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-h-96 overflow-y-auto pr-1">
+          <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-h-[400px] min-h-0 overflow-y-auto overscroll-contain pr-1 pb-3 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
             {filteredMySkins.length === 0 ? (
               <div className="col-span-full py-12 text-center text-xs text-white/40">
                 {t('inv.emptyHint')}
@@ -2279,7 +2542,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           </div>
 
           {/* Catalog Grid */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-h-96 overflow-y-auto pr-1">
+          <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-h-[400px] min-h-0 overflow-y-auto overscroll-contain pr-1 pb-3 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
             {filteredCatalogSkins.length === 0 ? (
               <div className="col-span-full py-12 text-center text-xs text-white/40">
                 {t('upg.noSkins')}
@@ -2368,6 +2631,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               addSaveToken(1);
             } else if (cashbackModal.awardedConsumable === 'zeus') {
               addZeus(1);
+            } else if (cashbackModal.awardedConsumable === 'hook') {
+              addHook(1);
             } else if (cashbackModal.skin) {
               addToInventory([cashbackModal.skin]);
             }

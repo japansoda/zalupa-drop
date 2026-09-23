@@ -12,10 +12,11 @@ interface GameState {
   stats: UserStats;
   isRefillOpen: boolean;
 
-  // Consumables (save tokens, zeus, luck potion)
+  // Consumables (save tokens, zeus, luck potion, grappling hook)
   saveTokensCount: number;
   zeusCount: number;
   potionsCount: number;
+  hookCount: number;
   activePotionCharges: number;
 
   // Case open popularity tracking
@@ -41,6 +42,8 @@ interface GameState {
   useSaveToken: () => boolean;
   addZeus: (count?: number) => void;
   useZeus: () => boolean;
+  addHook: (count?: number) => void;
+  useHook: () => boolean;
   addPotion: (count?: number) => void;
   drinkPotion: () => boolean;
   consumePotionCharge: () => boolean;
@@ -57,6 +60,7 @@ export const useGameStore = create<GameState>()(
       saveTokensCount: 1,
       zeusCount: 1,
       potionsCount: 1,
+      hookCount: 1,
       activePotionCharges: 0,
       stats: {
         casesOpened: 0,
@@ -246,6 +250,17 @@ export const useGameStore = create<GameState>()(
         return true;
       },
 
+      addHook: (count = 1) => {
+        set((state) => ({ hookCount: state.hookCount + count }));
+      },
+
+      useHook: () => {
+        const current = get().hookCount;
+        if (current <= 0) return false;
+        set((state) => ({ hookCount: state.hookCount - 1 }));
+        return true;
+      },
+
       addPotion: (count = 1) => {
         set((state) => ({ potionsCount: state.potionsCount + count }));
       },
@@ -302,6 +317,7 @@ export const useGameStore = create<GameState>()(
         stats: state.stats,
         saveTokensCount: state.saveTokensCount,
         zeusCount: state.zeusCount,
+        hookCount: state.hookCount,
         potionsCount: state.potionsCount,
         activePotionCharges: state.activePotionCharges,
         caseOpenCounts: state.caseOpenCounts,

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Sparkles, FlaskConical, ShieldCheck, Zap } from 'lucide-react';
+import { X, Sparkles, FlaskConical, ShieldCheck, Zap, Anchor } from 'lucide-react';
 import { useGameStore } from '../../store/useGameStore';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { sound } from '../../lib/sound';
@@ -79,7 +79,7 @@ const THEME_STYLES: Record<TierOption['theme'], { border: string; bg: string; te
 };
 
 export const RefillModal: React.FC = () => {
-  const { isRefillOpen, setRefillOpen, refillDemoBalance, balance, addPotion, addSaveToken, addZeus, potionsCount, saveTokensCount, zeusCount } = useGameStore();
+  const { isRefillOpen, setRefillOpen, refillDemoBalance, balance, addPotion, addSaveToken, addZeus, addHook, potionsCount, saveTokensCount, zeusCount, hookCount } = useGameStore();
   const { t, locale } = useLanguage();
 
   const [successAnimation, setSuccessAnimation] = useState<number | null>(null);
@@ -108,6 +108,11 @@ export const RefillModal: React.FC = () => {
   const handleGetZeus = () => {
     sound.playZeusShock();
     addZeus(1);
+  };
+
+  const handleGetHook = () => {
+    sound.playReward();
+    addHook(1);
   };
 
   return (
@@ -215,7 +220,7 @@ export const RefillModal: React.FC = () => {
         </div>
 
         {/* Free Consumables & Boosters Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5 mb-1 sm:mb-2">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5 mb-1 sm:mb-2">
           {/* Luck Potions */}
           <button
             type="button"
@@ -279,6 +284,28 @@ export const RefillModal: React.FC = () => {
             </div>
             <div className="px-1.5 py-0.5 rounded-lg bg-sky-500/15 border border-sky-500/30 font-mono font-bold text-[10px] text-sky-300 shrink-0 ml-1.5">
               {zeusCount} {locale === 'ru' ? 'шт.' : 'pcs'}
+            </div>
+          </button>
+
+          {/* Grappling Hook */}
+          <button
+            type="button"
+            onClick={handleGetHook}
+            className="px-2.5 py-2 rounded-xl flex items-center justify-between border border-orange-500/30 bg-orange-950/20 hover:border-orange-400 hover:bg-orange-900/30 transition-all cursor-pointer group active:scale-98 min-w-0"
+          >
+            <div className="flex items-center gap-2 min-w-0">
+              <Anchor className="w-5 h-5 text-orange-400 shrink-0" />
+              <div className="flex flex-col text-left leading-tight min-w-0">
+                <span className="font-bold text-xs text-orange-400 group-hover:text-orange-300 truncate">
+                  +1 {locale === 'ru' ? 'Крюк-кошка' : 'Grappling Hook'}
+                </span>
+                <span className="text-[8.5px] text-white/40 mt-0.5 truncate">
+                  {locale === 'ru' ? 'Зацеп 50/50' : 'Hook 50/50'}
+                </span>
+              </div>
+            </div>
+            <div className="px-1.5 py-0.5 rounded-lg bg-orange-500/15 border border-orange-500/30 font-mono font-bold text-[10px] text-orange-300 shrink-0 ml-1.5">
+              {hookCount} {locale === 'ru' ? 'шт.' : 'pcs'}
             </div>
           </button>
         </div>

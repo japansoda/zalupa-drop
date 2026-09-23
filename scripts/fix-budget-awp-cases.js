@@ -134,6 +134,55 @@ for (const caseId of ['case_awp_elite', 'case_awp_king']) {
   console.log(`${caseId}: now ${c.skins.length} AWP skins, min ${Math.min(...c.skins.map((s) => s.priceDc))}, max ${Math.max(...c.skins.map((s) => s.priceDc))}`);
 }
 
+// Knife lottery cases: real knives + diverse guns (were AK-only with zero knives,
+// so the "10%/50% knife" promise never fired)
+const isKnifeSkin = (s) => {
+  const w = (s.weapon || '').toLowerCase();
+  return (
+    w.includes('knife') || w.includes('bayonet') || w.includes('karambit') ||
+    w.includes('dagger') || w.includes('stiletto') || w.includes('talon') ||
+    w.includes('ursus') || w.includes('kukri') || w.includes('navaja') ||
+    w.includes('falchion') || w.includes('bowie') || w.includes('huntsman') ||
+    w.includes('butterfly') || w.includes('flip') || w.includes('gut') ||
+    w.includes('paracord') || w.includes('survival') || w.includes('nomad') ||
+    w.includes('skeleton') || w.includes('classic') || w.includes('нож')
+  );
+};
+const knifePool = pool.filter((s) => isKnifeSkin(s) && (s.priceDc || 0) > 0)
+  .sort((a, b) => a.priceDc - b.priceDc);
+
+function cheapestOfWeapon(weaponName, minPrice, maxPrice, excludeIds) {
+  const hit = weaponSkins
+    .filter((s) => (s.weapon || '').toLowerCase() === weaponName.toLowerCase() &&
+      s.priceDc >= minPrice && s.priceDc <= maxPrice && !excludeIds.has(s.id))
+    .sort((a, b) => a.priceDc - b.priceDc)[0];
+  if (hit) excludeIds.add(hit.id);
+  return hit;
+}
+
+function rebuildKnifeCase(caseId, knifeCount, gunWeapons, gunMin, gunMax) {
+  const c = cases.find((x) => x.id === caseId);
+  if (!c) {
+    console.log(`NOT FOUND: ${caseId}`);
+    return;
+  }
+  const exclude = new Set();
+  const knives = knifePool.slice(0, knifeCount);
+  knives.forEach((s) => exclude.add(s.id));
+  const guns = [];
+  for (const w of gunWeapons) {
+    const g = cheapestOfWeapon(w, gunMin, gunMax, exclude);
+    if (g) guns.push(g);
+  }
+  c.skins = knives.concat(guns).map(cleanSkin);
+  const kn = c.skins.filter(isKnifeSkin).length;
+  console.log(`${caseId}: ${kn} knives + ${guns.length} diverse guns (total ${c.skins.length})`);
+}
+
+const DIVERSE_GUNS = ['awp', 'm4a4', 'm4a1-s', 'ak-47', 'desert eagle', 'usp-s', 'glock-18', 'famas', 'galil ar', 'p90', 'tec-9', 'sg 553'];
+rebuildKnifeCase('case_10_knife', 5, DIVERSE_GUNS, 200, 3000);
+rebuildKnifeCase('case_50_knife', 7, DIVERSE_GUNS, 300, 5000);
+
 // Backup once, then save
 const backupPath = path.join(__dirname, '../src/data/all_cases.backup.json');
 if (!fs.existsSync(backupPath)) {
