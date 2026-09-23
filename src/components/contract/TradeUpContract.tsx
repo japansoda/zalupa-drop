@@ -441,7 +441,7 @@ export const TradeUpContract: React.FC = () => {
               >
                 <FlaskConical className="w-3.5 h-3.5" />
                 <span>{locale === 'ru' ? 'Выпить' : 'Drink'}</span>
-                <span className="font-mono text-[10px] text-zinc-400 bg-white/5 border border-white/10 px-1.5 py-0.5 rounded font-bold">x{potionsCount}</span>
+                <span className="font-mono text-[10px] text-zinc-400 bg-white/5 border border-white/10 px-1.5 py-0.5 rounded font-bold">{potionsCount}</span>
               </button>
             ) : null}
 

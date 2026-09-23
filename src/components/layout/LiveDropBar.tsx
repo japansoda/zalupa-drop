@@ -115,6 +115,9 @@ const LiveDropCard = memo(({ drop, isUser, locale }: CardProps) => {
         <div className="flex items-center justify-between gap-1 text-[8px] text-white/40 mt-0.5">
           <span className="truncate max-w-[70px]">
             {locale === 'en' ? (CASE_EN_MAP[drop.caseName] || drop.caseName) : drop.caseName}
+            {drop.chance != null && (
+              <span className="font-mono text-sky-400/90"> · {drop.chance}%</span>
+            )}
           </span>
           <span className="font-mono text-yellow-400/90 font-bold shrink-0">
             {drop.skin.priceDc.toLocaleString('ru-RU')} DC

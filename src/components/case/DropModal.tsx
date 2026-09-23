@@ -202,12 +202,12 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                       <RarityBadge rarity={it.rarity} size="sm" />
                     </div>
 
-                    <div className="w-full h-36 sm:h-40 flex items-center justify-center my-2 relative">
+                    <div className="w-full h-24 sm:h-40 flex items-center justify-center my-1 sm:my-2 relative">
                       <SkinImage
                         src={it.image}
                         alt={it.name}
                         size={180}
-                        className="w-full h-32 sm:h-36 object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-200"
+                        className="w-full h-20 sm:h-36 object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-200"
                       />
                     </div>
 
@@ -295,7 +295,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                         {locale === 'ru' ? 'Зелье удачи' : 'Luck Potion'}
                       </span>
                       <span className="text-[10px] font-mono font-black text-white/60 bg-white/5 px-1.5 py-0.5 rounded">
-                        x{bonusConsumables.potions}
+                        {bonusConsumables.potions}
                       </span>
                     </div>
                     <span className="text-[11px] text-white/40 mt-0.5">
@@ -320,7 +320,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                         {locale === 'ru' ? 'Жетон сохранения' : 'Guardian Aegis'}
                       </span>
                       <span className="text-[10px] font-mono font-black text-yellow-400 bg-yellow-400/10 px-1.5 py-0.5 rounded border border-yellow-400/20">
-                        x{bonusConsumables.saveTokens}
+                        {bonusConsumables.saveTokens}
                       </span>
                     </div>
                     <span className="text-[11px] text-white/40 mt-0.5">
@@ -347,7 +347,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                         Zeus x27
                       </span>
                       <span className="text-[10px] font-mono font-black text-sky-400 bg-sky-400/10 px-1.5 py-0.5 rounded border border-sky-400/20">
-                        x{bonusConsumables.zeus}
+                        {bonusConsumables.zeus}
                       </span>
                     </div>
                     <span className="text-[11px] text-white/40 mt-0.5">
@@ -374,7 +374,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                         {locale === 'ru' ? 'Крюк-кошка' : 'Grappling Hook'}
                       </span>
                       <span className="text-[10px] font-mono font-black text-orange-400 bg-orange-400/10 px-1.5 py-0.5 rounded border border-orange-400/20">
-                        x{bonusConsumables.hooks}
+                        {bonusConsumables.hooks}
                       </span>
                     </div>
                     <span className="text-[11px] text-white/40 mt-0.5">

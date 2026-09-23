@@ -54,6 +54,8 @@ export interface LiveDrop {
   skin: SkinEntity;
   caseName: string;
   timestamp: number;
+  /** Шанс апгрейда в % (только для дропов из апгрейдера) */
+  chance?: number;
 }
 
 export interface UserStats {

@@ -441,9 +441,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     autoSelectTargetSkin(desiredChance, effectiveBetDc);
   };
 
-  // Guard check: strictly disallow spinning without skins / bet
+  // Guard check: strictly disallow spinning without skins / bet,
+  // and NEVER allow a target cheaper than (or equal to) the bet
+  const isTargetProfitable = Boolean(targetSkin && targetSkin.priceDc > effectiveBetDc && effectiveBetDc > 0);
   const canUpgrade = useMemo(() => {
     if (isUpgrading || !targetSkin) return false;
+    if (!isTargetProfitable) return false;
     if (betMode === 'skin') {
       return selectedItems.length > 0 && effectiveBetDc > 0;
     }
@@ -451,7 +454,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       return customBetDc > 0 && balance >= customBetDc;
     }
     return false;
-  }, [isUpgrading, targetSkin, betMode, selectedItems, effectiveBetDc, customBetDc, balance]);
+  }, [isUpgrading, targetSkin, betMode, selectedItems, effectiveBetDc, customBetDc, balance, isTargetProfitable]);
 
   // Grappling Hook state (объявлен раньше Zeus из-за взаимных гардов)
   const [hookArmed, setHookArmed] = useState(false);
@@ -705,6 +708,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   // Perform Upgrade Spin
   const handleStartUpgrade = async () => {
     if (!canUpgrade || !targetSkin || effectiveBetDc <= 0) return;
+    // Hard guard: target must be strictly more expensive than the bet
+    if (targetSkin.priceDc <= effectiveBetDc) {
+      sound.playError();
+      autoSelectTargetSkin(targetChance, effectiveBetDc);
+      return;
+    }
 
     const currentLostAmount = effectiveBetDc;
     const wasProtected = Boolean(protectedInstanceId && selectedItems.some((i) => i.instanceId === protectedInstanceId));
@@ -774,11 +783,21 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         const kind = interruptKindRef.current;
         interruptKindRef.current = null;
         if (kind === 'hook') {
-          // Крюк зацепился: останавливаем стрелку и доводим её ТОЧНО в точку
-          // крюка КРАТЧАЙШИМ путём (вперёд или назад — что ближе) со скоростью
-          // пропорциональной дистанции.
+          // Крюк зацепился: исход ЧЁТКО зависит от того, где стрелка сейчас.
+          // Стрелка в секторе победы — победа (довод точно в точку крюка
+          // кратчайшим путём), иначе — поражение прямо там, где встала.
           await needleControls.stop();
           await new Promise<void>((r) => setTimeout(r, 350));
+          const stoppedNorm = ((needleAngleRef.current % 360) + 360) % 360;
+          const distToWin = Math.min(Math.abs(stoppedNorm - 90), 360 - Math.abs(stoppedNorm - 90));
+          const hookedWin = distToWin <= halfSpan;
+          if (!hookedWin) {
+            // Мимо сектора победы — проигрыш, стрелка остаётся на месте
+            setHookFlying(false);
+            stopRopeUpg();
+            spinResolveRef.current = null;
+            return false;
+          }
           const normHook = ((hookAngleRef.current % 360) + 360) % 360;
           const cur = needleAngleRef.current;
           const curNorm = ((cur % 360) + 360) % 360;
@@ -859,6 +878,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           skin: targetSkin,
           caseName: locale === 'ru' ? 'Апгрейдер' : 'Upgrader',
           timestamp: Date.now(),
+          chance: Number(chance.toFixed(1)),
         });
       }
 
@@ -2506,12 +2526,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       </div>
                     </div>
 
-                    <div className="w-full h-24 sm:h-28 flex items-center justify-center my-1">
+                    <div className="w-full h-[72px] sm:h-28 flex items-center justify-center my-1">
                       <SkinImage
                         src={item.image}
                         alt={item.name}
                         size={140}
-                        className="w-full h-20 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
+                        className="w-full h-14 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
                       />
                     </div>
 
@@ -2757,6 +2777,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       key={skin.id}
                       type="button"
                       onClick={() => {
+                        // Дешевле ставки брать нельзя — только дороже
+                        if (skin.priceDc <= effectiveBetDc) {
+                          sound.playError();
+                          return;
+                        }
                         sound.playClick();
                         setTargetSkin(skin);
                       }}
@@ -2780,12 +2805,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                         </div>
                       </div>
 
-                      <div className="w-full h-24 sm:h-28 flex items-center justify-center my-1">
+                      <div className="w-full h-[72px] sm:h-28 flex items-center justify-center my-1">
                         <SkinImage
                           src={skin.image}
                           alt={skin.name}
                           size={140}
-                          className="w-full h-20 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
+                          className="w-full h-14 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
                         />
                       </div>
 

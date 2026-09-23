@@ -104,7 +104,7 @@ export const Header: React.FC = () => {
                 : `Luck Potion active! ${activePotionCharges} left — works on cases, upgrader & contracts`}
             >
               <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="font-mono font-bold text-xs text-emerald-400">x{activePotionCharges}</span>
+              <span className="font-mono font-bold text-xs text-emerald-400">{activePotionCharges}</span>
             </div>
           ) : potionsCount > 0 ? (
             <button
@@ -116,7 +116,7 @@ export const Header: React.FC = () => {
                 : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
             >
               <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="font-mono font-bold text-xs text-emerald-400">x{potionsCount}</span>
+              <span className="font-mono font-bold text-xs text-emerald-400">{potionsCount}</span>
             </button>
           ) : null}
 
@@ -129,7 +129,7 @@ export const Header: React.FC = () => {
                 : `Guardian Aegis: ${saveTokensCount} pcs. Protects 1 skin from burning in upgrader on failure`}
             >
               <ShieldCheck className="w-3.5 h-3.5 text-yellow-400" />
-              <span className="font-mono font-bold text-xs text-yellow-400">x{saveTokensCount}</span>
+              <span className="font-mono font-bold text-xs text-yellow-400">{saveTokensCount}</span>
             </div>
           )}
 
@@ -142,7 +142,7 @@ export const Header: React.FC = () => {
                 : `Zeus x27: ${zeusCount} pcs. Lightning strike: reroll + luck (upgrader & cases)`}
             >
               <Zap className="w-3.5 h-3.5 text-sky-400" />
-              <span className="font-mono font-bold text-xs text-sky-400">x{zeusCount}</span>
+              <span className="font-mono font-bold text-xs text-sky-400">{zeusCount}</span>
             </div>
           )}
 
@@ -155,7 +155,7 @@ export const Header: React.FC = () => {
                 : `Grappling Hook: ${hookCount} pcs. Mid-spin hook 50/50 (cases & upgrader)`}
             >
               <Anchor className="w-3.5 h-3.5 text-orange-400" />
-              <span className="font-mono font-bold text-xs text-orange-400">x{hookCount}</span>
+              <span className="font-mono font-bold text-xs text-orange-400">{hookCount}</span>
             </div>
           )}
           </div>

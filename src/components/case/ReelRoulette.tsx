@@ -1393,7 +1393,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
               title={locale === 'ru' ? `Выпить зелье удачи +3 заряда. В наличии: ${potionsCount}` : `Drink Luck Potion +3 charges. In stock: ${potionsCount}`}
             >
               <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="font-mono font-bold text-xs text-emerald-400">x{potionsCount}</span>
+              <span className="font-mono font-bold text-xs text-emerald-400">{potionsCount}</span>
             </button>
           ) : null}
         </div>

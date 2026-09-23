@@ -140,7 +140,7 @@ export default function InventoryPage() {
                 >
                   <FlaskConical className="w-3.5 h-3.5" />
                   <span>{locale === 'ru' ? 'Выпить +3' : 'Drink +3'}</span>
-                  <span className="bg-black/20 px-1 py-0.2 rounded text-[10px]">x{potionsCount}</span>
+                  <span className="bg-black/20 px-1 py-0.2 rounded text-[10px]">{potionsCount}</span>
                 </button>
               ) : (
                 <span className="text-[11px] font-mono text-white/30 px-2 py-1 select-none">
@@ -219,14 +219,14 @@ export default function InventoryPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.2 }}
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+                className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4"
               >
                 {filteredInventory.map((item) => {
                   const config = RARITY_CONFIG[item.rarity] || RARITY_CONFIG.milspec;
                   return (
                     <div
                       key={item.instanceId}
-                      className="rounded-2xl glass-card p-3 flex flex-col justify-between border hover:border-yellow-400/40 transition-all group"
+                      className="rounded-2xl glass-card p-2 sm:p-3 flex flex-col justify-between border hover:border-yellow-400/40 transition-all group"
                       style={{ borderBottomWidth: '3px', borderBottomColor: config.color }}
                     >
                       <div className="flex items-center justify-between">
@@ -237,12 +237,12 @@ export default function InventoryPage() {
                         <RarityBadge rarity={item.rarity} size="sm" />
                       </div>
 
-                      <div className="w-full h-36 sm:h-40 flex items-center justify-center my-2">
+                      <div className="w-full h-20 sm:h-40 flex items-center justify-center my-1 sm:my-2">
                         <SkinImage
                           src={item.image}
                           alt={item.name}
                           size={180}
-                          className="w-full h-32 sm:h-36 object-contain group-hover:scale-115 transition-transform duration-300 filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.8)]"
+                          className="w-full h-[72px] sm:h-36 object-contain group-hover:scale-115 transition-transform duration-300 filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.8)]"
                         />
                       </div>
 
