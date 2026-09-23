@@ -234,6 +234,25 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     ropeBRef.current = { x, y };
   };
 
+  // Надёжный тап по летящей карте: click теряется, т.к. press и release
+  // попадают в разные карты. Ловим pointerdown (цель фиксируется в момент
+  // нажатия) и подтверждаем коротким pointerup почти без сдвига.
+  const tapDownRef = useRef<{ reelIdx: number; itemIdx: number; x: number; y: number; t: number; pointerId: number } | null>(null);
+
+  const handleCardPointerDown = (reelIdx: number, itemIdx: number, e: React.PointerEvent) => {
+    if (!hookArmed || hookFlying) return;
+    tapDownRef.current = { reelIdx, itemIdx, x: e.clientX, y: e.clientY, t: Date.now(), pointerId: e.pointerId };
+  };
+
+  const handleCardPointerUp = (e: React.PointerEvent) => {
+    const down = tapDownRef.current;
+    tapDownRef.current = null;
+    if (!down || e.pointerId !== down.pointerId) return;
+    const moved = Math.hypot(e.clientX - down.x, e.clientY - down.y);
+    if (moved > 14 || Date.now() - down.t > 600) return;
+    handleCardClick(down.reelIdx, down.itemIdx);
+  };
+
   const handleCardClick = (reelIdx: number, itemIdx: number) => {
     if (!hookArmed || hookUsedThisSpin || hookFlying || !isSpinning || isRevealed) return;
     if (reelIdx >= openCount) return;
@@ -1147,14 +1166,18 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                   return (
                     <div
                       key={`${skin.id}_${idx}`}
-                      onClick={() => handleCardClick(reelIdx, idx)}
+                      onPointerDown={(e) => handleCardPointerDown(reelIdx, idx, e)}
+                      onPointerUp={handleCardPointerUp}
+                      onPointerCancel={() => {
+                        tapDownRef.current = null;
+                      }}
                       className={`relative rounded-2xl bg-[#11121a] border shrink-0 flex flex-col items-center justify-between p-3 select-none overflow-hidden transition-all ${
                         isHookPicked
                           ? 'border-orange-400 shadow-[0_0_22px_rgba(249,115,22,0.6)]'
                           : showAsSpecial
                           ? 'border-yellow-400/50 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
                           : hookArmed
-                          ? 'border-white/10 cursor-pointer hover:border-orange-400/80 hover:shadow-[0_0_18px_rgba(249,115,22,0.45)]'
+                          ? 'border-white/10 cursor-pointer touch-manipulation hover:border-orange-400/80 hover:shadow-[0_0_18px_rgba(249,115,22,0.45)]'
                           : 'border-white/10'
                       }`}
                       style={{

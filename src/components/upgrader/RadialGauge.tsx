@@ -724,17 +724,22 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         const kind = interruptKindRef.current;
         interruptKindRef.current = null;
         if (kind === 'hook') {
-          // Крюк зацепился: останавливаем стрелку и ПЛАВНО доводим её
-          // ТОЧНО в точку крюка (крюк притягивает победу к себе)
+          // Крюк зацепился: останавливаем стрелку и доводим её ТОЧНО в точку
+          // крюка КРАТЧАЙШИМ путём (вперёд или назад — что ближе) со скоростью
+          // пропорциональной дистанции.
           await needleControls.stop();
           await new Promise<void>((r) => setTimeout(r, 350));
           const normHook = ((hookAngleRef.current % 360) + 360) % 360;
           const cur = needleAngleRef.current;
-          const hookTarget = Math.ceil(cur / 360) * 360 + normHook;
-          sound.startSpinWhoosh(1.6);
+          const curNorm = ((cur % 360) + 360) % 360;
+          let delta = (normHook - curNorm + 360) % 360;
+          if (delta > 180) delta -= 360; // назад короче — едем назад
+          const hookTarget = cur + delta;
+          const glideDur = Math.max(0.45, Math.min(1.7, 0.45 + (Math.abs(delta) / 360) * 1.35));
+          sound.startSpinWhoosh(glideDur);
           await needleControls.start({
             rotate: hookTarget,
-            transition: { duration: 1.6, ease: [0.3, 0.6, 0.3, 1] },
+            transition: { duration: glideDur, ease: [0.3, 0.6, 0.3, 1] },
           });
           sound.stopSpinWhoosh();
           setHookFlying(false);
