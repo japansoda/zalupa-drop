@@ -798,10 +798,14 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           const glides = [];
           for (let i = 0; i < spinOpenCount; i++) {
             const tx = -((i === reelIdx ? itemIdx : WIN_INDEX) * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook);
+            // Крюк тащит только свой барабан; остальные докручиваются как шли
+            const hooked = i === reelIdx;
             glides.push(
               ctrls[i].start({
                 x: tx,
-                transition: { duration: glideDur, ease: [0.2, 0.9, 0.25, 1] },
+                transition: hooked
+                  ? { duration: glideDur, ease: [0.2, 0.9, 0.25, 1] }
+                  : { duration: glideDur, ease: [0.12, 0.8, 0.15, 1] },
               })
             );
           }
@@ -1221,8 +1225,8 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                         transform: 'translateZ(0)',
                       }}
                     >
-                      <div className="w-full flex justify-between items-center z-10">
-                        <div className="flex items-center gap-1">
+                      <div className="w-full flex justify-between items-center gap-1 z-10">
+                        <div className="flex items-center gap-1 min-w-0">
                           {!showAsSpecial && skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
                           {!showAsSpecial && <WearBadge skin={skin} size="xs" />}
                           {showAsSpecial && (

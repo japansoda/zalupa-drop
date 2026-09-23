@@ -64,7 +64,7 @@ export const WearBadge: React.FC<WearBadgeProps> = ({
   if (showFullLabel) {
     return (
       <span
-        className="inline-flex items-center font-mono font-black text-[10px] px-2.5 py-0.5 rounded-full text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)] uppercase tracking-wider shadow-sm select-none shrink-0"
+        className="inline-flex items-center font-mono font-black text-[10px] px-2.5 py-0.5 rounded-full text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)] uppercase tracking-wider shadow-sm select-none truncate max-w-full min-w-0"
         style={{
           backgroundColor: wearConfig.color,
           boxShadow: `0 0 10px ${wearConfig.color}40`,
