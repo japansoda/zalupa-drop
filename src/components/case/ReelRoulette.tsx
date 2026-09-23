@@ -13,7 +13,7 @@ import { RarityBadge } from '../ui/RarityBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { useGameStore } from '../../store/useGameStore';
 import { Zap, Layers, FlaskConical, Anchor } from 'lucide-react';
-import { createRope, stepRope, ropePath, resetRope, RopePoint } from '../../lib/ropeChain';
+import { createRope, stepRope, stepFree, ropePath, resetRope, RopePoint } from '../../lib/ropeChain';
 import { useLanguage } from '../../lib/i18n';
 import { isOfficialCase, isKnifeOrGlove, rollSpecialKnifeDrop } from '../../lib/caseSpecials';
 import { isStatTrakableItem } from '../../lib/steam';
@@ -99,7 +99,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   const ropePtsRef = useRef<RopePoint[]>(createRope(12));
   const ropeBRef = useRef({ x: 0, y: 0 });
   const ropeRafRef = useRef(0);
-  const ropeModeRef = useRef<'cursor' | 'card' | 'retract' | 'off'>('off');
+  const ropeModeRef = useRef<'cursor' | 'card' | 'snapped' | 'off'>('off');
+  // Разорванная цепь: первая половина болтается на стрелке, вторая лежит на карте
+  const snapRef = useRef<{ first: RopePoint[]; second: RopePoint[]; life: number } | null>(null);
   const ropeReelRef = useRef(0);
   const ropeCursorRef = useRef({ x: 0, y: 0 });
   const ropeDimsRef = useRef({ w: 800, h: 220 });
@@ -158,16 +160,50 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       bx = itemIdx * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 + liveXRef.current[reelIdx];
       by = h / 2;
       ropeBRef.current = { x: bx, y: by };
-    } else if (ropeModeRef.current === 'retract') {
-      bx = ropeBRef.current.x + (ax - ropeBRef.current.x) * 0.24;
-      by = ropeBRef.current.y + (ay - ropeBRef.current.y) * 0.24;
-      ropeBRef.current = { x: bx, y: by };
-      if (Math.hypot(bx - ax, by - ay) < 10) {
+    } else if (ropeModeRef.current === 'snapped') {
+      // Разрыв пополам: кусок на стрелке болтается и падает, кусок на карте лежит.
+      // Обе половины быстро и плавно гаснут.
+      const snap = snapRef.current;
+      if (!snap) {
         ropeModeRef.current = 'off';
         setRopeOn(false);
         cancelAnimationFrame(ropeRafRef.current);
         return;
       }
+      snap.life -= 0.06;
+      stepFree(snap.first, ax, ay);
+      const d1 = ropePath(snap.first);
+      const d2 = ropePath(snap.second);
+      const end2 = snap.second[snap.second.length - 1];
+      const prev2 = snap.second[snap.second.length - 2] || end2;
+      const hang2 = (Math.atan2(end2.y - prev2.y, end2.x - prev2.x) * 180) / Math.PI + 90;
+      for (let i = 0; i < 3; i++) {
+        const wrap = ropeWrapRefs.current[i];
+        const base = ropeBaseRefs.current[i];
+        const link = ropeLinkRefs.current[i];
+        const hook = ropeHookRefs.current[i];
+        const show = i === ropeReelRef.current;
+        if (wrap) {
+          wrap.style.display = show ? '' : 'none';
+          if (show) wrap.style.opacity = Math.max(0, snap.life).toFixed(2);
+        }
+        if (!show) continue;
+        if (base) base.setAttribute('d', d1);
+        if (link) {
+          link.setAttribute('d', d2);
+          link.setAttribute('stroke-dasharray', 'none');
+        }
+        if (hook) hook.setAttribute('transform', `translate(${end2.x.toFixed(1)} ${end2.y.toFixed(1)}) rotate(${hang2.toFixed(1)})`);
+      }
+      if (snap.life <= 0) {
+        ropeModeRef.current = 'off';
+        snapRef.current = null;
+        setRopeOn(false);
+        cancelAnimationFrame(ropeRafRef.current);
+        return;
+      }
+      ropeRafRef.current = requestAnimationFrame(ropeLoop);
+      return;
     }
     stepRope(ropePtsRef.current, ax, ay, bx, by);
     const d = ropePath(ropePtsRef.current);
@@ -181,7 +217,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       const link = ropeLinkRefs.current[i];
       const hook = ropeHookRefs.current[i];
       const show = i === ropeReelRef.current;
-      if (wrap) wrap.style.display = show ? '' : 'none';
+      if (wrap) {
+        wrap.style.display = show ? '' : 'none';
+        if (show) wrap.style.opacity = '1';
+      }
       if (!show) continue;
       if (base) base.setAttribute('d', d);
       if (link) link.setAttribute('d', d);
@@ -774,10 +813,22 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           finishSpin(winners);
           break;
         } else {
-          // СОРВАЛАСЬ: цепь втягивается, лента УСКОРЯЕТСЯ к исходной цели
+          // СОРВАЛАСЬ: цепь РВЁТСЯ пополам с искрами — кусок остаётся
+          // на стрелке, кусок на карте, оба быстро и плавно исчезают.
+          // Лента стартует с места, быстро разгоняется и мягко садится в цель.
           await new Promise<void>((r) => setTimeout(r, 250));
           setHookFlying(false);
-          ropeModeRef.current = 'retract';
+          {
+            const pts = ropePtsRef.current;
+            const mid = Math.floor(pts.length / 2);
+            const first = pts.slice(0, mid + 1).map((p) => ({ ...p }));
+            const second = pts.slice(mid).map((p) => ({ ...p }));
+            snapRef.current = { first, second, life: 1 };
+            const mp = pts[mid];
+            setHookSparks({ reelIdx: ropeReelRef.current, x: mp.x, y: mp.y, key: Date.now() });
+            setTimeout(() => setHookSparks(null), 750);
+          }
+          ropeModeRef.current = 'snapped';
           setHookResult('slipped');
           sound.playHookSlip();
           // Старт с места: быстрый разгон и мягкая посадка точно в цель.

@@ -14,7 +14,7 @@ import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
-import { createRope, stepRope, ropePath, resetRope, RopePoint } from '../../lib/ropeChain';
+import { createRope, stepRope, stepFree, ropePath, resetRope, RopePoint } from '../../lib/ropeChain';
 
 export const matchesCatalogType = (skin: SkinEntity, type: string): boolean => {
   if (type === 'all') return true;
@@ -466,7 +466,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const [ropeOn, setRopeOn] = useState(false);
   const ropePtsRef = useRef<RopePoint[]>(createRope(12));
   const ropeRafRef = useRef(0);
-  const ropeModeRef = useRef<'cursor' | 'point' | 'retract' | 'off'>('off');
+  const ropeModeRef = useRef<'cursor' | 'point' | 'snapped' | 'off'>('off');
+  // Разорванная цепь: кусок на стрелке + кусок на крюке
+  const snapRef = useRef<{ first: RopePoint[]; second: RopePoint[]; life: number } | null>(null);
   const ropeCursorRef = useRef({ x: 120, y: 40 });
   const ropeBaseRef = useRef<SVGPathElement | null>(null);
   const ropeLinkRef = useRef<SVGPathElement | null>(null);
@@ -523,7 +525,6 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
   // Один rAF-цикл живой цепи поверх всего (прямая запись в DOM, без ре-рендеров)
   const ropeBRef = useRef({ x: 120, y: 40 });
-  const ropeRetractAtRef = useRef(0);
   const ropeLoopUpg = () => {
     if (ropeModeRef.current === 'off') return;
     const tip = needleTip();
@@ -538,17 +539,46 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       bx = 120 + gaugeR * Math.cos(a);
       by = 120 + gaugeR * Math.sin(a);
       ropeBRef.current = { x: bx, y: by };
-    } else {
-      // retract: конец втягивается к стрелке; стрелка движется, поэтому гасим по времени
-      bx = ropeBRef.current.x + (tip.x - ropeBRef.current.x) * 0.24;
-      by = ropeBRef.current.y + (tip.y - ropeBRef.current.y) * 0.24;
-      ropeBRef.current = { x: bx, y: by };
-      if (Date.now() - ropeRetractAtRef.current > 450) {
+    } else if (ropeModeRef.current === 'snapped') {
+      // Разрыв пополам: кусок на стрелке болтается за ней, кусок на крюке лежит.
+      // Обе половины быстро и плавно гаснут.
+      const snap = snapRef.current;
+      if (!snap) {
         ropeModeRef.current = 'off';
         setRopeOn(false);
         cancelAnimationFrame(ropeRafRef.current);
         return;
       }
+      snap.life -= 0.06;
+      stepFree(snap.first, tip.x, tip.y);
+      const wrapOpacity = Math.max(0, snap.life).toFixed(2);
+      const d1 = ropePath(snap.first);
+      const d2 = ropePath(snap.second);
+      const end2 = snap.second[snap.second.length - 1];
+      const prev2 = snap.second[snap.second.length - 2] || end2;
+      const hang2 = (Math.atan2(end2.y - prev2.y, end2.x - prev2.x) * 180) / Math.PI + 90;
+      if (ropeBaseRef.current) {
+        ropeBaseRef.current.setAttribute('d', d1);
+        ropeBaseRef.current.setAttribute('opacity', wrapOpacity);
+      }
+      if (ropeLinkRef.current) {
+        ropeLinkRef.current.setAttribute('d', d2);
+        ropeLinkRef.current.setAttribute('stroke-dasharray', 'none');
+        ropeLinkRef.current.setAttribute('opacity', wrapOpacity);
+      }
+      if (ropeHookRef.current) {
+        ropeHookRef.current.setAttribute('transform', `translate(${end2.x.toFixed(1)} ${end2.y.toFixed(1)}) rotate(${hang2.toFixed(1)})`);
+        ropeHookRef.current.setAttribute('opacity', wrapOpacity);
+      }
+      if (snap.life <= 0) {
+        ropeModeRef.current = 'off';
+        snapRef.current = null;
+        setRopeOn(false);
+        cancelAnimationFrame(ropeRafRef.current);
+        return;
+      }
+      ropeRafRef.current = requestAnimationFrame(ropeLoopUpg);
+      return;
     }
     stepRope(ropePtsRef.current, tip.x, tip.y, bx, by);
     const d = ropePath(ropePtsRef.current);
@@ -556,9 +586,19 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     const tail = pts[pts.length - 1];
     const prev = pts[pts.length - 2] || tail;
     const hang = (Math.atan2(tail.y - prev.y, tail.x - prev.x) * 180) / Math.PI + 90;
-    if (ropeBaseRef.current) ropeBaseRef.current.setAttribute('d', d);
-    if (ropeLinkRef.current) ropeLinkRef.current.setAttribute('d', d);
-    if (ropeHookRef.current) ropeHookRef.current.setAttribute('transform', `translate(${tail.x.toFixed(1)} ${tail.y.toFixed(1)}) rotate(${hang.toFixed(1)})`);
+    if (ropeBaseRef.current) {
+      ropeBaseRef.current.setAttribute('d', d);
+      ropeBaseRef.current.setAttribute('opacity', '0.9');
+    }
+    if (ropeLinkRef.current) {
+      ropeLinkRef.current.setAttribute('d', d);
+      ropeLinkRef.current.setAttribute('stroke-dasharray', '7 5');
+      ropeLinkRef.current.setAttribute('opacity', '0.95');
+    }
+    if (ropeHookRef.current) {
+      ropeHookRef.current.setAttribute('transform', `translate(${tail.x.toFixed(1)} ${tail.y.toFixed(1)}) rotate(${hang.toFixed(1)})`);
+      ropeHookRef.current.setAttribute('opacity', '1');
+    }
     ropeRafRef.current = requestAnimationFrame(ropeLoopUpg);
   };
   const startRopeUpg = () => {
@@ -618,11 +658,21 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         }
       }, 550);
     } else {
-      // Срыв: цепь втягивается к стрелке, спин продолжается нетронутым
+      // Срыв: цепь РВЁТСЯ пополам с искрами — кусок на стрелке, кусок на крюке,
+      // оба быстро и плавно исчезают. Спин продолжается нетронутым.
       setTimeout(() => {
         setHookFlying(false);
-        ropeRetractAtRef.current = Date.now();
-        ropeModeRef.current = 'retract';
+        const pts = ropePtsRef.current;
+        const mid = Math.floor(pts.length / 2);
+        snapRef.current = {
+          first: pts.slice(0, mid + 1).map((p) => ({ ...p })),
+          second: pts.slice(mid).map((p) => ({ ...p })),
+          life: 1,
+        };
+        const mp = pts[mid];
+        setHookSparks({ x: mp.x, y: mp.y, key: Date.now() });
+        setTimeout(() => setHookSparks(null), 750);
+        ropeModeRef.current = 'snapped';
         setHookResult('slipped');
         sound.playHookSlip();
         setTimeout(() => setHookResult(null), 1400);

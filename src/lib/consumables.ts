@@ -96,17 +96,17 @@ export function rollCaseBonusDrop(): {
   }
 
   const roll = Math.random();
-  if (roll < 0.22) {
-    // 22% of bonus drops -> Luck Potion
+  if (roll < 0.24) {
+    // 24% of bonus drops -> Luck Potion
     return { potion: true };
-  } else if (roll < 0.52) {
-    // 30% of bonus drops -> Save Token (Guardian Aegis)
+  } else if (roll < 0.58) {
+    // 34% of bonus drops -> Save Token (Guardian Aegis)
     return { saveToken: true };
-  } else if (roll < 0.85) {
-    // 33% of bonus drops -> Zeus x27
+  } else if (roll < 0.92) {
+    // 34% of bonus drops -> Zeus x27
     return { zeus: true };
   } else {
-    // 15% of bonus drops -> Grappling Hook
+    // 8% of bonus drops -> Grappling Hook (самый редкий расходник)
     return { hook: true };
   }
 }
@@ -128,13 +128,14 @@ export function rollConsolationPrize(lostAmount: number): {
   if (Math.random() > chance) return null;
 
   const roll = Math.random();
-  if (roll < 0.25) {
+  if (roll < 0.27) {
     return { potion: true };
-  } else if (roll < 0.55) {
+  } else if (roll < 0.60) {
     return { saveToken: true };
-  } else if (roll < 0.85) {
+  } else if (roll < 0.92) {
     return { zeus: true };
   } else {
+    // 8% -> Grappling Hook (самый редкий расходник)
     return { hook: true };
   }
 }

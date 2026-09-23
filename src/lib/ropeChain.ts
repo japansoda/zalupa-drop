@@ -99,6 +99,50 @@ export function ropePath(pts: RopePoint[]): string {
   return d;
 }
 
+/**
+ * Free-falling half: first point pinned at (ax, ay), the rest dangle
+ * under stronger gravity. Used for the snapped chain end on the arrow side.
+ */
+export function stepFree(pts: RopePoint[], ax: number, ay: number, gravity = 1.4): void {
+  const n = pts.length;
+  if (n < 2) return;
+  for (let i = 1; i < n; i++) {
+    const p = pts[i];
+    const vx = (p.x - p.px) * 0.985;
+    const vy = (p.y - p.py) * 0.985;
+    p.px = p.x;
+    p.py = p.y;
+    p.x += vx;
+    p.y += vy + gravity;
+  }
+  pts[0].x = ax;
+  pts[0].y = ay;
+  const dist = Math.hypot(pts[n - 1].x - ax, pts[n - 1].y - ay);
+  const segLen = Math.max(1, dist / (n - 1));
+  for (let k = 0; k < 2; k++) {
+    pts[0].x = ax;
+    pts[0].y = ay;
+    for (let i = 0; i < n - 1; i++) {
+      const a = pts[i];
+      const b = pts[i + 1];
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const d = Math.hypot(dx, dy) || 0.0001;
+      const diff = (d - segLen) / d;
+      if (i === 0) {
+        b.x -= dx * diff;
+        b.y -= dy * diff;
+      } else {
+        const f = diff * 0.5;
+        a.x += dx * f;
+        a.y += dy * f;
+        b.x -= dx * f;
+        b.y -= dy * f;
+      }
+    }
+  }
+}
+
 /** Snap all points onto the A->B segment (clean throw / retract start). */
 export function resetRope(pts: RopePoint[], ax: number, ay: number, bx: number, by: number): void {
   const n = pts.length;
