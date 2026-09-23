@@ -459,6 +459,112 @@ class SoundController {
   }
 
   /**
+   * Grappling hook throw: metallic chain swish (noise sweep up + steel whistle)
+   */
+  public playHookThrow() {
+    if (!this.enabled) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    const now = ctx.currentTime;
+    // 1. Chain links rattling — bandpass noise sweeping up
+    const noise = ctx.createBufferSource();
+    noise.buffer = this.getNoiseBuffer(ctx);
+    noise.loop = true;
+    const bp = ctx.createBiquadFilter();
+    bp.type = 'bandpass';
+    bp.Q.setValueAtTime(3.0, now);
+    bp.frequency.setValueAtTime(900, now);
+    bp.frequency.exponentialRampToValueAtTime(3600, now + 0.28);
+    const ng = ctx.createGain();
+    ng.gain.setValueAtTime(0.001, now);
+    ng.gain.linearRampToValueAtTime(0.16, now + 0.06);
+    ng.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
+    noise.connect(bp);
+    bp.connect(ng);
+    ng.connect(ctx.destination);
+    noise.start(now);
+    noise.stop(now + 0.35);
+
+    // 2. Steel whistle — sine gliding up as the hook flies
+    const osc = ctx.createOscillator();
+    const og = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(420, now);
+    osc.frequency.exponentialRampToValueAtTime(980, now + 0.28);
+    og.gain.setValueAtTime(0.001, now);
+    og.gain.linearRampToValueAtTime(0.07, now + 0.08);
+    og.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+    osc.connect(og);
+    og.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.32);
+  }
+
+  /**
+   * Hook latch: heavy metal clank (resonant partials + click transient)
+   */
+  public playHookLatch() {
+    if (!this.enabled) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    const now = ctx.currentTime;
+    // Metallic partials
+    [612, 917, 1440].forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, now);
+      const peak = idx === 0 ? 0.16 : 0.09;
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.linearRampToValueAtTime(peak, now + 0.008);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35 - idx * 0.06);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.4);
+    });
+    // Click transient
+    const noise = ctx.createBufferSource();
+    noise.buffer = this.getNoiseBuffer(ctx);
+    const hp = ctx.createBiquadFilter();
+    hp.type = 'highpass';
+    hp.frequency.setValueAtTime(2500, now);
+    const ng = ctx.createGain();
+    ng.gain.setValueAtTime(0.2, now);
+    ng.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+    noise.connect(hp);
+    hp.connect(ng);
+    ng.connect(ctx.destination);
+    noise.start(now);
+    noise.stop(now + 0.1);
+  }
+
+  /**
+   * Hook slip: chain slipping off — descending slide with soft rattle
+   */
+  public playHookSlip() {
+    if (!this.enabled) return;
+    const ctx = this.getContext();
+    if (!ctx) return;
+
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(540, now);
+    osc.frequency.exponentialRampToValueAtTime(170, now + 0.42);
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.linearRampToValueAtTime(0.1, now + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.47);
+  }
+
+  /**
    * High-voltage lightning discharge / taser spark sound for Zeus x27
    */
   public playZeusShock() {

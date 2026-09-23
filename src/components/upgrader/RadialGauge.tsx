@@ -14,6 +14,7 @@ import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
+import { createRope, stepRope, ropePath, resetRope, RopePoint } from '../../lib/ropeChain';
 
 export const matchesCatalogType = (skin: SkinEntity, type: string): boolean => {
   if (type === 'all') return true;
@@ -455,10 +456,21 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   // Grappling Hook state (объявлен раньше Zeus из-за взаимных гардов)
   const [hookArmed, setHookArmed] = useState(false);
   const [hookUsedThisSpin, setHookUsedThisSpin] = useState(false);
-  const [hookChain, setHookChain] = useState<{ angleDeg: number } | null>(null);
   const [hookFlying, setHookFlying] = useState(false);
   const [hookResult, setHookResult] = useState<'hooked' | 'slipped' | null>(null);
+  const [hookSparks, setHookSparks] = useState<{ x: number; y: number; key: number } | null>(null);
   const interruptKindRef = useRef<'zeus' | 'hook' | null>(null);
+  const hookAngleRef = useRef(0);
+  const needleAngleRef = useRef(0);
+  // Живая железная цепь поверх всего: rAF пишет d напрямую в DOM
+  const [ropeOn, setRopeOn] = useState(false);
+  const ropePtsRef = useRef<RopePoint[]>(createRope(12));
+  const ropeRafRef = useRef(0);
+  const ropeModeRef = useRef<'cursor' | 'point' | 'retract' | 'off'>('off');
+  const ropeCursorRef = useRef({ x: 120, y: 40 });
+  const ropeBaseRef = useRef<SVGPathElement | null>(null);
+  const ropeLinkRef = useRef<SVGPathElement | null>(null);
+  const ropeHookRef = useRef<SVGGElement | null>(null);
 
   // Zeus: можно прожать ТОЛЬКО когда спин уже идёт и ещё не завершился.
   // Просто прерывает текущий спин и запускает перекрут (+5% к шансу).
@@ -488,11 +500,85 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     if (hookArmed) {
       sound.playClick();
       setHookArmed(false);
+      stopRopeUpg();
       return;
     }
     if (!canPressHook) return;
     sound.playClick();
+    const tip = needleTip();
+    resetRope(ropePtsRef.current, tip.x, tip.y, 120, 50);
+    ropeBRef.current = { x: 120, y: 50 };
+    ropeCursorRef.current = { x: 120, y: 50 };
+    ropeModeRef.current = 'cursor';
     setHookArmed(true);
+    setRopeOn(true);
+    startRopeUpg();
+  };
+
+  // Кончик стрелки в координатах viewBox (цепь идёт ОТ стрелки)
+  const needleTip = () => {
+    const t = (needleAngleRef.current * Math.PI) / 180;
+    return { x: 120 + 100 * Math.cos(t), y: 120 + 100 * Math.sin(t) };
+  };
+
+  // Один rAF-цикл живой цепи поверх всего (прямая запись в DOM, без ре-рендеров)
+  const ropeBRef = useRef({ x: 120, y: 40 });
+  const ropeRetractAtRef = useRef(0);
+  const ropeLoopUpg = () => {
+    if (ropeModeRef.current === 'off') return;
+    const tip = needleTip();
+    let bx = ropeBRef.current.x;
+    let by = ropeBRef.current.y;
+    if (ropeModeRef.current === 'cursor') {
+      bx = ropeCursorRef.current.x;
+      by = ropeCursorRef.current.y;
+      ropeBRef.current = { x: bx, y: by };
+    } else if (ropeModeRef.current === 'point') {
+      const a = (hookAngleRef.current * Math.PI) / 180;
+      bx = 120 + gaugeR * Math.cos(a);
+      by = 120 + gaugeR * Math.sin(a);
+      ropeBRef.current = { x: bx, y: by };
+    } else {
+      // retract: конец втягивается к стрелке; стрелка движется, поэтому гасим по времени
+      bx = ropeBRef.current.x + (tip.x - ropeBRef.current.x) * 0.24;
+      by = ropeBRef.current.y + (tip.y - ropeBRef.current.y) * 0.24;
+      ropeBRef.current = { x: bx, y: by };
+      if (Date.now() - ropeRetractAtRef.current > 450) {
+        ropeModeRef.current = 'off';
+        setRopeOn(false);
+        cancelAnimationFrame(ropeRafRef.current);
+        return;
+      }
+    }
+    stepRope(ropePtsRef.current, tip.x, tip.y, bx, by);
+    const d = ropePath(ropePtsRef.current);
+    const pts = ropePtsRef.current;
+    const tail = pts[pts.length - 1];
+    const prev = pts[pts.length - 2] || tail;
+    const hang = (Math.atan2(tail.y - prev.y, tail.x - prev.x) * 180) / Math.PI + 90;
+    if (ropeBaseRef.current) ropeBaseRef.current.setAttribute('d', d);
+    if (ropeLinkRef.current) ropeLinkRef.current.setAttribute('d', d);
+    if (ropeHookRef.current) ropeHookRef.current.setAttribute('transform', `translate(${tail.x.toFixed(1)} ${tail.y.toFixed(1)}) rotate(${hang.toFixed(1)})`);
+    ropeRafRef.current = requestAnimationFrame(ropeLoopUpg);
+  };
+  const startRopeUpg = () => {
+    cancelAnimationFrame(ropeRafRef.current);
+    ropeRafRef.current = requestAnimationFrame(ropeLoopUpg);
+  };
+  const stopRopeUpg = () => {
+    ropeModeRef.current = 'off';
+    cancelAnimationFrame(ropeRafRef.current);
+    setRopeOn(false);
+  };
+
+  // Цепь следует за курсором пока крюк вооружён (мини-физика верёвки)
+  const handleGaugeMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!hookArmed || hookFlying) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    ropeCursorRef.current = {
+      x: ((e.clientX - rect.left) / rect.width) * 240,
+      y: ((e.clientY - rect.top) / rect.height) * 240,
+    };
   };
 
   const handleArcClick = (e: React.MouseEvent<SVGSVGElement>) => {
@@ -511,13 +597,19 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     useHook();
     setHookUsedThisSpin(true);
     setHookArmed(false);
-    setHookChain({ angleDeg });
+    hookAngleRef.current = angleDeg;
+    ropeModeRef.current = 'point';
     setHookFlying(true);
-    sound.playClick();
+    sound.playHookThrow();
     const hooked = Math.random() < 0.5;
     if (hooked) {
-      // Даём цепи долететь, затем прерываем спин и доводим стрелку в победу
+      // Даём цепи долететь (стрелка при этом ещё крутится, цепь тянется за ней),
+      // затем прерываем спин и доводим стрелку ТОЧНО в точку крюка
       setTimeout(() => {
+        const a = (angleDeg * Math.PI) / 180;
+        setHookSparks({ x: 120 + gaugeR * Math.cos(a), y: 120 + gaugeR * Math.sin(a), key: Date.now() });
+        sound.playHookLatch();
+        setTimeout(() => setHookSparks(null), 750);
         setHookResult('hooked');
         interruptKindRef.current = 'hook';
         if (spinResolveRef.current) {
@@ -526,16 +618,24 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         }
       }, 550);
     } else {
-      // Срыв: цепь отлетает, спин продолжается нетронутым
+      // Срыв: цепь втягивается к стрелке, спин продолжается нетронутым
       setTimeout(() => {
         setHookFlying(false);
-        setHookChain(null);
+        ropeRetractAtRef.current = Date.now();
+        ropeModeRef.current = 'retract';
         setHookResult('slipped');
-        sound.playTick(0.6);
+        sound.playHookSlip();
         setTimeout(() => setHookResult(null), 1400);
       }, 750);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      ropeModeRef.current = 'off';
+      cancelAnimationFrame(ropeRafRef.current);
+    };
+  }, []);
 
   const handleToggleProtect = (instanceId: string) => {
     if (isUpgrading) return;
@@ -575,9 +675,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     setZeusUsedThisSpin(false);
     setHookArmed(false);
     setHookUsedThisSpin(false);
-    setHookChain(null);
     setHookFlying(false);
     setHookResult(null);
+    setHookSparks(null);
+    stopRopeUpg();
     interruptKindRef.current = null;
 
     // Save whether potion was actually used to boost this roll
@@ -623,18 +724,21 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         const kind = interruptKindRef.current;
         interruptKindRef.current = null;
         if (kind === 'hook') {
-          // Крюк зацепился: останавливаем стрелку и ПЛАВНО доводим её в сектор победы
+          // Крюк зацепился: останавливаем стрелку и ПЛАВНО доводим её
+          // ТОЧНО в точку крюка (крюк притягивает победу к себе)
           await needleControls.stop();
           await new Promise<void>((r) => setTimeout(r, 350));
-          const winAngle = 90 - halfSpan + Math.random() * span;
+          const normHook = ((hookAngleRef.current % 360) + 360) % 360;
+          const cur = needleAngleRef.current;
+          const hookTarget = Math.ceil(cur / 360) * 360 + normHook;
           sound.startSpinWhoosh(1.6);
           await needleControls.start({
-            rotate: 360 * 5 + winAngle,
-            transition: { duration: 1.6, ease: [0.25, 0.7, 0.3, 1] },
+            rotate: hookTarget,
+            transition: { duration: 1.6, ease: [0.3, 0.6, 0.3, 1] },
           });
           sound.stopSpinWhoosh();
           setHookFlying(false);
-          setHookChain(null);
+          stopRopeUpg();
           spinResolveRef.current = null;
           return true;
         }
@@ -684,8 +788,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       setZeusStriking(false);
       setHookArmed(false);
       setHookFlying(false);
-      setHookChain(null);
-      setTimeout(() => setHookResult(null), 1500);
+      stopRopeUpg();
+      setTimeout(() => {
+        setHookResult(null);
+        setHookSparks(null);
+      }, 1500);
       setProtectedInstanceId(null);
 
       // Emit real drop to live drops ticker (strictly >= 25,000 DC)
@@ -738,8 +845,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       setZeusUsedThisSpin(false);
       setHookArmed(false);
       setHookFlying(false);
-      setHookChain(null);
-      setTimeout(() => setHookResult(null), 1500);
+      stopRopeUpg();
+      setTimeout(() => {
+        setHookResult(null);
+        setHookSparks(null);
+      }, 1500);
       setProtectedInstanceId(null);
 
       // ── CONSOLATION PRIZE (Кешбэк / Утешительный приз) ──
@@ -1426,7 +1536,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           {/* 2. CENTER: CIRCULAR DRUM GAUGE WITH SYMMETRICAL POTION EXPANSION & BUBBLES */}
           <div className="lg:col-span-4 flex flex-col items-center justify-center relative">
             {/* Circular Speedometer Gauge */}
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center">
+            <div
+              className="relative w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center"
+              onMouseMove={handleGaugeMouseMove}
+            >
               {/* Outer Metallic Ring */}
               <div className="absolute inset-0 rounded-full bg-[#12131b] border-8 border-[#1c1d28] shadow-[inset_0_0_20px_rgba(0,0,0,0.8),0_0_30px_rgba(0,0,0,0.5)]" />
 
@@ -1501,12 +1614,14 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       .zeus-arrow-charged {
                         animation: zeusArrowCharge 0.5s ease-in-out infinite;
                       }
-                      @keyframes hookChainDraw {
-                        from { stroke-dashoffset: 130; }
-                        to { stroke-dashoffset: 0; }
+                      @keyframes hookSparkFly {
+                        0% { transform: translate(0, 0) scale(1); opacity: 1; }
+                        100% { transform: translate(var(--dx), var(--dy)) scale(0.25); opacity: 0; }
                       }
-                      .hook-chain-draw {
-                        animation: hookChainDraw 0.5s ease-out forwards;
+                      .hook-spark-burst {
+                        animation: hookSparkFly 0.55s ease-out forwards;
+                        box-shadow: 0 0 8px rgba(253, 186, 116, 0.9);
+                        will-change: transform, opacity;
                       }
                     `}
                   </style>
@@ -1731,57 +1846,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   />
                 )}
 
-                {/* Цепь крюка: от центра к точке зацепа + крюк-кошка */}
-                {hookChain && (() => {
-                  const rad = (hookChain.angleDeg * Math.PI) / 180;
-                  const px = 120 + gaugeR * Math.cos(rad);
-                  const py = 120 + gaugeR * Math.sin(rad);
-                  const d = `M 120 120 L ${px.toFixed(1)} ${py.toFixed(1)}`;
-                  return (
-                    <g className="pointer-events-none">
-                      {/* Тень цепи */}
-                      <path
-                        d={d}
-                        stroke="#7c2d12"
-                        strokeWidth="5"
-                        fill="none"
-                        strokeLinecap="round"
-                        opacity="0.6"
-                      />
-                      {/* Звенья цепи (прорисовка вылетом) */}
-                      <path
-                        d={d}
-                        stroke="#fdba74"
-                        strokeWidth="2.6"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeDasharray="130"
-                        className="hook-chain-draw"
-                      />
-                      <path
-                        d={d}
-                        stroke="#fff7ed"
-                        strokeWidth="1.2"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeDasharray="4 4"
-                        className="zeus-bolt-flow"
-                        opacity="0.9"
-                      />
-                      {/* Крюк-кошка на конце */}
-                      <g
-                        transform={`translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(${(hookChain.angleDeg + 90).toFixed(1)})`}
-                        className="filter drop-shadow-[0_0_8px_#fb923c]"
-                      >
-                        <circle cx="0" cy="-9" r="2.4" fill="none" stroke="#fdba74" strokeWidth="2.2" />
-                        <path d="M 0 -7 L 0 5" stroke="#fdba74" strokeWidth="2.6" strokeLinecap="round" />
-                        <path d="M 0 5 C -0.5 1.5, -4.5 0.5, -7 -2.5 M -7 -2.5 L -4.8 -2.2 M -7 -2.5 L -6.6 0.2" fill="none" stroke="#fdba74" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M 0 5 C 0.5 1.5, 4.5 0.5, 7 -2.5 M 7 -2.5 L 4.8 -2.2 M 7 -2.5 L 6.6 0.2" fill="none" stroke="#fdba74" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M 0 5 L 0 9" stroke="#fff7ed" strokeWidth="1.4" strokeLinecap="round" />
-                      </g>
-                    </g>
-                  );
-                })()}
+
               </svg>
 
               {/* Zeus Lightning Bolt Strike Animation — тройной живой разряд */}
@@ -1832,6 +1897,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               {/* Rotating Pointer Needle with inward-pointing arrow + Zeus lightning */}
               <motion.div
                 animate={needleControls}
+                onUpdate={(latest) => {
+                  const v = (latest as { rotate?: unknown }).rotate;
+                  if (typeof v === 'number') needleAngleRef.current = v;
+                }}
                 className="absolute w-full h-full flex items-center justify-center pointer-events-none z-10"
                 style={{ transformOrigin: 'center center', willChange: 'transform' }}
               >
@@ -1992,6 +2061,82 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   </span>
                 )}
               </div>
+
+              {/* Живая железная цепь крюка — слой ВЫШЕ всего (стрелка, хаб, молнии) */}
+              {ropeOn && (
+                <div className="absolute inset-0 z-30 pointer-events-none">
+                  <svg viewBox="0 0 240 240" className="w-full h-full">
+                    <path
+                      ref={(el) => {
+                        ropeBaseRef.current = el;
+                      }}
+                      d=""
+                      stroke="#52525b"
+                      strokeWidth="5.5"
+                      fill="none"
+                      strokeLinecap="round"
+                      opacity="0.9"
+                    />
+                    <path
+                      ref={(el) => {
+                        ropeLinkRef.current = el;
+                      }}
+                      d=""
+                      stroke="#d4d4d8"
+                      strokeWidth="2"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeDasharray="7 5"
+                      opacity="0.95"
+                    />
+                    <g
+                      ref={(el) => {
+                        ropeHookRef.current = el;
+                      }}
+                      className="filter drop-shadow-[0_0_7px_rgba(161,161,170,0.9)]"
+                    >
+                      <circle cx="0" cy="-9" r="2.4" fill="none" stroke="#a1a1aa" strokeWidth="2.2" />
+                      <path d="M 0 -7 L 0 5" stroke="#a1a1aa" strokeWidth="2.6" strokeLinecap="round" />
+                      <path d="M 0 5 C -0.5 1.5, -4.5 0.5, -7 -2.5 M -7 -2.5 L -4.8 -2.2 M -7 -2.5 L -6.6 0.2" fill="none" stroke="#a1a1aa" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M 0 5 C 0.5 1.5, 4.5 0.5, 7 -2.5 M 7 -2.5 L 4.8 -2.2 M 7 -2.5 L 6.6 0.2" fill="none" stroke="#a1a1aa" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M 0 5 L 0 9" stroke="#e4e4e7" strokeWidth="1.4" strokeLinecap="round" />
+                    </g>
+                  </svg>
+                </div>
+              )}
+              {/* Вспышка искр в точке зацепа */}
+              {hookSparks && (
+                <div
+                  key={hookSparks.key}
+                  className="absolute z-30 pointer-events-none"
+                  style={{
+                    left: `${((hookSparks.x / 240) * 100).toFixed(2)}%`,
+                    top: `${((hookSparks.y / 240) * 100).toFixed(2)}%`,
+                    width: 0,
+                    height: 0,
+                  }}
+                >
+                  {Array.from({ length: 9 }).map((__, si) => {
+                    const ang = (si / 9) * Math.PI * 2 + 0.3;
+                    const dist = 24 + (si % 3) * 11;
+                    return (
+                      <span
+                        key={si}
+                        className="hook-spark-burst absolute rounded-full"
+                        style={{
+                          width: si % 3 === 0 ? 5 : 3,
+                          height: si % 3 === 0 ? 5 : 3,
+                          background: si % 2 === 0 ? '#fdba74' : '#fff7ed',
+                          // @ts-expect-error CSS vars
+                          '--dx': `${(Math.cos(ang) * dist).toFixed(1)}px`,
+                          '--dy': `${(Math.sin(ang) * dist).toFixed(1)}px`,
+                          animationDelay: `${(si * 0.02).toFixed(2)}s`,
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             {/* Action CTA Button: Upgrade заменяется кнопкой Zeus во время спина */}

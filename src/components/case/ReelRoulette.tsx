@@ -13,6 +13,7 @@ import { RarityBadge } from '../ui/RarityBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { useGameStore } from '../../store/useGameStore';
 import { Zap, Layers, FlaskConical, Anchor } from 'lucide-react';
+import { createRope, stepRope, ropePath, resetRope, RopePoint } from '../../lib/ropeChain';
 import { useLanguage } from '../../lib/i18n';
 import { isOfficialCase, isKnifeOrGlove, rollSpecialKnifeDrop } from '../../lib/caseSpecials';
 import { isStatTrakableItem } from '../../lib/steam';
@@ -91,8 +92,23 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   const [hookUsedThisSpin, setHookUsedThisSpin] = useState(false);
   const [hookFlying, setHookFlying] = useState(false);
   const [hookResult, setHookResult] = useState<'hooked' | 'slipped' | null>(null);
-  const [hookChain, setHookChain] = useState<{ reelIdx: number; x: number; y: number; w: number; h: number } | null>(null);
   const [hookPicked, setHookPicked] = useState<{ reelIdx: number; itemIdx: number } | null>(null);
+  const [hookSparks, setHookSparks] = useState<{ reelIdx: number; x: number; y: number; key: number } | null>(null);
+  // Живая цепь-верёвка: один rAF-цикл пишет d напрямую в SVG (без ре-рендеров)
+  const [ropeOn, setRopeOn] = useState(false);
+  const ropePtsRef = useRef<RopePoint[]>(createRope(12));
+  const ropeBRef = useRef({ x: 0, y: 0 });
+  const ropeRafRef = useRef(0);
+  const ropeModeRef = useRef<'cursor' | 'card' | 'retract' | 'off'>('off');
+  const ropeReelRef = useRef(0);
+  const ropeCursorRef = useRef({ x: 0, y: 0 });
+  const ropeDimsRef = useRef({ w: 800, h: 220 });
+  const ropeCardRef = useRef({ reelIdx: 0, itemIdx: 0 });
+  const ropeBaseRefs = useRef<Array<SVGPathElement | null>>([]);
+  const ropeLinkRefs = useRef<Array<SVGPathElement | null>>([]);
+  const ropeHookRefs = useRef<Array<SVGGElement | null>>([]);
+  const ropeWrapRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const velSamplesRef = useRef<Array<{ x: number; t: number }>>([]);
   const hookResolveRef = useRef<(() => void) | null>(null);
   const hookTargetRef = useRef<{ reelIdx: number; itemIdx: number } | null>(null);
   const frozenXRef = useRef<number[]>([0, 0, 0]);
@@ -116,19 +132,106 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     }
   };
 
+  // Чистим rAF-циклы при размонтировании
+  useEffect(() => {
+    return () => {
+      ropeModeRef.current = 'off';
+      cancelAnimationFrame(ropeRafRef.current);
+      rafCancelRef.current = true;
+      cancelAnimationFrame(rafIdRef.current);
+    };
+  }, []);
+
   const canPressHook =
     isSpinning && !isRevealed && !hookUsedThisSpin && !hookFlying && !zeusUsedThisSpin && !zeusStriking && hookCount > 0 && !fastOpen;
+
+  // Один rAF-цикл живой цепи: якорь A (стрелка сверху), цель B (курсор/карта).
+  // Пишет напрямую в DOM через ref — React не ре-рендерится каждый кадр.
+  const ropeLoop = () => {
+    if (ropeModeRef.current === 'off') return;
+    const { w, h } = ropeDimsRef.current;
+    const ax = w / 2;
+    const ay = 4;
+    let bx = ropeBRef.current.x;
+    let by = ropeBRef.current.y;
+    if (ropeModeRef.current === 'card') {
+      const { reelIdx, itemIdx } = ropeCardRef.current;
+      bx = itemIdx * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 + liveXRef.current[reelIdx];
+      by = h / 2;
+      ropeBRef.current = { x: bx, y: by };
+    } else if (ropeModeRef.current === 'retract') {
+      bx = ropeBRef.current.x + (ax - ropeBRef.current.x) * 0.24;
+      by = ropeBRef.current.y + (ay - ropeBRef.current.y) * 0.24;
+      ropeBRef.current = { x: bx, y: by };
+      if (Math.hypot(bx - ax, by - ay) < 10) {
+        ropeModeRef.current = 'off';
+        setRopeOn(false);
+        cancelAnimationFrame(ropeRafRef.current);
+        return;
+      }
+    }
+    stepRope(ropePtsRef.current, ax, ay, bx, by);
+    const d = ropePath(ropePtsRef.current);
+    const pts = ropePtsRef.current;
+    const tail = pts[pts.length - 1];
+    const prev = pts[pts.length - 2] || tail;
+    const hang = (Math.atan2(tail.y - prev.y, tail.x - prev.x) * 180) / Math.PI + 90;
+    for (let i = 0; i < 3; i++) {
+      const wrap = ropeWrapRefs.current[i];
+      const base = ropeBaseRefs.current[i];
+      const link = ropeLinkRefs.current[i];
+      const hook = ropeHookRefs.current[i];
+      const show = i === ropeReelRef.current;
+      if (wrap) wrap.style.display = show ? '' : 'none';
+      if (!show) continue;
+      if (base) base.setAttribute('d', d);
+      if (link) link.setAttribute('d', d);
+      if (hook) hook.setAttribute('transform', `translate(${tail.x.toFixed(1)} ${tail.y.toFixed(1)}) rotate(${hang.toFixed(1)})`);
+    }
+    ropeRafRef.current = requestAnimationFrame(ropeLoop);
+  };
+
+  const startRopeLoop = () => {
+    cancelAnimationFrame(ropeRafRef.current);
+    ropeRafRef.current = requestAnimationFrame(ropeLoop);
+  };
+
+  const stopRopeLoop = () => {
+    ropeModeRef.current = 'off';
+    cancelAnimationFrame(ropeRafRef.current);
+    setRopeOn(false);
+  };
 
   const handleArmHook = () => {
     if (hookUsedThisSpin || hookFlying) return;
     if (hookArmed) {
       sound.playClick();
       setHookArmed(false);
+      stopRopeLoop();
       return;
     }
     if (!canPressHook) return;
     sound.playClick();
+    const w = containerRef0.current?.offsetWidth || 800;
+    const h = containerRef0.current?.offsetHeight || 220;
+    ropeDimsRef.current = { w, h };
+    resetRope(ropePtsRef.current, w / 2, 4, w / 2, h * 0.4);
+    ropeBRef.current = { x: w / 2, y: h * 0.4 };
+    ropeModeRef.current = 'cursor';
     setHookArmed(true);
+    setRopeOn(true);
+    startRopeLoop();
+  };
+
+  // Курсор тянет цепь (только пока крюк вооружён и цель не выбрана)
+  const handleReelMouseMove = (reelIdx: number, e: React.MouseEvent<HTMLDivElement>) => {
+    if (!hookArmed || hookFlying) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    // Координаты вьюпорта ленты (минус паддинг внешнего контейнера p-3)
+    const x = e.clientX - rect.left - 12;
+    const y = e.clientY - rect.top - 12;
+    ropeReelRef.current = reelIdx;
+    ropeBRef.current = { x, y };
   };
 
   const handleCardClick = (reelIdx: number, itemIdx: number) => {
@@ -139,7 +242,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     setHookArmed(false);
     setHookFlying(true);
     setHookPicked({ reelIdx, itemIdx });
-    sound.playClick();
+    sound.playHookThrow();
+    ropeCardRef.current = { reelIdx, itemIdx };
+    ropeReelRef.current = reelIdx;
+    ropeModeRef.current = 'card';
     hookTargetRef.current = { reelIdx, itemIdx };
     if (hookResolveRef.current) {
       hookResolveRef.current();
@@ -362,8 +468,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     setHookUsedThisSpin(false);
     setHookFlying(false);
     setHookResult(null);
-    setHookChain(null);
+    setHookSparks(null);
     setHookPicked(null);
+    velSamplesRef.current = [];
+    stopRopeLoop();
     hookTargetRef.current = null;
     hookResolveRef.current = null;
     // Снапшот зелья ДО списания зарядов — фон живёт весь спин
@@ -424,8 +532,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       spinResolveRef.current = null;
       setPotionBgSnapshot(false);
       setHookArmed(false);
-      setHookChain(null);
       setHookFlying(false);
+      setHookSparks(null);
+      stopRopeLoop();
       setTimeout(() => {
         setHookResult(null);
         setHookPicked(null);
@@ -581,7 +690,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       }
 
       if (result === 'hook') {
-        // Крюк вцепился в карту: лента стынет, цепь летит, 50/50
+        // Крюк вцепился в карту: лента резко стынет, живая цепь уже летит (rope loop), 50/50
         const target = hookTargetRef.current;
         hookTargetRef.current = null;
         spinResolveRef.current = null;
@@ -592,30 +701,42 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
         } catch {}
         if (!target) {
           setHookFlying(false);
-          setHookChain(null);
+          stopRopeLoop();
           finishSpin(winners);
           break;
         }
         const { reelIdx, itemIdx } = target;
         frozenXRef.current = [...liveXRef.current];
         const containerW = containerRef0.current?.offsetWidth || 800;
-        const containerH = containerRef0.current?.offsetHeight || 220;
         const centerHook = containerW / 2;
         const cardCenter = itemIdx * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2;
-        setHookChain({
-          reelIdx,
-          x: cardCenter + frozenXRef.current[reelIdx],
-          y: containerH / 2,
-          w: containerW,
-          h: containerH,
-        });
-        // Цепь долетает до карты
+        ropeDimsRef.current = { w: containerW, h: containerRef0.current?.offsetHeight || 220 };
+        ropeReelRef.current = reelIdx;
+        // Скорость ленты в момент зацепа — для быстрого плавного гашения
+        const samples = velSamplesRef.current;
+        let velocity = -260;
+        if (samples.length >= 2) {
+          const a = samples[0];
+          const b = samples[samples.length - 1];
+          const dt = Math.max(16, b.t - a.t);
+          velocity = (b.x - a.x) / dt;
+          if (!isFinite(velocity) || velocity > -20) velocity = -160;
+        }
+        // Цепь долетает до карты (rope loop сам тянет конец к карте)
         await new Promise<void>((r) => setTimeout(r, 600));
         const hooked = Math.random() < 0.5;
         const ctrls = [controls0, controls1, controls2];
+        // Точка искр — текущее положение карты
+        const sparkX = cardCenter + liveXRef.current[reelIdx];
+        const sparkY = ropeDimsRef.current.h / 2;
         if (hooked) {
-          // Зацепилась: карта становится выигрышем, плавный довод под стрелку
+          // ЗАЦЕПИЛАСЬ: искры + звон, карта становится выигрышем.
+          // Фаза 1 — быстрое плавное гашение скорости, фаза 2 — довод в секцию.
+          // Цепь всё время следует за картой (rope loop читает liveXRef).
           setHookResult('hooked');
+          setHookSparks({ reelIdx, x: sparkX, y: sparkY, key: Date.now() });
+          sound.playHookLatch();
+          setTimeout(() => setHookSparks(null), 750);
           const skin = (reelsRef.current[reelIdx] || [])[itemIdx];
           if (skin) {
             const newWinners = [...winners];
@@ -623,31 +744,42 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             winners = newWinners;
             setWinningSkins(newWinners);
           }
-          const glides = [];
+          const brakeDist = Math.max(-260, Math.min(-30, velocity * 0.42));
+          const braking = [];
           for (let i = 0; i < spinOpenCount; i++) {
-            const tx = -((i === reelIdx ? itemIdx : WIN_INDEX) * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook);
-            ctrls[i].set({ x: frozenXRef.current[i] });
-            glides.push(
+            const from = frozenXRef.current[i];
+            braking.push(
               ctrls[i].start({
-                x: tx,
-                transition: { duration: i === reelIdx ? 1.5 : 1.1, ease: [0.25, 0.7, 0.3, 1] },
+                x: from + brakeDist,
+                transition: { duration: 0.38, ease: [0.25, 0.8, 0.35, 1] },
               })
             );
           }
-          sound.startSpinWhoosh(1.5);
+          await Promise.all(braking);
+          const glides = [];
+          for (let i = 0; i < spinOpenCount; i++) {
+            const tx = -((i === reelIdx ? itemIdx : WIN_INDEX) * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook);
+            glides.push(
+              ctrls[i].start({
+                x: tx,
+                transition: { duration: i === reelIdx ? 1.3 : 1.0, ease: [0.3, 0.65, 0.3, 1] },
+              })
+            );
+          }
+          sound.startSpinWhoosh(1.4);
           await Promise.all(glides);
           sound.stopSpinWhoosh();
           setHookFlying(false);
-          setHookChain(null);
+          stopRopeLoop();
           finishSpin(winners);
           break;
         } else {
-          // Сорвалась: цепь отлетает, спин продолжается с frozen-позиций
+          // СОРВАЛАСЬ: цепь втягивается, лента УСКОРЯЕТСЯ к исходной цели
           await new Promise<void>((r) => setTimeout(r, 250));
           setHookFlying(false);
-          setHookChain(null);
+          ropeModeRef.current = 'retract';
           setHookResult('slipped');
-          sound.playTick(0.6);
+          sound.playHookSlip();
           const resume = [];
           for (let i = 0; i < spinOpenCount; i++) {
             const tx = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook);
@@ -655,7 +787,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             resume.push(
               ctrls[i].start({
                 x: tx,
-                transition: { duration: 2.0, ease: [0.12, 0.8, 0.15, 1] },
+                transition: { duration: 1.7, ease: [0.55, 0.05, 0.35, 1] },
               })
             );
           }
@@ -744,12 +876,14 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             transform-origin: center;
             transform-box: fill-box;
           }
-          @keyframes caseHookChainDraw {
-            from { stroke-dashoffset: 400; }
-            to { stroke-dashoffset: 0; }
+          @keyframes hookSparkFly {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--dx), var(--dy)) scale(0.25); opacity: 0; }
           }
-          .case-hook-chain-draw {
-            animation: caseHookChainDraw 0.55s ease-out forwards;
+          .hook-spark-burst {
+            animation: hookSparkFly 0.55s ease-out forwards;
+            box-shadow: 0 0 8px rgba(253, 186, 116, 0.9);
+            will-change: transform, opacity;
           }
           @keyframes casePotionRise {
             0% { transform: translateY(0) translateX(0) scale(0.7); opacity: 0; }
@@ -777,6 +911,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
         {Array.from({ length: openCount }).map((_, reelIdx) => (
           <div
             key={reelIdx}
+            onMouseMove={(e) => handleReelMouseMove(reelIdx, e)}
             className={`relative w-full rounded-3xl p-3 glass-panel border shadow-2xl overflow-hidden transition-colors duration-300 ${
               isZeusCharged
                 ? 'border-sky-400/50 shadow-[0_0_35px_rgba(56,189,248,0.35)]'
@@ -977,7 +1112,15 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                 animate={animControls[reelIdx]}
                 onUpdate={(latest) => {
                   const v = (latest as { x?: unknown }).x;
-                  if (typeof v === 'number') liveXRef.current[reelIdx] = v;
+                  if (typeof v === 'number') {
+                    liveXRef.current[reelIdx] = v;
+                    const s = velSamplesRef.current;
+                    const now = Date.now();
+                    if (s.length === 0 || now - s[s.length - 1].t > 30) {
+                      s.push({ x: v, t: now });
+                      if (s.length > 5) s.shift();
+                    }
+                  }
                 }}
                 className="flex gap-3 will-change-transform"
                 style={{
@@ -1064,52 +1207,82 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                   );
                 })}
               </motion.div>
-              {/* Цепь крюка: от стрелки сверху к выбранной карте */}
-              {hookChain && hookChain.reelIdx === reelIdx && (() => {
-                const sx = hookChain.w / 2;
-                const sy = 2;
-                const ex = hookChain.x;
-                const ey = hookChain.y;
-                const len = Math.max(60, Math.hypot(ex - sx, ey - sy));
-                const ang = (Math.atan2(ey - sy, ex - sx) * 180) / Math.PI;
-                const d = `M ${sx.toFixed(1)} ${sy} L ${ex.toFixed(1)} ${ey.toFixed(1)}`;
-                return (
-                  <div className="absolute inset-0 z-30 pointer-events-none">
-                    <svg viewBox={`0 0 ${hookChain.w} ${hookChain.h}`} className="w-full h-full">
-                      <path d={d} stroke="#7c2d12" strokeWidth="7" fill="none" strokeLinecap="round" opacity="0.6" />
-                      <path
-                        d={d}
-                        stroke="#fdba74"
-                        strokeWidth="3"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeDasharray={len.toFixed(0)}
-                        className="case-hook-chain-draw"
+              {/* Живая железная цепь крюка (верёвочная физика, пишет rAF напрямую в DOM) */}
+              {ropeOn && (
+                <div
+                  ref={(el) => {
+                    ropeWrapRefs.current[reelIdx] = el;
+                  }}
+                  className="absolute inset-0 z-30 pointer-events-none"
+                  style={{ display: 'none' }}
+                >
+                  <svg viewBox={`0 0 ${ropeDimsRef.current.w} ${ropeDimsRef.current.h}`} className="w-full h-full">
+                    <path
+                      ref={(el) => {
+                        ropeBaseRefs.current[reelIdx] = el;
+                      }}
+                      d=""
+                      stroke="#52525b"
+                      strokeWidth="6"
+                      fill="none"
+                      strokeLinecap="round"
+                      opacity="0.85"
+                    />
+                    <path
+                      ref={(el) => {
+                        ropeLinkRefs.current[reelIdx] = el;
+                      }}
+                      d=""
+                      stroke="#d4d4d8"
+                      strokeWidth="2.2"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeDasharray="7 5"
+                      opacity="0.95"
+                    />
+                    <g
+                      ref={(el) => {
+                        ropeHookRefs.current[reelIdx] = el;
+                      }}
+                      className="filter drop-shadow-[0_0_7px_rgba(161,161,170,0.9)]"
+                    >
+                      <circle cx="0" cy="-10" r="2.6" fill="none" stroke="#a1a1aa" strokeWidth="2.4" />
+                      <path d="M 0 -8 L 0 6" stroke="#a1a1aa" strokeWidth="3" strokeLinecap="round" />
+                      <path d="M 0 6 C -0.5 2, -5 1, -8 -2.5 M -8 -2.5 L -5.4 -2.1 M -8 -2.5 L -7.4 0.6" fill="none" stroke="#a1a1aa" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M 0 6 C 0.5 2, 5 1, 8 -2.5 M 8 -2.5 L 5.4 -2.1 M 8 -2.5 L 7.4 0.6" fill="none" stroke="#a1a1aa" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M 0 6 L 0 10.5" stroke="#e4e4e7" strokeWidth="1.5" strokeLinecap="round" />
+                    </g>
+                  </svg>
+                </div>
+              )}
+              {/* Вспышка искр в точке зацепа */}
+              {hookSparks && hookSparks.reelIdx === reelIdx && (
+                <div
+                  key={hookSparks.key}
+                  className="absolute z-40 pointer-events-none"
+                  style={{ left: hookSparks.x, top: hookSparks.y, width: 0, height: 0 }}
+                >
+                  {Array.from({ length: 9 }).map((__, si) => {
+                    const ang = (si / 9) * Math.PI * 2 + 0.3;
+                    const dist = 26 + (si % 3) * 12;
+                    return (
+                      <span
+                        key={si}
+                        className="hook-spark-burst absolute rounded-full"
+                        style={{
+                          width: si % 3 === 0 ? 5 : 3,
+                          height: si % 3 === 0 ? 5 : 3,
+                          background: si % 2 === 0 ? '#fdba74' : '#fff7ed',
+                          // @ts-expect-error CSS vars
+                          '--dx': `${(Math.cos(ang) * dist).toFixed(1)}px`,
+                          '--dy': `${(Math.sin(ang) * dist).toFixed(1)}px`,
+                          animationDelay: `${(si * 0.02).toFixed(2)}s`,
+                        }}
                       />
-                      <path
-                        d={d}
-                        stroke="#fff7ed"
-                        strokeWidth="1.3"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeDasharray="5 5"
-                        className="case-zeus-bolt"
-                        opacity="0.9"
-                      />
-                      <g
-                        transform={`translate(${ex.toFixed(1)} ${ey.toFixed(1)}) rotate(${(ang + 90).toFixed(1)})`}
-                        className="filter drop-shadow-[0_0_9px_#fb923c]"
-                      >
-                        <circle cx="0" cy="-10" r="2.6" fill="none" stroke="#fdba74" strokeWidth="2.4" />
-                        <path d="M 0 -8 L 0 6" stroke="#fdba74" strokeWidth="3" strokeLinecap="round" />
-                        <path d="M 0 6 C -0.5 2, -5 1, -8 -2.5 M -8 -2.5 L -5.4 -2.1 M -8 -2.5 L -7.4 0.6" fill="none" stroke="#fdba74" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M 0 6 C 0.5 2, 5 1, 8 -2.5 M 8 -2.5 L 5.4 -2.1 M 8 -2.5 L 7.4 0.6" fill="none" stroke="#fdba74" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M 0 6 L 0 10.5" stroke="#fff7ed" strokeWidth="1.5" strokeLinecap="round" />
-                      </g>
-                    </svg>
-                  </div>
-                );
-              })()}
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         ))}
