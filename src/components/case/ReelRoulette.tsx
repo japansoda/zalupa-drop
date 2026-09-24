@@ -1549,6 +1549,14 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           bonusConsumables={bonusConsumables}
           onKeep={handleKeep}
           onSell={handleSell}
+          onSpinAgain={() => {
+            setShowModal(false);
+            setTimeout(() => {
+              startSpin();
+            }, 100);
+          }}
+          spinAgainCost={totalCost}
+          openCount={openCount}
         />
       )}
     </div>

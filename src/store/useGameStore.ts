@@ -12,6 +12,7 @@ import {
   rollHatchedChickenBreed,
   rollIsStatTrakChicken,
   rollEggSkinDrop,
+  calculateChickenSellPrice,
   CHICKEN_BREEDS,
 } from '../lib/farm';
 
@@ -40,6 +41,7 @@ interface GameState {
   feedChicken: (slotIndex: number) => boolean;
   feedAllChickens: () => void;
   claimEggDrop: (slotIndex: number) => SkinEntity | null;
+  sellChicken: (slotIndex: number) => number;
   speedUpIncubation: (slotIndex: number) => boolean;
   speedUpEggProduction: (slotIndex: number) => boolean;
 
@@ -337,11 +339,17 @@ export const useGameStore = create<GameState>()(
 
         get().removeFromInventory(skinInstanceIds);
 
+        const hasPotion = get().activePotionCharges > 0;
+        if (hasPotion) {
+          get().consumePotionCharge();
+        }
+
         slots[slotIdx] = {
           index: slotIdx,
           status: 'incubating',
           incubationStartedAt: Date.now(),
           incubatingUntil: Date.now() + INCUBATION_DURATION_MS,
+          hasLuckPotion: hasPotion,
         };
 
         set({ farmSlots: slots });
@@ -377,11 +385,17 @@ export const useGameStore = create<GameState>()(
         const slots = [...state.farmSlots];
         if (!slots[slotIndex] || slots[slotIndex].status !== 'empty') return false;
 
+        const hasPotion = state.activePotionCharges > 0;
+        if (hasPotion) {
+          get().consumePotionCharge();
+        }
+
         slots[slotIndex] = {
           index: slotIndex,
           status: 'incubating',
           incubationStartedAt: Date.now(),
           incubatingUntil: Date.now() + INCUBATION_DURATION_MS,
+          hasLuckPotion: hasPotion,
         };
 
         set({
@@ -397,9 +411,10 @@ export const useGameStore = create<GameState>()(
         const slot = slots[slotIndex];
         if (!slot) return null;
 
-        const breedId = rollHatchedChickenBreed();
+        const hadLuck = Boolean(slot.hasLuckPotion);
+        const breedId = rollHatchedChickenBreed(hadLuck);
         const breed = CHICKEN_BREEDS[breedId];
-        const isSt = rollIsStatTrakChicken();
+        const isSt = rollIsStatTrakChicken(hadLuck);
         const chicken: ChickenEntity = {
           id: `chicken_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
           breedId,
@@ -408,6 +423,7 @@ export const useGameStore = create<GameState>()(
           hatchedAt: Date.now(),
           eggsLaidCount: 0,
           isStatTrak: isSt,
+          hasLuckPotion: hadLuck,
         };
 
         slots[slotIndex] = {
@@ -415,6 +431,7 @@ export const useGameStore = create<GameState>()(
           status: 'chicken',
           chicken,
           feedStatus: 'hungry',
+          hasLuckPotion: undefined,
         };
 
         set({ farmSlots: slots });
@@ -427,10 +444,16 @@ export const useGameStore = create<GameState>()(
         const slot = slots[slotIndex];
         if (!slot || slot.status !== 'chicken' || slot.feedStatus !== 'hungry') return false;
 
+        const hasPotion = get().activePotionCharges > 0;
+        if (hasPotion) {
+          get().consumePotionCharge();
+        }
+
         slots[slotIndex] = {
           ...slot,
           feedStatus: 'producing',
           eggReadyUntil: Date.now() + EGG_PRODUCTION_DURATION_MS,
+          hasLuckPotion: hasPotion,
         };
 
         set({ farmSlots: slots });
@@ -446,10 +469,15 @@ export const useGameStore = create<GameState>()(
         let fedCount = 0;
         for (let i = 0; i < slots.length; i++) {
           if (slots[i].status === 'chicken' && slots[i].feedStatus === 'hungry') {
+            const hasPotion = get().activePotionCharges > 0;
+            if (hasPotion) {
+              get().consumePotionCharge();
+            }
             slots[i] = {
               ...slots[i],
               feedStatus: 'producing',
               eggReadyUntil: Date.now() + EGG_PRODUCTION_DURATION_MS,
+              hasLuckPotion: hasPotion,
             };
             fedCount++;
           }
@@ -474,9 +502,22 @@ export const useGameStore = create<GameState>()(
         if (!isReady || !slot.chicken) return null;
 
         const breedId = slot.readyEggBreed || slot.chicken.breedId;
-        const droppedSkin = rollEggSkinDrop(breedId);
+        const breed = CHICKEN_BREEDS[breedId] || CHICKEN_BREEDS.white_inferno;
+        const droppedSkin = rollEggSkinDrop(breedId, Boolean(slot.hasLuckPotion));
 
         get().addToInventory([droppedSkin]);
+
+        // Broadcast to Live Drops if skin is high-tier or valuable
+        if (droppedSkin.priceDc >= 1000 || droppedSkin.rarity === 'covert' || droppedSkin.rarity === 'classified' || droppedSkin.name.startsWith('★')) {
+          get().addLiveDrop({
+            id: `chickendrop_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+            user: 'Вы',
+            avatar: '',
+            skin: droppedSkin,
+            caseName: `🐔 ${breed.name}`,
+            timestamp: Date.now(),
+          });
+        }
 
         slots[slotIndex] = {
           index: slotIndex,
@@ -488,11 +529,37 @@ export const useGameStore = create<GameState>()(
           feedStatus: 'hungry',
           eggReadyUntil: undefined,
           readyEggBreed: undefined,
+          hasLuckPotion: undefined,
         };
 
         set({ farmSlots: slots });
         sound.playWin(droppedSkin.rarity);
         return droppedSkin;
+      },
+
+      sellChicken: (slotIndex) => {
+        const slots = [...get().farmSlots];
+        const slot = slots[slotIndex];
+        if (!slot || !slot.chicken) return 0;
+
+        const chicken = slot.chicken;
+        const sellPrice = calculateChickenSellPrice(
+          chicken.breedId,
+          chicken.isStatTrak,
+          chicken.eggsLaidCount
+        );
+
+        slots[slotIndex] = {
+          index: slotIndex,
+          status: 'empty',
+        };
+
+        set((state) => ({
+          farmSlots: slots,
+          balance: state.balance + sellPrice,
+        }));
+        sound.playCashout();
+        return sellPrice;
       },
 
       speedUpIncubation: (slotIndex) => {

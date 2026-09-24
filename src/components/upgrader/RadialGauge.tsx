@@ -2627,7 +2627,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
               {/* Inventory Grid */}
               <div className="relative flex-1">
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 sm:gap-3 h-[480px] sm:h-[520px] overflow-y-auto overscroll-contain pr-1 pb-16 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 sm:gap-3 max-h-[620px] min-h-[380px] overflow-y-auto overscroll-contain pr-1 pb-20 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
                   {filteredMySkins.length === 0 ? (
                     <div className="col-span-full py-16 text-center text-xs text-white/40">
                       {t('inv.emptyHint')}
@@ -2685,7 +2685,6 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     })
                   )}
                 </div>
-                <div className="pointer-events-none absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-[#0d0e14] to-transparent rounded-b-2xl" />
               </div>
             </>
           ) : (
@@ -2734,7 +2733,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
               {/* Mini Market Grid */}
               <div className="relative flex-1">
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 h-[480px] sm:h-[520px] overflow-y-auto overscroll-contain pr-1 pb-16 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-[620px] min-h-[380px] overflow-y-auto overscroll-contain pr-1 pb-20 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
                   {filteredMiniMarketSkins.length === 0 ? (
                     <div className="col-span-full py-16 text-center text-xs text-white/40">
                       {locale === 'ru' ? 'Скины не найдены' : 'No skins found'}
@@ -2793,7 +2792,6 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     })
                   )}
                 </div>
-                <div className="pointer-events-none absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-[#0d0e14] to-transparent rounded-b-2xl" />
               </div>
             </>
           )}
@@ -3011,7 +3009,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
           {/* Catalog Grid */}
           <div className="relative flex-1">
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 sm:gap-3 h-[480px] sm:h-[520px] overflow-y-auto overscroll-contain pr-1 pb-16 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 sm:gap-3 max-h-[620px] min-h-[380px] overflow-y-auto overscroll-contain pr-1 pb-20 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
               {filteredCatalogSkins.length === 0 ? (
                 <div className="col-span-full py-16 text-center text-xs text-white/40">
                   {t('upg.noSkins')}
@@ -3088,7 +3086,6 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 </>
               )}
             </div>
-            <div className="pointer-events-none absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-[#0d0e14] to-transparent rounded-b-2xl" />
           </div>
         </div>
       </div>

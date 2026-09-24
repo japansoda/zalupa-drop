@@ -288,6 +288,7 @@ export interface ChickenEntity {
   hatchedAt: number;
   eggsLaidCount: number;
   isStatTrak?: boolean;
+  hasLuckPotion?: boolean;
 }
 
 export type FarmSlotStatus = 'empty' | 'incubating' | 'hatch_ready' | 'chicken' | 'egg_ready';
@@ -301,6 +302,7 @@ export interface FarmSlot {
   feedStatus?: 'hungry' | 'producing';
   eggReadyUntil?: number; // timestamp ms when egg will be ready to crack
   readyEggBreed?: ChickenBreedId; // stores breed of chicken that produced the ready egg
+  hasLuckPotion?: boolean; // Potion effect: emerald aura, clover particles, boosted drops
 }
 
 export const INCUBATION_DURATION_MS = 2 * 60 * 60 * 1000; // 2 hours
@@ -326,35 +328,136 @@ export function isActualWeaponOrKnifeGlove(skin: SkinEntity): boolean {
 }
 
 /**
- * Pick a random chicken breed when an egg hatches
+ * Pick a random chicken breed when an egg hatches.
+ * When hasLuckPotion is true, covert and legendary breeds have 3.5x higher weights!
  */
-export function rollHatchedChickenBreed(): ChickenBreedId {
+export function rollHatchedChickenBreed(hasLuckPotion = false): ChickenBreedId {
   const breeds = Object.values(CHICKEN_BREEDS);
-  const totalWeight = breeds.reduce((sum, b) => sum + b.hatchWeight, 0);
+  const weightedBreeds = breeds.map((b) => {
+    let weight = b.hatchWeight;
+    if (hasLuckPotion) {
+      if (b.rarity === 'legendary') weight *= 4.5;
+      else if (b.rarity === 'covert') weight *= 3.0;
+      else if (b.rarity === 'classified') weight *= 2.0;
+      else if (b.rarity === 'common') weight *= 0.4;
+    }
+    return { id: b.id, weight };
+  });
+
+  const totalWeight = weightedBreeds.reduce((sum, b) => sum + b.weight, 0);
   let rnd = Math.random() * totalWeight;
 
-  for (const b of breeds) {
-    if (rnd <= b.hatchWeight) {
+  for (const b of weightedBreeds) {
+    if (rnd <= b.weight) {
       return b.id;
     }
-    rnd -= b.hatchWeight;
+    rnd -= b.weight;
   }
   return 'white_inferno';
 }
 
 /**
  * 15% probability for a hatched chicken to be StatTrak™
+ * Luck potion increases it to 35%!
  */
-export function rollIsStatTrakChicken(): boolean {
-  return Math.random() < 0.15;
+export function rollIsStatTrakChicken(hasLuckPotion = false): boolean {
+  return Math.random() < (hasLuckPotion ? 0.35 : 0.15);
+}
+
+/**
+ * Calculate the sell value of a chicken in DropCoins.
+ * Tiered base price by rarity + 50% StatTrak multiplier + 1,000 DC per egg laid.
+ */
+export function calculateChickenSellPrice(
+  breedId: ChickenBreedId,
+  isStatTrak = false,
+  eggsLaidCount = 0
+): number {
+  const breed = CHICKEN_BREEDS[breedId] || CHICKEN_BREEDS.white_inferno;
+  let basePrice = 25000; // Common base
+
+  switch (breed.rarity) {
+    case 'legendary':
+      basePrice = 1200000;
+      break;
+    case 'covert':
+      basePrice = 450000;
+      break;
+    case 'classified':
+      basePrice = 160000;
+      break;
+    case 'restricted':
+      basePrice = 65000;
+      break;
+    case 'common':
+    default:
+      basePrice = 25000;
+      break;
+  }
+
+  if (isStatTrak) {
+    basePrice = Math.round(basePrice * 1.5);
+  }
+
+  // Bonus for seasoned egg layers
+  basePrice += (eggsLaidCount || 0) * 1000;
+
+  return basePrice;
+}
+
+/**
+ * Helper to get human-readable loot odds description for ChickenDetailsModal
+ */
+export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 'ru') {
+  const breed = CHICKEN_BREEDS[breedId] || CHICKEN_BREEDS.white_inferno;
+  const isRu = locale === 'ru';
+
+  switch (breed.eggDropTier) {
+    case 'tier_legendary':
+      return {
+        knivesGloves: '75%',
+        covert: '25%',
+        classified: '0%',
+        summary: isRu ? '75% Ножи & Перчатки · 25% Тайное' : '75% Knives & Gloves · 25% Covert',
+      };
+    case 'tier_covert':
+      return {
+        knivesGloves: '40%',
+        covert: '50%',
+        classified: '10%',
+        summary: isRu ? '40% Ножи & Перчатки · 50% Тайное' : '40% Knives & Gloves · 50% Covert',
+      };
+    case 'tier_classified':
+      return {
+        knivesGloves: '15%',
+        covert: '45%',
+        classified: '40%',
+        summary: isRu ? '15% Ножи · 45% Тайное · 40% Засекреченное' : '15% Knives · 45% Covert · 40% Classified',
+      };
+    case 'tier_restricted':
+      return {
+        knivesGloves: '5%',
+        covert: '20%',
+        classified: '40%',
+        summary: isRu ? '5% Ножи · 20% Тайное · 40% Засекреченное' : '5% Knives · 20% Covert · 40% Classified',
+      };
+    case 'tier_common':
+    default:
+      return {
+        knivesGloves: '2%',
+        covert: '8%',
+        classified: '25%',
+        summary: isRu ? '2% Ножи · 8% Тайное · 25% Засекреченное' : '2% Knives · 8% Covert · 25% Classified',
+      };
+  }
 }
 
 /**
  * Roll a skin drop from an egg laid by a specific chicken breed.
  * STRICT: Absolutely NO stickers, NO charms, NO agents!
- * Higher breed rarity yields higher-value weapons, covert skins, and knives/gloves.
+ * When hasLuckPotion is true, knife/glove chances are dramatically increased!
  */
-export function rollEggSkinDrop(breedId: ChickenBreedId): SkinEntity {
+export function rollEggSkinDrop(breedId: ChickenBreedId, hasLuckPotion = false): SkinEntity {
   const breed = CHICKEN_BREEDS[breedId] || CHICKEN_BREEDS.white_inferno;
   
   // Filter all weapons/knives/gloves
@@ -374,8 +477,9 @@ export function rollEggSkinDrop(breedId: ChickenBreedId): SkinEntity {
 
   switch (breed.eggDropTier) {
     case 'tier_legendary':
-      // Golden Rooster: 75% Knives/Gloves, 25% Covert
-      if (roll < 75 && knivesAndGloves.length > 0) {
+      // Golden Rooster: 75% Knives/Gloves, 25% Covert. Luck potion makes it 90% Knives!
+      const legKnifePct = hasLuckPotion ? 90 : 75;
+      if (roll < legKnifePct && knivesAndGloves.length > 0) {
         candidateBucket = knivesAndGloves;
       } else {
         candidateBucket = covertPool.length > 0 ? covertPool : knivesAndGloves;
@@ -383,10 +487,12 @@ export function rollEggSkinDrop(breedId: ChickenBreedId): SkinEntity {
       break;
 
     case 'tier_covert':
-      // Blaze / Fade: 40% Knives/Gloves, 50% Covert, 10% Classified
-      if (roll < 40 && knivesAndGloves.length > 0) {
+      // Blaze / Fade: 40% Knives/Gloves, 50% Covert, 10% Classified. Luck potion: 65% Knives, 35% Covert!
+      const covKnifePct = hasLuckPotion ? 65 : 40;
+      const covCovertPct = hasLuckPotion ? 95 : 90;
+      if (roll < covKnifePct && knivesAndGloves.length > 0) {
         candidateBucket = knivesAndGloves;
-      } else if (roll < 90 && covertPool.length > 0) {
+      } else if (roll < covCovertPct && covertPool.length > 0) {
         candidateBucket = covertPool;
       } else {
         candidateBucket = classifiedPool;
@@ -394,10 +500,12 @@ export function rollEggSkinDrop(breedId: ChickenBreedId): SkinEntity {
       break;
 
     case 'tier_classified':
-      // Cyber Neon: 15% Knives/Gloves, 45% Covert, 40% Classified
-      if (roll < 15 && knivesAndGloves.length > 0) {
+      // Cyber Neon: 15% Knives, 45% Covert, 40% Classified. Luck potion: 35% Knives, 50% Covert!
+      const classKnifePct = hasLuckPotion ? 35 : 15;
+      const classCovertPct = hasLuckPotion ? 85 : 60;
+      if (roll < classKnifePct && knivesAndGloves.length > 0) {
         candidateBucket = knivesAndGloves;
-      } else if (roll < 60 && covertPool.length > 0) {
+      } else if (roll < classCovertPct && covertPool.length > 0) {
         candidateBucket = covertPool;
       } else {
         candidateBucket = classifiedPool;
@@ -405,12 +513,14 @@ export function rollEggSkinDrop(breedId: ChickenBreedId): SkinEntity {
       break;
 
     case 'tier_restricted':
-      // Toxic Zombie: 5% Knives, 20% Covert, 40% Classified, 35% Restricted
-      if (roll < 5 && knivesAndGloves.length > 0) {
+      // Toxic Zombie: 5% Knives, 20% Covert, 40% Classified, 35% Restricted. Luck potion: 18% Knives, 42% Covert!
+      const resKnifePct = hasLuckPotion ? 18 : 5;
+      const resCovertPct = hasLuckPotion ? 60 : 25;
+      if (roll < resKnifePct && knivesAndGloves.length > 0) {
         candidateBucket = knivesAndGloves;
-      } else if (roll < 25 && covertPool.length > 0) {
+      } else if (roll < resCovertPct && covertPool.length > 0) {
         candidateBucket = covertPool;
-      } else if (roll < 65 && classifiedPool.length > 0) {
+      } else if (roll < (hasLuckPotion ? 90 : 65) && classifiedPool.length > 0) {
         candidateBucket = classifiedPool;
       } else {
         candidateBucket = restrictedPool;
@@ -419,14 +529,17 @@ export function rollEggSkinDrop(breedId: ChickenBreedId): SkinEntity {
 
     case 'tier_common':
     default:
-      // White / Brown: 2% Knives, 8% Covert, 25% Classified, 40% Restricted, 25% Mil-Spec
-      if (roll < 2 && knivesAndGloves.length > 0) {
+      // White / Brown: 2% Knives, 8% Covert, 25% Classified. Luck potion: 10% Knives, 25% Covert, 40% Classified!
+      const comKnifePct = hasLuckPotion ? 10 : 2;
+      const comCovertPct = hasLuckPotion ? 35 : 10;
+      const comClassPct = hasLuckPotion ? 75 : 35;
+      if (roll < comKnifePct && knivesAndGloves.length > 0) {
         candidateBucket = knivesAndGloves;
-      } else if (roll < 10 && covertPool.length > 0) {
+      } else if (roll < comCovertPct && covertPool.length > 0) {
         candidateBucket = covertPool;
-      } else if (roll < 35 && classifiedPool.length > 0) {
+      } else if (roll < comClassPct && classifiedPool.length > 0) {
         candidateBucket = classifiedPool;
-      } else if (roll < 75 && restrictedPool.length > 0) {
+      } else if (roll < (hasLuckPotion ? 95 : 75) && restrictedPool.length > 0) {
         candidateBucket = restrictedPool;
       } else {
         candidateBucket = milspecPool.length > 0 ? milspecPool : restrictedPool;
@@ -443,7 +556,7 @@ export function rollEggSkinDrop(breedId: ChickenBreedId): SkinEntity {
   // Give wear & potential StatTrak
   const wears: SkinWear[] = ['FN', 'MW', 'FT'];
   const wearIdx = Math.floor(Math.random() * wears.length);
-  const isSt = Math.random() < 0.15 && !selectedSkin.name.startsWith('★');
+  const isSt = (Math.random() < (hasLuckPotion ? 0.35 : 0.15)) && !selectedSkin.name.startsWith('★');
 
   return {
     ...selectedSkin,

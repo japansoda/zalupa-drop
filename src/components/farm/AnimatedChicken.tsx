@@ -10,6 +10,7 @@ interface AnimatedChickenProps {
   isEating?: boolean;
   isLaying?: boolean;
   isStatTrak?: boolean;
+  hasLuckPotion?: boolean;
   eggsLaidCount?: number;
   className?: string;
   size?: number;
@@ -21,6 +22,7 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
   isEating = false,
   isLaying = false,
   isStatTrak = false,
+  hasLuckPotion = false,
   eggsLaidCount = 0,
   className = '',
   size = 140,
@@ -118,7 +120,7 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
   return (
     <div
       className={`relative flex items-center justify-center select-none ${className} ${
-        isEating ? 'animate-bounce' : ''
+        isEating && !isLaying ? 'animate-bounce' : ''
       }`}
       style={{ width: size, height: size }}
     >
@@ -187,6 +189,16 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
             transform: translateY(-24px) scale(0.8);
           }
         }
+        @keyframes cloverFloat {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg) scale(0.9);
+            opacity: 0.75;
+          }
+          50% {
+            transform: translateY(-8px) rotate(18deg) scale(1.1);
+            opacity: 1;
+          }
+        }
         .chicken-body-motion {
           animation: ${isLaying ? 'chickenNestingBob 3.2s ease-in-out infinite' : 'chickenIdleBob 2.4s ease-in-out infinite'};
           transform-origin: 50% 80%;
@@ -212,15 +224,35 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
         .laying-particle-2 {
           animation: floatLayingHeart 2.5s ease-out infinite 1.25s;
         }
+        .clover-p1 {
+          animation: cloverFloat 2.6s ease-in-out infinite;
+        }
+        .clover-p2 {
+          animation: cloverFloat 3.1s ease-in-out infinite 1.3s;
+        }
       `}</style>
 
-      {/* Ambient Rarity Glow Behind Chicken */}
+      {/* Ambient Rarity & Luck Glow Behind Chicken */}
       <div
         className="chicken-aura absolute inset-2 rounded-full blur-xl pointer-events-none -z-10"
         style={{
-          background: `radial-gradient(circle, ${breed.color}45 0%, transparent 70%)`,
+          background: hasLuckPotion
+            ? `radial-gradient(circle, rgba(34,197,94,0.6) 0%, ${breed.color}35 45%, transparent 75%)`
+            : `radial-gradient(circle, ${breed.color}45 0%, transparent 70%)`,
         }}
       />
+
+      {/* Floating Clovers when Luck Potion is Active */}
+      {hasLuckPotion && (
+        <>
+          <div className="clover-p1 absolute -top-2 left-6 text-sm pointer-events-none z-20 select-none filter drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]">
+            🍀
+          </div>
+          <div className="clover-p2 absolute top-1 right-5 text-xs pointer-events-none z-20 select-none filter drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]">
+            🍀
+          </div>
+        </>
+      )}
 
       {/* Floating Sparkles / Hearts during Egg Laying */}
       {isLaying && (

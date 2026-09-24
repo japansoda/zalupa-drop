@@ -10,6 +10,7 @@ import { DropCoinIcon } from '../../components/ui/DropCoinIcon';
 import { AnimatedChicken } from '../../components/farm/AnimatedChicken';
 import { DepositSkinsModal } from '../../components/farm/DepositSkinsModal';
 import { EggCrackingModal } from '../../components/farm/EggCrackingModal';
+import { ChickenDetailsModal } from '../../components/farm/ChickenDetailsModal';
 import { BreedEgg } from '../../components/farm/BreedEgg';
 import { CHICKEN_BREEDS, ChickenBreedId } from '../../lib/farm';
 import { useGameStore } from '../../store/useGameStore';
@@ -23,6 +24,7 @@ import {
   Wheat,
   Zap,
   Check,
+  Info,
 } from 'lucide-react';
 
 function formatTimer(msRemaining: number): string {
@@ -63,6 +65,22 @@ export default function ChickenFarmPage() {
     slotIndex: 0,
     breedId: 'white_inferno',
   });
+
+  const [chickenModal, setChickenModal] = useState<{
+    isOpen: boolean;
+    slotIndex: number;
+  }>({
+    isOpen: false,
+    slotIndex: 0,
+  });
+
+  const handleOpenChickenModal = (slotIndex: number) => {
+    sound.playClick();
+    setChickenModal({
+      isOpen: true,
+      slotIndex,
+    });
+  };
 
   const [now, setNow] = useState<number>(Date.now());
   const [isDraggingGrain, setIsDraggingGrain] = useState(false);
@@ -232,9 +250,6 @@ export default function ChickenFarmPage() {
                   <h3 className="text-sm sm:text-base font-black text-white uppercase tracking-tight">
                     {locale === 'ru' ? 'Кормушка: Отборное зерно CS2' : 'Feeding Station: CS2 Select Grain'}
                   </h3>
-                  <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                    {locale === 'ru' ? 'Бесплатно' : 'Free'}
-                  </span>
                   {hungryChickensCount > 0 && (
                     <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 animate-pulse">
                       {locale === 'ru' ? `Голодных: ${hungryChickensCount}` : `Hungry: ${hungryChickensCount}`}
@@ -307,6 +322,15 @@ export default function ChickenFarmPage() {
                     </span>
 
                     <div className="flex items-center gap-1">
+                      {slot.hasLuckPotion && (
+                        <span
+                          className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 animate-pulse"
+                          title={locale === 'ru' ? 'Зелье удачи активно' : 'Luck potion active'}
+                        >
+                          🍀
+                        </span>
+                      )}
+
                       {slot.chicken?.isStatTrak && (
                         <span className="text-[9px] font-mono font-black px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-400 border border-amber-500/40">
                           ST™
@@ -449,30 +473,40 @@ export default function ChickenFarmPage() {
                     {/* CASE 4: CHICKEN OCCUPIED */}
                     {slot.chicken && (slot.status === 'chicken' || slot.status === 'egg_ready') && (
                       <div className="flex flex-col items-center text-center w-full">
-                        <AnimatedChicken
-                          breedId={slot.chicken.breedId}
-                          isHungry={isHungryChicken}
-                          isEating={isProducingEgg && !isEggReady}
-                          isLaying={isProducingEgg || isEggReady}
-                          isStatTrak={slot.chicken.isStatTrak}
-                          eggsLaidCount={slot.chicken.eggsLaidCount}
-                          size={135}
-                        />
+                        {/* Clickable Chicken Preview for Stats & Selling */}
+                        <div
+                          onClick={() => handleOpenChickenModal(index)}
+                          className="cursor-pointer group relative flex flex-col items-center hover:scale-105 transition-transform"
+                          title={locale === 'ru' ? 'Кликните для статистики и продажи курочки' : 'Click for chicken stats & selling'}
+                        >
+                          <AnimatedChicken
+                            breedId={slot.chicken.breedId}
+                            isHungry={isHungryChicken}
+                            isEating={false}
+                            isLaying={isProducingEgg || isEggReady}
+                            isStatTrak={slot.chicken.isStatTrak}
+                            hasLuckPotion={Boolean(slot.hasLuckPotion)}
+                            eggsLaidCount={slot.chicken.eggsLaidCount}
+                            size={135}
+                          />
 
-                        <span className="text-xs font-black text-white mt-1 truncate max-w-[150px]">
-                          {locale === 'ru' ? breed?.name : breed?.nameEn}
-                        </span>
-
-                        <span className="text-[10px] text-white/40">
-                          {locale === 'ru'
-                            ? `Снесено: ${slot.chicken.eggsLaidCount || 0} яиц`
-                            : `Laid: ${slot.chicken.eggsLaidCount || 0} eggs`}
-                        </span>
+                          <div className="flex items-center gap-1 mt-1 max-w-[150px]">
+                            <span className="text-xs font-black text-white truncate group-hover:text-yellow-400 transition-colors">
+                              {locale === 'ru' ? breed?.name : breed?.nameEn}
+                            </span>
+                            <Info className="w-3.5 h-3.5 text-white/40 group-hover:text-yellow-400 transition-colors shrink-0" />
+                          </div>
+                        </div>
 
                         {/* Status Controls */}
                         {isEggReady ? (
                           <div className="flex flex-col items-center w-full mt-3">
-                            <div className="mb-2">
+                            <div className="relative mb-2">
+                              {slot.hasLuckPotion && (
+                                <div className="absolute -top-2 -right-2 text-sm z-20 animate-bounce pointer-events-none">
+                                  🍀
+                                </div>
+                              )}
                               <BreedEgg
                                 breedId={slot.readyEggBreed || slot.chicken.breedId}
                                 size={55}
@@ -607,6 +641,18 @@ export default function ChickenFarmPage() {
           breedId={crackModal.breedId}
           onClose={() =>
             setCrackModal((prev) => ({
+              ...prev,
+              isOpen: false,
+            }))
+          }
+        />
+
+        {/* Chicken Details & Selling Modal */}
+        <ChickenDetailsModal
+          isOpen={chickenModal.isOpen}
+          slotIndex={chickenModal.slotIndex}
+          onClose={() =>
+            setChickenModal((prev) => ({
               ...prev,
               isOpen: false,
             }))

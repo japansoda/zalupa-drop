@@ -24,19 +24,42 @@ interface EggCrackingModalProps {
   onClose: () => void;
 }
 
+// 16 jagged procedural eggshell fragments bursting in 360-degree trajectories
+const SHELL_SHARDS = [
+  { id: 1, tx: -150, ty: -140, rot: -320, size: 28, path: 'M0,0 L24,4 L16,22 Z' },
+  { id: 2, tx: 140, ty: -155, rot: 360, size: 32, path: 'M4,0 L28,10 L10,26 Z' },
+  { id: 3, tx: -190, ty: -25, rot: -240, size: 26, path: 'M0,6 L20,0 L16,22 Z' },
+  { id: 4, tx: 185, ty: -40, rot: 280, size: 30, path: 'M2,2 L24,4 L12,24 Z' },
+  { id: 5, tx: -160, ty: 120, rot: -190, size: 34, path: 'M0,8 L26,0 L18,28 Z' },
+  { id: 6, tx: 150, ty: 135, rot: 310, size: 27, path: 'M5,0 L24,12 L7,22 Z' },
+  { id: 7, tx: -30, ty: -200, rot: -180, size: 31, path: 'M0,4 L22,0 L13,23 Z' },
+  { id: 8, tx: 40, ty: -195, rot: 210, size: 29, path: 'M3,0 L26,7 L9,24 Z' },
+  { id: 9, tx: -45, ty: 190, rot: 260, size: 33, path: 'M2,7 L23,0 L14,26 Z' },
+  { id: 10, tx: 50, ty: 185, rot: -220, size: 30, path: 'M0,2 L25,5 L11,23 Z' },
+  { id: 11, tx: -115, ty: -95, rot: 150, size: 22, path: 'M0,0 L16,5 L9,16 Z' },
+  { id: 12, tx: 120, ty: -90, rot: -160, size: 24, path: 'M2,0 L18,7 L7,18 Z' },
+  { id: 13, tx: -125, ty: 75, rot: 190, size: 20, path: 'M0,3 L16,0 L10,16 Z' },
+  { id: 14, tx: 115, ty: 85, rot: -210, size: 23, path: 'M2,0 L17,9 L5,17 Z' },
+  { id: 15, tx: 0, ty: -160, rot: 45, size: 25, path: 'M0,0 L20,3 L10,20 Z' },
+  { id: 16, tx: 0, ty: 160, rot: -45, size: 25, path: 'M0,3 L20,0 L12,20 Z' },
+];
+
 export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
   isOpen,
   slotIndex,
   breedId,
   onClose,
 }) => {
-  const { claimEggDrop, sellSkin } = useGameStore();
+  const { farmSlots, claimEggDrop, sellSkin } = useGameStore();
   const { locale } = useLanguage();
 
   const [phase, setPhase] = useState<'ready' | 'cracking' | 'revealed'>('ready');
   const [crackStage, setCrackStage] = useState<0 | 1 | 2 | 3>(0);
   const [droppedSkin, setDroppedSkin] = useState<SkinEntity | null>(null);
+  const [showShards, setShowShards] = useState(false);
 
+  const slot = farmSlots[slotIndex];
+  const hasLuck = Boolean(slot?.hasLuckPotion);
   const breed = CHICKEN_BREEDS[breedId] || CHICKEN_BREEDS.white_inferno;
 
   useEffect(() => {
@@ -44,6 +67,7 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
       setPhase('ready');
       setCrackStage(0);
       setDroppedSkin(null);
+      setShowShards(false);
     }
   }, [isOpen]);
 
@@ -59,11 +83,12 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
     setTimeout(() => {
       setCrackStage(2);
       sound.playEggCrack();
-    }, 550);
+    }, 500);
 
-    // Stage 3 (Crack open & reveal)
+    // Stage 3 (Crack open, blast shards & reveal)
     setTimeout(() => {
       setCrackStage(3);
+      setShowShards(true);
       sound.playEggCrack();
 
       const skin = claimEggDrop(slotIndex);
@@ -72,26 +97,30 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
         setPhase('revealed');
         sound.playWin(skin.rarity);
 
-        const isHighTier = skin.priceDc >= 10000 || skin.name.startsWith('★') || skin.rarity === 'gold' || skin.rarity === 'extraordinary';
+        const isHighTier =
+          skin.priceDc >= 10000 ||
+          skin.name.startsWith('★') ||
+          skin.rarity === 'gold' ||
+          skin.rarity === 'extraordinary';
         const isMidTier = skin.priceDc >= 1000;
 
         if (isHighTier) {
           confetti({
-            particleCount: 240,
-            spread: 100,
+            particleCount: 260,
+            spread: 110,
             origin: { y: 0.5 },
-            colors: ['#ffd700', '#f59e0b', '#ef4444', '#38bdf8', '#ffffff'],
+            colors: ['#ffd700', '#f59e0b', '#ef4444', '#38bdf8', '#ffffff', '#22c55e'],
           });
         } else if (isMidTier) {
           confetti({
-            particleCount: 140,
-            spread: 75,
+            particleCount: 150,
+            spread: 80,
             origin: { y: 0.6 },
             colors: ['#facc15', '#ffffff', '#38bdf8', '#eab308', '#ec4899'],
           });
         } else {
           confetti({
-            particleCount: 70,
+            particleCount: 75,
             spread: 55,
             origin: { y: 0.6 },
             colors: ['#38bdf8', '#ffffff', '#facc15'],
@@ -100,7 +129,7 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
       } else {
         onClose();
       }
-    }, 1150);
+    }, 1100);
   };
 
   const handleSell = () => {
@@ -113,27 +142,68 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
     onClose();
   };
 
-  const rarityCfg = droppedSkin ? (RARITY_CONFIG[droppedSkin.rarity] || RARITY_CONFIG.milspec) : RARITY_CONFIG.milspec;
-  const isLegendaryDrop = droppedSkin && (droppedSkin.priceDc >= 10000 || droppedSkin.name.startsWith('★') || droppedSkin.rarity === 'gold');
+  const rarityCfg = droppedSkin
+    ? RARITY_CONFIG[droppedSkin.rarity] || RARITY_CONFIG.milspec
+    : RARITY_CONFIG.milspec;
+  const isLegendaryDrop =
+    droppedSkin &&
+    (droppedSkin.priceDc >= 10000 || droppedSkin.name.startsWith('★') || droppedSkin.rarity === 'gold');
   const isRareDrop = droppedSkin && !isLegendaryDrop && droppedSkin.priceDc >= 1000;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
       <style jsx>{`
         @keyframes eggWobble {
-          0%, 100% { transform: rotate(0deg); }
-          25% { transform: rotate(-5deg) scale(1.03); }
-          75% { transform: rotate(5deg) scale(1.03); }
+          0%, 100% {
+            transform: rotate(0deg);
+          }
+          25% {
+            transform: rotate(-6deg) scale(1.04);
+          }
+          75% {
+            transform: rotate(6deg) scale(1.04);
+          }
         }
         @keyframes sunburstSpin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes shardFly {
+          0% {
+            transform: translate(0, 0) scale(1) rotate(0deg);
+            opacity: 1;
+          }
+          60% {
+            opacity: 0.9;
+          }
+          100% {
+            transform: translate(var(--tx), var(--ty)) scale(0.4) rotate(var(--rot));
+            opacity: 0;
+          }
+        }
+        @keyframes floatClover {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-8px) rotate(15deg);
+          }
         }
         .animate-egg-wobble {
-          animation: eggWobble 0.22s infinite;
+          animation: eggWobble 0.2s infinite;
         }
         .animate-sunburst {
-          animation: sunburstSpin 20s linear infinite;
+          animation: sunburstSpin 22s linear infinite;
+        }
+        .animate-shell-shard {
+          animation: shardFly 0.95s cubic-bezier(0.12, 0.85, 0.35, 1) forwards;
+        }
+        .animate-clover {
+          animation: floatClover 2.2s ease-in-out infinite;
         }
       `}</style>
 
@@ -149,22 +219,30 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
           </button>
         )}
 
-        {/* Breed Attribution Pill */}
-        <div
-          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-4 border"
-          style={{
-            borderColor: `${breed.color}40`,
-            backgroundColor: `${breed.color}15`,
-            color: breed.color,
-          }}
-        >
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>{locale === 'ru' ? (breed.eggNameRu || breed.name) : (breed.eggNameEn || breed.nameEn)}</span>
+        {/* Breed Attribution & Luck Pill */}
+        <div className="flex items-center gap-2 mb-4 flex-wrap justify-center">
+          <div
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider border"
+            style={{
+              borderColor: `${breed.color}40`,
+              backgroundColor: `${breed.color}15`,
+              color: breed.color,
+            }}
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>{locale === 'ru' ? breed.eggNameRu || breed.name : breed.eggNameEn || breed.nameEn}</span>
+          </div>
+
+          {hasLuck && (
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider border bg-emerald-500/15 border-emerald-400/40 text-emerald-300 shadow-[0_0_15px_rgba(34,197,94,0.3)] animate-clover">
+              <span>🍀 {locale === 'ru' ? 'Зелье удачи' : 'Luck Potion'}</span>
+            </div>
+          )}
         </div>
 
         {/* Phase: Ready or Cracking */}
         {phase !== 'revealed' && (
-          <div className="flex flex-col items-center my-4 sm:my-6">
+          <div className="flex flex-col items-center my-4 sm:my-6 relative">
             <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight mb-2">
               {phase === 'cracking'
                 ? locale === 'ru'
@@ -175,30 +253,64 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
                 : 'Drop Egg is ready!'}
             </h2>
             <p className="text-xs sm:text-sm text-white/50 max-w-sm mb-6">
-              {locale === 'ru'
+              {hasLuck
+                ? locale === 'ru'
+                  ? '🍀 Зелье удачи активно! Повышенный шанс на ножи, перчатки и тайное!'
+                  : '🍀 Luck potion active! Boosted knife, glove, and covert rates!'
+                : locale === 'ru'
                 ? 'Внутри находится подлинное оружие, нож или перчатки CS2'
                 : 'Inside lies an authentic CS2 weapon, knife, or gloves skin'}
             </p>
 
-            {/* Unique Breed Egg with Live Cracking Animation */}
-            <div
-              className={`relative cursor-pointer transition-transform ${
-                phase === 'cracking'
-                  ? crackStage === 1
-                    ? 'animate-egg-wobble'
-                    : crackStage === 2
-                    ? 'scale-105 animate-egg-wobble'
-                    : 'scale-110'
-                  : 'hover:scale-105 active:scale-95'
-              }`}
-              onClick={phase === 'ready' ? handleStartCrack : undefined}
-            >
-              <BreedEgg
-                breedId={breedId}
-                size={160}
-                crackStage={crackStage}
-                glowing={true}
-              />
+            {/* Egg Container with Procedural Flying Shards */}
+            <div className="relative flex items-center justify-center my-2">
+              {/* Flying Eggshell Shards (Explosion at break) */}
+              {showShards && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
+                  {SHELL_SHARDS.map((shard) => (
+                    <svg
+                      key={shard.id}
+                      width={shard.size}
+                      height={shard.size}
+                      viewBox="0 0 32 32"
+                      className="absolute animate-shell-shard drop-shadow-md"
+                      style={
+                        {
+                          '--tx': `${shard.tx}px`,
+                          '--ty': `${shard.ty}px`,
+                          '--rot': `${shard.rot}deg`,
+                          fill: breed.eggShellColor || '#e2e8f0',
+                          stroke: '#0f172a',
+                          strokeWidth: 1.5,
+                        } as React.CSSProperties
+                      }
+                    >
+                      <path d={shard.path} />
+                    </svg>
+                  ))}
+                </div>
+              )}
+
+              {/* Egg Visual */}
+              <div
+                className={`relative cursor-pointer transition-transform ${
+                  phase === 'cracking'
+                    ? crackStage === 1
+                      ? 'animate-egg-wobble'
+                      : crackStage === 2
+                      ? 'scale-105 animate-egg-wobble'
+                      : 'scale-115'
+                    : 'hover:scale-105 active:scale-95'
+                }`}
+                onClick={phase === 'ready' ? handleStartCrack : undefined}
+              >
+                <BreedEgg
+                  breedId={breedId}
+                  size={160}
+                  crackStage={crackStage}
+                  glowing={true}
+                />
+              </div>
             </div>
 
             {/* Action Prompt */}
@@ -215,7 +327,7 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
 
             {phase === 'cracking' && (
               <div className="mt-8 flex items-center gap-2 text-xs font-mono font-bold text-yellow-400 animate-pulse">
-                <span>{crackStage === 1 ? '⚡ Трещина скорлупы...' : '💥 Пробитие ядра!'}</span>
+                <span>{crackStage === 1 ? '⚡ Трещина скорлупы...' : '💥 Раскол скорлупы!'}</span>
               </div>
             )}
           </div>
@@ -251,22 +363,10 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
               style={{
                 borderColor: rarityCfg.border,
                 boxShadow: isLegendaryDrop
-                  ? `0 0 50px rgba(250,204,21,0.4)`
+                  ? `0 0 50px rgba(250,204,21,0.45)`
                   : `0 0 35px ${rarityCfg.color}40`,
               }}
             >
-              {/* Legendary Rotating Sunburst Rays */}
-              {isLegendaryDrop && (
-                <div className="animate-sunburst absolute inset-0 -m-20 pointer-events-none opacity-20">
-                  <div
-                    className="w-full h-full"
-                    style={{
-                      background: 'conic-gradient(from 0deg, transparent 0deg 20deg, #facc15 20deg 40deg, transparent 40deg 60deg, #facc15 60deg 80deg, transparent 80deg 100deg, #facc15 100deg 120deg, transparent 120deg 140deg, #facc15 140deg 160deg, transparent 160deg 180deg, #facc15 180deg 200deg, transparent 200deg 220deg, #facc15 220deg 240deg, transparent 240deg 260deg, #facc15 260deg 280deg, transparent 280deg 300deg, #facc15 300deg 320deg, transparent 320deg 340deg, #facc15 340deg 360deg)',
-                    }}
-                  />
-                </div>
-              )}
-
               {/* Top Badges */}
               <div className="w-full flex items-center justify-between mb-2 z-10">
                 <div className="flex items-center gap-1.5">
@@ -276,13 +376,27 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
                 <RarityBadge rarity={droppedSkin.rarity} size="sm" />
               </div>
 
-              {/* Skin Image */}
-              <div className="w-full h-44 sm:h-52 flex items-center justify-center my-3 z-10">
+              {/* Skin Image Container with PERFECTLY CENTERED Sunburst directly behind the weapon */}
+              <div className="relative w-full h-44 sm:h-52 flex items-center justify-center my-3 z-10 overflow-hidden">
+                {isLegendaryDrop && (
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div
+                      className="animate-sunburst w-[460px] h-[460px] shrink-0 rounded-full opacity-35"
+                      style={{
+                        background:
+                          'conic-gradient(from 0deg, transparent 0deg 18deg, #facc15 18deg 36deg, transparent 36deg 54deg, #facc15 54deg 72deg, transparent 72deg 90deg, #facc15 90deg 108deg, transparent 108deg 126deg, #facc15 126deg 144deg, transparent 144deg 162deg, #facc15 162deg 180deg, transparent 180deg 198deg, #facc15 198deg 216deg, transparent 216deg 234deg, #facc15 234deg 252deg, transparent 252deg 270deg, #facc15 270deg 288deg, transparent 288deg 306deg, #facc15 306deg 324deg, transparent 324deg 342deg, #facc15 342deg 360deg)',
+                        maskImage: 'radial-gradient(circle, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 70%)',
+                        WebkitMaskImage: 'radial-gradient(circle, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 70%)',
+                      }}
+                    />
+                  </div>
+                )}
+
                 <SkinImage
                   src={droppedSkin.image}
                   alt={droppedSkin.name}
                   size={240}
-                  className="w-full h-40 sm:h-48 object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.9)] animate-in zoom-in-95 duration-300"
+                  className="relative z-10 w-full h-40 sm:h-48 object-contain filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.95)] animate-in zoom-in-95 duration-300"
                 />
               </div>
 

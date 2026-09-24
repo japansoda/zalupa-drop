@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import confetti from 'canvas-confetti';
-import { ExternalLink, Check, ShoppingBag, FlaskConical, ShieldCheck, Zap, Sparkles, Ticket, Anchor, Egg } from 'lucide-react';
+import { ExternalLink, Check, ShoppingBag, FlaskConical, ShieldCheck, Zap, Sparkles, Ticket, Anchor, Egg, RotateCcw } from 'lucide-react';
 import { SkinEntity } from '../../lib/types';
 import { RARITY_CONFIG } from '../../data/skins';
 import { RarityBadge } from '../ui/RarityBadge';
@@ -21,9 +21,21 @@ interface DropModalProps {
   bonusConsumables?: { potions: number; saveTokens: number; zeus: number; hooks?: number; eggs?: number };
   onKeep: (remaining?: SkinEntity[]) => void;
   onSell: (remaining?: SkinEntity[]) => void;
+  onSpinAgain?: () => void;
+  spinAgainCost?: number;
+  openCount?: number;
 }
 
-export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumables, onKeep, onSell }) => {
+export const DropModal: React.FC<DropModalProps> = ({
+  skin,
+  skins,
+  bonusConsumables,
+  onKeep,
+  onSell,
+  onSpinAgain,
+  spinAgainCost,
+  openCount,
+}) => {
   const { t, locale } = useLanguage();
   const rawItems: SkinEntity[] = useMemo(() => {
     return (skins && skins.length > 0) ? skins : (skin ? [skin] : []);
@@ -416,46 +428,71 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
           </div>
         )}
 
-        {/* Keep / Sell Buttons */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
-          <button
-            type="button"
-            onClick={() => {
-              sound.playClick();
-              onKeep(items);
-            }}
-            className="w-full py-3.5 px-4 rounded-xl glass-button text-white font-black text-sm flex items-center justify-center gap-2 hover:bg-white/15 cursor-pointer active:scale-95 transition-all"
-          >
-            <Check className="w-4 h-4 text-emerald-400" />
-            <span>
-              {isMulti
-                ? locale === 'ru'
-                  ? `Забрать всё в инвентарь (${items.length})`
-                  : `Claim all to inventory (${items.length})`
-                : locale === 'ru'
-                ? 'В инвентарь'
-                : 'Claim to inventory'}
-            </span>
-          </button>
+        {/* Keep / Sell / Spin Again Action Buttons */}
+        <div className="flex flex-col gap-2.5 w-full">
+          {onSpinAgain && (
+            <button
+              type="button"
+              onClick={() => {
+                sound.playClick();
+                onKeep(items);
+                onSpinAgain();
+              }}
+              className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-300 text-black font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all shadow-[0_0_25px_rgba(250,204,21,0.45)]"
+            >
+              <RotateCcw className="w-4 h-4 stroke-[3]" />
+              <span>
+                {locale === 'ru'
+                  ? `Крутить еще ${openCount && openCount > 1 ? `(${openCount}x)` : ''} ${
+                      spinAgainCost ? `· ${spinAgainCost.toLocaleString('ru-RU')} DC` : ''
+                    }`
+                  : `Spin Again ${openCount && openCount > 1 ? `(${openCount}x)` : ''} ${
+                      spinAgainCost ? `· ${spinAgainCost.toLocaleString('ru-RU')} DC` : ''
+                    }`}
+              </span>
+            </button>
+          )}
 
-          <button
-            type="button"
-            onClick={() => {
-              onSell(items);
-            }}
-            className="w-full py-3.5 px-4 rounded-xl btn-yellow text-black font-black text-sm flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all"
-          >
-            <ShoppingBag className="w-4 h-4" />
-            <span>
-              {isMulti
-                ? locale === 'ru'
-                  ? `Продать всё (+${totalPriceDc.toLocaleString('ru-RU')} DC)`
-                  : `Sell all (+${totalPriceDc.toLocaleString('ru-RU')} DC)`
-                : locale === 'ru'
-                ? `Продать (${totalPriceDc.toLocaleString('ru-RU')} DC)`
-                : `Sell (${totalPriceDc.toLocaleString('ru-RU')} DC)`}
-            </span>
-          </button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full">
+            <button
+              type="button"
+              onClick={() => {
+                sound.playClick();
+                onKeep(items);
+              }}
+              className="w-full py-3 px-4 rounded-xl glass-button text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 hover:bg-white/15 cursor-pointer active:scale-95 transition-all"
+            >
+              <Check className="w-4 h-4 text-emerald-400" />
+              <span>
+                {isMulti
+                  ? locale === 'ru'
+                    ? `В инвентарь (${items.length})`
+                    : `Claim all (${items.length})`
+                  : locale === 'ru'
+                  ? 'В инвентарь'
+                  : 'Claim to inventory'}
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                onSell(items);
+              }}
+              className="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all border border-white/10"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              <span>
+                {isMulti
+                  ? locale === 'ru'
+                    ? `Продать всё (+${totalPriceDc.toLocaleString('ru-RU')} DC)`
+                    : `Sell all (+${totalPriceDc.toLocaleString('ru-RU')} DC)`
+                  : locale === 'ru'
+                  ? `Продать (+${totalPriceDc.toLocaleString('ru-RU')} DC)`
+                  : `Sell (+${totalPriceDc.toLocaleString('ru-RU')} DC)`}
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
