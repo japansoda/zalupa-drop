@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Box, Zap, FileText, Briefcase, Plus } from 'lucide-react';
+import { Box, Zap, FileText, Briefcase, Plus, Store, Egg } from 'lucide-react';
 import { useGameStore } from '../../store/useGameStore';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
@@ -17,8 +17,10 @@ export const MobileNav: React.FC = () => {
 
   const navItems = [
     { href: '/', label: t('nav.cases') || (locale === 'ru' ? 'Кейсы' : 'Cases'), icon: Box },
+    { href: '/market', label: t('nav.market') || (locale === 'ru' ? 'Маркет' : 'Market'), icon: Store },
     { href: '/upgrader', label: t('nav.upgrader') || (locale === 'ru' ? 'Апгрейд' : 'Upgrader'), icon: Zap },
     { href: '/contract', label: t('nav.contract') || (locale === 'ru' ? 'Контракт' : 'Contract'), icon: FileText },
+    { href: '/farm', label: t('nav.farm') || (locale === 'ru' ? 'Ферма' : 'Farm'), icon: Egg },
     { href: '/inventory', label: t('nav.inventory') || (locale === 'ru' ? 'Инвентарь' : 'Inventory'), icon: Briefcase, count: inventory.length },
   ];
 

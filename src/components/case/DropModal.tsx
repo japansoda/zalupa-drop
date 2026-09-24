@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import confetti from 'canvas-confetti';
-import { ExternalLink, Check, ShoppingBag, FlaskConical, ShieldCheck, Zap, Sparkles, Ticket, Anchor } from 'lucide-react';
+import { ExternalLink, Check, ShoppingBag, FlaskConical, ShieldCheck, Zap, Sparkles, Ticket, Anchor, Egg } from 'lucide-react';
 import { SkinEntity } from '../../lib/types';
 import { RARITY_CONFIG } from '../../data/skins';
 import { RarityBadge } from '../ui/RarityBadge';
@@ -18,7 +18,7 @@ import { getSteamMarketListingUrl, isStatTrakableItem } from '../../lib/steam';
 interface DropModalProps {
   skin?: SkinEntity | null;
   skins?: SkinEntity[];
-  bonusConsumables?: { potions: number; saveTokens: number; zeus: number; hooks?: number };
+  bonusConsumables?: { potions: number; saveTokens: number; zeus: number; hooks?: number; eggs?: number };
   onKeep: (remaining?: SkinEntity[]) => void;
   onSell: (remaining?: SkinEntity[]) => void;
 }
@@ -46,7 +46,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
   );
 
   const hasBonus = Boolean(
-    bonusConsumables && ((bonusConsumables.potions || 0) + (bonusConsumables.saveTokens || 0) + (bonusConsumables.zeus || 0) + (bonusConsumables.hooks || 0) > 0)
+    bonusConsumables && ((bonusConsumables.potions || 0) + (bonusConsumables.saveTokens || 0) + (bonusConsumables.zeus || 0) + (bonusConsumables.hooks || 0) + (bonusConsumables.eggs || 0) > 0)
   );
 
   useEffect(() => {
@@ -278,7 +278,7 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                 {locale === 'ru' ? 'ДОПОЛНИТЕЛЬНЫЙ ДРОП' : 'BONUS DROP'}
               </span>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-black text-black bg-yellow-400 shadow-sm">
-                +{(bonusConsumables.potions || 0) + (bonusConsumables.saveTokens || 0) + (bonusConsumables.zeus || 0) + (bonusConsumables.hooks || 0)}
+                +{(bonusConsumables.potions || 0) + (bonusConsumables.saveTokens || 0) + (bonusConsumables.zeus || 0) + (bonusConsumables.hooks || 0) + (bonusConsumables.eggs || 0)}
               </span>
             </div>
 
@@ -381,6 +381,33 @@ export const DropModal: React.FC<DropModalProps> = ({ skin, skins, bonusConsumab
                       {locale === 'ru'
                         ? 'Зацеп за предмет mid-spin · 50/50 на выигрыш'
                         : 'Mid-spin item hook · 50/50 win grab'}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* Chicken Egg Bonus Card */}
+              {(bonusConsumables.eggs || 0) > 0 && (
+                <div
+                  className="flex items-center gap-3 p-3 rounded-xl glass-card border border-white/10 text-left w-full sm:max-w-md"
+                  style={{ borderBottomWidth: '3px', borderBottomColor: '#eab308' }}
+                >
+                  <div className="w-10 h-10 rounded-lg bg-yellow-500/15 flex items-center justify-center shrink-0">
+                    <Egg className="w-5 h-5 text-yellow-400" />
+                  </div>
+                  <div className="flex flex-col min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-black text-white truncate">
+                        {locale === 'ru' ? 'Куриное яйцо CS2' : 'CS2 Chicken Egg'}
+                      </span>
+                      <span className="text-[10px] font-mono font-black text-yellow-400 bg-yellow-400/10 px-1.5 py-0.5 rounded border border-yellow-400/20">
+                        {bonusConsumables.eggs}
+                      </span>
+                    </div>
+                    <span className="text-[11px] text-white/40 mt-0.5">
+                      {locale === 'ru'
+                        ? 'Отправлено в инкубатор фермы · Высиживается боевая курица!'
+                        : 'Sent to farm incubator · Hatches a combat chicken!'}
                     </span>
                   </div>
                 </div>

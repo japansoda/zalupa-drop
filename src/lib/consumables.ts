@@ -48,6 +48,16 @@ export const HOOK_ITEM: ConsumableItem = {
   icon: 'Anchor',
 };
 
+export const CHICKEN_EGG_ITEM: ConsumableItem = {
+  id: 'chicken_egg',
+  name: 'Куриное яйцо',
+  nameEn: 'Chicken Egg',
+  rarity: 'gold',
+  description: 'Инкубационное яйцо для фермы CS2. Вынашивается 2 часа и вылупляет боевую курицу!',
+  descriptionEn: 'Incubation egg for your CS2 chicken farm. Hatches into a CS2 chicken in 2 hours!',
+  icon: 'Egg',
+};
+
 export function getPotionName(locale: 'ru' | 'en' = 'ru'): string {
   return locale === 'en' ? LUCK_POTION.nameEn : LUCK_POTION.name;
 }
@@ -80,34 +90,46 @@ export function getHookDesc(locale: 'ru' | 'en' = 'ru'): string {
   return locale === 'en' ? HOOK_ITEM.descriptionEn : HOOK_ITEM.description;
 }
 
+export function getChickenEggName(locale: 'ru' | 'en' = 'ru'): string {
+  return locale === 'en' ? CHICKEN_EGG_ITEM.nameEn : CHICKEN_EGG_ITEM.name;
+}
+
+export function getChickenEggDesc(locale: 'ru' | 'en' = 'ru'): string {
+  return locale === 'en' ? CHICKEN_EGG_ITEM.descriptionEn : CHICKEN_EGG_ITEM.description;
+}
+
 /**
  * Roll rare bonus drop from opening a case.
- * Very low overall chance (approx 2.5%) for extra consumables.
+ * Very low overall chance (approx 3%) for extra consumables.
  */
 export function rollCaseBonusDrop(): {
   potion?: boolean;
   saveToken?: boolean;
   zeus?: boolean;
   hook?: boolean;
+  chickenEgg?: boolean;
 } {
-  // Low chance overall to get ANY bonus drop on opening a case: 2.8%
-  if (Math.random() > 0.028) {
+  // Low chance overall to get ANY bonus drop on opening a case: 3.2%
+  if (Math.random() > 0.032) {
     return {};
   }
 
   const roll = Math.random();
-  if (roll < 0.24) {
-    // 24% of bonus drops -> Luck Potion
+  if (roll < 0.20) {
+    // 20% of bonus drops -> Luck Potion
     return { potion: true };
-  } else if (roll < 0.58) {
-    // 34% of bonus drops -> Save Token (Guardian Aegis)
+  } else if (roll < 0.46) {
+    // 26% of bonus drops -> Save Token (Guardian Aegis)
     return { saveToken: true };
-  } else if (roll < 0.92) {
-    // 34% of bonus drops -> Zeus x27
+  } else if (roll < 0.72) {
+    // 26% of bonus drops -> Zeus x27
     return { zeus: true };
-  } else {
-    // 8% of bonus drops -> Grappling Hook (самый редкий расходник)
+  } else if (roll < 0.86) {
+    // 14% of bonus drops -> Grappling Hook
     return { hook: true };
+  } else {
+    // 14% of bonus drops -> Rare Chicken Egg!
+    return { chickenEgg: true };
   }
 }
 

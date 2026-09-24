@@ -2,11 +2,11 @@ import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react'
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { SkinEntity, InventoryItem, CaseItem, SkinRarity } from '../../lib/types';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
-import { RARITY_CONFIG } from '../../data/skins';
+import { RARITY_CONFIG, SKINS_DATABASE } from '../../data/skins';
 import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
 import { CASES_DATABASE } from '../../data/cases';
-import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, ShieldCheck, Percent, LayoutGrid, Sword, Hand, Crosshair, Zap, Target, Flame, Shield, Sticker, User, KeyRound, FlaskConical, Anchor } from 'lucide-react';
+import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, ShieldCheck, Percent, LayoutGrid, Sword, Hand, Crosshair, Zap, Target, Flame, Shield, Sticker, User, KeyRound, FlaskConical, Anchor, Store, ShoppingBag, Briefcase } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CashbackModal } from './CashbackModal';
 import { WearBadge } from '../ui/WearBadge';
@@ -148,6 +148,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const [catalogType, setCatalogType] = useState('all');
   const [catalogWeapon, setCatalogWeapon] = useState('all');
   const [catalogSort, setCatalogSort] = useState<'asc' | 'desc'>('asc');
+
+  // Mini-Marketplace in Left Panel
+  const [leftPanelMode, setLeftPanelMode] = useState<'inventory' | 'market'>('inventory');
+  const [miniMarketSearch, setMiniMarketSearch] = useState('');
+  const [miniMarketType, setMiniMarketType] = useState('all');
+  const [miniMarketSort, setMiniMarketSort] = useState<'asc' | 'desc'>('asc');
 
   // Infinite scroll for catalog
   const [catalogLimit, setCatalogLimit] = useState(60);
@@ -1045,6 +1051,61 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     result.sort((a, b) => (catalogSort === 'asc' ? a.priceDc - b.priceDc : b.priceDc - a.priceDc));
     return result;
   }, [catalogSkins, catalogSearch, catalogRarity, catalogType, catalogWeapon, catalogSort, effectiveBetDc, maxTargetPrice]);
+
+  // Mini-Marketplace skins pool for instant in-upgrader purchase
+  const filteredMiniMarketSkins = useMemo((): SkinEntity[] => {
+    let pool: SkinEntity[] = SKINS_DATABASE.filter(isActualWeapon);
+
+    if (miniMarketType !== 'all') {
+      pool = pool.filter((s: SkinEntity) => matchesCatalogType(s, miniMarketType));
+    }
+
+    if (miniMarketSearch.trim()) {
+      const q = miniMarketSearch.toLowerCase().trim();
+      pool = pool.filter(
+        (s: SkinEntity) =>
+          s.name.toLowerCase().includes(q) ||
+          (s.skinName || '').toLowerCase().includes(q) ||
+          (s.weapon || '').toLowerCase().includes(q)
+      );
+    }
+
+    pool = [...pool].sort((a: SkinEntity, b: SkinEntity) =>
+      miniMarketSort === 'asc' ? a.priceDc - b.priceDc : b.priceDc - a.priceDc
+    );
+
+    return pool.slice(0, 100);
+  }, [miniMarketType, miniMarketSearch, miniMarketSort]);
+
+  const handleBuyAndSelectSkin = (skin: SkinEntity) => {
+    sound.playClick();
+    if (balance < skin.priceDc) {
+      sound.playError();
+      alert(locale === 'ru' ? 'Недостаточно DC для покупки этого скина!' : 'Not enough DC to purchase this skin!');
+      return;
+    }
+    const success = deductBalance(skin.priceDc);
+    if (!success) return;
+
+    sound.playBuy();
+
+    const instanceId = `${skin.id}_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+    const newInvItem: InventoryItem = {
+      ...skin,
+      instanceId,
+      obtainedAt: Date.now(),
+    };
+    useGameStore.getState().addToInventory([skin]);
+
+    if (selectedItems.length < 5) {
+      setSelectedItems((prev) => {
+        const next = [...prev, newInvItem];
+        const nextBet = next.reduce((sum, i) => sum + i.priceDc, 0);
+        autoSelectTargetSkin(targetChance, nextBet);
+        return next;
+      });
+    }
+  };
 
   // Dynamic list of unique weapons present in the catalog matching current bet and catalogType
   const availableWeapons = useMemo(() => {
@@ -2096,46 +2157,52 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
               {/* Center Display Hub */}
               <div className="relative z-10 w-40 h-40 rounded-full bg-[#0a0a0f] border-4 border-[#1f212e] flex flex-col items-center justify-center text-center shadow-inner">
-                <span className="font-mono font-black text-4xl sm:text-5xl text-white tracking-tight">
-                  {chance < 1 ? chance.toFixed(2) : chance.toFixed(1)}%
-                </span>
-                {activePotionCharges > 0 && isPotionUsed && potionBonus > 0 ? (
-                  <div className="flex items-center gap-1 mt-1 font-mono text-[11px] font-bold text-emerald-400 tracking-tight">
-                    <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>+{potionBonus % 1 === 0 ? potionBonus.toFixed(0) : potionBonus.toFixed(1)}%</span>
-                    <span className="text-emerald-500/60">·</span>
-                    <span className="text-zinc-300">{activePotionCharges}/3</span>
-                  </div>
-                ) : activePotionCharges > 0 && isBaseAtMax ? (
-                  <div className="flex items-center gap-1 mt-1 font-mono text-[10px] font-semibold text-emerald-400/80">
-                    <FlaskConical className="w-3 h-3 text-emerald-400/80" />
-                    <span>{t('upg.potionSaved')}</span>
-                    <span className="text-zinc-400">{activePotionCharges}/3</span>
-                  </div>
-                ) : null}
-
-                {zeusUsedThisSpin && zeusBonus > 0 && (
-                  <div className="flex items-center gap-1 mt-0.5 font-mono text-[10px] font-bold text-sky-400 tracking-tight">
-                    <svg viewBox="0 0 10 14" className="zeus-spark-item inline-block w-[9px] h-[12px] filter drop-shadow-[0_0_5px_#38bdf8]" style={{ animationDuration: '0.5s' }}>
-                      <path
-                        d="M 6 1 L 2.5 8 L 5.5 8 L 4 13"
-                        fill="#38bdf8"
-                        stroke="#e0f2fe"
-                        strokeWidth="1"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <span>+{zeusBonus}% Zeus</span>
-                  </div>
-                )}
-
-                {potionBonus === 0 && zeusBonus === 0 && (
-                  <span
-                    className="text-[11px] font-bold mt-1 max-w-[120px] leading-tight"
-                    style={{ color: riskLabel.color }}
-                  >
-                    {riskLabel.text}
+                {lastResult === 'lose' ? (
+                  <span className="font-mono font-black text-2xl sm:text-3xl text-rose-500 uppercase tracking-tight drop-shadow-[0_0_12px_rgba(244,63,94,0.4)]">
+                    {locale === 'ru' ? 'НЕ БЕДА' : 'NO WORRIES'}
                   </span>
+                ) : (
+                  <span className="font-mono font-black text-4xl sm:text-5xl text-white tracking-tight">
+                    {chance < 1 ? chance.toFixed(2) : chance.toFixed(1)}%
+                  </span>
+                )}
+                {lastResult === 'lose' ? (
+                  <span className="text-xs font-bold text-zinc-300 mt-1 max-w-[130px] leading-tight">
+                    {locale === 'ru' ? 'Попробуем еще раз?' : 'Try again?'}
+                  </span>
+                ) : (
+                  <>
+                    {activePotionCharges > 0 && isPotionUsed && potionBonus > 0 ? (
+                      <div className="flex items-center gap-1 mt-1 font-mono text-[11px] font-bold text-emerald-400 tracking-tight">
+                        <FlaskConical className="w-3.5 h-3.5 text-emerald-400" />
+                        <span>+{potionBonus % 1 === 0 ? potionBonus.toFixed(0) : potionBonus.toFixed(1)}%</span>
+                        <span className="text-emerald-500/60">·</span>
+                        <span className="text-zinc-300">{activePotionCharges}/3</span>
+                      </div>
+                    ) : activePotionCharges > 0 && isBaseAtMax ? (
+                      <div className="flex items-center gap-1 mt-1 font-mono text-[10px] font-semibold text-emerald-400/80">
+                        <FlaskConical className="w-3 h-3 text-emerald-400/80" />
+                        <span>{t('upg.potionSaved')}</span>
+                        <span className="text-zinc-400">{activePotionCharges}/3</span>
+                      </div>
+                    ) : null}
+
+                    {zeusUsedThisSpin && zeusBonus > 0 && (
+                      <div className="flex items-center gap-1 mt-0.5 font-mono text-[10px] font-bold text-sky-400 tracking-tight">
+                        <Zap className="w-3.5 h-3.5 text-sky-400 fill-sky-400 animate-pulse shrink-0" />
+                        <span>+{zeusBonus}% Zeus</span>
+                      </div>
+                    )}
+
+                    {potionBonus === 0 && zeusBonus === 0 && (
+                      <span
+                        className="text-[11px] font-bold mt-1 max-w-[120px] leading-tight"
+                        style={{ color: riskLabel.color }}
+                      >
+                        {riskLabel.text}
+                      </span>
+                    )}
+                  </>
                 )}
               </div>
 
@@ -2463,94 +2530,263 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Left Bottom: МОИ СКИНЫ */}
         <div className="rounded-3xl p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col">
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-white/10">
+            {/* Miniature Toggle: Inventory vs Market */}
             <div className="flex items-center gap-2">
-              <h2 className="text-base font-black text-white uppercase">{t('upg.myInventory')}</h2>
-              <span className="text-xs font-bold text-white/40">({inventory.length})</span>
-            </div>
-
-            {selectedItems.length > 0 && (
-              <button
-                type="button"
-                onClick={handleClearAllSelected}
-                className="text-xs text-white/50 hover:text-white flex items-center gap-1 cursor-pointer"
-              >
-                <RotateCcw className="w-3 h-3" />
-                <span>{t('upg.clearAll')}</span>
-              </button>
-            )}
-          </div>
-
-          {/* Search */}
-          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-black/40 border border-white/10 mb-4">
-            <Search className="w-4 h-4 text-white/40" />
-            <input
-              type="text"
-              placeholder={t('upg.searchMy')}
-              value={mySearch}
-              onChange={(e) => setMySearch(e.target.value)}
-              className="w-full bg-transparent text-xs text-white outline-none"
-            />
-          </div>
-
-          {/* Inventory Grid */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-h-[400px] min-h-0 overflow-y-auto overscroll-contain pr-1 pb-3 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
-            {filteredMySkins.length === 0 ? (
-              <div className="col-span-full py-12 text-center text-xs text-white/40">
-                {t('inv.emptyHint')}
-              </div>
-            ) : (
-              filteredMySkins.map((item) => {
-                const isSelected = selectedItems.some((i) => i.instanceId === item.instanceId);
-
-                return (
-                  <button
-                    key={item.instanceId}
-                    type="button"
-                    onClick={() => handleToggleInventoryItem(item)}
-                    className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
-                      isSelected
-                        ? 'border-yellow-400 bg-yellow-400/10 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
-                        : 'border-white/10 bg-black/40 hover:border-white/20'
+              <div className="flex items-center bg-black/60 p-1 rounded-xl border border-white/10">
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playClick();
+                    setLeftPanelMode('inventory');
+                  }}
+                  title={locale === 'ru' ? 'Мой инвентарь' : 'My inventory'}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    leftPanelMode === 'inventory'
+                      ? 'bg-yellow-400 text-black shadow-sm'
+                      : 'text-white/60 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  <Briefcase className="w-3.5 h-3.5" />
+                  <span>{locale === 'ru' ? 'Инвентарь' : 'Inventory'}</span>
+                  <span
+                    className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full font-black ${
+                      leftPanelMode === 'inventory'
+                        ? 'bg-black/20 text-black'
+                        : 'bg-white/10 text-white/60'
                     }`}
                   >
-                    {isSelected && (
-                      <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
-                        <Check className="w-3.5 h-3.5 stroke-[3]" />
-                      </div>
-                    )}
+                    {inventory.length}
+                  </span>
+                </button>
 
-                    {/* Top Badges Row */}
-                    <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
-                      <div className="flex items-center gap-1">
-                        {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
-                        <WearBadge skin={item} size="xs" />
-                      </div>
-                    </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playClick();
+                    setLeftPanelMode('market');
+                  }}
+                  title={locale === 'ru' ? 'Быстрый маркетплейс (покупка за коины)' : 'Quick marketplace (buy with DC)'}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    leftPanelMode === 'market'
+                      ? 'bg-yellow-400 text-black shadow-sm'
+                      : 'text-white/60 hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  <Store className="w-3.5 h-3.5" />
+                  <span>{locale === 'ru' ? 'Маркет' : 'Market'}</span>
+                  <span className="text-[9px] font-black uppercase px-1 py-0.2 rounded bg-sky-500/20 text-sky-400 border border-sky-500/30">
+                    DC
+                  </span>
+                </button>
+              </div>
+            </div>
 
-                    <div className="w-full h-[72px] sm:h-28 flex items-center justify-center my-1">
-                      <SkinImage
-                        src={item.image}
-                        alt={item.name}
-                        size={140}
-                        className="w-full h-14 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
-                      />
-                    </div>
-
-                    <div className="w-full flex flex-col">
-                      <span className="text-[11px] font-black text-white truncate">
-                        {item.skinName || item.name}
-                      </span>
-                      <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
-                      <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-                        {item.priceDc.toLocaleString('ru-RU')} DC
-                      </span>
-                    </div>
-                  </button>
-                );
-              })
+            {leftPanelMode === 'inventory' ? (
+              selectedItems.length > 0 && (
+                <button
+                  type="button"
+                  onClick={handleClearAllSelected}
+                  className="text-xs text-white/50 hover:text-white flex items-center gap-1 cursor-pointer self-start sm:self-center"
+                >
+                  <RotateCcw className="w-3 h-3" />
+                  <span>{t('upg.clearAll')}</span>
+                </button>
+              )
+            ) : (
+              <div className="flex items-center gap-2 self-start sm:self-center">
+                <div className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-black/60 border border-white/10 text-yellow-400 font-mono text-xs font-black">
+                  <DropCoinIcon className="w-3.5 h-3.5" />
+                  <span>{balance.toLocaleString('ru-RU')} DC</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setMiniMarketSort((prev) => (prev === 'asc' ? 'desc' : 'asc'))}
+                  className="p-1.5 rounded-lg bg-black/60 border border-white/10 text-white/70 hover:text-white text-xs cursor-pointer font-bold"
+                  title={miniMarketSort === 'asc' ? 'Цена: Дешевле ↑' : 'Цена: Дороже ↓'}
+                >
+                  {miniMarketSort === 'asc' ? '↑ DC' : '↓ DC'}
+                </button>
+              </div>
             )}
           </div>
+
+          {leftPanelMode === 'inventory' ? (
+            <>
+              {/* Search */}
+              <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-black/40 border border-white/10 mb-4">
+                <Search className="w-4 h-4 text-white/40" />
+                <input
+                  type="text"
+                  placeholder={t('upg.searchMy')}
+                  value={mySearch}
+                  onChange={(e) => setMySearch(e.target.value)}
+                  className="w-full bg-transparent text-xs text-white outline-none"
+                />
+              </div>
+
+              {/* Inventory Grid */}
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-h-[400px] min-h-0 overflow-y-auto overscroll-contain pr-1 pb-3 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
+                {filteredMySkins.length === 0 ? (
+                  <div className="col-span-full py-12 text-center text-xs text-white/40">
+                    {t('inv.emptyHint')}
+                  </div>
+                ) : (
+                  filteredMySkins.map((item) => {
+                    const isSelected = selectedItems.some((i) => i.instanceId === item.instanceId);
+
+                    return (
+                      <button
+                        key={item.instanceId}
+                        type="button"
+                        onClick={() => handleToggleInventoryItem(item)}
+                        className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
+                          isSelected
+                            ? 'border-yellow-400 bg-yellow-400/10 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
+                            : 'border-white/10 bg-black/40 hover:border-white/20'
+                        }`}
+                      >
+                        {isSelected && (
+                          <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
+                            <Check className="w-3.5 h-3.5 stroke-[3]" />
+                          </div>
+                        )}
+
+                        {/* Top Badges Row */}
+                        <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
+                          <div className="flex items-center gap-1">
+                            {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
+                            <WearBadge skin={item} size="xs" />
+                          </div>
+                        </div>
+
+                        <div className="w-full h-[72px] sm:h-28 flex items-center justify-center my-1">
+                          <SkinImage
+                            src={item.image}
+                            alt={item.name}
+                            size={140}
+                            className="w-full h-14 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
+                          />
+                        </div>
+
+                        <div className="w-full flex flex-col">
+                          <span className="text-[11px] font-black text-white truncate">
+                            {item.skinName || item.name}
+                          </span>
+                          <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
+                          <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
+                            {item.priceDc.toLocaleString('ru-RU')} DC
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  })
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Mini Market Category Pills */}
+              <div className="flex flex-wrap items-center gap-1.5 mb-3">
+                {[
+                  { id: 'all', label: locale === 'ru' ? 'Все' : 'All' },
+                  { id: 'knives', label: locale === 'ru' ? 'Ножи' : 'Knives' },
+                  { id: 'gloves', label: locale === 'ru' ? 'Перчатки' : 'Gloves' },
+                  { id: 'rifles', label: locale === 'ru' ? 'Винтовки' : 'Rifles' },
+                  { id: 'pistols', label: locale === 'ru' ? 'Пистолеты' : 'Pistols' },
+                  { id: 'smgs', label: locale === 'ru' ? 'ПП' : 'SMGs' },
+                ].map((cat) => (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => {
+                      sound.playClick();
+                      setMiniMarketType(cat.id);
+                    }}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer border ${
+                      miniMarketType === cat.id
+                        ? 'bg-yellow-400 text-black border-yellow-300 shadow-sm font-black'
+                        : 'bg-white/5 border-white/10 text-white/70 hover:text-white hover:bg-white/10'
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Search */}
+              <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-black/40 border border-white/10 mb-3">
+                <Search className="w-4 h-4 text-white/40" />
+                <input
+                  type="text"
+                  placeholder={locale === 'ru' ? 'Поиск скинов для покупки...' : 'Search skins to buy...'}
+                  value={miniMarketSearch}
+                  onChange={(e) => setMiniMarketSearch(e.target.value)}
+                  className="w-full bg-transparent text-xs text-white outline-none"
+                />
+              </div>
+
+              {/* Mini Market Grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-[380px] min-h-0 overflow-y-auto overscroll-contain pr-1 pb-3 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
+                {filteredMiniMarketSkins.length === 0 ? (
+                  <div className="col-span-full py-12 text-center text-xs text-white/40">
+                    {locale === 'ru' ? 'Скины не найдены' : 'No skins found'}
+                  </div>
+                ) : (
+                  filteredMiniMarketSkins.map((item) => {
+                    const canAfford = balance >= item.priceDc;
+
+                    return (
+                      <div
+                        key={item.id}
+                        className="rounded-2xl p-2.5 flex flex-col justify-between border border-white/10 bg-black/40 hover:border-yellow-400/40 transition-all text-left group"
+                      >
+                        <div className="w-full flex items-center justify-between z-10 min-h-[18px] mb-1">
+                          <div className="flex items-center gap-1">
+                            {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
+                            <WearBadge skin={item} size="xs" />
+                          </div>
+                        </div>
+
+                        <div className="w-full h-20 flex items-center justify-center my-1">
+                          <SkinImage
+                            src={item.image}
+                            alt={item.name}
+                            size={120}
+                            className="w-full h-16 object-contain filter drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-200"
+                          />
+                        </div>
+
+                        <div className="w-full flex flex-col">
+                          <span className="text-[11px] font-black text-white truncate">
+                            {item.skinName || item.name}
+                          </span>
+                          <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
+                          <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
+                            {item.priceDc.toLocaleString('ru-RU')} DC
+                          </span>
+
+                          <button
+                            type="button"
+                            onClick={() => handleBuyAndSelectSkin(item)}
+                            disabled={!canAfford}
+                            className={`w-full mt-2 py-1.5 px-2 rounded-xl text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-1 transition-all ${
+                              canAfford
+                                ? 'bg-yellow-400 hover:bg-yellow-300 text-black shadow-[0_0_10px_rgba(250,204,21,0.3)] active:scale-95 cursor-pointer'
+                                : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
+                            }`}
+                          >
+                            <ShoppingBag className="w-3 h-3 shrink-0" />
+                            <span>{locale === 'ru' ? 'Купить' : 'Buy'}</span>
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            </>
+          )}
         </div>
 
         {/* Right Bottom: ВЫ ПОЛУЧАЕТЕ (Catalog, only items > bet) */}

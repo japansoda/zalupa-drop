@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Volume2, VolumeX, Plus, Briefcase, Zap, FileText, Box, FlaskConical, ShieldCheck, Anchor } from 'lucide-react';
+import { Volume2, VolumeX, Plus, Briefcase, Zap, FileText, Box, FlaskConical, ShieldCheck, Anchor, Store, Egg } from 'lucide-react';
 import { useGameStore } from '../../store/useGameStore';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { LogoSvg } from '../ui/LogoSvg';
@@ -17,8 +17,10 @@ export const Header: React.FC = () => {
 
   const navLinks = [
     { href: '/', label: t('nav.cases'), icon: Box },
+    { href: '/market', label: t('nav.market'), icon: Store },
     { href: '/upgrader', label: t('nav.upgrader'), icon: Zap },
     { href: '/contract', label: t('nav.contract'), icon: FileText },
+    { href: '/farm', label: t('nav.farm'), icon: Egg },
     { href: '/inventory', label: t('nav.inventory'), icon: Briefcase, count: inventory.length },
   ];
 

@@ -9,8 +9,10 @@ const translations: Record<Locale, Record<string, string>> = {
   ru: {
     // Nav
     'nav.cases': 'Кейсы',
+    'nav.market': 'Маркет',
     'nav.upgrader': 'Апгрейдер',
     'nav.contract': 'Контракты',
+    'nav.farm': 'Ферма',
     'nav.crash': 'Краш',
     'nav.inventory': 'Инвентарь',
     'nav.topup': 'Пополнить',
@@ -277,8 +279,10 @@ const translations: Record<Locale, Record<string, string>> = {
   en: {
     // Nav
     'nav.cases': 'Cases',
+    'nav.market': 'Market',
     'nav.upgrader': 'Upgrader',
     'nav.contract': 'Contracts',
+    'nav.farm': 'Farm',
     'nav.crash': 'Crash',
     'nav.inventory': 'Inventory',
     'nav.topup': 'Top Up',

@@ -4,6 +4,15 @@ import { InventoryItem, LiveDrop, SkinEntity, UserStats } from '../lib/types';
 import { sound } from '../lib/sound';
 import { SKINS_DATABASE } from '../data/skins';
 import { getSteamMarketHashName } from '../lib/steam';
+import {
+  FarmSlot,
+  ChickenEntity,
+  INCUBATION_DURATION_MS,
+  EGG_PRODUCTION_DURATION_MS,
+  rollHatchedChickenBreed,
+  rollEggSkinDrop,
+  CHICKEN_BREEDS,
+} from '../lib/farm';
 
 interface GameState {
   balance: number;
@@ -19,6 +28,19 @@ interface GameState {
   potionsCount: number;
   hookCount: number;
   activePotionCharges: number;
+
+  // Chicken Farm
+  farmSlots: FarmSlot[];
+  farmEggTokens: number;
+  depositSkinsForEgg: (skinInstanceIds: string[], targetSlotIndex?: number) => boolean;
+  addEggToken: (count?: number) => void;
+  placeEggToken: (slotIndex: number) => boolean;
+  hatchEgg: (slotIndex: number) => ChickenEntity | null;
+  feedChicken: (slotIndex: number) => boolean;
+  feedAllChickens: () => void;
+  claimEggDrop: (slotIndex: number) => SkinEntity | null;
+  speedUpIncubation: (slotIndex: number) => void;
+  speedUpEggProduction: (slotIndex: number) => void;
 
   // Case open popularity tracking
   caseOpenCounts: Record<string, number>;
@@ -64,6 +86,14 @@ export const useGameStore = create<GameState>()(
       potionsCount: 0,
       hookCount: 0,
       activePotionCharges: 0,
+      farmSlots: [
+        { index: 0, status: 'empty' },
+        { index: 1, status: 'empty' },
+        { index: 2, status: 'empty' },
+        { index: 3, status: 'empty' },
+        { index: 4, status: 'empty' },
+      ],
+      farmEggTokens: 0,
       stats: {
         casesOpened: 0,
         totalWonDc: 0,
@@ -285,6 +315,210 @@ export const useGameStore = create<GameState>()(
         return true;
       },
 
+      depositSkinsForEgg: (skinInstanceIds, targetSlotIndex) => {
+        if (skinInstanceIds.length !== 10) return false;
+        const currentInv = get().inventory;
+        const depositSkins = currentInv.filter((item) => skinInstanceIds.includes(item.instanceId));
+        if (depositSkins.length !== 10) return false;
+
+        const allEligible = depositSkins.every((item) => item.priceDc >= 1000);
+        if (!allEligible) return false;
+
+        const slots = [...get().farmSlots];
+        let slotIdx = -1;
+        if (typeof targetSlotIndex === 'number' && slots[targetSlotIndex]?.status === 'empty') {
+          slotIdx = targetSlotIndex;
+        } else {
+          slotIdx = slots.findIndex((s) => s.status === 'empty');
+        }
+
+        if (slotIdx === -1) return false;
+
+        get().removeFromInventory(skinInstanceIds);
+
+        slots[slotIdx] = {
+          index: slotIdx,
+          status: 'incubating',
+          incubationStartedAt: Date.now(),
+          incubatingUntil: Date.now() + INCUBATION_DURATION_MS,
+        };
+
+        set({ farmSlots: slots });
+        sound.playCashout();
+        return true;
+      },
+
+      addEggToken: (count = 1) => {
+        set((state) => {
+          const slots = [...state.farmSlots];
+          let remaining = count;
+          for (let i = 0; i < slots.length && remaining > 0; i++) {
+            if (slots[i].status === 'empty') {
+              slots[i] = {
+                index: i,
+                status: 'incubating',
+                incubationStartedAt: Date.now(),
+                incubatingUntil: Date.now() + INCUBATION_DURATION_MS,
+              };
+              remaining--;
+            }
+          }
+          return {
+            farmSlots: slots,
+            farmEggTokens: state.farmEggTokens + remaining,
+          };
+        });
+      },
+
+      placeEggToken: (slotIndex) => {
+        const state = get();
+        if (state.farmEggTokens <= 0) return false;
+        const slots = [...state.farmSlots];
+        if (!slots[slotIndex] || slots[slotIndex].status !== 'empty') return false;
+
+        slots[slotIndex] = {
+          index: slotIndex,
+          status: 'incubating',
+          incubationStartedAt: Date.now(),
+          incubatingUntil: Date.now() + INCUBATION_DURATION_MS,
+        };
+
+        set({
+          farmSlots: slots,
+          farmEggTokens: state.farmEggTokens - 1,
+        });
+        sound.playClick();
+        return true;
+      },
+
+      hatchEgg: (slotIndex) => {
+        const slots = [...get().farmSlots];
+        const slot = slots[slotIndex];
+        if (!slot) return null;
+
+        const breedId = rollHatchedChickenBreed();
+        const breed = CHICKEN_BREEDS[breedId];
+        const chicken: ChickenEntity = {
+          id: `chicken_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+          breedId,
+          name: breed.name,
+          nameEn: breed.nameEn,
+          hatchedAt: Date.now(),
+          eggsLaidCount: 0,
+        };
+
+        slots[slotIndex] = {
+          index: slotIndex,
+          status: 'chicken',
+          chicken,
+          feedStatus: 'hungry',
+        };
+
+        set({ farmSlots: slots });
+        sound.playEggHatch();
+        return chicken;
+      },
+
+      feedChicken: (slotIndex) => {
+        const slots = [...get().farmSlots];
+        const slot = slots[slotIndex];
+        if (!slot || slot.status !== 'chicken' || slot.feedStatus !== 'hungry') return false;
+
+        slots[slotIndex] = {
+          ...slot,
+          feedStatus: 'producing',
+          eggReadyUntil: Date.now() + EGG_PRODUCTION_DURATION_MS,
+        };
+
+        set({ farmSlots: slots });
+        sound.playFeedGrain();
+        setTimeout(() => {
+          sound.playChickenCluck();
+        }, 220);
+        return true;
+      },
+
+      feedAllChickens: () => {
+        const slots = [...get().farmSlots];
+        let fedCount = 0;
+        for (let i = 0; i < slots.length; i++) {
+          if (slots[i].status === 'chicken' && slots[i].feedStatus === 'hungry') {
+            slots[i] = {
+              ...slots[i],
+              feedStatus: 'producing',
+              eggReadyUntil: Date.now() + EGG_PRODUCTION_DURATION_MS,
+            };
+            fedCount++;
+          }
+        }
+        if (fedCount > 0) {
+          set({ farmSlots: slots });
+          sound.playFeedGrain();
+          setTimeout(() => {
+            sound.playChickenCluck();
+          }, 220);
+        }
+      },
+
+      claimEggDrop: (slotIndex) => {
+        const slots = [...get().farmSlots];
+        const slot = slots[slotIndex];
+        if (!slot) return null;
+
+        const isReady =
+          slot.status === 'egg_ready' ||
+          (slot.status === 'chicken' && !!slot.eggReadyUntil && slot.eggReadyUntil <= Date.now());
+        if (!isReady || !slot.chicken) return null;
+
+        const breedId = slot.readyEggBreed || slot.chicken.breedId;
+        const droppedSkin = rollEggSkinDrop(breedId);
+
+        get().addToInventory([droppedSkin]);
+
+        slots[slotIndex] = {
+          index: slotIndex,
+          status: 'chicken',
+          chicken: {
+            ...slot.chicken,
+            eggsLaidCount: (slot.chicken.eggsLaidCount || 0) + 1,
+          },
+          feedStatus: 'hungry',
+          eggReadyUntil: undefined,
+          readyEggBreed: undefined,
+        };
+
+        set({ farmSlots: slots });
+        sound.playWin(droppedSkin.rarity);
+        return droppedSkin;
+      },
+
+      speedUpIncubation: (slotIndex) => {
+        const slots = [...get().farmSlots];
+        if (slots[slotIndex]?.status === 'incubating') {
+          slots[slotIndex] = {
+            ...slots[slotIndex],
+            status: 'hatch_ready',
+            incubatingUntil: Date.now() - 1000,
+          };
+          set({ farmSlots: slots });
+          sound.playTick();
+        }
+      },
+
+      speedUpEggProduction: (slotIndex) => {
+        const slots = [...get().farmSlots];
+        if (slots[slotIndex]?.status === 'chicken' && slots[slotIndex]?.feedStatus === 'producing') {
+          slots[slotIndex] = {
+            ...slots[slotIndex],
+            status: 'egg_ready',
+            eggReadyUntil: Date.now() - 1000,
+            readyEggBreed: slots[slotIndex].chicken?.breedId,
+          };
+          set({ farmSlots: slots });
+          sound.playTick();
+        }
+      },
+
       recordCaseOpen: (caseId: string, count = 1) => {
         set((state) => ({
           caseOpenCounts: {
@@ -341,6 +575,15 @@ export const useGameStore = create<GameState>()(
             return !img.startsWith('file:') && !img.includes('file://') && !img.includes('C:/') && !img.includes('C:\\');
           });
         }
+        if (!Array.isArray(state.farmSlots) || state.farmSlots.length !== 5) {
+          state.farmSlots = [
+            { index: 0, status: 'empty' },
+            { index: 1, status: 'empty' },
+            { index: 2, status: 'empty' },
+            { index: 3, status: 'empty' },
+            { index: 4, status: 'empty' },
+          ];
+        }
       },
       partialize: (state) => ({
         balance: state.balance,
@@ -354,6 +597,8 @@ export const useGameStore = create<GameState>()(
         activePotionCharges: state.activePotionCharges,
         caseOpenCounts: state.caseOpenCounts,
         fakeDropsEnabled: state.fakeDropsEnabled,
+        farmSlots: state.farmSlots,
+        farmEggTokens: state.farmEggTokens,
       }),
     }
   )

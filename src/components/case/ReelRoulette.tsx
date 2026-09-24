@@ -172,11 +172,12 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   // Up to 3 reels
   const [reels, setReels] = useState<SkinEntity[][]>([[], [], []]);
   const [winningSkins, setWinningSkins] = useState<SkinEntity[]>([]);
-  const [bonusConsumables, setBonusConsumables] = useState<{ potions: number; saveTokens: number; zeus: number; hooks: number }>({
+  const [bonusConsumables, setBonusConsumables] = useState<{ potions: number; saveTokens: number; zeus: number; hooks: number; eggs: number }>({
     potions: 0,
     saveTokens: 0,
     zeus: 0,
     hooks: 0,
+    eggs: 0,
   });
   const [showModal, setShowModal] = useState(false);
 
@@ -646,6 +647,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     let droppedSaveTokens = 0;
     let droppedZeus = 0;
     let droppedHooks = 0;
+    let droppedEggs = 0;
     for (let i = 0; i < openCount; i++) {
       const bonus = rollCaseBonusDrop();
       if (bonus.potion) {
@@ -664,8 +666,18 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
         droppedHooks++;
         useGameStore.getState().addHook(1);
       }
+      if (bonus.chickenEgg) {
+        droppedEggs++;
+        useGameStore.getState().addEggToken(1);
+      }
     }
-    setBonusConsumables({ potions: droppedPotions, saveTokens: droppedSaveTokens, zeus: droppedZeus, hooks: droppedHooks });
+    setBonusConsumables({
+      potions: droppedPotions,
+      saveTokens: droppedSaveTokens,
+      zeus: droppedZeus,
+      hooks: droppedHooks,
+      eggs: droppedEggs,
+    });
 
     const spinOpenCount = openCount;
 
