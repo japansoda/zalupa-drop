@@ -13,7 +13,7 @@ interface SkinImageProps {
   thumb?: boolean;
 }
 
-export const SkinImage: React.FC<SkinImageProps> = ({
+export const SkinImage: React.FC<SkinImageProps> = React.memo(({
   src,
   alt,
   className = '',
@@ -56,18 +56,7 @@ export const SkinImage: React.FC<SkinImageProps> = ({
     const isSteam = src.includes('steamstatic.com') || src.includes('akamaihd.net') || src.includes('steamcommunity');
     if (!isSteam) return src;
 
-    // Thumbnails: pre-resized lightweight WebP first (few KB instead of full-size originals)
-    if (thumb) {
-      if (stage === 0) {
-        return `https://wsrv.nl/?url=${encodeURIComponent(src)}&w=${size * 2}&output=webp&q=60`;
-      }
-      if (stage === 1) {
-        return src;
-      }
-      return `/api/img?url=${encodeURIComponent(src)}`;
-    }
-
-    // Direct Steam Akamai/Cloudflare CDN gives ultra-fast <100ms loading without slow Dutch proxy delay
+    // Direct Steam CDN gives fast loading:
     if (priority || stage === 0) {
       return src;
     }
@@ -82,13 +71,7 @@ export const SkinImage: React.FC<SkinImageProps> = ({
   return (
     <div className={`relative flex items-center justify-center overflow-hidden ${className}`} style={style}>
       {!loaded && (
-        thumb ? (
-          <div className="absolute inset-0 bg-white/5 animate-pulse pointer-events-none" />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="w-6 h-6 rounded-full border-2 border-yellow-400/20 border-t-yellow-400/80 animate-spin" />
-          </div>
-        )
+        <div className="absolute inset-0 bg-white/5 animate-pulse pointer-events-none" />
       )}
       <img
         key={src}
@@ -101,10 +84,11 @@ export const SkinImage: React.FC<SkinImageProps> = ({
         onError={() => {
           setStage((prev) => prev + 1);
         }}
-        className={`w-full h-full object-contain transition-all duration-150 ${
-          loaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+        className={`w-full h-full object-contain transition-opacity duration-150 ${
+          loaded ? 'opacity-100' : 'opacity-0'
         }`}
       />
     </div>
   );
-};
+});
+SkinImage.displayName = 'SkinImage';

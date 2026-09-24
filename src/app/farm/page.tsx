@@ -10,9 +10,10 @@ import { DropCoinIcon } from '../../components/ui/DropCoinIcon';
 import { AnimatedChicken } from '../../components/farm/AnimatedChicken';
 import { DepositSkinsModal } from '../../components/farm/DepositSkinsModal';
 import { EggCrackingModal } from '../../components/farm/EggCrackingModal';
+import { ChickenHatchModal } from '../../components/farm/ChickenHatchModal';
 import { ChickenDetailsModal } from '../../components/farm/ChickenDetailsModal';
 import { BreedEgg } from '../../components/farm/BreedEgg';
-import { CHICKEN_BREEDS, ChickenBreedId } from '../../lib/farm';
+import { CHICKEN_BREEDS, ChickenBreedId, CHICKEN_FEED_COST_DC } from '../../lib/farm';
 import { useGameStore } from '../../store/useGameStore';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
@@ -82,6 +83,7 @@ export default function ChickenFarmPage() {
     });
   };
 
+  const [hatchSlot, setHatchSlot] = useState<number | null>(null);
   const [now, setNow] = useState<number>(Date.now());
   const [isDraggingGrain, setIsDraggingGrain] = useState(false);
   const [isFeedModeActive, setIsFeedModeActive] = useState(false);
@@ -125,6 +127,11 @@ export default function ChickenFarmPage() {
     if (data === 'grain_feed') {
       const slot = farmSlots[slotIndex];
       if (slot && slot.status === 'chicken' && slot.feedStatus === 'hungry') {
+        if (balance < CHICKEN_FEED_COST_DC) {
+          sound.playError();
+          useGameStore.getState().setRefillOpen(true);
+          return;
+        }
         feedChicken(slotIndex);
       }
     }
@@ -136,7 +143,7 @@ export default function ChickenFarmPage() {
 
   const handleHatch = (slotIndex: number) => {
     sound.playClick();
-    hatchEgg(slotIndex);
+    setHatchSlot(slotIndex);
   };
 
   const handleOpenCrackModal = (slotIndex: number, breedId: ChickenBreedId) => {
@@ -246,10 +253,14 @@ export default function ChickenFarmPage() {
               </div>
 
               <div className="flex flex-col">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="text-sm sm:text-base font-black text-white uppercase tracking-tight">
                     {locale === 'ru' ? 'Кормушка: Отборное зерно CS2' : 'Feeding Station: CS2 Select Grain'}
                   </h3>
+                  <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-yellow-400/15 border border-yellow-400/30 text-yellow-400 text-xs font-mono font-black">
+                    <DropCoinIcon className="w-3.5 h-3.5" />
+                    <span>7 500 DC</span>
+                  </div>
                   {hungryChickensCount > 0 && (
                     <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 animate-pulse">
                       {locale === 'ru' ? `Голодных: ${hungryChickensCount}` : `Hungry: ${hungryChickensCount}`}
@@ -258,11 +269,33 @@ export default function ChickenFarmPage() {
                 </div>
                 <p className="text-xs text-white/50 max-w-xl mt-0.5">
                   {locale === 'ru'
-                    ? 'Перетащите мешок с зерном на голодную курочку (или кликните по мешку, а затем по курице), чтобы начать вынашивание яйца с оружием CS2!'
-                    : 'Drag grain sack onto a hungry chicken (or tap sack then tap chicken) to start weapon egg laying!'}
+                    ? 'Стоимость порции: 7 500 DC. Перетащите мешок с зерном на голодную курочку (или кликните по мешку, а затем по курице), чтобы начать вынашивание яйца с оружием CS2!'
+                    : 'Cost per feed: 7,500 DC. Drag grain sack onto a hungry chicken (or tap sack then tap chicken) to start weapon egg laying!'}
                 </p>
               </div>
             </div>
+
+            {hungryChickensCount > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  if (balance < CHICKEN_FEED_COST_DC) {
+                    sound.playError();
+                    useGameStore.getState().setRefillOpen(true);
+                    return;
+                  }
+                  useGameStore.getState().feedAllChickens();
+                }}
+                className="px-4 py-2.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-black uppercase tracking-wider transition-all shadow-sm active:scale-95 flex items-center gap-1.5 cursor-pointer shrink-0"
+              >
+                <Wheat className="w-3.5 h-3.5" />
+                <span>
+                  {locale === 'ru'
+                    ? `Покормить всех (${(hungryChickensCount * CHICKEN_FEED_COST_DC).toLocaleString('ru-RU')} DC)`
+                    : `Feed all (${(hungryChickensCount * CHICKEN_FEED_COST_DC).toLocaleString('ru-RU')} DC)`}
+                </span>
+              </button>
+            )}
           </div>
         </section>
 
@@ -558,6 +591,11 @@ export default function ChickenFarmPage() {
                           <div
                             onClick={() => {
                               if (isFeedModeActive) {
+                                if (balance < CHICKEN_FEED_COST_DC) {
+                                  sound.playError();
+                                  useGameStore.getState().setRefillOpen(true);
+                                  return;
+                                }
                                 feedChicken(index);
                                 setIsFeedModeActive(false);
                               }
@@ -572,8 +610,8 @@ export default function ChickenFarmPage() {
                               <Wheat className="w-3.5 h-3.5 text-amber-400" />
                               <span>
                                 {isDraggingGrain || isFeedModeActive
-                                  ? (locale === 'ru' ? 'Сбросьте зерно сюда' : 'Drop Grain Here')
-                                  : (locale === 'ru' ? 'Голодна • Тяните зерно' : 'Hungry • Drag Grain')}
+                                  ? (locale === 'ru' ? 'Сбросьте зерно (7 500 DC)' : 'Drop Grain (7,500 DC)')
+                                  : (locale === 'ru' ? 'Голодна • Корм 7 500 DC' : 'Hungry • Grain 7,500 DC')}
                               </span>
                             </div>
                           </div>
@@ -645,6 +683,13 @@ export default function ChickenFarmPage() {
               isOpen: false,
             }))
           }
+        />
+
+        {/* Chicken Hatching Modal */}
+        <ChickenHatchModal
+          isOpen={hatchSlot !== null}
+          slotIndex={hatchSlot ?? 0}
+          onClose={() => setHatchSlot(null)}
         />
 
         {/* Chicken Details & Selling Modal */}

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useDeferredValue } from 'react';
 import Link from 'next/link';
 import { Header } from '../../components/layout/Header';
 import { Footer } from '../../components/layout/Footer';
@@ -82,7 +82,7 @@ const MarketSkinCard = React.memo<{
           src={skin.image}
           alt={skin.name}
           size={150}
-          className="w-full h-24 sm:h-28 object-contain filter drop-shadow-[0_8px_16px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
+          className="w-full h-24 sm:h-28 object-contain group-hover:scale-108 transition-transform duration-200"
         />
       </div>
 
@@ -123,6 +123,7 @@ export default function MarketplacePage() {
   const { locale } = useLanguage();
 
   const [search, setSearch] = useState('');
+  const deferredSearch = useDeferredValue(search);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedSubWeapon, setSelectedSubWeapon] = useState('all');
   const [selectedRarity, setSelectedRarity] = useState('all');
@@ -196,8 +197,8 @@ export default function MarketplacePage() {
     }
 
     // Text search
-    if (search.trim()) {
-      const q = search.toLowerCase().trim();
+    if (deferredSearch.trim()) {
+      const q = deferredSearch.toLowerCase().trim();
       list = list.filter(
         (s) =>
           s.name.toLowerCase().includes(q) ||
@@ -215,7 +216,7 @@ export default function MarketplacePage() {
     });
 
     return sorted;
-  }, [basePool, selectedCategory, selectedSubWeapon, selectedRarity, statTrakOnly, priceRange, search, sortOption]);
+  }, [basePool, selectedCategory, selectedSubWeapon, selectedRarity, statTrakOnly, priceRange, deferredSearch, sortOption]);
 
   // Sub-weapons available in current category
   const availableSubWeapons = useMemo(() => {

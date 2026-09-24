@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback, useDeferredValue } from 'react';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { SkinEntity, InventoryItem, CaseItem, SkinRarity } from '../../lib/types';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
@@ -15,6 +15,185 @@ import { SkinImage } from '../ui/SkinImage';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
 import { createRope, stepRope, stepFree, ropePath, resetRope, RopePoint } from '../../lib/ropeChain';
+
+// Memoized Inventory Card for ultra-fast 60-120fps scrolling
+const UpgraderInventoryCard = React.memo<{
+  item: InventoryItem;
+  isSelected: boolean;
+  onToggle: (item: InventoryItem) => void;
+}>(({ item, isSelected, onToggle }) => {
+  const rarityCfg = RARITY_CONFIG[item.rarity] || RARITY_CONFIG.milspec;
+  return (
+    <button
+      type="button"
+      onClick={() => onToggle(item)}
+      className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
+        isSelected
+          ? 'border-yellow-400 bg-yellow-400/10 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
+          : 'border-white/10 bg-black/40 hover:border-white/20'
+      }`}
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '160px' }}
+    >
+      {isSelected && (
+        <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
+          <Check className="w-3.5 h-3.5 stroke-[3]" />
+        </div>
+      )}
+
+      {/* Top Badges Row */}
+      <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
+        <div className="flex items-center gap-1">
+          {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
+          <WearBadge skin={item} size="xs" />
+        </div>
+        <span
+          className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
+          style={{ color: rarityCfg.color, backgroundColor: `${rarityCfg.color}15` }}
+        >
+          {item.rarity.slice(0, 3)}
+        </span>
+      </div>
+
+      <div className="w-full h-16 flex items-center justify-center my-1">
+        <SkinImage
+          src={item.image}
+          alt={item.name}
+          size={100}
+          className="w-full h-14 object-contain"
+        />
+      </div>
+
+      <div className="w-full flex flex-col">
+        <span className="text-[11px] font-black text-white truncate">{item.skinName || item.name}</span>
+        <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
+        <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
+          {item.priceDc.toLocaleString('ru-RU')} DC
+        </span>
+      </div>
+    </button>
+  );
+});
+UpgraderInventoryCard.displayName = 'UpgraderInventoryCard';
+
+// Memoized Catalog Card for ultra-fast 60-120fps scrolling
+const UpgraderCatalogCard = React.memo<{
+  skin: SkinEntity;
+  isSelected: boolean;
+  effectiveBetDc: number;
+  onSelect: (skin: SkinEntity) => void;
+}>(({ skin, isSelected, effectiveBetDc, onSelect }) => {
+  const rarityCfg = RARITY_CONFIG[skin.rarity] || RARITY_CONFIG.milspec;
+  const isTooCheap = skin.priceDc <= effectiveBetDc;
+
+  return (
+    <button
+      type="button"
+      onClick={() => onSelect(skin)}
+      className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
+        isSelected
+          ? 'border-yellow-400 bg-yellow-400/15 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
+          : isTooCheap
+          ? 'border-white/5 bg-black/20 opacity-40 cursor-not-allowed'
+          : 'border-white/10 bg-black/40 hover:border-white/20'
+      }`}
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '160px' }}
+    >
+      {isSelected && (
+        <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
+          <Check className="w-3.5 h-3.5 stroke-[3]" />
+        </div>
+      )}
+
+      {/* Top Badges Row */}
+      <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
+        <div className="flex items-center gap-1">
+          {skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
+          <WearBadge skin={skin} size="xs" />
+        </div>
+        <span
+          className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
+          style={{ color: rarityCfg.color, backgroundColor: `${rarityCfg.color}15` }}
+        >
+          {skin.rarity.slice(0, 3)}
+        </span>
+      </div>
+
+      <div className="w-full h-16 flex items-center justify-center my-1">
+        <SkinImage
+          src={skin.image}
+          alt={skin.name}
+          size={100}
+          className="w-full h-14 object-contain"
+        />
+      </div>
+
+      <div className="w-full flex flex-col">
+        <span className="text-[11px] font-black text-white truncate">{skin.skinName || skin.name}</span>
+        <span className="text-[9px] text-white/40 truncate">{skin.weapon}</span>
+        <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
+          {skin.priceDc.toLocaleString('ru-RU')} DC
+        </span>
+      </div>
+    </button>
+  );
+});
+UpgraderCatalogCard.displayName = 'UpgraderCatalogCard';
+
+// Memoized Mini Market Card for ultra-fast 60-120fps scrolling
+const UpgraderMiniMarketCard = React.memo<{
+  item: SkinEntity;
+  canAfford: boolean;
+  locale: string;
+  onBuyAndSelect: (item: SkinEntity) => void;
+}>(({ item, canAfford, locale, onBuyAndSelect }) => {
+  return (
+    <div
+      className="rounded-2xl p-2.5 flex flex-col justify-between border border-white/10 bg-black/40 hover:border-yellow-400/40 transition-all text-left group"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '210px' }}
+    >
+      <div className="w-full flex items-center justify-between z-10 min-h-[18px] mb-1">
+        <div className="flex items-center gap-1">
+          {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
+          <WearBadge skin={item} size="xs" />
+        </div>
+      </div>
+
+      <div className="w-full h-20 flex items-center justify-center my-1">
+        <SkinImage
+          src={item.image}
+          alt={item.name}
+          size={120}
+          className="w-full h-16 object-contain group-hover:scale-105 transition-transform duration-200"
+        />
+      </div>
+
+      <div className="w-full flex flex-col">
+        <span className="text-[11px] font-black text-white truncate">
+          {item.skinName || item.name}
+        </span>
+        <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
+        <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
+          {item.priceDc.toLocaleString('ru-RU')} DC
+        </span>
+
+        <button
+          type="button"
+          onClick={() => onBuyAndSelect(item)}
+          disabled={!canAfford}
+          className={`w-full mt-2 py-1.5 px-2 rounded-xl text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-1 transition-all ${
+            canAfford
+              ? 'bg-yellow-400 hover:bg-yellow-300 text-black shadow-[0_0_10px_rgba(250,204,21,0.3)] active:scale-95 cursor-pointer'
+              : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
+          }`}
+        >
+          <ShoppingBag className="w-3 h-3 shrink-0" />
+          <span>{locale === 'ru' ? 'Купить' : 'Buy'}</span>
+        </button>
+      </div>
+    </div>
+  );
+});
+UpgraderMiniMarketCard.displayName = 'UpgraderMiniMarketCard';
 
 export const matchesCatalogType = (skin: SkinEntity, type: string): boolean => {
   if (type === 'all') return true;
@@ -159,6 +338,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const [catalogLimit, setCatalogLimit] = useState(60);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const recentPicksRef = useRef<string[]>([]);
+
+  const deferredMySearch = useDeferredValue(mySearch);
+  const deferredCatalogSearch = useDeferredValue(catalogSearch);
+  const deferredMiniMarketSearch = useDeferredValue(miniMarketSearch);
 
 
 
@@ -1018,24 +1201,30 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
   // Filtered inventory list
   const filteredMySkins = useMemo(() => {
+    const q = deferredMySearch.toLowerCase().trim();
+    if (!q) return inventory;
     return inventory.filter((item) =>
-      item.name.toLowerCase().includes(mySearch.toLowerCase()) ||
-      item.weapon.toLowerCase().includes(mySearch.toLowerCase())
+      item.name.toLowerCase().includes(q) ||
+      item.weapon.toLowerCase().includes(q)
     );
-  }, [inventory, mySearch]);
+  }, [inventory, deferredMySearch]);
 
   // Filtered target catalog skins (strictly priceDc > effectiveBetDc AND <= maxTargetPrice)
   const filteredCatalogSkins = useMemo(() => {
     const minPrice = Math.max(1, effectiveBetDc);
+    const q = deferredCatalogSearch.toLowerCase().trim();
     let result = catalogSkins.filter((skin) => {
       if (skin.priceDc <= minPrice) return false;
       if (skin.priceDc > maxTargetPrice) return false;
 
-      const matchesSearch =
-        skin.name.toLowerCase().includes(catalogSearch.toLowerCase()) ||
-        skin.weapon.toLowerCase().includes(catalogSearch.toLowerCase());
+      if (q) {
+        const matchesSearch =
+          skin.name.toLowerCase().includes(q) ||
+          skin.weapon.toLowerCase().includes(q);
+        if (!matchesSearch) return false;
+      }
       const matchesRarity = catalogRarity === 'all' || skin.rarity === catalogRarity;
-      if (!matchesSearch || !matchesRarity) return false;
+      if (!matchesRarity) return false;
 
       // Filter by item type
       if (!matchesCatalogType(skin, catalogType)) return false;
@@ -1050,7 +1239,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
     result.sort((a, b) => (catalogSort === 'asc' ? a.priceDc - b.priceDc : b.priceDc - a.priceDc));
     return result;
-  }, [catalogSkins, catalogSearch, catalogRarity, catalogType, catalogWeapon, catalogSort, effectiveBetDc, maxTargetPrice]);
+  }, [catalogSkins, deferredCatalogSearch, catalogRarity, catalogType, catalogWeapon, catalogSort, effectiveBetDc, maxTargetPrice]);
 
   // Mini-Marketplace skins pool for instant in-upgrader purchase
   const filteredMiniMarketSkins = useMemo((): SkinEntity[] => {
@@ -1060,8 +1249,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       pool = pool.filter((s: SkinEntity) => matchesCatalogType(s, miniMarketType));
     }
 
-    if (miniMarketSearch.trim()) {
-      const q = miniMarketSearch.toLowerCase().trim();
+    const q = deferredMiniMarketSearch.toLowerCase().trim();
+    if (q) {
       pool = pool.filter(
         (s: SkinEntity) =>
           s.name.toLowerCase().includes(q) ||
@@ -1075,7 +1264,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     );
 
     return pool.slice(0, 100);
-  }, [miniMarketType, miniMarketSearch, miniMarketSort]);
+  }, [miniMarketType, deferredMiniMarketSearch, miniMarketSort]);
 
   const handleBuyAndSelectSkin = (skin: SkinEntity) => {
     sound.playClick();
@@ -2529,8 +2718,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       {/* ── BOTTOM SECTION: INVENTORY & CATALOG ── */}
       <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 pb-12">
         {/* Left Bottom: МОИ СКИНЫ */}
-        <div className="rounded-3xl p-5 sm:p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col min-h-[640px]">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-white/10">
+        <div className="rounded-3xl p-5 sm:p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col h-[780px]">
+          <div className="shrink-0 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-white/10">
             {/* Miniature Toggle: Inventory vs Market */}
             <div className="flex items-center gap-2">
               <div className="flex items-center bg-black/60 p-1 rounded-xl border border-white/10">
@@ -2614,7 +2803,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           {leftPanelMode === 'inventory' ? (
             <>
               {/* Search */}
-              <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-black/40 border border-white/10 mb-4">
+              <div className="shrink-0 flex items-center gap-2 px-3 py-2 rounded-xl bg-black/40 border border-white/10 mb-4">
                 <Search className="w-4 h-4 text-white/40" />
                 <input
                   type="text"
@@ -2625,64 +2814,27 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 />
               </div>
 
-              {/* Inventory Grid */}
-              <div className="relative flex-1">
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 sm:gap-3 max-h-[620px] min-h-[380px] overflow-y-auto overscroll-contain pr-1 pb-20 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
+              {/* Inventory Grid - Continuous Scrollable Area to Bottom */}
+              <div className="relative flex-1 min-h-0">
+                <div className="absolute inset-0 overflow-y-auto overscroll-contain pr-1 pb-4 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
                   {filteredMySkins.length === 0 ? (
-                    <div className="col-span-full py-16 text-center text-xs text-white/40">
+                    <div className="py-20 text-center text-xs text-white/40">
                       {t('inv.emptyHint')}
                     </div>
                   ) : (
-                    filteredMySkins.map((item) => {
-                      const isSelected = selectedItems.some((i) => i.instanceId === item.instanceId);
-
-                      return (
-                        <button
-                          key={item.instanceId}
-                          type="button"
-                          onClick={() => handleToggleInventoryItem(item)}
-                          className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
-                            isSelected
-                              ? 'border-yellow-400 bg-yellow-400/10 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
-                              : 'border-white/10 bg-black/40 hover:border-white/20'
-                          }`}
-                          style={{ contentVisibility: 'auto', containIntrinsicSize: '160px' }}
-                        >
-                          {isSelected && (
-                            <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
-                              <Check className="w-3.5 h-3.5 stroke-[3]" />
-                            </div>
-                          )}
-
-                          {/* Top Badges Row */}
-                          <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
-                            <div className="flex items-center gap-1">
-                              {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
-                              <WearBadge skin={item} size="xs" />
-                            </div>
-                          </div>
-
-                          <div className="w-full h-[72px] sm:h-28 flex items-center justify-center my-1">
-                            <SkinImage
-                              src={item.image}
-                              alt={item.name}
-                              size={140}
-                              className="w-full h-14 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
-                            />
-                          </div>
-
-                          <div className="w-full flex flex-col">
-                            <span className="text-[11px] font-black text-white truncate">
-                              {item.skinName || item.name}
-                            </span>
-                            <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
-                            <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-                              {item.priceDc.toLocaleString('ru-RU')} DC
-                            </span>
-                          </div>
-                        </button>
-                      );
-                    })
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                      {filteredMySkins.map((item) => {
+                        const isSelected = selectedItems.some((i) => i.instanceId === item.instanceId);
+                        return (
+                          <UpgraderInventoryCard
+                            key={item.instanceId}
+                            item={item}
+                            isSelected={isSelected}
+                            onToggle={handleToggleInventoryItem}
+                          />
+                        );
+                      })}
+                    </div>
                   )}
                 </div>
               </div>
@@ -2690,7 +2842,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           ) : (
             <>
               {/* Mini Market Category Pills */}
-              <div className="flex flex-wrap items-center gap-1.5 mb-3">
+              <div className="shrink-0 flex flex-wrap items-center gap-1.5 mb-3">
                 {[
                   { id: 'all', label: locale === 'ru' ? 'Все оружие' : 'All Weapons' },
                   { id: 'knives', label: locale === 'ru' ? 'Ножи' : 'Knives' },
@@ -2720,7 +2872,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               </div>
 
               {/* Search */}
-              <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-black/40 border border-white/10 mb-3">
+              <div className="shrink-0 flex items-center gap-2 px-3 py-2 rounded-xl bg-black/40 border border-white/10 mb-3">
                 <Search className="w-4 h-4 text-white/40" />
                 <input
                   type="text"
@@ -2731,65 +2883,25 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 />
               </div>
 
-              {/* Mini Market Grid */}
-              <div className="relative flex-1">
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-[620px] min-h-[380px] overflow-y-auto overscroll-contain pr-1 pb-20 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
+              {/* Mini Market Grid - Continuous Scrollable Area to Bottom */}
+              <div className="relative flex-1 min-h-0">
+                <div className="absolute inset-0 overflow-y-auto overscroll-contain pr-1 pb-4 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
                   {filteredMiniMarketSkins.length === 0 ? (
-                    <div className="col-span-full py-16 text-center text-xs text-white/40">
+                    <div className="py-20 text-center text-xs text-white/40">
                       {locale === 'ru' ? 'Скины не найдены' : 'No skins found'}
                     </div>
                   ) : (
-                    filteredMiniMarketSkins.map((item) => {
-                      const canAfford = balance >= item.priceDc;
-
-                      return (
-                        <div
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                      {filteredMiniMarketSkins.map((item) => (
+                        <UpgraderMiniMarketCard
                           key={item.id}
-                          className="rounded-2xl p-2.5 flex flex-col justify-between border border-white/10 bg-black/40 hover:border-yellow-400/40 transition-all text-left group"
-                          style={{ contentVisibility: 'auto', containIntrinsicSize: '210px' }}
-                        >
-                          <div className="w-full flex items-center justify-between z-10 min-h-[18px] mb-1">
-                            <div className="flex items-center gap-1">
-                              {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
-                              <WearBadge skin={item} size="xs" />
-                            </div>
-                          </div>
-
-                          <div className="w-full h-20 flex items-center justify-center my-1">
-                            <SkinImage
-                              src={item.image}
-                              alt={item.name}
-                              size={120}
-                              className="w-full h-16 object-contain filter drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-200"
-                            />
-                          </div>
-
-                          <div className="w-full flex flex-col">
-                            <span className="text-[11px] font-black text-white truncate">
-                              {item.skinName || item.name}
-                            </span>
-                            <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
-                            <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-                              {item.priceDc.toLocaleString('ru-RU')} DC
-                            </span>
-
-                            <button
-                              type="button"
-                              onClick={() => handleBuyAndSelectSkin(item)}
-                              disabled={!canAfford}
-                              className={`w-full mt-2 py-1.5 px-2 rounded-xl text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-1 transition-all ${
-                                canAfford
-                                  ? 'bg-yellow-400 hover:bg-yellow-300 text-black shadow-[0_0_10px_rgba(250,204,21,0.3)] active:scale-95 cursor-pointer'
-                                  : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
-                              }`}
-                            >
-                              <ShoppingBag className="w-3 h-3 shrink-0" />
-                              <span>{locale === 'ru' ? 'Купить' : 'Buy'}</span>
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    })
+                          item={item}
+                          canAfford={balance >= item.priceDc}
+                          locale={locale}
+                          onBuyAndSelect={handleBuyAndSelectSkin}
+                        />
+                      ))}
+                    </div>
                   )}
                 </div>
               </div>
@@ -2798,8 +2910,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         </div>
 
         {/* Right Bottom: ВЫ ПОЛУЧАЕТЕ (Catalog, only items > bet) */}
-        <div className="rounded-3xl p-5 sm:p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col min-h-[640px]">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10">
+        <div className="rounded-3xl p-5 sm:p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col h-[780px]">
+          <div className="shrink-0 flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10">
             <div className="flex items-center gap-2">
               <h2 className="text-base font-black text-white uppercase">{t('upg.targetCatalog')}</h2>
               <span className="text-[11px] text-yellow-400/80 font-bold">
@@ -2996,7 +3108,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           )}
 
           {/* Search */}
-          <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-black/40 border border-white/10 mb-4">
+          <div className="shrink-0 flex items-center gap-2 px-3 py-2 rounded-xl bg-black/40 border border-white/10 mb-4">
             <Search className="w-4 h-4 text-white/40" />
             <input
               type="text"
@@ -3007,73 +3119,31 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             />
           </div>
 
-          {/* Catalog Grid */}
-          <div className="relative flex-1">
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 sm:gap-3 max-h-[620px] min-h-[380px] overflow-y-auto overscroll-contain pr-1 pb-20 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
+          {/* Catalog Grid - Continuous Scrollable Area to Bottom */}
+          <div className="relative flex-1 min-h-0">
+            <div className="absolute inset-0 overflow-y-auto overscroll-contain pr-1 pb-4 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
               {filteredCatalogSkins.length === 0 ? (
-                <div className="col-span-full py-16 text-center text-xs text-white/40">
+                <div className="py-20 text-center text-xs text-white/40">
                   {t('upg.noSkins')}
                 </div>
               ) : (
-                <>
-                  {filteredCatalogSkins.slice(0, catalogLimit).map((skin) => {
-                    const isSelected = targetSkin?.id === skin.id;
-
-                    return (
-                      <button
-                        key={skin.id}
-                        type="button"
-                        onClick={() => {
-                          // Дешевле ставки брать нельзя — только дороже
-                          if (skin.priceDc <= effectiveBetDc) {
-                            sound.playError();
-                            return;
-                          }
-                          sound.playClick();
-                          setTargetSkin(skin);
-                        }}
-                        className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
-                          isSelected
-                            ? 'border-yellow-400 bg-yellow-400/15 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
-                            : 'border-white/10 bg-black/40 hover:border-white/20'
-                        }`}
-                        style={{ contentVisibility: 'auto', containIntrinsicSize: '160px' }}
-                      >
-                        {isSelected && (
-                          <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
-                            <Check className="w-3.5 h-3.5 stroke-[3]" />
-                          </div>
-                        )}
-
-                        {/* Top Badges Row */}
-                        <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
-                          <div className="flex items-center gap-1">
-                            {skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
-                            <WearBadge skin={skin} size="xs" />
-                          </div>
-                        </div>
-
-                        <div className="w-full h-[72px] sm:h-28 flex items-center justify-center my-1">
-                          <SkinImage
-                            src={skin.image}
-                            alt={skin.name}
-                            size={140}
-                            className="w-full h-14 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
-                          />
-                        </div>
-
-                        <div className="w-full flex flex-col">
-                          <span className="text-[11px] font-black text-white truncate">
-                            {skin.skinName || skin.name}
-                          </span>
-                          <span className="text-[9px] text-white/40 truncate">{skin.weapon}</span>
-                          <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-                            {skin.priceDc.toLocaleString('ru-RU')} DC
-                          </span>
-                        </div>
-                      </button>
-                    );
-                  })}
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                  {filteredCatalogSkins.slice(0, catalogLimit).map((skin) => (
+                    <UpgraderCatalogCard
+                      key={skin.id}
+                      skin={skin}
+                      isSelected={targetSkin?.id === skin.id}
+                      effectiveBetDc={effectiveBetDc}
+                      onSelect={(s) => {
+                        if (s.priceDc <= effectiveBetDc) {
+                          sound.playError();
+                          return;
+                        }
+                        sound.playClick();
+                        setTargetSkin(s);
+                      }}
+                    />
+                  ))}
                   {/* Load-more sentinel */}
                   {catalogLimit < filteredCatalogSkins.length && (
                     <div
@@ -3083,7 +3153,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       {t('upg.showing')} {Math.min(catalogLimit, filteredCatalogSkins.length)} {t('upg.of')} {filteredCatalogSkins.length}. {t('upg.scrollMore')}
                     </div>
                   )}
-                </>
+                </div>
               )}
             </div>
           </div>

@@ -307,6 +307,8 @@ export interface FarmSlot {
 
 export const INCUBATION_DURATION_MS = 2 * 60 * 60 * 1000; // 2 hours
 export const EGG_PRODUCTION_DURATION_MS = 15 * 60 * 1000; // 15 minutes
+export const CHICKEN_FEED_COST_DC = 7500; // 7,500 DC per feed
+
 
 /**
  * Filter out stickers, charms, agents, patches.

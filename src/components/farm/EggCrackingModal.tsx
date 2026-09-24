@@ -83,53 +83,56 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
     setTimeout(() => {
       setCrackStage(2);
       sound.playEggCrack();
-    }, 500);
+    }, 450);
 
-    // Stage 3 (Crack open, blast shards & reveal)
+    // Stage 3 (Crack open, blast shards)
     setTimeout(() => {
       setCrackStage(3);
       setShowShards(true);
       sound.playEggCrack();
 
-      const skin = claimEggDrop(slotIndex);
-      if (skin) {
-        setDroppedSkin(skin);
-        setPhase('revealed');
-        sound.playWin(skin.rarity);
+      // Reveal skin 650ms after shards start blasting
+      setTimeout(() => {
+        const skin = claimEggDrop(slotIndex);
+        if (skin) {
+          setDroppedSkin(skin);
+          setPhase('revealed');
+          sound.playWin(skin.rarity);
 
-        const isHighTier =
-          skin.priceDc >= 10000 ||
-          skin.name.startsWith('★') ||
-          skin.rarity === 'gold' ||
-          skin.rarity === 'extraordinary';
-        const isMidTier = skin.priceDc >= 1000;
+          const isHighTier =
+            skin.priceDc >= 10000 ||
+            skin.name.startsWith('★') ||
+            skin.rarity === 'gold' ||
+            skin.rarity === 'extraordinary';
+          const isMidTier = skin.priceDc >= 1000;
 
-        if (isHighTier) {
-          confetti({
-            particleCount: 260,
-            spread: 110,
-            origin: { y: 0.5 },
-            colors: ['#ffd700', '#f59e0b', '#ef4444', '#38bdf8', '#ffffff', '#22c55e'],
-          });
-        } else if (isMidTier) {
-          confetti({
-            particleCount: 150,
-            spread: 80,
-            origin: { y: 0.6 },
-            colors: ['#facc15', '#ffffff', '#38bdf8', '#eab308', '#ec4899'],
-          });
+          if (isHighTier) {
+            confetti({
+              particleCount: 260,
+              spread: 110,
+              origin: { y: 0.5 },
+              colors: ['#ffd700', '#f59e0b', '#ef4444', '#38bdf8', '#ffffff', '#22c55e'],
+            });
+          } else if (isMidTier) {
+            confetti({
+              particleCount: 150,
+              spread: 80,
+              origin: { y: 0.6 },
+              colors: ['#facc15', '#ffffff', '#38bdf8', '#eab308', '#ec4899'],
+            });
+          } else {
+            confetti({
+              particleCount: 75,
+              spread: 55,
+              origin: { y: 0.6 },
+              colors: ['#38bdf8', '#ffffff', '#facc15'],
+            });
+          }
         } else {
-          confetti({
-            particleCount: 75,
-            spread: 55,
-            origin: { y: 0.6 },
-            colors: ['#38bdf8', '#ffffff', '#facc15'],
-          });
+          onClose();
         }
-      } else {
-        onClose();
-      }
-    }, 1100);
+      }, 650);
+    }, 950);
   };
 
   const handleSell = () => {
@@ -219,6 +222,33 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
           </button>
         )}
 
+        {/* Flying Eggshell Shards (Rendered at modal root so shards persist flying across reveal) */}
+        {showShards && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
+            {SHELL_SHARDS.map((shard) => (
+              <svg
+                key={shard.id}
+                width={shard.size}
+                height={shard.size}
+                viewBox="0 0 32 32"
+                className="absolute animate-shell-shard drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)]"
+                style={
+                  {
+                    '--tx': `${shard.tx}px`,
+                    '--ty': `${shard.ty}px`,
+                    '--rot': `${shard.rot}deg`,
+                    fill: breed.eggShellColor || '#e2e8f0',
+                    stroke: '#0f172a',
+                    strokeWidth: 1.5,
+                  } as React.CSSProperties
+                }
+              >
+                <path d={shard.path} />
+              </svg>
+            ))}
+          </div>
+        )}
+
         {/* Breed Attribution & Luck Pill */}
         <div className="flex items-center gap-2 mb-4 flex-wrap justify-center">
           <div
@@ -262,35 +292,8 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
                 : 'Inside lies an authentic CS2 weapon, knife, or gloves skin'}
             </p>
 
-            {/* Egg Container with Procedural Flying Shards */}
+            {/* Egg Container */}
             <div className="relative flex items-center justify-center my-2">
-              {/* Flying Eggshell Shards (Explosion at break) */}
-              {showShards && (
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
-                  {SHELL_SHARDS.map((shard) => (
-                    <svg
-                      key={shard.id}
-                      width={shard.size}
-                      height={shard.size}
-                      viewBox="0 0 32 32"
-                      className="absolute animate-shell-shard drop-shadow-md"
-                      style={
-                        {
-                          '--tx': `${shard.tx}px`,
-                          '--ty': `${shard.ty}px`,
-                          '--rot': `${shard.rot}deg`,
-                          fill: breed.eggShellColor || '#e2e8f0',
-                          stroke: '#0f172a',
-                          strokeWidth: 1.5,
-                        } as React.CSSProperties
-                      }
-                    >
-                      <path d={shard.path} />
-                    </svg>
-                  ))}
-                </div>
-              )}
-
               {/* Egg Visual */}
               <div
                 className={`relative cursor-pointer transition-transform ${
@@ -377,16 +380,19 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
               </div>
 
               {/* Skin Image Container with PERFECTLY CENTERED Sunburst directly behind the weapon */}
-              <div className="relative w-full h-44 sm:h-52 flex items-center justify-center my-3 z-10 overflow-hidden">
+              <div className="relative w-full h-44 sm:h-52 flex items-center justify-center my-3 z-10">
                 {isLegendaryDrop && (
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    {/* Soft diffuse ambient glow */}
+                    <div className="absolute w-64 h-64 bg-[radial-gradient(circle_at_center,_rgba(250,204,21,0.22)_0%,_transparent_70%)]" />
+                    {/* Sunburst rays with smooth gradual fade out (NO cut-off boundary) */}
                     <div
-                      className="animate-sunburst w-[460px] h-[460px] shrink-0 rounded-full opacity-35"
+                      className="animate-sunburst w-80 h-80 shrink-0 opacity-40 pointer-events-none"
                       style={{
                         background:
                           'conic-gradient(from 0deg, transparent 0deg 18deg, #facc15 18deg 36deg, transparent 36deg 54deg, #facc15 54deg 72deg, transparent 72deg 90deg, #facc15 90deg 108deg, transparent 108deg 126deg, #facc15 126deg 144deg, transparent 144deg 162deg, #facc15 162deg 180deg, transparent 180deg 198deg, #facc15 198deg 216deg, transparent 216deg 234deg, #facc15 234deg 252deg, transparent 252deg 270deg, #facc15 270deg 288deg, transparent 288deg 306deg, #facc15 306deg 324deg, transparent 324deg 342deg, #facc15 342deg 360deg)',
-                        maskImage: 'radial-gradient(circle, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 70%)',
-                        WebkitMaskImage: 'radial-gradient(circle, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 70%)',
+                        maskImage: 'radial-gradient(circle at center, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 25%, rgba(0,0,0,0.18) 45%, rgba(0,0,0,0) 65%)',
+                        WebkitMaskImage: 'radial-gradient(circle at center, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 25%, rgba(0,0,0,0.18) 45%, rgba(0,0,0,0) 65%)',
                       }}
                     />
                   </div>

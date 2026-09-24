@@ -14,6 +14,7 @@ import {
   rollEggSkinDrop,
   calculateChickenSellPrice,
   CHICKEN_BREEDS,
+  CHICKEN_FEED_COST_DC,
 } from '../lib/farm';
 
 interface GameState {
@@ -440,11 +441,14 @@ export const useGameStore = create<GameState>()(
       },
 
       feedChicken: (slotIndex) => {
-        const slots = [...get().farmSlots];
+        const state = get();
+        if (state.balance < CHICKEN_FEED_COST_DC) return false;
+
+        const slots = [...state.farmSlots];
         const slot = slots[slotIndex];
         if (!slot || slot.status !== 'chicken' || slot.feedStatus !== 'hungry') return false;
 
-        const hasPotion = get().activePotionCharges > 0;
+        const hasPotion = state.activePotionCharges > 0;
         if (hasPotion) {
           get().consumePotionCharge();
         }
@@ -456,7 +460,10 @@ export const useGameStore = create<GameState>()(
           hasLuckPotion: hasPotion,
         };
 
-        set({ farmSlots: slots });
+        set({
+          balance: state.balance - CHICKEN_FEED_COST_DC,
+          farmSlots: slots,
+        });
         sound.playFeedGrain();
         setTimeout(() => {
           sound.playChickenCluck();
@@ -465,30 +472,42 @@ export const useGameStore = create<GameState>()(
       },
 
       feedAllChickens: () => {
-        const slots = [...get().farmSlots];
-        let fedCount = 0;
+        const state = get();
+        const slots = [...state.farmSlots];
+        const hungryIndices: number[] = [];
         for (let i = 0; i < slots.length; i++) {
           if (slots[i].status === 'chicken' && slots[i].feedStatus === 'hungry') {
-            const hasPotion = get().activePotionCharges > 0;
-            if (hasPotion) {
-              get().consumePotionCharge();
-            }
-            slots[i] = {
-              ...slots[i],
-              feedStatus: 'producing',
-              eggReadyUntil: Date.now() + EGG_PRODUCTION_DURATION_MS,
-              hasLuckPotion: hasPotion,
-            };
-            fedCount++;
+            hungryIndices.push(i);
           }
         }
-        if (fedCount > 0) {
-          set({ farmSlots: slots });
-          sound.playFeedGrain();
-          setTimeout(() => {
-            sound.playChickenCluck();
-          }, 220);
+        if (hungryIndices.length === 0) return;
+
+        const maxAfford = Math.floor(state.balance / CHICKEN_FEED_COST_DC);
+        const toFeed = hungryIndices.slice(0, maxAfford);
+        if (toFeed.length === 0) return;
+
+        for (const idx of toFeed) {
+          const hasPotion = get().activePotionCharges > 0;
+          if (hasPotion) {
+            get().consumePotionCharge();
+          }
+          slots[idx] = {
+            ...slots[idx],
+            feedStatus: 'producing',
+            eggReadyUntil: Date.now() + EGG_PRODUCTION_DURATION_MS,
+            hasLuckPotion: hasPotion,
+          };
         }
+
+        const totalCost = toFeed.length * CHICKEN_FEED_COST_DC;
+        set({
+          balance: state.balance - totalCost,
+          farmSlots: slots,
+        });
+        sound.playFeedGrain();
+        setTimeout(() => {
+          sound.playChickenCluck();
+        }, 220);
       },
 
       claimEggDrop: (slotIndex) => {
