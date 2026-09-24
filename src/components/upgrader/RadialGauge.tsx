@@ -2527,9 +2527,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
 
       {/* ── BOTTOM SECTION: INVENTORY & CATALOG ── */}
-      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 pb-12">
         {/* Left Bottom: МОИ СКИНЫ */}
-        <div className="rounded-3xl p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col">
+        <div className="rounded-3xl p-5 sm:p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col min-h-[640px]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-white/10">
             {/* Miniature Toggle: Inventory vs Market */}
             <div className="flex items-center gap-2">
@@ -2626,62 +2626,66 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               </div>
 
               {/* Inventory Grid */}
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-h-[400px] min-h-0 overflow-y-auto overscroll-contain pr-1 pb-3 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
-                {filteredMySkins.length === 0 ? (
-                  <div className="col-span-full py-12 text-center text-xs text-white/40">
-                    {t('inv.emptyHint')}
-                  </div>
-                ) : (
-                  filteredMySkins.map((item) => {
-                    const isSelected = selectedItems.some((i) => i.instanceId === item.instanceId);
+              <div className="relative flex-1">
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 sm:gap-3 h-[480px] sm:h-[520px] overflow-y-auto overscroll-contain pr-1 pb-16 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
+                  {filteredMySkins.length === 0 ? (
+                    <div className="col-span-full py-16 text-center text-xs text-white/40">
+                      {t('inv.emptyHint')}
+                    </div>
+                  ) : (
+                    filteredMySkins.map((item) => {
+                      const isSelected = selectedItems.some((i) => i.instanceId === item.instanceId);
 
-                    return (
-                      <button
-                        key={item.instanceId}
-                        type="button"
-                        onClick={() => handleToggleInventoryItem(item)}
-                        className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
-                          isSelected
-                            ? 'border-yellow-400 bg-yellow-400/10 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
-                            : 'border-white/10 bg-black/40 hover:border-white/20'
-                        }`}
-                      >
-                        {isSelected && (
-                          <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
-                            <Check className="w-3.5 h-3.5 stroke-[3]" />
+                      return (
+                        <button
+                          key={item.instanceId}
+                          type="button"
+                          onClick={() => handleToggleInventoryItem(item)}
+                          className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
+                            isSelected
+                              ? 'border-yellow-400 bg-yellow-400/10 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
+                              : 'border-white/10 bg-black/40 hover:border-white/20'
+                          }`}
+                          style={{ contentVisibility: 'auto', containIntrinsicSize: '160px' }}
+                        >
+                          {isSelected && (
+                            <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
+                              <Check className="w-3.5 h-3.5 stroke-[3]" />
+                            </div>
+                          )}
+
+                          {/* Top Badges Row */}
+                          <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
+                            <div className="flex items-center gap-1">
+                              {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
+                              <WearBadge skin={item} size="xs" />
+                            </div>
                           </div>
-                        )}
 
-                        {/* Top Badges Row */}
-                        <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
-                          <div className="flex items-center gap-1">
-                            {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
-                            <WearBadge skin={item} size="xs" />
+                          <div className="w-full h-[72px] sm:h-28 flex items-center justify-center my-1">
+                            <SkinImage
+                              src={item.image}
+                              alt={item.name}
+                              size={140}
+                              className="w-full h-14 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
+                            />
                           </div>
-                        </div>
 
-                        <div className="w-full h-[72px] sm:h-28 flex items-center justify-center my-1">
-                          <SkinImage
-                            src={item.image}
-                            alt={item.name}
-                            size={140}
-                            className="w-full h-14 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
-                          />
-                        </div>
-
-                        <div className="w-full flex flex-col">
-                          <span className="text-[11px] font-black text-white truncate">
-                            {item.skinName || item.name}
-                          </span>
-                          <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
-                          <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-                            {item.priceDc.toLocaleString('ru-RU')} DC
-                          </span>
-                        </div>
-                      </button>
-                    );
-                  })
-                )}
+                          <div className="w-full flex flex-col">
+                            <span className="text-[11px] font-black text-white truncate">
+                              {item.skinName || item.name}
+                            </span>
+                            <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
+                            <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
+                              {item.priceDc.toLocaleString('ru-RU')} DC
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })
+                  )}
+                </div>
+                <div className="pointer-events-none absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-[#0d0e14] to-transparent rounded-b-2xl" />
               </div>
             </>
           ) : (
@@ -2689,12 +2693,14 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               {/* Mini Market Category Pills */}
               <div className="flex flex-wrap items-center gap-1.5 mb-3">
                 {[
-                  { id: 'all', label: locale === 'ru' ? 'Все' : 'All' },
+                  { id: 'all', label: locale === 'ru' ? 'Все оружие' : 'All Weapons' },
                   { id: 'knives', label: locale === 'ru' ? 'Ножи' : 'Knives' },
                   { id: 'gloves', label: locale === 'ru' ? 'Перчатки' : 'Gloves' },
+                  { id: 'snipers', label: locale === 'ru' ? 'Снайперки' : 'Snipers' },
                   { id: 'rifles', label: locale === 'ru' ? 'Винтовки' : 'Rifles' },
                   { id: 'pistols', label: locale === 'ru' ? 'Пистолеты' : 'Pistols' },
                   { id: 'smgs', label: locale === 'ru' ? 'ПП' : 'SMGs' },
+                  { id: 'heavy', label: locale === 'ru' ? 'Тяжелое' : 'Heavy' },
                 ].map((cat) => (
                   <button
                     key={cat.id}
@@ -2727,70 +2733,74 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               </div>
 
               {/* Mini Market Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-[380px] min-h-0 overflow-y-auto overscroll-contain pr-1 pb-3 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
-                {filteredMiniMarketSkins.length === 0 ? (
-                  <div className="col-span-full py-12 text-center text-xs text-white/40">
-                    {locale === 'ru' ? 'Скины не найдены' : 'No skins found'}
-                  </div>
-                ) : (
-                  filteredMiniMarketSkins.map((item) => {
-                    const canAfford = balance >= item.priceDc;
+              <div className="relative flex-1">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 h-[480px] sm:h-[520px] overflow-y-auto overscroll-contain pr-1 pb-16 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
+                  {filteredMiniMarketSkins.length === 0 ? (
+                    <div className="col-span-full py-16 text-center text-xs text-white/40">
+                      {locale === 'ru' ? 'Скины не найдены' : 'No skins found'}
+                    </div>
+                  ) : (
+                    filteredMiniMarketSkins.map((item) => {
+                      const canAfford = balance >= item.priceDc;
 
-                    return (
-                      <div
-                        key={item.id}
-                        className="rounded-2xl p-2.5 flex flex-col justify-between border border-white/10 bg-black/40 hover:border-yellow-400/40 transition-all text-left group"
-                      >
-                        <div className="w-full flex items-center justify-between z-10 min-h-[18px] mb-1">
-                          <div className="flex items-center gap-1">
-                            {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
-                            <WearBadge skin={item} size="xs" />
+                      return (
+                        <div
+                          key={item.id}
+                          className="rounded-2xl p-2.5 flex flex-col justify-between border border-white/10 bg-black/40 hover:border-yellow-400/40 transition-all text-left group"
+                          style={{ contentVisibility: 'auto', containIntrinsicSize: '210px' }}
+                        >
+                          <div className="w-full flex items-center justify-between z-10 min-h-[18px] mb-1">
+                            <div className="flex items-center gap-1">
+                              {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
+                              <WearBadge skin={item} size="xs" />
+                            </div>
+                          </div>
+
+                          <div className="w-full h-20 flex items-center justify-center my-1">
+                            <SkinImage
+                              src={item.image}
+                              alt={item.name}
+                              size={120}
+                              className="w-full h-16 object-contain filter drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-200"
+                            />
+                          </div>
+
+                          <div className="w-full flex flex-col">
+                            <span className="text-[11px] font-black text-white truncate">
+                              {item.skinName || item.name}
+                            </span>
+                            <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
+                            <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
+                              {item.priceDc.toLocaleString('ru-RU')} DC
+                            </span>
+
+                            <button
+                              type="button"
+                              onClick={() => handleBuyAndSelectSkin(item)}
+                              disabled={!canAfford}
+                              className={`w-full mt-2 py-1.5 px-2 rounded-xl text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-1 transition-all ${
+                                canAfford
+                                  ? 'bg-yellow-400 hover:bg-yellow-300 text-black shadow-[0_0_10px_rgba(250,204,21,0.3)] active:scale-95 cursor-pointer'
+                                  : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
+                              }`}
+                            >
+                              <ShoppingBag className="w-3 h-3 shrink-0" />
+                              <span>{locale === 'ru' ? 'Купить' : 'Buy'}</span>
+                            </button>
                           </div>
                         </div>
-
-                        <div className="w-full h-20 flex items-center justify-center my-1">
-                          <SkinImage
-                            src={item.image}
-                            alt={item.name}
-                            size={120}
-                            className="w-full h-16 object-contain filter drop-shadow-[0_4px_10px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-200"
-                          />
-                        </div>
-
-                        <div className="w-full flex flex-col">
-                          <span className="text-[11px] font-black text-white truncate">
-                            {item.skinName || item.name}
-                          </span>
-                          <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
-                          <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-                            {item.priceDc.toLocaleString('ru-RU')} DC
-                          </span>
-
-                          <button
-                            type="button"
-                            onClick={() => handleBuyAndSelectSkin(item)}
-                            disabled={!canAfford}
-                            className={`w-full mt-2 py-1.5 px-2 rounded-xl text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-1 transition-all ${
-                              canAfford
-                                ? 'bg-yellow-400 hover:bg-yellow-300 text-black shadow-[0_0_10px_rgba(250,204,21,0.3)] active:scale-95 cursor-pointer'
-                                : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
-                            }`}
-                          >
-                            <ShoppingBag className="w-3 h-3 shrink-0" />
-                            <span>{locale === 'ru' ? 'Купить' : 'Buy'}</span>
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })
-                )}
+                      );
+                    })
+                  )}
+                </div>
+                <div className="pointer-events-none absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-[#0d0e14] to-transparent rounded-b-2xl" />
               </div>
             </>
           )}
         </div>
 
         {/* Right Bottom: ВЫ ПОЛУЧАЕТЕ (Catalog, only items > bet) */}
-        <div className="rounded-3xl p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col">
+        <div className="rounded-3xl p-5 sm:p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col min-h-[640px]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10">
             <div className="flex items-center gap-2">
               <h2 className="text-base font-black text-white uppercase">{t('upg.targetCatalog')}</h2>
@@ -3000,81 +3010,85 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           </div>
 
           {/* Catalog Grid */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-h-[400px] min-h-0 overflow-y-auto overscroll-contain pr-1 pb-3 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
-            {filteredCatalogSkins.length === 0 ? (
-              <div className="col-span-full py-12 text-center text-xs text-white/40">
-                {t('upg.noSkins')}
-              </div>
-            ) : (
-              <>
-                {filteredCatalogSkins.slice(0, catalogLimit).map((skin) => {
-                  const isSelected = targetSkin?.id === skin.id;
+          <div className="relative flex-1">
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 sm:gap-3 h-[480px] sm:h-[520px] overflow-y-auto overscroll-contain pr-1 pb-16 [scrollbar-width:thin] [scrollbar-color:rgba(250,204,21,0.35)_transparent]">
+              {filteredCatalogSkins.length === 0 ? (
+                <div className="col-span-full py-16 text-center text-xs text-white/40">
+                  {t('upg.noSkins')}
+                </div>
+              ) : (
+                <>
+                  {filteredCatalogSkins.slice(0, catalogLimit).map((skin) => {
+                    const isSelected = targetSkin?.id === skin.id;
 
-                  return (
-                    <button
-                      key={skin.id}
-                      type="button"
-                      onClick={() => {
-                        // Дешевле ставки брать нельзя — только дороже
-                        if (skin.priceDc <= effectiveBetDc) {
-                          sound.playError();
-                          return;
-                        }
-                        sound.playClick();
-                        setTargetSkin(skin);
-                      }}
-                      className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
-                        isSelected
-                          ? 'border-yellow-400 bg-yellow-400/15 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
-                          : 'border-white/10 bg-black/40 hover:border-white/20'
-                      }`}
+                    return (
+                      <button
+                        key={skin.id}
+                        type="button"
+                        onClick={() => {
+                          // Дешевле ставки брать нельзя — только дороже
+                          if (skin.priceDc <= effectiveBetDc) {
+                            sound.playError();
+                            return;
+                          }
+                          sound.playClick();
+                          setTargetSkin(skin);
+                        }}
+                        className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
+                          isSelected
+                            ? 'border-yellow-400 bg-yellow-400/15 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
+                            : 'border-white/10 bg-black/40 hover:border-white/20'
+                        }`}
+                        style={{ contentVisibility: 'auto', containIntrinsicSize: '160px' }}
+                      >
+                        {isSelected && (
+                          <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
+                            <Check className="w-3.5 h-3.5 stroke-[3]" />
+                          </div>
+                        )}
+
+                        {/* Top Badges Row */}
+                        <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
+                          <div className="flex items-center gap-1">
+                            {skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
+                            <WearBadge skin={skin} size="xs" />
+                          </div>
+                        </div>
+
+                        <div className="w-full h-[72px] sm:h-28 flex items-center justify-center my-1">
+                          <SkinImage
+                            src={skin.image}
+                            alt={skin.name}
+                            size={140}
+                            className="w-full h-14 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
+                          />
+                        </div>
+
+                        <div className="w-full flex flex-col">
+                          <span className="text-[11px] font-black text-white truncate">
+                            {skin.skinName || skin.name}
+                          </span>
+                          <span className="text-[9px] text-white/40 truncate">{skin.weapon}</span>
+                          <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
+                            {skin.priceDc.toLocaleString('ru-RU')} DC
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                  {/* Load-more sentinel */}
+                  {catalogLimit < filteredCatalogSkins.length && (
+                    <div
+                      ref={loadMoreRef}
+                      className="col-span-full py-4 text-center text-xs text-white/30"
                     >
-                      {isSelected && (
-                        <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
-                          <Check className="w-3.5 h-3.5 stroke-[3]" />
-                        </div>
-                      )}
-
-                      {/* Top Badges Row */}
-                      <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
-                        <div className="flex items-center gap-1">
-                          {skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
-                          <WearBadge skin={skin} size="xs" />
-                        </div>
-                      </div>
-
-                      <div className="w-full h-[72px] sm:h-28 flex items-center justify-center my-1">
-                        <SkinImage
-                          src={skin.image}
-                          alt={skin.name}
-                          size={140}
-                          className="w-full h-14 sm:h-24 object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.8)] group-hover:scale-108 transition-transform duration-200"
-                        />
-                      </div>
-
-                      <div className="w-full flex flex-col">
-                        <span className="text-[11px] font-black text-white truncate">
-                          {skin.skinName || skin.name}
-                        </span>
-                        <span className="text-[9px] text-white/40 truncate">{skin.weapon}</span>
-                        <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-                          {skin.priceDc.toLocaleString('ru-RU')} DC
-                        </span>
-                      </div>
-                    </button>
-                  );
-                })}
-                {/* Load-more sentinel */}
-                {catalogLimit < filteredCatalogSkins.length && (
-                  <div
-                    ref={loadMoreRef}
-                    className="col-span-full py-4 text-center text-xs text-white/30"
-                  >
-                    {t('upg.showing')} {Math.min(catalogLimit, filteredCatalogSkins.length)} {t('upg.of')} {filteredCatalogSkins.length}. {t('upg.scrollMore')}
-                  </div>
-                )}
-              </>
-            )}
+                      {t('upg.showing')} {Math.min(catalogLimit, filteredCatalogSkins.length)} {t('upg.of')} {filteredCatalogSkins.length}. {t('upg.scrollMore')}
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+            <div className="pointer-events-none absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-[#0d0e14] to-transparent rounded-b-2xl" />
           </div>
         </div>
       </div>

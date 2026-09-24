@@ -16,7 +16,7 @@ export default function UpgraderPage() {
   const { t } = useLanguage();
 
   return (
-    <main className="min-h-screen flex flex-col justify-between max-w-full overflow-x-hidden">
+    <main className="min-h-screen flex flex-col justify-between max-w-full overflow-x-hidden pb-24 sm:pb-16">
       <div>
         <Header />
         <LiveDropBar />
@@ -36,7 +36,7 @@ export default function UpgraderPage() {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-6 pb-16">
           <RadialGauge inventory={inventory} catalogSkins={SKINS_DATABASE} />
         </section>
       </div>

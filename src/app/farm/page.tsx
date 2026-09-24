@@ -10,6 +10,7 @@ import { DropCoinIcon } from '../../components/ui/DropCoinIcon';
 import { AnimatedChicken } from '../../components/farm/AnimatedChicken';
 import { DepositSkinsModal } from '../../components/farm/DepositSkinsModal';
 import { EggCrackingModal } from '../../components/farm/EggCrackingModal';
+import { BreedEgg } from '../../components/farm/BreedEgg';
 import { CHICKEN_BREEDS, ChickenBreedId } from '../../lib/farm';
 import { useGameStore } from '../../store/useGameStore';
 import { sound } from '../../lib/sound';
@@ -19,14 +20,9 @@ import {
   Sparkles,
   Plus,
   Clock,
-  Flame,
-  Check,
   Wheat,
-  RotateCcw,
   Zap,
-  Info,
-  ChevronRight,
-  FastForward,
+  Check,
 } from 'lucide-react';
 
 function formatTimer(msRemaining: number): string {
@@ -49,7 +45,6 @@ export default function ChickenFarmPage() {
     placeEggToken,
     hatchEgg,
     feedChicken,
-    feedAllChickens,
     speedUpIncubation,
     speedUpEggProduction,
     balance,
@@ -71,6 +66,7 @@ export default function ChickenFarmPage() {
 
   const [now, setNow] = useState<number>(Date.now());
   const [isDraggingGrain, setIsDraggingGrain] = useState(false);
+  const [isFeedModeActive, setIsFeedModeActive] = useState(false);
 
   // Live timer tick every 1000ms
   useEffect(() => {
@@ -97,6 +93,11 @@ export default function ChickenFarmPage() {
 
   const handleDragEndGrain = () => {
     setIsDraggingGrain(false);
+  };
+
+  const handleToggleFeedMode = () => {
+    sound.playClick();
+    setIsFeedModeActive((prev) => !prev);
   };
 
   const handleDropOnSlot = (slotIndex: number, e: React.DragEvent) => {
@@ -130,7 +131,7 @@ export default function ChickenFarmPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col justify-between bg-[#08080a] text-white">
+    <main className="min-h-screen flex flex-col justify-between bg-[#08080a] text-white pb-20 md:pb-8">
       <div>
         <Header />
         <LiveDropBar />
@@ -201,11 +202,60 @@ export default function ChickenFarmPage() {
           </div>
         </section>
 
+        {/* Prominent Grain Feeding Station Bar (Right Above Roosts) */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
+          <div className="p-4 sm:p-5 rounded-3xl bg-[#0d0e14] border border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.15)] flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-4 w-full sm:w-auto">
+              {/* Draggable Grain Feed Bowl with Tap-to-Feed toggle */}
+              <div
+                draggable
+                onDragStart={handleDragStartGrain}
+                onDragEnd={handleDragEndGrain}
+                onClick={handleToggleFeedMode}
+                className={`w-16 h-16 sm:w-18 sm:h-18 rounded-2xl border-2 flex flex-col items-center justify-center cursor-grab active:cursor-grabbing transition-all select-none ${
+                  isFeedModeActive || isDraggingGrain
+                    ? 'bg-amber-500 text-black border-yellow-300 shadow-[0_0_25px_rgba(245,158,11,0.6)] scale-105'
+                    : 'bg-gradient-to-br from-amber-500/30 via-yellow-500/20 to-amber-700/30 border-amber-400/50 text-amber-400 hover:scale-105 shadow-[0_0_15px_rgba(245,158,11,0.25)]'
+                }`}
+                title={locale === 'ru' ? 'Перетащите зерно на курицу или кликните!' : 'Drag grain onto a chicken or click!'}
+              >
+                <Wheat className="w-7 h-7 sm:w-8 sm:h-8" />
+                <span className="text-[8px] font-black uppercase tracking-tight mt-0.5">
+                  {isFeedModeActive
+                    ? (locale === 'ru' ? 'Кормим...' : 'Feeding...')
+                    : (locale === 'ru' ? 'Тяни корм' : 'Drag Grain')}
+                </span>
+              </div>
+
+              <div className="flex flex-col">
+                <div className="flex items-center gap-2">
+                  <h3 className="text-sm sm:text-base font-black text-white uppercase tracking-tight">
+                    {locale === 'ru' ? 'Кормушка: Отборное зерно CS2' : 'Feeding Station: CS2 Select Grain'}
+                  </h3>
+                  <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                    {locale === 'ru' ? 'Бесплатно' : 'Free'}
+                  </span>
+                  {hungryChickensCount > 0 && (
+                    <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 animate-pulse">
+                      {locale === 'ru' ? `Голодных: ${hungryChickensCount}` : `Hungry: ${hungryChickensCount}`}
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-white/50 max-w-xl mt-0.5">
+                  {locale === 'ru'
+                    ? 'Перетащите мешок с зерном на голодную курочку (или кликните по мешку, а затем по курице), чтобы начать вынашивание яйца с оружием CS2!'
+                    : 'Drag grain sack onto a hungry chicken (or tap sack then tap chicken) to start weapon egg laying!'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Coop Roosts Section: 5 Chicken Slots */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-          <div className="flex items-center justify-between mb-6">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-6 pb-12">
+          <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <h2 className="text-lg sm:text-xl font-black text-white uppercase tracking-tight">
+              <h2 className="text-base sm:text-lg font-black text-white uppercase tracking-tight">
                 {locale === 'ru' ? 'Насесты курятника (5 слотов)' : 'Coop Roosts (5 slots)'}
               </h2>
             </div>
@@ -237,35 +287,45 @@ export default function ChickenFarmPage() {
               const eggProductionMsLeft = (slot.eggReadyUntil || 0) - now;
               const isEggReady = slot.status === 'egg_ready' || (isProducingEgg && eggProductionMsLeft <= 0);
 
+              const isHungryChicken = slot.status === 'chicken' && slot.feedStatus === 'hungry' && !isEggReady;
+
               return (
                 <div
                   key={index}
                   onDrop={(e) => handleDropOnSlot(index, e)}
                   onDragOver={handleDragOverSlot}
-                  className={`relative rounded-3xl p-4 flex flex-col justify-between border transition-all min-h-[380px] bg-[#0d0e14] ${
-                    isDraggingGrain && slot.status === 'chicken' && slot.feedStatus === 'hungry'
+                  className={`relative rounded-3xl p-4 flex flex-col justify-between border transition-all min-h-[400px] bg-[#0d0e14] ${
+                    (isDraggingGrain || isFeedModeActive) && isHungryChicken
                       ? 'border-amber-400 bg-amber-400/10 shadow-[0_0_25px_rgba(251,191,36,0.35)] scale-[1.02]'
                       : 'border-white/10 hover:border-white/20'
                   }`}
                 >
-                  {/* Slot Number Badge */}
+                  {/* Slot Header */}
                   <div className="flex items-center justify-between w-full mb-2">
                     <span className="text-[10px] font-mono font-bold text-white/40 uppercase">
                       {locale === 'ru' ? `Насест #${index + 1}` : `Roost #${index + 1}`}
                     </span>
 
-                    {breed && (
-                      <span
-                        className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full border"
-                        style={{
-                          borderColor: `${breed.color}40`,
-                          backgroundColor: `${breed.color}15`,
-                          color: breed.color,
-                        }}
-                      >
-                        {locale === 'ru' ? breed.rarityName : breed.rarityNameEn}
-                      </span>
-                    )}
+                    <div className="flex items-center gap-1">
+                      {slot.chicken?.isStatTrak && (
+                        <span className="text-[9px] font-mono font-black px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-400 border border-amber-500/40">
+                          ST™
+                        </span>
+                      )}
+
+                      {breed && (
+                        <span
+                          className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full border"
+                          style={{
+                            borderColor: `${breed.color}40`,
+                            backgroundColor: `${breed.color}15`,
+                            color: breed.color,
+                          }}
+                        >
+                          {locale === 'ru' ? breed.rarityName : breed.rarityNameEn}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   {/* Slot Body Content */}
@@ -310,17 +370,8 @@ export default function ChickenFarmPage() {
                     {/* CASE 2: INCUBATING EGG */}
                     {isIncubating && (
                       <div className="flex flex-col items-center text-center w-full">
-                        <div className="relative w-24 h-28 flex items-center justify-center my-2">
-                          <div className="absolute inset-0 rounded-full bg-amber-500/20 blur-xl animate-pulse" />
-                          <svg viewBox="0 0 100 120" className="w-20 h-24 filter drop-shadow-lg">
-                            <path
-                              d="M 50 10 C 25 10 15 50 15 85 C 15 110 32 118 50 118 C 68 118 85 110 85 85 C 85 50 75 10 50 10 Z"
-                              fill="#fde047"
-                              stroke="#ca8a04"
-                              strokeWidth="2.5"
-                            />
-                            <ellipse cx="40" cy="45" rx="8" ry="16" fill="#ffffff" opacity="0.4" />
-                          </svg>
+                        <div className="relative my-2">
+                          <BreedEgg breedId="white_inferno" size={70} glowing={true} />
                         </div>
 
                         <span className="text-xs font-black text-white uppercase mt-2">
@@ -338,16 +389,27 @@ export default function ChickenFarmPage() {
                           <span>{isIncubationDone ? '00:00:00' : formatTimer(incubatingMsLeft)}</span>
                         </div>
 
-                        {/* Speedup Button for Testing / Dev */}
+                        {/* Speedup Button for 100,000 DC */}
                         {!isIncubationDone && (
                           <button
                             type="button"
-                            onClick={() => speedUpIncubation(index)}
-                            className="mt-3 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[10px] font-bold text-amber-300 border border-white/10 flex items-center gap-1 cursor-pointer transition-colors"
-                            title="Ускорить таймер для демонстрации"
+                            onClick={() => {
+                              if (balance < 100000) {
+                                sound.playError();
+                                return;
+                              }
+                              speedUpIncubation(index);
+                            }}
+                            disabled={balance < 100000}
+                            className={`mt-3 px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer ${
+                              balance >= 100000
+                                ? 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.25)] active:scale-95'
+                                : 'bg-white/5 text-white/30 border border-white/5 cursor-not-allowed'
+                            }`}
+                            title={balance < 100000 ? (locale === 'ru' ? 'Нужно 100 000 DC' : '100,000 DC required') : ''}
                           >
-                            <FastForward className="w-3 h-3" />
-                            <span>{locale === 'ru' ? 'Ускорить (Тест)' : 'Speedup (Test)'}</span>
+                            <Zap className="w-3.5 h-3.5 text-yellow-400" />
+                            <span>{locale === 'ru' ? '⚡ Ускорить (100 000 DC)' : '⚡ Speed up (100k DC)'}</span>
                           </button>
                         )}
 
@@ -366,17 +428,8 @@ export default function ChickenFarmPage() {
                     {/* CASE 3: READY TO HATCH */}
                     {slot.status === 'hatch_ready' && (
                       <div className="flex flex-col items-center text-center w-full">
-                        <div className="relative w-24 h-28 flex items-center justify-center my-2">
-                          <div className="absolute inset-0 rounded-full bg-yellow-400/30 blur-2xl animate-pulse" />
-                          <svg viewBox="0 0 100 120" className="w-20 h-24 filter drop-shadow-xl animate-bounce">
-                            <path
-                              d="M 50 10 C 25 10 15 50 15 85 C 15 110 32 118 50 118 C 68 118 85 110 85 85 C 85 50 75 10 50 10 Z"
-                              fill="#fde047"
-                              stroke="#ca8a04"
-                              strokeWidth="2.5"
-                            />
-                            <path d="M 50 30 L 45 60 L 55 80 L 48 100" stroke="#78350f" strokeWidth="2.5" fill="none" />
-                          </svg>
+                        <div className="relative my-2">
+                          <BreedEgg breedId="golden_nugget" size={70} crackStage={2} glowing={true} />
                         </div>
 
                         <span className="text-xs font-black text-yellow-400 uppercase mt-2">
@@ -398,9 +451,11 @@ export default function ChickenFarmPage() {
                       <div className="flex flex-col items-center text-center w-full">
                         <AnimatedChicken
                           breedId={slot.chicken.breedId}
-                          isHungry={slot.feedStatus === 'hungry' && !isEggReady}
+                          isHungry={isHungryChicken}
                           isEating={isProducingEgg && !isEggReady}
-                          isLaying={isEggReady}
+                          isLaying={isProducingEgg || isEggReady}
+                          isStatTrak={slot.chicken.isStatTrak}
+                          eggsLaidCount={slot.chicken.eggsLaidCount}
                           size={135}
                         />
 
@@ -416,14 +471,23 @@ export default function ChickenFarmPage() {
 
                         {/* Status Controls */}
                         {isEggReady ? (
-                          <button
-                            type="button"
-                            onClick={() => handleOpenCrackModal(index, slot.chicken!.breedId)}
-                            className="mt-3 w-full py-2.5 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(250,204,21,0.4)] active:scale-95 cursor-pointer animate-bounce flex items-center justify-center gap-1.5"
-                          >
-                            <Sparkles className="w-4 h-4" />
-                            <span>{locale === 'ru' ? 'Разбить яйцо!' : 'Crack Egg!'}</span>
-                          </button>
+                          <div className="flex flex-col items-center w-full mt-3">
+                            <div className="mb-2">
+                              <BreedEgg
+                                breedId={slot.readyEggBreed || slot.chicken.breedId}
+                                size={55}
+                                glowing={true}
+                              />
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => handleOpenCrackModal(index, slot.readyEggBreed || slot.chicken!.breedId)}
+                              className="w-full py-2.5 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(250,204,21,0.4)] active:scale-95 cursor-pointer animate-bounce flex items-center justify-center gap-1.5"
+                            >
+                              <Sparkles className="w-4 h-4" />
+                              <span>{locale === 'ru' ? 'Разбить яйцо!' : 'Crack Egg!'}</span>
+                            </button>
+                          </div>
                         ) : isProducingEgg ? (
                           <div className="flex flex-col items-center mt-3 w-full">
                             <span className="text-[10px] text-white/60">
@@ -433,25 +497,52 @@ export default function ChickenFarmPage() {
                               {formatTimer(eggProductionMsLeft)}
                             </span>
 
+                            {/* Speedup Egg Production for 10,000 DC */}
                             <button
                               type="button"
-                              onClick={() => speedUpEggProduction(index)}
-                              className="mt-2 px-2.5 py-0.5 rounded-lg bg-white/5 hover:bg-white/10 text-[9px] font-bold text-amber-300 border border-white/10 flex items-center gap-1 cursor-pointer transition-colors"
-                              title="Ускорить яйцекладку для демонстрации"
+                              onClick={() => {
+                                if (balance < 10000) {
+                                  sound.playError();
+                                  return;
+                                }
+                                speedUpEggProduction(index);
+                              }}
+                              disabled={balance < 10000}
+                              className={`mt-2 px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer ${
+                                balance >= 10000
+                                  ? 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.25)] active:scale-95'
+                                  : 'bg-white/5 text-white/30 border border-white/5 cursor-not-allowed'
+                              }`}
+                              title={balance < 10000 ? (locale === 'ru' ? 'Нужно 10 000 DC' : '10,000 DC required') : ''}
                             >
-                              <FastForward className="w-2.5 h-2.5" />
-                              <span>{locale === 'ru' ? 'Ускорить (Тест)' : 'Speedup (Test)'}</span>
+                              <Zap className="w-3.5 h-3.5 text-yellow-400" />
+                              <span>{locale === 'ru' ? '⚡ Ускорить (10 000 DC)' : '⚡ Speed up (10k DC)'}</span>
                             </button>
                           </div>
                         ) : (
-                          <button
-                            type="button"
-                            onClick={() => feedChicken(index)}
-                            className="mt-3 w-full py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 font-bold text-xs uppercase tracking-wider active:scale-95 cursor-pointer flex items-center justify-center gap-1.5 transition-all"
+                          /* Hungry State: No direct feed button, drag grain or tap */
+                          <div
+                            onClick={() => {
+                              if (isFeedModeActive) {
+                                feedChicken(index);
+                                setIsFeedModeActive(false);
+                              }
+                            }}
+                            className={`mt-3 w-full py-2.5 px-2 rounded-xl text-center text-xs font-black uppercase tracking-wider border transition-all ${
+                              isDraggingGrain || isFeedModeActive
+                                ? 'bg-amber-500/30 text-amber-300 border-amber-400 animate-pulse cursor-pointer shadow-[0_0_15px_rgba(245,158,11,0.3)]'
+                                : 'bg-white/5 text-white/40 border-white/5'
+                            }`}
                           >
-                            <Wheat className="w-3.5 h-3.5" />
-                            <span>{locale === 'ru' ? 'Покормить' : 'Feed'}</span>
-                          </button>
+                            <div className="flex items-center justify-center gap-1.5">
+                              <Wheat className="w-3.5 h-3.5 text-amber-400" />
+                              <span>
+                                {isDraggingGrain || isFeedModeActive
+                                  ? (locale === 'ru' ? 'Сбросьте зерно сюда' : 'Drop Grain Here')
+                                  : (locale === 'ru' ? 'Голодна • Тяните зерно' : 'Hungry • Drag Grain')}
+                              </span>
+                            </div>
+                          </div>
                         )}
                       </div>
                     )}
@@ -462,78 +553,26 @@ export default function ChickenFarmPage() {
           </div>
         </section>
 
-        {/* Feeding Station Section */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-          <div className="p-6 rounded-3xl bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              {/* Draggable Grain Feed Bowl */}
-              <div
-                draggable
-                onDragStart={handleDragStartGrain}
-                onDragEnd={handleDragEndGrain}
-                className="w-18 h-18 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-br from-amber-500/30 via-yellow-500/20 to-amber-700/30 border-2 border-amber-400/50 flex flex-col items-center justify-center text-amber-400 cursor-grab active:cursor-grabbing shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:scale-105 transition-transform"
-                title={locale === 'ru' ? 'Перетащите зерно на курицу для кормления!' : 'Drag grain onto a chicken to feed!'}
-              >
-                <Wheat className="w-7 h-7 sm:w-8 sm:h-8" />
-                <span className="text-[9px] font-black uppercase text-amber-300 mt-1">
-                  {locale === 'ru' ? 'Тяни корм' : 'Drag Feed'}
-                </span>
-              </div>
-
-              <div className="flex flex-col">
-                <div className="flex items-center gap-2">
-                  <h3 className="text-base sm:text-lg font-black text-white uppercase tracking-tight">
-                    {locale === 'ru' ? 'Отборное зерно CS2' : 'CS2 Select Grain'}
-                  </h3>
-                  <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                    {locale === 'ru' ? 'Бесплатно' : 'Free'}
-                  </span>
-                </div>
-                <p className="text-xs text-white/50 max-w-md mt-1">
-                  {locale === 'ru'
-                    ? 'Кормите куриц бесплатным зерном: перетащите мешок на курицу или нажмите кнопку справа. Накормленная курица снесет яйцо с CS2 скином!'
-                    : 'Feed your chickens free grain: drag the bowl onto a chicken or click Feed All. A fed chicken produces an authentic CS2 weapon egg!'}
-                </p>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={feedAllChickens}
-              disabled={hungryChickensCount === 0}
-              className={`px-6 py-3.5 rounded-2xl font-black text-xs sm:text-sm uppercase tracking-wider transition-all flex items-center gap-2 ${
-                hungryChickensCount > 0
-                  ? 'bg-yellow-400 hover:bg-yellow-300 text-black shadow-[0_0_20px_rgba(250,204,21,0.35)] cursor-pointer active:scale-95'
-                  : 'bg-white/5 text-white/30 cursor-not-allowed border border-white/5'
-              }`}
-            >
-              <Wheat className="w-4 h-4" />
-              <span>
-                {locale === 'ru'
-                  ? `Покормить всех куриц (${hungryChickensCount})`
-                  : `Feed All Chickens (${hungryChickensCount})`}
-              </span>
-            </button>
-          </div>
-        </section>
-
-        {/* Breeds Reference Guide */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-6 pb-12">
+        {/* Breeds Reference Guide (All 12 CS2 Breeds with Egg Textures) */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-6 pb-16">
           <div className="p-6 rounded-3xl bg-[#0d0e14] border border-white/10 shadow-lg">
-            <h3 className="text-sm font-black text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+            <h3 className="text-sm sm:text-base font-black text-white uppercase tracking-wider mb-4 flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-yellow-400" />
-              <span>{locale === 'ru' ? 'Породы куриц и ценность дропа' : 'Chicken Breeds & Drop Odds'}</span>
+              <span>{locale === 'ru' ? 'Породы боевых курочек и текстуры яиц (12 видов)' : 'Combat Chicken Breeds & Egg Textures (12 types)'}</span>
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
               {Object.values(CHICKEN_BREEDS).map((b) => (
                 <div
                   key={b.id}
-                  className="p-3 rounded-2xl border bg-black/40 flex flex-col justify-between"
-                  style={{ borderColor: `${b.color}30` }}
+                  className="p-3.5 rounded-2xl border bg-black/40 flex flex-col justify-between"
+                  style={{ borderColor: `${b.color}35` }}
                 >
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs font-black text-white">{locale === 'ru' ? b.name : b.nameEn}</span>
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <div className="flex flex-col">
+                      <span className="text-xs font-black text-white">{locale === 'ru' ? b.name : b.nameEn}</span>
+                      <span className="text-[10px] text-white/50">{locale === 'ru' ? b.eggNameRu : b.eggNameEn}</span>
+                    </div>
                     <span
                       className="text-[9px] font-black uppercase px-1.5 py-0.2 rounded"
                       style={{ color: b.color, backgroundColor: `${b.color}20` }}
@@ -541,27 +580,37 @@ export default function ChickenFarmPage() {
                       {locale === 'ru' ? b.rarityName : b.rarityNameEn}
                     </span>
                   </div>
-                  <p className="text-[10px] text-white/50 leading-relaxed mt-1">
-                    {locale === 'ru' ? b.description : b.descriptionEn}
-                  </p>
+
+                  <div className="flex items-center gap-3 my-2">
+                    <BreedEgg breedId={b.id} size={36} glowing={false} />
+                    <p className="text-[11px] text-white/60 leading-tight">
+                      {locale === 'ru' ? b.description : b.descriptionEn}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Modals */}
+        {/* Sacrifice Deposit Modal */}
         <DepositSkinsModal
           isOpen={depositModalOpen}
-          onClose={() => setDepositModalOpen(false)}
           targetSlotIndex={targetSlotForDeposit}
+          onClose={() => setDepositModalOpen(false)}
         />
 
+        {/* Egg Cracking Modal */}
         <EggCrackingModal
           isOpen={crackModal.isOpen}
           slotIndex={crackModal.slotIndex}
           breedId={crackModal.breedId}
-          onClose={() => setCrackModal((prev) => ({ ...prev, isOpen: false }))}
+          onClose={() =>
+            setCrackModal((prev) => ({
+              ...prev,
+              isOpen: false,
+            }))
+          }
         />
       </div>
 

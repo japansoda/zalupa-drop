@@ -2,12 +2,15 @@
 
 import React from 'react';
 import { ChickenBreedId, CHICKEN_BREEDS } from '../../lib/farm';
+import { BreedEgg } from './BreedEgg';
 
 interface AnimatedChickenProps {
   breedId: ChickenBreedId;
   isHungry?: boolean;
   isEating?: boolean;
   isLaying?: boolean;
+  isStatTrak?: boolean;
+  eggsLaidCount?: number;
   className?: string;
   size?: number;
 }
@@ -17,6 +20,8 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
   isHungry = false,
   isEating = false,
   isLaying = false,
+  isStatTrak = false,
+  eggsLaidCount = 0,
   className = '',
   size = 140,
 }) => {
@@ -29,8 +34,13 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
   const isGhost = breedId === 'ghost_fade';
   const isZombie = breedId === 'toxic_zombie';
   const isBrown = breedId === 'brown_rooster';
+  const isAsiimov = breedId === 'asiimov';
+  const isCaseHardened = breedId === 'case_hardened';
+  const isPrintstream = breedId === 'printstream';
+  const isDragon = breedId === 'dragon_lore';
+  const isHowl = breedId === 'howl';
 
-  // Body color
+  // Body colors
   let bodyFill = '#f8fafc';
   let bodyShadow = '#cbd5e1';
   let combFill = '#ef4444';
@@ -73,12 +83,42 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
     combFill = '#ca8a04';
     beakFill = '#fef08a';
     eyeFill = '#422006';
+  } else if (isAsiimov) {
+    bodyFill = '#ffffff';
+    bodyShadow = '#27272a';
+    combFill = '#f97316';
+    beakFill = '#18181b';
+    eyeFill = '#38bdf8';
+  } else if (isCaseHardened) {
+    bodyFill = 'url(#caseHardenedChickenGrad)';
+    bodyShadow = '#0369a1';
+    combFill = '#eab308';
+    beakFill = '#facc15';
+    eyeFill = '#38bdf8';
+  } else if (isPrintstream) {
+    bodyFill = 'url(#printstreamChickenGrad)';
+    bodyShadow = '#cbd5e1';
+    combFill = '#0f172a';
+    beakFill = '#1e293b';
+    eyeFill = '#ec4899';
+  } else if (isDragon) {
+    bodyFill = 'url(#dragonLoreChickenGrad)';
+    bodyShadow = '#166534';
+    combFill = '#ca8a04';
+    beakFill = '#facc15';
+    eyeFill = '#22c55e';
+  } else if (isHowl) {
+    bodyFill = 'url(#howlChickenGrad)';
+    bodyShadow = '#18181b';
+    combFill = '#ef4444';
+    beakFill = '#f97316';
+    eyeFill = '#fde047';
   }
 
   return (
     <div
       className={`relative flex items-center justify-center select-none ${className} ${
-        isEating ? 'animate-bounce' : isLaying ? 'animate-pulse' : ''
+        isEating ? 'animate-bounce' : ''
       }`}
       style={{ width: size, height: size }}
     >
@@ -89,6 +129,14 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
           }
           50% {
             transform: translateY(-4px) rotate(1deg);
+          }
+        }
+        @keyframes chickenNestingBob {
+          0%, 100% {
+            transform: translateY(2px) scale(1.02, 0.98);
+          }
+          50% {
+            transform: translateY(4px) scale(1.04, 0.96);
           }
         }
         @keyframes chickenWingFlap {
@@ -125,8 +173,22 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
             transform: scale(1.08);
           }
         }
+        @keyframes floatLayingHeart {
+          0% {
+            opacity: 0;
+            transform: translateY(0) scale(0.6);
+          }
+          40% {
+            opacity: 1;
+            transform: translateY(-10px) scale(1);
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(-24px) scale(0.8);
+          }
+        }
         .chicken-body-motion {
-          animation: chickenIdleBob 2.4s ease-in-out infinite;
+          animation: ${isLaying ? 'chickenNestingBob 3.2s ease-in-out infinite' : 'chickenIdleBob 2.4s ease-in-out infinite'};
           transform-origin: 50% 80%;
         }
         .chicken-wing-motion {
@@ -144,15 +206,33 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
         .chicken-aura {
           animation: auraGlow 2.5s ease-in-out infinite;
         }
+        .laying-particle-1 {
+          animation: floatLayingHeart 2.5s ease-out infinite;
+        }
+        .laying-particle-2 {
+          animation: floatLayingHeart 2.5s ease-out infinite 1.25s;
+        }
       `}</style>
 
       {/* Ambient Rarity Glow Behind Chicken */}
       <div
         className="chicken-aura absolute inset-2 rounded-full blur-xl pointer-events-none -z-10"
         style={{
-          background: `radial-gradient(circle, ${breed.color}40 0%, transparent 70%)`,
+          background: `radial-gradient(circle, ${breed.color}45 0%, transparent 70%)`,
         }}
       />
+
+      {/* Floating Sparkles / Hearts during Egg Laying */}
+      {isLaying && (
+        <>
+          <div className="laying-particle-1 absolute -top-1 left-8 text-amber-400 pointer-events-none z-20 text-xs">
+            ✨
+          </div>
+          <div className="laying-particle-2 absolute 0 right-8 text-yellow-300 pointer-events-none z-20 text-xs">
+            💛
+          </div>
+        </>
+      )}
 
       <svg
         viewBox="0 0 120 120"
@@ -185,14 +265,36 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
             <stop offset="100%" stopColor="#38bdf8" />
           </linearGradient>
 
-          {/* Cyber Circuit Pattern */}
-          {isCyber && (
-            <linearGradient id="cyberWingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#06b6d4" />
-              <stop offset="50%" stopColor="#3b82f6" />
-              <stop offset="100%" stopColor="#ec4899" />
-            </linearGradient>
-          )}
+          {/* Case Hardened Blue Gem */}
+          <linearGradient id="caseHardenedChickenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#38bdf8" />
+            <stop offset="40%" stopColor="#0284c7" />
+            <stop offset="75%" stopColor="#ca8a04" />
+            <stop offset="100%" stopColor="#eab308" />
+          </linearGradient>
+
+          {/* Printstream Monochrome */}
+          <linearGradient id="printstreamChickenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ffffff" />
+            <stop offset="50%" stopColor="#f1f5f9" />
+            <stop offset="100%" stopColor="#e2e8f0" />
+          </linearGradient>
+
+          {/* Dragon Lore Gold / Green */}
+          <linearGradient id="dragonLoreChickenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#fef08a" />
+            <stop offset="30%" stopColor="#ca8a04" />
+            <stop offset="70%" stopColor="#15803d" />
+            <stop offset="100%" stopColor="#14532d" />
+          </linearGradient>
+
+          {/* Howl Wolf Beast */}
+          <linearGradient id="howlChickenGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#18181b" />
+            <stop offset="40%" stopColor="#b91c1c" />
+            <stop offset="80%" stopColor="#f97316" />
+            <stop offset="100%" stopColor="#fde047" />
+          </linearGradient>
         </defs>
 
         {/* Straw / Nest Platform Beneath */}
@@ -207,10 +309,12 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
         </g>
 
         {/* Feet / Claws */}
-        <g id="chicken-feet">
-          <path d="M 46 92 L 46 100 M 46 100 L 40 103 M 46 100 L 46 104 M 46 100 L 52 103" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round" />
-          <path d="M 68 92 L 68 100 M 68 100 L 62 103 M 68 100 L 68 104 M 68 100 L 74 103" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round" />
-        </g>
+        {!isLaying && (
+          <g id="chicken-feet">
+            <path d="M 46 92 L 46 100 M 46 100 L 40 103 M 46 100 L 46 104 M 46 100 L 52 103" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round" />
+            <path d="M 68 92 L 68 100 M 68 100 L 62 103 M 68 100 L 68 104 M 68 100 L 74 103" stroke="#f59e0b" strokeWidth="2.5" strokeLinecap="round" />
+          </g>
+        )}
 
         {/* Main Body Animated Group */}
         <g className="chicken-body-motion">
@@ -231,6 +335,13 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
                 opacity="0.9"
               />
             )}
+            {isHowl && (
+              <path
+                d="M 16 46 Q 8 30 22 26 Q 24 38 28 42 Z"
+                fill="#ea580c"
+                opacity="0.95"
+              />
+            )}
           </g>
 
           {/* Plump Chicken Body */}
@@ -238,6 +349,25 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
             d="M 32 68 C 30 50 44 42 62 42 C 84 42 96 52 94 72 C 92 88 78 96 58 96 C 40 96 32 84 32 68 Z"
             fill={bodyFill}
           />
+
+          {/* Breed-Specific Body Decals */}
+          {isAsiimov && (
+            <g>
+              <polygon points="38,55 88,55 82,65 42,65" fill="#18181b" />
+              <polygon points="44,57 82,57 78,63 48,63" fill="#f97316" />
+              <circle cx="56" cy="74" r="5" stroke="#f97316" strokeWidth="1.5" fill="none" />
+            </g>
+          )}
+
+          {isPrintstream && (
+            <g opacity="0.8">
+              <rect x="42" y="60" width="2" height="10" fill="#0f172a" />
+              <rect x="46" y="60" width="1" height="10" fill="#0f172a" />
+              <rect x="49" y="60" width="2" height="10" fill="#0f172a" />
+              <text x="56" y="68" fill="#0f172a" fontSize="7" fontWeight="bold" fontFamily="monospace">XX</text>
+            </g>
+          )}
+
           {/* Subtle Belly Shadow */}
           <path
             d="M 36 74 C 42 88 56 94 74 92 C 86 86 92 78 93 72 C 86 88 64 96 42 86 Z"
@@ -251,116 +381,83 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
             fill={bodyFill}
           />
 
-          {/* Comb (Гребешок) */}
-          <g className="chicken-comb-motion">
+          {/* Crown on Golden Nugget */}
+          {isGold && (
+            <g id="rooster-crown">
+              <polygon points="76,26 80,16 84,22 88,14 92,22 96,16 100,26" fill="#facc15" stroke="#ca8a04" strokeWidth="1.2" />
+              <circle cx="80" cy="16" r="1.5" fill="#ffffff" />
+              <circle cx="88" cy="14" r="1.5" fill="#ffffff" />
+              <circle cx="96" cy="16" r="1.5" fill="#ffffff" />
+            </g>
+          )}
+
+          {/* Red Comb on Head */}
+          <g id="chicken-comb" className="chicken-comb-motion">
             <path
-              d="M 76 28 C 74 20 80 18 82 22 C 84 16 90 16 90 22 C 94 18 98 20 96 28 Z"
+              d="M 76 28 C 76 20 82 18 84 22 C 86 16 92 18 92 24 C 94 20 98 22 96 28 Z"
               fill={combFill}
             />
-            {/* Golden Crown for Golden Nugget */}
-            {isGold && (
-              <g id="golden-crown" transform="translate(76, 8)">
-                <polygon points="0,12 5,2 10,8 15,2 20,12" fill="#fef08a" stroke="#ca8a04" strokeWidth="1" />
-                <circle cx="5" cy="2" r="1.5" fill="#38bdf8" />
-                <circle cx="10" cy="8" r="1.5" fill="#f43f5e" />
-                <circle cx="15" cy="2" r="1.5" fill="#38bdf8" />
-              </g>
-            )}
           </g>
 
-          {/* Wattle (Бородка под клювом) */}
-          <path
-            d="M 92 48 C 96 50 96 56 93 58 C 90 56 90 52 92 48 Z"
-            fill={combFill}
-          />
+          {/* Wattle under beak */}
+          <g id="chicken-wattle">
+            <path
+              d="M 94 48 C 96 54 92 60 88 58 C 86 52 90 48 94 48 Z"
+              fill={combFill}
+            />
+          </g>
 
-          {/* Beak (Клюв) */}
+          {/* Beak */}
           <polygon
             points="94,42 108,46 94,50"
             fill={beakFill}
-            stroke="#b45309"
-            strokeWidth="0.8"
-            strokeLinejoin="round"
+            filter="drop-shadow(0 2px 2px rgba(0,0,0,0.3))"
           />
 
           {/* Eye */}
-          <g className="chicken-eye-motion">
-            {isCyber ? (
-              // Cyberpunk Visor
-              <rect x="80" y="36" width="16" height="6" rx="2" fill="#06b6d4" stroke="#ec4899" strokeWidth="1">
-                <animate attributeName="opacity" values="0.8;1;0.8" dur="1s" repeatCount="indefinite" />
-              </rect>
-            ) : isZombie ? (
-              // Glowing Toxic Radioactive Eye
-              <g>
-                <circle cx="85" cy="38" r="4.5" fill="#14532d" />
-                <circle cx="85" cy="38" r="3" fill="#a3e635" />
-                <circle cx="85" cy="38" r="1.5" fill="#ffffff" />
-              </g>
-            ) : isGold ? (
-              // Cool Shades or Royal Diamond Eye
-              <g>
-                <circle cx="85" cy="38" r="4" fill="#422006" />
-                <circle cx="86" cy="37" r="1.5" fill="#ffffff" />
-                <polygon points="85,34 87,38 85,42 83,38" fill="#fef08a" opacity="0.8" />
-              </g>
+          <g id="chicken-eye" className="chicken-eye-motion">
+            {isLaying ? (
+              // Relaxed happy eye curve when laying an egg
+              <path d="M 80 43 Q 84 39 88 43" stroke={eyeFill} strokeWidth="2.5" strokeLinecap="round" fill="none" />
             ) : (
-              // Classic Cute CS2 Eye
-              <g>
-                <circle cx="85" cy="38" r="3.8" fill={eyeFill} />
-                <circle cx="86.2" cy="36.8" r="1.4" fill={pupilHighlight} />
-                <circle cx="84" cy="39" r="0.7" fill={pupilHighlight} />
-              </g>
+              <>
+                <circle cx="84" cy="42" r="5" fill={eyeFill} />
+                <circle cx="86" cy="40" r="1.8" fill={pupilHighlight} />
+                {isZombie && <circle cx="84" cy="42" r="7" stroke="#84cc16" strokeWidth="1.5" opacity="0.6" />}
+                {isCyber && <rect x="79" y="38" width="10" height="7" rx="1.5" fill="#06b6d4" opacity="0.8" />}
+              </>
             )}
           </g>
 
-          {/* Wing with Flap Animation */}
-          <g className="chicken-wing-motion">
+          {/* Wing */}
+          <g id="chicken-wing" className="chicken-wing-motion">
             <path
-              d="M 44 58 C 42 54 52 50 64 54 C 74 58 76 72 70 78 C 60 84 46 80 44 70 Z"
-              fill={isCyber ? 'url(#cyberWingGrad)' : bodyShadow}
-              stroke={isCyber ? '#06b6d4' : 'none'}
-              strokeWidth={isCyber ? 1.5 : 0}
+              d="M 44 60 C 44 52 56 50 68 56 C 76 60 78 72 74 78 C 66 86 48 82 44 72 Z"
+              fill={bodyShadow}
+              opacity="0.85"
             />
-            {/* Wing Feather Detail */}
             <path
-              d="M 48 64 C 54 60 62 62 66 68 M 52 70 C 58 68 64 70 66 74"
-              stroke={bodyFill}
-              strokeWidth="2"
-              strokeLinecap="round"
-              opacity="0.8"
+              d="M 46 62 C 46 56 56 54 66 58 C 72 62 74 70 70 76 C 62 82 48 78 46 70 Z"
+              fill={bodyFill}
             />
           </g>
-
-          {/* Cybernetic Details */}
-          {isCyber && (
-            <g id="cyber-circuits">
-              <path d="M 64 48 L 72 44 L 80 48" stroke="#ec4899" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-              <circle cx="80" cy="48" r="1.5" fill="#06b6d4" />
-            </g>
-          )}
-
-          {/* Blaze Flame Wisps */}
-          {isBlaze && (
-            <g id="flame-wisps">
-              <path d="M 52 46 Q 58 36 62 42" stroke="#fde047" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-              <path d="M 40 54 Q 32 44 42 46" stroke="#fb923c" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-            </g>
-          )}
         </g>
       </svg>
 
-      {/* Hungry Alert Bubble */}
-      {isHungry && (
-        <div className="absolute -top-3 -right-2 bg-amber-500 text-black font-black text-[10px] px-2 py-0.5 rounded-full shadow-lg border border-amber-300 animate-bounce">
-          🌽 Корм!
+      {/* Visible Breed Egg nestled during incubation / laying */}
+      {isLaying && (
+        <div className="absolute bottom-2 left-6 z-10 transition-transform scale-90 filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
+          <BreedEgg breedId={breedId} size={34} glowing={false} />
         </div>
       )}
 
-      {/* Ready Egg Indicator */}
-      {isLaying && (
-        <div className="absolute -bottom-2 bg-yellow-400 text-black font-black text-[10px] px-2 py-0.5 rounded-full shadow-xl border border-yellow-200 animate-pulse">
-          🥚 Яйцо готово!
+      {/* CS2 StatTrak™ Digital Counter LED Box */}
+      {isStatTrak && (
+        <div className="absolute -bottom-2 z-30 px-2 py-0.5 rounded bg-black/90 border border-amber-500/80 shadow-[0_0_10px_rgba(245,158,11,0.5)] flex items-center gap-1">
+          <span className="text-[7px] font-black text-amber-500 font-mono tracking-tighter">ST™</span>
+          <span className="text-[9px] font-black text-amber-400 font-mono tracking-wider">
+            {String(eggsLaidCount || 0).padStart(6, '0')}
+          </span>
         </div>
       )}
     </div>

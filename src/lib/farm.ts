@@ -6,9 +6,28 @@ export type ChickenBreedId =
   | 'brown_rooster'
   | 'toxic_zombie'
   | 'cyber_neon'
+  | 'asiimov'
+  | 'case_hardened'
   | 'blaze_phoenix'
+  | 'printstream'
   | 'ghost_fade'
-  | 'golden_nugget';
+  | 'golden_nugget'
+  | 'dragon_lore'
+  | 'howl';
+
+export type EggPatternType =
+  | 'porcelain'
+  | 'speckled'
+  | 'toxic'
+  | 'cyber'
+  | 'magma'
+  | 'asiimov'
+  | 'case_hardened'
+  | 'printstream'
+  | 'fade'
+  | 'gold'
+  | 'dragon'
+  | 'howl';
 
 export interface ChickenBreed {
   id: ChickenBreedId;
@@ -23,6 +42,11 @@ export interface ChickenBreed {
   descriptionEn: string;
   hatchWeight: number; // probability weight when hatching an egg
   eggDropTier: 'tier_common' | 'tier_restricted' | 'tier_classified' | 'tier_covert' | 'tier_legendary';
+  eggPattern: EggPatternType;
+  eggShellColor: string;
+  eggGlowColor: string;
+  eggNameRu: string;
+  eggNameEn: string;
 }
 
 export const CHICKEN_BREEDS: Record<ChickenBreedId, ChickenBreed> = {
@@ -37,8 +61,13 @@ export const CHICKEN_BREEDS: Record<ChickenBreedId, ChickenBreed> = {
     secondaryColor: '#ef4444',
     description: 'Легендарная курочка с карты Inferno. Любит зерно и стабильно приносит классические CS2 дропы!',
     descriptionEn: 'The legendary chicken from Inferno. Loves seeds and brings solid classic CS2 drops!',
-    hatchWeight: 45,
+    hatchWeight: 36,
     eggDropTier: 'tier_common',
+    eggPattern: 'porcelain',
+    eggShellColor: '#f1f5f9',
+    eggGlowColor: 'rgba(255,255,255,0.4)',
+    eggNameRu: 'Белое яйцо Инферно',
+    eggNameEn: 'White Inferno Egg',
   },
   brown_rooster: {
     id: 'brown_rooster',
@@ -51,8 +80,13 @@ export const CHICKEN_BREEDS: Record<ChickenBreedId, ChickenBreed> = {
     secondaryColor: '#f59e0b',
     description: 'Бодрый деревенский петух из Италии. Прилежно кукарекает и откладывает надежные оружейные яйца.',
     descriptionEn: 'Lively Italian farm rooster. Faithful morning clucker with dependable weapon egg drops.',
-    hatchWeight: 26,
+    hatchWeight: 22,
     eggDropTier: 'tier_common',
+    eggPattern: 'speckled',
+    eggShellColor: '#d97706',
+    eggGlowColor: 'rgba(217,119,6,0.4)',
+    eggNameRu: 'Крапчатое фермерское яйцо',
+    eggNameEn: 'Speckled Farm Egg',
   },
   toxic_zombie: {
     id: 'toxic_zombie',
@@ -67,6 +101,11 @@ export const CHICKEN_BREEDS: Record<ChickenBreedId, ChickenBreed> = {
     descriptionEn: 'Mutated chicken with glowing radioactive eyes and increased drop chances for Restricted skins!',
     hatchWeight: 14,
     eggDropTier: 'tier_restricted',
+    eggPattern: 'toxic',
+    eggShellColor: '#4d7c0f',
+    eggGlowColor: 'rgba(132,204,22,0.6)',
+    eggNameRu: 'Радиоактивное яйцо',
+    eggNameEn: 'Toxic Biohazard Egg',
   },
   cyber_neon: {
     id: 'cyber_neon',
@@ -79,8 +118,51 @@ export const CHICKEN_BREEDS: Record<ChickenBreedId, ChickenBreed> = {
     secondaryColor: '#ec4899',
     description: 'Модифицированный киборг с неоновыми контурами и HUD-визором. Сносит яйца с Засекреченным оружием!',
     descriptionEn: 'Cyborg chicken with glowing neon circuitry and HUD visor. Lays eggs with Classified grade skins!',
-    hatchWeight: 8,
+    hatchWeight: 9,
     eggDropTier: 'tier_classified',
+    eggPattern: 'cyber',
+    eggShellColor: '#0f172a',
+    eggGlowColor: 'rgba(6,182,212,0.6)',
+    eggNameRu: 'Кибернетическое яйцо',
+    eggNameEn: 'Cybernetic Matrix Egg',
+  },
+  asiimov: {
+    id: 'asiimov',
+    name: 'Азимов (Asiimov)',
+    nameEn: 'Asiimov Mecha',
+    rarity: 'restricted',
+    rarityName: 'Запрещенная',
+    rarityNameEn: 'Restricted',
+    color: '#f97316',
+    secondaryColor: '#18181b',
+    description: 'Высокотехнологичный боевой дрон в легендарной расцветке Asiimov с цифровыми оптическими сенсорами.',
+    descriptionEn: 'High-tech combat mech in iconic Asiimov styling with optical target-tracking sensors.',
+    hatchWeight: 7,
+    eggDropTier: 'tier_restricted',
+    eggPattern: 'asiimov',
+    eggShellColor: '#fafafa',
+    eggGlowColor: 'rgba(249,115,22,0.6)',
+    eggNameRu: 'Яйцо Азимов',
+    eggNameEn: 'Asiimov Tech Egg',
+  },
+  case_hardened: {
+    id: 'case_hardened',
+    name: 'Blue Gem (Закалка)',
+    nameEn: 'Case Hardened (Blue Gem)',
+    rarity: 'classified',
+    rarityName: 'Засекреченная',
+    rarityNameEn: 'Classified',
+    color: '#38bdf8',
+    secondaryColor: '#eab308',
+    description: 'Редчайший паттерн 661 с зеркальным синим блеском и золотыми переливами закалённой стали.',
+    descriptionEn: 'Ultra-rare tier-1 661 Blue Gem pattern with iridescent turquoise patina and gold highlights.',
+    hatchWeight: 4.5,
+    eggDropTier: 'tier_classified',
+    eggPattern: 'case_hardened',
+    eggShellColor: '#0284c7',
+    eggGlowColor: 'rgba(56,189,248,0.7)',
+    eggNameRu: 'Яйцо Blue Gem',
+    eggNameEn: 'Blue Gem Egg',
   },
   blaze_phoenix: {
     id: 'blaze_phoenix',
@@ -93,8 +175,32 @@ export const CHICKEN_BREEDS: Record<ChickenBreedId, ChickenBreed> = {
     secondaryColor: '#dc2626',
     description: 'Рождённая в огне Молотова! Пылающие крылья и магматический клюв. Высокий шанс на Тайные скины и ножи!',
     descriptionEn: 'Born in a Molotov fire! Burning wings, ember beak, and high probability of Coverts & Knives!',
-    hatchWeight: 4,
+    hatchWeight: 3.5,
     eggDropTier: 'tier_covert',
+    eggPattern: 'magma',
+    eggShellColor: '#991b1b',
+    eggGlowColor: 'rgba(249,115,22,0.7)',
+    eggNameRu: 'Пламенное яйцо Феникса',
+    eggNameEn: 'Phoenix Magma Egg',
+  },
+  printstream: {
+    id: 'printstream',
+    name: 'Printstream',
+    nameEn: 'Printstream',
+    rarity: 'covert',
+    rarityName: 'Тайная',
+    rarityNameEn: 'Covert',
+    color: '#f8fafc',
+    secondaryColor: '#ec4899',
+    description: 'Перламутровый матовый полимер с голографическим переливом, крестами XX и монохромным цифровым кодом.',
+    descriptionEn: 'Silky pearlescent polymer with holographic sheen, XX decals and digital ASCII barcode.',
+    hatchWeight: 2.2,
+    eggDropTier: 'tier_covert',
+    eggPattern: 'printstream',
+    eggShellColor: '#f8fafc',
+    eggGlowColor: 'rgba(236,72,153,0.7)',
+    eggNameRu: 'Яйцо Printstream',
+    eggNameEn: 'Printstream Egg',
   },
   ghost_fade: {
     id: 'ghost_fade',
@@ -107,8 +213,13 @@ export const CHICKEN_BREEDS: Record<ChickenBreedId, ChickenBreed> = {
     secondaryColor: '#06b6d4',
     description: 'Переливающийся CS2 Градиент с призрачным эфиром. Премиум коллекция ножей и перчаток!',
     descriptionEn: 'Shimmering CS2 Fade chromatic gradient with spectral smoke. Premium tier Knives & Gloves drops!',
-    hatchWeight: 2.2,
+    hatchWeight: 1.2,
     eggDropTier: 'tier_covert',
+    eggPattern: 'fade',
+    eggShellColor: '#7e22ce',
+    eggGlowColor: 'rgba(168,85,247,0.7)',
+    eggNameRu: 'Яйцо Fade Градиент',
+    eggNameEn: 'Chromatic Fade Egg',
   },
   golden_nugget: {
     id: 'golden_nugget',
@@ -121,8 +232,51 @@ export const CHICKEN_BREEDS: Record<ChickenBreedId, ChickenBreed> = {
     secondaryColor: '#fef08a',
     description: 'Королевская птица из чистого золота 999 пробы с сияющей короной. Преимущественно сносит ножи и перчатки!',
     descriptionEn: 'Pure 24k gold royal chicken wearing a diamond crown. Exclusively lays eggs with Knives & Gloves!',
-    hatchWeight: 0.8,
+    hatchWeight: 0.6,
     eggDropTier: 'tier_legendary',
+    eggPattern: 'gold',
+    eggShellColor: '#ca8a04',
+    eggGlowColor: 'rgba(234,179,8,0.85)',
+    eggNameRu: 'Золотой самородок-яйцо ★',
+    eggNameEn: '24K Golden Nugget Egg ★',
+  },
+  dragon_lore: {
+    id: 'dragon_lore',
+    name: 'Dragon Lore ★',
+    nameEn: 'Dragon Lore ★',
+    rarity: 'legendary',
+    rarityName: 'Экстраординарная',
+    rarityNameEn: 'Legendary',
+    color: '#ca8a04',
+    secondaryColor: '#16a34a',
+    description: 'Древний дракон из кельтских преданий. Огненное пламя и исключительный шанс на элитные ножи и снайперки!',
+    descriptionEn: 'Ancient Celtic dragon rooster with emerald eyes. High tier knives and legendary covert snipers!',
+    hatchWeight: 0.35,
+    eggDropTier: 'tier_legendary',
+    eggPattern: 'dragon',
+    eggShellColor: '#854d0e',
+    eggGlowColor: 'rgba(202,138,4,0.85)',
+    eggNameRu: 'Яйцо Dragon Lore ★',
+    eggNameEn: 'Dragon Lore Egg ★',
+  },
+  howl: {
+    id: 'howl',
+    name: 'Вой (Howl) ★',
+    nameEn: 'Howl Beast ★',
+    rarity: 'legendary',
+    rarityName: 'Контрабанда',
+    rarityNameEn: 'Contraband',
+    color: '#ef4444',
+    secondaryColor: '#ea580c',
+    description: 'Контрабандная ярость дикого волка. Пылающая грива и раскаленные угли. Самый ценный оружейный дроп!',
+    descriptionEn: 'Contraband wolf fire rooster. Flaming crimson aura with the absolute rarest CS2 armory drops!',
+    hatchWeight: 0.15,
+    eggDropTier: 'tier_legendary',
+    eggPattern: 'howl',
+    eggShellColor: '#18181b',
+    eggGlowColor: 'rgba(239,68,68,0.9)',
+    eggNameRu: 'Контрабандное яйцо Howl ★',
+    eggNameEn: 'Contraband Howl Egg ★',
   },
 };
 
@@ -133,6 +287,7 @@ export interface ChickenEntity {
   nameEn: string;
   hatchedAt: number;
   eggsLaidCount: number;
+  isStatTrak?: boolean;
 }
 
 export type FarmSlotStatus = 'empty' | 'incubating' | 'hatch_ready' | 'chicken' | 'egg_ready';
@@ -185,6 +340,13 @@ export function rollHatchedChickenBreed(): ChickenBreedId {
     rnd -= b.hatchWeight;
   }
   return 'white_inferno';
+}
+
+/**
+ * 15% probability for a hatched chicken to be StatTrak™
+ */
+export function rollIsStatTrakChicken(): boolean {
+  return Math.random() < 0.15;
 }
 
 /**

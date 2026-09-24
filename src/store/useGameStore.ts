@@ -10,6 +10,7 @@ import {
   INCUBATION_DURATION_MS,
   EGG_PRODUCTION_DURATION_MS,
   rollHatchedChickenBreed,
+  rollIsStatTrakChicken,
   rollEggSkinDrop,
   CHICKEN_BREEDS,
 } from '../lib/farm';
@@ -39,8 +40,8 @@ interface GameState {
   feedChicken: (slotIndex: number) => boolean;
   feedAllChickens: () => void;
   claimEggDrop: (slotIndex: number) => SkinEntity | null;
-  speedUpIncubation: (slotIndex: number) => void;
-  speedUpEggProduction: (slotIndex: number) => void;
+  speedUpIncubation: (slotIndex: number) => boolean;
+  speedUpEggProduction: (slotIndex: number) => boolean;
 
   // Case open popularity tracking
   caseOpenCounts: Record<string, number>;
@@ -398,13 +399,15 @@ export const useGameStore = create<GameState>()(
 
         const breedId = rollHatchedChickenBreed();
         const breed = CHICKEN_BREEDS[breedId];
+        const isSt = rollIsStatTrakChicken();
         const chicken: ChickenEntity = {
           id: `chicken_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
           breedId,
-          name: breed.name,
-          nameEn: breed.nameEn,
+          name: isSt ? `StatTrak™ ${breed.name}` : breed.name,
+          nameEn: isSt ? `StatTrak™ ${breed.nameEn}` : breed.nameEn,
           hatchedAt: Date.now(),
           eggsLaidCount: 0,
+          isStatTrak: isSt,
         };
 
         slots[slotIndex] = {
@@ -494,19 +497,36 @@ export const useGameStore = create<GameState>()(
 
       speedUpIncubation: (slotIndex) => {
         const slots = [...get().farmSlots];
+        const currentBalance = get().balance;
+        const COST = 100_000;
+        if (currentBalance < COST) {
+          sound.playError();
+          return false;
+        }
         if (slots[slotIndex]?.status === 'incubating') {
           slots[slotIndex] = {
             ...slots[slotIndex],
             status: 'hatch_ready',
             incubatingUntil: Date.now() - 1000,
           };
-          set({ farmSlots: slots });
-          sound.playTick();
+          set({
+            farmSlots: slots,
+            balance: currentBalance - COST,
+          });
+          sound.playBuy();
+          return true;
         }
+        return false;
       },
 
       speedUpEggProduction: (slotIndex) => {
         const slots = [...get().farmSlots];
+        const currentBalance = get().balance;
+        const COST = 10_000;
+        if (currentBalance < COST) {
+          sound.playError();
+          return false;
+        }
         if (slots[slotIndex]?.status === 'chicken' && slots[slotIndex]?.feedStatus === 'producing') {
           slots[slotIndex] = {
             ...slots[slotIndex],
@@ -514,9 +534,14 @@ export const useGameStore = create<GameState>()(
             eggReadyUntil: Date.now() - 1000,
             readyEggBreed: slots[slotIndex].chicken?.breedId,
           };
-          set({ farmSlots: slots });
-          sound.playTick();
+          set({
+            farmSlots: slots,
+            balance: currentBalance - COST,
+          });
+          sound.playBuy();
+          return true;
         }
+        return false;
       },
 
       recordCaseOpen: (caseId: string, count = 1) => {
