@@ -417,39 +417,39 @@ export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 
   switch (breed.eggDropTier) {
     case 'tier_legendary':
       return {
-        knivesGloves: '75%',
-        covert: '25%',
-        classified: '0%',
-        summary: isRu ? '75% Ножи & Перчатки · 25% Тайное' : '75% Knives & Gloves · 25% Covert',
+        knivesGloves: '2.8%',
+        covert: '11.0%',
+        classified: '39.0%',
+        summary: isRu ? '2.8% Ножи & Перчатки · 11% Тайное · 39% Засекреченное' : '2.8% Knives & Gloves · 11% Covert · 39% Classified',
       };
     case 'tier_covert':
       return {
-        knivesGloves: '40%',
-        covert: '50%',
-        classified: '10%',
-        summary: isRu ? '40% Ножи & Перчатки · 50% Тайное' : '40% Knives & Gloves · 50% Covert',
+        knivesGloves: '2.0%',
+        covert: '8.5%',
+        classified: '36.0%',
+        summary: isRu ? '2.0% Ножи & Перчатки · 8.5% Тайное · 36% Засекреченное' : '2.0% Knives & Gloves · 8.5% Covert · 36% Classified',
       };
     case 'tier_classified':
       return {
-        knivesGloves: '15%',
-        covert: '45%',
-        classified: '40%',
-        summary: isRu ? '15% Ножи · 45% Тайное · 40% Засекреченное' : '15% Knives · 45% Covert · 40% Classified',
+        knivesGloves: '1.5%',
+        covert: '6.5%',
+        classified: '33.0%',
+        summary: isRu ? '1.5% Ножи · 6.5% Тайное · 33% Засекреченное' : '1.5% Knives · 6.5% Covert · 33% Classified',
       };
     case 'tier_restricted':
       return {
-        knivesGloves: '5%',
-        covert: '20%',
-        classified: '40%',
-        summary: isRu ? '5% Ножи · 20% Тайное · 40% Засекреченное' : '5% Knives · 20% Covert · 40% Classified',
+        knivesGloves: '1.1%',
+        covert: '4.8%',
+        classified: '30.0%',
+        summary: isRu ? '1.1% Ножи · 4.8% Тайное · 30% Засекреченное' : '1.1% Knives · 4.8% Covert · 30% Classified',
       };
     case 'tier_common':
     default:
       return {
-        knivesGloves: '2%',
-        covert: '8%',
-        classified: '25%',
-        summary: isRu ? '2% Ножи · 8% Тайное · 25% Засекреченное' : '2% Knives · 8% Covert · 25% Classified',
+        knivesGloves: '0.8%',
+        covert: '3.6%',
+        classified: '27.0%',
+        summary: isRu ? '0.8% Ножи · 3.6% Тайное · 27% Засекреченное' : '0.8% Knives · 3.6% Covert · 27% Classified',
       };
   }
 }
@@ -457,7 +457,8 @@ export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 
 /**
  * Roll a skin drop from an egg laid by a specific chicken breed.
  * STRICT: Absolutely NO stickers, NO charms, NO agents!
- * When hasLuckPotion is true, knife/glove chances are dramatically increased!
+ * Calibrated for ~98.5% overall RTP on 7,500 DC chicken feed cost.
+ * When hasLuckPotion is true, knife/glove and covert chances are boosted.
  */
 export function rollEggSkinDrop(breedId: ChickenBreedId, hasLuckPotion = false): SkinEntity {
   const breed = CHICKEN_BREEDS[breedId] || CHICKEN_BREEDS.white_inferno;
@@ -468,7 +469,9 @@ export function rollEggSkinDrop(breedId: ChickenBreedId, hasLuckPotion = false):
   const knivesAndGloves = weaponsPool.filter(
     (s) => s.name.startsWith('★') || s.rarity === 'gold' || s.rarity === 'extraordinary' || (s.weapon || '').toLowerCase().includes('knife') || (s.weapon || '').toLowerCase().includes('gloves')
   );
-  const covertPool = weaponsPool.filter((s) => s.rarity === 'covert');
+  const covertPool = weaponsPool.filter(
+    (s) => s.rarity === 'covert' && !s.name.startsWith('★') && !(s.weapon || '').toLowerCase().includes('knife') && !(s.weapon || '').toLowerCase().includes('gloves')
+  );
   const classifiedPool = weaponsPool.filter((s) => s.rarity === 'classified');
   const restrictedPool = weaponsPool.filter((s) => s.rarity === 'restricted');
   const milspecPool = weaponsPool.filter((s) => s.rarity === 'milspec' || s.rarity === 'industrial' || s.rarity === 'consumer');
@@ -478,75 +481,111 @@ export function rollEggSkinDrop(breedId: ChickenBreedId, hasLuckPotion = false):
   let candidateBucket: SkinEntity[] = [];
 
   switch (breed.eggDropTier) {
-    case 'tier_legendary':
-      // Golden Rooster: 75% Knives/Gloves, 25% Covert. Luck potion makes it 90% Knives!
-      const legKnifePct = hasLuckPotion ? 90 : 75;
-      if (roll < legKnifePct && knivesAndGloves.length > 0) {
-        candidateBucket = knivesAndGloves;
-      } else {
-        candidateBucket = covertPool.length > 0 ? covertPool : knivesAndGloves;
-      }
-      break;
+    case 'tier_legendary': {
+      // Golden / Dragon / Howl: 2.8% Knife, 11% Covert, 39% Classified, 36% Restricted, 11.2% Milspec
+      const knifeCut = hasLuckPotion ? 5.0 : 2.8;
+      const covCut = knifeCut + (hasLuckPotion ? 16.0 : 11.0);
+      const classCut = covCut + (hasLuckPotion ? 42.0 : 39.0);
+      const resCut = classCut + (hasLuckPotion ? 30.0 : 36.0);
 
-    case 'tier_covert':
-      // Blaze / Fade: 40% Knives/Gloves, 50% Covert, 10% Classified. Luck potion: 65% Knives, 35% Covert!
-      const covKnifePct = hasLuckPotion ? 65 : 40;
-      const covCovertPct = hasLuckPotion ? 95 : 90;
-      if (roll < covKnifePct && knivesAndGloves.length > 0) {
+      if (roll < knifeCut && knivesAndGloves.length > 0) {
         candidateBucket = knivesAndGloves;
-      } else if (roll < covCovertPct && covertPool.length > 0) {
+      } else if (roll < covCut && covertPool.length > 0) {
         candidateBucket = covertPool;
-      } else {
+      } else if (roll < classCut && classifiedPool.length > 0) {
         candidateBucket = classifiedPool;
-      }
-      break;
-
-    case 'tier_classified':
-      // Cyber Neon: 15% Knives, 45% Covert, 40% Classified. Luck potion: 35% Knives, 50% Covert!
-      const classKnifePct = hasLuckPotion ? 35 : 15;
-      const classCovertPct = hasLuckPotion ? 85 : 60;
-      if (roll < classKnifePct && knivesAndGloves.length > 0) {
-        candidateBucket = knivesAndGloves;
-      } else if (roll < classCovertPct && covertPool.length > 0) {
-        candidateBucket = covertPool;
-      } else {
-        candidateBucket = classifiedPool;
-      }
-      break;
-
-    case 'tier_restricted':
-      // Toxic Zombie: 5% Knives, 20% Covert, 40% Classified, 35% Restricted. Luck potion: 18% Knives, 42% Covert!
-      const resKnifePct = hasLuckPotion ? 18 : 5;
-      const resCovertPct = hasLuckPotion ? 60 : 25;
-      if (roll < resKnifePct && knivesAndGloves.length > 0) {
-        candidateBucket = knivesAndGloves;
-      } else if (roll < resCovertPct && covertPool.length > 0) {
-        candidateBucket = covertPool;
-      } else if (roll < (hasLuckPotion ? 90 : 65) && classifiedPool.length > 0) {
-        candidateBucket = classifiedPool;
-      } else {
-        candidateBucket = restrictedPool;
-      }
-      break;
-
-    case 'tier_common':
-    default:
-      // White / Brown: 2% Knives, 8% Covert, 25% Classified. Luck potion: 10% Knives, 25% Covert, 40% Classified!
-      const comKnifePct = hasLuckPotion ? 10 : 2;
-      const comCovertPct = hasLuckPotion ? 35 : 10;
-      const comClassPct = hasLuckPotion ? 75 : 35;
-      if (roll < comKnifePct && knivesAndGloves.length > 0) {
-        candidateBucket = knivesAndGloves;
-      } else if (roll < comCovertPct && covertPool.length > 0) {
-        candidateBucket = covertPool;
-      } else if (roll < comClassPct && classifiedPool.length > 0) {
-        candidateBucket = classifiedPool;
-      } else if (roll < (hasLuckPotion ? 95 : 75) && restrictedPool.length > 0) {
+      } else if (roll < resCut && restrictedPool.length > 0) {
         candidateBucket = restrictedPool;
       } else {
         candidateBucket = milspecPool.length > 0 ? milspecPool : restrictedPool;
       }
       break;
+    }
+
+    case 'tier_covert': {
+      // Blaze / Printstream / Fade: 2.0% Knife, 8.5% Covert, 36% Classified, 40% Restricted, 13.5% Milspec
+      const knifeCut = hasLuckPotion ? 3.5 : 2.0;
+      const covCut = knifeCut + (hasLuckPotion ? 12.0 : 8.5);
+      const classCut = covCut + (hasLuckPotion ? 40.0 : 36.0);
+      const resCut = classCut + (hasLuckPotion ? 35.0 : 40.0);
+
+      if (roll < knifeCut && knivesAndGloves.length > 0) {
+        candidateBucket = knivesAndGloves;
+      } else if (roll < covCut && covertPool.length > 0) {
+        candidateBucket = covertPool;
+      } else if (roll < classCut && classifiedPool.length > 0) {
+        candidateBucket = classifiedPool;
+      } else if (roll < resCut && restrictedPool.length > 0) {
+        candidateBucket = restrictedPool;
+      } else {
+        candidateBucket = milspecPool.length > 0 ? milspecPool : restrictedPool;
+      }
+      break;
+    }
+
+    case 'tier_classified': {
+      // Cyber Neon / Case Hardened: 1.5% Knife, 6.5% Covert, 33% Classified, 42% Restricted, 17% Milspec
+      const knifeCut = hasLuckPotion ? 2.6 : 1.5;
+      const covCut = knifeCut + (hasLuckPotion ? 9.0 : 6.5);
+      const classCut = covCut + (hasLuckPotion ? 38.0 : 33.0);
+      const resCut = classCut + (hasLuckPotion ? 38.0 : 42.0);
+
+      if (roll < knifeCut && knivesAndGloves.length > 0) {
+        candidateBucket = knivesAndGloves;
+      } else if (roll < covCut && covertPool.length > 0) {
+        candidateBucket = covertPool;
+      } else if (roll < classCut && classifiedPool.length > 0) {
+        candidateBucket = classifiedPool;
+      } else if (roll < resCut && restrictedPool.length > 0) {
+        candidateBucket = restrictedPool;
+      } else {
+        candidateBucket = milspecPool.length > 0 ? milspecPool : restrictedPool;
+      }
+      break;
+    }
+
+    case 'tier_restricted': {
+      // Toxic Zombie / Asiimov: 1.1% Knife, 4.8% Covert, 30% Classified, 43% Restricted, 21.1% Milspec
+      const knifeCut = hasLuckPotion ? 2.0 : 1.1;
+      const covCut = knifeCut + (hasLuckPotion ? 7.0 : 4.8);
+      const classCut = covCut + (hasLuckPotion ? 36.0 : 30.0);
+      const resCut = classCut + (hasLuckPotion ? 40.0 : 43.0);
+
+      if (roll < knifeCut && knivesAndGloves.length > 0) {
+        candidateBucket = knivesAndGloves;
+      } else if (roll < covCut && covertPool.length > 0) {
+        candidateBucket = covertPool;
+      } else if (roll < classCut && classifiedPool.length > 0) {
+        candidateBucket = classifiedPool;
+      } else if (roll < resCut && restrictedPool.length > 0) {
+        candidateBucket = restrictedPool;
+      } else {
+        candidateBucket = milspecPool.length > 0 ? milspecPool : restrictedPool;
+      }
+      break;
+    }
+
+    case 'tier_common':
+    default: {
+      // White Inferno / Village Rooster: 0.8% Knife, 3.6% Covert, 27% Classified, 44% Restricted, 24.6% Milspec
+      const knifeCut = hasLuckPotion ? 1.5 : 0.8;
+      const covCut = knifeCut + (hasLuckPotion ? 5.5 : 3.6);
+      const classCut = covCut + (hasLuckPotion ? 35.0 : 27.0);
+      const resCut = classCut + (hasLuckPotion ? 40.0 : 44.0);
+
+      if (roll < knifeCut && knivesAndGloves.length > 0) {
+        candidateBucket = knivesAndGloves;
+      } else if (roll < covCut && covertPool.length > 0) {
+        candidateBucket = covertPool;
+      } else if (roll < classCut && classifiedPool.length > 0) {
+        candidateBucket = classifiedPool;
+      } else if (roll < resCut && restrictedPool.length > 0) {
+        candidateBucket = restrictedPool;
+      } else {
+        candidateBucket = milspecPool.length > 0 ? milspecPool : restrictedPool;
+      }
+      break;
+    }
   }
 
   if (candidateBucket.length === 0) {

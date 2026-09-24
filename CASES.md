@@ -1375,27 +1375,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **1 350 DC**
 - **Описание:** Повышенный шанс 10% на выпадение ножа
-- **Количество предметов в кейсе:** 17 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Survival Knife | Tiger Tooth | covert | - | - | 96 000 DC |
-| 2 | Flip Knife | Tiger Tooth | covert | - | - | 96 000 DC |
-| 3 | Gut Knife | Safari Mesh | covert | - | - | 96 000 DC |
-| 4 | Karambit | Autotronic | covert | - | - | 96 000 DC |
-| 5 | M9 Bayonet | Crimson Web | covert | - | - | 96 000 DC |
-| 6 | AWP | Sun in Leo | industrial | - | - | 330 DC |
-| 7 | M4A4 | Urban DDPAT | industrial | - | - | 240 DC |
-| 8 | M4A1-S | Moss Quartz | industrial | - | - | 200 DC |
-| 9 | AK-47 | Baroque Purple | industrial | - | - | 210 DC |
-| 10 | Desert Eagle | Urban DDPAT | industrial | - | - | 200 DC |
-| 11 | USP-S | Pathfinder | industrial | - | - | 255 DC |
-| 12 | Glock-18 | Red Tire | industrial | - | - | 280 DC |
-| 13 | FAMAS | Cyanospatter | industrial | - | - | 250 DC |
-| 14 | Galil AR | Cold Fusion | industrial | - | - | 220 DC |
-| 15 | P90 | Ash Wood | industrial | - | - | 230 DC |
-| 16 | Tec-9 | Hades | industrial | - | - | 200 DC |
-| 17 | SG 553 | Fallout Warning | industrial | - | - | 215 DC |
+| 1 | Survival Knife | Tiger Tooth | covert | FN | - | 96 000 DC |
+| 2 | Flip Knife | Tiger Tooth | covert | FN | - | 96 000 DC |
+| 3 | Karambit | Autotronic | covert | FT | - | 62 400 DC |
+| 4 | AWP | Sun in Leo | industrial | FN | - | 330 DC |
+| 5 | M4A4 | Urban DDPAT | industrial | MW | - | 240 DC |
+| 6 | M4A1-S | Moss Quartz | industrial | FN | - | 200 DC |
+| 7 | AK-47 | Baroque Purple | industrial | MW | - | 210 DC |
+| 8 | Desert Eagle | Urban DDPAT | industrial | FN | - | 200 DC |
+| 9 | USP-S | Pathfinder | industrial | FN | - | 255 DC |
+| 10 | Glock-18 | Red Tire | industrial | MW | - | 280 DC |
+| 11 | FAMAS | Cyanospatter | industrial | FN | - | 250 DC |
+| 12 | Galil AR | Cold Fusion | industrial | FN | - | 220 DC |
+| 13 | P90 | Ash Wood | industrial | FN | - | 230 DC |
+| 14 | Tec-9 | Hades | industrial | MW | - | 200 DC |
+| 15 | SG 553 | Fallout Warning | industrial | FN | - | 215 DC |
+| 16 | P250 | Crimson Kimono | industrial | FN | - | 225 DC |
+| 17 | MP7 | Base-2 | industrial | FN | - | 210 DC |
+| 18 | Nova | Candy Apple | industrial | FN | - | 215 DC |
 
 ---
 
@@ -1405,29 +1406,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **2 200 DC**
 - **Описание:** Орёл или решка: 50% нож, 50% ширпотреб
-- **Количество предметов в кейсе:** 19 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Survival Knife | Tiger Tooth | covert | - | - | 96 000 DC |
-| 2 | Flip Knife | Tiger Tooth | covert | - | - | 96 000 DC |
-| 3 | Gut Knife | Safari Mesh | covert | - | - | 96 000 DC |
-| 4 | Karambit | Autotronic | covert | - | - | 96 000 DC |
-| 5 | M9 Bayonet | Crimson Web | covert | - | - | 96 000 DC |
-| 6 | Shadow Daggers | Case Hardened | covert | - | - | 96 000 DC |
-| 7 | Stiletto Knife | Damascus Steel | covert | - | - | 96 000 DC |
-| 8 | AWP | Sun in Leo | industrial | - | - | 330 DC |
-| 9 | M4A4 | Steel Work | industrial | - | - | 305 DC |
-| 10 | M4A1-S | Wash me plz | industrial | - | - | 305 DC |
-| 11 | AK-47 | Safari Mesh | industrial | - | - | 320 DC |
-| 12 | Desert Eagle | Tilted | industrial | - | - | 350 DC |
-| 13 | USP-S | Desert Tactical | industrial | - | - | 350 DC |
-| 14 | Glock-18 | Death Rattle | industrial | - | - | 300 DC |
-| 15 | FAMAS | Half Sleeve | industrial | - | - | 325 DC |
-| 16 | Galil AR | NV | industrial | - | - | 315 DC |
-| 17 | P90 | Wash me | industrial | - | - | 360 DC |
-| 18 | Tec-9 | Banana Leaf | industrial | - | - | 310 DC |
-| 19 | SG 553 | Basket Halftone | industrial | - | - | 365 DC |
+| 1 | Survival Knife | Tiger Tooth | covert | FN | - | 96 000 DC |
+| 2 | Flip Knife | Tiger Tooth | covert | FN | - | 96 000 DC |
+| 3 | Gut Knife | Safari Mesh | covert | FT | - | 96 000 DC |
+| 4 | Karambit | Autotronic | covert | FT | - | 96 000 DC |
+| 5 | M9 Bayonet | Crimson Web | covert | FT | - | 96 000 DC |
+| 6 | Shadow Daggers | Case Hardened | covert | MW | - | 96 000 DC |
+| 7 | Stiletto Knife | Damascus Steel | covert | FN | - | 96 000 DC |
+| 8 | Bayonet | Doppler | covert | FN | - | 280 000 DC |
+| 9 | Talon Knife | Blue Steel | covert | FT | - | 108 000 DC |
+| 10 | AWP | Sun in Leo | industrial | MW | - | 330 DC |
+| 11 | M4A4 | Steel Work | industrial | FN | - | 305 DC |
+| 12 | M4A1-S | Wash me plz | industrial | MW | - | 305 DC |
+| 13 | AK-47 | Safari Mesh | industrial | FT | - | 320 DC |
+| 14 | Desert Eagle | Tilted | industrial | FN | - | 350 DC |
+| 15 | USP-S | Desert Tactical | industrial | MW | - | 350 DC |
+| 16 | Glock-18 | Death Rattle | industrial | FN | - | 300 DC |
+| 17 | FAMAS | Half Sleeve | industrial | MW | - | 325 DC |
+| 18 | P90 | Wash me | industrial | FN | - | 360 DC |
 
 ---
 
@@ -1437,41 +1437,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **126 000 DC**
 - **Описание:** 100% гарантия получения ножа любого класса и износа
-- **Количество предметов в кейсе:** 31 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Bayonet | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 3 | Butterfly Knife | Doppler | covert | FN | - | 280 000 DC |
-| 4 | Butterfly Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 5 | Bayonet | Fade | covert | FN | - | 240 000 DC |
-| 6 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
-| 7 | Butterfly Knife | Rust Coat | covert | FN | - | 213 600 DC |
-| 8 | Bayonet | Safari Mesh | covert | FN | - | 204 000 DC |
-| 9 | Bayonet | Rust Coat | covert | FN | - | 187 200 DC |
-| 10 | Butterfly Knife | Lore | covert | FN | - | 182 400 DC |
-| 11 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 12 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 13 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 14 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 15 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 16 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 17 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 18 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 19 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 20 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 21 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 22 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 23 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 24 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 25 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 26 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 27 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 28 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 29 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 30 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 31 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
+| 1 | Karambit | Doppler | covert | FN | - | 280 000 DC |
+| 2 | Butterfly Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 3 | M9 Bayonet | Fade | covert | FN | - | 240 000 DC |
+| 4 | Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
+| 5 | Talon Knife | Tiger Tooth | covert | FN | - | 139 200 DC |
+| 6 | Skeleton Knife | Slaughter | covert | FN | - | 170 400 DC |
+| 7 | Stiletto Knife | Crimson Web | covert | FN | - | 148 800 DC |
+| 8 | Nomad Knife | Case Hardened | covert | FN | - | 192 000 DC |
+| 9 | Ursus Knife | Doppler | covert | FN | - | 280 000 DC |
+| 10 | Paracord Knife | Fade | covert | FN | - | 240 000 DC |
+| 11 | Survival Knife | Damascus Steel | covert | FN | - | 153 600 DC |
+| 12 | Kukri Knife | Fade | covert | FN | - | 240 000 DC |
+| 13 | Flip Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 14 | Huntsman Knife | Lore | covert | MW | - | 110 208 DC |
+| 15 | Bowie Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 16 | Falchion Knife | Fade | covert | FN | - | 240 000 DC |
+| 17 | Shadow Daggers | Doppler | covert | FN | - | 280 000 DC |
+| 18 | Classic Knife | Crimson Web | covert | FN | - | 132 000 DC |
 
 ---
 
@@ -1485,24 +1472,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Hand Wraps | Spruce DDPAT | extraordinary | - | - | 96 000 DC |
-| 2 | Specialist Gloves | Big Swell | extraordinary | - | - | 96 000 DC |
-| 3 | Moto Gloves | Transport | extraordinary | - | - | 98 400 DC |
-| 4 | Sport Gloves | Scarlet Shamagh | extraordinary | - | - | 98 400 DC |
-| 5 | Specialist Gloves | Blackbook | extraordinary | - | - | 100 800 DC |
-| 6 | Moto Gloves | Boom! | extraordinary | - | - | 103 200 DC |
-| 7 | Sport Gloves | Occult | extraordinary | - | - | 103 200 DC |
-| 8 | Driver Gloves | Black Tie | extraordinary | - | - | 105 600 DC |
-| 9 | Hydra Gloves | Mangrove | extraordinary | - | - | 105 600 DC |
-| 10 | Moto Gloves | Finish Line | extraordinary | - | - | 108 000 DC |
-| 11 | Sport Gloves | Blaze | extraordinary | - | - | 108 000 DC |
-| 12 | Driver Gloves | Rezan the Red | extraordinary | - | - | 110 400 DC |
-| 13 | Broken Fang Gloves | Yellow-banded | extraordinary | - | - | 110 400 DC |
-| 14 | Hand Wraps | Slaughter | extraordinary | - | - | 112 800 DC |
-| 15 | Specialist Gloves | Crimson Web | extraordinary | - | - | 112 800 DC |
-| 16 | Driver Gloves | Queen Jaguar | extraordinary | - | - | 115 200 DC |
-| 17 | Bloodhound Gloves | Bronzed | extraordinary | - | - | 115 200 DC |
-| 18 | Hand Wraps | Giraffe | extraordinary | - | - | 117 600 DC |
+| 1 | Sport Gloves | Vice | extraordinary | FN | - | 350 000 DC |
+| 2 | Sport Gloves | Pandora's Box | extraordinary | FN | - | 380 000 DC |
+| 3 | Sport Gloves | Amphibious | extraordinary | FN | - | 260 000 DC |
+| 4 | Sport Gloves | Hedge Maze | extraordinary | FN | - | 290 000 DC |
+| 5 | Sport Gloves | Superconductor | extraordinary | FN | - | 270 000 DC |
+| 6 | Moto Gloves | Spearmint | extraordinary | MW | - | 110 208 DC |
+| 7 | Moto Gloves | POW! | extraordinary | FN | - | 196 800 DC |
+| 8 | Specialist Gloves | Crimson Kimono | extraordinary | MW | - | 122 016 DC |
+| 9 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
+| 10 | Specialist Gloves | Emerald Web | extraordinary | MW | - | 125 952 DC |
+| 11 | Specialist Gloves | Foundation | extraordinary | FN | - | 206 400 DC |
+| 12 | Driver Gloves | King Snake | extraordinary | FN | - | 199 200 DC |
+| 13 | Driver Gloves | Snow Leopard | extraordinary | FN | - | 146 400 DC |
+| 14 | Driver Gloves | Imperial Plaid | extraordinary | FN | - | 172 800 DC |
+| 15 | Moto Gloves | Polygon | extraordinary | MW | - | 106 272 DC |
+| 16 | Specialist Gloves | Mogul | extraordinary | FN | - | 201 600 DC |
+| 17 | Sport Gloves | Scarlet Shamagh | extraordinary | MW | - | 98 400 DC |
+| 18 | Driver Gloves | Black Tie | extraordinary | FN | - | 105 600 DC |
 
 ---
 
@@ -1516,23 +1503,23 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
-| 2 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
-| 3 | Bayonet | Fade | covert | FN | - | 240 000 DC |
-| 4 | Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
-| 5 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
-| 6 | Survival Knife | Fade | covert | FN | - | 240 000 DC |
-| 7 | Paracord Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 8 | Falchion Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 9 | Gut Knife | Fade | covert | FN | - | 240 000 DC |
-| 10 | Navaja Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 11 | Kukri Knife | Fade | covert | FN | - | 240 000 DC |
-| 12 | Nomad Knife | Fade | covert | FN | - | 240 000 DC |
-| 13 | Shadow Daggers | Marble Fade | covert | FN | - | 240 000 DC |
-| 14 | Stiletto Knife | Fade | covert | FN | - | 240 000 DC |
-| 15 | Bowie Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 16 | Ursus Knife | Fade | covert | FN | - | 240 000 DC |
-| 17 | AWP | Fade | covert | FN | - | 53 900 DC |
+| 1 | Karambit | Fade | covert | FN | - | 240 000 DC |
+| 2 | M9 Bayonet | Fade | covert | FN | - | 240 000 DC |
+| 3 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
+| 4 | Bayonet | Fade | covert | FN | - | 240 000 DC |
+| 5 | Talon Knife | Fade | covert | FN | - | 240 000 DC |
+| 6 | Skeleton Knife | Fade | covert | FN | - | 240 000 DC |
+| 7 | Stiletto Knife | Fade | covert | FN | - | 240 000 DC |
+| 8 | Nomad Knife | Fade | covert | FN | - | 240 000 DC |
+| 9 | Ursus Knife | Fade | covert | FN | - | 240 000 DC |
+| 10 | Kukri Knife | Fade | covert | FN | - | 240 000 DC |
+| 11 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
+| 12 | AWP | Fade | covert | FN | - | 53 900 DC |
+| 13 | Glock-18 | Fade | restricted | FN | - | 2 632 DC |
+| 14 | MAC-10 | Fade | milspec | FN | - | 2 800 DC |
+| 15 | MP7 | Fade | restricted | FN | - | 4 480 DC |
+| 16 | R8 Revolver | Fade | covert | FN | - | 31 850 DC |
+| 17 | UMP-45 | Fade | classified | FN | - | 9 180 DC |
 | 18 | AUG | Amber Fade | milspec | FN | - | 1 275 DC |
 
 ---
@@ -1547,24 +1534,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Bayonet | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 3 | Butterfly Knife | Doppler | covert | FN | - | 280 000 DC |
-| 4 | Butterfly Knife | Doppler | covert | MW | - | 229 600 DC |
-| 5 | Butterfly Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 6 | Survival Knife | Doppler | covert | FN | - | 280 000 DC |
-| 7 | Falchion Knife | Doppler | covert | FN | - | 280 000 DC |
-| 8 | Flip Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 9 | Navaja Knife | Doppler | covert | FN | - | 280 000 DC |
-| 10 | M9 Bayonet | Doppler | covert | FN | - | 280 000 DC |
-| 11 | Shadow Daggers | Doppler | covert | FN | - | 280 000 DC |
-| 12 | Stiletto Knife | Doppler | covert | FN | - | 280 000 DC |
-| 13 | Huntsman Knife | Doppler | covert | FN | - | 280 000 DC |
-| 14 | Talon Knife | Doppler | covert | FN | - | 280 000 DC |
-| 15 | Paracord Knife | Doppler | covert | MW | - | 229 600 DC |
-| 16 | Flip Knife | Doppler | covert | MW | - | 229 600 DC |
-| 17 | Gut Knife | Gamma Doppler | covert | MW | - | 229 600 DC |
-| 18 | Karambit | Gamma Doppler | covert | MW | - | 229 600 DC |
+| 1 | Karambit | Doppler | covert | FN | - | 280 000 DC |
+| 2 | Karambit | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 3 | M9 Bayonet | Doppler | covert | FN | - | 280 000 DC |
+| 4 | M9 Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 5 | Butterfly Knife | Doppler | covert | FN | - | 280 000 DC |
+| 6 | Butterfly Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 7 | Bayonet | Doppler | covert | FN | - | 280 000 DC |
+| 8 | Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 9 | Talon Knife | Doppler | covert | FN | - | 280 000 DC |
+| 10 | Skeleton Knife | Doppler | covert | FN | - | 280 000 DC |
+| 11 | Stiletto Knife | Doppler | covert | FN | - | 280 000 DC |
+| 12 | Nomad Knife | Doppler | covert | FN | - | 280 000 DC |
+| 13 | Ursus Knife | Doppler | covert | FN | - | 280 000 DC |
+| 14 | Paracord Knife | Doppler | covert | FN | - | 280 000 DC |
+| 15 | Survival Knife | Doppler | covert | FN | - | 280 000 DC |
+| 16 | Flip Knife | Doppler | covert | FN | - | 280 000 DC |
+| 17 | Huntsman Knife | Doppler | covert | FN | - | 280 000 DC |
+| 18 | Bowie Knife | Doppler | covert | FN | - | 280 000 DC |
 
 ---
 
@@ -1574,37 +1561,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **126 000 DC**
 - **Описание:** Полная коллекция ножей-бабочек Butterfly Knives
-- **Количество предметов в кейсе:** 27 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Butterfly Knife | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Butterfly Knife | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Butterfly Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 4 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
-| 5 | Butterfly Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 6 | Butterfly Knife | Rust Coat | covert | FN | - | 213 600 DC |
-| 7 | Butterfly Knife | Rust Coat | covert | MW | - | 175 152 DC |
-| 8 | Butterfly Knife | Urban Masked | covert | FN | - | 199 200 DC |
-| 9 | Butterfly Knife | Damascus Steel | covert | FN | - | 187 200 DC |
-| 10 | Butterfly Knife | Damascus Steel | covert | MW | - | 153 504 DC |
-| 11 | Butterfly Knife | Night | covert | MW | - | 167 280 DC |
-| 12 | Butterfly Knife | Bright Water | covert | FN | - | 146 400 DC |
-| 13 | Butterfly Knife | Bright Water | covert | MW | - | 120 048 DC |
+| 2 | Butterfly Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 3 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
+| 4 | Butterfly Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 5 | Butterfly Knife | Slaughter | covert | FN | - | 160 800 DC |
+| 6 | Butterfly Knife | Lore | covert | FN | - | 182 400 DC |
+| 7 | Butterfly Knife | Crimson Web | covert | MW | - | 175 000 DC |
+| 8 | Butterfly Knife | Autotronic | covert | FN | - | 151 200 DC |
+| 9 | Butterfly Knife | Tiger Tooth | covert | FN | - | 135 000 DC |
+| 10 | Butterfly Knife | Case Hardened | covert | FN | - | 124 800 DC |
+| 11 | Butterfly Knife | Damascus Steel | covert | FN | - | 187 200 DC |
+| 12 | Butterfly Knife | Black Laminate | covert | MW | - | 98 400 DC |
+| 13 | Butterfly Knife | Blue Steel | covert | FN | - | 98 400 DC |
 | 14 | Butterfly Knife | Freehand | covert | FN | - | 134 400 DC |
-| 15 | Butterfly Knife | Stained | covert | MW | - | 127 920 DC |
-| 16 | Butterfly Knife | Safari Mesh | covert | FN | - | 110 400 DC |
-| 17 | Butterfly Knife | Tiger Tooth | covert | MW | - | 106 272 DC |
-| 18 | Butterfly Knife | Black Laminate | covert | MW | - | 98 400 DC |
-| 19 | Butterfly Knife | Slaughter | covert | FN | StatTrak™ | 217 080 DC |
-| 20 | Butterfly Knife | Slaughter | covert | MW | StatTrak™ | 178 488 DC |
-| 21 | Butterfly Knife | Slaughter | covert | FN | - | 160 800 DC |
-| 22 | Butterfly Knife | Blue Steel | covert | FN | StatTrak™ | 132 840 DC |
-| 23 | Butterfly Knife | Blue Steel | covert | MW | StatTrak™ | 109 224 DC |
-| 24 | Butterfly Knife | Blue Steel | covert | FN | - | 98 400 DC |
-| 25 | Butterfly Knife | Case Hardened | covert | FN | StatTrak™ | 168 480 DC |
-| 26 | Butterfly Knife | Case Hardened | covert | MW | StatTrak™ | 138 528 DC |
-| 27 | Butterfly Knife | Case Hardened | covert | FN | - | 124 800 DC |
+| 15 | Butterfly Knife | Night | covert | MW | - | 167 280 DC |
+| 16 | Butterfly Knife | Stained | covert | MW | - | 127 920 DC |
+| 17 | Butterfly Knife | Urban Masked | covert | FN | - | 199 200 DC |
+| 18 | Butterfly Knife | Safari Mesh | covert | FT | - | 110 400 DC |
 
 ---
 
@@ -1614,36 +1592,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **170 000 DC**
 - **Описание:** Все серповидные клинки Karambit
-- **Количество предметов в кейсе:** 26 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Karambit | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Karambit | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Karambit | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 4 | Karambit | Fade | covert | FN | - | 240 000 DC |
-| 5 | Karambit | Marble Fade | covert | FN | - | 240 000 DC |
-| 6 | Karambit | Marble Fade | covert | MW | - | 196 800 DC |
-| 7 | Karambit | Crimson Web | covert | FN | - | 211 200 DC |
-| 8 | Karambit | Crimson Web | covert | MW | - | 173 184 DC |
-| 9 | Karambit | Forest DDPAT | covert | FN | - | 184 800 DC |
-| 10 | Karambit | Forest DDPAT | covert | MW | - | 151 536 DC |
-| 11 | Karambit | Lore | covert | FN | - | 158 400 DC |
-| 12 | Karambit | ★ Karambit | covert | FN | - | 144 000 DC |
-| 13 | Karambit | Stained | covert | FN | - | 132 000 DC |
-| 14 | Karambit | Boreal Forest | covert | MW | - | 125 952 DC |
-| 15 | Karambit | Slaughter | covert | MW | - | 112 176 DC |
-| 16 | Karambit | Tiger Tooth | covert | FN | - | 105 600 DC |
-| 17 | Karambit | Tiger Tooth | covert | MW | - | 86 592 DC |
-| 18 | Karambit | Bright Water | covert | MW | - | 100 368 DC |
-| 19 | Butterfly Knife | Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 20 | Butterfly Knife | Fade | covert | MW | StatTrak™ | 266 400 DC |
-| 21 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
-| 22 | Butterfly Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 23 | Butterfly Knife | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 24 | Butterfly Knife | Marble Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 25 | Butterfly Knife | Marble Fade | covert | MW | StatTrak™ | 266 400 DC |
-| 26 | Butterfly Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 2 | Karambit | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 3 | Karambit | Fade | covert | FN | - | 240 000 DC |
+| 4 | Karambit | Marble Fade | covert | FN | - | 240 000 DC |
+| 5 | Karambit | Crimson Web | covert | FN | - | 211 200 DC |
+| 6 | Karambit | Lore | covert | FN | - | 158 400 DC |
+| 7 | Karambit | Slaughter | covert | FN | - | 145 000 DC |
+| 8 | Karambit | Tiger Tooth | covert | FN | - | 105 600 DC |
+| 9 | Karambit | Autotronic | covert | FN | - | 96 000 DC |
+| 10 | Karambit | Case Hardened | covert | FN | - | 100 800 DC |
+| 11 | Karambit | Damascus Steel | covert | FN | - | 163 200 DC |
+| 12 | Karambit | Blue Steel | covert | FN | - | 194 400 DC |
+| 13 | Karambit | Black Laminate | covert | MW | - | 115 000 DC |
+| 14 | Karambit | Freehand | covert | FN | - | 120 000 DC |
+| 15 | Karambit | Night | covert | FN | - | 180 000 DC |
+| 16 | Karambit | Stained | covert | FN | - | 132 000 DC |
+| 17 | Karambit | Boreal Forest | covert | MW | - | 125 952 DC |
+| 18 | Karambit | Safari Mesh | covert | FN | - | 206 400 DC |
 
 ---
 
@@ -1653,39 +1623,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **170 000 DC**
 - **Описание:** Тактические штык-ножи M9 Bayonet
-- **Количество предметов в кейсе:** 29 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | M9 Bayonet | Doppler | covert | FN | - | 280 000 DC |
-| 2 | M9 Bayonet | Doppler | covert | MW | - | 229 600 DC |
-| 3 | M9 Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 4 | M9 Bayonet | Fade | covert | FN | - | 240 000 DC |
-| 5 | M9 Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
-| 6 | M9 Bayonet | Marble Fade | covert | MW | - | 196 800 DC |
-| 7 | M9 Bayonet | Safari Mesh | covert | FN | - | 211 200 DC |
-| 8 | M9 Bayonet | Night | covert | FN | - | 184 800 DC |
-| 9 | M9 Bayonet | Night | covert | MW | - | 151 536 DC |
-| 10 | M9 Bayonet | Blue Steel | covert | MW | - | 163 344 DC |
-| 11 | M9 Bayonet | Boreal Forest | covert | FN | - | 158 400 DC |
-| 12 | M9 Bayonet | Boreal Forest | covert | MW | - | 129 888 DC |
-| 13 | M9 Bayonet | Stained | covert | FN | - | 136 800 DC |
-| 14 | M9 Bayonet | Stained | covert | MW | - | 112 176 DC |
-| 15 | M9 Bayonet | Slaughter | covert | MW | - | 116 112 DC |
-| 16 | M9 Bayonet | Case Hardened | covert | FN | - | 105 600 DC |
-| 17 | M9 Bayonet | Case Hardened | covert | MW | - | 86 592 DC |
-| 18 | M9 Bayonet | Crimson Web | covert | FN | - | 96 000 DC |
-| 19 | Butterfly Knife | Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 20 | Butterfly Knife | Fade | covert | MW | StatTrak™ | 266 400 DC |
-| 21 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
-| 22 | Butterfly Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 23 | Butterfly Knife | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 24 | Butterfly Knife | Marble Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 25 | Butterfly Knife | Marble Fade | covert | MW | StatTrak™ | 266 400 DC |
-| 26 | Butterfly Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 27 | Butterfly Knife | Freehand | covert | FN | StatTrak™ | 181 440 DC |
-| 28 | Butterfly Knife | Freehand | covert | MW | StatTrak™ | 149 184 DC |
-| 29 | Butterfly Knife | Freehand | covert | FN | - | 134 400 DC |
+| 2 | M9 Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 3 | M9 Bayonet | Fade | covert | FN | - | 240 000 DC |
+| 4 | M9 Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
+| 5 | M9 Bayonet | Crimson Web | covert | FN | - | 96 000 DC |
+| 6 | M9 Bayonet | Lore | covert | FN | - | 180 000 DC |
+| 7 | M9 Bayonet | Autotronic | covert | FN | - | 100 800 DC |
+| 8 | M9 Bayonet | Slaughter | covert | FN | - | 150 000 DC |
+| 9 | M9 Bayonet | Tiger Tooth | covert | FN | - | 110 400 DC |
+| 10 | M9 Bayonet | Case Hardened | covert | FN | - | 105 600 DC |
+| 11 | M9 Bayonet | Damascus Steel | covert | FN | - | 168 000 DC |
+| 12 | M9 Bayonet | Blue Steel | covert | MW | - | 163 344 DC |
+| 13 | M9 Bayonet | Black Laminate | covert | MW | - | 112 000 DC |
+| 14 | M9 Bayonet | Night | covert | FN | - | 184 800 DC |
+| 15 | M9 Bayonet | Stained | covert | FN | - | 136 800 DC |
+| 16 | M9 Bayonet | Freehand | covert | FN | - | 125 000 DC |
+| 17 | M9 Bayonet | Boreal Forest | covert | FN | - | 158 400 DC |
+| 18 | M9 Bayonet | Safari Mesh | covert | FN | - | 211 200 DC |
 
 ---
 
@@ -1695,33 +1654,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **170 000 DC**
 - **Описание:** Изогнутые клинки Talon Knife с кольцом на рукояти
-- **Количество предметов в кейсе:** 23 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Talon Knife | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Talon Knife | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Talon Knife | Fade | covert | FN | - | 240 000 DC |
-| 4 | Talon Knife | Fade | covert | MW | - | 196 800 DC |
-| 5 | Talon Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 6 | Talon Knife | Urban Masked | covert | FN | - | 213 600 DC |
-| 7 | Talon Knife | Forest DDPAT | covert | FN | - | 192 000 DC |
-| 8 | Talon Knife | Slaughter | covert | FN | - | 170 400 DC |
-| 9 | Talon Knife | Slaughter | covert | MW | - | 139 728 DC |
-| 10 | Talon Knife | Damascus Steel | covert | MW | - | 161 376 DC |
-| 11 | Talon Knife | Safari Mesh | covert | FN | - | 156 000 DC |
-| 12 | Talon Knife | Case Hardened | covert | FN | - | 134 400 DC |
-| 13 | Talon Knife | Crimson Web | covert | FN | - | 129 600 DC |
-| 14 | Talon Knife | Night Stripe | covert | FN | - | 124 800 DC |
-| 15 | Talon Knife | Blue Steel | covert | FN | - | 108 000 DC |
-| 16 | Talon Knife | Rust Coat | covert | FN | - | 103 200 DC |
-| 17 | Talon Knife | Rust Coat | covert | MW | - | 84 624 DC |
-| 18 | Talon Knife | ★ Talon Knife | covert | FN | - | 98 400 DC |
-| 19 | Butterfly Knife | Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 20 | Butterfly Knife | Fade | covert | MW | StatTrak™ | 266 400 DC |
-| 21 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
-| 22 | Butterfly Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 23 | Butterfly Knife | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 2 | Talon Knife | Fade | covert | FN | - | 240 000 DC |
+| 3 | Talon Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 4 | Talon Knife | Tiger Tooth | covert | FN | - | 139 200 DC |
+| 5 | Talon Knife | Slaughter | covert | FN | - | 170 400 DC |
+| 6 | Talon Knife | Crimson Web | covert | FN | - | 129 600 DC |
+| 7 | Talon Knife | Case Hardened | covert | FN | - | 134 400 DC |
+| 8 | Talon Knife | Damascus Steel | covert | MW | - | 161 376 DC |
+| 9 | Butterfly Knife | Autotronic | covert | MW | - | 140 000 DC |
+| 10 | Talon Knife | Blue Steel | covert | FN | - | 108 000 DC |
+| 11 | Talon Knife | Night Stripe | covert | FN | - | 124 800 DC |
+| 12 | Talon Knife | Urban Masked | covert | FN | - | 213 600 DC |
+| 13 | Talon Knife | Forest DDPAT | covert | FN | - | 192 000 DC |
+| 14 | Talon Knife | Stained | covert | MW | - | 115 000 DC |
+| 15 | Talon Knife | Rust Coat | covert | MW | - | 84 624 DC |
+| 16 | Talon Knife | Boreal Forest | covert | MW | - | 95 000 DC |
+| 17 | Talon Knife | Scorched | covert | MW | - | 90 000 DC |
+| 18 | Talon Knife | Safari Mesh | covert | FN | - | 156 000 DC |
 
 ---
 
@@ -1731,39 +1685,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **170 000 DC**
 - **Описание:** Один из самых желанных ножей CS2 Skeleton Knife
-- **Количество предметов в кейсе:** 29 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Skeleton Knife | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Skeleton Knife | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Skeleton Knife | Fade | covert | FN | - | 240 000 DC |
-| 4 | Skeleton Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 5 | Skeleton Knife | Marble Fade | covert | MW | - | 196 800 DC |
-| 6 | Skeleton Knife | Stained | covert | FN | - | 213 600 DC |
-| 7 | Skeleton Knife | Stained | covert | MW | - | 175 152 DC |
-| 8 | Skeleton Knife | Safari Mesh | covert | FN | - | 204 000 DC |
-| 9 | Skeleton Knife | Safari Mesh | covert | MW | - | 167 280 DC |
-| 10 | Skeleton Knife | Case Hardened | covert | FN | - | 182 400 DC |
-| 11 | Skeleton Knife | Case Hardened | covert | MW | - | 149 568 DC |
-| 12 | Skeleton Knife | Tiger Tooth | covert | MW | - | 153 504 DC |
-| 13 | Skeleton Knife | Crimson Web | covert | MW | - | 145 632 DC |
-| 14 | Skeleton Knife | Urban Masked | covert | FN | - | 141 600 DC |
+| 2 | Skeleton Knife | Fade | covert | FN | - | 240 000 DC |
+| 3 | Skeleton Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 4 | Skeleton Knife | Slaughter | covert | FN | - | 170 400 DC |
+| 5 | Skeleton Knife | Crimson Web | covert | MW | - | 145 632 DC |
+| 6 | Skeleton Knife | Case Hardened | covert | FN | - | 182 400 DC |
+| 7 | Skeleton Knife | Tiger Tooth | covert | MW | - | 153 504 DC |
+| 8 | Skeleton Knife | Damascus Steel | covert | MW | - | 102 336 DC |
+| 9 | Skeleton Knife | Blue Steel | covert | MW | - | 135 000 DC |
+| 10 | Skeleton Knife | Night Stripe | covert | FN | - | 172 800 DC |
+| 11 | Skeleton Knife | Stained | covert | FN | - | 213 600 DC |
+| 12 | Skeleton Knife | Urban Masked | covert | FN | - | 141 600 DC |
+| 13 | Skeleton Knife | Forest DDPAT | covert | FN | - | 120 000 DC |
+| 14 | Skeleton Knife | Boreal Forest | covert | MW | - | 110 000 DC |
 | 15 | Skeleton Knife | Rust Coat | covert | MW | - | 123 984 DC |
-| 16 | Skeleton Knife | Forest DDPAT | covert | FN | - | 120 000 DC |
-| 17 | Skeleton Knife | Forest DDPAT | covert | MW | - | 98 400 DC |
-| 18 | Skeleton Knife | Damascus Steel | covert | MW | - | 102 336 DC |
-| 19 | Butterfly Knife | Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 20 | Butterfly Knife | Fade | covert | MW | StatTrak™ | 266 400 DC |
-| 21 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
-| 22 | Butterfly Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 23 | Butterfly Knife | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 24 | Butterfly Knife | Marble Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 25 | Butterfly Knife | Marble Fade | covert | MW | StatTrak™ | 266 400 DC |
-| 26 | Butterfly Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 27 | Butterfly Knife | Freehand | covert | FN | StatTrak™ | 181 440 DC |
-| 28 | Butterfly Knife | Freehand | covert | MW | StatTrak™ | 149 184 DC |
-| 29 | Butterfly Knife | Freehand | covert | FN | - | 134 400 DC |
+| 16 | Skeleton Knife | Scorched | covert | MW | - | 98 000 DC |
+| 17 | Skeleton Knife | Safari Mesh | covert | FN | - | 204 000 DC |
+| 18 | Skeleton Knife | ★ Skeleton Knife | covert | FN | - | 180 000 DC |
 
 ---
 
@@ -1773,33 +1716,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **170 000 DC**
 - **Описание:** Быстродействующий автоматический клинок Stiletto Knife
-- **Количество предметов в кейсе:** 23 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Stiletto Knife | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Stiletto Knife | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Stiletto Knife | Fade | covert | FN | - | 240 000 DC |
-| 4 | Stiletto Knife | Fade | covert | MW | - | 196 800 DC |
-| 5 | Stiletto Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 6 | Stiletto Knife | Forest DDPAT | covert | FN | - | 211 200 DC |
-| 7 | Stiletto Knife | Slaughter | covert | FN | - | 189 600 DC |
-| 8 | Stiletto Knife | Safari Mesh | covert | FN | - | 175 200 DC |
-| 9 | Stiletto Knife | Safari Mesh | covert | MW | - | 143 664 DC |
-| 10 | Stiletto Knife | Scorched | covert | MW | - | 169 248 DC |
-| 11 | Stiletto Knife | Case Hardened | covert | FN | - | 153 600 DC |
-| 12 | Stiletto Knife | Case Hardened | covert | MW | - | 125 952 DC |
-| 13 | Stiletto Knife | Crimson Web | covert | FN | - | 148 800 DC |
-| 14 | Stiletto Knife | ★ Stiletto Knife | covert | FN | - | 129 600 DC |
-| 15 | Stiletto Knife | Night Stripe | covert | MW | - | 118 080 DC |
-| 16 | Stiletto Knife | Urban Masked | covert | FN | - | 112 800 DC |
-| 17 | Stiletto Knife | Rust Coat | covert | MW | - | 100 368 DC |
-| 18 | Stiletto Knife | Damascus Steel | covert | FN | - | 96 000 DC |
-| 19 | Butterfly Knife | Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 20 | Butterfly Knife | Fade | covert | MW | StatTrak™ | 266 400 DC |
-| 21 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
-| 22 | Butterfly Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 23 | Butterfly Knife | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 2 | Stiletto Knife | Fade | covert | FN | - | 240 000 DC |
+| 3 | Stiletto Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 4 | Stiletto Knife | Tiger Tooth | covert | FN | - | 140 000 DC |
+| 5 | Stiletto Knife | Slaughter | covert | FN | - | 189 600 DC |
+| 6 | Stiletto Knife | Crimson Web | covert | FN | - | 148 800 DC |
+| 7 | Stiletto Knife | Case Hardened | covert | FN | - | 153 600 DC |
+| 8 | Stiletto Knife | Damascus Steel | covert | FN | - | 96 000 DC |
+| 9 | Stiletto Knife | Blue Steel | covert | MW | - | 120 000 DC |
+| 10 | Stiletto Knife | Night Stripe | covert | MW | - | 118 080 DC |
+| 11 | Stiletto Knife | Urban Masked | covert | FN | - | 112 800 DC |
+| 12 | Stiletto Knife | Stained | covert | MW | - | 100 368 DC |
+| 13 | Stiletto Knife | Rust Coat | covert | MW | - | 100 368 DC |
+| 14 | Stiletto Knife | Forest DDPAT | covert | FN | - | 211 200 DC |
+| 15 | Stiletto Knife | Boreal Forest | covert | MW | - | 95 000 DC |
+| 16 | Stiletto Knife | Scorched | covert | MW | - | 169 248 DC |
+| 17 | Stiletto Knife | Safari Mesh | covert | FN | - | 175 200 DC |
+| 18 | Stiletto Knife | ★ Stiletto Knife | covert | FN | - | 129 600 DC |
 
 ---
 
@@ -1809,40 +1747,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **126 000 DC**
 - **Описание:** Любимый нож s1mple Nomad Knife во всех расцветках
-- **Количество предметов в кейсе:** 30 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Nomad Knife | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Nomad Knife | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Nomad Knife | Fade | covert | FN | - | 240 000 DC |
-| 4 | Nomad Knife | Fade | covert | MW | - | 196 800 DC |
-| 5 | Nomad Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 6 | Nomad Knife | Safari Mesh | covert | FN | - | 213 600 DC |
-| 7 | Nomad Knife | Safari Mesh | covert | MW | - | 175 152 DC |
-| 8 | Nomad Knife | Case Hardened | covert | FN | - | 192 000 DC |
-| 9 | Nomad Knife | Case Hardened | covert | MW | - | 157 440 DC |
-| 10 | Nomad Knife | Tiger Tooth | covert | MW | - | 161 376 DC |
-| 11 | Nomad Knife | Crimson Web | covert | MW | - | 153 504 DC |
-| 12 | Nomad Knife | Blue Steel | covert | MW | - | 135 792 DC |
-| 13 | Nomad Knife | Rust Coat | covert | MW | - | 131 856 DC |
-| 14 | Nomad Knife | Forest DDPAT | covert | FN | - | 129 600 DC |
-| 15 | Nomad Knife | Urban Masked | covert | MW | - | 123 984 DC |
-| 16 | Nomad Knife | Slaughter | covert | FN | - | 108 000 DC |
-| 17 | Nomad Knife | Slaughter | covert | MW | - | 88 560 DC |
-| 18 | Nomad Knife | Scorched | covert | MW | - | 102 336 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 29 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 30 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
+| 2 | Nomad Knife | Fade | covert | FN | - | 240 000 DC |
+| 3 | Nomad Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 4 | Nomad Knife | Slaughter | covert | FN | - | 108 000 DC |
+| 5 | Nomad Knife | Crimson Web | covert | MW | - | 153 504 DC |
+| 6 | Nomad Knife | Case Hardened | covert | FN | - | 192 000 DC |
+| 7 | Nomad Knife | Tiger Tooth | covert | MW | - | 161 376 DC |
+| 8 | Nomad Knife | Blue Steel | covert | MW | - | 135 792 DC |
+| 9 | Nomad Knife | Night Stripe | covert | MW | - | 120 000 DC |
+| 10 | Nomad Knife | Damascus Steel | covert | FN | - | 134 400 DC |
+| 11 | Nomad Knife | Stained | covert | MW | - | 110 000 DC |
+| 12 | Nomad Knife | Forest DDPAT | covert | FN | - | 129 600 DC |
+| 13 | Nomad Knife | Urban Masked | covert | MW | - | 123 984 DC |
+| 14 | Nomad Knife | Boreal Forest | covert | MW | - | 105 000 DC |
+| 15 | Nomad Knife | Rust Coat | covert | MW | - | 131 856 DC |
+| 16 | Nomad Knife | Scorched | covert | MW | - | 102 336 DC |
+| 17 | Nomad Knife | Safari Mesh | covert | FN | - | 213 600 DC |
+| 18 | Nomad Knife | ★ Nomad Knife | covert | FN | - | 150 000 DC |
 
 ---
 
@@ -1852,37 +1778,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **126 000 DC**
 - **Описание:** Простой и надежный японский клинок Ursus Knife
-- **Количество предметов в кейсе:** 27 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Ursus Knife | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Ursus Knife | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Ursus Knife | Fade | covert | FN | - | 240 000 DC |
-| 4 | Ursus Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 5 | Ursus Knife | Marble Fade | covert | MW | - | 196 800 DC |
-| 6 | Ursus Knife | Slaughter | covert | FN | - | 199 200 DC |
-| 7 | Ursus Knife | Slaughter | covert | MW | - | 163 344 DC |
-| 8 | Ursus Knife | Boreal Forest | covert | FN | - | 189 600 DC |
-| 9 | Ursus Knife | Stained | covert | MW | - | 159 408 DC |
-| 10 | Ursus Knife | Night Stripe | covert | FN | - | 153 600 DC |
-| 11 | Ursus Knife | Tiger Tooth | covert | MW | - | 137 760 DC |
-| 12 | Ursus Knife | Rust Coat | covert | FN | - | 132 000 DC |
-| 13 | Ursus Knife | Ultraviolet | covert | FN | - | 127 200 DC |
-| 14 | Ursus Knife | Urban Masked | covert | FN | - | 122 400 DC |
-| 15 | Ursus Knife | Damascus Steel | covert | FN | - | 105 600 DC |
-| 16 | Ursus Knife | ★ Ursus Knife | covert | FN | - | 103 200 DC |
-| 17 | Ursus Knife | ★ Ursus Knife | covert | MW | - | 84 624 DC |
-| 18 | Ursus Knife | Scorched | covert | FN | - | 96 000 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
+| 2 | Ursus Knife | Fade | covert | FN | - | 240 000 DC |
+| 3 | Ursus Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 4 | Ursus Knife | Slaughter | covert | FN | - | 199 200 DC |
+| 5 | Ursus Knife | Crimson Web | covert | FN | - | 158 400 DC |
+| 6 | Ursus Knife | Tiger Tooth | covert | MW | - | 137 760 DC |
+| 7 | Ursus Knife | Case Hardened | covert | FN | - | 163 200 DC |
+| 8 | Ursus Knife | Ultraviolet | covert | FN | - | 127 200 DC |
+| 9 | Ursus Knife | Night Stripe | covert | FN | - | 153 600 DC |
+| 10 | Ursus Knife | Damascus Steel | covert | FN | - | 105 600 DC |
+| 11 | Ursus Knife | Blue Steel | covert | MW | - | 115 000 DC |
+| 12 | Ursus Knife | Stained | covert | MW | - | 159 408 DC |
+| 13 | Ursus Knife | Urban Masked | covert | FN | - | 122 400 DC |
+| 14 | Ursus Knife | Boreal Forest | covert | FN | - | 189 600 DC |
+| 15 | Ursus Knife | Forest DDPAT | covert | MW | - | 95 000 DC |
+| 16 | Ursus Knife | Rust Coat | covert | FN | - | 132 000 DC |
+| 17 | Ursus Knife | Scorched | covert | FN | - | 96 000 DC |
+| 18 | Ursus Knife | Safari Mesh | covert | MW | - | 88 000 DC |
 
 ---
 
@@ -1892,40 +1809,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **126 000 DC**
 - **Описание:** Полевой клинок Paracord Knife с оплеткой рукояти
-- **Количество предметов в кейсе:** 30 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Paracord Knife | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Paracord Knife | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Paracord Knife | Fade | covert | FN | - | 240 000 DC |
-| 4 | Paracord Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 5 | Paracord Knife | Marble Fade | covert | MW | - | 196 800 DC |
-| 6 | Paracord Knife | Stained | covert | FN | - | 213 600 DC |
-| 7 | Paracord Knife | Safari Mesh | covert | FN | - | 204 000 DC |
-| 8 | Paracord Knife | Crimson Web | covert | FN | - | 177 600 DC |
-| 9 | Paracord Knife | Night Stripe | covert | FN | - | 172 800 DC |
-| 10 | Paracord Knife | Night Stripe | covert | MW | - | 141 696 DC |
-| 11 | Paracord Knife | ★ Paracord Knife | covert | FN | - | 165 600 DC |
-| 12 | Paracord Knife | ★ Paracord Knife | covert | MW | - | 135 792 DC |
-| 13 | Paracord Knife | Tiger Tooth | covert | MW | - | 153 504 DC |
-| 14 | Paracord Knife | Ultraviolet | covert | FN | - | 146 400 DC |
-| 15 | Paracord Knife | Rust Coat | covert | MW | - | 123 984 DC |
-| 16 | Paracord Knife | Forest DDPAT | covert | FN | - | 120 000 DC |
-| 17 | Paracord Knife | Forest DDPAT | covert | MW | - | 98 400 DC |
-| 18 | Paracord Knife | Damascus Steel | covert | MW | - | 102 336 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 29 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 30 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
+| 2 | Paracord Knife | Fade | covert | FN | - | 240 000 DC |
+| 3 | Paracord Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 4 | Paracord Knife | Slaughter | covert | FN | - | 98 400 DC |
+| 5 | Paracord Knife | Crimson Web | covert | FN | - | 177 600 DC |
+| 6 | Paracord Knife | Case Hardened | covert | FN | - | 182 400 DC |
+| 7 | Paracord Knife | Tiger Tooth | covert | MW | - | 153 504 DC |
+| 8 | Paracord Knife | Night Stripe | covert | FN | - | 172 800 DC |
+| 9 | Paracord Knife | Ultraviolet | covert | FN | - | 146 400 DC |
+| 10 | Paracord Knife | Blue Steel | covert | MW | - | 120 000 DC |
+| 11 | Paracord Knife | Damascus Steel | covert | MW | - | 102 336 DC |
+| 12 | Paracord Knife | Stained | covert | FN | - | 213 600 DC |
+| 13 | Paracord Knife | Urban Masked | covert | MW | - | 110 000 DC |
+| 14 | Paracord Knife | Forest DDPAT | covert | FN | - | 120 000 DC |
+| 15 | Paracord Knife | Boreal Forest | covert | MW | - | 95 000 DC |
+| 16 | Paracord Knife | Rust Coat | covert | MW | - | 123 984 DC |
+| 17 | Paracord Knife | Safari Mesh | covert | FN | - | 204 000 DC |
+| 18 | Paracord Knife | ★ Paracord Knife | covert | FN | - | 165 600 DC |
 
 ---
 
@@ -1935,37 +1840,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **126 000 DC**
 - **Описание:** Тактический клинок Survival Knife со стропорезом
-- **Количество предметов в кейсе:** 27 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Survival Knife | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Survival Knife | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Survival Knife | Fade | covert | FN | - | 240 000 DC |
-| 4 | Survival Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 5 | Survival Knife | Marble Fade | covert | MW | - | 196 800 DC |
-| 6 | Survival Knife | Case Hardened | covert | FN | - | 211 200 DC |
-| 7 | Survival Knife | Night Stripe | covert | FN | - | 201 600 DC |
-| 8 | Survival Knife | Ultraviolet | covert | FN | - | 175 200 DC |
-| 9 | Survival Knife | Ultraviolet | covert | MW | - | 143 664 DC |
-| 10 | Survival Knife | Urban Masked | covert | FN | - | 170 400 DC |
-| 11 | Survival Knife | Damascus Steel | covert | FN | - | 153 600 DC |
-| 12 | Survival Knife | Damascus Steel | covert | MW | - | 125 952 DC |
+| 2 | Survival Knife | Fade | covert | FN | - | 240 000 DC |
+| 3 | Survival Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 4 | Survival Knife | Case Hardened | covert | FN | - | 211 200 DC |
+| 5 | Survival Knife | Slaughter | covert | FN | - | 127 200 DC |
+| 6 | Survival Knife | Crimson Web | covert | FN | - | 206 400 DC |
+| 7 | Survival Knife | Tiger Tooth | covert | FN | - | 96 000 DC |
+| 8 | Survival Knife | Night Stripe | covert | FN | - | 201 600 DC |
+| 9 | Survival Knife | Ultraviolet | covert | FN | - | 175 200 DC |
+| 10 | Survival Knife | Damascus Steel | covert | FN | - | 153 600 DC |
+| 11 | Survival Knife | Blue Steel | covert | MW | - | 115 000 DC |
+| 12 | Survival Knife | Urban Masked | covert | FN | - | 170 400 DC |
 | 13 | Survival Knife | Forest DDPAT | covert | FN | - | 148 800 DC |
-| 14 | Survival Knife | ★ Survival Knife | covert | FN | - | 134 400 DC |
-| 15 | Survival Knife | Scorched | covert | MW | - | 118 080 DC |
-| 16 | Survival Knife | Safari Mesh | covert | FN | - | 112 800 DC |
-| 17 | Survival Knife | Stained | covert | MW | - | 100 368 DC |
-| 18 | Survival Knife | Tiger Tooth | covert | FN | - | 96 000 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
+| 14 | Survival Knife | Stained | covert | MW | - | 100 368 DC |
+| 15 | Survival Knife | Boreal Forest | covert | MW | - | 95 000 DC |
+| 16 | Survival Knife | Scorched | covert | MW | - | 118 080 DC |
+| 17 | Survival Knife | Safari Mesh | covert | FN | - | 112 800 DC |
+| 18 | Survival Knife | ★ Survival Knife | covert | FN | - | 134 400 DC |
 
 ---
 
@@ -1975,43 +1871,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **157 000 DC**
 - **Описание:** Новейший непальский клинок Kukri Knife из Kilowatt
-- **Количество предметов в кейсе:** 33 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Kukri Knife | Fade | covert | FN | - | 240 000 DC |
-| 2 | Kukri Knife | Fade | covert | MW | - | 196 800 DC |
-| 3 | Kukri Knife | Blue Steel | covert | FN | - | 201 600 DC |
-| 4 | Kukri Knife | Blue Steel | covert | MW | - | 165 312 DC |
-| 5 | Kukri Knife | Boreal Forest | covert | FN | - | 196 800 DC |
-| 6 | Kukri Knife | Boreal Forest | covert | MW | - | 161 376 DC |
-| 7 | Kukri Knife | Night Stripe | covert | FN | - | 192 000 DC |
-| 8 | Kukri Knife | Night Stripe | covert | MW | - | 157 440 DC |
-| 9 | Kukri Knife | Stained | covert | FN | - | 170 400 DC |
-| 10 | Kukri Knife | ★ Kukri Knife | covert | FN | - | 156 000 DC |
-| 11 | Kukri Knife | Case Hardened | covert | FN | - | 139 200 DC |
-| 12 | Kukri Knife | Case Hardened | covert | MW | - | 114 144 DC |
-| 13 | Kukri Knife | Scorched | covert | FN | - | 134 400 DC |
-| 14 | Kukri Knife | Urban Masked | covert | MW | - | 131 856 DC |
-| 15 | Kukri Knife | Slaughter | covert | FN | - | 112 800 DC |
-| 16 | Kukri Knife | Forest DDPAT | covert | FN | - | 108 000 DC |
-| 17 | Kukri Knife | Forest DDPAT | covert | MW | - | 88 560 DC |
-| 18 | Kukri Knife | Safari Mesh | covert | FN | - | 103 200 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 29 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 30 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 31 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 32 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 33 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
+| 2 | Kukri Knife | Slaughter | covert | FN | - | 112 800 DC |
+| 3 | Kukri Knife | Crimson Web | covert | FN | - | 165 600 DC |
+| 4 | Kukri Knife | Case Hardened | covert | FN | - | 139 200 DC |
+| 5 | Kukri Knife | Blue Steel | covert | FN | - | 201 600 DC |
+| 6 | Kukri Knife | Night Stripe | covert | FN | - | 192 000 DC |
+| 7 | Kukri Knife | Stained | covert | FN | - | 170 400 DC |
+| 8 | Kukri Knife | Urban Masked | covert | MW | - | 131 856 DC |
+| 9 | Kukri Knife | Forest DDPAT | covert | FN | - | 108 000 DC |
+| 10 | Kukri Knife | Boreal Forest | covert | FN | - | 196 800 DC |
+| 11 | Kukri Knife | Scorched | covert | FN | - | 134 400 DC |
+| 12 | Kukri Knife | Safari Mesh | covert | FN | - | 103 200 DC |
+| 13 | Kukri Knife | ★ Kukri Knife | covert | FN | - | 156 000 DC |
+| 14 | Kukri Knife | Blue Steel | covert | MW | - | 165 312 DC |
+| 15 | Kukri Knife | Night Stripe | covert | MW | - | 157 440 DC |
+| 16 | Kukri Knife | Boreal Forest | covert | MW | - | 161 376 DC |
+| 17 | Kukri Knife | Case Hardened | covert | MW | - | 114 144 DC |
+| 18 | Kukri Knife | Fade | covert | MW | - | 196 800 DC |
 
 ---
 
@@ -2021,32 +1902,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **170 000 DC**
 - **Описание:** Элегантные складные ножи Flip Knife
-- **Количество предметов в кейсе:** 22 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Flip Knife | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Flip Knife | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Flip Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 4 | Flip Knife | Fade | covert | FN | - | 240 000 DC |
-| 5 | Flip Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 6 | Flip Knife | Marble Fade | covert | MW | - | 196 800 DC |
-| 7 | Flip Knife | Case Hardened | covert | FN | - | 211 200 DC |
-| 8 | Flip Knife | Crimson Web | covert | FN | - | 201 600 DC |
-| 9 | Flip Knife | Forest DDPAT | covert | FN | - | 175 200 DC |
-| 10 | Flip Knife | Autotronic | covert | MW | - | 169 248 DC |
+| 2 | Flip Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 3 | Flip Knife | Fade | covert | FN | - | 240 000 DC |
+| 4 | Flip Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 5 | Flip Knife | Crimson Web | covert | FN | - | 201 600 DC |
+| 6 | Flip Knife | Lore | covert | FN | - | 175 000 DC |
+| 7 | Flip Knife | Autotronic | covert | FN | - | 206 400 DC |
+| 8 | Flip Knife | Slaughter | covert | FN | - | 155 000 DC |
+| 9 | Flip Knife | Tiger Tooth | covert | FN | - | 135 000 DC |
+| 10 | Flip Knife | Case Hardened | covert | FN | - | 211 200 DC |
 | 11 | Flip Knife | Damascus Steel | covert | FN | - | 153 600 DC |
-| 12 | Flip Knife | Damascus Steel | covert | MW | - | 125 952 DC |
-| 13 | Flip Knife | Rust Coat | covert | MW | - | 147 600 DC |
+| 12 | Flip Knife | Blue Steel | covert | MW | - | 115 000 DC |
+| 13 | Flip Knife | Black Laminate | covert | MW | - | 105 000 DC |
 | 14 | Flip Knife | Night | covert | MW | - | 139 728 DC |
-| 15 | Flip Knife | Boreal Forest | covert | MW | - | 118 080 DC |
-| 16 | Flip Knife | Scorched | covert | FN | - | 108 000 DC |
-| 17 | Flip Knife | Stained | covert | MW | - | 100 368 DC |
-| 18 | Flip Knife | Bright Water | covert | MW | - | 92 496 DC |
-| 19 | Butterfly Knife | Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 20 | Butterfly Knife | Fade | covert | MW | StatTrak™ | 266 400 DC |
-| 21 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
-| 22 | Butterfly Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 15 | Flip Knife | Stained | covert | MW | - | 100 368 DC |
+| 16 | Flip Knife | Bright Water | covert | MW | - | 92 496 DC |
+| 17 | Flip Knife | Boreal Forest | covert | MW | - | 118 080 DC |
+| 18 | Flip Knife | Scorched | covert | FN | - | 108 000 DC |
 
 ---
 
@@ -2056,34 +1933,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **126 000 DC**
 - **Описание:** Агрессивные зубчатые охотничьи ножи Huntsman
-- **Количество предметов в кейсе:** 24 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Huntsman Knife | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Huntsman Knife | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Huntsman Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 4 | Huntsman Knife | Fade | covert | FN | - | 240 000 DC |
-| 5 | Huntsman Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 6 | Huntsman Knife | Marble Fade | covert | MW | - | 196 800 DC |
-| 7 | Huntsman Knife | Scorched | covert | FN | - | 213 600 DC |
-| 8 | Huntsman Knife | ★ Huntsman Knife | covert | FN | - | 201 600 DC |
-| 9 | Huntsman Knife | Safari Mesh | covert | FN | - | 182 400 DC |
-| 10 | Huntsman Knife | Rust Coat | covert | FN | - | 165 600 DC |
-| 11 | Huntsman Knife | Black Laminate | covert | FN | - | 160 800 DC |
-| 12 | Huntsman Knife | Black Laminate | covert | MW | - | 131 856 DC |
-| 13 | Huntsman Knife | Bright Water | covert | MW | - | 153 504 DC |
-| 14 | Huntsman Knife | Damascus Steel | covert | FN | - | 139 200 DC |
-| 15 | Huntsman Knife | Night | covert | FN | - | 124 800 DC |
-| 16 | Huntsman Knife | Lore | covert | MW | - | 110 208 DC |
-| 17 | Huntsman Knife | Ultraviolet | covert | FN | - | 103 200 DC |
-| 18 | Huntsman Knife | Stained | covert | MW | - | 88 560 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
+| 2 | Huntsman Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 3 | Huntsman Knife | Fade | covert | FN | - | 240 000 DC |
+| 4 | Huntsman Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 5 | Huntsman Knife | Crimson Web | covert | MW | - | 145 000 DC |
+| 6 | Huntsman Knife | Lore | covert | MW | - | 110 208 DC |
+| 7 | Huntsman Knife | Slaughter | covert | FN | - | 130 000 DC |
+| 8 | Huntsman Knife | Tiger Tooth | covert | FN | - | 120 000 DC |
+| 9 | Huntsman Knife | Case Hardened | covert | FN | - | 135 000 DC |
+| 10 | Huntsman Knife | Damascus Steel | covert | FN | - | 139 200 DC |
+| 11 | Huntsman Knife | Blue Steel | covert | MW | - | 110 000 DC |
+| 12 | Huntsman Knife | Black Laminate | covert | FN | - | 160 800 DC |
+| 13 | Huntsman Knife | Night | covert | FN | - | 124 800 DC |
+| 14 | Huntsman Knife | Ultraviolet | covert | FN | - | 103 200 DC |
+| 15 | Huntsman Knife | Bright Water | covert | MW | - | 153 504 DC |
+| 16 | Huntsman Knife | Stained | covert | MW | - | 88 560 DC |
+| 17 | Huntsman Knife | Scorched | covert | FN | - | 213 600 DC |
+| 18 | Huntsman Knife | Safari Mesh | covert | FN | - | 182 400 DC |
 
 ---
 
@@ -2093,37 +1964,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **126 000 DC**
 - **Описание:** Массивный тесак Bowie Knife с тяжелым лезвием
-- **Количество предметов в кейсе:** 27 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Bowie Knife | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Bowie Knife | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Bowie Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 4 | Bowie Knife | Fade | covert | FN | - | 240 000 DC |
-| 5 | Bowie Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 6 | Bowie Knife | Slaughter | covert | FN | - | 213 600 DC |
-| 7 | Bowie Knife | Bright Water | covert | FN | - | 199 200 DC |
-| 8 | Bowie Knife | Bright Water | covert | MW | - | 163 344 DC |
-| 9 | Bowie Knife | Scorched | covert | FN | - | 194 400 DC |
+| 2 | Bowie Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 3 | Bowie Knife | Fade | covert | FN | - | 240 000 DC |
+| 4 | Bowie Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 5 | Bowie Knife | Slaughter | covert | FN | - | 213 600 DC |
+| 6 | Bowie Knife | Crimson Web | covert | MW | - | 168 000 DC |
+| 7 | Bowie Knife | Lore | covert | FN | - | 160 000 DC |
+| 8 | Bowie Knife | Autotronic | covert | FN | - | 204 000 DC |
+| 9 | Bowie Knife | Tiger Tooth | covert | FN | - | 135 000 DC |
 | 10 | Bowie Knife | Case Hardened | covert | FN | - | 177 600 DC |
-| 11 | Bowie Knife | Case Hardened | covert | MW | - | 145 632 DC |
-| 12 | Bowie Knife | Stained | covert | MW | - | 171 216 DC |
-| 13 | Bowie Knife | Blue Steel | covert | FN | - | 151 200 DC |
-| 14 | Bowie Knife | ★ Bowie Knife | covert | FN | - | 139 200 DC |
-| 15 | Bowie Knife | Urban Masked | covert | FN | - | 132 000 DC |
-| 16 | Bowie Knife | Damascus Steel | covert | FN | - | 120 000 DC |
-| 17 | Bowie Knife | Damascus Steel | covert | MW | - | 98 400 DC |
-| 18 | Bowie Knife | Night | covert | MW | - | 112 176 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
+| 11 | Bowie Knife | Bright Water | covert | FN | - | 199 200 DC |
+| 12 | Bowie Knife | Blue Steel | covert | FN | - | 151 200 DC |
+| 13 | Bowie Knife | Damascus Steel | covert | FN | - | 120 000 DC |
+| 14 | Bowie Knife | Night | covert | MW | - | 112 176 DC |
+| 15 | Bowie Knife | Ultraviolet | covert | FN | - | 105 600 DC |
+| 16 | Bowie Knife | Stained | covert | MW | - | 171 216 DC |
+| 17 | Bowie Knife | Scorched | covert | FN | - | 194 400 DC |
+| 18 | Bowie Knife | Safari Mesh | covert | FN | - | 163 200 DC |
 
 ---
 
@@ -2133,34 +1995,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **126 000 DC**
 - **Описание:** Двойные клинки Shadow Daggers всех расцветок
-- **Количество предметов в кейсе:** 24 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Shadow Daggers | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Shadow Daggers | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Shadow Daggers | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 4 | Shadow Daggers | Fade | covert | FN | - | 240 000 DC |
-| 5 | Shadow Daggers | Marble Fade | covert | FN | - | 240 000 DC |
-| 6 | Shadow Daggers | Black Laminate | covert | FN | - | 211 200 DC |
-| 7 | Shadow Daggers | ★ Shadow Daggers | covert | FN | - | 196 800 DC |
-| 8 | Shadow Daggers | Blue Steel | covert | FN | - | 189 600 DC |
-| 9 | Shadow Daggers | Night | covert | FN | - | 175 200 DC |
-| 10 | Shadow Daggers | Crimson Web | covert | MW | - | 169 248 DC |
-| 11 | Shadow Daggers | Lore | covert | FN | - | 153 600 DC |
-| 12 | Shadow Daggers | Lore | covert | MW | - | 125 952 DC |
-| 13 | Shadow Daggers | Forest DDPAT | covert | MW | - | 147 600 DC |
-| 14 | Shadow Daggers | Slaughter | covert | FN | - | 132 000 DC |
-| 15 | Shadow Daggers | Bright Water | covert | FN | - | 117 600 DC |
-| 16 | Shadow Daggers | Freehand | covert | FN | - | 105 600 DC |
-| 17 | Shadow Daggers | Freehand | covert | MW | - | 86 592 DC |
-| 18 | Shadow Daggers | Autotronic | covert | MW | - | 100 368 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
+| 2 | Shadow Daggers | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 3 | Shadow Daggers | Fade | covert | FN | - | 240 000 DC |
+| 4 | Shadow Daggers | Marble Fade | covert | FN | - | 240 000 DC |
+| 5 | Shadow Daggers | Crimson Web | covert | FN | - | 206 400 DC |
+| 6 | Shadow Daggers | Lore | covert | FN | - | 153 600 DC |
+| 7 | Shadow Daggers | Autotronic | covert | MW | - | 100 368 DC |
+| 8 | Shadow Daggers | Slaughter | covert | FN | - | 132 000 DC |
+| 9 | Shadow Daggers | Tiger Tooth | covert | FN | - | 110 000 DC |
+| 10 | Shadow Daggers | Case Hardened | covert | FN | - | 96 000 DC |
+| 11 | Shadow Daggers | Damascus Steel | covert | FN | - | 95 000 DC |
+| 12 | Shadow Daggers | Black Laminate | covert | FN | - | 211 200 DC |
+| 13 | Shadow Daggers | Blue Steel | covert | FN | - | 189 600 DC |
+| 14 | Shadow Daggers | Night | covert | FN | - | 175 200 DC |
+| 15 | Shadow Daggers | Ultraviolet | covert | FN | - | 144 000 DC |
+| 16 | Shadow Daggers | Bright Water | covert | FN | - | 117 600 DC |
+| 17 | Shadow Daggers | Freehand | covert | FN | - | 105 600 DC |
+| 18 | Shadow Daggers | Forest DDPAT | covert | MW | - | 147 600 DC |
 
 ---
 
@@ -2170,32 +2026,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **170 000 DC**
 - **Описание:** Бюджетные клинки Gut Knife для любителей классики
-- **Количество предметов в кейсе:** 22 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Gut Knife | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Gut Knife | Doppler | covert | MW | - | 229 600 DC |
-| 3 | Gut Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 4 | Gut Knife | Fade | covert | FN | - | 240 000 DC |
-| 5 | Gut Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 6 | Gut Knife | Marble Fade | covert | MW | - | 196 800 DC |
-| 7 | Gut Knife | Blue Steel | covert | FN | - | 204 000 DC |
-| 8 | Gut Knife | Urban Masked | covert | FN | - | 184 800 DC |
-| 9 | Gut Knife | Lore | covert | FN | - | 168 000 DC |
-| 10 | Gut Knife | Boreal Forest | covert | FN | - | 163 200 DC |
-| 11 | Gut Knife | Boreal Forest | covert | MW | - | 133 824 DC |
-| 12 | Gut Knife | Night | covert | MW | - | 155 472 DC |
-| 13 | Gut Knife | Stained | covert | FN | - | 141 600 DC |
-| 14 | Gut Knife | Slaughter | covert | MW | - | 120 048 DC |
-| 15 | Gut Knife | Tiger Tooth | covert | FN | - | 115 200 DC |
+| 2 | Gut Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 3 | Gut Knife | Fade | covert | FN | - | 240 000 DC |
+| 4 | Gut Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 5 | Gut Knife | Crimson Web | covert | FN | - | 100 800 DC |
+| 6 | Gut Knife | Lore | covert | FN | - | 168 000 DC |
+| 7 | Gut Knife | Autotronic | covert | FN | - | 105 600 DC |
+| 8 | Gut Knife | Slaughter | covert | FN | - | 146 400 DC |
+| 9 | Gut Knife | Tiger Tooth | covert | FN | - | 115 200 DC |
+| 10 | Gut Knife | Case Hardened | covert | MW | - | 90 528 DC |
+| 11 | Gut Knife | Damascus Steel | covert | FN | - | 172 800 DC |
+| 12 | Gut Knife | Blue Steel | covert | FN | - | 204 000 DC |
+| 13 | Gut Knife | Black Laminate | covert | MW | - | 88 000 DC |
+| 14 | Gut Knife | Night | covert | MW | - | 155 472 DC |
+| 15 | Gut Knife | Ultraviolet | covert | FN | - | 158 400 DC |
 | 16 | Gut Knife | Bright Water | covert | MW | - | 108 240 DC |
 | 17 | Gut Knife | Freehand | covert | MW | - | 98 400 DC |
-| 18 | Gut Knife | Case Hardened | covert | MW | - | 90 528 DC |
-| 19 | Butterfly Knife | Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 20 | Butterfly Knife | Fade | covert | MW | StatTrak™ | 266 400 DC |
-| 21 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
-| 22 | Butterfly Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 18 | Gut Knife | Urban Masked | covert | FN | - | 184 800 DC |
 
 ---
 
@@ -2205,37 +2057,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **89 000 DC**
 - **Описание:** Кованая многослойная дамасская сталь на клинках
-- **Количество предметов в кейсе:** 27 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Talon Knife | Damascus Steel | covert | FN | - | 196 800 DC |
-| 2 | Butterfly Knife | Damascus Steel | covert | FN | - | 187 200 DC |
-| 3 | Gut Knife | Damascus Steel | covert | FN | - | 172 800 DC |
-| 4 | Gut Knife | Damascus Steel | covert | MW | - | 141 696 DC |
-| 5 | M9 Bayonet | Damascus Steel | covert | FN | - | 168 000 DC |
-| 6 | Karambit | Damascus Steel | covert | FN | - | 163 200 DC |
-| 7 | Bayonet | Damascus Steel | covert | FN | - | 160 800 DC |
-| 8 | Bayonet | Damascus Steel | covert | MW | - | 131 856 DC |
+| 1 | Butterfly Knife | Damascus Steel | covert | FN | - | 187 200 DC |
+| 2 | Karambit | Damascus Steel | covert | FN | - | 163 200 DC |
+| 3 | M9 Bayonet | Damascus Steel | covert | FN | - | 168 000 DC |
+| 4 | Talon Knife | Damascus Steel | covert | FN | - | 196 800 DC |
+| 5 | Skeleton Knife | Damascus Steel | covert | FN | - | 124 800 DC |
+| 6 | Bayonet | Damascus Steel | covert | FN | - | 160 800 DC |
+| 7 | Stiletto Knife | Damascus Steel | covert | FN | - | 96 000 DC |
+| 8 | Nomad Knife | Damascus Steel | covert | FN | - | 134 400 DC |
 | 9 | Survival Knife | Damascus Steel | covert | FN | - | 153 600 DC |
-| 10 | Huntsman Knife | Damascus Steel | covert | FN | - | 139 200 DC |
-| 11 | Nomad Knife | Damascus Steel | covert | FN | - | 134 400 DC |
-| 12 | Nomad Knife | Damascus Steel | covert | MW | - | 110 208 DC |
-| 13 | Flip Knife | Damascus Steel | covert | MW | - | 125 952 DC |
-| 14 | Skeleton Knife | Damascus Steel | covert | FN | - | 124 800 DC |
-| 15 | Navaja Knife | Damascus Steel | covert | MW | - | 114 144 DC |
-| 16 | Paracord Knife | Damascus Steel | covert | MW | - | 102 336 DC |
-| 17 | Stiletto Knife | Damascus Steel | covert | FN | - | 96 000 DC |
-| 18 | Stiletto Knife | Damascus Steel | covert | MW | - | 78 720 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
+| 10 | Ursus Knife | Damascus Steel | covert | FN | - | 105 600 DC |
+| 11 | Paracord Knife | Damascus Steel | covert | MW | - | 102 336 DC |
+| 12 | Flip Knife | Damascus Steel | covert | MW | - | 125 952 DC |
+| 13 | Huntsman Knife | Damascus Steel | covert | FN | - | 139 200 DC |
+| 14 | Bowie Knife | Damascus Steel | covert | FN | - | 120 000 DC |
+| 15 | Falchion Knife | Damascus Steel | covert | FN | - | 134 400 DC |
+| 16 | Shadow Daggers | Damascus Steel | covert | FN | - | 95 000 DC |
+| 17 | Gut Knife | Damascus Steel | covert | FN | - | 172 800 DC |
+| 18 | Navaja Knife | Damascus Steel | covert | MW | - | 114 144 DC |
 
 ---
 
@@ -2245,61 +2088,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **45 000 DC**
 - **Описание:** Темные матовые ножи Night и скины Nightwish
-- **Количество предметов в кейсе:** 51 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Karambit | Night | covert | FN | - | 180 000 DC |
-| 2 | Karambit | Night | covert | MW | - | 147 600 DC |
-| 3 | Karambit | Night | covert | FT | - | 117 000 DC |
-| 4 | Butterfly Knife | Night | covert | FN | - | 204 000 DC |
-| 5 | Butterfly Knife | Night | covert | MW | - | 167 280 DC |
-| 6 | Butterfly Knife | Night | covert | FT | - | 132 600 DC |
-| 7 | M9 Bayonet | Night | covert | FN | - | 184 800 DC |
-| 8 | M9 Bayonet | Night | covert | MW | - | 151 536 DC |
-| 9 | M9 Bayonet | Night | covert | FT | - | 120 120 DC |
-| 10 | Bayonet | Night | covert | FN | - | 177 600 DC |
-| 11 | Bayonet | Night | covert | MW | - | 145 632 DC |
-| 12 | Bayonet | Night | covert | FT | - | 115 440 DC |
+| 1 | Butterfly Knife | Night | covert | FN | - | 204 000 DC |
+| 2 | Karambit | Night | covert | FN | - | 180 000 DC |
+| 3 | M9 Bayonet | Night | covert | FN | - | 184 800 DC |
+| 4 | Bayonet | Night | covert | FN | - | 177 600 DC |
+| 5 | Talon Knife | Night Stripe | covert | FN | - | 124 800 DC |
+| 6 | Skeleton Knife | Night Stripe | covert | FN | - | 172 800 DC |
+| 7 | Stiletto Knife | Night Stripe | covert | MW | - | 118 080 DC |
+| 8 | Nomad Knife | Night Stripe | covert | MW | - | 120 000 DC |
+| 9 | Ursus Knife | Night Stripe | covert | FN | - | 153 600 DC |
+| 10 | Paracord Knife | Night Stripe | covert | FN | - | 172 800 DC |
+| 11 | Survival Knife | Night Stripe | covert | FN | - | 201 600 DC |
+| 12 | Flip Knife | Night | covert | MW | - | 139 728 DC |
 | 13 | Huntsman Knife | Night | covert | FN | - | 124 800 DC |
-| 14 | Huntsman Knife | Night | covert | MW | - | 102 336 DC |
-| 15 | Huntsman Knife | Night | covert | FT | - | 81 120 DC |
-| 16 | AK-47 | Nightwish | covert | FN | - | 49 700 DC |
-| 17 | AK-47 | Nightwish | covert | MW | - | 40 754 DC |
-| 18 | AK-47 | Nightwish | covert | FT | - | 32 305 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 29 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 30 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 31 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 32 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 33 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 34 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 35 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 36 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 37 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 38 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 39 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 40 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 41 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 42 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 43 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 44 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 45 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 46 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 47 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 48 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 49 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 50 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 51 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
+| 14 | Bowie Knife | Night | covert | MW | - | 112 176 DC |
+| 15 | Falchion Knife | Night | covert | FN | - | 120 000 DC |
+| 16 | Shadow Daggers | Night | covert | FN | - | 175 200 DC |
+| 17 | Gut Knife | Night | covert | MW | - | 155 472 DC |
+| 18 | AK-47 | Nightwish | covert | FN | - | 49 700 DC |
 
 ---
 
@@ -2309,60 +2119,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **96 000 DC**
 - **Описание:** Высокотехнологичный сплав и красная сетка
-- **Количество предметов в кейсе:** 50 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Karambit | Autotronic | covert | FN | - | 96 000 DC |
-| 2 | Karambit | Autotronic | covert | MW | - | 78 720 DC |
-| 3 | Karambit | Autotronic | covert | FT | - | 62 400 DC |
-| 4 | Butterfly Knife | Autotronic | covert | FN | - | 151 200 DC |
-| 5 | Butterfly Knife | Autotronic | covert | MW | - | 123 984 DC |
-| 6 | Butterfly Knife | Autotronic | covert | FT | - | 98 280 DC |
-| 7 | M9 Bayonet | Autotronic | covert | FN | - | 100 800 DC |
-| 8 | M9 Bayonet | Autotronic | covert | MW | - | 82 656 DC |
-| 9 | M9 Bayonet | Autotronic | covert | FT | - | 65 520 DC |
-| 10 | Bayonet | Autotronic | covert | FN | - | 213 600 DC |
-| 11 | Bayonet | Autotronic | covert | MW | - | 175 152 DC |
-| 12 | Bayonet | Autotronic | covert | FT | - | 138 840 DC |
-| 13 | Flip Knife | Autotronic | covert | FN | - | 206 400 DC |
-| 14 | Flip Knife | Autotronic | covert | MW | - | 169 248 DC |
-| 15 | Flip Knife | Autotronic | covert | FT | - | 134 160 DC |
-| 16 | Bowie Knife | Autotronic | covert | FN | - | 204 000 DC |
-| 17 | Bowie Knife | Autotronic | covert | MW | - | 167 280 DC |
-| 18 | Bowie Knife | Autotronic | covert | FT | - | 132 600 DC |
-| 19 | Gut Knife | Autotronic | covert | FN | - | 105 600 DC |
-| 20 | Gut Knife | Autotronic | covert | MW | - | 86 592 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 22 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 23 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 25 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 26 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 28 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 29 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 30 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 31 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 32 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 33 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 34 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 35 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 36 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 37 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 38 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 39 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 40 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 41 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 42 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 43 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 44 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 45 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 46 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 47 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 48 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 49 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 50 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
+| 1 | Butterfly Knife | Autotronic | covert | FN | - | 151 200 DC |
+| 2 | Karambit | Autotronic | covert | FN | - | 96 000 DC |
+| 3 | M9 Bayonet | Autotronic | covert | FN | - | 100 800 DC |
+| 4 | Bayonet | Autotronic | covert | FN | - | 213 600 DC |
+| 5 | Flip Knife | Autotronic | covert | FN | - | 206 400 DC |
+| 6 | Bowie Knife | Autotronic | covert | FN | - | 204 000 DC |
+| 7 | Huntsman Knife | Autotronic | covert | FN | - | 192 000 DC |
+| 8 | Falchion Knife | Autotronic | covert | FN | - | 98 400 DC |
+| 9 | Gut Knife | Autotronic | covert | FN | - | 105 600 DC |
+| 10 | Shadow Daggers | Autotronic | covert | MW | - | 100 368 DC |
+| 11 | Driver Gloves | Rezan the Red | extraordinary | FN | - | 110 400 DC |
+| 12 | Moto Gloves | Blood Pressure | extraordinary | FN | - | 139 200 DC |
+| 13 | Moto Gloves | Finish Line | extraordinary | FN | - | 108 000 DC |
+| 14 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 15 | MP7 | Bloodsport | covert | FN | - | 59 500 DC |
+| 16 | SCAR-20 | Bloodsport | classified | FN | - | 14 280 DC |
+| 17 | M4A4 | Hellfire | classified | FN | - | 13 940 DC |
+| 18 | P250 | Muertos | classified | FN | - | 8 730 DC |
 
 ---
 
@@ -2372,31 +2150,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **125 000 DC**
 - **Описание:** Gamma Doppler Изумруд и перчатки Emerald Web
-- **Количество предметов в кейсе:** 21 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 1 | Karambit | Gamma Doppler | covert | FN | - | 280 000 DC |
 | 2 | Butterfly Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 3 | Falchion Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 4 | Falchion Knife | Gamma Doppler | covert | MW | - | 229 600 DC |
+| 3 | M9 Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 4 | Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
 | 5 | Flip Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
 | 6 | Gut Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 7 | Gut Knife | Gamma Doppler | covert | MW | - | 229 600 DC |
-| 8 | M9 Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 9 | Huntsman Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 10 | Shadow Daggers | Gamma Doppler | covert | MW | - | 229 600 DC |
+| 7 | Huntsman Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 8 | Falchion Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 9 | Shadow Daggers | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 10 | Specialist Gloves | Emerald Web | extraordinary | MW | - | 125 952 DC |
 | 11 | Hydra Gloves | Emerald | extraordinary | FN | - | 168 000 DC |
-| 12 | Specialist Gloves | Emerald Web | extraordinary | MW | - | 125 952 DC |
-| 13 | Glock-18 | Gamma Doppler | covert | MW | - | 39 605 DC |
-| 14 | AK-47 | Emerald Pinstripe | restricted | FN | - | 4 984 DC |
-| 15 | SCAR-20 | Emerald | restricted | MW | - | 4 041 DC |
-| 16 | M249 | Emerald Poison Dart | restricted | MW | - | 3 031 DC |
-| 17 | CZ75-Auto | Emerald | milspec | FN | - | 1 445 DC |
-| 18 | CZ75-Auto | Emerald Quartz | milspec | MW | - | 1 059 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
+| 12 | Glock-18 | Gamma Doppler | covert | FN | - | 48 299 DC |
+| 13 | AK-47 | Emerald Pinstripe | restricted | FN | - | 4 984 DC |
+| 14 | SCAR-20 | Emerald | restricted | MW | - | 4 041 DC |
+| 15 | CZ75-Auto | Emerald | milspec | FN | - | 1 445 DC |
+| 16 | CZ75-Auto | Emerald Quartz | milspec | MW | - | 1 059 DC |
+| 17 | M249 | Emerald Poison Dart | restricted | MW | - | 3 031 DC |
+| 18 | P90 | Emerald Dragon | classified | FN | - | 9 350 DC |
 
 ---
 
@@ -2406,40 +2181,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **110 000 DC**
 - **Описание:** Трехцветные ножи Marble Fade Огонь и Лед
-- **Количество предметов в кейсе:** 30 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
-| 2 | Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
-| 3 | Butterfly Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 4 | Butterfly Knife | Marble Fade | covert | MW | - | 196 800 DC |
-| 5 | Survival Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 6 | Paracord Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 7 | Paracord Knife | Marble Fade | covert | MW | - | 196 800 DC |
-| 8 | Flip Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 9 | Flip Knife | Marble Fade | covert | MW | - | 196 800 DC |
-| 10 | Navaja Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 11 | Nomad Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 12 | Nomad Knife | Marble Fade | covert | MW | - | 196 800 DC |
-| 13 | Skeleton Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 2 | Karambit | Marble Fade | covert | FN | - | 240 000 DC |
+| 3 | M9 Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
+| 4 | Butterfly Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 5 | Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
+| 6 | Talon Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 7 | Skeleton Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 8 | Stiletto Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 9 | Nomad Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 10 | Ursus Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 11 | Paracord Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 12 | Survival Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 13 | Flip Knife | Marble Fade | covert | FN | - | 240 000 DC |
 | 14 | Huntsman Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 15 | Huntsman Knife | Marble Fade | covert | MW | - | 196 800 DC |
-| 16 | Talon Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 17 | Karambit | Marble Fade | covert | MW | - | 196 800 DC |
-| 18 | Stiletto Knife | Marble Fade | covert | MW | - | 196 800 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 29 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 30 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
+| 15 | Bowie Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 16 | Falchion Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 17 | Shadow Daggers | Marble Fade | covert | FN | - | 240 000 DC |
+| 18 | Navaja Knife | Marble Fade | covert | FN | - | 240 000 DC |
 
 ---
 
@@ -2449,47 +2212,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **170 000 DC**
 - **Описание:** Коллекция клинков Gamma Doppler Фазы 1-4
-- **Количество предметов в кейсе:** 37 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Bayonet | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 2 | Flip Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 3 | M9 Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 4 | Huntsman Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 5 | Butterfly Knife | Gamma Doppler | covert | MW | - | 229 600 DC |
-| 6 | Gut Knife | Gamma Doppler | covert | MW | - | 229 600 DC |
-| 7 | Shadow Daggers | Gamma Doppler | covert | MW | - | 229 600 DC |
-| 8 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 9 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 10 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 11 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 12 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 13 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 14 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 15 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 16 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 17 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 18 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 19 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 20 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 21 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 22 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 23 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 24 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 25 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 26 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 27 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 28 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 29 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 30 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 31 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 32 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 33 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 34 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 35 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 36 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 37 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
+| 1 | Karambit | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 2 | M9 Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 3 | Butterfly Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 4 | Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 5 | Flip Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 6 | Huntsman Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 7 | Bowie Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 8 | Falchion Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 9 | Gut Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 10 | Shadow Daggers | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 11 | Karambit | Gamma Doppler | covert | MW | - | 229 600 DC |
+| 12 | Butterfly Knife | Gamma Doppler | covert | MW | - | 229 600 DC |
+| 13 | Bayonet | Gamma Doppler | covert | MW | - | 229 600 DC |
+| 14 | Flip Knife | Gamma Doppler | covert | MW | - | 229 600 DC |
+| 15 | Gut Knife | Gamma Doppler | covert | MW | - | 229 600 DC |
+| 16 | Glock-18 | Gamma Doppler | covert | FN | - | 48 299 DC |
+| 17 | Glock-18 | Gamma Doppler | covert | MW | - | 39 605 DC |
+| 18 | Hydra Gloves | Emerald | extraordinary | FN | - | 168 000 DC |
 
 ---
 
@@ -2503,24 +2247,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Hand Wraps | Spruce DDPAT | extraordinary | - | - | 96 000 DC |
-| 2 | Specialist Gloves | Big Swell | extraordinary | - | - | 96 000 DC |
-| 3 | Moto Gloves | Transport | extraordinary | - | - | 98 400 DC |
-| 4 | Sport Gloves | Scarlet Shamagh | extraordinary | - | - | 98 400 DC |
-| 5 | Specialist Gloves | Blackbook | extraordinary | - | - | 100 800 DC |
-| 6 | Moto Gloves | Boom! | extraordinary | - | - | 103 200 DC |
-| 7 | Sport Gloves | Occult | extraordinary | - | - | 103 200 DC |
-| 8 | Driver Gloves | Black Tie | extraordinary | - | - | 105 600 DC |
-| 9 | Hydra Gloves | Mangrove | extraordinary | - | - | 105 600 DC |
-| 10 | Moto Gloves | Finish Line | extraordinary | - | - | 108 000 DC |
-| 11 | Sport Gloves | Blaze | extraordinary | - | - | 108 000 DC |
-| 12 | Driver Gloves | Rezan the Red | extraordinary | - | - | 110 400 DC |
-| 13 | Broken Fang Gloves | Yellow-banded | extraordinary | - | - | 110 400 DC |
-| 14 | Hand Wraps | Slaughter | extraordinary | - | - | 112 800 DC |
-| 15 | Specialist Gloves | Crimson Web | extraordinary | - | - | 112 800 DC |
-| 16 | Driver Gloves | Queen Jaguar | extraordinary | - | - | 115 200 DC |
-| 17 | Bloodhound Gloves | Bronzed | extraordinary | - | - | 115 200 DC |
-| 18 | Hand Wraps | Giraffe | extraordinary | - | - | 117 600 DC |
+| 1 | Sport Gloves | Vice | extraordinary | FN | - | 350 000 DC |
+| 2 | Sport Gloves | Pandora's Box | extraordinary | FN | - | 380 000 DC |
+| 3 | Sport Gloves | Amphibious | extraordinary | FN | - | 260 000 DC |
+| 4 | Sport Gloves | Hedge Maze | extraordinary | FN | - | 290 000 DC |
+| 5 | Sport Gloves | Superconductor | extraordinary | FN | - | 270 000 DC |
+| 6 | Moto Gloves | Spearmint | extraordinary | FN | - | 220 000 DC |
+| 7 | Moto Gloves | POW! | extraordinary | FN | - | 196 800 DC |
+| 8 | Specialist Gloves | Crimson Kimono | extraordinary | FN | - | 230 000 DC |
+| 9 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
+| 10 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
+| 11 | Specialist Gloves | Foundation | extraordinary | FN | - | 206 400 DC |
+| 12 | Driver Gloves | King Snake | extraordinary | FN | - | 199 200 DC |
+| 13 | Driver Gloves | Snow Leopard | extraordinary | FN | - | 146 400 DC |
+| 14 | Driver Gloves | Imperial Plaid | extraordinary | FN | - | 172 800 DC |
+| 15 | Moto Gloves | Polygon | extraordinary | FN | - | 180 000 DC |
+| 16 | Specialist Gloves | Mogul | extraordinary | FN | - | 201 600 DC |
+| 17 | Sport Gloves | Scarlet Shamagh | extraordinary | FN | - | 185 000 DC |
+| 18 | Driver Gloves | Black Tie | extraordinary | FN | - | 105 600 DC |
 
 ---
 
@@ -2530,40 +2274,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **78 000 DC**
 - **Описание:** Specialist Gloves: Crimson Kimono, Fade, Emerald Web, Foundation, Mogul, Tiger Strike
-- **Количество предметов в кейсе:** 30 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
-| 2 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
-| 3 | Specialist Gloves | Marble Fade | extraordinary | MW | - | 196 800 DC |
-| 4 | Specialist Gloves | Field Agent | extraordinary | FN | - | 211 200 DC |
-| 5 | Specialist Gloves | Field Agent | extraordinary | MW | - | 173 184 DC |
-| 6 | Specialist Gloves | Foundation | extraordinary | FN | - | 206 400 DC |
-| 7 | Specialist Gloves | Mogul | extraordinary | FN | - | 201 600 DC |
-| 8 | Specialist Gloves | Mogul | extraordinary | MW | - | 165 312 DC |
-| 9 | Specialist Gloves | Forest DDPAT | extraordinary | FN | - | 184 800 DC |
-| 10 | Specialist Gloves | Forest DDPAT | extraordinary | MW | - | 151 536 DC |
+| 1 | Specialist Gloves | Crimson Kimono | extraordinary | FN | - | 230 000 DC |
+| 2 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
+| 3 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
+| 4 | Specialist Gloves | Foundation | extraordinary | FN | - | 206 400 DC |
+| 5 | Specialist Gloves | Mogul | extraordinary | FN | - | 201 600 DC |
+| 6 | Specialist Gloves | Tiger Strike | extraordinary | FN | - | 144 000 DC |
+| 7 | Specialist Gloves | Field Agent | extraordinary | FN | - | 211 200 DC |
+| 8 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
+| 9 | Specialist Gloves | Crimson Web | extraordinary | FN | - | 112 800 DC |
+| 10 | Specialist Gloves | Forest DDPAT | extraordinary | FN | - | 184 800 DC |
 | 11 | Specialist Gloves | Chocolate Chesterfield | extraordinary | MW | - | 155 472 DC |
-| 12 | Specialist Gloves | Tiger Strike | extraordinary | FN | - | 144 000 DC |
-| 13 | Specialist Gloves | Lime Polycam | extraordinary | MW | - | 133 824 DC |
-| 14 | Specialist Gloves | Pillow Punchers | extraordinary | MW | - | 129 888 DC |
-| 15 | Specialist Gloves | Crimson Kimono | extraordinary | MW | - | 122 016 DC |
-| 16 | Specialist Gloves | Crimson Web | extraordinary | FN | - | 112 800 DC |
-| 17 | Specialist Gloves | Crimson Web | extraordinary | MW | - | 92 496 DC |
-| 18 | Specialist Gloves | Blackbook | extraordinary | FN | - | 100 800 DC |
-| 19 | Specialist Gloves | Cloud Chaser | extraordinary | FN | - | 132 000 DC |
-| 20 | Specialist Gloves | Cloud Chaser | extraordinary | MW | - | 108 240 DC |
-| 21 | Specialist Gloves | Cloud Chaser | extraordinary | FT | - | 85 800 DC |
-| 22 | Specialist Gloves | Sunburst | extraordinary | FN | - | 127 200 DC |
-| 23 | Specialist Gloves | Sunburst | extraordinary | MW | - | 104 304 DC |
-| 24 | Specialist Gloves | Sunburst | extraordinary | FT | - | 82 680 DC |
-| 25 | Specialist Gloves | Big Swell | extraordinary | FN | - | 96 000 DC |
-| 26 | Specialist Gloves | Big Swell | extraordinary | MW | - | 78 720 DC |
-| 27 | Specialist Gloves | Big Swell | extraordinary | FT | - | 62 400 DC |
-| 28 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
-| 29 | Specialist Gloves | Emerald Web | extraordinary | MW | - | 125 952 DC |
-| 30 | Specialist Gloves | Emerald Web | extraordinary | FT | - | 99 840 DC |
+| 12 | Specialist Gloves | Lime Polycam | extraordinary | MW | - | 133 824 DC |
+| 13 | Specialist Gloves | Pillow Punchers | extraordinary | MW | - | 129 888 DC |
+| 14 | Specialist Gloves | Blackbook | extraordinary | FN | - | 100 800 DC |
+| 15 | Specialist Gloves | Cloud Chaser | extraordinary | FN | - | 132 000 DC |
+| 16 | Specialist Gloves | Sunburst | extraordinary | FN | - | 127 200 DC |
+| 17 | Specialist Gloves | Big Swell | extraordinary | FN | - | 96 000 DC |
+| 18 | Specialist Gloves | Buckshot | extraordinary | FN | - | 90 000 DC |
 
 ---
 
@@ -2573,36 +2305,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **68 000 DC**
 - **Описание:** Moto Gloves: Spearmint, POW!, Polygon, Smoke Out, Blood Pressure, Finish Line, Cool Mint
-- **Количество предметов в кейсе:** 26 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Moto Gloves | Eclipse | extraordinary | FN | - | 201 600 DC |
-| 2 | Moto Gloves | Eclipse | extraordinary | FT | - | 131 040 DC |
-| 3 | Moto Gloves | POW! | extraordinary | FN | - | 196 800 DC |
-| 4 | Moto Gloves | POW! | extraordinary | MW | - | 161 376 DC |
-| 5 | Moto Gloves | POW! | extraordinary | FT | - | 127 920 DC |
-| 6 | Moto Gloves | Smoke Out | extraordinary | FN | - | 192 000 DC |
-| 7 | Moto Gloves | Turtle | extraordinary | FN | - | 170 400 DC |
-| 8 | Moto Gloves | Turtle | extraordinary | MW | - | 139 728 DC |
-| 9 | Moto Gloves | 3rd Commando Company | extraordinary | FN | - | 165 600 DC |
-| 10 | Moto Gloves | 3rd Commando Company | extraordinary | MW | - | 135 792 DC |
-| 11 | Moto Gloves | Spearmint | extraordinary | MW | - | 110 208 DC |
-| 12 | Moto Gloves | Polygon | extraordinary | MW | - | 106 272 DC |
-| 13 | Moto Gloves | Boom! | extraordinary | FN | - | 103 200 DC |
-| 14 | Moto Gloves | Blood Pressure | extraordinary | FT | - | 90 480 DC |
-| 15 | Moto Gloves | Blood Pressure | extraordinary | WW | - | 72 384 DC |
-| 16 | Moto Gloves | Blood Pressure | extraordinary | BS | - | 58 464 DC |
-| 17 | Moto Gloves | Finish Line | extraordinary | MW | - | 88 560 DC |
-| 18 | Moto Gloves | Cool Mint | extraordinary | FN | - | 160 800 DC |
-| 19 | Moto Gloves | Cool Mint | extraordinary | MW | - | 131 856 DC |
-| 20 | Moto Gloves | Cool Mint | extraordinary | FT | - | 104 520 DC |
-| 21 | Moto Gloves | Transport | extraordinary | FN | - | 98 400 DC |
-| 22 | Moto Gloves | Transport | extraordinary | MW | - | 80 688 DC |
-| 23 | Moto Gloves | Transport | extraordinary | FT | - | 63 960 DC |
-| 24 | UMP-45 | Motorized | milspec | FN | StatTrak™ | 1 377 DC |
-| 25 | UMP-45 | Motorized | milspec | MW | StatTrak™ | 1 132 DC |
-| 26 | UMP-45 | Motorized | milspec | FN | - | 1 020 DC |
+| 1 | Moto Gloves | Spearmint | extraordinary | MW | - | 110 208 DC |
+| 2 | Moto Gloves | POW! | extraordinary | FN | - | 196 800 DC |
+| 3 | Moto Gloves | Polygon | extraordinary | MW | - | 106 272 DC |
+| 4 | Moto Gloves | Smoke Out | extraordinary | FN | - | 192 000 DC |
+| 5 | Moto Gloves | Blood Pressure | extraordinary | FN | - | 139 200 DC |
+| 6 | Moto Gloves | Finish Line | extraordinary | FN | - | 108 000 DC |
+| 7 | Moto Gloves | Cool Mint | extraordinary | FN | - | 160 800 DC |
+| 8 | Moto Gloves | Boom! | extraordinary | FN | - | 103 200 DC |
+| 9 | Moto Gloves | Eclipse | extraordinary | FN | - | 201 600 DC |
+| 10 | Moto Gloves | Turtle | extraordinary | FN | - | 170 400 DC |
+| 11 | Moto Gloves | 3rd Commando Company | extraordinary | FN | - | 165 600 DC |
+| 12 | Moto Gloves | Transport | extraordinary | FN | - | 98 400 DC |
+| 13 | Moto Gloves | Spearmint | extraordinary | FT | - | 85 000 DC |
+| 14 | Moto Gloves | POW! | extraordinary | MW | - | 161 376 DC |
+| 15 | Moto Gloves | Cool Mint | extraordinary | MW | - | 131 856 DC |
+| 16 | Moto Gloves | Finish Line | extraordinary | MW | - | 88 560 DC |
+| 17 | Moto Gloves | Blood Pressure | extraordinary | MW | - | 114 144 DC |
+| 18 | Moto Gloves | Eclipse | extraordinary | MW | - | 165 312 DC |
 
 ---
 
@@ -2612,31 +2336,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **123 000 DC**
 - **Описание:** Driver Gloves: King Snake, Imperial Fluor, Snow Leopard, Crimson Weave, Lunar Weave
-- **Количество предметов в кейсе:** 21 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Driver Gloves | Garden | extraordinary | FN | - | 213 600 DC |
-| 2 | Driver Gloves | Wave Chaser | extraordinary | FN | - | 208 800 DC |
-| 3 | Driver Gloves | Convoy | extraordinary | FN | - | 204 000 DC |
-| 4 | Driver Gloves | King Snake | extraordinary | FN | - | 199 200 DC |
-| 5 | Driver Gloves | Racing Green | extraordinary | FN | - | 194 400 DC |
-| 6 | Driver Gloves | Racing Green | extraordinary | MW | - | 159 408 DC |
-| 7 | Driver Gloves | Hand Sweaters | extraordinary | FN | - | 182 400 DC |
-| 8 | Driver Gloves | Imperial Plaid | extraordinary | FN | - | 172 800 DC |
-| 9 | Driver Gloves | Diamondback | extraordinary | FN | - | 168 000 DC |
-| 10 | Driver Gloves | Brocade Crane | extraordinary | MW | - | 153 504 DC |
-| 11 | Driver Gloves | Snow Leopard | extraordinary | FN | - | 146 400 DC |
-| 12 | Driver Gloves | Crimson Weave | extraordinary | FN | - | 141 600 DC |
-| 13 | Driver Gloves | Overtake | extraordinary | FN | - | 136 800 DC |
-| 14 | Driver Gloves | Overtake | extraordinary | MW | - | 112 176 DC |
-| 15 | Driver Gloves | Plum Quill | extraordinary | MW | - | 123 984 DC |
-| 16 | Driver Gloves | Seigaiha | extraordinary | FN | - | 120 000 DC |
-| 17 | Driver Gloves | Black Tie | extraordinary | FN | - | 105 600 DC |
-| 18 | Driver Gloves | Queen Jaguar | extraordinary | MW | - | 94 464 DC |
-| 19 | Driver Gloves | Brocade Flowers | extraordinary | FN | - | 156 000 DC |
-| 20 | Driver Gloves | Brocade Flowers | extraordinary | MW | - | 127 920 DC |
-| 21 | Driver Gloves | Brocade Flowers | extraordinary | FT | - | 101 400 DC |
+| 1 | Driver Gloves | King Snake | extraordinary | FN | - | 199 200 DC |
+| 2 | Driver Gloves | Snow Leopard | extraordinary | FN | - | 146 400 DC |
+| 3 | Driver Gloves | Imperial Plaid | extraordinary | FN | - | 172 800 DC |
+| 4 | Driver Gloves | Crimson Weave | extraordinary | FN | - | 141 600 DC |
+| 5 | Driver Gloves | Lunar Weave | extraordinary | FN | - | 150 000 DC |
+| 6 | Driver Gloves | Black Tie | extraordinary | FN | - | 105 600 DC |
+| 7 | Driver Gloves | Rezan the Red | extraordinary | FN | - | 110 400 DC |
+| 8 | Driver Gloves | Queen Jaguar | extraordinary | FN | - | 115 200 DC |
+| 9 | Driver Gloves | Overtake | extraordinary | FN | - | 136 800 DC |
+| 10 | Driver Gloves | Diamondback | extraordinary | FN | - | 168 000 DC |
+| 11 | Driver Gloves | Racing Green | extraordinary | FN | - | 194 400 DC |
+| 12 | Driver Gloves | Convoy | extraordinary | FN | - | 204 000 DC |
+| 13 | Driver Gloves | Garden | extraordinary | FN | - | 213 600 DC |
+| 14 | Driver Gloves | Wave Chaser | extraordinary | FN | - | 208 800 DC |
+| 15 | Driver Gloves | Hand Sweaters | extraordinary | FN | - | 182 400 DC |
+| 16 | Driver Gloves | Brocade Crane | extraordinary | MW | - | 153 504 DC |
+| 17 | Driver Gloves | Plum Quill | extraordinary | MW | - | 123 984 DC |
+| 18 | Driver Gloves | Seigaiha | extraordinary | FN | - | 120 000 DC |
 
 ---
 
@@ -2646,46 +2367,28 @@
 - **Категория:** `knives`
 - **Цена открытия:** **69 000 DC**
 - **Описание:** Hand Wraps: Cobalt Skulls, Overprint, CAUTION!, Slaughter, Leather, Giraffe
-- **Количество предметов в кейсе:** 36 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 2 | Hand Wraps | Duct Tape | extraordinary | WW | - | 109 824 DC |
-| 3 | Hand Wraps | Duct Tape | extraordinary | BS | - | 88 704 DC |
-| 4 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 5 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 6 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 7 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 8 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 9 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 10 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 11 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 12 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 13 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 14 | Hand Wraps | Badlands | extraordinary | BS | - | 64 512 DC |
-| 15 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 18 | Hand Wraps | CAUTION! | extraordinary | BS | - | 51 408 DC |
-| 19 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 20 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 21 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
-| 22 | Moto Gloves | Eclipse | extraordinary | FN | - | 201 600 DC |
-| 23 | Moto Gloves | Eclipse | extraordinary | MW | - | 165 312 DC |
-| 24 | Moto Gloves | Eclipse | extraordinary | FT | - | 131 040 DC |
-| 25 | Moto Gloves | Turtle | extraordinary | FN | - | 170 400 DC |
-| 26 | Moto Gloves | Turtle | extraordinary | MW | - | 139 728 DC |
-| 27 | Moto Gloves | Turtle | extraordinary | FT | - | 110 760 DC |
-| 28 | Moto Gloves | Blood Pressure | extraordinary | FN | - | 139 200 DC |
-| 29 | Moto Gloves | Blood Pressure | extraordinary | MW | - | 114 144 DC |
-| 30 | Moto Gloves | Blood Pressure | extraordinary | FT | - | 90 480 DC |
-| 31 | Moto Gloves | Finish Line | extraordinary | FN | - | 108 000 DC |
-| 32 | Moto Gloves | Finish Line | extraordinary | MW | - | 88 560 DC |
-| 33 | Moto Gloves | Finish Line | extraordinary | FT | - | 70 200 DC |
-| 34 | Moto Gloves | POW! | extraordinary | FN | - | 196 800 DC |
-| 35 | Moto Gloves | POW! | extraordinary | MW | - | 161 376 DC |
-| 36 | Moto Gloves | POW! | extraordinary | FT | - | 127 920 DC |
+| 1 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
+| 2 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
+| 3 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
+| 4 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
+| 5 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
+| 6 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
+| 7 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
+| 8 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
+| 9 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
+| 10 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
+| 11 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
+| 12 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
+| 13 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
+| 14 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
+| 15 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
+| 16 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
+| 17 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
+| 18 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
 
 ---
 
@@ -2701,24 +2404,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AWP | Sun in Leo | industrial | - | - | 330 DC |
-| 2 | AWP | Safari Mesh | industrial | - | - | 385 DC |
-| 3 | AWP | Capillary | milspec | - | - | 697 DC |
-| 4 | AWP | Snake Camo | milspec | - | - | 1 088 DC |
-| 5 | AWP | Acheron | milspec | - | - | 1 156 DC |
-| 6 | AWP | Arsenic Spill | milspec | - | - | 1 343 DC |
-| 7 | AWP | Black Nile | milspec | - | - | 1 411 DC |
-| 8 | AWP | POP AWP | restricted | - | - | 2 352 DC |
-| 9 | AWP | Pink DDPAT | restricted | - | - | 2 464 DC |
-| 10 | AWP | Phobos | restricted | - | - | 2 576 DC |
-| 11 | AWP | Exoskeleton | restricted | - | - | 2 688 DC |
-| 12 | AWP | Worm God | restricted | - | - | 2 744 DC |
-| 13 | AWP | PAW | restricted | - | - | 2 856 DC |
-| 14 | AWP | Exothermic | restricted | - | - | 2 968 DC |
-| 15 | AWP | Pit Viper | restricted | - | - | 3 080 DC |
-| 16 | AWP | Atheris | restricted | - | - | 4 368 DC |
-| 17 | AWP | Black Box | restricted | - | - | 4 816 DC |
-| 18 | AWP | The End | classified | - | - | 6 800 DC |
+| 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
+| 2 | AWP | Gungnir | covert | FN | - | 59 500 DC |
+| 3 | AWP | Medusa | covert | FN | - | 44 100 DC |
+| 4 | AWP | Fade | covert | FN | - | 53 900 DC |
+| 5 | AWP | Desert Hydra | covert | FN | - | 50 400 DC |
+| 6 | AWP | The Prince | covert | FN | - | 42 700 DC |
+| 7 | AWP | Chrome Cannon | covert | FN | - | 40 600 DC |
+| 8 | AWP | Lightning Strike | covert | FN | - | 52 500 DC |
+| 9 | AWP | Asiimov | covert | FN | - | 16 000 DC |
+| 10 | AWP | Containment Breach | covert | FN | - | 45 500 DC |
+| 11 | AWP | CMYK | covert | FN | - | 18 000 DC |
+| 12 | AWP | Crakow! | classified | FN | - | 12 500 DC |
+| 13 | AWP | Wildfire | covert | FN | - | 36 400 DC |
+| 14 | AWP | Oni Taiji | covert | FN | - | 39 200 DC |
+| 15 | AWP | Hyper Beast | covert | FN | - | 30 100 DC |
+| 16 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
+| 17 | AWP | Graphite | classified | FN | - | 14 960 DC |
+| 18 | AWP | Electric Hive | classified | FN | - | 13 770 DC |
 
 ---
 
@@ -2732,24 +2435,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Baroque Purple | industrial | - | - | 210 DC |
-| 2 | AK-47 | Jungle Spray | industrial | - | - | 255 DC |
-| 3 | AK-47 | Safari Mesh | industrial | - | - | 320 DC |
-| 4 | AK-47 | Olive Polycam | industrial | - | - | 350 DC |
-| 5 | AK-47 | VariCamo Grey | industrial | - | - | 385 DC |
-| 6 | AK-47 | Predator | industrial | - | - | 440 DC |
-| 7 | AK-47 | Wintergreen | milspec | - | - | 680 DC |
-| 8 | AK-47 | Crossfade | milspec | - | - | 697 DC |
-| 9 | AK-47 | Black Laminate | milspec | - | - | 748 DC |
-| 10 | AK-47 | Steel Delta | milspec | - | - | 1 224 DC |
-| 11 | AK-47 | Green Laminate | milspec | - | - | 1 377 DC |
-| 12 | AK-47 | Elite Build | milspec | - | - | 1 428 DC |
-| 13 | AK-47 | Uncharted | milspec | - | - | 1 462 DC |
-| 14 | AK-47 | Orbit Mk01 | restricted | - | - | 2 576 DC |
-| 15 | AK-47 | Rat Rod | restricted | - | - | 2 688 DC |
-| 16 | AK-47 | Midnight Laminate | restricted | - | - | 2 968 DC |
-| 17 | AK-47 | Safety Net | restricted | - | - | 3 080 DC |
-| 18 | AK-47 | Blue Laminate | restricted | - | - | 3 192 DC |
+| 1 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 2 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
+| 3 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 4 | AK-47 | B the Monster | covert | FN | - | 45 500 DC |
+| 5 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 6 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 7 | AK-47 | Vulcan | covert | FN | - | 31 500 DC |
+| 8 | AK-47 | Fuel Injector | covert | FN | - | 41 300 DC |
+| 9 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 10 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 11 | AK-47 | First Class | restricted | FN | - | 5 500 DC |
+| 12 | AK-47 | Head Shot | covert | FN | - | 48 299 DC |
+| 13 | AK-47 | Neon Rider | covert | FN | - | 56 000 DC |
+| 14 | AK-47 | Neon Revolution | covert | FN | - | 52 500 DC |
+| 15 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
+| 16 | AK-47 | The Empress | covert | FN | - | 51 800 DC |
+| 17 | AK-47 | Legion of Anubis | covert | FN | - | 43 400 DC |
+| 18 | AK-47 | Redline | classified | FN | - | 12 410 DC |
 
 ---
 
@@ -2763,24 +2466,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | M4A1-S | Moss Quartz | industrial | - | - | 200 DC |
-| 2 | M4A4 | Urban DDPAT | industrial | - | - | 240 DC |
-| 3 | M4A4 | Tornado | industrial | - | - | 275 DC |
-| 4 | M4A4 | Naval Shred Camo | industrial | - | - | 285 DC |
-| 5 | M4A4 | Steel Work | industrial | - | - | 305 DC |
-| 6 | M4A1-S | Wash me plz | industrial | - | - | 305 DC |
-| 7 | M4A1-S | Boreal Forest | industrial | - | - | 315 DC |
-| 8 | M4A1-S | Mud-Spec | industrial | - | - | 325 DC |
-| 9 | M4A4 | Aeolian Dark | industrial | - | - | 350 DC |
-| 10 | M4A4 | Desert Storm | industrial | - | - | 360 DC |
-| 11 | M4A4 | Dark Blossom | industrial | - | - | 395 DC |
-| 12 | M4A4 | Jungle Tiger | industrial | - | - | 415 DC |
-| 13 | M4A4 | Mainframe | industrial | - | - | 440 DC |
-| 14 | M4A4 | Faded Zebra | milspec | - | - | 680 DC |
-| 15 | M4A4 | Dark Operative | milspec | - | - | 748 DC |
-| 16 | M4A1-S | Briefing | milspec | - | - | 765 DC |
-| 17 | M4A4 | Converter | milspec | - | - | 782 DC |
-| 18 | M4A1-S | Blood Tiger | milspec | - | - | 816 DC |
+| 1 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 2 | M4A1-S | Fade | covert | FN | - | 68 000 DC |
+| 3 | M4A1-S | Vaporwave | covert | FN | - | 35 000 DC |
+| 4 | M4A1-S | Welcome to the Jungle | covert | FN | - | 32 900 DC |
+| 5 | M4A1-S | Imminent Danger | covert | FN | - | 28 700 DC |
+| 6 | M4A4 | Poseidon | classified | FN | - | 12 393 DC |
+| 7 | M4A1-S | Hot Rod | classified | FN | - | 12 750 DC |
+| 8 | M4A1-S | Printstream | covert | FN | - | 38 000 DC |
+| 9 | M4A1-S | Blue Phosphor | classified | FN | - | 10 880 DC |
+| 10 | M4A4 | Eye of Horus | covert | FN | - | 35 000 DC |
+| 11 | M4A1-S | Icarus Fell | restricted | FN | - | 4 872 DC |
+| 12 | M4A4 | The Emperor | covert | FN | - | 53 200 DC |
+| 13 | M4A4 | Temukau | covert | FN | - | 56 000 DC |
+| 14 | M4A4 | Turbine | restricted | FN | - | 4 200 DC |
+| 15 | M4A4 | Polysoup | restricted | FN | - | 2 100 DC |
+| 16 | M4A1-S | Player Two | covert | FN | - | 58 800 DC |
+| 17 | M4A1-S | Hyper Beast | covert | FN | - | 42 000 DC |
+| 18 | M4A4 | Asiimov | covert | FN | - | 16 000 DC |
 
 ---
 
@@ -2790,59 +2493,28 @@
 - **Категория:** `weapons`
 - **Цена открытия:** **16 000 DC**
 - **Описание:** 100% скинов со встроенным счетчиком фрагов StatTrak™
-- **Количество предметов в кейсе:** 49 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Consequence of the Jinn | covert | FN | StatTrak™ | 74 655 DC |
-| 2 | AK-47 | Consequence of the Jinn | covert | MW | StatTrak™ | 61 383 DC |
-| 3 | AK-47 | Consequence of the Jinn | covert | BS | StatTrak™ | 31 521 DC |
-| 4 | AK-47 | AUTOEXEC | covert | FN | StatTrak™ | 64 260 DC |
-| 5 | AK-47 | AUTOEXEC | covert | MW | StatTrak™ | 52 836 DC |
-| 6 | AK-47 | AUTOEXEC | covert | FT | StatTrak™ | 41 888 DC |
-| 7 | AK-47 | The Oligarch | covert | FN | StatTrak™ | 62 370 DC |
-| 8 | AK-47 | The Oligarch | covert | MW | StatTrak™ | 51 282 DC |
-| 9 | AK-47 | The Oligarch | covert | FT | StatTrak™ | 40 656 DC |
-| 10 | AK-47 | Crane Flight | classified | FN | StatTrak™ | 12 623 DC |
-| 11 | AK-47 | Crane Flight | classified | BS | StatTrak™ | 5 329 DC |
-| 12 | AK-47 | The Outsiders | classified | FN | StatTrak™ | 12 164 DC |
-| 13 | AK-47 | The Outsiders | classified | MW | StatTrak™ | 10 001 DC |
-| 14 | AK-47 | The Outsiders | classified | FT | StatTrak™ | 7 929 DC |
-| 15 | AK-47 | Searing Rage | classified | FN | StatTrak™ | 9 639 DC |
-| 16 | AK-47 | Searing Rage | classified | MW | StatTrak™ | 7 925 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 31 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 34 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 37 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 40 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 42 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 43 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 44 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 45 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 46 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 47 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 48 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 49 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
+| 1 | AK-47 | Bloodsport | covert | FN | StatTrak™ | 82 215 DC |
+| 2 | AWP | Chrome Cannon | covert | FN | StatTrak™ | 58 000 DC |
+| 3 | M4A1-S | Printstream | covert | FN | StatTrak™ | 51 300 DC |
+| 4 | AK-47 | Inheritance | covert | FN | StatTrak™ | 37 800 DC |
+| 5 | USP-S | Kill Confirmed | covert | FN | StatTrak™ | 65 000 DC |
+| 6 | Desert Eagle | Printstream | covert | FN | StatTrak™ | 51 300 DC |
+| 7 | M4A4 | Neo-Noir | covert | FN | StatTrak™ | 52 920 DC |
+| 8 | Glock-18 | Gold Toof | covert | FN | StatTrak™ | 76 545 DC |
+| 9 | AWP | Neo-Noir | covert | FN | StatTrak™ | 63 315 DC |
+| 10 | AK-47 | Vulcan | covert | FN | StatTrak™ | 42 525 DC |
+| 11 | USP-S | Jawbreaker | classified | FN | StatTrak™ | 22 000 DC |
+| 12 | M4A1-S | Black Lotus | classified | FN | StatTrak™ | 16 000 DC |
+| 13 | P250 | Asiimov | classified | FN | StatTrak™ | 18 000 DC |
+| 14 | FAMAS | Rapid Eye Movement | classified | MW | StatTrak™ | 14 719 DC |
+| 15 | MP9 | Mount Fuji | restricted | FN | StatTrak™ | 8 500 DC |
+| 16 | MAC-10 | Saibā Oni | restricted | FN | StatTrak™ | 6 800 DC |
+| 17 | Galil AR | Chatterbox | covert | FN | StatTrak™ | 51 030 DC |
+| 18 | Kukri Knife | Fade | covert | FN | StatTrak™ | 324 000 DC |
 
 ---
 
@@ -2852,59 +2524,28 @@
 - **Категория:** `weapons`
 - **Цена открытия:** **13 000 DC**
 - **Описание:** Только Засекреченное и Тайное оружие высшего эшелона
-- **Количество предметов в кейсе:** 49 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Consequence of the Jinn | covert | WW | - | 28 756 DC |
-| 2 | AK-47 | AUTOEXEC | covert | BS | StatTrak™ | 27 132 DC |
-| 3 | AK-47 | AUTOEXEC | covert | WW | - | 24 752 DC |
-| 4 | AK-47 | AUTOEXEC | covert | BS | - | 19 992 DC |
-| 5 | AK-47 | Crane Flight | classified | FN | StatTrak™ | 12 623 DC |
-| 6 | AK-47 | Crane Flight | classified | MW | StatTrak™ | 10 379 DC |
-| 7 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
-| 8 | AK-47 | Searing Rage | classified | FN | StatTrak™ | 9 639 DC |
-| 9 | AK-47 | Searing Rage | classified | MW | StatTrak™ | 7 925 DC |
-| 10 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
-| 11 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 12 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 13 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 14 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 15 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 16 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 17 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 18 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 19 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 20 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 21 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 22 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 23 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 24 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 25 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 26 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 27 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 28 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 29 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 30 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 31 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 32 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 33 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 34 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 35 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 36 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 37 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 38 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 39 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 40 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 41 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 42 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 43 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 44 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 45 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 46 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
-| 47 | AK-47 | The Oligarch | covert | FN | StatTrak™ | 62 370 DC |
-| 48 | AK-47 | The Oligarch | covert | MW | StatTrak™ | 51 282 DC |
-| 49 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 1 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 2 | AWP | Medusa | covert | FN | - | 44 100 DC |
+| 3 | M4A1-S | Vaporwave | covert | FN | - | 35 000 DC |
+| 4 | M4A4 | Poseidon | classified | FN | - | 12 393 DC |
+| 5 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
+| 6 | M4A1-S | Blue Phosphor | classified | FN | - | 10 880 DC |
+| 7 | USP-S | Kill Confirmed | covert | FN | - | 48 000 DC |
+| 8 | Glock-18 | Gold Toof | covert | FN | - | 56 700 DC |
+| 9 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 10 | AWP | Chrome Cannon | covert | FN | - | 40 600 DC |
+| 11 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 12 | M4A4 | The Emperor | covert | FN | - | 53 200 DC |
+| 13 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 14 | Desert Eagle | Code Red | covert | FN | - | 38 500 DC |
+| 15 | AWP | Lightning Strike | covert | FN | - | 52 500 DC |
+| 16 | M4A1-S | Hot Rod | classified | FN | - | 12 750 DC |
+| 17 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 18 | AWP | Desert Hydra | covert | FN | - | 50 400 DC |
 
 ---
 
@@ -2918,24 +2559,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Desert Eagle | Urban DDPAT | industrial | - | - | 200 DC |
-| 2 | Desert Eagle | Midnight Storm | industrial | - | - | 205 DC |
-| 3 | Desert Eagle | Tilted | industrial | - | - | 350 DC |
-| 4 | Desert Eagle | Night | industrial | - | - | 375 DC |
-| 5 | Desert Eagle | Mudder | industrial | - | - | 385 DC |
-| 6 | Desert Eagle | The Bronze | industrial | - | - | 400 DC |
-| 7 | Desert Eagle | Bronze Deco | milspec | - | - | 765 DC |
-| 8 | Desert Eagle | Oxide Blaze | milspec | - | - | 782 DC |
-| 9 | Desert Eagle | Sputnik | milspec | - | - | 833 DC |
-| 10 | Desert Eagle | Corinthian | milspec | - | - | 884 DC |
-| 11 | Desert Eagle | Mint Fan | milspec | - | - | 901 DC |
-| 12 | Desert Eagle | Night Heist | milspec | - | - | 952 DC |
-| 13 | Desert Eagle | Calligraffiti | milspec | - | - | 969 DC |
-| 14 | Desert Eagle | Blue Ply | milspec | - | - | 1 003 DC |
-| 15 | Desert Eagle | Urban Rubble | milspec | - | - | 1 088 DC |
-| 16 | Desert Eagle | Meteorite | milspec | - | - | 1 394 DC |
-| 17 | Desert Eagle | The Daily Deagle | milspec | - | - | 1 496 DC |
-| 18 | Desert Eagle | Light Rail | restricted | - | - | 2 352 DC |
+| 1 | Desert Eagle | Heat Treated | classified | FN | - | 18 000 DC |
+| 2 | Desert Eagle | Blaze | restricted | FN | - | 3 976 DC |
+| 3 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
+| 4 | Desert Eagle | Code Red | covert | FN | - | 38 500 DC |
+| 5 | Desert Eagle | Emerald Jörmungandr | restricted | FN | - | 2 408 DC |
+| 6 | Desert Eagle | Golden Koi | covert | FN | - | 46 900 DC |
+| 7 | Desert Eagle | Ocean Drive | covert | FN | - | 50 400 DC |
+| 8 | Desert Eagle | Fennec Fox | classified | FN | - | 13 430 DC |
+| 9 | Desert Eagle | Calligraffiti | milspec | FN | - | 1 400 DC |
+| 10 | Desert Eagle | Hand Cannon | restricted | FN | - | 4 872 DC |
+| 11 | Desert Eagle | Sunset Storm 壱 | restricted | FN | - | 3 024 DC |
+| 12 | Desert Eagle | Kumicho Dragon | classified | FN | - | 10 710 DC |
+| 13 | Desert Eagle | Cobalt Disruption | classified | FN | - | 11 730 DC |
+| 14 | Desert Eagle | Hypnotic | classified | FN | - | 8 500 DC |
+| 15 | Desert Eagle | Mecha Industries | classified | FN | - | 11 220 DC |
+| 16 | Desert Eagle | Conspiracy | classified | FN | - | 6 500 DC |
+| 17 | Desert Eagle | Directive | restricted | FN | - | 4 256 DC |
+| 18 | Desert Eagle | Light Rail | restricted | FN | - | 2 352 DC |
 
 ---
 
@@ -2949,24 +2590,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Desert Eagle | Urban DDPAT | industrial | - | - | 200 DC |
-| 2 | Tec-9 | Hades | industrial | - | - | 200 DC |
-| 3 | Desert Eagle | Midnight Storm | industrial | - | - | 205 DC |
-| 4 | Tec-9 | Perimeter | industrial | - | - | 215 DC |
-| 5 | Five-SeveN | Desert Seal | industrial | - | - | 225 DC |
-| 6 | P250 | Crimson Kimono | industrial | - | - | 225 DC |
-| 7 | Tec-9 | Rust Leaf | industrial | - | - | 225 DC |
-| 8 | CZ75-Auto | Midnight Palm | industrial | - | - | 235 DC |
-| 9 | P250 | Dark Filigree | industrial | - | - | 240 DC |
-| 10 | P250 | Sedimentary | industrial | - | - | 250 DC |
-| 11 | USP-S | Pathfinder | industrial | - | - | 255 DC |
-| 12 | Dual Berettas | Mystic Conjunction | industrial | - | - | 260 DC |
-| 13 | Five-SeveN | Midnight Paintover | industrial | - | - | 260 DC |
-| 14 | Dual Berettas | Polished Malachite | industrial | - | - | 275 DC |
-| 15 | Glock-18 | Red Tire | industrial | - | - | 280 DC |
-| 16 | Dual Berettas | Stained | industrial | - | - | 290 DC |
-| 17 | Glock-18 | Groundwater | industrial | - | - | 290 DC |
-| 18 | Tec-9 | Citric Acid | industrial | - | - | 290 DC |
+| 1 | USP-S | Kill Confirmed | covert | FN | - | 48 000 DC |
+| 2 | USP-S | Jawbreaker | classified | FN | - | 15 000 DC |
+| 3 | Glock-18 | Gold Toof | covert | FN | - | 56 700 DC |
+| 4 | Glock-18 | Water Elemental | classified | FN | - | 10 594 DC |
+| 5 | Desert Eagle | Heat Treated | classified | FN | - | 18 000 DC |
+| 6 | Five-SeveN | Heat Treated | restricted | FN | - | 2 240 DC |
+| 7 | USP-S | 27 | milspec | FN | - | 1 800 DC |
+| 8 | Glock-18 | AXIA | classified | FN | - | 3 500 DC |
+| 9 | P250 | Epicenter | classified | FN | - | 6 970 DC |
+| 10 | P250 | Mehndi | classified | FN | - | 12 164 DC |
+| 11 | Five-SeveN | Angry Mob | covert | FN | - | 35 700 DC |
+| 12 | USP-S | Neo-Noir | covert | FN | - | 41 300 DC |
+| 13 | Glock-18 | Bullet Queen | covert | FN | - | 35 000 DC |
+| 14 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
+| 15 | P250 | See Ya Later | covert | FN | - | 33 880 DC |
+| 16 | Five-SeveN | Fairy Tale | classified | FN | - | 12 750 DC |
+| 17 | USP-S | Ticket to Hell | restricted | FN | - | 3 903 DC |
+| 18 | Glock-18 | Block-18 | restricted | FN | - | 3 326 DC |
 
 ---
 
@@ -2980,24 +2621,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | MP7 | Base-2 | industrial | - | - | 210 DC |
-| 2 | PP-Bizon | Chemical Green | industrial | - | - | 215 DC |
-| 3 | MAC-10 | Acid Hex | industrial | - | - | 220 DC |
-| 4 | MP5-SD | Nitro | industrial | - | - | 225 DC |
-| 5 | PP-Bizon | Carbon Fiber | industrial | - | - | 230 DC |
-| 6 | P90 | Ash Wood | industrial | - | - | 230 DC |
-| 7 | P90 | Verdant Growth | industrial | - | - | 240 DC |
-| 8 | MAC-10 | Palm | industrial | - | - | 245 DC |
-| 9 | MP5-SD | Savannah Halftone | industrial | - | - | 245 DC |
-| 10 | UMP-45 | Fallout Warning | industrial | - | - | 245 DC |
-| 11 | MAC-10 | Echoing Sands | industrial | - | - | 250 DC |
-| 12 | P90 | Sunset Lily | industrial | - | - | 250 DC |
-| 13 | MAC-10 | Candy Apple | industrial | - | - | 255 DC |
-| 14 | MP9 | Old Roots | industrial | - | - | 255 DC |
-| 15 | MAC-10 | Video Cam | industrial | - | - | 265 DC |
-| 16 | MP7 | Vault Heist | industrial | - | - | 270 DC |
-| 17 | MAC-10 | Commuter | industrial | - | - | 280 DC |
-| 18 | MP5-SD | Neon Squeezer | industrial | - | - | 280 DC |
+| 1 | P90 | Death by Kitty | covert | MW | - | 47 600 DC |
+| 2 | MP7 | Bloodsport | covert | FN | - | 59 500 DC |
+| 3 | MAC-10 | Saibā Oni | restricted | FN | - | 4 500 DC |
+| 4 | MAC-10 | Neon Rider | covert | FN | - | 54 600 DC |
+| 5 | MP9 | Mount Fuji | restricted | FN | - | 4 500 DC |
+| 6 | P90 | Randy Rush | restricted | FN | - | 6 728 DC |
+| 7 | P90 | Asiimov | covert | FN | - | 16 000 DC |
+| 8 | MP7 | Nemesis | classified | FN | - | 7 500 DC |
+| 9 | MAC-10 | Disco Tech | classified | FN | - | 6 970 DC |
+| 10 | MP9 | Starlight Protector | covert | FN | - | 59 500 DC |
+| 11 | P90 | Emerald Dragon | classified | FN | - | 9 350 DC |
+| 12 | MP7 | Fade | restricted | FN | - | 4 480 DC |
+| 13 | MAC-10 | Stalker | covert | FN | - | 35 742 DC |
+| 14 | MP9 | Food Chain | classified | FN | - | 11 050 DC |
+| 15 | UMP-45 | Neo-Noir | classified | FN | - | 14 280 DC |
+| 16 | MP7 | Abyssal Apparition | classified | FN | - | 12 920 DC |
+| 17 | MP9 | Hydra | classified | FN | - | 15 130 DC |
+| 18 | UMP-45 | Motorized | milspec | FN | - | 1 377 DC |
 
 ---
 
@@ -3011,24 +2652,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Sawed-Off | Snake Camo | industrial | - | - | 200 DC |
-| 2 | Negev | CaliCamo | industrial | - | - | 205 DC |
-| 3 | Nova | Candy Apple | industrial | - | - | 215 DC |
-| 4 | MAG-7 | Wildwood | industrial | - | - | 220 DC |
-| 5 | MAG-7 | Silver | industrial | - | - | 225 DC |
-| 6 | M249 | Spectrogram | industrial | - | - | 230 DC |
-| 7 | XM1014 | Banana Leaf | industrial | - | - | 230 DC |
-| 8 | Negev | Nuclear Waste | industrial | - | - | 250 DC |
-| 9 | M249 | Gator Mesh | industrial | - | - | 265 DC |
-| 10 | XM1014 | Fallout Warning | industrial | - | - | 265 DC |
-| 11 | Sawed-Off | Rust Coat | industrial | - | - | 270 DC |
-| 12 | Negev | Wall Bang | industrial | - | - | 280 DC |
-| 13 | Nova | Green Apple | industrial | - | - | 280 DC |
-| 14 | M249 | Shipping Forecast | industrial | - | - | 285 DC |
-| 15 | XM1014 | CaliCamo | industrial | - | - | 285 DC |
-| 16 | MAG-7 | Metallic DDPAT | industrial | - | - | 290 DC |
-| 17 | Nova | Morning Sun | industrial | - | - | 290 DC |
-| 18 | Sawed-Off | Mosaico | industrial | - | - | 295 DC |
+| 1 | Negev | Mjölnir | classified | FN | - | 7 310 DC |
+| 2 | MAG-7 | Cinquedea | classified | FN | - | 8 840 DC |
+| 3 | XM1014 | Frost Borre | milspec | FN | - | 1 207 DC |
+| 4 | Nova | Antique | classified | FN | - | 16 065 DC |
+| 5 | M249 | Downtown | restricted | FN | - | 5 000 DC |
+| 6 | XM1014 | Incinegator | classified | FN | - | 7 500 DC |
+| 7 | Nova | Hyper Beast | classified | FN | - | 8 303 DC |
+| 8 | MAG-7 | Justice | classified | FN | - | 10 594 DC |
+| 9 | Negev | Power Loader | restricted | FN | - | 4 500 DC |
+| 10 | XM1014 | Entombed | classified | FN | - | 6 500 DC |
+| 11 | MAG-7 | SWAG-7 | restricted | FN | - | 6 199 DC |
+| 12 | Nova | Bloomstick | classified | FN | - | 7 000 DC |
+| 13 | M249 | Nebula Crusader | restricted | FN | - | 5 443 DC |
+| 14 | XM1014 | Tranquility | classified | FN | - | 8 500 DC |
+| 15 | MAG-7 | Core Breach | restricted | FN | - | 2 688 DC |
+| 16 | Negev | dev_texture | restricted | FN | - | 3 976 DC |
+| 17 | Nova | Wild Six | restricted | FN | - | 3 094 DC |
+| 18 | M249 | Emerald Poison Dart | restricted | MW | - | 3 031 DC |
 
 ---
 
@@ -3038,43 +2679,28 @@
 - **Категория:** `weapons`
 - **Цена открытия:** **9 200 DC**
 - **Описание:** Огненный арсенал: AK-47 Vulcan, Deagle Blaze, Wildfire, Hellfire, Heat
-- **Количество предметов в кейсе:** 33 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Sport Gloves | Blaze | extraordinary | FN | - | 108 000 DC |
-| 2 | Sport Gloves | Blaze | extraordinary | MW | - | 88 560 DC |
-| 3 | AWP | Sovereign Flame | covert | FN | - | 49 700 DC |
-| 4 | AWP | Sovereign Flame | covert | MW | - | 40 754 DC |
-| 5 | AWP | Wildfire | covert | FN | - | 36 400 DC |
-| 6 | AWP | Wildfire | covert | MW | - | 29 848 DC |
-| 7 | M4A4 | Hellfire | classified | MW | - | 11 431 DC |
-| 8 | AUG | Flame Jörmungandr | restricted | FN | - | 4 704 DC |
-| 9 | AUG | Flame Jörmungandr | restricted | MW | - | 3 857 DC |
-| 10 | MAG-7 | Heat | restricted | FN | - | 2 296 DC |
-| 11 | Patch | Copenhagen Flames (Gold) | Stockholm 2021 | milspec | FN | - | 1 865 DC |
-| 12 | SCAR-20 | Trail Blazer | milspec | FN | - | 1 326 DC |
+| 1 | AK-47 | Vulcan | covert | FN | - | 31 500 DC |
+| 2 | Desert Eagle | Blaze | restricted | FN | - | 3 976 DC |
+| 3 | AWP | Wildfire | covert | FN | - | 36 400 DC |
+| 4 | M4A4 | Hellfire | classified | FN | - | 13 940 DC |
+| 5 | MAC-10 | Heat | restricted | FN | - | 4 256 DC |
+| 6 | MAG-7 | Heat | restricted | FN | - | 2 296 DC |
+| 7 | AWP | Sovereign Flame | covert | FN | - | 49 700 DC |
+| 8 | Sport Gloves | Blaze | extraordinary | FN | - | 108 000 DC |
+| 9 | M4A1-S | Chantico's Fire | covert | FN | - | 39 200 DC |
+| 10 | Five-SeveN | Heat Treated | restricted | FN | - | 2 240 DC |
+| 11 | Desert Eagle | Heat Treated | classified | FN | - | 11 050 DC |
+| 12 | Desert Eagle | Oxide Blaze | milspec | FN | - | 782 DC |
 | 13 | Glock-18 | Oxide Blaze | milspec | FN | - | 1 071 DC |
-| 14 | Glock-18 | Oxide Blaze | milspec | MW | - | 878 DC |
-| 15 | XM1014 | Blaze Orange | milspec | FN | - | 1 003 DC |
-| 16 | XM1014 | Blaze Orange | milspec | MW | - | 822 DC |
-| 17 | Five-SeveN | Flame Test | milspec | FN | - | 731 DC |
-| 18 | Desert Eagle | Oxide Blaze | milspec | MW | - | 641 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 29 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 30 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 31 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 32 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 33 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
+| 14 | SCAR-20 | Trail Blazer | milspec | FN | - | 1 326 DC |
+| 15 | AUG | Flame Jörmungandr | restricted | FN | - | 4 704 DC |
+| 16 | XM1014 | Blaze Orange | milspec | FN | - | 1 003 DC |
+| 17 | Nova | Blaze Orange | milspec | FN | - | 1 054 DC |
+| 18 | M249 | Magma | milspec | FN | - | 1 071 DC |
 
 ---
 
@@ -3088,24 +2714,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Nova | Candy Apple | industrial | - | - | 215 DC |
-| 2 | P250 | Crimson Kimono | industrial | - | - | 225 DC |
-| 3 | MAC-10 | Candy Apple | industrial | - | - | 255 DC |
-| 4 | Glock-18 | Red Tire | industrial | - | - | 280 DC |
-| 5 | M4A4 | Naval Shred Camo | industrial | - | - | 285 DC |
-| 6 | PP-Bizon | Candy Apple | industrial | - | - | 400 DC |
-| 7 | SG 553 | Candy Apple | industrial | - | - | 420 DC |
-| 8 | Five-SeveN | Withered Vine | industrial | - | - | 425 DC |
-| 9 | Five-SeveN | Candy Apple | industrial | - | - | 435 DC |
-| 10 | AK-47 | Predator | industrial | - | - | 440 DC |
-| 11 | MP9 | Shredded | milspec | - | - | 748 DC |
-| 12 | Glock-18 | Candy Apple | milspec | - | - | 765 DC |
-| 13 | M249 | Predator | milspec | - | - | 867 DC |
-| 14 | Dual Berettas | Shred | milspec | - | - | 901 DC |
-| 15 | SCAR-20 | Crimson Web | milspec | - | - | 918 DC |
-| 16 | P90 | Baroque Red | milspec | - | - | 969 DC |
-| 17 | AUG | Hot Rod | milspec | - | - | 986 DC |
-| 18 | Galil AR | Shattered | milspec | - | - | 1 003 DC |
+| 1 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 2 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 3 | AK-47 | Redline | classified | FN | - | 12 410 DC |
+| 4 | AWP | Redline | classified | FN | - | 11 730 DC |
+| 5 | M4A1-S | Hot Rod | classified | FN | - | 12 750 DC |
+| 6 | M9 Bayonet | Crimson Web | covert | FN | - | 96 000 DC |
+| 7 | Specialist Gloves | Crimson Web | extraordinary | FN | - | 112 800 DC |
+| 8 | Desert Eagle | Code Red | covert | FN | - | 38 500 DC |
+| 9 | MP7 | Bloodsport | covert | FN | - | 59 500 DC |
+| 10 | SCAR-20 | Bloodsport | classified | FN | - | 14 280 DC |
+| 11 | P250 | Muertos | classified | FN | - | 8 730 DC |
+| 12 | CZ75-Auto | Crimson Web | milspec | FN | - | 1 275 DC |
+| 13 | R8 Revolver | Crimson Web | milspec | FN | - | 1 054 DC |
+| 14 | Glock-18 | Candy Apple | milspec | FN | - | 765 DC |
+| 15 | MAC-10 | Candy Apple | industrial | FN | - | 255 DC |
+| 16 | Nova | Candy Apple | industrial | FN | - | 215 DC |
+| 17 | Dual Berettas | Hemoglobin | restricted | FN | - | 2 957 DC |
+| 18 | Five-SeveN | Candy Apple | industrial | FN | - | 435 DC |
 
 ---
 
@@ -3119,24 +2745,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Zeus x27 | Electric Blue | industrial | - | - | 215 DC |
-| 2 | AWP | Sun in Leo | industrial | - | - | 330 DC |
-| 3 | XM1014 | Blue Steel | industrial | - | - | 345 DC |
-| 4 | Five-SeveN | Sky Blue | industrial | - | - | 370 DC |
-| 5 | USP-S | Royal Blue | industrial | - | - | 405 DC |
-| 6 | XM1014 | Blue Spruce | milspec | - | - | 714 DC |
-| 7 | Galil AR | Blue Titanium | milspec | - | - | 731 DC |
-| 8 | P90 | Blue Tac | milspec | - | - | 731 DC |
-| 9 | Glock-18 | Blue Fissure | milspec | - | - | 833 DC |
-| 10 | SCAR-20 | Blueprint | milspec | - | - | 833 DC |
-| 11 | MP9 | Cobalt Paisley | milspec | - | - | 969 DC |
-| 12 | Desert Eagle | Blue Ply | milspec | - | - | 1 003 DC |
-| 13 | MAG-7 | Cobalt Core | milspec | - | - | 1 139 DC |
-| 14 | XM1014 | VariCamo Blue | milspec | - | - | 1 190 DC |
-| 15 | MP9 | Buff Blue | milspec | - | - | 1 224 DC |
-| 16 | USP-S | Blueprint | milspec | - | - | 1 224 DC |
-| 17 | Tec-9 | Blue Blast | milspec | - | - | 1 241 DC |
-| 18 | Tec-9 | Blue Titanium | milspec | - | - | 1 292 DC |
+| 1 | AWP | Gungnir | covert | FN | - | 59 500 DC |
+| 2 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
+| 3 | M4A1-S | Blue Phosphor | classified | FN | - | 10 880 DC |
+| 4 | Dual Berettas | Hydro Strike | restricted | FN | - | 3 500 DC |
+| 5 | AK-47 | Frontside Misty | classified | FN | - | 13 940 DC |
+| 6 | M4A4 | Poseidon | classified | FN | - | 12 393 DC |
+| 7 | Sport Gloves | Superconductor | extraordinary | FN | - | 270 000 DC |
+| 8 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
+| 9 | Desert Eagle | Cobalt Disruption | classified | FN | - | 11 730 DC |
+| 10 | Glock-18 | Twilight Galaxy | classified | FN | - | 9 860 DC |
+| 11 | USP-S | Blueprint | milspec | FN | - | 1 224 DC |
+| 12 | AWP | Sun in Leo | industrial | FN | - | 330 DC |
+| 13 | Galil AR | Blue Titanium | milspec | FN | - | 731 DC |
+| 14 | SCAR-20 | Blueprint | milspec | FN | - | 833 DC |
+| 15 | P250 | Undertow | classified | FN | - | 7 171 DC |
+| 16 | MP9 | Cobalt Paisley | milspec | FN | - | 969 DC |
+| 17 | MAG-7 | Cobalt Core | milspec | FN | - | 1 139 DC |
+| 18 | Tec-9 | Blue Titanium | milspec | FN | - | 1 292 DC |
 
 ---
 
@@ -3150,24 +2776,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | PP-Bizon | Chemical Green | industrial | - | - | 215 DC |
-| 2 | Nova | Green Apple | industrial | - | - | 280 DC |
-| 3 | Galil AR | Green Apple | industrial | - | - | 330 DC |
-| 4 | USP-S | Para Green | industrial | - | - | 395 DC |
-| 5 | G3SG1 | Green Apple | industrial | - | - | 430 DC |
-| 6 | AK-47 | Wintergreen | milspec | - | - | 680 DC |
-| 7 | Dual Berettas | Emerald | milspec | - | - | 799 DC |
-| 8 | CZ75-Auto | Green Plaid | milspec | - | - | 867 DC |
-| 9 | SSG 08 | Green Ceramic | milspec | - | - | 867 DC |
-| 10 | Glock-18 | Green Line | milspec | - | - | 901 DC |
-| 11 | SCAR-20 | Green Marine | milspec | - | - | 986 DC |
-| 12 | UMP-45 | Green Swirl | milspec | - | - | 1 275 DC |
-| 13 | CZ75-Auto | Emerald Quartz | milspec | - | - | 1 292 DC |
-| 14 | USP-S | Black Lotus | milspec | - | - | 1 326 DC |
-| 15 | AK-47 | Green Laminate | milspec | - | - | 1 377 DC |
-| 16 | MP9 | Green Plaid | milspec | - | - | 1 411 DC |
-| 17 | G3SG1 | Green Cell | milspec | - | - | 1 428 DC |
-| 18 | CZ75-Auto | Emerald | milspec | - | - | 1 445 DC |
+| 1 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 2 | AWP | Containment Breach | covert | FN | - | 45 500 DC |
+| 3 | Desert Eagle | Emerald Jörmungandr | restricted | FN | - | 2 408 DC |
+| 4 | Specialist Gloves | Emerald Web | extraordinary | MW | - | 125 952 DC |
+| 5 | Hydra Gloves | Emerald | extraordinary | FN | - | 168 000 DC |
+| 6 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 7 | P90 | Emerald Dragon | classified | FN | - | 9 350 DC |
+| 8 | SCAR-20 | Emerald | restricted | FN | - | 4 928 DC |
+| 9 | CZ75-Auto | Emerald | milspec | FN | - | 1 445 DC |
+| 10 | Galil AR | Eco | classified | FN | - | 15 130 DC |
+| 11 | CZ75-Auto | Eco | restricted | FN | - | 3 192 DC |
+| 12 | AK-47 | Emerald Pinstripe | restricted | FN | - | 4 984 DC |
+| 13 | Glock-18 | Nuclear Garden | restricted | FN | - | 2 296 DC |
+| 14 | P250 | Nuclear Threat | restricted | FN | - | 2 688 DC |
+| 15 | MP9 | Bioleak | milspec | FN | - | 1 173 DC |
+| 16 | USP-S | Black Lotus | milspec | FN | - | 1 326 DC |
+| 17 | M249 | Emerald Poison Dart | restricted | MW | - | 3 031 DC |
+| 18 | Dual Berettas | Emerald | milspec | FN | - | 799 DC |
 
 ---
 
@@ -3177,31 +2803,28 @@
 - **Категория:** `weapons`
 - **Цена открытия:** **13 500 DC**
 - **Описание:** Сборка фиолетового сета: Ultraviolet, Lightning Strike, Nightwish, Black Lotus
-- **Количество предметов в кейсе:** 21 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Survival Knife | Ultraviolet | covert | FN | - | 175 200 DC |
-| 2 | Survival Knife | Ultraviolet | covert | MW | - | 143 664 DC |
-| 3 | Butterfly Knife | Ultraviolet | covert | FN | - | 172 800 DC |
-| 4 | Navaja Knife | Ultraviolet | covert | FN | - | 160 800 DC |
-| 5 | Navaja Knife | Ultraviolet | covert | MW | - | 131 856 DC |
-| 6 | Gut Knife | Ultraviolet | covert | FN | - | 158 400 DC |
-| 7 | Nomad Knife | Ultraviolet | covert | FN | - | 156 000 DC |
-| 8 | Karambit | Ultraviolet | covert | FN | - | 148 800 DC |
-| 9 | Skeleton Knife | Ultraviolet | covert | FN | - | 146 400 DC |
-| 10 | Ursus Knife | Ultraviolet | covert | FN | - | 127 200 DC |
-| 11 | Bayonet | Ultraviolet | covert | MW | - | 120 048 DC |
-| 12 | Stiletto Knife | Ultraviolet | covert | FN | - | 117 600 DC |
-| 13 | Bowie Knife | Ultraviolet | covert | FN | - | 105 600 DC |
-| 14 | Falchion Knife | Ultraviolet | covert | MW | - | 98 400 DC |
-| 15 | AK-47 | Nightwish | covert | FN | - | 49 700 DC |
-| 16 | M4A1-S | Black Lotus | classified | FN | - | 7 820 DC |
-| 17 | USP-S | Purple DDPAT | milspec | FN | - | 1 394 DC |
-| 18 | SG 553 | Ultraviolet | milspec | FN | - | 799 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
+| 1 | AWP | Lightning Strike | covert | FN | - | 52 500 DC |
+| 2 | AK-47 | Nightwish | covert | FN | - | 49 700 DC |
+| 3 | M4A1-S | Black Lotus | classified | FN | - | 7 820 DC |
+| 4 | Karambit | Ultraviolet | covert | FN | - | 148 800 DC |
+| 5 | Butterfly Knife | Ultraviolet | covert | FN | - | 172 800 DC |
+| 6 | M9 Bayonet | Ultraviolet | covert | FN | - | 153 600 DC |
+| 7 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
+| 8 | Driver Gloves | Imperial Plaid | extraordinary | FN | - | 172 800 DC |
+| 9 | Galil AR | Sugar Rush | classified | FN | - | 13 260 DC |
+| 10 | FAMAS | Pulse | restricted | FN | - | 3 500 DC |
+| 11 | SG 553 | Ultraviolet | milspec | FN | - | 799 DC |
+| 12 | USP-S | Purple DDPAT | milspec | FN | - | 1 394 DC |
+| 13 | Glock-18 | Moonrise | restricted | FN | - | 4 704 DC |
+| 14 | MAC-10 | Ultraviolet | milspec | FN | - | 1 469 DC |
+| 15 | CZ75-Auto | The Fuschia Is Now | classified | MW | - | 16 417 DC |
+| 16 | Dual Berettas | Flora Carnivora | restricted | FN | - | 2 520 DC |
+| 17 | P2000 | Wicked Sick | classified | FN | - | 11 016 DC |
+| 18 | UMP-45 | Moonrise | restricted | FN | - | 4 368 DC |
 
 ---
 
@@ -3215,24 +2838,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | UMP-45 | Mechanism | industrial | - | - | 335 DC |
-| 2 | SG 553 | Damascus Steel | milspec | - | - | 1 190 DC |
-| 3 | MAC-10 | Whitefish | milspec | - | - | 1 224 DC |
-| 4 | P250 | Whiteout | milspec | - | - | 1 292 DC |
-| 5 | MP7 | Whiteout | milspec | - | - | 1 309 DC |
-| 6 | Tec-9 | Whiteout | restricted | - | - | 2 632 DC |
-| 7 | FAMAS | Mecha Industries | classified | - | - | 9 180 DC |
-| 8 | Desert Eagle | Mecha Industries | classified | - | - | 11 220 DC |
-| 9 | USP-S | Whiteout | classified | - | - | 11 220 DC |
-| 10 | AK-47 | Asiimov | covert | - | - | 16 000 DC |
-| 11 | AWP | Asiimov | covert | - | - | 16 000 DC |
-| 12 | M4A4 | Asiimov | covert | - | - | 16 000 DC |
-| 13 | P250 | Asiimov | classified | - | - | 16 000 DC |
-| 14 | P90 | Asiimov | covert | - | - | 16 000 DC |
-| 15 | AWP | Printstream | covert | - | - | 38 000 DC |
-| 16 | Desert Eagle | Printstream | covert | - | - | 38 000 DC |
-| 17 | M4A1-S | Printstream | covert | - | - | 38 000 DC |
-| 18 | USP-S | Printstream | covert | - | - | 38 000 DC |
+| 1 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
+| 2 | M4A1-S | Printstream | covert | FN | - | 38 000 DC |
+| 3 | USP-S | Printstream | covert | FN | - | 38 000 DC |
+| 4 | AWP | Printstream | covert | FN | - | 38 000 DC |
+| 5 | USP-S | Whiteout | classified | FN | - | 11 220 DC |
+| 6 | P250 | Whiteout | milspec | FN | - | 1 292 DC |
+| 7 | MP7 | Whiteout | milspec | FN | - | 1 309 DC |
+| 8 | Tec-9 | Whiteout | restricted | FN | - | 2 632 DC |
+| 9 | Desert Eagle | Mecha Industries | classified | FN | - | 11 220 DC |
+| 10 | M4A1-S | Mecha Industries | covert | FN | - | 46 900 DC |
+| 11 | FAMAS | Mecha Industries | classified | FN | - | 9 180 DC |
+| 12 | Desert Eagle | Hypnotic | classified | FN | - | 8 500 DC |
+| 13 | MP9 | Hypnotic | restricted | FN | - | 5 368 DC |
+| 14 | Galil AR | Tuxedo | milspec | FN | - | 901 DC |
+| 15 | CZ75-Auto | Tuxedo | milspec | FN | - | 1 241 DC |
+| 16 | Driver Gloves | Snow Leopard | extraordinary | FN | - | 146 400 DC |
+| 17 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
+| 18 | M4A4 | Asiimov | covert | FN | - | 16 000 DC |
 
 ---
 
@@ -3246,24 +2869,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Desert Eagle | Midnight Storm | industrial | - | - | 205 DC |
-| 2 | PP-Bizon | Carbon Fiber | industrial | - | - | 230 DC |
-| 3 | CZ75-Auto | Midnight Palm | industrial | - | - | 235 DC |
-| 4 | P250 | Dark Filigree | industrial | - | - | 240 DC |
-| 5 | SCAR-20 | Carbon Fiber | industrial | - | - | 255 DC |
-| 6 | Five-SeveN | Midnight Paintover | industrial | - | - | 260 DC |
-| 7 | XM1014 | Black Site | industrial | - | - | 320 DC |
-| 8 | UMP-45 | Carbon Fiber | industrial | - | - | 325 DC |
-| 9 | M4A4 | Aeolian Dark | industrial | - | - | 350 DC |
-| 10 | PP-Bizon | Night Ops | industrial | - | - | 355 DC |
-| 11 | Glock-18 | Night | industrial | - | - | 355 DC |
-| 12 | R8 Revolver | Dark Chamber | industrial | - | - | 355 DC |
-| 13 | MAG-7 | Carbon Fiber | industrial | - | - | 365 DC |
-| 14 | Desert Eagle | Night | industrial | - | - | 375 DC |
-| 15 | M249 | Midnight Palm | industrial | - | - | 385 DC |
-| 16 | SSG 08 | Carbon Fiber | industrial | - | - | 390 DC |
-| 17 | M4A4 | Dark Blossom | industrial | - | - | 395 DC |
-| 18 | PP-Bizon | Night Riot | milspec | - | - | 680 DC |
+| 1 | AK-47 | Slate | restricted | FN | - | 4 760 DC |
+| 2 | Driver Gloves | Black Tie | extraordinary | FN | - | 105 600 DC |
+| 3 | M4A1-S | Dark Water | restricted | FN | - | 4 928 DC |
+| 4 | USP-S | Dark Water | restricted | FN | - | 4 480 DC |
+| 5 | FAMAS | Dark Water | milspec | FN | - | 1 054 DC |
+| 6 | SSG 08 | Dark Water | milspec | FN | - | 884 DC |
+| 7 | Karambit | Night | covert | FN | - | 180 000 DC |
+| 8 | M9 Bayonet | Night | covert | FN | - | 184 800 DC |
+| 9 | Butterfly Knife | Night | covert | MW | - | 167 280 DC |
+| 10 | Glock-18 | Night | industrial | FN | - | 355 DC |
+| 11 | Desert Eagle | Night | industrial | FN | - | 375 DC |
+| 12 | PP-Bizon | Carbon Fiber | industrial | FN | - | 230 DC |
+| 13 | SCAR-20 | Carbon Fiber | industrial | FN | - | 255 DC |
+| 14 | UMP-45 | Carbon Fiber | industrial | FN | - | 325 DC |
+| 15 | MAG-7 | Carbon Fiber | industrial | FN | - | 365 DC |
+| 16 | SSG 08 | Carbon Fiber | industrial | FN | - | 390 DC |
+| 17 | Desert Eagle | Conspiracy | classified | MW | - | 16 040 DC |
+| 18 | AWP | Graphite | classified | FN | - | 14 960 DC |
 
 ---
 
@@ -3277,24 +2900,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Desert Eagle | Urban DDPAT | industrial | - | - | 200 DC |
-| 2 | Tec-9 | Hades | industrial | - | - | 200 DC |
-| 3 | Desert Eagle | Midnight Storm | industrial | - | - | 205 DC |
-| 4 | Tec-9 | Perimeter | industrial | - | - | 215 DC |
-| 5 | Five-SeveN | Desert Seal | industrial | - | - | 225 DC |
-| 6 | P250 | Crimson Kimono | industrial | - | - | 225 DC |
-| 7 | Tec-9 | Rust Leaf | industrial | - | - | 225 DC |
-| 8 | CZ75-Auto | Midnight Palm | industrial | - | - | 235 DC |
-| 9 | P250 | Dark Filigree | industrial | - | - | 240 DC |
-| 10 | P250 | Sedimentary | industrial | - | - | 250 DC |
-| 11 | USP-S | Pathfinder | industrial | - | - | 255 DC |
-| 12 | Dual Berettas | Mystic Conjunction | industrial | - | - | 260 DC |
-| 13 | Five-SeveN | Midnight Paintover | industrial | - | - | 260 DC |
-| 14 | Dual Berettas | Polished Malachite | industrial | - | - | 275 DC |
-| 15 | Glock-18 | Red Tire | industrial | - | - | 280 DC |
-| 16 | Dual Berettas | Stained | industrial | - | - | 290 DC |
-| 17 | Glock-18 | Groundwater | industrial | - | - | 290 DC |
-| 18 | Tec-9 | Citric Acid | industrial | - | - | 290 DC |
+| 1 | Glock-18 | Fade | restricted | FN | - | 2 632 DC |
+| 2 | Desert Eagle | Blaze | restricted | FN | - | 3 976 DC |
+| 3 | USP-S | Kill Confirmed | covert | FN | - | 48 000 DC |
+| 4 | USP-S | Orion | classified | FN | - | 15 000 DC |
+| 5 | P250 | Whiteout | milspec | FN | - | 1 292 DC |
+| 6 | Desert Eagle | Heat Treated | classified | FN | - | 18 000 DC |
+| 7 | Glock-18 | Gold Toof | covert | FN | - | 56 700 DC |
+| 8 | USP-S | Jawbreaker | classified | FN | - | 15 000 DC |
+| 9 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
+| 10 | Glock-18 | Bullet Queen | covert | FN | - | 35 000 DC |
+| 11 | USP-S | The Traitor | covert | FN | - | 58 100 DC |
+| 12 | Desert Eagle | Golden Koi | covert | FN | - | 46 900 DC |
+| 13 | Five-SeveN | Angry Mob | covert | FN | - | 35 700 DC |
+| 14 | P250 | See Ya Later | covert | FN | - | 33 880 DC |
+| 15 | Desert Eagle | Code Red | covert | FN | - | 38 500 DC |
+| 16 | USP-S | Neo-Noir | covert | FN | - | 41 300 DC |
+| 17 | Five-SeveN | Heat Treated | restricted | FN | - | 2 240 DC |
+| 18 | CZ75-Auto | Victoria | covert | FN | - | 33 866 DC |
 
 ---
 
@@ -3308,24 +2931,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AWP | Sun in Leo | industrial | - | - | 330 DC |
-| 2 | AWP | Safari Mesh | industrial | - | - | 385 DC |
-| 3 | AWP | Capillary | milspec | - | - | 697 DC |
-| 4 | AWP | Snake Camo | milspec | - | - | 1 088 DC |
-| 5 | AWP | Acheron | milspec | - | - | 1 156 DC |
-| 6 | AWP | Arsenic Spill | milspec | - | - | 1 343 DC |
-| 7 | AWP | Black Nile | milspec | - | - | 1 411 DC |
-| 8 | AWP | POP AWP | restricted | - | - | 2 352 DC |
-| 9 | AWP | Pink DDPAT | restricted | - | - | 2 464 DC |
-| 10 | AWP | Phobos | restricted | - | - | 2 576 DC |
-| 11 | AWP | Exoskeleton | restricted | - | - | 2 688 DC |
-| 12 | AWP | Worm God | restricted | - | - | 2 744 DC |
-| 13 | AWP | PAW | restricted | - | - | 2 856 DC |
-| 14 | AWP | Exothermic | restricted | - | - | 2 968 DC |
-| 15 | AWP | Pit Viper | restricted | - | - | 3 080 DC |
-| 16 | AWP | Atheris | restricted | - | - | 4 368 DC |
-| 17 | AWP | Black Box | restricted | - | - | 4 816 DC |
-| 18 | AWP | The End | classified | - | - | 6 800 DC |
+| 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
+| 2 | AWP | Gungnir | covert | FN | - | 59 500 DC |
+| 3 | AWP | Medusa | covert | FN | - | 44 100 DC |
+| 4 | AWP | Desert Hydra | covert | FN | - | 50 400 DC |
+| 5 | AWP | The Prince | covert | FN | - | 42 700 DC |
+| 6 | AWP | Lightning Strike | covert | FN | - | 52 500 DC |
+| 7 | AWP | Fade | covert | FN | - | 53 900 DC |
+| 8 | AWP | Oni Taiji | covert | FN | - | 39 200 DC |
+| 9 | AWP | Chrome Cannon | covert | FN | - | 40 600 DC |
+| 10 | AWP | CMYK | covert | FN | - | 18 000 DC |
+| 11 | AWP | Crakow! | classified | FN | - | 12 500 DC |
+| 12 | AWP | Containment Breach | covert | FN | - | 45 500 DC |
+| 13 | AWP | Wildfire | covert | FN | - | 36 400 DC |
+| 14 | AWP | Silk Tiger | classified | FN | - | 10 540 DC |
+| 15 | AWP | Graphite | classified | FN | - | 14 960 DC |
+| 16 | AWP | Asiimov | covert | FN | - | 16 000 DC |
+| 17 | AWP | Hyper Beast | covert | FN | - | 30 100 DC |
+| 18 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
 
 ---
 
@@ -3339,24 +2962,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Baroque Purple | industrial | - | - | 210 DC |
-| 2 | AK-47 | Jungle Spray | industrial | - | - | 255 DC |
-| 3 | AK-47 | Safari Mesh | industrial | - | - | 320 DC |
-| 4 | AK-47 | Olive Polycam | industrial | - | - | 350 DC |
-| 5 | AK-47 | VariCamo Grey | industrial | - | - | 385 DC |
-| 6 | AK-47 | Predator | industrial | - | - | 440 DC |
-| 7 | AK-47 | Wintergreen | milspec | - | - | 680 DC |
-| 8 | AK-47 | Crossfade | milspec | - | - | 697 DC |
-| 9 | AK-47 | Black Laminate | milspec | - | - | 748 DC |
-| 10 | AK-47 | Steel Delta | milspec | - | - | 1 224 DC |
-| 11 | AK-47 | Green Laminate | milspec | - | - | 1 377 DC |
-| 12 | AK-47 | Elite Build | milspec | - | - | 1 428 DC |
-| 13 | AK-47 | Uncharted | milspec | - | - | 1 462 DC |
-| 14 | AK-47 | Orbit Mk01 | restricted | - | - | 2 576 DC |
-| 15 | AK-47 | Rat Rod | restricted | - | - | 2 688 DC |
-| 16 | AK-47 | Midnight Laminate | restricted | - | - | 2 968 DC |
-| 17 | AK-47 | Safety Net | restricted | - | - | 3 080 DC |
-| 18 | AK-47 | Blue Laminate | restricted | - | - | 3 192 DC |
+| 1 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 2 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
+| 3 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 4 | AK-47 | B the Monster | covert | FN | - | 45 500 DC |
+| 5 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 6 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 7 | AK-47 | Vulcan | covert | FN | - | 31 500 DC |
+| 8 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 9 | AK-47 | Fuel Injector | covert | FN | - | 41 300 DC |
+| 10 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 11 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
+| 12 | AK-47 | The Empress | covert | FN | - | 51 800 DC |
+| 13 | AK-47 | Head Shot | covert | FN | - | 48 299 DC |
+| 14 | AK-47 | Neon Rider | covert | FN | - | 56 000 DC |
+| 15 | AK-47 | Neon Revolution | covert | FN | - | 52 500 DC |
+| 16 | AK-47 | Legion of Anubis | covert | FN | - | 43 400 DC |
+| 17 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
+| 18 | AK-47 | Redline | classified | FN | - | 12 410 DC |
 
 ---
 
@@ -3370,24 +2993,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | M4A1-S | Moss Quartz | industrial | - | - | 200 DC |
-| 2 | M4A4 | Urban DDPAT | industrial | - | - | 240 DC |
-| 3 | M4A4 | Tornado | industrial | - | - | 275 DC |
-| 4 | M4A4 | Naval Shred Camo | industrial | - | - | 285 DC |
-| 5 | M4A4 | Steel Work | industrial | - | - | 305 DC |
-| 6 | M4A1-S | Wash me plz | industrial | - | - | 305 DC |
-| 7 | M4A1-S | Boreal Forest | industrial | - | - | 315 DC |
-| 8 | M4A1-S | Mud-Spec | industrial | - | - | 325 DC |
-| 9 | M4A4 | Aeolian Dark | industrial | - | - | 350 DC |
-| 10 | M4A4 | Desert Storm | industrial | - | - | 360 DC |
-| 11 | M4A4 | Dark Blossom | industrial | - | - | 395 DC |
-| 12 | M4A4 | Jungle Tiger | industrial | - | - | 415 DC |
-| 13 | M4A4 | Mainframe | industrial | - | - | 440 DC |
-| 14 | M4A4 | Faded Zebra | milspec | - | - | 680 DC |
-| 15 | M4A4 | Dark Operative | milspec | - | - | 748 DC |
-| 16 | M4A1-S | Briefing | milspec | - | - | 765 DC |
-| 17 | M4A4 | Converter | milspec | - | - | 782 DC |
-| 18 | M4A1-S | Blood Tiger | milspec | - | - | 816 DC |
+| 1 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 2 | M4A1-S | Fade | covert | FN | - | 68 000 DC |
+| 3 | M4A1-S | Vaporwave | covert | FN | - | 35 000 DC |
+| 4 | M4A4 | Poseidon | classified | FN | - | 12 393 DC |
+| 5 | M4A1-S | Imminent Danger | covert | FN | - | 28 700 DC |
+| 6 | M4A1-S | Welcome to the Jungle | covert | FN | - | 32 900 DC |
+| 7 | M4A1-S | Blue Phosphor | classified | FN | - | 10 880 DC |
+| 8 | M4A1-S | Printstream | covert | FN | - | 38 000 DC |
+| 9 | M4A1-S | Hot Rod | classified | FN | - | 12 750 DC |
+| 10 | M4A4 | Eye of Horus | covert | FN | - | 35 000 DC |
+| 11 | M4A1-S | Icarus Fell | restricted | FN | - | 4 872 DC |
+| 12 | M4A4 | The Emperor | covert | FN | - | 53 200 DC |
+| 13 | M4A4 | Turbine | restricted | FN | - | 4 200 DC |
+| 14 | M4A4 | Temukau | covert | FN | - | 56 000 DC |
+| 15 | M4A1-S | Player Two | covert | FN | - | 58 800 DC |
+| 16 | M4A4 | In Living Color | covert | FN | - | 48 299 DC |
+| 17 | M4A1-S | Hyper Beast | covert | FN | - | 42 000 DC |
+| 18 | M4A4 | Asiimov | covert | FN | - | 16 000 DC |
 
 ---
 
@@ -3401,24 +3024,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | MP7 | Base-2 | industrial | - | - | 210 DC |
-| 2 | PP-Bizon | Chemical Green | industrial | - | - | 215 DC |
-| 3 | MAC-10 | Acid Hex | industrial | - | - | 220 DC |
-| 4 | MP5-SD | Nitro | industrial | - | - | 225 DC |
-| 5 | PP-Bizon | Carbon Fiber | industrial | - | - | 230 DC |
-| 6 | P90 | Ash Wood | industrial | - | - | 230 DC |
-| 7 | P90 | Verdant Growth | industrial | - | - | 240 DC |
-| 8 | MAC-10 | Palm | industrial | - | - | 245 DC |
-| 9 | MP5-SD | Savannah Halftone | industrial | - | - | 245 DC |
-| 10 | UMP-45 | Fallout Warning | industrial | - | - | 245 DC |
-| 11 | MAC-10 | Echoing Sands | industrial | - | - | 250 DC |
-| 12 | P90 | Sunset Lily | industrial | - | - | 250 DC |
-| 13 | MAC-10 | Candy Apple | industrial | - | - | 255 DC |
-| 14 | MP9 | Old Roots | industrial | - | - | 255 DC |
-| 15 | MAC-10 | Video Cam | industrial | - | - | 265 DC |
-| 16 | MP7 | Vault Heist | industrial | - | - | 270 DC |
-| 17 | MAC-10 | Commuter | industrial | - | - | 280 DC |
-| 18 | MP5-SD | Neon Squeezer | industrial | - | - | 280 DC |
+| 1 | MP9 | Wild Lily | classified | FN | - | 12 920 DC |
+| 2 | MP9 | Hot Rod | milspec | FN | - | 1 139 DC |
+| 3 | MAC-10 | Hot Snakes | classified | FN | - | 14 000 DC |
+| 4 | MAC-10 | Gold Brick | restricted | FN | - | 4 200 DC |
+| 5 | P90 | Run and Hide | classified | FN | - | 7 140 DC |
+| 6 | MP7 | Fade | restricted | FN | - | 4 480 DC |
+| 7 | MAC-10 | Saibā Oni | restricted | FN | - | 4 500 DC |
+| 8 | P90 | Death by Kitty | covert | MW | - | 47 600 DC |
+| 9 | MP7 | Bloodsport | covert | FN | - | 59 500 DC |
+| 10 | MAC-10 | Neon Rider | covert | FN | - | 54 600 DC |
+| 11 | MP9 | Starlight Protector | covert | FN | - | 59 500 DC |
+| 12 | P90 | Emerald Dragon | classified | FN | - | 9 350 DC |
+| 13 | MAC-10 | Stalker | covert | FN | - | 35 742 DC |
+| 14 | MP7 | Nemesis | classified | FN | - | 7 500 DC |
+| 15 | MP9 | Mount Fuji | restricted | FN | - | 4 500 DC |
+| 16 | P90 | Randy Rush | restricted | FN | - | 6 728 DC |
+| 17 | UMP-45 | Neo-Noir | classified | FN | - | 14 280 DC |
+| 18 | MP9 | Food Chain | classified | FN | - | 11 050 DC |
 
 ---
 
@@ -3432,24 +3055,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Sawed-Off | Snake Camo | industrial | - | - | 200 DC |
-| 2 | Negev | CaliCamo | industrial | - | - | 205 DC |
-| 3 | Nova | Candy Apple | industrial | - | - | 215 DC |
-| 4 | MAG-7 | Wildwood | industrial | - | - | 220 DC |
-| 5 | MAG-7 | Silver | industrial | - | - | 225 DC |
-| 6 | M249 | Spectrogram | industrial | - | - | 230 DC |
-| 7 | XM1014 | Banana Leaf | industrial | - | - | 230 DC |
-| 8 | Negev | Nuclear Waste | industrial | - | - | 250 DC |
-| 9 | M249 | Gator Mesh | industrial | - | - | 265 DC |
-| 10 | XM1014 | Fallout Warning | industrial | - | - | 265 DC |
-| 11 | Sawed-Off | Rust Coat | industrial | - | - | 270 DC |
-| 12 | Negev | Wall Bang | industrial | - | - | 280 DC |
-| 13 | Nova | Green Apple | industrial | - | - | 280 DC |
-| 14 | M249 | Shipping Forecast | industrial | - | - | 285 DC |
-| 15 | XM1014 | CaliCamo | industrial | - | - | 285 DC |
-| 16 | MAG-7 | Metallic DDPAT | industrial | - | - | 290 DC |
-| 17 | Nova | Morning Sun | industrial | - | - | 290 DC |
-| 18 | Sawed-Off | Mosaico | industrial | - | - | 295 DC |
+| 1 | MAG-7 | Cinquedea | classified | FN | - | 8 840 DC |
+| 2 | XM1014 | Frost Borre | milspec | FN | - | 1 207 DC |
+| 3 | Nova | Baroque Orange | restricted | FN | - | 3 500 DC |
+| 4 | Negev | Mjölnir | classified | FN | - | 7 310 DC |
+| 5 | M249 | Downtown | restricted | FN | - | 5 000 DC |
+| 6 | Nova | Antique | classified | FN | - | 16 065 DC |
+| 7 | XM1014 | Incinegator | classified | FN | - | 7 500 DC |
+| 8 | Nova | Hyper Beast | classified | FN | - | 8 303 DC |
+| 9 | MAG-7 | Justice | classified | FN | - | 10 594 DC |
+| 10 | Negev | Power Loader | restricted | FN | - | 4 500 DC |
+| 11 | XM1014 | Entombed | classified | FN | - | 6 500 DC |
+| 12 | MAG-7 | SWAG-7 | restricted | FN | - | 6 199 DC |
+| 13 | Nova | Bloomstick | classified | FN | - | 7 000 DC |
+| 14 | M249 | Nebula Crusader | restricted | FN | - | 5 443 DC |
+| 15 | XM1014 | Tranquility | classified | FN | - | 8 500 DC |
+| 16 | MAG-7 | Core Breach | restricted | FN | - | 2 688 DC |
+| 17 | Nova | Wild Six | restricted | FN | - | 3 094 DC |
+| 18 | Negev | dev_texture | restricted | FN | - | 3 976 DC |
 
 ---
 
@@ -3459,38 +3082,28 @@
 - **Категория:** `weapons`
 - **Цена открытия:** **18 500 DC**
 - **Описание:** Стритрейсинг: M4A1-S Hot Rod, Glock-18 Twilight Galaxy, SG 553 Bulldozer, Urban Rubble
-- **Количество предметов в кейсе:** 28 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | M4A1-S | Hot Rod | classified | FN | - | 12 750 DC |
 | 2 | M4A1-S | Hot Rod | classified | MW | - | 10 455 DC |
-| 3 | USP-S | Whiteout | classified | FN | - | 11 220 DC |
-| 4 | USP-S | Whiteout | classified | MW | - | 9 200 DC |
-| 5 | Glock-18 | Twilight Galaxy | classified | FN | - | 9 860 DC |
-| 6 | Glock-18 | Twilight Galaxy | classified | MW | - | 8 085 DC |
-| 7 | MAG-7 | Bulldozer | restricted | FN | - | 3 192 DC |
-| 8 | MAG-7 | Bulldozer | restricted | MW | - | 2 617 DC |
-| 9 | MP9 | Bulldozer | restricted | FN | - | 2 968 DC |
-| 10 | Tec-9 | Whiteout | restricted | FN | - | 2 632 DC |
-| 11 | Tec-9 | Whiteout | restricted | MW | - | 2 158 DC |
-| 12 | P250 | Whiteout | milspec | FN | - | 1 292 DC |
-| 13 | P250 | Whiteout | milspec | MW | - | 1 059 DC |
-| 14 | MP9 | Hot Rod | milspec | FN | - | 1 139 DC |
-| 15 | MP9 | Hot Rod | milspec | MW | - | 934 DC |
+| 3 | M4A4 | Choppa | milspec | FN | - | 1 262 DC |
+| 4 | Glock-18 | Twilight Galaxy | classified | FN | - | 9 860 DC |
+| 5 | Glock-18 | Twilight Galaxy | classified | MW | - | 8 085 DC |
+| 6 | SG 553 | Bulldozer | restricted | FN | - | 3 500 DC |
+| 7 | SG 553 | Bulldozer | restricted | MW | - | 2 800 DC |
+| 8 | MAG-7 | Bulldozer | restricted | FN | - | 3 192 DC |
+| 9 | MAG-7 | Bulldozer | restricted | MW | - | 2 617 DC |
+| 10 | MP9 | Bulldozer | restricted | FN | - | 2 968 DC |
+| 11 | MP9 | Hot Rod | milspec | FN | - | 1 139 DC |
+| 12 | MP9 | Hot Rod | milspec | MW | - | 934 DC |
+| 13 | Tec-9 | Whiteout | restricted | FN | - | 2 632 DC |
+| 14 | Tec-9 | Whiteout | restricted | MW | - | 2 158 DC |
+| 15 | P250 | Whiteout | milspec | FN | - | 1 292 DC |
 | 16 | MP7 | Whiteout | milspec | MW | - | 1 073 DC |
 | 17 | Desert Eagle | Urban Rubble | milspec | MW | - | 892 DC |
 | 18 | Galil AR | Urban Rubble | industrial | FN | - | 275 DC |
-| 19 | M4A4 | Choppa | milspec | FN | StatTrak™ | 1 262 DC |
-| 20 | M4A4 | Choppa | milspec | MW | StatTrak™ | 1 038 DC |
-| 21 | M4A4 | Choppa | milspec | FN | - | 935 DC |
-| 22 | P90 | Chopper | restricted | FN | StatTrak™ | 6 502 DC |
-| 23 | P90 | Chopper | restricted | MW | StatTrak™ | 5 346 DC |
-| 24 | P90 | Chopper | restricted | FN | - | 4 816 DC |
-| 25 | Sticker | chopper | Krakow 2017 | milspec | - | - | 1 648 DC |
-| 26 | Sticker | chopper (Foil) | Krakow 2017 | classified | - | - | 26 060 DC |
-| 27 | Sticker | chopper (Gold) | Krakow 2017 | extraordinary | - | - | 70 349 DC |
-| 28 | Sticker | chopper | Boston 2018 | milspec | - | - | 3 139 DC |
 
 ---
 
@@ -3504,24 +3117,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
-| 2 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
-| 3 | Bayonet | Fade | covert | FN | - | 240 000 DC |
-| 4 | Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
-| 5 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
-| 6 | Survival Knife | Fade | covert | FN | - | 240 000 DC |
-| 7 | Paracord Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 8 | Falchion Knife | Fade | covert | FN | - | 240 000 DC |
-| 9 | Flip Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 10 | Gut Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 11 | Hydra Gloves | Emerald | extraordinary | FN | - | 168 000 DC |
-| 12 | Survival Knife | Damascus Steel | covert | FN | - | 153 600 DC |
-| 13 | Falchion Knife | Damascus Steel | covert | FN | - | 134 400 DC |
-| 14 | AK-47 | Emerald Pinstripe | restricted | FN | - | 4 984 DC |
-| 15 | Glock-18 | Fade | restricted | FN | - | 2 632 DC |
-| 16 | CZ75-Auto | Emerald | milspec | FN | - | 1 445 DC |
-| 17 | CZ75-Auto | Emerald Quartz | milspec | FN | - | 1 292 DC |
-| 18 | Galil AR | Amber Fade | milspec | FN | - | 1 173 DC |
+| 1 | Glock-18 | Fade | restricted | FN | - | 2 632 DC |
+| 2 | MP9 | Bulldozer | restricted | FN | - | 2 968 DC |
+| 3 | FAMAS | Spitfire | restricted | FN | - | 8 500 DC |
+| 4 | SCAR-20 | Emerald | restricted | FN | - | 4 928 DC |
+| 5 | AK-47 | Emerald Pinstripe | restricted | FN | - | 4 984 DC |
+| 6 | M4A4 | Radiation Hazard | milspec | FN | - | 1 122 DC |
+| 7 | AUG | Anodized Navy | milspec | FN | - | 1 207 DC |
+| 8 | P250 | Facets | industrial | FN | - | 1 400 DC |
+| 9 | MAG-7 | Hazard | milspec | FN | - | 1 377 DC |
+| 10 | SSG 08 | Mayan Dreams | industrial | FN | - | 1 250 DC |
+| 11 | Glock-18 | Groundwater | industrial | FN | - | 290 DC |
+| 12 | MP7 | Groundwater | milspec | FN | - | 680 DC |
+| 13 | Tec-9 | Toxic | milspec | FN | - | 867 DC |
+| 14 | Five-SeveN | Anodized Gunmetal | milspec | FN | - | 900 DC |
+| 15 | Sawed-Off | Copper | milspec | FN | - | 1 100 DC |
+| 16 | P90 | Glacier Mesh | milspec | FN | - | 1 258 DC |
+| 17 | XM1014 | Blaze Orange | milspec | FN | - | 1 003 DC |
+| 18 | Specialist Gloves | Foundation | extraordinary | FN | - | 206 400 DC |
 
 ---
 
@@ -3535,24 +3148,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
-| 2 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
-| 3 | Bayonet | Fade | covert | FN | - | 240 000 DC |
-| 4 | Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
-| 5 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
-| 6 | Survival Knife | Fade | covert | FN | - | 240 000 DC |
-| 7 | Paracord Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 8 | Falchion Knife | Fade | covert | FN | - | 240 000 DC |
-| 9 | Flip Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 10 | Gut Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 11 | Karambit | Fade | covert | FN | - | 240 000 DC |
-| 12 | M9 Bayonet | Fade | covert | FN | - | 240 000 DC |
-| 13 | Nomad Knife | Fade | covert | FN | - | 240 000 DC |
-| 14 | AWP | Fade | covert | FN | - | 53 900 DC |
-| 15 | Glock-18 | Fade | restricted | FN | - | 2 632 DC |
-| 16 | P2000 | Silver | milspec | FN | - | 1 292 DC |
-| 17 | AUG | Anodized Navy | milspec | FN | - | 1 207 DC |
-| 18 | Dual Berettas | Silver Pour | milspec | FN | - | 714 DC |
+| 1 | Glock-18 | Fade | restricted | FN | - | 2 632 DC |
+| 2 | MP9 | Bulldozer | restricted | FN | - | 2 968 DC |
+| 3 | AUG | Hot Rod | milspec | FN | - | 986 DC |
+| 4 | AUG | Anodized Navy | milspec | FN | - | 1 207 DC |
+| 5 | MP9 | Hot Rod | milspec | FN | - | 1 139 DC |
+| 6 | Negev | Anodized Navy | milspec | FN | - | 1 050 DC |
+| 7 | P2000 | Silver | milspec | FN | - | 1 292 DC |
+| 8 | Dual Berettas | Silver Pour | milspec | FN | - | 714 DC |
+| 9 | Five-SeveN | Candy Apple | industrial | FN | - | 435 DC |
+| 10 | Nova | Candy Apple | industrial | FN | - | 215 DC |
+| 11 | UMP-45 | Blaze | milspec | FN | - | 697 DC |
+| 12 | M4A4 | Radiation Hazard | milspec | FN | - | 1 122 DC |
+| 13 | M4A1-S | Fade | covert | FN | - | 68 000 DC |
+| 14 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
+| 15 | Bayonet | Fade | covert | FN | - | 240 000 DC |
+| 16 | Karambit | Fade | covert | FN | - | 240 000 DC |
+| 17 | M9 Bayonet | Fade | covert | FN | - | 240 000 DC |
+| 18 | AWP | Fade | covert | FN | - | 53 900 DC |
 
 ---
 
@@ -3564,60 +3177,28 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **95 000 DC**
 - **Описание:** Шанс на легендарный AWP Dragon Lore
-- **Количество предметов в кейсе:** 50 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
 | 2 | AWP | Dragon Lore | covert | MW | - | 697 000 DC |
-| 3 | M4A1-S | Knight | classified | FN | - | 8 670 DC |
-| 4 | M4A1-S | Knight | classified | MW | - | 7 109 DC |
-| 5 | M4A1-S | Knight | classified | FT | - | 5 636 DC |
-| 6 | Desert Eagle | Hand Cannon | restricted | FN | - | 4 872 DC |
-| 7 | Desert Eagle | Hand Cannon | restricted | MW | - | 3 995 DC |
-| 8 | Desert Eagle | Hand Cannon | restricted | FT | - | 3 167 DC |
-| 9 | CZ75-Auto | Chalice | restricted | FN | - | 2 688 DC |
-| 10 | CZ75-Auto | Chalice | restricted | MW | - | 2 204 DC |
-| 11 | CZ75-Auto | Chalice | restricted | FT | - | 1 747 DC |
-| 12 | P2000 | Amber Fade | restricted | FN | - | 4 480 DC |
-| 13 | P2000 | Amber Fade | restricted | MW | - | 3 674 DC |
-| 14 | P2000 | Amber Fade | restricted | FT | - | 2 912 DC |
+| 3 | AWP | Dragon Lore | covert | FT | - | 552 500 DC |
+| 4 | M4A1-S | Knight | classified | FN | - | 8 670 DC |
+| 5 | M4A1-S | Knight | classified | MW | - | 7 109 DC |
+| 6 | M4A1-S | Knight | classified | FT | - | 5 636 DC |
+| 7 | Desert Eagle | Hand Cannon | restricted | FN | - | 4 872 DC |
+| 8 | Desert Eagle | Hand Cannon | restricted | MW | - | 3 995 DC |
+| 9 | Desert Eagle | Hand Cannon | restricted | FT | - | 3 167 DC |
+| 10 | CZ75-Auto | Chalice | restricted | FN | - | 2 688 DC |
+| 11 | CZ75-Auto | Chalice | restricted | MW | - | 2 204 DC |
+| 12 | CZ75-Auto | Chalice | restricted | FT | - | 1 747 DC |
+| 13 | P2000 | Amber Fade | restricted | FN | - | 4 480 DC |
+| 14 | P2000 | Amber Fade | restricted | MW | - | 3 674 DC |
 | 15 | MP9 | Dark Age | milspec | FN | - | 765 DC |
 | 16 | MP9 | Dark Age | milspec | MW | - | 627 DC |
-| 17 | MP9 | Dark Age | milspec | FT | - | 497 DC |
-| 18 | USP-S | Royal Blue | industrial | FN | - | 405 DC |
-| 19 | USP-S | Royal Blue | industrial | MW | - | 332 DC |
-| 20 | USP-S | Royal Blue | industrial | FT | - | 263 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 22 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 23 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 25 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 26 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 28 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 29 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 30 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 31 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 32 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 33 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 34 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 35 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 36 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 37 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 38 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 39 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 40 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 41 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 42 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 43 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 44 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 45 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 46 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 47 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 48 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 49 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 50 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
+| 17 | USP-S | Royal Blue | industrial | FN | - | 405 DC |
+| 18 | USP-S | Royal Blue | industrial | MW | - | 332 DC |
 
 ---
 
@@ -3627,7 +3208,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **18 000 DC**
 - **Описание:** Шанс на AK-47 Золотая арабеска
-- **Количество предметов в кейсе:** 51 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -3646,42 +3227,9 @@
 | 13 | Nova | Quick Sand | milspec | FN | - | 1 241 DC |
 | 14 | Nova | Quick Sand | milspec | MW | - | 1 018 DC |
 | 15 | Nova | Quick Sand | milspec | FT | - | 807 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 42 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 44 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 45 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 47 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 48 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 50 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 51 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 16 | P90 | Desert DDPAT | milspec | FN | - | 450 DC |
+| 17 | PP-Bizon | Brass | milspec | FN | - | 1 190 DC |
+| 18 | SG 553 | Desert Blossom | milspec | FN | - | 1 445 DC |
 
 ---
 
@@ -3691,7 +3239,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **22 000 DC**
 - **Описание:** Шанс на AWP Desert Hydra
-- **Количество предметов в кейсе:** 51 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -3710,42 +3258,9 @@
 | 13 | XM1014 | Elegant Vines | restricted | FN | - | 3 248 DC |
 | 14 | XM1014 | Elegant Vines | restricted | MW | - | 2 663 DC |
 | 15 | XM1014 | Elegant Vines | restricted | FT | - | 2 111 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 42 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 44 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 45 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 47 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 48 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 50 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 51 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 16 | AUG | Navy Murano | milspec | FN | - | 2 800 DC |
+| 17 | MAG-7 | Navy Sheen | milspec | FN | - | 1 207 DC |
+| 18 | P250 | Verdigris | milspec | FN | - | 1 056 DC |
 
 ---
 
@@ -3755,7 +3270,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **16 000 DC**
 - **Описание:** Шанс на M4A1-S Добро пожаловать в джунгли
-- **Количество предметов в кейсе:** 51 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -3771,45 +3286,12 @@
 | 10 | USP-S | Ancient Visions | restricted | FN | - | 3 584 DC |
 | 11 | USP-S | Ancient Visions | restricted | MW | - | 2 939 DC |
 | 12 | USP-S | Ancient Visions | restricted | FT | - | 2 330 DC |
-| 13 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 16 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 19 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 22 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 25 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 28 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 31 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 34 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 37 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 40 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 41 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 42 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 43 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 46 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
-| 49 | AK-47 | AUTOEXEC | covert | FN | StatTrak™ | 64 260 DC |
-| 50 | AK-47 | AUTOEXEC | covert | MW | StatTrak™ | 52 836 DC |
-| 51 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 13 | FAMAS | Dark Water | milspec | FN | - | 1 054 DC |
+| 14 | Galil AR | Dusk Ruins | milspec | FN | - | 3 200 DC |
+| 15 | AUG | Carved Jade | milspec | FN | - | 1 200 DC |
+| 16 | Nova | Rust Coat | industrial | FN | - | 270 DC |
+| 17 | SG 553 | Lush Ruins | milspec | FN | - | 1 150 DC |
+| 18 | P2000 | Panther Camo | industrial | FN | - | 900 DC |
 
 ---
 
@@ -3819,7 +3301,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **12 000 DC**
 - **Описание:** Шанс на M4A4 Глаз Гора
-- **Количество предметов в кейсе:** 51 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -3838,42 +3320,9 @@
 | 13 | AK-47 | Steel Delta | milspec | FN | - | 1 224 DC |
 | 14 | AK-47 | Steel Delta | milspec | MW | - | 1 004 DC |
 | 15 | AK-47 | Steel Delta | milspec | FT | - | 796 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 42 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 44 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 45 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 47 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 48 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 50 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 51 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 16 | Tec-9 | Mummy's Rot | milspec | FN | - | 950 DC |
+| 17 | MAG-7 | Copper Coated | milspec | FN | - | 850 DC |
+| 18 | Nova | Sobek's Bite | restricted | FN | - | 920 DC |
 
 ---
 
@@ -3883,7 +3332,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **10 000 DC**
 - **Описание:** Шанс на M4A1-S Imminent Danger
-- **Количество предметов в кейсе:** 51 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -3899,45 +3348,12 @@
 | 10 | Galil AR | CAUTION! | restricted | FN | - | 4 200 DC |
 | 11 | Galil AR | CAUTION! | restricted | MW | - | 3 444 DC |
 | 12 | Galil AR | CAUTION! | restricted | FT | - | 2 730 DC |
-| 13 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 16 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 19 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 22 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 25 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 28 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 31 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 34 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 37 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 40 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 41 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 42 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 43 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 46 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
-| 49 | AK-47 | AUTOEXEC | covert | FN | StatTrak™ | 64 260 DC |
-| 50 | AK-47 | AUTOEXEC | covert | MW | StatTrak™ | 52 836 DC |
-| 51 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 13 | P90 | Schematic | milspec | FN | - | 1 250 DC |
+| 14 | AK-47 | Green Laminate | milspec | FN | - | 1 377 DC |
+| 15 | MAC-10 | Propaganda | classified | FN | - | 2 800 DC |
+| 16 | SSG 08 | Carbon Fiber | industrial | FN | - | 390 DC |
+| 17 | Dual Berettas | Switch Board | industrial | FN | - | 980 DC |
+| 18 | FAMAS | Faulty Wiring | milspec | FN | - | 320 DC |
 
 ---
 
@@ -3947,7 +3363,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **6 500 DC**
 - **Описание:** Шанс на SG 553 Integrale
-- **Количество предметов в кейсе:** 51 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -3966,42 +3382,9 @@
 | 13 | MP7 | Fade | restricted | FN | - | 4 480 DC |
 | 14 | MP7 | Fade | restricted | MW | - | 3 674 DC |
 | 15 | MP7 | Fade | restricted | FT | - | 2 912 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 42 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 44 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 45 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 47 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 48 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 50 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 51 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 16 | SSG 08 | Hand Brake | milspec | FN | - | 1 150 DC |
+| 17 | USP-S | Check Engine | milspec | FN | - | 1 250 DC |
+| 18 | M4A4 | Converter | milspec | FN | - | 782 DC |
 
 ---
 
@@ -4011,7 +3394,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **5 000 DC**
 - **Описание:** Шанс на M4A4 Радиационная опасность
-- **Количество предметов в кейсе:** 51 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4030,42 +3413,9 @@
 | 13 | MAG-7 | Core Breach | restricted | FN | - | 2 688 DC |
 | 14 | MAG-7 | Core Breach | restricted | MW | - | 2 204 DC |
 | 15 | MAG-7 | Core Breach | restricted | FT | - | 1 747 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 42 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 44 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 45 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 47 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 48 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 50 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 51 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 16 | AWP | Acheron | milspec | FN | - | 1 156 DC |
+| 17 | P90 | Facility Negative | milspec | FN | - | 900 DC |
+| 18 | MP7 | Motherboard | industrial | FN | - | 1 050 DC |
 
 ---
 
@@ -4075,7 +3425,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **25 000 DC**
 - **Описание:** Либо дешевый ширпотреб, либо Howl / Dragon Lore
-- **Количество предметов в кейсе:** 33 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4085,33 +3435,18 @@
 | 4 | Karambit | Doppler | covert | FN | - | 280 000 DC |
 | 5 | AK-47 | Olive Polycam | industrial | BS | - | 147 DC |
 | 6 | AK-47 | Baroque Purple | industrial | FT | - | 137 DC |
-| 7 | AK-47 | Baroque Purple | industrial | BS | StatTrak™ | 120 DC |
-| 8 | AK-47 | Baroque Purple | industrial | WW | - | 109 DC |
-| 9 | AK-47 | Safari Mesh | industrial | BS | - | 134 DC |
-| 10 | AK-47 | Jungle Spray | industrial | BS | StatTrak™ | 145 DC |
-| 11 | AK-47 | Jungle Spray | industrial | WW | - | 133 DC |
-| 12 | AK-47 | Jungle Spray | industrial | BS | - | 107 DC |
-| 13 | AUG | Steel Sentinel | industrial | FT | - | 146 DC |
-| 14 | AUG | Steel Sentinel | industrial | BS | StatTrak™ | 128 DC |
-| 15 | AUG | Steel Sentinel | industrial | WW | - | 117 DC |
-| 16 | AUG | Spalted Wood | industrial | BS | - | 124 DC |
-| 17 | AUG | Condemned | industrial | BS | - | 139 DC |
-| 18 | AUG | Radiation Hazard | industrial | FT | - | 130 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 29 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 30 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 31 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 32 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 33 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
+| 7 | AK-47 | Safari Mesh | industrial | BS | - | 134 DC |
+| 8 | AK-47 | Jungle Spray | industrial | WW | - | 133 DC |
+| 9 | AUG | Steel Sentinel | industrial | FT | - | 146 DC |
+| 10 | AUG | Spalted Wood | industrial | BS | - | 124 DC |
+| 11 | AUG | Condemned | industrial | BS | - | 139 DC |
+| 12 | AUG | Radiation Hazard | industrial | FT | - | 130 DC |
+| 13 | P90 | Sand Spray | milspec | FT | - | 120 DC |
+| 14 | Glock-18 | Groundwater | industrial | FT | - | 135 DC |
+| 15 | Nova | Predator | milspec | FT | - | 115 DC |
+| 16 | M4A4 | Urban DDPAT | industrial | FT | - | 140 DC |
+| 17 | USP-S | Forest Leaves | industrial | FT | - | 125 DC |
+| 18 | FAMAS | Colony | milspec | FT | - | 80 DC |
 
 ---
 
@@ -4126,23 +3461,23 @@
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
-| 2 | AWP | Gungnir | covert | FN | - | 59 500 DC |
-| 3 | AWP | Queen's Gambit | covert | FN | - | 58 800 DC |
-| 4 | AWP | Chromatic Aberration | covert | FN | - | 57 400 DC |
-| 5 | AWP | Fade | covert | FN | - | 53 900 DC |
+| 2 | Desert Eagle | Kumicho Dragon | classified | FN | - | 10 710 DC |
+| 3 | P90 | Emerald Dragon | classified | FN | - | 9 350 DC |
+| 4 | SSG 08 | Dragonfire | covert | FN | - | 35 000 DC |
+| 5 | AWP | Gungnir | covert | FN | - | 59 500 DC |
 | 6 | AWP | Desert Hydra | covert | FN | - | 50 400 DC |
-| 7 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
-| 8 | AWP | Medusa | covert | FN | - | 44 100 DC |
-| 9 | AWP | Chrome Cannon | covert | FN | - | 40 600 DC |
+| 7 | AWP | Medusa | covert | FN | - | 44 100 DC |
+| 8 | AWP | The Prince | covert | FN | - | 42 700 DC |
+| 9 | AWP | Fade | covert | FN | - | 53 900 DC |
 | 10 | AWP | Wildfire | covert | FN | - | 36 400 DC |
-| 11 | AWP | Corticera | classified | FN | - | 15 130 DC |
-| 12 | AWP | Electric Hive | classified | FN | - | 13 770 DC |
-| 13 | AWP | Ice Coaled | classified | FN | - | 12 410 DC |
-| 14 | AWP | Duality | classified | FN | - | 10 030 DC |
-| 15 | AWP | Crakow! | classified | FN | - | 8 500 DC |
-| 16 | AWP | Pit Viper | restricted | FN | - | 3 080 DC |
-| 17 | AWP | Exoskeleton | restricted | FN | - | 2 688 DC |
-| 18 | AWP | Black Nile | milspec | FN | - | 1 411 DC |
+| 11 | M4A4 | 龍王 (Dragon King) | classified | FN | - | 10 200 DC |
+| 12 | P2000 | Imperial Dragon | classified | FN | - | 13 770 DC |
+| 13 | Dual Berettas | Dualing Dragons | milspec | FN | - | 1 173 DC |
+| 14 | Glock-18 | Dragon Tattoo | restricted | FN | - | 4 592 DC |
+| 15 | SG 553 | Dragon Tech | restricted | FN | - | 3 080 DC |
+| 16 | AWP | Lightning Strike | covert | FN | - | 52 500 DC |
+| 17 | AWP | Chromatic Aberration | covert | FN | - | 57 400 DC |
+| 18 | AWP | Containment Breach | covert | FN | - | 45 500 DC |
 
 ---
 
@@ -4152,58 +3487,28 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **25 000 DC**
 - **Описание:** Премиальный кейс для ценителей дорогих коллекций
-- **Количество предметов в кейсе:** 48 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | P90 | Run and Hide | classified | FN | - | 7 140 DC |
-| 2 | Sticker | ELEAGUE (Foil) | Boston 2018 | classified | - | - | 8 175 DC |
-| 3 | Sticker | karrigan (Foil) | Cologne 2015 | classified | - | - | 9 330 DC |
-| 4 | USP-S | Whiteout | classified | - | - | 11 220 DC |
-| 5 | Sticker | OpTic Gaming (Holo) | Cologne 2016 | restricted | - | - | 13 791 DC |
-| 6 | P250 | Undertow | classified | FN | StatTrak™ | 16 983 DC |
-| 7 | Moto Gloves | Turtle | extraordinary | BS | - | 71 568 DC |
-| 8 | Moto Gloves | Blood Pressure | extraordinary | WW | - | 72 384 DC |
-| 9 | Moto Gloves | Blood Pressure | extraordinary | BS | - | 58 464 DC |
-| 10 | Moto Gloves | Finish Line | extraordinary | FT | - | 70 200 DC |
-| 11 | Moto Gloves | Finish Line | extraordinary | WW | - | 56 160 DC |
-| 12 | Moto Gloves | Finish Line | extraordinary | BS | - | 45 360 DC |
-| 13 | Moto Gloves | 3rd Commando Company | extraordinary | BS | - | 69 552 DC |
-| 14 | Moto Gloves | Spearmint | extraordinary | WW | - | 69 888 DC |
-| 15 | Moto Gloves | Spearmint | extraordinary | BS | - | 56 448 DC |
-| 16 | Moto Gloves | Boom! | extraordinary | FT | - | 67 080 DC |
-| 17 | Moto Gloves | Boom! | extraordinary | WW | - | 53 664 DC |
-| 18 | Moto Gloves | Boom! | extraordinary | BS | - | 43 344 DC |
-| 19 | Moto Gloves | Cool Mint | extraordinary | BS | - | 67 536 DC |
-| 20 | Moto Gloves | Polygon | extraordinary | WW | - | 67 392 DC |
-| 21 | Moto Gloves | Polygon | extraordinary | BS | - | 54 432 DC |
-| 22 | Moto Gloves | Transport | extraordinary | FT | - | 63 960 DC |
-| 23 | Moto Gloves | Transport | extraordinary | WW | - | 51 168 DC |
-| 24 | Moto Gloves | Transport | extraordinary | BS | - | 41 328 DC |
-| 25 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 26 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 27 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 28 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 29 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 30 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 31 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 32 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 33 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 34 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 35 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 36 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 37 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 38 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 39 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 40 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 41 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 42 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 43 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 44 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 45 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 46 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 47 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 48 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
+| 1 | AWP | Gungnir | covert | FN | - | 59 500 DC |
+| 2 | AWP | The Prince | covert | FN | - | 42 700 DC |
+| 3 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 4 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 5 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
+| 6 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 7 | M4A1-S | Welcome to the Jungle | covert | FN | - | 32 900 DC |
+| 8 | Karambit | Doppler | covert | FN | - | 280 000 DC |
+| 9 | M9 Bayonet | Fade | covert | FN | - | 240 000 DC |
+| 10 | Butterfly Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 11 | Sport Gloves | Superconductor | extraordinary | FN | - | 270 000 DC |
+| 12 | Specialist Gloves | Crimson Kimono | extraordinary | FN | - | 230 000 DC |
+| 13 | Moto Gloves | Spearmint | extraordinary | FN | - | 220 000 DC |
+| 14 | Driver Gloves | King Snake | extraordinary | FN | - | 199 200 DC |
+| 15 | AWP | Fade | covert | FN | - | 53 900 DC |
+| 16 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
+| 17 | M4A1-S | Hot Rod | classified | FN | - | 12 750 DC |
+| 18 | Glock-18 | Fade | restricted | FN | - | 2 632 DC |
 
 ---
 
@@ -4213,67 +3518,28 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **50 000 DC**
 - **Описание:** Элитный кейс: редчайшие ножи, перчатки и сувениры
-- **Количество предметов в кейсе:** 57 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Sticker | tarik (Foil) | Cologne 2015 | classified | - | - | 7 501 DC |
-| 2 | Sticker | FURIA (Holo) | 2020 RMR | restricted | - | - | 8 615 DC |
-| 3 | Sticker | SK Gaming (Foil) | Atlanta 2017 | classified | - | - | 9 631 DC |
-| 4 | Sticker | Poorly Drawn Bloody Darryl (Holo) | restricted | - | - | 11 875 DC |
-| 5 | Оперативник | Lt. Commander Ricksaw | NSWC SEAL | covert | - | - | 14 250 DC |
-| 6 | AK-47 | Frontside Misty | classified | FN | StatTrak™ | 18 819 DC |
-| 7 | Moto Gloves | Eclipse | extraordinary | MW | - | 165 312 DC |
-| 8 | Moto Gloves | Eclipse | extraordinary | FT | - | 131 040 DC |
-| 9 | Moto Gloves | Eclipse | extraordinary | WW | - | 104 832 DC |
-| 10 | Moto Gloves | Turtle | extraordinary | FN | - | 170 400 DC |
-| 11 | Moto Gloves | Turtle | extraordinary | MW | - | 139 728 DC |
-| 12 | Moto Gloves | Turtle | extraordinary | FT | - | 110 760 DC |
-| 13 | Moto Gloves | Blood Pressure | extraordinary | FN | - | 139 200 DC |
-| 14 | Moto Gloves | Blood Pressure | extraordinary | MW | - | 114 144 DC |
-| 15 | Moto Gloves | Blood Pressure | extraordinary | FT | - | 90 480 DC |
-| 16 | Moto Gloves | Finish Line | extraordinary | FN | - | 108 000 DC |
-| 17 | Moto Gloves | Finish Line | extraordinary | MW | - | 88 560 DC |
-| 18 | Moto Gloves | Finish Line | extraordinary | FT | - | 70 200 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 29 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 30 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 31 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 32 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 33 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 34 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 35 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 36 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 37 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 38 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 39 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 40 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 41 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 42 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 43 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 44 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 45 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 46 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 47 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 48 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 49 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 50 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 51 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 52 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 53 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 54 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
-| 55 | AK-47 | AUTOEXEC | covert | FN | StatTrak™ | 64 260 DC |
-| 56 | AK-47 | AUTOEXEC | covert | MW | StatTrak™ | 52 836 DC |
-| 57 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
+| 2 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 3 | AWP | Gungnir | covert | FN | - | 59 500 DC |
+| 4 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 5 | Sport Gloves | Pandora's Box | extraordinary | FN | - | 380 000 DC |
+| 6 | Sport Gloves | Vice | extraordinary | FN | - | 350 000 DC |
+| 7 | Karambit | Doppler | covert | FN | - | 280 000 DC |
+| 8 | Butterfly Knife | Doppler | covert | FN | - | 280 000 DC |
+| 9 | M9 Bayonet | Doppler | covert | FN | - | 280 000 DC |
+| 10 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
+| 11 | M4A1-S | Welcome to the Jungle | covert | FN | - | 32 900 DC |
+| 12 | AWP | Desert Hydra | covert | FN | - | 50 400 DC |
+| 13 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
+| 14 | Driver Gloves | Snow Leopard | extraordinary | FN | - | 146 400 DC |
+| 15 | Moto Gloves | Spearmint | extraordinary | FN | - | 220 000 DC |
+| 16 | AWP | Medusa | covert | FN | - | 44 100 DC |
+| 17 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 18 | M4A4 | Poseidon | classified | FN | - | 12 393 DC |
 
 ---
 
@@ -4283,40 +3549,28 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **100 000 DC**
 - **Описание:** Самый дорогой кейс: только божественные скины
-- **Количество предметов в кейсе:** 30 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Moto Gloves | Eclipse | extraordinary | FN | - | 201 600 DC |
-| 2 | Moto Gloves | Eclipse | extraordinary | MW | - | 165 312 DC |
-| 3 | Moto Gloves | Eclipse | extraordinary | FT | - | 131 040 DC |
-| 4 | Moto Gloves | Turtle | extraordinary | FN | - | 170 400 DC |
-| 5 | Moto Gloves | Turtle | extraordinary | MW | - | 139 728 DC |
-| 6 | Moto Gloves | Turtle | extraordinary | FT | - | 110 760 DC |
-| 7 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 8 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 9 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 10 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 11 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 12 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 13 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 14 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 15 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 16 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 17 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 18 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 19 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 20 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 21 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 22 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 23 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 24 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 25 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 26 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 27 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 28 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 29 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 30 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
+| 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
+| 2 | AWP | Dragon Lore | covert | MW | - | 697 000 DC |
+| 3 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 4 | M4A4 | Howl | milspec | MW | - | 344 400 DC |
+| 5 | Sport Gloves | Pandora's Box | extraordinary | FN | - | 380 000 DC |
+| 6 | Sport Gloves | Vice | extraordinary | FN | - | 350 000 DC |
+| 7 | AWP | Gungnir | covert | FN | - | 59 500 DC |
+| 8 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 9 | Karambit | Doppler | covert | FN | - | 280 000 DC |
+| 10 | Butterfly Knife | Doppler | covert | FN | - | 280 000 DC |
+| 11 | M9 Bayonet | Doppler | covert | FN | - | 280 000 DC |
+| 12 | Bayonet | Doppler | covert | FN | - | 280 000 DC |
+| 13 | Talon Knife | Doppler | covert | FN | - | 280 000 DC |
+| 14 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
+| 15 | Sport Gloves | Superconductor | extraordinary | FN | - | 270 000 DC |
+| 16 | Moto Gloves | Spearmint | extraordinary | FN | - | 220 000 DC |
+| 17 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 18 | AWP | Desert Hydra | covert | FN | - | 50 400 DC |
 
 ---
 
@@ -4326,7 +3580,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **180 000 DC**
 - **Описание:** Howl, Dragon Lore, Fire Serpent, Medusa
-- **Количество предметов в кейсе:** 51 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4341,46 +3595,13 @@
 | 9 | AK-47 | Fire Serpent | covert | FT | - | 78 000 DC |
 | 10 | AWP | Gungnir | covert | FN | - | 59 500 DC |
 | 11 | AWP | Gungnir | covert | MW | - | 48 790 DC |
-| 12 | AWP | Gungnir | covert | FT | - | 38 675 DC |
-| 13 | AWP | Medusa | covert | FN | - | 44 100 DC |
-| 14 | AWP | Medusa | covert | MW | - | 36 162 DC |
-| 15 | AWP | Medusa | covert | FT | - | 28 665 DC |
-| 16 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
-| 17 | AK-47 | Wild Lotus | covert | MW | - | 32 144 DC |
-| 18 | AK-47 | Wild Lotus | covert | FT | - | 25 480 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 29 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 30 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 31 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 32 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 33 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 34 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 35 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 36 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 37 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 38 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 39 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 40 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 41 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 42 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 43 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 44 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 45 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 46 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 47 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 48 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 49 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 50 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 51 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
+| 12 | AWP | Medusa | covert | FN | - | 44 100 DC |
+| 13 | AWP | Medusa | covert | MW | - | 36 162 DC |
+| 14 | AWP | Medusa | covert | FT | - | 28 665 DC |
+| 15 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 16 | AK-47 | Wild Lotus | covert | MW | - | 32 144 DC |
+| 17 | Karambit | Fade | covert | FN | - | 240 000 DC |
+| 18 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
 
 ---
 
@@ -4390,51 +3611,28 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **55 000 DC**
 - **Описание:** Премиум скины из чистого золота: Arabesque, Golden Koi, Gold Brick, The Prince
-- **Количество предметов в кейсе:** 41 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | M4A4 | Royal Paladin | covert | FN | - | 60 900 DC |
-| 2 | M4A4 | Royal Paladin | covert | MW | - | 49 938 DC |
-| 3 | AK-47 | Gold Arabesque | covert | FN | StatTrak™ | 57 645 DC |
-| 4 | AK-47 | Gold Arabesque | covert | MW | StatTrak™ | 47 397 DC |
-| 5 | AK-47 | Gold Arabesque | covert | FT | - | 27 755 DC |
-| 6 | AWP | The Prince | covert | FN | StatTrak™ | 57 645 DC |
-| 7 | AWP | The Prince | covert | FT | StatTrak™ | 37 576 DC |
-| 8 | AWP | The Prince | covert | WW | - | 22 204 DC |
-| 9 | Desert Eagle | Golden Koi | covert | FN | - | 46 900 DC |
-| 10 | Desert Eagle | Golden Koi | covert | MW | - | 38 458 DC |
+| 1 | AK-47 | Gold Arabesque | covert | FN | StatTrak™ | 57 645 DC |
+| 2 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
+| 3 | AWP | The Prince | covert | FN | StatTrak™ | 57 645 DC |
+| 4 | AWP | The Prince | covert | FN | - | 42 700 DC |
+| 5 | Desert Eagle | Golden Koi | covert | FN | StatTrak™ | 63 315 DC |
+| 6 | Desert Eagle | Golden Koi | covert | FN | - | 46 900 DC |
+| 7 | MAC-10 | Gold Brick | restricted | FN | - | 4 200 DC |
+| 8 | M4A4 | Royal Paladin | covert | FN | - | 60 900 DC |
+| 9 | Glock-18 | Gold Toof | covert | FN | - | 56 700 DC |
+| 10 | M4A1-S | Golden Coil | covert | FN | - | 62 300 DC |
 | 11 | Glock-18 | Brass | restricted | FN | - | 4 368 DC |
-| 12 | Glock-18 | Brass | restricted | MW | - | 3 582 DC |
-| 13 | Five-SeveN | Copper Galaxy | restricted | MW | - | 1 929 DC |
-| 14 | PP-Bizon | Brass | milspec | MW | StatTrak™ | 1 321 DC |
-| 15 | PP-Bizon | Brass | milspec | FT | - | 774 DC |
-| 16 | Tec-9 | Brass | milspec | FN | - | 1 071 DC |
-| 17 | SCAR-20 | Brass | milspec | MW | - | 1 046 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 29 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 31 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 32 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 34 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 35 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 37 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 38 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 40 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 41 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
+| 12 | Tec-9 | Brass | milspec | FN | - | 1 071 DC |
+| 13 | PP-Bizon | Brass | milspec | FN | - | 1 190 DC |
+| 14 | SCAR-20 | Brass | milspec | FN | - | 1 275 DC |
+| 15 | Five-SeveN | Copper Galaxy | restricted | FN | - | 2 352 DC |
+| 16 | Bayonet | Tiger Tooth | covert | FN | - | 103 200 DC |
+| 17 | Karambit | Lore | covert | FN | - | 158 400 DC |
+| 18 | M9 Bayonet | Lore | covert | FN | - | 180 000 DC |
 
 ---
 
@@ -4444,57 +3642,28 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **150 000 DC**
 - **Описание:** Шанс на Dragon Lore, Gungnir, Medusa, Desert Hydra, Eye of Horus, Fire Serpent
-- **Количество предметов в кейсе:** 47 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AWP | Dragon Lore | covert | FN | StatTrak™ | 1 147 500 DC |
-| 2 | AWP | Dragon Lore | covert | MW | StatTrak™ | 943 500 DC |
-| 3 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
-| 4 | AK-47 | Fire Serpent | covert | FN | StatTrak™ | 162 000 DC |
-| 5 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
-| 6 | AK-47 | Fire Serpent | covert | BS | StatTrak™ | 68 400 DC |
-| 7 | AWP | Gungnir | covert | FN | StatTrak™ | 80 325 DC |
-| 8 | AWP | Gungnir | covert | FT | - | 38 675 DC |
-| 9 | AWP | Gungnir | covert | BS | StatTrak™ | 33 915 DC |
-| 10 | AWP | Medusa | covert | FN | StatTrak™ | 59 535 DC |
-| 11 | AWP | Medusa | covert | MW | StatTrak™ | 48 951 DC |
-| 12 | AWP | Desert Hydra | covert | FN | - | 50 400 DC |
-| 13 | AWP | Desert Hydra | covert | MW | - | 41 328 DC |
-| 14 | M4A4 | Eye of Horus | covert | MW | - | 28 700 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 42 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 43 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 44 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 47 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
+| 2 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
+| 3 | AWP | Gungnir | covert | FN | StatTrak™ | 80 325 DC |
+| 4 | AWP | Gungnir | covert | FN | - | 59 500 DC |
+| 5 | AWP | Medusa | covert | FN | StatTrak™ | 59 535 DC |
+| 6 | AWP | Medusa | covert | FN | - | 44 100 DC |
+| 7 | AWP | Desert Hydra | covert | FN | - | 50 400 DC |
+| 8 | M4A4 | Eye of Horus | covert | FN | - | 35 000 DC |
+| 9 | AK-47 | Fire Serpent | covert | FN | StatTrak™ | 162 000 DC |
+| 10 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 11 | M4A4 | Poseidon | classified | FN | - | 12 393 DC |
+| 12 | AWP | The Prince | covert | FN | - | 42 700 DC |
+| 13 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 14 | Karambit | Lore | covert | FN | - | 158 400 DC |
+| 15 | Butterfly Knife | Lore | covert | FN | - | 182 400 DC |
+| 16 | M9 Bayonet | Lore | covert | FN | - | 180 000 DC |
+| 17 | Bayonet | Lore | covert | FN | - | 156 000 DC |
+| 18 | Huntsman Knife | Lore | covert | MW | - | 110 208 DC |
 
 ---
 
@@ -4504,60 +3673,28 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **85 000 DC**
 - **Описание:** Северные реликвии: AWP Gungnir, Negev Mjölnir, Emerald Jörmungandr, Flame Jörmungandr
-- **Количество предметов в кейсе:** 50 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AWP | Gungnir | covert | FN | StatTrak™ | 80 325 DC |
-| 2 | AWP | Gungnir | covert | MW | StatTrak™ | 66 045 DC |
-| 3 | AWP | Gungnir | covert | FN | - | 59 500 DC |
+| 2 | AWP | Gungnir | covert | FN | - | 59 500 DC |
+| 3 | AWP | Gungnir | covert | MW | - | 48 790 DC |
 | 4 | Negev | Mjölnir | classified | FN | StatTrak™ | 9 869 DC |
 | 5 | Negev | Mjölnir | classified | FN | - | 7 310 DC |
 | 6 | Negev | Mjölnir | classified | MW | - | 5 994 DC |
-| 7 | AUG | Flame Jörmungandr | restricted | FT | StatTrak™ | 4 140 DC |
-| 8 | AUG | Flame Jörmungandr | restricted | FT | - | 3 058 DC |
-| 9 | AUG | Flame Jörmungandr | restricted | BS | - | 1 976 DC |
-| 10 | Desert Eagle | Emerald Jörmungandr | restricted | FN | StatTrak™ | 3 251 DC |
-| 11 | Desert Eagle | Emerald Jörmungandr | restricted | FN | - | 2 408 DC |
-| 12 | P90 | Astral Jörmungandr | restricted | FN | - | 2 576 DC |
-| 13 | P90 | Astral Jörmungandr | restricted | FT | - | 1 674 DC |
-| 14 | P90 | Astral Jörmungandr | restricted | WW | - | 1 340 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 42 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 43 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 44 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 47 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 50 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 7 | Desert Eagle | Emerald Jörmungandr | restricted | FN | StatTrak™ | 3 251 DC |
+| 8 | Desert Eagle | Emerald Jörmungandr | restricted | FN | - | 2 408 DC |
+| 9 | AUG | Flame Jörmungandr | restricted | FN | - | 4 704 DC |
+| 10 | AUG | Flame Jörmungandr | restricted | MW | - | 3 857 DC |
+| 11 | P90 | Astral Jörmungandr | restricted | FN | - | 2 576 DC |
+| 12 | P90 | Astral Jörmungandr | restricted | FT | - | 1 674 DC |
+| 13 | CZ75-Auto | Emerald | milspec | FN | - | 1 445 DC |
+| 14 | SCAR-20 | Emerald | restricted | FN | - | 4 928 DC |
+| 15 | Galil AR | Cold Fusion | industrial | FN | - | 220 DC |
+| 16 | MP9 | Dark Age | milspec | FN | - | 765 DC |
+| 17 | P2000 | Amber Fade | restricted | FN | - | 4 480 DC |
+| 18 | UMP-45 | Fade | classified | FN | - | 9 180 DC |
 
 ---
 
@@ -4567,58 +3704,28 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **92 000 DC**
 - **Описание:** Райские тропические скины: AK-47 Wild Lotus, MP9 Wild Lily, Synth Leaf, Sea Calico
-- **Количество предметов в кейсе:** 48 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AK-47 | Wild Lotus | covert | FN | StatTrak™ | 52 920 DC |
-| 2 | AK-47 | Wild Lotus | covert | MW | StatTrak™ | 43 512 DC |
-| 3 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 2 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 3 | AK-47 | Wild Lotus | covert | MW | - | 32 144 DC |
 | 4 | MP9 | Wild Lily | classified | FN | - | 12 920 DC |
-| 5 | Glock-18 | Synth Leaf | restricted | FN | StatTrak™ | 5 519 DC |
-| 6 | Glock-18 | Synth Leaf | restricted | FT | StatTrak™ | 3 597 DC |
-| 7 | Glock-18 | Synth Leaf | restricted | FT | - | 2 657 DC |
-| 8 | MP7 | Teal Blossom | milspec | FN | StatTrak™ | 1 469 DC |
-| 9 | MP7 | Teal Blossom | milspec | MW | StatTrak™ | 1 208 DC |
-| 10 | MP7 | Teal Blossom | milspec | FN | - | 1 088 DC |
-| 11 | MP5-SD | Bamboo Garden | milspec | WW | - | 760 DC |
-| 12 | MP5-SD | Bamboo Garden | milspec | BS | - | 614 DC |
-| 13 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 16 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 19 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 22 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 25 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 28 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 31 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 34 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 37 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 40 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 41 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 42 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 43 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 46 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 5 | MP9 | Wild Lily | classified | MW | - | 10 500 DC |
+| 6 | Glock-18 | Synth Leaf | restricted | FN | StatTrak™ | 5 519 DC |
+| 7 | Glock-18 | Synth Leaf | restricted | FN | - | 4 088 DC |
+| 8 | SSG 08 | Sea Calico | restricted | FN | - | 3 500 DC |
+| 9 | SSG 08 | Sea Calico | restricted | MW | - | 2 800 DC |
+| 10 | MP7 | Teal Blossom | milspec | FN | StatTrak™ | 1 469 DC |
+| 11 | MP7 | Teal Blossom | milspec | FN | - | 1 088 DC |
+| 12 | MP5-SD | Bamboo Garden | milspec | FN | - | 1 100 DC |
+| 13 | MP5-SD | Bamboo Garden | milspec | MW | - | 900 DC |
+| 14 | P90 | Sunset Lily | industrial | FN | - | 250 DC |
+| 15 | Tec-9 | Rust Leaf | industrial | FN | - | 225 DC |
+| 16 | AUG | Copperhead | milspec | FN | - | 1 224 DC |
+| 17 | M4A4 | Jungle Tiger | industrial | FN | - | 415 DC |
+| 18 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
 
 ---
 
@@ -4628,59 +3735,28 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **68 000 DC**
 - **Описание:** Итальянская роскошь: AWP The Prince, MAG-7 Cinquedea, Baroque Purple, Red Filigree
-- **Количество предметов в кейсе:** 49 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AWP | The Prince | covert | FN | StatTrak™ | 57 645 DC |
-| 2 | AWP | The Prince | covert | MW | StatTrak™ | 47 397 DC |
-| 3 | AWP | The Prince | covert | FN | - | 42 700 DC |
+| 2 | AWP | The Prince | covert | FN | - | 42 700 DC |
+| 3 | AWP | The Prince | covert | MW | - | 35 000 DC |
 | 4 | MAG-7 | Cinquedea | classified | FN | StatTrak™ | 11 934 DC |
 | 5 | MAG-7 | Cinquedea | classified | FN | - | 8 840 DC |
-| 6 | MAG-7 | Cinquedea | classified | WW | - | 4 597 DC |
+| 6 | MAG-7 | Cinquedea | classified | MW | - | 7 200 DC |
 | 7 | MAC-10 | Red Filigree | restricted | FN | StatTrak™ | 6 350 DC |
-| 8 | MAC-10 | Red Filigree | restricted | MW | StatTrak™ | 5 221 DC |
-| 9 | MAC-10 | Red Filigree | restricted | BS | StatTrak™ | 2 681 DC |
-| 10 | MP9 | Stained Glass | restricted | FT | - | 1 565 DC |
-| 11 | AK-47 | Baroque Purple | industrial | MW | StatTrak™ | 233 DC |
-| 12 | AK-47 | Baroque Purple | industrial | FT | StatTrak™ | 185 DC |
-| 13 | AK-47 | Baroque Purple | industrial | BS | StatTrak™ | 120 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 41 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 42 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 8 | MAC-10 | Red Filigree | restricted | FN | - | 4 500 DC |
+| 9 | MP9 | Stained Glass | restricted | FN | - | 2 800 DC |
+| 10 | MP9 | Stained Glass | restricted | MW | - | 2 200 DC |
+| 11 | AK-47 | Baroque Purple | industrial | FN | - | 350 DC |
+| 12 | AK-47 | Baroque Purple | industrial | MW | - | 233 DC |
+| 13 | P250 | Dark Filigree | industrial | FN | - | 240 DC |
+| 14 | Nova | Baroque Orange | restricted | FN | - | 3 500 DC |
+| 15 | Dual Berettas | Twin Turbo | classified | FN | - | 13 940 DC |
+| 16 | P250 | Vino Primo | restricted | FN | - | 3 584 DC |
+| 17 | SG 553 | Integrale | classified | FN | - | 6 800 DC |
+| 18 | Stiletto Knife | Fade | covert | FN | - | 240 000 DC |
 
 ---
 
@@ -4690,56 +3766,28 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **74 000 DC**
 - **Описание:** Редчайшие японские скины: AUG Akihabara Accept, Hydroponic, Sunset Storm, Neon Kimono
-- **Количество предметов в кейсе:** 46 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AUG | Akihabara Accept | covert | FN | StatTrak™ | 75 600 DC |
-| 2 | AUG | Akihabara Accept | covert | MW | StatTrak™ | 62 160 DC |
-| 3 | AUG | Akihabara Accept | covert | FN | - | 56 000 DC |
+| 2 | AUG | Akihabara Accept | covert | FN | - | 56 000 DC |
+| 3 | AUG | Akihabara Accept | covert | MW | - | 45 000 DC |
 | 4 | AK-47 | Hydroponic | classified | FN | StatTrak™ | 17 672 DC |
 | 5 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
 | 6 | AK-47 | Hydroponic | classified | FT | - | 8 509 DC |
-| 7 | AUG | Midnight Lily | restricted | MW | StatTrak™ | 5 346 DC |
-| 8 | AUG | Midnight Lily | restricted | FT | StatTrak™ | 4 238 DC |
-| 9 | AUG | Midnight Lily | restricted | BS | StatTrak™ | 2 745 DC |
-| 10 | Five-SeveN | Neon Kimono | restricted | FN | - | 3 640 DC |
-| 11 | Desert Eagle | Sunset Storm 壱 | restricted | FN | - | 3 024 DC |
-| 12 | PP-Bizon | Bamboo Print | milspec | MW | StatTrak™ | 1 170 DC |
-| 13 | PP-Bizon | Bamboo Print | milspec | FT | - | 685 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 41 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 42 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
+| 7 | Desert Eagle | Sunset Storm 壱 | restricted | FN | - | 3 024 DC |
+| 8 | Desert Eagle | Sunset Storm 弐 | restricted | FN | - | 4 368 DC |
+| 9 | Five-SeveN | Neon Kimono | restricted | FN | - | 3 640 DC |
+| 10 | AUG | Midnight Lily | restricted | FN | - | 5 500 DC |
+| 11 | AUG | Midnight Lily | restricted | MW | - | 4 200 DC |
+| 12 | PP-Bizon | Bamboo Print | milspec | FN | - | 1 400 DC |
+| 13 | PP-Bizon | Bamboo Print | milspec | MW | - | 1 170 DC |
+| 14 | P250 | Crimson Kimono | industrial | FN | - | 225 DC |
+| 15 | Galil AR | Aqua Terrace | milspec | FN | - | 1 350 DC |
+| 16 | Tec-9 | Bamboo Forest | milspec | FN | - | 900 DC |
+| 17 | AWP | Oni Taiji | covert | FN | - | 39 200 DC |
+| 18 | Specialist Gloves | Crimson Kimono | extraordinary | FN | - | 230 000 DC |
 
 ---
 
@@ -4749,56 +3797,28 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **82 000 DC**
 - **Описание:** Античный пантеон: M4A4 Poseidon, AWP Medusa, M4A1-S Icarus Fell, Emerald Dragon, Chronos
-- **Количество предметов в кейсе:** 46 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Sport Gloves | Pandora's Box | extraordinary | FN | - | 120 000 DC |
-| 2 | Sport Gloves | Pandora's Box | extraordinary | MW | - | 98 400 DC |
-| 3 | Sport Gloves | Pandora's Box | extraordinary | FT | - | 78 000 DC |
+| 1 | M4A4 | Poseidon | classified | FN | StatTrak™ | 12 393 DC |
+| 2 | M4A4 | Poseidon | classified | FN | - | 9 180 DC |
+| 3 | M4A4 | Poseidon | classified | MW | - | 7 500 DC |
 | 4 | AWP | Medusa | covert | FN | StatTrak™ | 59 535 DC |
-| 5 | AWP | Medusa | covert | MW | StatTrak™ | 48 951 DC |
+| 5 | AWP | Medusa | covert | FN | - | 44 100 DC |
 | 6 | AWP | Medusa | covert | MW | - | 36 162 DC |
-| 7 | M4A4 | Poseidon | classified | FN | StatTrak™ | 12 393 DC |
-| 8 | M4A4 | Poseidon | classified | BS | - | 3 856 DC |
+| 7 | M4A1-S | Icarus Fell | restricted | FN | - | 4 872 DC |
+| 8 | M4A1-S | Icarus Fell | restricted | MW | - | 3 995 DC |
 | 9 | P90 | Emerald Dragon | classified | FN | - | 9 350 DC |
-| 10 | P90 | Emerald Dragon | classified | MW | - | 7 667 DC |
-| 11 | G3SG1 | Chronos | restricted | FN | StatTrak™ | 5 291 DC |
-| 12 | G3SG1 | Chronos | restricted | FT | - | 2 547 DC |
-| 13 | G3SG1 | Chronos | restricted | WW | - | 2 038 DC |
-| 14 | M4A1-S | Icarus Fell | restricted | FN | - | 4 872 DC |
-| 15 | M4A1-S | Icarus Fell | restricted | MW | - | 3 995 DC |
-| 16 | MP9 | Pandora's Box | milspec | MW | - | 1 171 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 31 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 34 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 37 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 40 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 42 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 43 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 44 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 45 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 46 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
+| 10 | G3SG1 | Chronos | restricted | FN | StatTrak™ | 5 291 DC |
+| 11 | G3SG1 | Chronos | restricted | FN | - | 3 500 DC |
+| 12 | Sport Gloves | Pandora's Box | extraordinary | FN | - | 120 000 DC |
+| 13 | MP9 | Pandora's Box | milspec | FN | - | 1 500 DC |
+| 14 | MP9 | Pandora's Box | milspec | MW | - | 1 171 DC |
+| 15 | M4A4 | Eye of Horus | covert | FN | - | 35 000 DC |
+| 16 | Zeus x27 | Olympus | classified | FN | - | 12 000 DC |
+| 17 | UMP-45 | Minotaur's Labyrinth | milspec | FN | - | 1 100 DC |
+| 18 | Tec-9 | Hades | industrial | FN | - | 280 DC |
 
 ---
 
@@ -4825,7 +3845,7 @@
 | 9 | Bowie Knife | Safari Mesh | covert | FN | - | 163 200 DC |
 | 10 | Survival Knife | Safari Mesh | covert | FN | - | 112 800 DC |
 | 11 | Navaja Knife | Safari Mesh | covert | FN | - | 98 400 DC |
-| 12 | Charm | Hot Howl | restricted | - | - | 3 359 DC |
+| 12 | Брелок | Hot Howl | gold | - | - | 3 359 DC |
 | 13 | MAG-7 | Sand Dune | milspec | FN | - | 1 411 DC |
 | 14 | G3SG1 | Safari Mesh | milspec | FN | - | 1 207 DC |
 | 15 | SSG 08 | Sand Dune | milspec | FN | - | 1 054 DC |
@@ -4864,7 +3884,7 @@
 | 17 | Sticker | Dark Angels | milspec | - | - | 291 DC |
 | 18 | Sticker | Ninjas in Pyjamas | Katowice 2019 | milspec | - | - | 306 DC |
 | 19 | Sticker | chrisJ | Atlanta 2017 | milspec | - | - | 323 DC |
-| 20 | Galil AR | VariCamo | industrial | - | - | 340 DC |
+| 20 | Galil AR | VariCamo | industrial | FN | - | 340 DC |
 | 21 | Sticker | TeSeS (Champion) | Cologne 2026 | milspec | - | - | 354 DC |
 | 22 | Sticker | SENER1 | Antwerp 2022 | milspec | - | - | 367 DC |
 | 23 | Sticker | gr1ks | Cologne 2026 | milspec | - | - | 382 DC |
@@ -4892,7 +3912,7 @@
 | 8 | Sticker | dupreeh | Atlanta 2017 | milspec | - | - | 178 DC |
 | 9 | Sticker | PENTA Sports | DreamHack 2014 | milspec | - | - | 199 DC |
 | 10 | Sticker | autimatic | Rio 2022 | milspec | - | - | 216 DC |
-| 11 | CZ75-Auto | Midnight Palm | industrial | - | - | 235 DC |
+| 11 | CZ75-Auto | Midnight Palm | industrial | FN | - | 235 DC |
 | 12 | Sticker | OpTic Gaming | Cologne 2016 | milspec | - | - | 251 DC |
 | 13 | Брелок | Lil' Tusk | milspec | - | - | 270 DC |
 | 14 | Sticker | donk | Budapest 2025 | milspec | - | - | 288 DC |
@@ -4931,16 +3951,16 @@
 | 10 | Sticker | jkaem | Paris 2023 | milspec | - | - | 273 DC |
 | 11 | Sticker | jeorge | Austin 2025 | milspec | - | - | 297 DC |
 | 12 | Sticker | Ninjas in Pyjamas (Embroidered) | Budapest 2025 | restricted | - | - | 323 DC |
-| 13 | M4A4 | Aeolian Dark | industrial | - | - | 350 DC |
+| 13 | M4A4 | Aeolian Dark | industrial | FN | - | 350 DC |
 | 14 | Sticker | Lynn Vision | Cologne 2026 | milspec | - | - | 372 DC |
 | 15 | Sticker | ISSAA | Berlin 2019 | milspec | - | - | 400 DC |
 | 16 | Sticker | s1mple | Antwerp 2022 | milspec | - | - | 425 DC |
-| 17 | Tec-9 | Blast From the Past | milspec | - | - | 714 DC |
-| 18 | Charm | Lil' Eldritch | restricted | - | - | 890 DC |
-| 19 | SCAR-20 | Grotto | milspec | - | - | 1 054 DC |
-| 20 | MAC-10 | Whitefish | milspec | - | - | 1 224 DC |
-| 21 | Negev | Desert-Strike | milspec | - | - | 1 394 DC |
-| 22 | Patch | MOUZ (Gold) | Stockholm 2021 | milspec | - | - | 1 573 DC |
+| 17 | Tec-9 | Blast From the Past | milspec | FN | - | 714 DC |
+| 18 | Брелок | Lil' Eldritch | gold | - | - | 890 DC |
+| 19 | SCAR-20 | Grotto | milspec | FN | - | 1 054 DC |
+| 20 | MAC-10 | Whitefish | milspec | FN | - | 1 224 DC |
+| 21 | Negev | Desert-Strike | milspec | FN | - | 1 394 DC |
+| 22 | Patch | MOUZ (Gold) | Stockholm 2021 | milspec | FN | - | 1 573 DC |
 | 23 | Sticker | jackasmo (Glitter) | Shanghai 2024 | restricted | - | - | 1 852 DC |
 | 24 | Sticker | Grim (Holo) | Budapest 2025 | classified | - | - | 2 200 DC |
 
@@ -4970,13 +3990,13 @@
 | 12 | Sticker | Virtus.Pro | Stockholm 2021 | milspec | - | - | 414 DC |
 | 13 | Sticker | iM (Glitter) | Copenhagen 2024 | restricted | - | - | 683 DC |
 | 14 | Sticker | Imperial Esports (Glitter) | Shanghai 2024 | restricted | - | - | 916 DC |
-| 15 | R8 Revolver | Bone Forged | milspec | - | - | 1 122 DC |
+| 15 | R8 Revolver | Bone Forged | milspec | FN | - | 1 122 DC |
 | 16 | Sticker | Natus Vincere | Krakow 2017 | milspec | - | - | 1 335 DC |
 | 17 | Sticker | Jee (Glitter) | Copenhagen 2024 | restricted | - | - | 1 569 DC |
 | 18 | Sticker | GuardiaN | Krakow 2017 | milspec | - | - | 1 944 DC |
-| 19 | Desert Eagle | Light Rail | restricted | - | - | 2 352 DC |
+| 19 | Desert Eagle | Light Rail | restricted | FN | - | 2 352 DC |
 | 20 | Sticker | Hobbit | Krakow 2017 | milspec | - | - | 2 708 DC |
-| 21 | SG 553 | Dragon Tech | restricted | - | - | 3 080 DC |
+| 21 | SG 553 | Dragon Tech | restricted | FN | - | 3 080 DC |
 | 22 | Sticker | rallen (Glitter) | Paris 2023 | restricted | - | - | 3 441 DC |
 | 23 | Sticker | Falcons (Foil) | Austin 2025 | classified | - | - | 3 863 DC |
 | 24 | Sticker | HellRaisers (Foil) | Katowice 2019 | classified | - | - | 4 499 DC |
@@ -4999,21 +4019,21 @@
 | 4 | Sticker | Sico | Berlin 2019 | milspec | - | - | 173 DC |
 | 5 | Sticker | Edward | Cologne 2015 | milspec | - | - | 212 DC |
 | 6 | Sticker | mezii (Embroidered) | Budapest 2025 | restricted | - | - | 244 DC |
-| 7 | Nova | Green Apple | industrial | - | - | 280 DC |
+| 7 | Nova | Green Apple | industrial | FN | - | 280 DC |
 | 8 | Sticker | Rickeh | Cologne 2015 | milspec | - | - | 316 DC |
 | 9 | Sticker | tarik | Cologne 2015 | milspec | - | - | 352 DC |
 | 10 | Sticker | nitr0 | Rio 2022 | milspec | - | - | 385 DC |
 | 11 | Sticker | nitr0 | Berlin 2019 | milspec | - | - | 423 DC |
 | 12 | Sticker | Aleksib (Glitter, Champion) | Copenhagen 2024 | restricted | - | - | 772 DC |
 | 13 | Sticker | skullz (Foil) | Austin 2025 | classified | - | - | 1 016 DC |
-| 14 | UMP-45 | Delusion | milspec | - | - | 1 241 DC |
-| 15 | MP9 | Featherweight | milspec | - | - | 1 479 DC |
+| 14 | UMP-45 | Delusion | milspec | FN | - | 1 241 DC |
+| 15 | MP9 | Featherweight | milspec | FN | - | 1 479 DC |
 | 16 | Sticker | ZywOo (Glitter) | Rio 2022 | restricted | - | - | 1 833 DC |
 | 17 | Sticker | seized | Krakow 2017 | milspec | - | - | 2 296 DC |
 | 18 | Sticker | NiKo (Foil) | Cluj-Napoca 2015 | classified | - | - | 2 688 DC |
 | 19 | Sticker | hades (Glitter) | Antwerp 2022 | restricted | - | - | 3 101 DC |
 | 20 | Sticker | boltz | Krakow 2017 | milspec | - | - | 3 495 DC |
-| 21 | P2000 | Woodsman | restricted | - | - | 4 032 DC |
+| 21 | P2000 | Woodsman | restricted | FN | - | 4 032 DC |
 | 22 | Sticker | mixwell (Foil) | Atlanta 2017 | classified | - | - | 4 747 DC |
 | 23 | Sticker | Team EnVyUs (Gold) | Katowice 2015 | extraordinary | - | - | 5 613 DC |
 | 24 | Sticker | rain (Foil) | Austin 2025 | classified | - | - | 6 499 DC |
@@ -5026,36 +4046,30 @@
 - **Категория:** `budget`
 - **Цена открытия:** **1 000 DC**
 - **Описание:** Полноценный кейс со скинами из популярных коллекций
-- **Количество предметов в кейсе:** 26 шт.
+- **Количество предметов в кейсе:** 20 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Olive Polycam | industrial | - | - | 350 DC |
-| 2 | Sticker | White Scars | milspec | - | - | 363 DC |
-| 3 | Sticker | syrsoN | Antwerp 2022 | milspec | - | - | 378 DC |
-| 4 | Sticker | Ninjas in Pyjamas | Stockholm 2021 | milspec | - | - | 399 DC |
-| 5 | Sticker | Virtus.Pro | Stockholm 2021 | milspec | - | - | 414 DC |
-| 6 | P90 | Freight | milspec | WW | - | 433 DC |
-| 7 | Оперативник | Aspirant | Gendarmerie Nationale | milspec | - | - | 630 DC |
-| 8 | Desert Eagle | Bronze Deco | milspec | FN | - | 765 DC |
-| 9 | AK-47 | Searing Rage | classified | BS | - | 2 999 DC |
-| 10 | AK-47 | Panthera onca | classified | BS | - | 3 070 DC |
-| 11 | AUG | Lil' Pig | classified | BS | - | 3 427 DC |
-| 12 | AUG | Bengal Tiger | classified | BS | - | 3 142 DC |
-| 13 | AWP | The End | classified | BS | - | 2 856 DC |
-| 14 | CZ75-Auto | Xiangliu | classified | BS | - | 2 856 DC |
-| 15 | Desert Eagle | Eastern Enigma | classified | BS | - | 3 142 DC |
-| 16 | FAMAS | Waters of Nephthys | classified | BS | - | 3 356 DC |
-| 17 | G3SG1 | The Executioner | classified | BS | - | 3 142 DC |
-| 18 | P2000 | Wicked Sick | classified | BS | - | 3 427 DC |
-| 19 | M4A4 | Cyber Security | classified | BS | - | 3 356 DC |
-| 20 | M4A4 | Tooth Fairy | classified | BS | - | 3 070 DC |
-| 21 | M4A1-S | Guardian | classified | BS | - | 3 499 DC |
-| 22 | M4A1-S | Stratosphere | classified | BS | - | 3 070 DC |
-| 23 | M4A1-S | Black Lotus | classified | BS | - | 3 284 DC |
-| 24 | MAC-10 | Disco Tech | classified | BS | - | 2 927 DC |
-| 25 | Negev | Mjölnir | classified | BS | - | 3 070 DC |
-| 26 | Nova | Hyper Beast | classified | BS | - | 3 142 DC |
+| 1 | AK-47 | Olive Polycam | industrial | FN | - | 350 DC |
+| 2 | P90 | Freight | milspec | WW | - | 433 DC |
+| 3 | Оперативник | Aspirant | milspec | - | - | 630 DC |
+| 4 | Desert Eagle | Bronze Deco | milspec | FN | - | 765 DC |
+| 5 | AK-47 | Searing Rage | classified | BS | - | 2 999 DC |
+| 6 | AK-47 | Panthera onca | classified | BS | - | 3 070 DC |
+| 7 | AUG | Lil' Pig | classified | BS | - | 3 427 DC |
+| 8 | AUG | Bengal Tiger | classified | BS | - | 3 142 DC |
+| 9 | AWP | The End | classified | BS | - | 2 856 DC |
+| 10 | CZ75-Auto | Xiangliu | classified | BS | - | 2 856 DC |
+| 11 | Desert Eagle | Eastern Enigma | classified | BS | - | 3 142 DC |
+| 12 | FAMAS | Waters of Nephthys | classified | BS | - | 3 356 DC |
+| 13 | G3SG1 | The Executioner | classified | BS | - | 3 142 DC |
+| 14 | P2000 | Wicked Sick | classified | BS | - | 3 427 DC |
+| 15 | M4A4 | Cyber Security | classified | BS | - | 3 356 DC |
+| 16 | M4A4 | Tooth Fairy | classified | BS | - | 3 070 DC |
+| 17 | M4A1-S | Guardian | classified | BS | - | 3 499 DC |
+| 18 | M4A1-S | Stratosphere | classified | BS | - | 3 070 DC |
+| 19 | M4A1-S | Black Lotus | classified | BS | - | 3 284 DC |
+| 20 | MAC-10 | Disco Tech | classified | BS | - | 2 927 DC |
 
 ---
 
@@ -5065,37 +4079,28 @@
 - **Категория:** `budget`
 - **Цена открытия:** **500 DC**
 - **Описание:** Куча сеток Safari Mesh и 1 скрытый Dragon Lore
-- **Количество предметов в кейсе:** 27 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
-| 2 | AWP | Dragon Lore | covert | MW | - | 697 000 DC |
-| 3 | AK-47 | Safari Mesh | industrial | FN | - | 320 DC |
-| 4 | AK-47 | Safari Mesh | industrial | MW | - | 262 DC |
-| 5 | AK-47 | Safari Mesh | industrial | FT | - | 208 DC |
-| 6 | AWP | Safari Mesh | industrial | FN | - | 385 DC |
-| 7 | AWP | Safari Mesh | industrial | MW | - | 316 DC |
-| 8 | AWP | Safari Mesh | industrial | FT | - | 250 DC |
-| 9 | Butterfly Knife | Safari Mesh | covert | FN | StatTrak™ | 149 040 DC |
-| 10 | Butterfly Knife | Safari Mesh | covert | MW | StatTrak™ | 122 544 DC |
-| 11 | Butterfly Knife | Safari Mesh | covert | FN | - | 110 400 DC |
-| 12 | Survival Knife | Safari Mesh | covert | FN | - | 112 800 DC |
-| 13 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 16 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 19 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 22 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 25 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
+| 2 | Butterfly Knife | Safari Mesh | covert | FN | - | 110 400 DC |
+| 3 | Karambit | Safari Mesh | covert | FN | - | 206 400 DC |
+| 4 | M9 Bayonet | Safari Mesh | covert | FN | - | 211 200 DC |
+| 5 | Bayonet | Safari Mesh | covert | FN | - | 204 000 DC |
+| 6 | Huntsman Knife | Safari Mesh | covert | FN | - | 182 400 DC |
+| 7 | Gut Knife | Safari Mesh | covert | FN | - | 96 000 DC |
+| 8 | AK-47 | Safari Mesh | industrial | FN | - | 320 DC |
+| 9 | AK-47 | Safari Mesh | industrial | MW | - | 262 DC |
+| 10 | AK-47 | Safari Mesh | industrial | FT | - | 208 DC |
+| 11 | AWP | Safari Mesh | industrial | FN | - | 385 DC |
+| 12 | AWP | Safari Mesh | industrial | MW | - | 316 DC |
+| 13 | AWP | Safari Mesh | industrial | FT | - | 250 DC |
+| 14 | G3SG1 | Safari Mesh | milspec | FN | - | 1 207 DC |
+| 15 | G3SG1 | Safari Mesh | milspec | MW | - | 800 DC |
+| 16 | G3SG1 | Safari Mesh | milspec | FT | - | 500 DC |
+| 17 | Glock-18 | Sand Dune | industrial | FN | - | 410 DC |
+| 18 | MAG-7 | Sand Dune | milspec | FN | - | 1 411 DC |
 
 ---
 
@@ -5105,37 +4110,28 @@
 - **Категория:** `budget`
 - **Цена открытия:** **1 000 DC**
 - **Описание:** Лучшие Mil-Spec скины с бешеным ROI: Blue Phosphor, Dark Water, Hypnotic, Copper Galaxy
-- **Количество предметов в кейсе:** 27 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Hydra Gloves | Emerald | extraordinary | FN | - | 168 000 DC |
-| 2 | Hydra Gloves | Emerald | extraordinary | MW | - | 137 760 DC |
-| 3 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
-| 4 | Specialist Gloves | Emerald Web | extraordinary | MW | - | 125 952 DC |
-| 5 | M4A1-S | Blue Phosphor | classified | FN | - | 10 880 DC |
-| 6 | P90 | Emerald Dragon | classified | FN | - | 9 350 DC |
-| 7 | P90 | Emerald Dragon | classified | MW | - | 7 667 DC |
-| 8 | M4A1-S | Dark Water | restricted | FN | - | 4 928 DC |
-| 9 | AK-47 | Emerald Pinstripe | restricted | MW | - | 4 087 DC |
-| 10 | SCAR-20 | Emerald | restricted | MW | - | 4 041 DC |
-| 11 | SG 553 | Hypnotic | restricted | FN | - | 3 304 DC |
-| 12 | SG 553 | Hypnotic | restricted | MW | - | 2 709 DC |
-| 13 | Five-SeveN | Copper Galaxy | restricted | FN | - | 2 352 DC |
-| 14 | CZ75-Auto | Emerald | milspec | FN | - | 1 445 DC |
-| 15 | CZ75-Auto | Tuxedo | milspec | FN | - | 1 241 DC |
-| 16 | FAMAS | Dark Water | milspec | FN | - | 1 054 DC |
-| 17 | Galil AR | Tuxedo | milspec | FN | - | 901 DC |
-| 18 | Dual Berettas | Emerald | milspec | FN | - | 799 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
+| 1 | M4A1-S | Blue Phosphor | classified | FN | - | 10 880 DC |
+| 2 | M4A1-S | Dark Water | restricted | FN | - | 4 928 DC |
+| 3 | USP-S | Dark Water | restricted | FN | - | 4 480 DC |
+| 4 | SG 553 | Hypnotic | restricted | FN | - | 3 304 DC |
+| 5 | MP9 | Hypnotic | restricted | FN | - | 5 368 DC |
+| 6 | Five-SeveN | Copper Galaxy | restricted | FN | - | 2 352 DC |
+| 7 | CZ75-Auto | Tuxedo | milspec | FN | - | 1 241 DC |
+| 8 | Galil AR | Tuxedo | milspec | FN | - | 901 DC |
+| 9 | FAMAS | Dark Water | milspec | FN | - | 1 054 DC |
+| 10 | Dual Berettas | Emerald | milspec | FN | - | 799 DC |
+| 11 | Glock-18 | Blue Fissure | milspec | FN | - | 833 DC |
+| 12 | Desert Eagle | Blue Ply | milspec | FN | - | 1 003 DC |
+| 13 | AK-47 | Elite Build | milspec | FN | - | 1 428 DC |
+| 14 | P250 | Valence | milspec | FN | - | 1 003 DC |
+| 15 | MAC-10 | Ultraviolet | milspec | FN | - | 1 469 DC |
+| 16 | SCAR-20 | Crimson Web | milspec | FN | - | 918 DC |
+| 17 | Tec-9 | Blue Titanium | milspec | FN | - | 1 292 DC |
+| 18 | SSG 08 | Abyss | milspec | FN | - | 1 513 DC |
 
 ---
 
@@ -5147,21 +4143,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 500 DC**
 - **Описание:** Перламутровый дизайн Printstream для Deagle, M4A1-S, USP-S и monochrome скины
-- **Количество предметов в кейсе:** 11 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | P250 | Whiteout | milspec | - | - | 1 292 DC |
-| 2 | MP7 | Whiteout | milspec | - | - | 1 309 DC |
-| 3 | Tec-9 | Whiteout | restricted | - | - | 2 632 DC |
-| 4 | FAMAS | Mecha Industries | classified | - | - | 9 180 DC |
-| 5 | Desert Eagle | Mecha Industries | classified | - | - | 11 220 DC |
-| 6 | USP-S | Whiteout | classified | - | - | 11 220 DC |
-| 7 | AWP | Printstream | covert | - | - | 38 000 DC |
-| 8 | Desert Eagle | Printstream | covert | - | - | 38 000 DC |
-| 9 | M4A1-S | Printstream | covert | - | - | 38 000 DC |
-| 10 | USP-S | Printstream | covert | - | - | 38 000 DC |
-| 11 | M4A1-S | Mecha Industries | covert | - | - | 46 900 DC |
+| 1 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
+| 2 | Desert Eagle | Printstream | covert | MW | - | 31 000 DC |
+| 3 | M4A1-S | Printstream | covert | FN | - | 38 000 DC |
+| 4 | M4A1-S | Printstream | covert | MW | - | 31 000 DC |
+| 5 | USP-S | Printstream | covert | FN | - | 38 000 DC |
+| 6 | USP-S | Printstream | covert | MW | - | 31 000 DC |
+| 7 | AWP | Printstream | covert | FN | - | 38 000 DC |
+| 8 | AWP | Printstream | covert | MW | - | 31 000 DC |
+| 9 | USP-S | Whiteout | classified | FN | - | 11 220 DC |
+| 10 | P250 | Whiteout | milspec | FN | - | 1 292 DC |
+| 11 | MP7 | Whiteout | milspec | FN | - | 1 309 DC |
+| 12 | Tec-9 | Whiteout | restricted | FN | - | 2 632 DC |
+| 13 | FAMAS | Mecha Industries | classified | FN | - | 9 180 DC |
+| 14 | Desert Eagle | Mecha Industries | classified | FN | - | 11 220 DC |
+| 15 | M4A1-S | Mecha Industries | covert | FN | - | 46 900 DC |
+| 16 | Galil AR | Tuxedo | milspec | FN | - | 901 DC |
+| 17 | CZ75-Auto | Tuxedo | milspec | FN | - | 1 241 DC |
+| 18 | Desert Eagle | Hypnotic | classified | FN | - | 8 500 DC |
 
 ---
 
@@ -5171,24 +4174,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **3 900 DC**
 - **Описание:** Культовая футуристическая коллекция Asiimov и кибернетический арсенал
-- **Количество предметов в кейсе:** 14 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | USP-S | Cyrex | restricted | - | - | 2 912 DC |
-| 2 | SCAR-20 | Cyrex | classified | - | - | 7 990 DC |
-| 3 | FAMAS | Mecha Industries | classified | - | - | 9 180 DC |
-| 4 | Tec-9 | Fuel Injector | classified | - | - | 9 350 DC |
-| 5 | Desert Eagle | Mecha Industries | classified | - | - | 11 220 DC |
-| 6 | SG 553 | Cyrex | classified | - | - | 13 430 DC |
-| 7 | AK-47 | Asiimov | covert | - | - | 16 000 DC |
-| 8 | AWP | Asiimov | covert | - | - | 16 000 DC |
-| 9 | M4A4 | Asiimov | covert | - | - | 16 000 DC |
-| 10 | P250 | Asiimov | classified | - | - | 16 000 DC |
-| 11 | P90 | Asiimov | covert | - | - | 16 000 DC |
-| 12 | AK-47 | Fuel Injector | covert | - | - | 41 300 DC |
-| 13 | M4A1-S | Mecha Industries | covert | - | - | 46 900 DC |
-| 14 | M4A1-S | Cyrex | covert | - | - | 49 700 DC |
+| 1 | AWP | Asiimov | covert | FT | - | 16 000 DC |
+| 2 | AWP | Asiimov | covert | WW | - | 13 500 DC |
+| 3 | AWP | Asiimov | covert | BS | - | 11 000 DC |
+| 4 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
+| 5 | AK-47 | Asiimov | covert | FT | - | 12 000 DC |
+| 6 | AK-47 | Asiimov | covert | BS | - | 9 120 DC |
+| 7 | M4A4 | Asiimov | covert | FT | - | 16 000 DC |
+| 8 | M4A4 | Asiimov | covert | WW | - | 13 000 DC |
+| 9 | M4A4 | Asiimov | covert | BS | - | 10 500 DC |
+| 10 | P250 | Asiimov | classified | FN | - | 16 000 DC |
+| 11 | P250 | Asiimov | classified | FT | - | 11 500 DC |
+| 12 | P90 | Asiimov | covert | FN | - | 16 000 DC |
+| 13 | P90 | Asiimov | covert | FT | - | 11 000 DC |
+| 14 | AK-47 | Fuel Injector | covert | FN | - | 41 300 DC |
+| 15 | Tec-9 | Fuel Injector | classified | FN | - | 9 350 DC |
+| 16 | M4A1-S | Cyrex | covert | FN | - | 49 700 DC |
+| 17 | SCAR-20 | Cyrex | classified | FN | - | 7 990 DC |
+| 18 | M4A1-S | Mecha Industries | covert | FN | - | 46 900 DC |
 
 ---
 
@@ -5198,17 +4205,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **10 000 DC**
 - **Описание:** Кислотные монстры Скоростной Зверь для AWP, M4A1-S, Nova, Five-SeveN
-- **Количество предметов в кейсе:** 7 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Nova | Hyper Beast | classified | - | - | 7 480 DC |
-| 2 | USP-S | Monster Mashup | classified | - | - | 8 500 DC |
-| 3 | AWP | Hyper Beast | covert | - | - | 30 100 DC |
-| 4 | Sawed-Off | The Kraken | covert | - | - | 35 000 DC |
-| 5 | AWP | Wildfire | covert | - | - | 36 400 DC |
-| 6 | Five-SeveN | Hyper Beast | covert | - | - | 42 000 DC |
-| 7 | M4A1-S | Hyper Beast | covert | - | - | 42 000 DC |
+| 1 | AWP | Hyper Beast | covert | FN | - | 30 100 DC |
+| 2 | AWP | Hyper Beast | covert | MW | - | 24 500 DC |
+| 3 | AWP | Hyper Beast | covert | FT | - | 19 000 DC |
+| 4 | AWP | Hyper Beast | covert | BS | - | 14 000 DC |
+| 5 | M4A1-S | Hyper Beast | covert | FN | - | 42 000 DC |
+| 6 | M4A1-S | Hyper Beast | covert | MW | - | 34 440 DC |
+| 7 | M4A1-S | Hyper Beast | covert | FT | - | 26 000 DC |
+| 8 | M4A1-S | Hyper Beast | covert | BS | - | 18 000 DC |
+| 9 | Five-SeveN | Hyper Beast | covert | FN | - | 42 000 DC |
+| 10 | Five-SeveN | Hyper Beast | covert | MW | - | 32 000 DC |
+| 11 | Five-SeveN | Hyper Beast | covert | FT | - | 24 000 DC |
+| 12 | Nova | Hyper Beast | classified | FN | - | 12 000 DC |
+| 13 | Nova | Hyper Beast | classified | MW | - | 8 303 DC |
+| 14 | Nova | Hyper Beast | classified | FT | - | 6 000 DC |
+| 15 | USP-S | Monster Mashup | classified | FN | - | 12 000 DC |
+| 16 | Sawed-Off | The Kraken | covert | FN | - | 35 000 DC |
+| 17 | AWP | Wildfire | covert | FN | - | 36 400 DC |
+| 18 | AK-47 | Aquamarine Revenge | covert | FN | - | 32 900 DC |
 
 ---
 
@@ -5222,24 +4240,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Five-SeveN | Case Hardened | restricted | - | - | 3 584 DC |
-| 2 | MAC-10 | Case Hardened | restricted | - | - | 4 592 DC |
-| 3 | AK-47 | Case Hardened | classified | - | - | 8 670 DC |
-| 4 | Shadow Daggers | Case Hardened | covert | - | - | 96 000 DC |
-| 5 | Bayonet | Case Hardened | covert | - | - | 98 400 DC |
-| 6 | Karambit | Case Hardened | covert | - | - | 100 800 DC |
-| 7 | Classic Knife | Case Hardened | covert | - | - | 105 600 DC |
-| 8 | M9 Bayonet | Case Hardened | covert | - | - | 105 600 DC |
-| 9 | Gut Knife | Case Hardened | covert | - | - | 110 400 DC |
-| 10 | Butterfly Knife | Case Hardened | covert | - | - | 124 800 DC |
-| 11 | Talon Knife | Case Hardened | covert | - | - | 134 400 DC |
-| 12 | Hydra Gloves | Case Hardened | extraordinary | - | - | 136 800 DC |
-| 13 | Kukri Knife | Case Hardened | covert | - | - | 139 200 DC |
-| 14 | Stiletto Knife | Case Hardened | covert | - | - | 153 600 DC |
-| 15 | Ursus Knife | Case Hardened | covert | - | - | 163 200 DC |
-| 16 | Bowie Knife | Case Hardened | covert | - | - | 177 600 DC |
-| 17 | Paracord Knife | Case Hardened | covert | - | - | 182 400 DC |
-| 18 | Skeleton Knife | Case Hardened | covert | - | - | 182 400 DC |
+| 1 | Five-SeveN | Case Hardened | restricted | FN | - | 3 584 DC |
+| 2 | MAC-10 | Case Hardened | restricted | FN | - | 4 592 DC |
+| 3 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
+| 4 | Shadow Daggers | Case Hardened | covert | FN | - | 96 000 DC |
+| 5 | Bayonet | Case Hardened | covert | FN | - | 98 400 DC |
+| 6 | Karambit | Case Hardened | covert | FN | - | 100 800 DC |
+| 7 | Classic Knife | Case Hardened | covert | FN | - | 105 600 DC |
+| 8 | M9 Bayonet | Case Hardened | covert | FN | - | 105 600 DC |
+| 9 | Gut Knife | Case Hardened | covert | FN | - | 110 400 DC |
+| 10 | Butterfly Knife | Case Hardened | covert | FN | - | 124 800 DC |
+| 11 | Talon Knife | Case Hardened | covert | FN | - | 134 400 DC |
+| 12 | Hydra Gloves | Case Hardened | extraordinary | FN | - | 136 800 DC |
+| 13 | Kukri Knife | Case Hardened | covert | FN | - | 139 200 DC |
+| 14 | Stiletto Knife | Case Hardened | covert | FN | - | 153 600 DC |
+| 15 | Ursus Knife | Case Hardened | covert | FN | - | 163 200 DC |
+| 16 | Bowie Knife | Case Hardened | covert | FN | - | 177 600 DC |
+| 17 | Paracord Knife | Case Hardened | covert | FN | - | 182 400 DC |
+| 18 | Skeleton Knife | Case Hardened | covert | FN | - | 182 400 DC |
 
 ---
 
@@ -5249,20 +4267,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **3 900 DC**
 - **Описание:** Карбоновые Redline, Bloodsport, Crimson Web, Hot Rod, Code Red
-- **Количество предметов в кейсе:** 10 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | USP-S | Cyrex | restricted | - | - | 2 912 DC |
-| 2 | SCAR-20 | Cyrex | classified | - | - | 7 990 DC |
-| 3 | AWP | Redline | classified | - | - | 11 730 DC |
-| 4 | AK-47 | Redline | classified | - | - | 12 410 DC |
-| 5 | SG 553 | Cyrex | classified | - | - | 13 430 DC |
-| 6 | SCAR-20 | Bloodsport | classified | - | - | 14 280 DC |
-| 7 | Desert Eagle | Code Red | covert | - | - | 38 500 DC |
-| 8 | M4A1-S | Cyrex | covert | - | - | 49 700 DC |
-| 9 | MP7 | Bloodsport | covert | - | - | 59 500 DC |
-| 10 | AK-47 | Bloodsport | covert | - | - | 60 900 DC |
+| 1 | AK-47 | Redline | classified | FN | - | 12 410 DC |
+| 2 | AK-47 | Redline | classified | MW | - | 10 176 DC |
+| 3 | AK-47 | Redline | classified | FT | - | 7 500 DC |
+| 4 | AWP | Redline | classified | FN | - | 11 730 DC |
+| 5 | AWP | Redline | classified | MW | - | 9 500 DC |
+| 6 | AWP | Redline | classified | FT | - | 7 000 DC |
+| 7 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 8 | MP7 | Bloodsport | covert | FN | - | 59 500 DC |
+| 9 | SCAR-20 | Bloodsport | classified | FN | - | 14 280 DC |
+| 10 | M4A1-S | Hot Rod | classified | FN | - | 12 750 DC |
+| 11 | Desert Eagle | Code Red | covert | FN | - | 38 500 DC |
+| 12 | M4A1-S | Cyrex | covert | FN | - | 49 700 DC |
+| 13 | SCAR-20 | Cyrex | classified | FN | - | 7 990 DC |
+| 14 | USP-S | Cyrex | restricted | FN | - | 2 912 DC |
+| 15 | SG 553 | Cyrex | classified | FN | - | 13 430 DC |
+| 16 | M9 Bayonet | Crimson Web | covert | FT | - | 96 000 DC |
+| 17 | Karambit | Crimson Web | covert | FT | - | 110 000 DC |
+| 18 | Specialist Gloves | Crimson Web | extraordinary | FT | - | 92 000 DC |
 
 ---
 
@@ -5272,55 +4298,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **19 500 DC**
 - **Описание:** Неоновые шедевры Neon Rider, Neon Revolution, Decimator, Disco Tech
-- **Количество предметов в кейсе:** 45 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Neon Rider | covert | FN | StatTrak™ | 75 600 DC |
-| 2 | AK-47 | Neon Rider | covert | MW | StatTrak™ | 62 160 DC |
-| 3 | AK-47 | Neon Rider | covert | FT | StatTrak™ | 49 280 DC |
-| 4 | AK-47 | Neon Revolution | covert | FN | StatTrak™ | 70 875 DC |
-| 5 | AK-47 | Neon Revolution | covert | MW | StatTrak™ | 58 275 DC |
+| 1 | AK-47 | Neon Rider | covert | FN | - | 56 000 DC |
+| 2 | AK-47 | Neon Rider | covert | MW | - | 45 000 DC |
+| 3 | AK-47 | Neon Rider | covert | FT | - | 35 000 DC |
+| 4 | AK-47 | Neon Revolution | covert | FN | - | 52 500 DC |
+| 5 | AK-47 | Neon Revolution | covert | MW | - | 42 000 DC |
 | 6 | AK-47 | Neon Revolution | covert | FT | - | 34 125 DC |
-| 7 | AWP | Neo-Noir | covert | FN | StatTrak™ | 63 315 DC |
-| 8 | AWP | Neo-Noir | covert | BS | - | 19 698 DC |
-| 9 | MAC-10 | Neon Rider | covert | FN | - | 54 600 DC |
-| 10 | Glock-18 | Neo-Noir | covert | FN | - | 41 300 DC |
-| 11 | Glock-18 | Neo-Noir | covert | FT | - | 26 845 DC |
-| 12 | M4A4 | Neo-Noir | covert | FN | - | 39 200 DC |
-| 13 | M4A4 | Neo-Noir | covert | MW | - | 32 144 DC |
-| 14 | Tec-9 | Decimator | classified | FN | - | 11 900 DC |
-| 15 | Tec-9 | Decimator | classified | MW | - | 9 758 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 42 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 44 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 45 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
+| 7 | MAC-10 | Neon Rider | covert | FN | - | 54 600 DC |
+| 8 | MAC-10 | Neon Rider | covert | MW | - | 44 772 DC |
+| 9 | M4A1-S | Decimator | classified | FN | - | 13 600 DC |
+| 10 | M4A1-S | Decimator | classified | MW | - | 11 000 DC |
+| 11 | Tec-9 | Decimator | classified | FN | - | 11 900 DC |
+| 12 | Tec-9 | Decimator | classified | MW | - | 9 758 DC |
+| 13 | MAC-10 | Disco Tech | classified | FN | - | 6 970 DC |
+| 14 | MAC-10 | Disco Tech | classified | MW | - | 5 715 DC |
+| 15 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
+| 16 | Glock-18 | Neo-Noir | covert | FN | - | 41 300 DC |
+| 17 | M4A4 | Neo-Noir | covert | FN | - | 39 200 DC |
+| 18 | USP-S | Neo-Noir | covert | FN | - | 41 300 DC |
 
 ---
 
@@ -5330,34 +4329,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **2 500 DC**
 - **Описание:** Качественные засекреченные стволы для игры
-- **Количество предметов в кейсе:** 24 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Desert Eagle | Night | industrial | - | - | 375 DC |
-| 2 | Sticker | Dragon Tale | milspec | - | - | 410 DC |
-| 3 | AK-47 | Crossfade | milspec | MW | - | 572 DC |
-| 4 | XM1014 | Blaze Orange | milspec | MW | - | 822 DC |
-| 5 | Sticker | innocent | Krakow 2017 | milspec | - | - | 1 083 DC |
-| 6 | AUG | Hot Rod | milspec | FN | StatTrak™ | 1 331 DC |
-| 7 | FAMAS | Cyanospatter | industrial | - | - | 250 DC |
-| 8 | MAC-10 | Echoing Sands | industrial | - | - | 250 DC |
-| 9 | Negev | Nuclear Waste | industrial | - | - | 250 DC |
-| 10 | P250 | Sedimentary | industrial | - | - | 250 DC |
-| 11 | P90 | Sunset Lily | industrial | - | - | 250 DC |
-| 12 | AK-47 | Jungle Spray | industrial | - | - | 255 DC |
-| 13 | G3SG1 | Arctic Camo | industrial | - | - | 255 DC |
-| 14 | Galil AR | Robin's Egg | industrial | - | - | 255 DC |
-| 15 | P2000 | Pathfinder | industrial | - | - | 255 DC |
-| 16 | MAC-10 | Candy Apple | industrial | - | - | 255 DC |
-| 17 | MP9 | Old Roots | industrial | - | - | 255 DC |
-| 18 | SCAR-20 | Carbon Fiber | industrial | - | - | 255 DC |
-| 19 | USP-S | Pathfinder | industrial | - | - | 255 DC |
-| 20 | Dual Berettas | Mystic Conjunction | industrial | - | - | 260 DC |
-| 21 | Five-SeveN | Midnight Paintover | industrial | - | - | 260 DC |
-| 22 | M249 | Gator Mesh | industrial | - | - | 265 DC |
-| 23 | MAC-10 | Video Cam | industrial | - | - | 265 DC |
-| 24 | XM1014 | Fallout Warning | industrial | - | - | 265 DC |
+| 1 | AWP | Fever Dream | classified | FN | - | 9 180 DC |
+| 2 | AK-47 | Redline | classified | MW | - | 10 176 DC |
+| 3 | M4A1-S | Decimator | classified | FN | - | 13 600 DC |
+| 4 | USP-S | Cortex | classified | FN | - | 11 050 DC |
+| 5 | Glock-18 | Vogue | classified | FN | - | 9 126 DC |
+| 6 | Desert Eagle | Kumicho Dragon | classified | FN | - | 10 710 DC |
+| 7 | USP-S | Jawbreaker | classified | FN | - | 15 000 DC |
+| 8 | AK-47 | Point Disarray | classified | FN | - | 9 860 DC |
+| 9 | AWP | Electric Hive | classified | FN | - | 13 770 DC |
+| 10 | P250 | Mehndi | classified | FN | - | 12 164 DC |
+| 11 | AUG | Syd Mead | classified | MW | - | 10 316 DC |
+| 12 | Galil AR | Sugar Rush | classified | FN | - | 13 260 DC |
+| 13 | FAMAS | Rapid Eye Movement | classified | MW | - | 11 000 DC |
+| 14 | MP9 | Airlock | classified | MW | - | 6 970 DC |
+| 15 | CZ75-Auto | The Fuschia Is Now | classified | MW | - | 16 417 DC |
+| 16 | SSG 08 | Big Iron | classified | MW | - | 8 500 DC |
+| 17 | Five-SeveN | Fowl Play | classified | MW | - | 7 388 DC |
+| 18 | Desert Eagle | Cobalt Disruption | classified | FN | - | 11 730 DC |
 
 ---
 
@@ -5367,34 +4360,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **5 000 DC**
 - **Описание:** Тайные винтовки и пистолеты с яркими паттернами
-- **Количество предметов в кейсе:** 24 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Оперативник | Getaway Sally | The Professionals | restricted | - | - | 750 DC |
-| 2 | UMP-45 | Motorized | milspec | FN | - | 1 020 DC |
-| 3 | SSG 08 | Necropos | milspec | FT | StatTrak™ | 1 272 DC |
-| 4 | SG 553 | Danger Close | milspec | FN | StatTrak™ | 1 721 DC |
-| 5 | P90 | ScaraB Rush | restricted | FT | - | 2 330 DC |
-| 6 | Sticker | ropz | Boston 2018 | milspec | - | - | 2 920 DC |
-| 7 | AK-47 | Wintergreen | milspec | - | - | 680 DC |
-| 8 | PP-Bizon | Night Riot | milspec | - | - | 680 DC |
-| 9 | Dual Berettas | Oil Change | milspec | - | - | 680 DC |
-| 10 | G3SG1 | Ventilator | milspec | - | - | 680 DC |
-| 11 | Galil AR | Tornado | milspec | - | - | 680 DC |
-| 12 | M249 | Humidor | milspec | - | - | 680 DC |
-| 13 | M4A4 | Faded Zebra | milspec | - | - | 680 DC |
-| 14 | MAC-10 | Bronzer | milspec | - | - | 680 DC |
-| 15 | MP5-SD | Acid Wash | milspec | - | - | 680 DC |
-| 16 | MP7 | Groundwater | milspec | - | - | 680 DC |
-| 17 | MP9 | Pine | milspec | - | - | 680 DC |
-| 18 | Nova | Walnut | milspec | - | - | 680 DC |
-| 19 | R8 Revolver | Memento | milspec | - | - | 680 DC |
-| 20 | SSG 08 | Spring Twilly | milspec | - | - | 680 DC |
-| 21 | UMP-45 | Mudder | milspec | - | - | 680 DC |
-| 22 | XM1014 | Urban Perforated | milspec | - | - | 680 DC |
-| 23 | AK-47 | Crossfade | milspec | - | - | 697 DC |
-| 24 | AUG | Triqua | milspec | - | - | 697 DC |
+| 1 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
+| 2 | M4A4 | The Emperor | covert | MW | - | 43 624 DC |
+| 3 | Desert Eagle | Code Red | covert | FN | - | 38 500 DC |
+| 4 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
+| 5 | USP-S | The Traitor | covert | MW | - | 47 642 DC |
+| 6 | Glock-18 | Bullet Queen | covert | MW | - | 28 000 DC |
+| 7 | M4A1-S | Chantico's Fire | covert | FN | - | 39 200 DC |
+| 8 | Five-SeveN | Angry Mob | covert | FN | - | 35 700 DC |
+| 9 | P250 | See Ya Later | covert | FN | - | 33 880 DC |
+| 10 | AK-47 | Aquamarine Revenge | covert | FN | - | 32 900 DC |
+| 11 | M4A1-S | Vaporwave | covert | FN | - | 35 000 DC |
+| 12 | AWP | Hyper Beast | covert | FN | - | 30 100 DC |
+| 13 | AK-47 | Neon Revolution | covert | FN | - | 52 500 DC |
+| 14 | M4A1-S | Player Two | covert | MW | - | 48 216 DC |
+| 15 | Desert Eagle | Ocean Drive | covert | FN | - | 50 400 DC |
+| 16 | AK-47 | Legion of Anubis | covert | FN | - | 43 400 DC |
+| 17 | AWP | Chromatic Aberration | covert | FN | - | 57 400 DC |
+| 18 | FAMAS | Commemoration | covert | FN | - | 46 900 DC |
 
 ---
 
@@ -5404,34 +4391,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **10 000 DC**
 - **Описание:** Крупная игра с шансом на ножи и топовые скины
-- **Количество предметов в кейсе:** 24 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Оперативник | John 'Van Healen' Kask | SWAT | restricted | - | - | 1 500 DC |
-| 2 | Sticker | FaZe Clan (Foil) | London 2018 | classified | - | - | 2 120 DC |
-| 3 | Sticker | Fnatic (Foil) | Cologne 2014 | classified | - | - | 2 772 DC |
-| 4 | M4A4 | Griffin | restricted | FN | StatTrak™ | 3 402 DC |
-| 5 | AUG | Aristocrat | restricted | FN | - | 4 256 DC |
-| 6 | Glock-18 | Synth Leaf | restricted | FN | StatTrak™ | 5 519 DC |
-| 7 | AUG | Anodized Navy | milspec | - | - | 1 207 DC |
-| 8 | Dual Berettas | Cartel | milspec | - | - | 1 207 DC |
-| 9 | FAMAS | Decommissioned | milspec | - | - | 1 207 DC |
-| 10 | Five-SeveN | Capillary | milspec | - | - | 1 207 DC |
-| 11 | G3SG1 | Safari Mesh | milspec | - | - | 1 207 DC |
-| 12 | M4A4 | Poly Mag | milspec | - | - | 1 207 DC |
-| 13 | MAG-7 | Navy Sheen | milspec | - | - | 1 207 DC |
-| 14 | MP5-SD | Statics | milspec | - | - | 1 207 DC |
-| 15 | Nova | Dark Sigil | milspec | - | - | 1 207 DC |
-| 16 | P90 | Desert Halftone | milspec | - | - | 1 207 DC |
-| 17 | SG 553 | Tornado | milspec | - | - | 1 207 DC |
-| 18 | SSG 08 | Memorial | milspec | - | - | 1 207 DC |
-| 19 | XM1014 | Frost Borre | milspec | - | - | 1 207 DC |
-| 20 | AK-47 | Steel Delta | milspec | - | - | 1 224 DC |
-| 21 | AUG | Copperhead | milspec | - | - | 1 224 DC |
-| 22 | MAC-10 | Whitefish | milspec | - | - | 1 224 DC |
-| 23 | MAG-7 | MAGnitude | milspec | - | - | 1 224 DC |
-| 24 | MP7 | Sunbaked | milspec | - | - | 1 224 DC |
+| 1 | Karambit | Doppler | covert | FN | - | 280 000 DC |
+| 2 | M9 Bayonet | Fade | covert | FN | - | 240 000 DC |
+| 3 | Butterfly Knife | Slaughter | covert | FN | - | 160 800 DC |
+| 4 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 5 | AWP | Lightning Strike | covert | FN | - | 52 500 DC |
+| 6 | M4A1-S | Printstream | covert | FN | - | 38 000 DC |
+| 7 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
+| 8 | AK-47 | Vulcan | covert | FN | - | 31 500 DC |
+| 9 | M4A4 | The Emperor | covert | FN | - | 53 200 DC |
+| 10 | USP-S | Kill Confirmed | covert | FN | - | 48 000 DC |
+| 11 | AWP | Containment Breach | covert | FN | - | 45 500 DC |
+| 12 | Glock-18 | Gamma Doppler | covert | FN | - | 48 299 DC |
+| 13 | Survival Knife | Fade | covert | FN | - | 240 000 DC |
+| 14 | Stiletto Knife | Slaughter | covert | FN | - | 189 600 DC |
+| 15 | Nomad Knife | Case Hardened | covert | FN | - | 192 000 DC |
+| 16 | Ursus Knife | Tiger Tooth | covert | FN | - | 150 000 DC |
+| 17 | Flip Knife | Autotronic | covert | FN | - | 206 400 DC |
+| 18 | Huntsman Knife | Marble Fade | covert | FN | - | 240 000 DC |
 
 ---
 
@@ -5441,73 +4422,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **1 200 DC**
 - **Описание:** Все агенты CS2: Профессионалы, SWAT, SEAL, Партизаны
-- **Количество предметов в кейсе:** 63 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Оперативник | Bio-Haz Specialist | SWAT | milspec | - | - | 350 DC |
-| 2 | Оперативник | Ground Rebel  | Elite Crew | milspec | - | - | 350 DC |
-| 3 | Оперативник | Jungle Rebel | Elite Crew | milspec | - | - | 350 DC |
-| 4 | Оперативник | Street Soldier | Phoenix | milspec | - | - | 350 DC |
-| 5 | Оперативник | B Squadron Officer | SAS | milspec | - | - | 350 DC |
-| 6 | Оперативник | Trapper Aggressor | Guerrilla Warfare | milspec | - | - | 360 DC |
-| 7 | Оперативник | 3rd Commando Company | KSK | milspec | - | - | 396 DC |
-| 8 | Оперативник | Seal Team 6 Soldier | NSWC SEAL | milspec | - | - | 540 DC |
-| 9 | Оперативник | Soldier | Phoenix | milspec | - | - | 558 DC |
-| 10 | Оперативник | D Squadron Officer | NZSAS | milspec | - | - | 576 DC |
-| 11 | Оперативник | Enforcer | Phoenix | milspec | - | - | 594 DC |
-| 12 | Оперативник | Aspirant | Gendarmerie Nationale | milspec | - | - | 630 DC |
-| 13 | Оперативник | Getaway Sally | The Professionals | restricted | - | - | 750 DC |
-| 14 | Оперативник | Operator | FBI SWAT | milspec | - | - | 792 DC |
-| 15 | Оперативник | Primeiro Tenente | Brazilian 1st Battalion | milspec | - | - | 936 DC |
-| 16 | Оперативник | Chem-Haz Specialist | SWAT | milspec | - | - | 1 062 DC |
-| 17 | Оперативник | Officer Jacques Beltram | Gendarmerie Nationale | restricted | - | - | 1 125 DC |
-| 18 | Оперативник | Dragomir | Sabre | restricted | - | - | 1 200 DC |
-| 19 | Оперативник | Sous-Lieutenant Medic | Gendarmerie Nationale | restricted | - | - | 1 425 DC |
-| 20 | Оперативник | John 'Van Healen' Kask | SWAT | restricted | - | - | 1 500 DC |
-| 21 | Оперативник | Col. Mangos Dabisi | Guerrilla Warfare | restricted | - | - | 1 575 DC |
-| 22 | Оперативник | Dragomir | Sabre Footsoldier | milspec | - | - | 1 640 DC |
-| 23 | Оперативник | Slingshot | Phoenix | restricted | - | - | 1 725 DC |
-| 24 | Оперативник | Markus Delrow | FBI HRT | restricted | - | - | 2 025 DC |
-| 25 | Оперативник | Lieutenant 'Tree Hugger' Farlow | SWAT | restricted | - | - | 2 100 DC |
-| 26 | Оперативник | Buckshot | NSWC SEAL | restricted | - | - | 2 850 DC |
-| 27 | Оперативник | Maximus | Sabre | restricted | - | - | 2 925 DC |
-| 28 | Оперативник | Safecracker Voltzmann | The Professionals | classified | - | - | 3 360 DC |
-| 29 | Оперативник | Lieutenant Rex Krikey | SEAL Frogman | classified | - | - | 3 360 DC |
-| 30 | Оперативник | Little Kev | The Professionals | restricted | - | - | 3 375 DC |
-| 31 | Оперативник | Sergeant Bombson | SWAT | restricted | - | - | 3 600 DC |
-| 32 | Оперативник | Trapper | Guerrilla Warfare | restricted | - | - | 3 750 DC |
-| 33 | Оперативник | Bloody Darryl The Strapped | The Professionals | classified | - | - | 3 920 DC |
-| 34 | Оперативник | 'Blueberries' Buckshot | NSWC SEAL | restricted | - | - | 3 975 DC |
-| 35 | Оперативник | Osiris | Elite Crew | restricted | - | - | 4 275 DC |
-| 36 | Оперативник | 'Two Times' McCoy | USAF TACP | classified | - | - | 5 939 DC |
-| 37 | Оперативник | 1st Lieutenant Farlow | SWAT | classified | - | - | 6 160 DC |
-| 38 | Оперативник | Michael Syfers  | FBI Sniper | classified | - | - | 6 160 DC |
-| 39 | Оперативник | Elite Trapper Solman | Guerrilla Warfare | classified | - | - | 6 440 DC |
-| 40 | Оперативник | Prof. Shahmat | Elite Crew | classified | - | - | 7 840 DC |
-| 41 | Оперативник | Rezan the Redshirt | Sabre | classified | - | - | 8 120 DC |
-| 42 | Оперативник | Arno The Overgrown | Guerrilla Warfare | classified | - | - | 9 520 DC |
-| 43 | Оперативник | Chem-Haz Capitaine | Gendarmerie Nationale | classified | - | - | 9 800 DC |
-| 44 | Оперативник | Cmdr. Davida 'Goggles' Fernandez | SEAL Frogman | covert | - | - | 11 400 DC |
-| 45 | Оперативник | Rezan The Ready | Sabre | classified | - | - | 11 480 DC |
-| 46 | Оперативник | Blackwolf | Sabre | classified | - | - | 12 040 DC |
-| 47 | Оперативник | 'Two Times' McCoy | TACP Cavalry | classified | - | - | 12 600 DC |
-| 48 | Оперативник | Number K | The Professionals | classified | - | - | 12 880 DC |
-| 49 | Оперативник | Lt. Commander Ricksaw | NSWC SEAL | covert | - | - | 14 250 DC |
-| 50 | Оперативник | Cmdr. Mae 'Dead Cold' Jamison | SWAT | covert | - | - | 19 000 DC |
-| 51 | Оперативник | Special Agent Ava | FBI | covert | - | - | 19 950 DC |
-| 52 | Оперативник | Cmdr. Frank 'Wet Sox' Baroud | SEAL Frogman | covert | - | - | 21 850 DC |
-| 53 | Оперативник | Crasswater The Forgotten | Guerrilla Warfare | covert | - | - | 21 850 DC |
-| 54 | Оперативник | Sir Bloody Skullhead Darryl | The Professionals | covert | - | - | 25 650 DC |
-| 55 | Оперативник | 'The Doctor' Romanov | Sabre | covert | - | - | 28 500 DC |
-| 56 | Оперативник | The Elite Mr. Muhlik | Elite Crew | covert | - | - | 32 300 DC |
-| 57 | Оперативник | Chef d'Escadron Rouchard | Gendarmerie Nationale | covert | - | - | 34 200 DC |
-| 58 | Оперативник | 'Medium Rare' Crasswater | Guerrilla Warfare | covert | - | - | 41 800 DC |
-| 59 | Оперативник | Sir Bloody Silent Darryl | The Professionals | covert | - | - | 43 700 DC |
-| 60 | Оперативник | Vypa Sista of the Revolution | Guerrilla Warfare | covert | - | - | 45 600 DC |
-| 61 | Оперативник | Sir Bloody Loudmouth Darryl | The Professionals | covert | - | - | 46 550 DC |
-| 62 | Оперативник | Sir Bloody Miami Darryl | The Professionals | covert | - | - | 50 350 DC |
-| 63 | Оперативник | Sir Bloody Darryl Royale | The Professionals | covert | - | - | 51 300 DC |
+| 1 | Оперативник | Sir Bloody Darryl Royale | covert | - | - | 51 300 DC |
+| 2 | Оперативник | Sir Bloody Miami Darryl | covert | - | - | 50 350 DC |
+| 3 | Оперативник | Vypa Sista of the Revolution | covert | - | - | 45 600 DC |
+| 4 | Оперативник | 'The Doctor' Romanov | covert | - | - | 28 500 DC |
+| 5 | Оперативник | Special Agent Ava | covert | - | - | 19 950 DC |
+| 6 | Оперативник | Cmdr. Mae 'Dead Cold' Jamison | covert | - | - | 19 000 DC |
+| 7 | Оперативник | Lt. Commander Ricksaw | covert | - | - | 14 250 DC |
+| 8 | Оперативник | Cmdr. Davida 'Goggles' Fernandez | covert | - | - | 11 400 DC |
+| 9 | Оперативник | Chem-Haz Capitaine | classified | - | - | 9 800 DC |
+| 10 | Оперативник | Rezan The Ready | classified | - | - | 11 480 DC |
+| 11 | Оперативник | Michael Syfers | classified | - | - | 6 160 DC |
+| 12 | Оперативник | Bloody Darryl The Strapped | classified | - | - | 3 920 DC |
+| 13 | Оперативник | 'Blueberries' Buckshot | restricted | - | - | 3 975 DC |
+| 14 | Оперативник | Safecracker Voltzmann | classified | - | - | 3 360 DC |
+| 15 | Оперативник | Getaway Sally | restricted | - | - | 750 DC |
+| 16 | Оперативник | John 'Van Healen' Kask | restricted | - | - | 1 500 DC |
+| 17 | Оперативник | Street Soldier | milspec | - | - | 350 DC |
+| 18 | Оперативник | Bio-Haz Specialist | milspec | - | - | 350 DC |
 
 ---
 
@@ -5517,52 +4453,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **5 800 DC**
 - **Описание:** M4A4 Temukau, Player Two, Neo-Noir, Kumicho Dragon, Bullet Queen
-- **Количество предметов в кейсе:** 42 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AWP | Neo-Noir | covert | FN | StatTrak™ | 63 315 DC |
-| 2 | AWP | Neo-Noir | covert | MW | StatTrak™ | 52 059 DC |
-| 3 | AWP | Neo-Noir | covert | FT | StatTrak™ | 41 272 DC |
+| 1 | M4A4 | Temukau | covert | FN | - | 56 000 DC |
+| 2 | M4A4 | Temukau | covert | MW | - | 45 920 DC |
+| 3 | M4A4 | Temukau | covert | FT | - | 35 000 DC |
 | 4 | M4A1-S | Player Two | covert | FN | - | 58 800 DC |
 | 5 | M4A1-S | Player Two | covert | MW | - | 48 216 DC |
-| 6 | M4A4 | Temukau | covert | FN | - | 56 000 DC |
-| 7 | M4A4 | Temukau | covert | MW | - | 45 920 DC |
-| 8 | USP-S | Neo-Noir | covert | MW | - | 33 866 DC |
-| 9 | UMP-45 | Neo-Noir | classified | FN | - | 14 280 DC |
-| 10 | Desert Eagle | Kumicho Dragon | classified | MW | StatTrak™ | 11 888 DC |
-| 11 | Desert Eagle | Kumicho Dragon | classified | FT | StatTrak™ | 9 425 DC |
-| 12 | Desert Eagle | Kumicho Dragon | classified | BS | - | 4 498 DC |
-| 13 | Sawed-Off | Kiss♥Love | classified | FN | - | 10 710 DC |
-| 14 | Five-SeveN | Fairy Tale | classified | FT | - | 8 288 DC |
-| 15 | Five-SeveN | Fairy Tale | classified | WW | - | 6 630 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 42 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
+| 6 | M4A1-S | Player Two | covert | FT | - | 38 000 DC |
+| 7 | Glock-18 | Bullet Queen | covert | FN | - | 35 000 DC |
+| 8 | Glock-18 | Bullet Queen | covert | MW | - | 28 000 DC |
+| 9 | Desert Eagle | Kumicho Dragon | classified | FN | - | 10 710 DC |
+| 10 | Desert Eagle | Kumicho Dragon | classified | MW | - | 8 500 DC |
+| 11 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
+| 12 | AWP | Neo-Noir | covert | MW | - | 38 000 DC |
+| 13 | M4A4 | Neo-Noir | covert | FN | - | 39 200 DC |
+| 14 | USP-S | Neo-Noir | covert | MW | - | 33 866 DC |
+| 15 | UMP-45 | Neo-Noir | classified | FN | - | 14 280 DC |
+| 16 | Five-SeveN | Fairy Tale | classified | FN | - | 12 750 DC |
+| 17 | MAC-10 | Saibā Oni | restricted | FN | - | 4 911 DC |
+| 18 | Glock-18 | Shinobu | classified | FN | - | 15 147 DC |
 
 ---
 
@@ -5572,58 +4484,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **16 500 DC**
 - **Описание:** Коллекция стильного комикс-нуара для AWP, M4A4, USP-S, Glock-18
-- **Количество предметов в кейсе:** 48 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AWP | Neo-Noir | covert | FN | StatTrak™ | 63 315 DC |
-| 2 | AWP | Neo-Noir | covert | MW | StatTrak™ | 52 059 DC |
-| 3 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
-| 4 | Glock-18 | Neo-Noir | covert | FN | StatTrak™ | 55 755 DC |
-| 5 | Glock-18 | Neo-Noir | covert | MW | - | 33 866 DC |
-| 6 | M4A4 | Neo-Noir | covert | FN | StatTrak™ | 52 920 DC |
-| 7 | M4A4 | Neo-Noir | covert | MW | StatTrak™ | 43 512 DC |
-| 8 | M4A4 | Neo-Noir | covert | MW | - | 32 144 DC |
-| 9 | USP-S | Neo-Noir | covert | FT | - | 26 845 DC |
-| 10 | UMP-45 | Neo-Noir | classified | FN | StatTrak™ | 19 278 DC |
-| 11 | UMP-45 | Neo-Noir | classified | MW | StatTrak™ | 15 851 DC |
-| 12 | UMP-45 | Neo-Noir | classified | FT | StatTrak™ | 12 566 DC |
-| 13 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 16 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 19 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 22 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 25 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 28 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 31 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 34 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 37 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 40 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 41 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 42 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 43 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 46 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 1 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
+| 2 | AWP | Neo-Noir | covert | MW | - | 38 000 DC |
+| 3 | AWP | Neo-Noir | covert | FT | - | 28 000 DC |
+| 4 | AWP | Neo-Noir | covert | BS | - | 19 698 DC |
+| 5 | M4A4 | Neo-Noir | covert | FN | - | 39 200 DC |
+| 6 | M4A4 | Neo-Noir | covert | MW | - | 32 144 DC |
+| 7 | M4A4 | Neo-Noir | covert | FT | - | 24 000 DC |
+| 8 | M4A4 | Neo-Noir | covert | BS | - | 16 000 DC |
+| 9 | USP-S | Neo-Noir | covert | FN | - | 41 300 DC |
+| 10 | USP-S | Neo-Noir | covert | MW | - | 33 866 DC |
+| 11 | USP-S | Neo-Noir | covert | FT | - | 26 845 DC |
+| 12 | USP-S | Neo-Noir | covert | BS | - | 18 000 DC |
+| 13 | Glock-18 | Neo-Noir | covert | FN | - | 41 300 DC |
+| 14 | Glock-18 | Neo-Noir | covert | MW | - | 33 866 DC |
+| 15 | Glock-18 | Neo-Noir | covert | FT | - | 26 845 DC |
+| 16 | Glock-18 | Neo-Noir | covert | BS | - | 18 000 DC |
+| 17 | UMP-45 | Neo-Noir | classified | FN | - | 14 280 DC |
+| 18 | UMP-45 | Neo-Noir | classified | MW | - | 11 500 DC |
 
 ---
 
@@ -5633,50 +4515,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **7 200 DC**
 - **Описание:** M4A4 Howl, Wild Lotus, Kraken, Dragonfire, Monster Mashup, Tooth Fairy, Jaguar
-- **Количество предметов в кейсе:** 40 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
-| 2 | M4A4 | Howl | milspec | MW | - | 344 400 DC |
-| 3 | Брелок | Hot Howl | gold | - | - | 119 000 DC |
-| 4 | Driver Gloves | Queen Jaguar | extraordinary | FN | - | 115 200 DC |
-| 5 | Driver Gloves | Queen Jaguar | extraordinary | FT | - | 74 880 DC |
-| 6 | Driver Gloves | Queen Jaguar | extraordinary | BS | - | 48 384 DC |
-| 7 | AK-47 | Wild Lotus | covert | FN | StatTrak™ | 52 920 DC |
-| 8 | AK-47 | Wild Lotus | covert | FT | StatTrak™ | 34 496 DC |
-| 9 | AK-47 | Wild Lotus | covert | BS | StatTrak™ | 22 344 DC |
-| 10 | AK-47 | Jaguar | covert | FN | - | 36 400 DC |
-| 11 | Sawed-Off | The Kraken | covert | MW | - | 28 700 DC |
-| 12 | AK-47 | Panthera onca | classified | MW | StatTrak™ | 8 114 DC |
-| 13 | AK-47 | Panthera onca | classified | MW | - | 5 994 DC |
-| 14 | AK-47 | Panthera onca | classified | FT | - | 4 752 DC |
-| 15 | M4A4 | Tooth Fairy | classified | FN | - | 7 310 DC |
-| 16 | Charm | Hot Howl | restricted | - | - | 3 359 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 31 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 34 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 37 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 40 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
+| 2 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 3 | AK-47 | Jaguar | covert | FN | - | 36 400 DC |
+| 4 | Sawed-Off | The Kraken | covert | FN | - | 35 000 DC |
+| 5 | SSG 08 | Dragonfire | covert | FN | - | 35 000 DC |
+| 6 | USP-S | Monster Mashup | classified | FN | - | 12 000 DC |
+| 7 | USP-S | Jawbreaker | classified | FN | - | 15 000 DC |
+| 8 | AK-47 | Panthera onca | classified | FN | - | 7 310 DC |
+| 9 | AWP | Hyper Beast | covert | FN | - | 30 100 DC |
+| 10 | M4A1-S | Hyper Beast | covert | FN | - | 42 000 DC |
+| 11 | Five-SeveN | Hyper Beast | covert | FN | - | 42 000 DC |
+| 12 | Nova | Hyper Beast | classified | FN | - | 12 000 DC |
+| 13 | AWP | Containment Breach | covert | FN | - | 45 500 DC |
+| 14 | P90 | Death by Kitty | covert | MW | - | 47 600 DC |
+| 15 | Galil AR | Chatterbox | covert | FN | - | 51 030 DC |
+| 16 | MAC-10 | Stalker | covert | FN | - | 35 742 DC |
+| 17 | Driver Gloves | Queen Jaguar | extraordinary | FN | - | 115 200 DC |
+| 18 | AK-47 | B the Monster | covert | FN | - | 45 500 DC |
 
 ---
 
@@ -5686,55 +4546,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **5 400 DC**
 - **Описание:** AK-47 Head Shot, Disco Tech, In Living Color, Mount Fuji, Visions, Chromatic
-- **Количество предметов в кейсе:** 45 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AWP | Chromatic Aberration | covert | FN | StatTrak™ | 77 490 DC |
-| 2 | AWP | Chromatic Aberration | covert | MW | StatTrak™ | 63 714 DC |
-| 3 | AWP | Chromatic Aberration | covert | FN | - | 57 400 DC |
-| 4 | AK-47 | Head Shot | covert | FN | StatTrak™ | 65 204 DC |
-| 5 | AK-47 | Head Shot | covert | MW | StatTrak™ | 53 612 DC |
-| 6 | AK-47 | Head Shot | covert | FN | - | 48 299 DC |
-| 7 | M4A4 | In Living Color | covert | MW | - | 39 605 DC |
-| 8 | M4A4 | In Living Color | covert | WW | - | 25 115 DC |
-| 9 | M4A4 | In Living Color | covert | BS | - | 20 286 DC |
-| 10 | Galil AR | Chromatic Aberration | classified | MW | StatTrak™ | 12 266 DC |
-| 11 | Galil AR | Chromatic Aberration | classified | FT | StatTrak™ | 9 724 DC |
-| 12 | Galil AR | Chromatic Aberration | classified | BS | StatTrak™ | 6 298 DC |
-| 13 | P250 | Visions | classified | MW | - | 8 643 DC |
-| 14 | MAC-10 | Disco Tech | classified | MW | - | 5 715 DC |
-| 15 | USP-S | Ancient Visions | restricted | MW | - | 2 939 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 42 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 44 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 45 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
+| 1 | AK-47 | Head Shot | covert | FN | - | 48 299 DC |
+| 2 | AK-47 | Head Shot | covert | MW | - | 38 000 DC |
+| 3 | M4A4 | In Living Color | covert | FN | - | 48 299 DC |
+| 4 | M4A1-S | Vaporwave | covert | FN | - | 35 000 DC |
+| 5 | AWP | Chromatic Aberration | covert | FN | - | 57 400 DC |
+| 6 | AWP | Chromatic Aberration | covert | MW | - | 47 068 DC |
+| 7 | Galil AR | Chromatic Aberration | classified | FN | - | 14 000 DC |
+| 8 | FAMAS | Bad Trip | covert | FN | - | 65 204 DC |
+| 9 | MAC-10 | Disco Tech | classified | FN | - | 6 970 DC |
+| 10 | MAC-10 | Disco Tech | classified | MW | - | 5 715 DC |
+| 11 | MP9 | Mount Fuji | restricted | FN | - | 4 500 DC |
+| 12 | MP9 | Mount Fuji | restricted | MW | - | 3 200 DC |
+| 13 | P250 | Visions | classified | FN | - | 11 000 DC |
+| 14 | P250 | Visions | classified | MW | - | 8 643 DC |
+| 15 | USP-S | Ancient Visions | restricted | FN | - | 3 584 DC |
+| 16 | USP-S | Ancient Visions | restricted | MW | - | 2 939 DC |
+| 17 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
+| 18 | Glock-18 | Vogue | classified | FN | - | 9 126 DC |
 
 ---
 
@@ -5744,37 +4577,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **12 000 DC**
 - **Описание:** Zeus x27 Olympus, AK-47 Inheritance, AWP Chrome Cannon, M4A1-S Black Lotus, Kukri
-- **Количество предметов в кейсе:** 27 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Kukri Knife | Fade | covert | FN | - | 240 000 DC |
-| 2 | Kukri Knife | Fade | covert | MW | - | 196 800 DC |
-| 3 | Kukri Knife | Blue Steel | covert | FN | - | 201 600 DC |
-| 4 | Kukri Knife | Boreal Forest | covert | FN | - | 196 800 DC |
-| 5 | Kukri Knife | Boreal Forest | covert | MW | - | 161 376 DC |
-| 6 | Kukri Knife | Night Stripe | covert | FN | - | 192 000 DC |
-| 7 | Kukri Knife | Night Stripe | covert | MW | - | 157 440 DC |
-| 8 | Kukri Knife | Crimson Web | covert | FN | - | 165 600 DC |
-| 9 | Kukri Knife | Case Hardened | covert | FN | - | 139 200 DC |
-| 10 | Kukri Knife | Scorched | covert | FN | - | 134 400 DC |
-| 11 | Kukri Knife | Scorched | covert | MW | - | 110 208 DC |
-| 12 | Kukri Knife | ★ Kukri Knife | covert | MW | - | 127 920 DC |
-| 13 | Kukri Knife | Safari Mesh | covert | FN | - | 103 200 DC |
-| 14 | Kukri Knife | Forest DDPAT | covert | MW | - | 88 560 DC |
-| 15 | AWP | Chrome Cannon | covert | FN | - | 40 600 DC |
-| 16 | AK-47 | Inheritance | covert | MW | - | 22 960 DC |
-| 17 | USP-S | Jawbreaker | classified | MW | - | 11 988 DC |
-| 18 | Zeus x27 | Olympus | classified | MW | - | 9 340 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
+| 2 | Kukri Knife | Slaughter | covert | FN | - | 112 800 DC |
+| 3 | Kukri Knife | Case Hardened | covert | FN | - | 139 200 DC |
+| 4 | Kukri Knife | Blue Steel | covert | FN | - | 201 600 DC |
+| 5 | AWP | Chrome Cannon | covert | FN | - | 40 600 DC |
+| 6 | AWP | Chrome Cannon | covert | MW | - | 33 292 DC |
+| 7 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 8 | AK-47 | Inheritance | covert | MW | - | 22 960 DC |
+| 9 | Zeus x27 | Olympus | classified | FN | - | 12 000 DC |
+| 10 | Zeus x27 | Olympus | classified | MW | - | 9 340 DC |
+| 11 | M4A1-S | Black Lotus | classified | FN | - | 7 820 DC |
+| 12 | M4A1-S | Black Lotus | classified | MW | - | 6 000 DC |
+| 13 | USP-S | Jawbreaker | classified | FN | - | 15 000 DC |
+| 14 | USP-S | Jawbreaker | classified | MW | - | 11 988 DC |
+| 15 | Glock-18 | Block-18 | restricted | FN | - | 3 326 DC |
+| 16 | M4A4 | Etch Lord | restricted | MW | - | 4 911 DC |
+| 17 | Five-SeveN | Hybrid | restricted | FT | - | 2 985 DC |
+| 18 | UMP-45 | Motorized | milspec | FN | - | 1 377 DC |
 
 ---
 
@@ -5784,59 +4608,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 800 DC**
 - **Описание:** AK-47 Nightwish, MP9 Starlight Protector, Melondrama, Rapid Eye Movement, Ticket to Hell
-- **Количество предметов в кейсе:** 49 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | MP9 | Starlight Protector | covert | FN | StatTrak™ | 80 325 DC |
-| 2 | MP9 | Starlight Protector | covert | MW | StatTrak™ | 66 045 DC |
-| 3 | MP9 | Starlight Protector | covert | FN | - | 59 500 DC |
-| 4 | AK-47 | Nightwish | covert | FN | StatTrak™ | 67 095 DC |
-| 5 | AK-47 | Nightwish | covert | MW | StatTrak™ | 55 167 DC |
-| 6 | AK-47 | Nightwish | covert | FN | - | 49 700 DC |
-| 7 | FAMAS | Rapid Eye Movement | classified | MW | StatTrak™ | 14 719 DC |
-| 8 | FAMAS | Rapid Eye Movement | classified | FT | StatTrak™ | 11 669 DC |
-| 9 | FAMAS | Rapid Eye Movement | classified | BS | StatTrak™ | 7 558 DC |
-| 10 | Dual Berettas | Melondrama | classified | MW | StatTrak™ | 10 567 DC |
-| 11 | Dual Berettas | Melondrama | classified | FT | StatTrak™ | 8 378 DC |
-| 12 | Dual Berettas | Melondrama | classified | WW | - | 4 950 DC |
-| 13 | USP-S | Ticket to Hell | restricted | MW | - | 3 903 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 41 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 42 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 1 | AK-47 | Nightwish | covert | FN | - | 49 700 DC |
+| 2 | AK-47 | Nightwish | covert | MW | - | 40 754 DC |
+| 3 | AK-47 | Nightwish | covert | FT | - | 32 305 DC |
+| 4 | MP9 | Starlight Protector | covert | FN | - | 59 500 DC |
+| 5 | MP9 | Starlight Protector | covert | MW | - | 45 000 DC |
+| 6 | MP9 | Starlight Protector | covert | FT | - | 32 000 DC |
+| 7 | Dual Berettas | Melondrama | classified | FN | - | 12 000 DC |
+| 8 | Dual Berettas | Melondrama | classified | MW | - | 7 806 DC |
+| 9 | Dual Berettas | Melondrama | classified | FT | - | 6 000 DC |
+| 10 | FAMAS | Rapid Eye Movement | classified | FN | - | 15 000 DC |
+| 11 | FAMAS | Rapid Eye Movement | classified | MW | - | 11 000 DC |
+| 12 | FAMAS | Rapid Eye Movement | classified | FT | - | 8 500 DC |
+| 13 | USP-S | Ticket to Hell | restricted | FN | - | 4 500 DC |
+| 14 | USP-S | Ticket to Hell | restricted | MW | - | 3 903 DC |
+| 15 | USP-S | Ticket to Hell | restricted | FT | - | 2 713 DC |
+| 16 | MP7 | Abyssal Apparition | classified | FN | - | 12 920 DC |
+| 17 | PP-Bizon | Space Cat | restricted | FN | - | 4 838 DC |
+| 18 | M4A1-S | Night Terror | restricted | FN | - | 3 500 DC |
 
 ---
 
@@ -5846,61 +4639,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **5 200 DC**
 - **Описание:** USP-S Printstream, AK-47 Ice Coaled, AWP Chromatic Aberration, Sawed-Off Kiss♥Love
-- **Количество предметов в кейсе:** 51 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AWP | Chromatic Aberration | covert | FN | StatTrak™ | 77 490 DC |
-| 2 | AWP | Chromatic Aberration | covert | MW | StatTrak™ | 63 714 DC |
-| 3 | AWP | Chromatic Aberration | covert | FN | - | 57 400 DC |
-| 4 | AK-47 | Ice Coaled | classified | FN | StatTrak™ | 13 770 DC |
-| 5 | AK-47 | Ice Coaled | classified | MW | StatTrak™ | 11 322 DC |
-| 6 | AK-47 | Ice Coaled | classified | MW | - | 8 364 DC |
-| 7 | Sawed-Off | Kiss♥Love | classified | FT | StatTrak™ | 9 425 DC |
-| 8 | Sawed-Off | Kiss♥Love | classified | WW | - | 5 569 DC |
-| 9 | Sawed-Off | Kiss♥Love | classified | BS | - | 4 498 DC |
-| 10 | SG 553 | Dragon Tech | restricted | MW | StatTrak™ | 3 419 DC |
-| 11 | SG 553 | Dragon Tech | restricted | FT | StatTrak™ | 2 710 DC |
-| 12 | SG 553 | Dragon Tech | restricted | BS | StatTrak™ | 1 756 DC |
-| 13 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 16 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 19 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 22 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 25 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 28 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 31 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 34 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 37 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 40 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 41 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 42 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 43 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 46 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
-| 49 | AK-47 | AUTOEXEC | covert | FN | StatTrak™ | 64 260 DC |
-| 50 | AK-47 | AUTOEXEC | covert | MW | StatTrak™ | 52 836 DC |
-| 51 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 1 | USP-S | Printstream | covert | FN | - | 38 000 DC |
+| 2 | USP-S | Printstream | covert | MW | - | 31 000 DC |
+| 3 | USP-S | Printstream | covert | FT | - | 25 000 DC |
+| 4 | AK-47 | Ice Coaled | classified | FN | - | 10 200 DC |
+| 5 | AK-47 | Ice Coaled | classified | MW | - | 8 364 DC |
+| 6 | AK-47 | Ice Coaled | classified | FT | - | 6 630 DC |
+| 7 | AWP | Chromatic Aberration | covert | FN | - | 57 400 DC |
+| 8 | AWP | Chromatic Aberration | covert | MW | - | 47 068 DC |
+| 9 | AWP | Chromatic Aberration | covert | FT | - | 38 000 DC |
+| 10 | Glock-18 | Shinobu | classified | FN | - | 15 147 DC |
+| 11 | Sawed-Off | Kiss♥Love | classified | MW | - | 8 500 DC |
+| 12 | Sawed-Off | Kiss♥Love | classified | FT | - | 6 500 DC |
+| 13 | P250 | Visions | classified | FN | - | 11 000 DC |
+| 14 | P250 | Visions | classified | MW | - | 8 643 DC |
+| 15 | SG 553 | Dragon Tech | restricted | FN | - | 3 800 DC |
+| 16 | SG 553 | Dragon Tech | restricted | MW | - | 2 526 DC |
+| 17 | Dual Berettas | Flora Carnivora | restricted | FN | - | 2 520 DC |
+| 18 | P90 | Vent Rush | restricted | FN | - | 3 200 DC |
 
 ---
 
@@ -5910,59 +4670,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **5 900 DC**
 - **Описание:** M4A4 Temukau, AK-47 Head Shot, AWP Duality, P90 Neoqueen, MAC-10 Sakkaku
-- **Количество предметов в кейсе:** 49 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | M4A4 | Temukau | covert | FN | StatTrak™ | 75 600 DC |
-| 2 | M4A4 | Temukau | covert | MW | StatTrak™ | 62 160 DC |
-| 3 | M4A4 | Temukau | covert | FN | - | 56 000 DC |
-| 4 | AK-47 | Head Shot | covert | FN | StatTrak™ | 65 204 DC |
-| 5 | AK-47 | Head Shot | covert | MW | StatTrak™ | 53 612 DC |
-| 6 | AK-47 | Head Shot | covert | FN | - | 48 299 DC |
-| 7 | AWP | Duality | classified | MW | StatTrak™ | 11 133 DC |
-| 8 | AWP | Duality | classified | FT | StatTrak™ | 8 826 DC |
-| 9 | AWP | Duality | classified | WW | - | 5 216 DC |
-| 10 | UMP-45 | Wild Child | classified | MW | - | 8 225 DC |
-| 11 | MAC-10 | Sakkaku | restricted | FN | - | 3 528 DC |
-| 12 | MAC-10 | Sakkaku | restricted | FT | StatTrak™ | 3 105 DC |
-| 13 | MAC-10 | Sakkaku | restricted | BS | StatTrak™ | 2 011 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 41 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 42 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 1 | M4A4 | Temukau | covert | FN | - | 56 000 DC |
+| 2 | M4A4 | Temukau | covert | MW | - | 45 920 DC |
+| 3 | M4A4 | Temukau | covert | FT | - | 35 000 DC |
+| 4 | AK-47 | Head Shot | covert | FN | - | 48 299 DC |
+| 5 | AK-47 | Head Shot | covert | MW | - | 38 000 DC |
+| 6 | AK-47 | Head Shot | covert | FT | - | 29 000 DC |
+| 7 | AWP | Duality | classified | FN | - | 10 030 DC |
+| 8 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 9 | AWP | Duality | classified | FT | - | 6 500 DC |
+| 10 | UMP-45 | Wild Child | classified | FN | - | 12 000 DC |
+| 11 | UMP-45 | Wild Child | classified | MW | - | 8 225 DC |
+| 12 | P2000 | Wicked Sick | classified | FN | - | 11 016 DC |
+| 13 | P2000 | Wicked Sick | classified | MW | - | 8 500 DC |
+| 14 | P90 | Neoqueen | restricted | FN | - | 4 500 DC |
+| 15 | P90 | Neoqueen | restricted | MW | - | 3 500 DC |
+| 16 | MAC-10 | Sakkaku | restricted | FN | - | 3 528 DC |
+| 17 | MAC-10 | Sakkaku | restricted | FT | - | 2 500 DC |
+| 18 | M4A1-S | Emphorosaur-S | restricted | FN | - | 3 248 DC |
 
 ---
 
@@ -5972,59 +4701,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **5 600 DC**
 - **Описание:** Desert Eagle Printstream, AK-47 Legion of Anubis, Glock-18 Vogue, M4A4 Tooth Fairy
-- **Количество предметов в кейсе:** 49 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Legion of Anubis | covert | FN | StatTrak™ | 58 590 DC |
-| 2 | AK-47 | Legion of Anubis | covert | MW | StatTrak™ | 48 174 DC |
-| 3 | AK-47 | Legion of Anubis | covert | FN | - | 43 400 DC |
-| 4 | Desert Eagle | Printstream | covert | FN | StatTrak™ | 51 300 DC |
-| 5 | Desert Eagle | Printstream | covert | MW | StatTrak™ | 42 180 DC |
-| 6 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
-| 7 | Glock-18 | Vogue | classified | MW | StatTrak™ | 11 511 DC |
-| 8 | Glock-18 | Vogue | classified | FT | StatTrak™ | 9 126 DC |
-| 9 | Glock-18 | Vogue | classified | BS | StatTrak™ | 5 911 DC |
-| 10 | M4A4 | Tooth Fairy | classified | MW | StatTrak™ | 8 114 DC |
-| 11 | M4A4 | Tooth Fairy | classified | FT | StatTrak™ | 6 433 DC |
-| 12 | M4A4 | Tooth Fairy | classified | BS | StatTrak™ | 4 167 DC |
-| 13 | MAG-7 | Monster Call | restricted | FN | - | 4 480 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 41 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 42 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 1 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
+| 2 | Desert Eagle | Printstream | covert | MW | - | 31 000 DC |
+| 3 | Desert Eagle | Printstream | covert | FT | - | 25 000 DC |
+| 4 | AK-47 | Legion of Anubis | covert | FN | - | 43 400 DC |
+| 5 | AK-47 | Legion of Anubis | covert | MW | - | 35 000 DC |
+| 6 | AK-47 | Legion of Anubis | covert | FT | - | 27 000 DC |
+| 7 | Glock-18 | Vogue | classified | FN | - | 9 126 DC |
+| 8 | Glock-18 | Vogue | classified | MW | - | 7 500 DC |
+| 9 | Glock-18 | Vogue | classified | FT | - | 5 911 DC |
+| 10 | USP-S | Jawbreaker | classified | FN | - | 15 000 DC |
+| 11 | M4A4 | Tooth Fairy | classified | MW | - | 5 800 DC |
+| 12 | M4A4 | Tooth Fairy | classified | FT | - | 4 500 DC |
+| 13 | XM1014 | Entombed | classified | FN | - | 6 500 DC |
+| 14 | XM1014 | Entombed | classified | MW | - | 5 200 DC |
+| 15 | MAG-7 | Monster Call | restricted | FN | - | 4 480 DC |
+| 16 | MAG-7 | Monster Call | restricted | FT | - | 3 200 DC |
+| 17 | Tec-9 | Brother | restricted | FN | - | 6 124 DC |
+| 18 | MAC-10 | Allure | restricted | FN | - | 3 500 DC |
 
 ---
 
@@ -6034,58 +4732,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 300 DC**
 - **Описание:** M4A4 The Emperor, Five-SeveN Angry Mob, AWP Atheris, Desert Eagle Light Rail
-- **Количество предметов в кейсе:** 48 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | M4A4 | The Emperor | covert | FN | - | 53 200 DC |
 | 2 | M4A4 | The Emperor | covert | MW | - | 43 624 DC |
-| 3 | Five-SeveN | Angry Mob | covert | FN | StatTrak™ | 48 195 DC |
-| 4 | Five-SeveN | Angry Mob | covert | MW | StatTrak™ | 39 627 DC |
-| 5 | Five-SeveN | Angry Mob | covert | FN | - | 35 700 DC |
-| 6 | AK-47 | Phantom Disruptor | classified | FN | StatTrak™ | 20 196 DC |
-| 7 | AK-47 | Phantom Disruptor | classified | MW | StatTrak™ | 16 606 DC |
-| 8 | AK-47 | Phantom Disruptor | classified | FT | StatTrak™ | 13 165 DC |
-| 9 | MAC-10 | Disco Tech | classified | FN | - | 6 970 DC |
-| 10 | MAC-10 | Disco Tech | classified | MW | - | 5 715 DC |
-| 11 | AWP | Atheris | restricted | FN | - | 4 368 DC |
-| 12 | AWP | Atheris | restricted | WW | - | 2 271 DC |
-| 13 | Desert Eagle | Light Rail | restricted | FN | StatTrak™ | 3 175 DC |
-| 14 | Desert Eagle | Light Rail | restricted | MW | StatTrak™ | 2 611 DC |
-| 15 | Desert Eagle | Light Rail | restricted | MW | - | 1 929 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 42 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 44 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 45 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 47 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 48 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
+| 3 | M4A4 | The Emperor | covert | FT | - | 34 000 DC |
+| 4 | Five-SeveN | Angry Mob | covert | FN | - | 35 700 DC |
+| 5 | Five-SeveN | Angry Mob | covert | MW | - | 28 000 DC |
+| 6 | Five-SeveN | Angry Mob | covert | FT | - | 21 000 DC |
+| 7 | AWP | Atheris | restricted | FN | - | 4 368 DC |
+| 8 | AWP | Atheris | restricted | MW | - | 3 582 DC |
+| 9 | AWP | Atheris | restricted | FT | - | 2 800 DC |
+| 10 | Desert Eagle | Light Rail | restricted | FN | - | 3 175 DC |
+| 11 | Desert Eagle | Light Rail | restricted | MW | - | 2 500 DC |
+| 12 | Desert Eagle | Light Rail | restricted | FT | - | 1 929 DC |
+| 13 | AUG | Momentum | classified | FN | - | 8 500 DC |
+| 14 | AUG | Momentum | classified | FT | - | 5 967 DC |
+| 15 | XM1014 | Incinegator | classified | FN | - | 7 500 DC |
+| 16 | XM1014 | Incinegator | classified | MW | - | 5 800 DC |
+| 17 | R8 Revolver | Skull Crusher | classified | MW | - | 5 500 DC |
+| 18 | UMP-45 | Moonrise | restricted | FN | - | 4 368 DC |
 
 ---
 
@@ -6095,59 +4763,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 600 DC**
 - **Описание:** AK-47 Asiimov, AWP Neo-Noir, Desert Eagle Mecha Industries, MP5-SD Gauss
-- **Количество предметов в кейсе:** 49 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AWP | Neo-Noir | covert | FN | StatTrak™ | 63 315 DC |
-| 2 | AWP | Neo-Noir | covert | MW | StatTrak™ | 52 059 DC |
-| 3 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
-| 4 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
-| 5 | AK-47 | Asiimov | covert | MW | - | 13 120 DC |
-| 6 | Desert Eagle | Mecha Industries | classified | FN | - | 11 220 DC |
-| 7 | Desert Eagle | Mecha Industries | classified | MW | - | 9 200 DC |
-| 8 | Desert Eagle | Mecha Industries | classified | FT | - | 7 293 DC |
-| 9 | MP5-SD | Gauss | restricted | FN | - | 4 200 DC |
-| 10 | MP5-SD | Gauss | restricted | FT | - | 2 730 DC |
-| 11 | Glock-18 | Oxide Blaze | milspec | MW | StatTrak™ | 1 189 DC |
-| 12 | Glock-18 | Oxide Blaze | milspec | FT | StatTrak™ | 942 DC |
-| 13 | Glock-18 | Oxide Blaze | milspec | BS | StatTrak™ | 610 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 41 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 42 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 1 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
+| 2 | AK-47 | Asiimov | covert | MW | - | 13 120 DC |
+| 3 | AK-47 | Asiimov | covert | FT | - | 10 500 DC |
+| 4 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
+| 5 | AWP | Neo-Noir | covert | MW | - | 38 000 DC |
+| 6 | AWP | Neo-Noir | covert | FT | - | 28 000 DC |
+| 7 | Desert Eagle | Mecha Industries | classified | FN | - | 11 220 DC |
+| 8 | Desert Eagle | Mecha Industries | classified | MW | - | 9 200 DC |
+| 9 | Desert Eagle | Mecha Industries | classified | FT | - | 7 293 DC |
+| 10 | MP5-SD | Gauss | restricted | FN | - | 4 200 DC |
+| 11 | MP5-SD | Gauss | restricted | MW | - | 3 400 DC |
+| 12 | MP5-SD | Gauss | restricted | FT | - | 2 730 DC |
+| 13 | UMP-45 | Momentum | classified | FN | - | 14 450 DC |
+| 14 | UMP-45 | Momentum | classified | FT | - | 9 393 DC |
+| 15 | USP-S | Flashback | restricted | FN | - | 5 746 DC |
+| 16 | USP-S | Flashback | restricted | MW | - | 4 200 DC |
+| 17 | Glock-18 | Oxide Blaze | milspec | FN | - | 1 071 DC |
+| 18 | G3SG1 | Scavenger | restricted | FN | - | 2 800 DC |
 
 ---
 
@@ -6157,59 +4794,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 900 DC**
 - **Описание:** M4A4 Neo-Noir, MP7 Bloodsport, USP-S Cortex, AWP Mortis, Nova Wild Six
-- **Количество предметов в кейсе:** 49 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | MP7 | Bloodsport | covert | FN | StatTrak™ | 80 325 DC |
-| 2 | MP7 | Bloodsport | covert | MW | StatTrak™ | 66 045 DC |
-| 3 | MP7 | Bloodsport | covert | FN | - | 59 500 DC |
-| 4 | M4A4 | Neo-Noir | covert | FN | StatTrak™ | 52 920 DC |
-| 5 | M4A4 | Neo-Noir | covert | MW | StatTrak™ | 43 512 DC |
-| 6 | M4A4 | Neo-Noir | covert | FT | StatTrak™ | 34 496 DC |
-| 7 | AWP | Mortis | classified | MW | StatTrak™ | 13 964 DC |
-| 8 | AWP | Mortis | classified | BS | StatTrak™ | 7 171 DC |
-| 9 | USP-S | Cortex | classified | FN | - | 11 050 DC |
-| 10 | USP-S | Cortex | classified | MW | - | 9 061 DC |
-| 11 | Nova | Wild Six | restricted | FN | StatTrak™ | 5 821 DC |
-| 12 | Nova | Wild Six | restricted | MW | StatTrak™ | 4 786 DC |
-| 13 | Nova | Wild Six | restricted | FT | StatTrak™ | 3 795 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 41 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 42 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 1 | M4A4 | Neo-Noir | covert | FN | - | 39 200 DC |
+| 2 | M4A4 | Neo-Noir | covert | MW | - | 32 144 DC |
+| 3 | M4A4 | Neo-Noir | covert | FT | - | 24 000 DC |
+| 4 | MP7 | Bloodsport | covert | FN | - | 59 500 DC |
+| 5 | MP7 | Bloodsport | covert | MW | - | 48 000 DC |
+| 6 | MP7 | Bloodsport | covert | FT | - | 38 675 DC |
+| 7 | USP-S | Cortex | classified | FN | - | 11 050 DC |
+| 8 | USP-S | Cortex | classified | MW | - | 9 061 DC |
+| 9 | USP-S | Cortex | classified | FT | - | 7 000 DC |
+| 10 | AWP | Mortis | classified | FN | - | 12 580 DC |
+| 11 | AWP | Mortis | classified | MW | - | 9 500 DC |
+| 12 | AWP | Mortis | classified | FT | - | 7 200 DC |
+| 13 | AUG | Stymphalian | classified | FN | - | 10 500 DC |
+| 14 | AUG | Stymphalian | classified | MW | - | 8 500 DC |
+| 15 | Nova | Wild Six | restricted | FN | - | 3 094 DC |
+| 16 | Nova | Wild Six | restricted | MW | - | 2 400 DC |
+| 17 | Glock-18 | Moonrise | restricted | FN | - | 4 704 DC |
+| 18 | UMP-45 | Arctic Wolf | restricted | FN | - | 4 200 DC |
 
 ---
 
@@ -6219,61 +4825,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 100 DC**
 - **Описание:** AK-47 Neon Rider, Desert Eagle Code Red, M4A1-S Nightmare, FAMAS Eye of Athena
-- **Количество предметов в кейсе:** 51 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Neon Rider | covert | FN | StatTrak™ | 75 600 DC |
-| 2 | AK-47 | Neon Rider | covert | MW | StatTrak™ | 62 160 DC |
-| 3 | AK-47 | Neon Rider | covert | FN | - | 56 000 DC |
-| 4 | Desert Eagle | Code Red | covert | FN | StatTrak™ | 51 975 DC |
-| 5 | Desert Eagle | Code Red | covert | MW | StatTrak™ | 42 735 DC |
-| 6 | Desert Eagle | Code Red | covert | FT | StatTrak™ | 33 880 DC |
-| 7 | FAMAS | Eye of Athena | classified | FN | StatTrak™ | 13 311 DC |
-| 8 | FAMAS | Eye of Athena | classified | FN | - | 9 860 DC |
-| 9 | FAMAS | Eye of Athena | classified | FT | StatTrak™ | 8 677 DC |
-| 10 | Glock-18 | Warhawk | milspec | MW | StatTrak™ | 1 661 DC |
-| 11 | Glock-18 | Warhawk | milspec | FT | StatTrak™ | 1 316 DC |
-| 12 | Glock-18 | Warhawk | milspec | BS | StatTrak™ | 853 DC |
-| 13 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 16 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 19 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 22 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 25 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 28 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 31 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 34 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 37 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 40 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 41 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 42 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 43 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 46 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
-| 49 | AK-47 | AUTOEXEC | covert | FN | StatTrak™ | 64 260 DC |
-| 50 | AK-47 | AUTOEXEC | covert | MW | StatTrak™ | 52 836 DC |
-| 51 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 1 | AK-47 | Neon Rider | covert | FN | - | 56 000 DC |
+| 2 | AK-47 | Neon Rider | covert | MW | - | 45 000 DC |
+| 3 | AK-47 | Neon Rider | covert | FT | - | 35 000 DC |
+| 4 | Desert Eagle | Code Red | covert | FN | - | 38 500 DC |
+| 5 | Desert Eagle | Code Red | covert | MW | - | 30 000 DC |
+| 6 | Desert Eagle | Code Red | covert | FT | - | 22 000 DC |
+| 7 | M4A1-S | Nightmare | classified | FN | - | 13 940 DC |
+| 8 | M4A1-S | Nightmare | classified | MW | - | 11 000 DC |
+| 9 | M4A1-S | Nightmare | classified | FT | - | 9 061 DC |
+| 10 | FAMAS | Eye of Athena | classified | FN | - | 9 860 DC |
+| 11 | FAMAS | Eye of Athena | classified | MW | - | 7 800 DC |
+| 12 | FAMAS | Eye of Athena | classified | FT | - | 6 200 DC |
+| 13 | Sawed-Off | Devourer | classified | FN | - | 12 000 DC |
+| 14 | Sawed-Off | Devourer | classified | MW | - | 9 500 DC |
+| 15 | AWP | PAW | restricted | FN | - | 2 856 DC |
+| 16 | AWP | PAW | restricted | MW | - | 2 200 DC |
+| 17 | Glock-18 | Warhawk | milspec | FN | - | 1 496 DC |
+| 18 | MP7 | Powercore | restricted | MW | - | 2 709 DC |
 
 ---
 
@@ -6283,60 +4856,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **6 200 DC**
 - **Описание:** AK-47 Bloodsport, USP-S Neo-Noir, M4A1-S Decimator, AWP Fever Dream
-- **Количество предметов в кейсе:** 50 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Bloodsport | covert | FN | StatTrak™ | 82 215 DC |
-| 2 | AK-47 | Bloodsport | covert | MW | StatTrak™ | 67 599 DC |
-| 3 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
-| 4 | M4A1-S | Decimator | classified | MW | StatTrak™ | 15 096 DC |
-| 5 | M4A1-S | Decimator | classified | FT | - | 8 840 DC |
-| 6 | M4A1-S | Decimator | classified | BS | StatTrak™ | 7 752 DC |
-| 7 | AWP | Fever Dream | classified | FN | StatTrak™ | 12 393 DC |
-| 8 | AWP | Fever Dream | classified | MW | StatTrak™ | 10 190 DC |
-| 9 | AWP | Fever Dream | classified | WW | - | 4 774 DC |
-| 10 | CZ75-Auto | Xiangliu | classified | FT | StatTrak™ | 5 984 DC |
-| 11 | CZ75-Auto | Xiangliu | classified | MW | - | 5 576 DC |
-| 12 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 13 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 15 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 16 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 18 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 19 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 21 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 22 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 24 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 25 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 27 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 28 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 30 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 31 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 33 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 34 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 36 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 37 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 39 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 40 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 41 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 42 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 43 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 45 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 46 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
-| 48 | AK-47 | AUTOEXEC | covert | FN | StatTrak™ | 64 260 DC |
-| 49 | AK-47 | AUTOEXEC | covert | MW | StatTrak™ | 52 836 DC |
-| 50 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 1 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 2 | AK-47 | Bloodsport | covert | MW | - | 49 938 DC |
+| 3 | AK-47 | Bloodsport | covert | FT | - | 39 000 DC |
+| 4 | USP-S | Neo-Noir | covert | FN | - | 41 300 DC |
+| 5 | USP-S | Neo-Noir | covert | MW | - | 33 866 DC |
+| 6 | USP-S | Neo-Noir | covert | FT | - | 26 845 DC |
+| 7 | M4A1-S | Decimator | classified | FN | - | 13 600 DC |
+| 8 | M4A1-S | Decimator | classified | MW | - | 11 000 DC |
+| 9 | M4A1-S | Decimator | classified | FT | - | 8 840 DC |
+| 10 | AWP | Fever Dream | classified | FN | - | 9 180 DC |
+| 11 | AWP | Fever Dream | classified | MW | - | 7 500 DC |
+| 12 | AWP | Fever Dream | classified | FT | - | 5 800 DC |
+| 13 | CZ75-Auto | Xiangliu | classified | FN | - | 9 000 DC |
+| 14 | CZ75-Auto | Xiangliu | classified | MW | - | 7 548 DC |
+| 15 | MAC-10 | Last Dive | restricted | FN | - | 4 928 DC |
+| 16 | MAC-10 | Last Dive | restricted | MW | - | 3 800 DC |
+| 17 | Galil AR | Crimson Tsunami | restricted | FN | - | 3 472 DC |
+| 18 | Desert Eagle | Oxide Blaze | milspec | FN | - | 1 056 DC |
 
 ---
 
@@ -6350,24 +4891,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Bowie Knife | Slaughter | covert | FN | - | 213 600 DC |
-| 2 | Karambit | Crimson Web | covert | FN | - | 211 200 DC |
-| 3 | Bayonet | Crimson Web | covert | FN | - | 208 800 DC |
-| 4 | Survival Knife | Crimson Web | covert | FN | - | 206 400 DC |
-| 5 | Shadow Daggers | Crimson Web | covert | FN | - | 206 400 DC |
-| 6 | Classic Knife | Slaughter | covert | FN | - | 199 200 DC |
-| 7 | Nomad Knife | Crimson Web | covert | FN | - | 187 200 DC |
-| 8 | Paracord Knife | Crimson Web | covert | FN | - | 177 600 DC |
-| 9 | Butterfly Knife | Slaughter | covert | FN | - | 160 800 DC |
-| 10 | Gut Knife | Slaughter | covert | FN | - | 146 400 DC |
-| 11 | Bayonet | Slaughter | covert | FN | - | 134 400 DC |
-| 12 | Survival Knife | Slaughter | covert | FN | - | 127 200 DC |
-| 13 | Butterfly Knife | Crimson Web | covert | FN | - | 115 200 DC |
-| 14 | Navaja Knife | Slaughter | covert | FN | - | 112 800 DC |
-| 15 | Falchion Knife | Slaughter | covert | FN | - | 108 000 DC |
-| 16 | Paracord Knife | Slaughter | covert | FN | - | 98 400 DC |
-| 17 | M9 Bayonet | Crimson Web | covert | FN | - | 96 000 DC |
-| 18 | AWP | Redline | classified | FN | - | 11 730 DC |
+| 1 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 2 | AK-47 | Bloodsport | covert | MW | - | 49 938 DC |
+| 3 | AK-47 | Bloodsport | covert | FT | - | 39 000 DC |
+| 4 | MP7 | Bloodsport | covert | FN | - | 59 500 DC |
+| 5 | MP7 | Bloodsport | covert | MW | - | 48 000 DC |
+| 6 | MP7 | Bloodsport | covert | FT | - | 38 675 DC |
+| 7 | SCAR-20 | Bloodsport | classified | FN | - | 14 280 DC |
+| 8 | SCAR-20 | Bloodsport | classified | MW | - | 11 710 DC |
+| 9 | Karambit | Crimson Web | covert | FN | - | 211 200 DC |
+| 10 | M9 Bayonet | Crimson Web | covert | FN | - | 96 000 DC |
+| 11 | Butterfly Knife | Crimson Web | covert | FN | - | 115 200 DC |
+| 12 | Bowie Knife | Slaughter | covert | FN | - | 213 600 DC |
+| 13 | Bayonet | Slaughter | covert | FN | - | 134 400 DC |
+| 14 | Survival Knife | Crimson Web | covert | FN | - | 206 400 DC |
+| 15 | Stiletto Knife | Crimson Web | covert | FN | - | 148 800 DC |
+| 16 | Moto Gloves | Blood Pressure | extraordinary | FN | - | 139 200 DC |
+| 17 | Moto Gloves | Finish Line | extraordinary | FN | - | 108 000 DC |
+| 18 | Specialist Gloves | Crimson Kimono | extraordinary | MW | - | 122 016 DC |
 
 ---
 
@@ -6377,53 +4918,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **7 500 DC**
 - **Описание:** Высокотехнологичный сплав Mecha Industries, Vulcan, Asiimov, Cyber Security
-- **Количество предметов в кейсе:** 43 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Fuel Injector | covert | FN | StatTrak™ | 55 755 DC |
-| 2 | AK-47 | Fuel Injector | covert | MW | StatTrak™ | 45 843 DC |
-| 3 | AK-47 | Fuel Injector | covert | WW | - | 21 476 DC |
-| 4 | M4A1-S | Cyrex | covert | FN | - | 49 700 DC |
-| 5 | M4A1-S | Cyrex | covert | MW | - | 40 754 DC |
-| 6 | M4A1-S | Mecha Industries | covert | FN | - | 46 900 DC |
-| 7 | AK-47 | Vulcan | covert | FN | StatTrak™ | 42 525 DC |
-| 8 | AK-47 | Vulcan | covert | MW | StatTrak™ | 34 965 DC |
-| 9 | AK-47 | Vulcan | covert | FN | - | 31 500 DC |
-| 10 | SG 553 | Cyrex | classified | FN | - | 13 430 DC |
-| 11 | Desert Eagle | Mecha Industries | classified | FN | - | 11 220 DC |
-| 12 | Desert Eagle | Mecha Industries | classified | MW | - | 9 200 DC |
-| 13 | Desert Eagle | Mecha Industries | classified | BS | - | 4 712 DC |
-| 14 | M4A4 | Cyber Security | classified | FN | - | 7 990 DC |
-| 15 | M4A4 | Cyber Security | classified | MW | - | 6 552 DC |
-| 16 | FAMAS | Mecha Industries | classified | MW | - | 7 528 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 31 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 34 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 37 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 40 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 41 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 42 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 43 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
+| 1 | M4A1-S | Mecha Industries | covert | FN | - | 46 900 DC |
+| 2 | M4A1-S | Mecha Industries | covert | MW | - | 38 000 DC |
+| 3 | Desert Eagle | Mecha Industries | classified | FN | - | 11 220 DC |
+| 4 | Desert Eagle | Mecha Industries | classified | MW | - | 9 200 DC |
+| 5 | FAMAS | Mecha Industries | classified | FN | - | 9 180 DC |
+| 6 | FAMAS | Mecha Industries | classified | MW | - | 7 528 DC |
+| 7 | AK-47 | Vulcan | covert | FN | - | 31 500 DC |
+| 8 | AK-47 | Vulcan | covert | MW | - | 26 000 DC |
+| 9 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
+| 10 | AK-47 | Asiimov | covert | FT | - | 12 000 DC |
+| 11 | AWP | Asiimov | covert | FT | - | 16 000 DC |
+| 12 | M4A4 | Asiimov | covert | FT | - | 16 000 DC |
+| 13 | M4A4 | Cyber Security | classified | FN | - | 7 990 DC |
+| 14 | M4A4 | Cyber Security | classified | MW | - | 6 552 DC |
+| 15 | AK-47 | Fuel Injector | covert | FN | - | 41 300 DC |
+| 16 | AK-47 | Fuel Injector | covert | MW | - | 33 866 DC |
+| 17 | Tec-9 | Fuel Injector | classified | FN | - | 9 350 DC |
+| 18 | SG 553 | Cyrex | classified | FN | - | 13 430 DC |
 
 ---
 
@@ -6433,50 +4949,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **11 500 DC**
 - **Описание:** Японская мифология: AWP Oni Taiji, Kumicho Dragon, Galil Kami, Bloodsport, Mount Fuji
-- **Количество предметов в кейсе:** 40 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Bloodsport | covert | FN | StatTrak™ | 82 215 DC |
-| 2 | AK-47 | Bloodsport | covert | MW | StatTrak™ | 67 599 DC |
-| 3 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
-| 4 | MP7 | Bloodsport | covert | FN | - | 59 500 DC |
-| 5 | AWP | Oni Taiji | covert | FT | - | 25 480 DC |
-| 6 | AWP | Oni Taiji | covert | BS | - | 16 464 DC |
-| 7 | Desert Eagle | Kumicho Dragon | classified | FN | - | 10 710 DC |
-| 8 | Desert Eagle | Sunset Storm 弐 | restricted | FN | - | 4 368 DC |
-| 9 | Desert Eagle | Sunset Storm 壱 | restricted | MW | StatTrak™ | 3 357 DC |
-| 10 | Desert Eagle | Sunset Storm 壱 | restricted | FT | StatTrak™ | 2 661 DC |
-| 11 | Desert Eagle | Sunset Storm 壱 | restricted | WW | - | 1 572 DC |
-| 12 | MP9 | Mount Fuji | restricted | MW | - | 2 158 DC |
-| 13 | Galil AR | Kami | milspec | FN | - | 1 190 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
+| 1 | AWP | Oni Taiji | covert | FN | - | 39 200 DC |
+| 2 | AWP | Oni Taiji | covert | MW | - | 32 000 DC |
+| 3 | AWP | Oni Taiji | covert | FT | - | 25 480 DC |
+| 4 | Desert Eagle | Kumicho Dragon | classified | FN | - | 10 710 DC |
+| 5 | Desert Eagle | Kumicho Dragon | classified | MW | - | 8 500 DC |
+| 6 | Desert Eagle | Kumicho Dragon | classified | FT | - | 6 800 DC |
+| 7 | Galil AR | Kami | milspec | FN | - | 1 190 DC |
+| 8 | Galil AR | Kami | milspec | MW | - | 950 DC |
+| 9 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 10 | AK-47 | Bloodsport | covert | MW | - | 49 938 DC |
+| 11 | MP9 | Mount Fuji | restricted | FN | - | 4 500 DC |
+| 12 | MP9 | Mount Fuji | restricted | MW | - | 3 200 DC |
+| 13 | Desert Eagle | Sunset Storm 壱 | restricted | FN | - | 3 024 DC |
+| 14 | Desert Eagle | Sunset Storm 弐 | restricted | FN | - | 4 368 DC |
+| 15 | MAC-10 | Saibā Oni | restricted | FN | - | 4 500 DC |
+| 16 | MAC-10 | Saibā Oni | restricted | MW | - | 3 500 DC |
+| 17 | AUG | Akihabara Accept | covert | FN | - | 56 000 DC |
+| 18 | Five-SeveN | Neon Kimono | restricted | FN | - | 3 640 DC |
 
 ---
 
@@ -6486,59 +4980,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **7 200 DC**
 - **Описание:** Морозная свежесть Frontside Misty, Ice Coaled, Shallow Grave, Water Elemental, Frostborre
-- **Количество предметов в кейсе:** 49 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Frontside Misty | classified | FN | StatTrak™ | 18 819 DC |
-| 2 | AK-47 | Frontside Misty | classified | MW | StatTrak™ | 15 473 DC |
-| 3 | AK-47 | Frontside Misty | classified | MW | - | 11 431 DC |
-| 4 | Glock-18 | Water Elemental | classified | FN | StatTrak™ | 17 442 DC |
-| 5 | Glock-18 | Water Elemental | classified | MW | StatTrak™ | 14 341 DC |
-| 6 | Glock-18 | Water Elemental | classified | MW | - | 10 594 DC |
-| 7 | AWP | Ice Coaled | classified | FN | StatTrak™ | 16 754 DC |
-| 8 | AWP | Ice Coaled | classified | MW | StatTrak™ | 13 775 DC |
-| 9 | AWP | Ice Coaled | classified | FN | - | 12 410 DC |
-| 10 | M4A1-S | Blue Phosphor | classified | MW | - | 8 922 DC |
-| 11 | AK-47 | Ice Coaled | classified | MW | - | 8 364 DC |
-| 12 | AK-47 | Ice Coaled | classified | FT | - | 6 630 DC |
-| 13 | AK-47 | Ice Coaled | classified | WW | - | 5 304 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 41 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 42 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 1 | AK-47 | Frontside Misty | classified | FN | - | 13 940 DC |
+| 2 | AK-47 | Frontside Misty | classified | MW | - | 11 431 DC |
+| 3 | AK-47 | Frontside Misty | classified | FT | - | 8 500 DC |
+| 4 | AK-47 | Ice Coaled | classified | FN | - | 10 200 DC |
+| 5 | AK-47 | Ice Coaled | classified | MW | - | 8 364 DC |
+| 6 | AK-47 | Ice Coaled | classified | FT | - | 6 630 DC |
+| 7 | AWP | Ice Coaled | classified | FN | - | 12 410 DC |
+| 8 | AWP | Ice Coaled | classified | MW | - | 10 000 DC |
+| 9 | AWP | Ice Coaled | classified | FT | - | 8 000 DC |
+| 10 | Glock-18 | Water Elemental | classified | FN | - | 17 442 DC |
+| 11 | Glock-18 | Water Elemental | classified | MW | - | 10 594 DC |
+| 12 | Glock-18 | Water Elemental | classified | FT | - | 7 500 DC |
+| 13 | P90 | Shallow Grave | classified | FN | - | 9 000 DC |
+| 14 | P90 | Shallow Grave | classified | MW | - | 7 000 DC |
+| 15 | XM1014 | Frost Borre | milspec | FN | - | 1 207 DC |
+| 16 | XM1014 | Frost Borre | milspec | MW | - | 950 DC |
+| 17 | M4A1-S | Blue Phosphor | classified | FN | - | 10 880 DC |
+| 18 | P2000 | Ocean Foam | classified | FN | - | 11 050 DC |
 
 ---
 
@@ -6548,40 +5011,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **6 900 DC**
 - **Описание:** Ядерные заражения: Nuclear Threat, Nuclear Garden, Bone Machine, Bioleak, Eco
-- **Количество предметов в кейсе:** 30 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AWP | Containment Breach | covert | FN | - | 45 500 DC |
 | 2 | AWP | Containment Breach | covert | MW | - | 37 310 DC |
-| 3 | Galil AR | Eco | classified | FN | - | 15 130 DC |
-| 4 | Galil AR | Eco | classified | MW | - | 12 407 DC |
-| 5 | Tec-9 | Nuclear Threat | restricted | FN | - | 3 863 DC |
-| 6 | CZ75-Auto | Eco | restricted | FN | - | 3 192 DC |
-| 7 | P250 | Nuclear Threat | restricted | FN | - | 2 688 DC |
-| 8 | Glock-18 | Nuclear Garden | restricted | FN | - | 2 296 DC |
-| 9 | Glock-18 | Nuclear Garden | restricted | MW | - | 1 883 DC |
-| 10 | MP9 | Broken Record | milspec | FN | - | 1 343 DC |
-| 11 | MP9 | Bioleak | milspec | FN | - | 1 173 DC |
-| 12 | MP9 | Bioleak | milspec | MW | - | 962 DC |
-| 13 | Charm | Lil' Eco | restricted | - | - | 1 003 DC |
-| 14 | MAC-10 | Nuclear Garden | milspec | FN | - | 799 DC |
-| 15 | Desert Eagle | Bronze Deco | milspec | FN | - | 765 DC |
-| 16 | Desert Eagle | Bronze Deco | milspec | MW | - | 627 DC |
-| 17 | MP7 | Army Recon | milspec | MW | - | 683 DC |
-| 18 | Брелок | Lil' Eco | consumer | - | - | 15 DC |
-| 19 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 20 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 21 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 22 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 23 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 24 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 25 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 26 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 27 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 28 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 29 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 30 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
+| 3 | Tec-9 | Nuclear Threat | restricted | FN | - | 3 863 DC |
+| 4 | Tec-9 | Nuclear Threat | restricted | MW | - | 3 000 DC |
+| 5 | P250 | Nuclear Threat | restricted | FN | - | 2 688 DC |
+| 6 | P250 | Nuclear Threat | restricted | MW | - | 2 100 DC |
+| 7 | Glock-18 | Nuclear Garden | restricted | FN | - | 2 296 DC |
+| 8 | Glock-18 | Nuclear Garden | restricted | MW | - | 1 883 DC |
+| 9 | MAC-10 | Nuclear Garden | milspec | FN | - | 799 DC |
+| 10 | MAC-10 | Nuclear Garden | milspec | MW | - | 650 DC |
+| 11 | Galil AR | Eco | classified | FN | - | 15 130 DC |
+| 12 | Galil AR | Eco | classified | MW | - | 12 407 DC |
+| 13 | CZ75-Auto | Eco | restricted | FN | - | 3 192 DC |
+| 14 | CZ75-Auto | Eco | restricted | MW | - | 2 500 DC |
+| 15 | MP9 | Bioleak | milspec | FN | - | 1 173 DC |
+| 16 | MP9 | Bioleak | milspec | MW | - | 962 DC |
+| 17 | Tec-9 | Toxic | milspec | FN | - | 867 DC |
+| 18 | P90 | Grim | milspec | FN | - | 950 DC |
 
 ---
 
@@ -6591,49 +5042,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **3 700 DC**
 - **Описание:** Неоновые волны 80-х: MAC-10 Neon Rider, Signal, Pulse, High Beam, Decimator
-- **Количество предметов в кейсе:** 39 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Neon Rider | covert | FN | StatTrak™ | 75 600 DC |
-| 2 | AK-47 | Neon Rider | covert | MW | StatTrak™ | 62 160 DC |
+| 1 | MAC-10 | Neon Rider | covert | FN | - | 54 600 DC |
+| 2 | MAC-10 | Neon Rider | covert | MW | - | 44 772 DC |
 | 3 | AK-47 | Neon Rider | covert | FN | - | 56 000 DC |
-| 4 | MAC-10 | Neon Rider | covert | FN | - | 54 600 DC |
-| 5 | MAC-10 | Neon Rider | covert | MW | - | 44 772 DC |
-| 6 | M4A1-S | Decimator | classified | FN | - | 13 600 DC |
-| 7 | Tec-9 | Decimator | classified | MW | - | 9 758 DC |
-| 8 | MAC-10 | Disco Tech | classified | MW | - | 5 715 DC |
-| 9 | SG 553 | Pulse | restricted | FN | - | 2 968 DC |
-| 10 | SG 553 | Pulse | restricted | MW | - | 2 434 DC |
-| 11 | AUG | Signal Scanner | milspec | FN | StatTrak™ | 1 882 DC |
-| 12 | AUG | Signal Scanner | milspec | MW | - | 1 143 DC |
-| 13 | AUG | Signal Scanner | milspec | FT | - | 906 DC |
-| 14 | P2000 | Pulse | milspec | FN | - | 1 411 DC |
-| 15 | FAMAS | Pulse | restricted | WW | - | 1 310 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 17 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 18 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 20 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 21 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 23 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 24 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 26 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 27 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 29 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 30 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 32 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 33 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 35 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 36 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 38 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 39 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
+| 4 | AK-47 | Neon Rider | covert | MW | - | 45 000 DC |
+| 5 | M4A1-S | Decimator | classified | FN | - | 13 600 DC |
+| 6 | M4A1-S | Decimator | classified | MW | - | 11 000 DC |
+| 7 | Tec-9 | Decimator | classified | FN | - | 11 900 DC |
+| 8 | Tec-9 | Decimator | classified | MW | - | 9 758 DC |
+| 9 | MAC-10 | Disco Tech | classified | FN | - | 6 970 DC |
+| 10 | MAC-10 | Disco Tech | classified | MW | - | 5 715 DC |
+| 11 | SG 553 | Pulse | restricted | FN | - | 2 968 DC |
+| 12 | SG 553 | Pulse | restricted | MW | - | 2 434 DC |
+| 13 | FAMAS | Pulse | restricted | FN | - | 3 500 DC |
+| 14 | FAMAS | Pulse | restricted | MW | - | 2 800 DC |
+| 15 | P2000 | Pulse | milspec | FN | - | 1 411 DC |
+| 16 | AUG | Signal Scanner | milspec | FN | - | 1 882 DC |
+| 17 | Galil AR | Signal | restricted | FN | - | 3 200 DC |
+| 18 | Galil AR | Signal | restricted | MW | - | 2 617 DC |
 
 ---
 
@@ -6643,59 +5073,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **14 500 DC**
 - **Описание:** Золото фараонов: M4A4 Eye of Horus, AK-47 Legion of Anubis, Desert Blossom, Sundown
-- **Количество предметов в кейсе:** 49 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Legion of Anubis | covert | FN | StatTrak™ | 58 590 DC |
-| 2 | AK-47 | Legion of Anubis | covert | MW | StatTrak™ | 48 174 DC |
-| 3 | AK-47 | Legion of Anubis | covert | FN | - | 43 400 DC |
-| 4 | M4A4 | Eye of Horus | covert | FN | StatTrak™ | 47 250 DC |
-| 5 | M4A4 | Eye of Horus | covert | MW | StatTrak™ | 38 850 DC |
-| 6 | M4A4 | Eye of Horus | covert | MW | - | 28 700 DC |
-| 7 | Five-SeveN | Copper Galaxy | restricted | MW | StatTrak™ | 2 611 DC |
-| 8 | Five-SeveN | Copper Galaxy | restricted | MW | - | 1 929 DC |
-| 9 | Five-SeveN | Copper Galaxy | restricted | WW | - | 1 223 DC |
-| 10 | SG 553 | Desert Blossom | milspec | FN | - | 1 445 DC |
-| 11 | FAMAS | Sundown | milspec | MW | StatTrak™ | 1 076 DC |
-| 12 | FAMAS | Sundown | milspec | FT | StatTrak™ | 853 DC |
-| 13 | FAMAS | Sundown | milspec | FT | - | 630 DC |
-| 14 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 15 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
-| 16 | Hand Wraps | Spruce DDPAT | extraordinary | FT | - | 62 400 DC |
-| 17 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 18 | Hand Wraps | Desert Shamagh | extraordinary | MW | - | 151 536 DC |
-| 19 | Hand Wraps | Desert Shamagh | extraordinary | FT | - | 120 120 DC |
-| 20 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 21 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
-| 22 | Hand Wraps | Badlands | extraordinary | FT | - | 99 840 DC |
-| 23 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 24 | Hand Wraps | CAUTION! | extraordinary | MW | - | 100 368 DC |
-| 25 | Hand Wraps | CAUTION! | extraordinary | FT | - | 79 560 DC |
-| 26 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 27 | Hand Wraps | Duct Tape | extraordinary | MW | - | 173 184 DC |
-| 28 | Hand Wraps | Duct Tape | extraordinary | FT | - | 137 280 DC |
-| 29 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 30 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
-| 31 | Hand Wraps | Cobalt Skulls | extraordinary | FT | - | 117 000 DC |
-| 32 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 33 | Hand Wraps | Overprint | extraordinary | MW | - | 122 016 DC |
-| 34 | Hand Wraps | Overprint | extraordinary | FT | - | 96 720 DC |
-| 35 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 36 | Hand Wraps | Giraffe | extraordinary | MW | - | 96 432 DC |
-| 37 | Hand Wraps | Giraffe | extraordinary | FT | - | 76 440 DC |
-| 38 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 39 | Hand Wraps | Arboreal | extraordinary | MW | - | 169 248 DC |
-| 40 | Hand Wraps | Arboreal | extraordinary | FT | - | 134 160 DC |
-| 41 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 42 | Hand Wraps | Leather | extraordinary | MW | - | 143 664 DC |
-| 43 | Hand Wraps | Leather | extraordinary | FT | - | 113 880 DC |
-| 44 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 45 | Hand Wraps | Constrictor | extraordinary | MW | - | 118 080 DC |
-| 46 | Hand Wraps | Constrictor | extraordinary | FT | - | 93 600 DC |
-| 47 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 48 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
-| 49 | Hand Wraps | Slaughter | extraordinary | FT | - | 73 320 DC |
+| 1 | M4A4 | Eye of Horus | covert | FN | - | 35 000 DC |
+| 2 | M4A4 | Eye of Horus | covert | MW | - | 28 700 DC |
+| 3 | M4A4 | Eye of Horus | covert | FT | - | 22 750 DC |
+| 4 | AK-47 | Legion of Anubis | covert | FN | - | 43 400 DC |
+| 5 | AK-47 | Legion of Anubis | covert | MW | - | 35 000 DC |
+| 6 | AK-47 | Legion of Anubis | covert | FT | - | 27 000 DC |
+| 7 | SG 553 | Desert Blossom | milspec | FN | - | 1 445 DC |
+| 8 | SG 553 | Desert Blossom | milspec | MW | - | 1 150 DC |
+| 9 | SG 553 | Desert Blossom | milspec | FT | - | 900 DC |
+| 10 | FAMAS | Sundown | milspec | FN | - | 1 350 DC |
+| 11 | FAMAS | Sundown | milspec | MW | - | 1 076 DC |
+| 12 | FAMAS | Sundown | milspec | FT | - | 853 DC |
+| 13 | Five-SeveN | Copper Galaxy | restricted | FN | - | 2 352 DC |
+| 14 | Five-SeveN | Copper Galaxy | restricted | MW | - | 1 929 DC |
+| 15 | P90 | ScaraB Rush | restricted | FN | - | 3 584 DC |
+| 16 | P90 | ScaraB Rush | restricted | MW | - | 2 939 DC |
+| 17 | Glock-18 | Ramese's Reach | restricted | FN | - | 2 576 DC |
+| 18 | FAMAS | Waters of Nephthys | classified | FN | - | 7 990 DC |
 
 ---
 
@@ -6709,24 +5108,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Specialist Gloves | Field Agent | extraordinary | FN | - | 211 200 DC |
-| 2 | Desert Eagle | Ocean Drive | covert | FN | - | 50 400 DC |
-| 3 | Desert Eagle | Golden Koi | covert | FN | - | 46 900 DC |
-| 4 | Desert Eagle | Code Red | covert | FN | - | 38 500 DC |
-| 5 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
-| 6 | Desert Eagle | Starcade | classified | FN | - | 14 110 DC |
-| 7 | Desert Eagle | Mecha Industries | classified | FN | - | 11 220 DC |
-| 8 | Desert Eagle | Kumicho Dragon | classified | FN | - | 10 710 DC |
-| 9 | Desert Eagle | Naga | restricted | FN | - | 4 984 DC |
-| 10 | AK-47 | Slate | restricted | FN | - | 4 760 DC |
-| 11 | Desert Eagle | Directive | restricted | FN | - | 4 256 DC |
-| 12 | Desert Eagle | Serpent Strike | restricted | FN | - | 3 808 DC |
-| 13 | Desert Eagle | Heirloom | restricted | FN | - | 2 800 DC |
-| 14 | Desert Eagle | Light Rail | restricted | FN | - | 2 352 DC |
-| 15 | Desert Eagle | Blue Ply | milspec | FN | - | 1 003 DC |
-| 16 | Desert Eagle | Mint Fan | milspec | FN | - | 901 DC |
-| 17 | Desert Eagle | Oxide Blaze | milspec | FN | - | 782 DC |
-| 18 | Desert Eagle | Tilted | industrial | FN | - | 350 DC |
+| 1 | USP-S | Orion | classified | FN | - | 15 000 DC |
+| 2 | USP-S | Orion | classified | MW | - | 12 000 DC |
+| 3 | M4A1-S | Dark Water | restricted | FN | - | 4 928 DC |
+| 4 | M4A1-S | Dark Water | restricted | MW | - | 3 398 DC |
+| 5 | M4A1-S | Control Panel | classified | FN | - | 8 840 DC |
+| 6 | M4A1-S | Blue Phosphor | classified | FN | - | 10 880 DC |
+| 7 | M4A1-S | Printstream | covert | FN | - | 38 000 DC |
+| 8 | Desert Eagle | Conspiracy | classified | FN | - | 8 500 DC |
+| 9 | Desert Eagle | Conspiracy | classified | MW | - | 6 500 DC |
+| 10 | Desert Eagle | Directive | restricted | FN | - | 4 256 DC |
+| 11 | Desert Eagle | Starcade | classified | FN | - | 14 110 DC |
+| 12 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
+| 13 | Specialist Gloves | Field Agent | extraordinary | FN | - | 211 200 DC |
+| 14 | Оперативник | Special Agent Ava | covert | - | - | 19 950 DC |
+| 15 | Оперативник | Markus Delrow | restricted | - | - | 2 025 DC |
+| 16 | Оперативник | Michael Syfers | classified | - | - | 6 160 DC |
+| 17 | Оперативник | Operator | milspec | - | - | 792 DC |
+| 18 | AK-47 | Slate | restricted | FN | - | 4 760 DC |
 
 ---
 
@@ -6740,24 +5139,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
-| 2 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
-| 3 | Sport Gloves | Blaze | extraordinary | FN | - | 108 000 DC |
-| 4 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
-| 5 | AK-47 | Bloodsport | covert | FN | StatTrak™ | 82 215 DC |
-| 6 | AUG | Amber Fade | milspec | FN | - | 1 275 DC |
-| 7 | AUG | Amber Fade | milspec | FN | StatTrak™ | 1 721 DC |
-| 8 | AUG | Flame Jörmungandr | restricted | FN | - | 4 704 DC |
-| 9 | AUG | Flame Jörmungandr | restricted | FN | StatTrak™ | 6 350 DC |
-| 10 | AUG | Hot Rod | milspec | FN | - | 986 DC |
-| 11 | AUG | Hot Rod | milspec | FN | StatTrak™ | 1 331 DC |
-| 12 | AWP | Fade | covert | FN | - | 53 900 DC |
-| 13 | AWP | Fade | covert | FN | StatTrak™ | 72 765 DC |
-| 14 | AWP | Sovereign Flame | covert | FN | - | 49 700 DC |
-| 15 | AWP | Sovereign Flame | covert | FN | StatTrak™ | 67 095 DC |
-| 16 | AWP | Wildfire | covert | FN | - | 36 400 DC |
-| 17 | AWP | Wildfire | covert | FN | StatTrak™ | 49 140 DC |
-| 18 | Bayonet | Fade | covert | FN | - | 240 000 DC |
+| 1 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 2 | M4A4 | Howl | milspec | MW | - | 344 400 DC |
+| 3 | M4A4 | Howl | milspec | FT | - | 273 000 DC |
+| 4 | Брелок | Hot Howl | gold | - | - | 119 000 DC |
+| 5 | Брелок | Hot Howl | gold | - | - | 3 359 DC |
+| 6 | M4A1-S | Hot Rod | classified | FN | - | 12 750 DC |
+| 7 | Sport Gloves | Blaze | extraordinary | FN | - | 108 000 DC |
+| 8 | AWP | Sovereign Flame | covert | FN | - | 49 700 DC |
+| 9 | AWP | Wildfire | covert | FN | - | 36 400 DC |
+| 10 | M4A4 | Hellfire | classified | FN | - | 13 940 DC |
+| 11 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 12 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 13 | AUG | Flame Jörmungandr | restricted | FN | - | 4 704 DC |
+| 14 | AUG | Hot Rod | milspec | FN | - | 986 DC |
+| 15 | M4A1-S | Chantico's Fire | covert | FN | - | 39 200 DC |
+| 16 | Bayonet | Fade | covert | FN | - | 240 000 DC |
+| 17 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
+| 18 | AWP | Fade | covert | FN | - | 53 900 DC |
 
 ---
 
@@ -6771,24 +5170,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
-| 2 | AK-47 | Asiimov | covert | FN | StatTrak™ | 21 600 DC |
-| 3 | AK-47 | Redline | classified | FN | - | 12 410 DC |
-| 4 | AK-47 | Redline | classified | FN | StatTrak™ | 16 754 DC |
-| 5 | AK-47 | Point Disarray | classified | FN | - | 9 860 DC |
-| 6 | AK-47 | Point Disarray | classified | FN | StatTrak™ | 13 311 DC |
-| 7 | AK-47 | Vulcan | covert | FN | - | 31 500 DC |
-| 8 | AK-47 | Vulcan | covert | FN | StatTrak™ | 42 525 DC |
-| 9 | AK-47 | Frontside Misty | classified | FN | - | 13 940 DC |
-| 10 | AK-47 | Frontside Misty | classified | FN | StatTrak™ | 18 819 DC |
-| 11 | AWP | Asiimov | covert | FN | - | 16 000 DC |
-| 12 | AWP | Asiimov | covert | FN | StatTrak™ | 21 600 DC |
-| 13 | AWP | Redline | classified | FN | - | 11 730 DC |
-| 14 | AWP | Redline | classified | FN | StatTrak™ | 15 836 DC |
+| 1 | AK-47 | Vulcan | covert | FN | StatTrak™ | 42 525 DC |
+| 2 | AK-47 | Vulcan | covert | FN | - | 31 500 DC |
+| 3 | AK-47 | Vulcan | covert | MW | - | 26 000 DC |
+| 4 | AWP | Wildfire | covert | FN | - | 36 400 DC |
+| 5 | AWP | Wildfire | covert | MW | - | 29 848 DC |
+| 6 | Desert Eagle | Blaze | restricted | FN | - | 3 976 DC |
+| 7 | M4A4 | Hellfire | classified | FN | - | 13 940 DC |
+| 8 | M4A4 | Hellfire | classified | MW | - | 11 431 DC |
+| 9 | AK-47 | Redline | classified | FN | - | 12 410 DC |
+| 10 | AWP | Redline | classified | FN | - | 11 730 DC |
+| 11 | AK-47 | Point Disarray | classified | FN | - | 9 860 DC |
+| 12 | AK-47 | Point Disarray | classified | MW | - | 8 000 DC |
+| 13 | AK-47 | Frontside Misty | classified | FN | - | 13 940 DC |
+| 14 | AK-47 | Frontside Misty | classified | MW | - | 11 431 DC |
 | 15 | AWP | Electric Hive | classified | FN | - | 13 770 DC |
-| 16 | AWP | Electric Hive | classified | FN | StatTrak™ | 18 590 DC |
-| 17 | Bayonet | Doppler | covert | FN | - | 280 000 DC |
-| 18 | Bayonet | Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 16 | AWP | Asiimov | covert | FN | - | 16 000 DC |
+| 17 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
+| 18 | Bayonet | Doppler | covert | FN | - | 280 000 DC |
 
 ---
 
@@ -6803,23 +5202,23 @@
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
-| 2 | AK-47 | Gold Arabesque | covert | FN | StatTrak™ | 57 645 DC |
+| 2 | AK-47 | Gold Arabesque | covert | MW | - | 35 014 DC |
 | 3 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
-| 4 | AWP | Dragon Lore | covert | FN | StatTrak™ | 1 147 500 DC |
+| 4 | AWP | Dragon Lore | covert | MW | - | 697 000 DC |
 | 5 | AWP | Desert Hydra | covert | FN | - | 50 400 DC |
-| 6 | AWP | Desert Hydra | covert | FN | StatTrak™ | 68 040 DC |
-| 7 | Bayonet | Tiger Tooth | covert | FN | - | 103 200 DC |
-| 8 | Bayonet | Tiger Tooth | covert | FN | StatTrak™ | 139 320 DC |
-| 9 | Bayonet | Lore | covert | FN | - | 156 000 DC |
-| 10 | Bayonet | Lore | covert | FN | StatTrak™ | 210 600 DC |
+| 6 | Desert Eagle | Golden Koi | covert | FN | - | 46 900 DC |
+| 7 | Glock-18 | Gold Toof | covert | FN | - | 56 700 DC |
+| 8 | MAC-10 | Gold Brick | restricted | FN | - | 4 200 DC |
+| 9 | M4A4 | Royal Paladin | covert | FN | - | 60 900 DC |
+| 10 | Glock-18 | Brass | restricted | FN | - | 4 368 DC |
 | 11 | PP-Bizon | Brass | milspec | FN | - | 1 190 DC |
-| 12 | PP-Bizon | Brass | milspec | FN | StatTrak™ | 1 607 DC |
-| 13 | Desert Eagle | Golden Koi | covert | FN | - | 46 900 DC |
-| 14 | Desert Eagle | Golden Koi | covert | FN | StatTrak™ | 63 315 DC |
-| 15 | Glock-18 | Brass | restricted | FN | - | 4 368 DC |
-| 16 | Glock-18 | Brass | restricted | FN | StatTrak™ | 5 897 DC |
-| 17 | Glock-18 | Gold Toof | covert | FN | - | 56 700 DC |
-| 18 | Glock-18 | Gold Toof | covert | FN | StatTrak™ | 76 545 DC |
+| 12 | Bayonet | Tiger Tooth | covert | FN | - | 103 200 DC |
+| 13 | Bayonet | Lore | covert | FN | - | 156 000 DC |
+| 14 | Karambit | Lore | covert | FN | - | 158 400 DC |
+| 15 | M9 Bayonet | Lore | covert | FN | - | 180 000 DC |
+| 16 | Butterfly Knife | Lore | covert | FN | - | 182 400 DC |
+| 17 | M4A1-S | Golden Coil | covert | FN | - | 62 300 DC |
+| 18 | Five-SeveN | Copper Galaxy | restricted | FN | - | 2 352 DC |
 
 ---
 
@@ -6835,22 +5234,22 @@
 |---|---|---|---|---|---|---|
 | 1 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
 | 2 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
-| 3 | AUG | Amber Fade | milspec | FN | - | 1 275 DC |
-| 4 | AUG | Amber Fade | milspec | FN | StatTrak™ | 1 721 DC |
-| 5 | AWP | Fade | covert | FN | - | 53 900 DC |
-| 6 | AWP | Fade | covert | FN | StatTrak™ | 72 765 DC |
-| 7 | Bayonet | Fade | covert | FN | - | 240 000 DC |
-| 8 | Bayonet | Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 9 | Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
-| 10 | Bayonet | Marble Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 11 | Galil AR | Amber Fade | milspec | FN | - | 1 173 DC |
-| 12 | Galil AR | Amber Fade | milspec | FN | StatTrak™ | 1 584 DC |
-| 13 | Glock-18 | Fade | restricted | FN | - | 2 632 DC |
-| 14 | Glock-18 | Fade | restricted | FN | StatTrak™ | 3 553 DC |
+| 3 | Karambit | Fade | covert | FN | - | 240 000 DC |
+| 4 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
+| 5 | M9 Bayonet | Fade | covert | FN | - | 240 000 DC |
+| 6 | Bayonet | Fade | covert | FN | - | 240 000 DC |
+| 7 | Talon Knife | Fade | covert | FN | - | 240 000 DC |
+| 8 | Skeleton Knife | Fade | covert | FN | - | 240 000 DC |
+| 9 | AWP | Fade | covert | FN | - | 53 900 DC |
+| 10 | Glock-18 | Fade | restricted | FN | - | 2 632 DC |
+| 11 | MAC-10 | Fade | milspec | FN | - | 2 800 DC |
+| 12 | MP7 | Fade | restricted | FN | - | 4 480 DC |
+| 13 | R8 Revolver | Fade | covert | FN | - | 31 850 DC |
+| 14 | UMP-45 | Fade | classified | FN | - | 9 180 DC |
 | 15 | P2000 | Amber Fade | restricted | FN | - | 4 480 DC |
-| 16 | P2000 | Amber Fade | restricted | FN | StatTrak™ | 6 048 DC |
-| 17 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
-| 18 | Butterfly Knife | Fade | covert | FN | StatTrak™ | 324 000 DC |
+| 16 | M4A1-S | Fade | covert | FN | - | 68 000 DC |
+| 17 | AUG | Amber Fade | milspec | FN | - | 1 275 DC |
+| 18 | Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
 
 ---
 
@@ -6864,24 +5263,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 2 | Hand Wraps | Desert Shamagh | extraordinary | FN | - | 184 800 DC |
-| 3 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
-| 4 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
-| 5 | Hand Wraps | Duct Tape | extraordinary | FN | - | 211 200 DC |
-| 6 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 7 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
-| 8 | Hand Wraps | Giraffe | extraordinary | FN | - | 117 600 DC |
-| 9 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
-| 10 | Hand Wraps | Leather | extraordinary | FN | - | 175 200 DC |
-| 11 | Hand Wraps | Constrictor | extraordinary | FN | - | 144 000 DC |
-| 12 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
-| 13 | Moto Gloves | Eclipse | extraordinary | FN | - | 201 600 DC |
-| 14 | Moto Gloves | Turtle | extraordinary | FN | - | 170 400 DC |
-| 15 | Moto Gloves | Blood Pressure | extraordinary | FN | - | 139 200 DC |
-| 16 | Moto Gloves | Finish Line | extraordinary | FN | - | 108 000 DC |
-| 17 | Moto Gloves | POW! | extraordinary | FN | - | 196 800 DC |
-| 18 | Moto Gloves | 3rd Commando Company | extraordinary | FN | - | 165 600 DC |
+| 1 | Sport Gloves | Vice | extraordinary | FN | - | 350 000 DC |
+| 2 | Sport Gloves | Pandora's Box | extraordinary | FN | - | 380 000 DC |
+| 3 | Sport Gloves | Superconductor | extraordinary | FN | - | 270 000 DC |
+| 4 | Sport Gloves | Amphibious | extraordinary | FN | - | 260 000 DC |
+| 5 | Moto Gloves | Spearmint | extraordinary | FN | - | 220 000 DC |
+| 6 | Moto Gloves | POW! | extraordinary | FN | - | 196 800 DC |
+| 7 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
+| 8 | Hand Wraps | Overprint | extraordinary | FN | - | 148 800 DC |
+| 9 | Hand Wraps | CAUTION! | extraordinary | FN | - | 122 400 DC |
+| 10 | Specialist Gloves | Crimson Kimono | extraordinary | FN | - | 230 000 DC |
+| 11 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
+| 12 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
+| 13 | Driver Gloves | King Snake | extraordinary | FN | - | 199 200 DC |
+| 14 | Driver Gloves | Snow Leopard | extraordinary | FN | - | 146 400 DC |
+| 15 | Driver Gloves | Imperial Plaid | extraordinary | FN | - | 172 800 DC |
+| 16 | Moto Gloves | Eclipse | extraordinary | FN | - | 201 600 DC |
+| 17 | Hand Wraps | Slaughter | extraordinary | FN | - | 112 800 DC |
+| 18 | Driver Gloves | Black Tie | extraordinary | FN | - | 105 600 DC |
 
 ---
 
@@ -6895,24 +5294,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Bayonet | Doppler | covert | FN | - | 280 000 DC |
-| 2 | Bayonet | Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 3 | Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 4 | Bayonet | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 5 | Glock-18 | Gamma Doppler | covert | FN | - | 48 299 DC |
-| 6 | Glock-18 | Gamma Doppler | covert | FN | StatTrak™ | 65 204 DC |
-| 7 | Butterfly Knife | Doppler | covert | FN | - | 280 000 DC |
-| 8 | Butterfly Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 9 | Butterfly Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 10 | Butterfly Knife | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 11 | Survival Knife | Doppler | covert | FN | - | 280 000 DC |
-| 12 | Survival Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 13 | Paracord Knife | Doppler | covert | FN | - | 280 000 DC |
-| 14 | Paracord Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 15 | Falchion Knife | Doppler | covert | FN | - | 280 000 DC |
-| 16 | Falchion Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 17 | Falchion Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 18 | Falchion Knife | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 1 | Karambit | Doppler | covert | FN | - | 280 000 DC |
+| 2 | Karambit | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 3 | M9 Bayonet | Doppler | covert | FN | - | 280 000 DC |
+| 4 | M9 Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 5 | Butterfly Knife | Doppler | covert | FN | - | 280 000 DC |
+| 6 | Butterfly Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 7 | Bayonet | Doppler | covert | FN | - | 280 000 DC |
+| 8 | Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 9 | Talon Knife | Doppler | covert | FN | - | 280 000 DC |
+| 10 | Skeleton Knife | Doppler | covert | FN | - | 280 000 DC |
+| 11 | Stiletto Knife | Doppler | covert | FN | - | 280 000 DC |
+| 12 | Nomad Knife | Doppler | covert | FN | - | 280 000 DC |
+| 13 | Ursus Knife | Doppler | covert | FN | - | 280 000 DC |
+| 14 | Paracord Knife | Doppler | covert | FN | - | 280 000 DC |
+| 15 | Survival Knife | Doppler | covert | FN | - | 280 000 DC |
+| 16 | Flip Knife | Doppler | covert | FN | - | 280 000 DC |
+| 17 | Huntsman Knife | Doppler | covert | FN | - | 280 000 DC |
+| 18 | Glock-18 | Gamma Doppler | covert | FN | - | 48 299 DC |
 
 ---
 
@@ -6926,24 +5325,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
-| 2 | Hydra Gloves | Emerald | extraordinary | FN | - | 168 000 DC |
-| 3 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
-| 4 | AK-47 | Wild Lotus | covert | FN | StatTrak™ | 52 920 DC |
-| 5 | AK-47 | Emerald Pinstripe | restricted | FN | - | 4 984 DC |
-| 6 | AK-47 | Emerald Pinstripe | restricted | FN | StatTrak™ | 6 728 DC |
-| 7 | AK-47 | Jungle Spray | industrial | FN | - | 255 DC |
-| 8 | AK-47 | Jungle Spray | industrial | FN | StatTrak™ | 344 DC |
+| 1 | AK-47 | Wild Lotus | covert | FN | StatTrak™ | 52 920 DC |
+| 2 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 3 | AK-47 | Wild Lotus | covert | MW | - | 32 144 DC |
+| 4 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
+| 5 | Hydra Gloves | Emerald | extraordinary | FN | - | 168 000 DC |
+| 6 | MP9 | Wild Lily | classified | FN | - | 12 920 DC |
+| 7 | Glock-18 | Synth Leaf | restricted | FN | - | 4 088 DC |
+| 8 | AK-47 | Emerald Pinstripe | restricted | FN | - | 4 984 DC |
 | 9 | AWP | Silk Tiger | classified | FN | - | 10 540 DC |
-| 10 | AWP | Silk Tiger | classified | FN | StatTrak™ | 14 229 DC |
-| 11 | Bayonet | Boreal Forest | covert | FN | - | 151 200 DC |
-| 12 | Bayonet | Boreal Forest | covert | FN | StatTrak™ | 204 120 DC |
+| 10 | Bayonet | Boreal Forest | covert | FN | - | 151 200 DC |
+| 11 | CZ75-Auto | Emerald Quartz | milspec | FN | - | 1 292 DC |
+| 12 | CZ75-Auto | Emerald | milspec | FN | - | 1 445 DC |
 | 13 | PP-Bizon | Jungle Slipstream | milspec | FN | - | 833 DC |
-| 14 | PP-Bizon | Jungle Slipstream | milspec | FN | StatTrak™ | 1 125 DC |
-| 15 | CZ75-Auto | Emerald Quartz | milspec | FN | - | 1 292 DC |
-| 16 | CZ75-Auto | Emerald Quartz | milspec | FN | StatTrak™ | 1 744 DC |
-| 17 | CZ75-Auto | Emerald | milspec | FN | - | 1 445 DC |
-| 18 | CZ75-Auto | Emerald | milspec | FN | StatTrak™ | 1 951 DC |
+| 14 | P90 | Sunset Lily | industrial | FN | - | 250 DC |
+| 15 | SSG 08 | Sea Calico | restricted | FN | - | 3 500 DC |
+| 16 | MP7 | Teal Blossom | milspec | FN | - | 1 088 DC |
+| 17 | AK-47 | Jungle Spray | industrial | FN | - | 255 DC |
+| 18 | AUG | Copperhead | milspec | FN | - | 1 224 DC |
 
 ---
 
@@ -6957,24 +5356,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
-| 2 | Hydra Gloves | Emerald | extraordinary | FN | - | 168 000 DC |
-| 3 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
-| 4 | AK-47 | Fire Serpent | covert | FN | StatTrak™ | 162 000 DC |
-| 5 | AK-47 | Emerald Pinstripe | restricted | FN | - | 4 984 DC |
-| 6 | AK-47 | Emerald Pinstripe | restricted | FN | StatTrak™ | 6 728 DC |
+| 1 | AK-47 | Fire Serpent | covert | FN | StatTrak™ | 162 000 DC |
+| 2 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 3 | AK-47 | Fire Serpent | covert | MW | - | 98 400 DC |
+| 4 | Desert Eagle | Kumicho Dragon | classified | FN | - | 10 710 DC |
+| 5 | P90 | Emerald Dragon | classified | FN | - | 9 350 DC |
+| 6 | AWP | Containment Breach | covert | FN | - | 45 500 DC |
 | 7 | AUG | Flame Jörmungandr | restricted | FN | - | 4 704 DC |
-| 8 | AUG | Flame Jörmungandr | restricted | FN | StatTrak™ | 6 350 DC |
-| 9 | AWP | Containment Breach | covert | FN | - | 45 500 DC |
-| 10 | AWP | Containment Breach | covert | FN | StatTrak™ | 61 425 DC |
-| 11 | CZ75-Auto | Emerald Quartz | milspec | FN | - | 1 292 DC |
-| 12 | CZ75-Auto | Emerald Quartz | milspec | FN | StatTrak™ | 1 744 DC |
-| 13 | CZ75-Auto | Emerald | milspec | FN | - | 1 445 DC |
-| 14 | CZ75-Auto | Emerald | milspec | FN | StatTrak™ | 1 951 DC |
-| 15 | Desert Eagle | Emerald Jörmungandr | restricted | FN | - | 2 408 DC |
-| 16 | Desert Eagle | Emerald Jörmungandr | restricted | FN | StatTrak™ | 3 251 DC |
-| 17 | Desert Eagle | Kumicho Dragon | classified | FN | - | 10 710 DC |
-| 18 | Desert Eagle | Kumicho Dragon | classified | FN | StatTrak™ | 14 459 DC |
+| 8 | Desert Eagle | Emerald Jörmungandr | restricted | FN | - | 2 408 DC |
+| 9 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
+| 10 | Hydra Gloves | Emerald | extraordinary | FN | - | 168 000 DC |
+| 11 | Glock-18 | Dragon Tattoo | restricted | FN | - | 4 592 DC |
+| 12 | Dual Berettas | Dualing Dragons | milspec | FN | - | 1 173 DC |
+| 13 | AK-47 | Emerald Pinstripe | restricted | FN | - | 4 984 DC |
+| 14 | CZ75-Auto | Emerald Quartz | milspec | FN | - | 1 292 DC |
+| 15 | CZ75-Auto | Emerald | milspec | FN | - | 1 445 DC |
+| 16 | P2000 | Imperial Dragon | classified | FN | - | 13 770 DC |
+| 17 | M4A4 | 龍王 (Dragon King) | classified | FN | - | 10 200 DC |
+| 18 | SG 553 | Dragon Tech | restricted | FN | - | 3 080 DC |
 
 ---
 
@@ -6988,24 +5387,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Neon Revolution | covert | FN | - | 52 500 DC |
-| 2 | AK-47 | Neon Revolution | covert | FN | StatTrak™ | 70 875 DC |
-| 3 | AK-47 | Neon Rider | covert | FN | - | 56 000 DC |
+| 1 | AK-47 | Neon Revolution | covert | FN | StatTrak™ | 70 875 DC |
+| 2 | AK-47 | Neon Revolution | covert | FN | - | 52 500 DC |
+| 3 | AK-47 | Neon Revolution | covert | MW | - | 42 000 DC |
 | 4 | AK-47 | Neon Rider | covert | FN | StatTrak™ | 75 600 DC |
-| 5 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
-| 6 | AWP | Neo-Noir | covert | FN | StatTrak™ | 63 315 DC |
-| 7 | AWP | Fever Dream | classified | FN | - | 9 180 DC |
-| 8 | AWP | Fever Dream | classified | FN | StatTrak™ | 12 393 DC |
-| 9 | Glock-18 | Neo-Noir | covert | FN | - | 41 300 DC |
-| 10 | Glock-18 | Neo-Noir | covert | FN | StatTrak™ | 55 755 DC |
-| 11 | M4A4 | Neo-Noir | covert | FN | - | 39 200 DC |
-| 12 | M4A4 | Neo-Noir | covert | FN | StatTrak™ | 52 920 DC |
+| 5 | AK-47 | Neon Rider | covert | FN | - | 56 000 DC |
+| 6 | AK-47 | Neon Rider | covert | MW | - | 45 000 DC |
+| 7 | MAC-10 | Neon Rider | covert | FN | - | 54 600 DC |
+| 8 | MAC-10 | Neon Rider | covert | MW | - | 44 772 DC |
+| 9 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
+| 10 | AWP | Neo-Noir | covert | MW | - | 38 000 DC |
+| 11 | Glock-18 | Neo-Noir | covert | FN | - | 41 300 DC |
+| 12 | M4A4 | Neo-Noir | covert | FN | - | 39 200 DC |
 | 13 | M4A1-S | Decimator | classified | FN | - | 13 600 DC |
-| 14 | M4A1-S | Decimator | classified | FN | StatTrak™ | 18 360 DC |
-| 15 | MAC-10 | Disco Tech | classified | FN | - | 6 970 DC |
-| 16 | MAC-10 | Disco Tech | classified | FN | StatTrak™ | 9 410 DC |
-| 17 | MAC-10 | Neon Rider | covert | FN | - | 54 600 DC |
-| 18 | MAC-10 | Neon Rider | covert | FN | StatTrak™ | 73 710 DC |
+| 14 | M4A1-S | Decimator | classified | MW | - | 11 000 DC |
+| 15 | AWP | Fever Dream | classified | FN | - | 9 180 DC |
+| 16 | AWP | Fever Dream | classified | MW | - | 7 500 DC |
+| 17 | MAC-10 | Disco Tech | classified | FN | - | 6 970 DC |
+| 18 | UMP-45 | Neo-Noir | classified | FN | - | 14 280 DC |
 
 ---
 
@@ -7019,24 +5418,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AWP | Fade | covert | FN | - | 53 900 DC |
-| 2 | AWP | Fade | covert | FN | StatTrak™ | 72 765 DC |
-| 3 | AWP | Man-o'-war | covert | FN | - | 44 800 DC |
-| 4 | AWP | Man-o'-war | covert | FN | StatTrak™ | 60 480 DC |
-| 5 | AWP | PAW | restricted | FN | - | 2 856 DC |
-| 6 | AWP | PAW | restricted | FN | StatTrak™ | 3 856 DC |
-| 7 | AWP | Graphite | classified | FN | - | 14 960 DC |
-| 8 | AWP | Graphite | classified | FN | StatTrak™ | 20 196 DC |
-| 9 | AWP | Lightning Strike | covert | FN | - | 52 500 DC |
-| 10 | AWP | Lightning Strike | covert | FN | StatTrak™ | 70 875 DC |
+| 1 | AWP | Gungnir | covert | FN | - | 59 500 DC |
+| 2 | AWP | Gungnir | covert | MW | - | 48 790 DC |
+| 3 | AWP | Medusa | covert | FN | - | 44 100 DC |
+| 4 | AWP | Medusa | covert | MW | - | 36 162 DC |
+| 5 | AWP | The Prince | covert | FN | - | 42 700 DC |
+| 6 | AWP | The Prince | covert | MW | - | 35 000 DC |
+| 7 | AWP | Desert Hydra | covert | FN | - | 50 400 DC |
+| 8 | AWP | Lightning Strike | covert | FN | - | 52 500 DC |
+| 9 | AWP | Fade | covert | FN | - | 53 900 DC |
+| 10 | AWP | Graphite | classified | FN | - | 14 960 DC |
 | 11 | AWP | Silk Tiger | classified | FN | - | 10 540 DC |
-| 12 | AWP | Silk Tiger | classified | FN | StatTrak™ | 14 229 DC |
-| 13 | AWP | Worm God | restricted | FN | - | 2 744 DC |
-| 14 | AWP | Worm God | restricted | FN | StatTrak™ | 3 704 DC |
-| 15 | AWP | Black Box | restricted | FN | - | 4 816 DC |
-| 16 | AWP | Black Box | restricted | FN | StatTrak™ | 6 502 DC |
-| 17 | AWP | Ice Coaled | classified | FN | - | 12 410 DC |
-| 18 | AWP | Ice Coaled | classified | FN | StatTrak™ | 16 754 DC |
+| 12 | AWP | Silk Tiger | classified | MW | - | 8 500 DC |
+| 13 | AWP | Man-o'-war | covert | FN | - | 44 800 DC |
+| 14 | AWP | Ice Coaled | classified | FN | - | 12 410 DC |
+| 15 | AWP | Ice Coaled | classified | MW | - | 10 000 DC |
+| 16 | AWP | PAW | restricted | FN | - | 2 856 DC |
+| 17 | AWP | Worm God | restricted | FN | - | 2 744 DC |
+| 18 | AWP | Black Box | restricted | FN | - | 4 816 DC |
 
 ---
 
@@ -7050,24 +5449,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
-| 2 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
-| 3 | Hydra Gloves | Case Hardened | extraordinary | FN | - | 136 800 DC |
-| 4 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
-| 5 | AK-47 | Case Hardened | classified | FN | StatTrak™ | 11 705 DC |
-| 6 | AUG | Amber Fade | milspec | FN | - | 1 275 DC |
-| 7 | AUG | Amber Fade | milspec | FN | StatTrak™ | 1 721 DC |
-| 8 | AWP | Fade | covert | FN | - | 53 900 DC |
-| 9 | AWP | Fade | covert | FN | StatTrak™ | 72 765 DC |
-| 10 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
-| 11 | AWP | Dragon Lore | covert | FN | StatTrak™ | 1 147 500 DC |
-| 12 | AWP | The Prince | covert | FN | - | 42 700 DC |
-| 13 | AWP | The Prince | covert | FN | StatTrak™ | 57 645 DC |
-| 14 | AWP | Gungnir | covert | FN | - | 59 500 DC |
-| 15 | AWP | Gungnir | covert | FN | StatTrak™ | 80 325 DC |
-| 16 | Bayonet | Fade | covert | FN | - | 240 000 DC |
-| 17 | Bayonet | Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 18 | Bayonet | Doppler | covert | FN | - | 280 000 DC |
+| 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
+| 2 | AWP | Dragon Lore | covert | MW | - | 697 000 DC |
+| 3 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 4 | M4A4 | Howl | milspec | MW | - | 344 400 DC |
+| 5 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
+| 6 | AK-47 | Case Hardened | classified | MW | - | 7 000 DC |
+| 7 | AWP | Gungnir | covert | FN | - | 59 500 DC |
+| 8 | AWP | The Prince | covert | FN | - | 42 700 DC |
+| 9 | AWP | Medusa | covert | FN | - | 44 100 DC |
+| 10 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 11 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
+| 12 | Karambit | Case Hardened | covert | FN | - | 100 800 DC |
+| 13 | Butterfly Knife | Case Hardened | covert | FN | - | 124 800 DC |
+| 14 | M9 Bayonet | Case Hardened | covert | FN | - | 105 600 DC |
+| 15 | Hydra Gloves | Case Hardened | extraordinary | FN | - | 136 800 DC |
+| 16 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
+| 17 | Karambit | Fade | covert | FN | - | 240 000 DC |
+| 18 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
 
 ---
 
@@ -7081,24 +5480,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Bayonet | Fade | covert | FN | - | 240 000 DC |
-| 2 | Bayonet | Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 3 | Bayonet | Doppler | covert | FN | - | 280 000 DC |
-| 4 | Bayonet | Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 5 | Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 6 | Bayonet | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 7 | Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
-| 8 | Bayonet | Marble Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 9 | Bayonet | Freehand | covert | FN | - | 108 000 DC |
-| 10 | Bayonet | Freehand | covert | FN | StatTrak™ | 145 800 DC |
-| 11 | Bayonet | Slaughter | covert | FN | - | 134 400 DC |
-| 12 | Bayonet | Slaughter | covert | FN | StatTrak™ | 181 440 DC |
-| 13 | Bayonet | Tiger Tooth | covert | FN | - | 103 200 DC |
-| 14 | Bayonet | Tiger Tooth | covert | FN | StatTrak™ | 139 320 DC |
-| 15 | Bayonet | Blue Steel | covert | FN | - | 192 000 DC |
-| 16 | Bayonet | Blue Steel | covert | FN | StatTrak™ | 259 200 DC |
-| 17 | Bayonet | Damascus Steel | covert | FN | - | 160 800 DC |
-| 18 | Bayonet | Damascus Steel | covert | FN | StatTrak™ | 217 080 DC |
+| 1 | Karambit | Doppler | covert | FN | - | 280 000 DC |
+| 2 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
+| 3 | M9 Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
+| 4 | Bayonet | Slaughter | covert | FN | - | 134 400 DC |
+| 5 | Talon Knife | Tiger Tooth | covert | FN | - | 139 200 DC |
+| 6 | Skeleton Knife | Crimson Web | covert | MW | - | 145 632 DC |
+| 7 | Stiletto Knife | Damascus Steel | covert | FN | - | 96 000 DC |
+| 8 | Nomad Knife | Case Hardened | covert | FN | - | 192 000 DC |
+| 9 | Ursus Knife | Ultraviolet | covert | FN | - | 127 200 DC |
+| 10 | Paracord Knife | Night Stripe | covert | FN | - | 172 800 DC |
+| 11 | Survival Knife | Blue Steel | covert | MW | - | 115 000 DC |
+| 12 | Kukri Knife | Slaughter | covert | FN | - | 112 800 DC |
+| 13 | Flip Knife | Autotronic | covert | FN | - | 206 400 DC |
+| 14 | Huntsman Knife | Lore | covert | MW | - | 110 208 DC |
+| 15 | Bowie Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 16 | Falchion Knife | Fade | covert | FN | - | 240 000 DC |
+| 17 | Shadow Daggers | Doppler | covert | FN | - | 280 000 DC |
+| 18 | Gut Knife | Tiger Tooth | covert | FN | - | 115 200 DC |
 
 ---
 
@@ -7108,20 +5507,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **3 900 DC**
 - **Описание:** Строгая красно-черная классика карбона и стали
-- **Количество предметов в кейсе:** 10 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | USP-S | Cyrex | restricted | - | - | 2 912 DC |
-| 2 | SCAR-20 | Cyrex | classified | - | - | 7 990 DC |
-| 3 | AWP | Redline | classified | - | - | 11 730 DC |
-| 4 | AK-47 | Redline | classified | - | - | 12 410 DC |
-| 5 | SG 553 | Cyrex | classified | - | - | 13 430 DC |
-| 6 | SCAR-20 | Bloodsport | classified | - | - | 14 280 DC |
-| 7 | Desert Eagle | Code Red | covert | - | - | 38 500 DC |
-| 8 | M4A1-S | Cyrex | covert | - | - | 49 700 DC |
-| 9 | MP7 | Bloodsport | covert | - | - | 59 500 DC |
-| 10 | AK-47 | Bloodsport | covert | - | - | 60 900 DC |
+| 1 | AK-47 | Redline | classified | FN | - | 12 410 DC |
+| 2 | AK-47 | Redline | classified | MW | - | 10 176 DC |
+| 3 | AK-47 | Redline | classified | FT | - | 7 500 DC |
+| 4 | AK-47 | Redline | classified | BS | - | 5 000 DC |
+| 5 | AWP | Redline | classified | FN | - | 11 730 DC |
+| 6 | AWP | Redline | classified | MW | - | 9 500 DC |
+| 7 | AWP | Redline | classified | FT | - | 7 000 DC |
+| 8 | AWP | Redline | classified | BS | - | 4 800 DC |
+| 9 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 10 | AK-47 | Bloodsport | covert | MW | - | 49 938 DC |
+| 11 | MP7 | Bloodsport | covert | FN | - | 59 500 DC |
+| 12 | MP7 | Bloodsport | covert | MW | - | 48 000 DC |
+| 13 | SCAR-20 | Bloodsport | classified | FN | - | 14 280 DC |
+| 14 | Desert Eagle | Code Red | covert | FN | - | 38 500 DC |
+| 15 | Desert Eagle | Code Red | covert | MW | - | 30 000 DC |
+| 16 | M4A1-S | Cyrex | covert | FN | - | 49 700 DC |
+| 17 | SCAR-20 | Cyrex | classified | FN | - | 7 990 DC |
+| 18 | USP-S | Cyrex | restricted | FN | - | 2 912 DC |
 
 ---
 
@@ -7135,24 +5542,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Driver Gloves | Racing Green | extraordinary | FN | - | 194 400 DC |
-| 2 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
-| 3 | Hydra Gloves | Emerald | extraordinary | FN | - | 168 000 DC |
-| 4 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
-| 5 | AK-47 | Hydroponic | classified | FN | StatTrak™ | 17 672 DC |
-| 6 | AK-47 | Emerald Pinstripe | restricted | FN | - | 4 984 DC |
-| 7 | AK-47 | Emerald Pinstripe | restricted | FN | StatTrak™ | 6 728 DC |
-| 8 | AK-47 | Green Laminate | milspec | FN | - | 1 377 DC |
-| 9 | AK-47 | Green Laminate | milspec | FN | StatTrak™ | 1 859 DC |
-| 10 | AWP | Atheris | restricted | FN | - | 4 368 DC |
-| 11 | AWP | Atheris | restricted | FN | StatTrak™ | 5 897 DC |
-| 12 | AWP | Green Energy | classified | FN | - | 14 790 DC |
-| 13 | AWP | Green Energy | classified | FN | StatTrak™ | 19 967 DC |
-| 14 | PP-Bizon | Chemical Green | industrial | FN | - | 215 DC |
-| 15 | PP-Bizon | Chemical Green | industrial | FN | StatTrak™ | 290 DC |
-| 16 | CZ75-Auto | Emerald Quartz | milspec | FN | - | 1 292 DC |
-| 17 | CZ75-Auto | Emerald Quartz | milspec | FN | StatTrak™ | 1 744 DC |
-| 18 | CZ75-Auto | Emerald | milspec | FN | - | 1 445 DC |
+| 1 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 2 | AK-47 | Hydroponic | classified | MW | - | 10 500 DC |
+| 3 | AK-47 | Emerald Pinstripe | restricted | FN | - | 4 984 DC |
+| 4 | AK-47 | Emerald Pinstripe | restricted | MW | - | 3 800 DC |
+| 5 | AWP | Atheris | restricted | FN | - | 4 368 DC |
+| 6 | AWP | Atheris | restricted | MW | - | 3 500 DC |
+| 7 | AWP | Green Energy | classified | FN | - | 14 790 DC |
+| 8 | AWP | Green Energy | classified | MW | - | 12 000 DC |
+| 9 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
+| 10 | Hydra Gloves | Emerald | extraordinary | FN | - | 168 000 DC |
+| 11 | Driver Gloves | Racing Green | extraordinary | FN | - | 194 400 DC |
+| 12 | Galil AR | Eco | classified | FN | - | 15 130 DC |
+| 13 | Galil AR | Eco | classified | MW | - | 12 407 DC |
+| 14 | CZ75-Auto | Emerald | milspec | FN | - | 1 445 DC |
+| 15 | SCAR-20 | Emerald | restricted | FN | - | 4 928 DC |
+| 16 | PP-Bizon | Chemical Green | industrial | FN | - | 215 DC |
+| 17 | Glock-18 | Nuclear Garden | restricted | FN | - | 2 296 DC |
+| 18 | P250 | Nuclear Threat | restricted | FN | - | 2 688 DC |
 
 ---
 
@@ -7166,24 +5573,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Driver Gloves | Dragon Fists | extraordinary | FN | - | 124 800 DC |
-| 2 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
-| 3 | AK-47 | Bloodsport | covert | FN | StatTrak™ | 82 215 DC |
-| 4 | AUG | Akihabara Accept | covert | FN | - | 56 000 DC |
-| 5 | AUG | Akihabara Accept | covert | FN | StatTrak™ | 75 600 DC |
-| 6 | AWP | Oni Taiji | covert | FN | - | 39 200 DC |
-| 7 | AWP | Oni Taiji | covert | FN | StatTrak™ | 52 920 DC |
-| 8 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
-| 9 | AWP | Dragon Lore | covert | FN | StatTrak™ | 1 147 500 DC |
-| 10 | Desert Eagle | Kumicho Dragon | classified | FN | - | 10 710 DC |
-| 11 | Desert Eagle | Kumicho Dragon | classified | FN | StatTrak™ | 14 459 DC |
-| 12 | Dual Berettas | Dualing Dragons | milspec | FN | - | 1 173 DC |
-| 13 | Dual Berettas | Dualing Dragons | milspec | FN | StatTrak™ | 1 584 DC |
-| 14 | Glock-18 | Dragon Tattoo | restricted | FN | - | 4 592 DC |
-| 15 | Glock-18 | Dragon Tattoo | restricted | FN | StatTrak™ | 6 199 DC |
-| 16 | P2000 | Imperial Dragon | classified | FN | - | 13 770 DC |
-| 17 | P2000 | Imperial Dragon | classified | FN | StatTrak™ | 18 590 DC |
-| 18 | M4A4 | 龍王 (Dragon King) | classified | FN | - | 10 200 DC |
+| 1 | AUG | Akihabara Accept | covert | FN | - | 56 000 DC |
+| 2 | AUG | Akihabara Accept | covert | MW | - | 45 000 DC |
+| 3 | AWP | Oni Taiji | covert | FN | - | 39 200 DC |
+| 4 | AWP | Oni Taiji | covert | MW | - | 32 000 DC |
+| 5 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 6 | AK-47 | Bloodsport | covert | MW | - | 49 938 DC |
+| 7 | Desert Eagle | Kumicho Dragon | classified | FN | - | 10 710 DC |
+| 8 | Desert Eagle | Kumicho Dragon | classified | MW | - | 8 500 DC |
+| 9 | M4A4 | 龍王 (Dragon King) | classified | FN | - | 10 200 DC |
+| 10 | M4A4 | 龍王 (Dragon King) | classified | MW | - | 8 000 DC |
+| 11 | P2000 | Imperial Dragon | classified | FN | - | 13 770 DC |
+| 12 | P2000 | Imperial Dragon | classified | MW | - | 11 000 DC |
+| 13 | Glock-18 | Dragon Tattoo | restricted | FN | - | 4 592 DC |
+| 14 | Glock-18 | Dragon Tattoo | restricted | MW | - | 3 800 DC |
+| 15 | Dual Berettas | Dualing Dragons | milspec | FN | - | 1 173 DC |
+| 16 | Glock-18 | Shinobu | classified | FN | - | 15 147 DC |
+| 17 | Driver Gloves | Dragon Fists | extraordinary | FN | - | 124 800 DC |
+| 18 | MAC-10 | Saibā Oni | restricted | FN | - | 4 500 DC |
 
 ---
 
@@ -7197,24 +5604,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
-| 2 | Specialist Gloves | Forest DDPAT | extraordinary | FN | - | 184 800 DC |
-| 3 | AK-47 | VariCamo Grey | industrial | FN | - | 385 DC |
-| 4 | AK-47 | VariCamo Grey | industrial | FN | StatTrak™ | 520 DC |
-| 5 | AK-47 | Safari Mesh | industrial | FN | - | 320 DC |
-| 6 | AK-47 | Safari Mesh | industrial | FN | StatTrak™ | 432 DC |
-| 7 | AK-47 | Predator | industrial | FN | - | 440 DC |
-| 8 | AK-47 | Predator | industrial | FN | StatTrak™ | 594 DC |
+| 1 | Specialist Gloves | Forest DDPAT | extraordinary | FN | - | 184 800 DC |
+| 2 | Specialist Gloves | Forest DDPAT | extraordinary | MW | - | 151 536 DC |
+| 3 | Hand Wraps | Spruce DDPAT | extraordinary | FN | - | 96 000 DC |
+| 4 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
+| 5 | Bayonet | Forest DDPAT | covert | FN | - | 182 400 DC |
+| 6 | Bayonet | Forest DDPAT | covert | MW | - | 145 000 DC |
+| 7 | Bayonet | Safari Mesh | covert | FN | - | 204 000 DC |
+| 8 | Bayonet | Safari Mesh | covert | MW | - | 160 000 DC |
 | 9 | AWP | Pink DDPAT | restricted | FN | - | 2 464 DC |
-| 10 | AWP | Pink DDPAT | restricted | FN | StatTrak™ | 3 326 DC |
-| 11 | AWP | Safari Mesh | industrial | FN | - | 385 DC |
-| 12 | AWP | Safari Mesh | industrial | FN | StatTrak™ | 520 DC |
-| 13 | AWP | Snake Camo | milspec | FN | - | 1 088 DC |
-| 14 | AWP | Snake Camo | milspec | FN | StatTrak™ | 1 469 DC |
-| 15 | Bayonet | Forest DDPAT | covert | FN | - | 182 400 DC |
-| 16 | Bayonet | Forest DDPAT | covert | FN | StatTrak™ | 246 240 DC |
-| 17 | Bayonet | Safari Mesh | covert | FN | - | 204 000 DC |
-| 18 | Bayonet | Safari Mesh | covert | FN | StatTrak™ | 275 400 DC |
+| 10 | AWP | Pink DDPAT | restricted | MW | - | 1 900 DC |
+| 11 | AWP | Snake Camo | milspec | FN | - | 1 088 DC |
+| 12 | AWP | Snake Camo | milspec | MW | - | 850 DC |
+| 13 | AK-47 | Predator | industrial | FN | - | 440 DC |
+| 14 | AK-47 | Predator | industrial | MW | - | 350 DC |
+| 15 | AK-47 | VariCamo Grey | industrial | FN | - | 385 DC |
+| 16 | AK-47 | VariCamo Grey | industrial | MW | - | 300 DC |
+| 17 | AK-47 | Safari Mesh | industrial | FN | - | 320 DC |
+| 18 | AWP | Safari Mesh | industrial | FN | - | 385 DC |
 
 ---
 
@@ -7228,24 +5635,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Driver Gloves | Queen Jaguar | extraordinary | FN | - | 115 200 DC |
-| 2 | Driver Gloves | King Snake | extraordinary | FN | - | 199 200 DC |
-| 3 | AK-47 | The Empress | covert | FN | - | 51 800 DC |
-| 4 | AK-47 | The Empress | covert | FN | StatTrak™ | 69 930 DC |
-| 5 | AWP | Queen's Gambit | covert | FN | - | 58 800 DC |
-| 6 | AWP | Queen's Gambit | covert | FN | StatTrak™ | 79 380 DC |
+| 1 | AK-47 | The Empress | covert | FN | - | 51 800 DC |
+| 2 | AK-47 | The Empress | covert | MW | - | 42 000 DC |
+| 3 | AK-47 | The Empress | covert | FT | - | 33 670 DC |
+| 4 | M4A4 | The Emperor | covert | FN | - | 53 200 DC |
+| 5 | M4A4 | The Emperor | covert | MW | - | 43 624 DC |
+| 6 | M4A4 | The Emperor | covert | FT | - | 34 000 DC |
 | 7 | AWP | Mortis | classified | FN | - | 12 580 DC |
-| 8 | AWP | Mortis | classified | FN | StatTrak™ | 16 983 DC |
-| 9 | AWP | The Prince | covert | FN | - | 42 700 DC |
-| 10 | AWP | The Prince | covert | FN | StatTrak™ | 57 645 DC |
-| 11 | Five-SeveN | Fairy Tale | classified | FN | - | 12 750 DC |
-| 12 | Five-SeveN | Fairy Tale | classified | FN | StatTrak™ | 17 213 DC |
-| 13 | Glock-18 | Bullet Queen | covert | FN | - | 35 000 DC |
-| 14 | Glock-18 | Bullet Queen | covert | FN | StatTrak™ | 47 250 DC |
-| 15 | M4A4 | 龍王 (Dragon King) | classified | FN | - | 10 200 DC |
-| 16 | M4A4 | 龍王 (Dragon King) | classified | FN | StatTrak™ | 13 770 DC |
-| 17 | M4A4 | The Emperor | covert | FN | - | 53 200 DC |
-| 18 | M4A4 | The Emperor | covert | FN | StatTrak™ | 71 820 DC |
+| 8 | AWP | Mortis | classified | MW | - | 9 500 DC |
+| 9 | AWP | Mortis | classified | FT | - | 7 200 DC |
+| 10 | AWP | Queen's Gambit | covert | FN | - | 58 800 DC |
+| 11 | AWP | Queen's Gambit | covert | MW | - | 48 000 DC |
+| 12 | AWP | The Prince | covert | FN | - | 42 700 DC |
+| 13 | AWP | The Prince | covert | MW | - | 35 000 DC |
+| 14 | Glock-18 | Bullet Queen | covert | FN | - | 35 000 DC |
+| 15 | Glock-18 | Bullet Queen | covert | MW | - | 28 000 DC |
+| 16 | Five-SeveN | Fairy Tale | classified | FN | - | 12 750 DC |
+| 17 | Driver Gloves | Queen Jaguar | extraordinary | FN | - | 115 200 DC |
+| 18 | Driver Gloves | King Snake | extraordinary | FN | - | 199 200 DC |
 
 ---
 
@@ -7259,24 +5666,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
-| 2 | Sport Gloves | Superconductor | extraordinary | FN | - | 124 800 DC |
-| 3 | AK-47 | Ice Coaled | classified | FN | - | 10 200 DC |
-| 4 | AK-47 | Ice Coaled | classified | FN | StatTrak™ | 13 770 DC |
-| 5 | AK-47 | Aquamarine Revenge | covert | FN | - | 32 900 DC |
-| 6 | AK-47 | Aquamarine Revenge | covert | FN | StatTrak™ | 44 415 DC |
-| 7 | AWP | Ice Coaled | classified | FN | - | 12 410 DC |
-| 8 | AWP | Ice Coaled | classified | FN | StatTrak™ | 16 754 DC |
-| 9 | AWP | Sun in Leo | industrial | FN | - | 330 DC |
-| 10 | AWP | Sun in Leo | industrial | FN | StatTrak™ | 446 DC |
-| 11 | PP-Bizon | Cobalt Halftone | milspec | FN | - | 1 411 DC |
-| 12 | PP-Bizon | Cobalt Halftone | milspec | FN | StatTrak™ | 1 905 DC |
-| 13 | Desert Eagle | Cobalt Disruption | classified | FN | - | 11 730 DC |
-| 14 | Desert Eagle | Cobalt Disruption | classified | FN | StatTrak™ | 15 836 DC |
-| 15 | Desert Eagle | Ocean Drive | covert | FN | - | 50 400 DC |
-| 16 | Desert Eagle | Ocean Drive | covert | FN | StatTrak™ | 68 040 DC |
-| 17 | Dual Berettas | Cobalt Quartz | restricted | FN | - | 4 816 DC |
-| 18 | Dual Berettas | Cobalt Quartz | restricted | FN | StatTrak™ | 6 502 DC |
+| 1 | Sport Gloves | Superconductor | extraordinary | FN | - | 270 000 DC |
+| 2 | Sport Gloves | Superconductor | extraordinary | MW | - | 220 000 DC |
+| 3 | Sport Gloves | Superconductor | extraordinary | FT | - | 170 000 DC |
+| 4 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
+| 5 | Hand Wraps | Cobalt Skulls | extraordinary | MW | - | 147 600 DC |
+| 6 | Desert Eagle | Cobalt Disruption | classified | FN | - | 11 730 DC |
+| 7 | Desert Eagle | Cobalt Disruption | classified | MW | - | 9 500 DC |
+| 8 | Desert Eagle | Ocean Drive | covert | FN | - | 50 400 DC |
+| 9 | Desert Eagle | Ocean Drive | covert | MW | - | 40 000 DC |
+| 10 | AK-47 | Ice Coaled | classified | FN | - | 10 200 DC |
+| 11 | AK-47 | Ice Coaled | classified | MW | - | 8 364 DC |
+| 12 | AWP | Ice Coaled | classified | FN | - | 12 410 DC |
+| 13 | AWP | Ice Coaled | classified | MW | - | 10 000 DC |
+| 14 | AK-47 | Aquamarine Revenge | covert | FN | - | 32 900 DC |
+| 15 | AK-47 | Aquamarine Revenge | covert | MW | - | 26 000 DC |
+| 16 | Dual Berettas | Cobalt Quartz | restricted | FN | - | 4 816 DC |
+| 17 | Dual Berettas | Cobalt Quartz | restricted | MW | - | 3 800 DC |
+| 18 | PP-Bizon | Cobalt Halftone | milspec | FN | - | 1 411 DC |
 
 ---
 
@@ -7292,22 +5699,22 @@
 |---|---|---|---|---|---|---|
 | 1 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
 | 2 | Sport Gloves | Blaze | extraordinary | FN | - | 108 000 DC |
-| 3 | AK-47 | Ice Coaled | classified | FN | - | 10 200 DC |
-| 4 | AK-47 | Ice Coaled | classified | FN | StatTrak™ | 13 770 DC |
-| 5 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
-| 6 | AK-47 | Fire Serpent | covert | FN | StatTrak™ | 162 000 DC |
-| 7 | AUG | Flame Jörmungandr | restricted | FN | - | 4 704 DC |
-| 8 | AUG | Flame Jörmungandr | restricted | FN | StatTrak™ | 6 350 DC |
-| 9 | AWP | Ice Coaled | classified | FN | - | 12 410 DC |
-| 10 | AWP | Ice Coaled | classified | FN | StatTrak™ | 16 754 DC |
-| 11 | AWP | Sovereign Flame | covert | FN | - | 49 700 DC |
-| 12 | AWP | Sovereign Flame | covert | FN | StatTrak™ | 67 095 DC |
-| 13 | AWP | Hyper Beast | covert | FN | - | 30 100 DC |
-| 14 | AWP | Hyper Beast | covert | FN | StatTrak™ | 40 635 DC |
-| 15 | Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
-| 16 | Bayonet | Marble Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 17 | Desert Eagle | Blaze | restricted | FN | - | 3 976 DC |
-| 18 | Desert Eagle | Blaze | restricted | FN | StatTrak™ | 5 368 DC |
+| 3 | Karambit | Marble Fade | covert | FN | - | 240 000 DC |
+| 4 | Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
+| 5 | Butterfly Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 6 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 7 | AK-47 | Fire Serpent | covert | MW | - | 98 400 DC |
+| 8 | AK-47 | Ice Coaled | classified | FN | - | 10 200 DC |
+| 9 | AK-47 | Ice Coaled | classified | MW | - | 8 364 DC |
+| 10 | AWP | Ice Coaled | classified | FN | - | 12 410 DC |
+| 11 | AWP | Ice Coaled | classified | MW | - | 10 000 DC |
+| 12 | AWP | Sovereign Flame | covert | FN | - | 49 700 DC |
+| 13 | AWP | Sovereign Flame | covert | MW | - | 40 754 DC |
+| 14 | AWP | Wildfire | covert | FN | - | 36 400 DC |
+| 15 | AWP | Hyper Beast | covert | FN | - | 30 100 DC |
+| 16 | Desert Eagle | Blaze | restricted | FN | - | 3 976 DC |
+| 17 | AUG | Flame Jörmungandr | restricted | FN | - | 4 704 DC |
+| 18 | M4A4 | Hellfire | classified | FN | - | 13 940 DC |
 
 ---
 
@@ -7322,23 +5729,23 @@
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AK-47 | Phantom Disruptor | classified | FN | - | 14 960 DC |
-| 2 | AK-47 | Phantom Disruptor | classified | FN | StatTrak™ | 20 196 DC |
+| 2 | AK-47 | Phantom Disruptor | classified | MW | - | 12 000 DC |
 | 3 | AWP | Exoskeleton | restricted | FN | - | 2 688 DC |
-| 4 | AWP | Exoskeleton | restricted | FN | StatTrak™ | 3 629 DC |
-| 5 | FAMAS | Dark Water | milspec | FN | - | 1 054 DC |
-| 6 | FAMAS | Dark Water | milspec | FN | StatTrak™ | 1 423 DC |
-| 7 | FAMAS | Grey Ghost | industrial | FN | - | 360 DC |
-| 8 | FAMAS | Grey Ghost | industrial | FN | StatTrak™ | 486 DC |
-| 9 | Glock-18 | Ghost Protocol | covert | FN | - | 47 600 DC |
-| 10 | Glock-18 | Ghost Protocol | covert | FN | StatTrak™ | 64 260 DC |
-| 11 | M249 | Spectre | milspec | FN | - | 816 DC |
-| 12 | M249 | Spectre | milspec | FN | StatTrak™ | 1 102 DC |
-| 13 | M4A1-S | Dark Water | restricted | FN | - | 4 928 DC |
-| 14 | M4A1-S | Dark Water | restricted | FN | StatTrak™ | 6 653 DC |
-| 15 | M4A1-S | Nightmare | classified | FN | - | 13 940 DC |
-| 16 | M4A1-S | Nightmare | classified | FN | StatTrak™ | 18 819 DC |
-| 17 | M4A1-S | Black Lotus | classified | FN | - | 7 820 DC |
-| 18 | M4A1-S | Black Lotus | classified | FN | StatTrak™ | 10 557 DC |
+| 4 | AWP | Exoskeleton | restricted | MW | - | 2 204 DC |
+| 5 | M4A1-S | Nightmare | classified | FN | - | 13 940 DC |
+| 6 | M4A1-S | Nightmare | classified | MW | - | 11 000 DC |
+| 7 | M4A1-S | Black Lotus | classified | FN | - | 7 820 DC |
+| 8 | M4A1-S | Black Lotus | classified | MW | - | 6 000 DC |
+| 9 | M4A1-S | Dark Water | restricted | FN | - | 4 928 DC |
+| 10 | M4A1-S | Dark Water | restricted | MW | - | 3 398 DC |
+| 11 | Glock-18 | Ghost Protocol | covert | FN | - | 47 600 DC |
+| 12 | Glock-18 | Ghost Protocol | covert | MW | - | 38 000 DC |
+| 13 | FAMAS | Dark Water | milspec | FN | - | 1 054 DC |
+| 14 | FAMAS | Grey Ghost | industrial | FN | - | 360 DC |
+| 15 | M249 | Spectre | milspec | FN | - | 816 DC |
+| 16 | SSG 08 | Abyss | milspec | FN | - | 1 513 DC |
+| 17 | Karambit | Night | covert | FN | - | 180 000 DC |
+| 18 | M4A1-S | Night Terror | restricted | FN | - | 3 500 DC |
 
 ---
 
@@ -7352,24 +5759,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
-| 2 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
-| 3 | AK-47 | Neon Revolution | covert | FN | - | 52 500 DC |
-| 4 | AK-47 | Neon Revolution | covert | FN | StatTrak™ | 70 875 DC |
-| 5 | AK-47 | Neon Rider | covert | FN | - | 56 000 DC |
-| 6 | AK-47 | Neon Rider | covert | FN | StatTrak™ | 75 600 DC |
-| 7 | AUG | Amber Fade | milspec | FN | - | 1 275 DC |
-| 8 | AUG | Amber Fade | milspec | FN | StatTrak™ | 1 721 DC |
+| 1 | AK-47 | Neon Revolution | covert | FN | - | 52 500 DC |
+| 2 | AK-47 | Neon Revolution | covert | MW | - | 42 000 DC |
+| 3 | AK-47 | Neon Rider | covert | FN | - | 56 000 DC |
+| 4 | Galil AR | Rainbow Spoon | classified | FN | - | 4 200 DC |
+| 5 | AWP | Fever Dream | classified | FN | - | 9 180 DC |
+| 6 | AWP | Fever Dream | classified | MW | - | 7 500 DC |
+| 7 | AWP | Pink DDPAT | restricted | FN | - | 2 464 DC |
+| 8 | AWP | Pink DDPAT | restricted | MW | - | 1 900 DC |
 | 9 | AWP | Fade | covert | FN | - | 53 900 DC |
-| 10 | AWP | Fade | covert | FN | StatTrak™ | 72 765 DC |
-| 11 | AWP | Fever Dream | classified | FN | - | 9 180 DC |
-| 12 | AWP | Fever Dream | classified | FN | StatTrak™ | 12 393 DC |
-| 13 | AWP | Pink DDPAT | restricted | FN | - | 2 464 DC |
-| 14 | AWP | Pink DDPAT | restricted | FN | StatTrak™ | 3 326 DC |
-| 15 | Bayonet | Fade | covert | FN | - | 240 000 DC |
-| 16 | Bayonet | Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 17 | Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
-| 18 | Bayonet | Marble Fade | covert | FN | StatTrak™ | 324 000 DC |
+| 10 | Glock-18 | Bullet Queen | covert | FN | - | 35 000 DC |
+| 11 | Glock-18 | Bullet Queen | covert | MW | - | 28 000 DC |
+| 12 | M4A4 | In Living Color | covert | FN | - | 48 299 DC |
+| 13 | M4A4 | In Living Color | covert | MW | - | 39 605 DC |
+| 14 | MAC-10 | Disco Tech | classified | FN | - | 6 970 DC |
+| 15 | MAC-10 | Disco Tech | classified | MW | - | 5 715 DC |
+| 16 | Galil AR | Sugar Rush | classified | FN | - | 13 260 DC |
+| 17 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
+| 18 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
 
 ---
 
@@ -7383,24 +5790,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Cartel | classified | FN | - | 10 880 DC |
-| 2 | AK-47 | Cartel | classified | FN | StatTrak™ | 14 688 DC |
-| 3 | AK-47 | Head Shot | covert | FN | - | 48 299 DC |
-| 4 | AK-47 | Head Shot | covert | FN | StatTrak™ | 65 204 DC |
-| 5 | AWP | Printstream | covert | FN | - | 38 000 DC |
-| 6 | AWP | Printstream | covert | FN | StatTrak™ | 51 300 DC |
-| 7 | AWP | Duality | classified | FN | - | 10 030 DC |
-| 8 | AWP | Duality | classified | FN | StatTrak™ | 13 541 DC |
-| 9 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
-| 10 | Desert Eagle | Printstream | covert | FN | StatTrak™ | 51 300 DC |
-| 11 | Dual Berettas | Cartel | milspec | FN | - | 1 207 DC |
-| 12 | Dual Berettas | Cartel | milspec | FN | StatTrak™ | 1 629 DC |
-| 13 | Galil AR | Vandal | milspec | FN | - | 1 445 DC |
-| 14 | Galil AR | Vandal | milspec | FN | StatTrak™ | 1 951 DC |
-| 15 | M4A4 | In Living Color | covert | FN | - | 48 299 DC |
-| 16 | M4A4 | In Living Color | covert | FN | StatTrak™ | 65 204 DC |
-| 17 | M4A1-S | Player Two | covert | FN | - | 58 800 DC |
-| 18 | M4A1-S | Player Two | covert | FN | StatTrak™ | 79 380 DC |
+| 1 | AK-47 | Head Shot | covert | FN | - | 48 299 DC |
+| 2 | AK-47 | Head Shot | covert | MW | - | 38 000 DC |
+| 3 | AK-47 | Head Shot | covert | FT | - | 29 000 DC |
+| 4 | M4A4 | In Living Color | covert | FN | - | 48 299 DC |
+| 5 | M4A4 | In Living Color | covert | MW | - | 39 605 DC |
+| 6 | M4A4 | In Living Color | covert | FT | - | 30 000 DC |
+| 7 | M4A1-S | Player Two | covert | FN | - | 58 800 DC |
+| 8 | M4A1-S | Player Two | covert | MW | - | 48 216 DC |
+| 9 | AWP | Printstream | covert | FN | - | 38 000 DC |
+| 10 | AWP | Printstream | covert | MW | - | 31 000 DC |
+| 11 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
+| 12 | Desert Eagle | Printstream | covert | MW | - | 31 000 DC |
+| 13 | AWP | Duality | classified | FN | - | 10 030 DC |
+| 14 | AWP | Duality | classified | MW | - | 8 225 DC |
+| 15 | AK-47 | Cartel | classified | FN | - | 10 880 DC |
+| 16 | AK-47 | Cartel | classified | MW | - | 8 500 DC |
+| 17 | Galil AR | Vandal | milspec | FN | - | 1 445 DC |
+| 18 | Dual Berettas | Cartel | milspec | FN | - | 1 207 DC |
 
 ---
 
@@ -7414,24 +5821,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Elite Build | milspec | FN | - | 1 428 DC |
-| 2 | AK-47 | Elite Build | milspec | FN | StatTrak™ | 1 928 DC |
-| 3 | AWP | Elite Build | classified | FN | - | 13 600 DC |
-| 4 | AWP | Elite Build | classified | FN | StatTrak™ | 18 360 DC |
-| 5 | PP-Bizon | Carbon Fiber | industrial | FN | - | 230 DC |
-| 6 | PP-Bizon | Carbon Fiber | industrial | FN | StatTrak™ | 311 DC |
-| 7 | Desert Eagle | Mecha Industries | classified | FN | - | 11 220 DC |
-| 8 | Desert Eagle | Mecha Industries | classified | FN | StatTrak™ | 15 147 DC |
-| 9 | FAMAS | Commemoration | covert | FN | - | 46 900 DC |
-| 10 | FAMAS | Commemoration | covert | FN | StatTrak™ | 63 315 DC |
-| 11 | FAMAS | Mecha Industries | classified | FN | - | 9 180 DC |
-| 12 | FAMAS | Mecha Industries | classified | FN | StatTrak™ | 12 393 DC |
-| 13 | Galil AR | Sugar Rush | classified | FN | - | 13 260 DC |
-| 14 | Galil AR | Sugar Rush | classified | FN | StatTrak™ | 17 901 DC |
-| 15 | Shadow Daggers | Fade | covert | FN | - | 240 000 DC |
-| 16 | Shadow Daggers | Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 17 | Shadow Daggers | Doppler | covert | FN | - | 280 000 DC |
-| 18 | Shadow Daggers | Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 1 | Shadow Daggers | Doppler | covert | FN | - | 280 000 DC |
+| 2 | Shadow Daggers | Doppler | covert | MW | - | 229 600 DC |
+| 3 | Shadow Daggers | Fade | covert | FN | - | 240 000 DC |
+| 4 | Shadow Daggers | Fade | covert | MW | - | 196 800 DC |
+| 5 | FAMAS | Commemoration | covert | FN | - | 46 900 DC |
+| 6 | FAMAS | Commemoration | covert | MW | - | 38 000 DC |
+| 7 | FAMAS | Mecha Industries | classified | FN | - | 9 180 DC |
+| 8 | FAMAS | Mecha Industries | classified | MW | - | 7 528 DC |
+| 9 | Desert Eagle | Mecha Industries | classified | FN | - | 11 220 DC |
+| 10 | Desert Eagle | Mecha Industries | classified | MW | - | 9 200 DC |
+| 11 | AWP | Elite Build | classified | FN | - | 13 600 DC |
+| 12 | AWP | Elite Build | classified | MW | - | 10 500 DC |
+| 13 | AK-47 | Elite Build | milspec | FN | - | 1 428 DC |
+| 14 | AK-47 | Elite Build | milspec | MW | - | 1 100 DC |
+| 15 | Galil AR | Sugar Rush | classified | FN | - | 13 260 DC |
+| 16 | Galil AR | Sugar Rush | classified | MW | - | 10 500 DC |
+| 17 | PP-Bizon | Carbon Fiber | industrial | FN | - | 230 DC |
+| 18 | P90 | Elite Build | milspec | FN | - | 1 200 DC |
 
 ---
 
@@ -7445,24 +5852,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Safari Mesh | industrial | FN | - | 320 DC |
-| 2 | AK-47 | Safari Mesh | industrial | FN | StatTrak™ | 432 DC |
-| 3 | AK-47 | Predator | industrial | FN | - | 440 DC |
-| 4 | AK-47 | Predator | industrial | FN | StatTrak™ | 594 DC |
-| 5 | AWP | Man-o'-war | covert | FN | - | 44 800 DC |
-| 6 | AWP | Man-o'-war | covert | FN | StatTrak™ | 60 480 DC |
-| 7 | AWP | Safari Mesh | industrial | FN | - | 385 DC |
-| 8 | AWP | Safari Mesh | industrial | FN | StatTrak™ | 520 DC |
-| 9 | Bayonet | Safari Mesh | covert | FN | - | 204 000 DC |
-| 10 | Bayonet | Safari Mesh | covert | FN | StatTrak™ | 275 400 DC |
-| 11 | PP-Bizon | Modern Hunter | milspec | FN | - | 1 241 DC |
-| 12 | PP-Bizon | Modern Hunter | milspec | FN | StatTrak™ | 1 675 DC |
-| 13 | Desert Eagle | Golden Koi | covert | FN | - | 46 900 DC |
-| 14 | Desert Eagle | Golden Koi | covert | FN | StatTrak™ | 63 315 DC |
-| 15 | G3SG1 | Hunter | milspec | FN | - | 714 DC |
-| 16 | G3SG1 | Hunter | milspec | FN | StatTrak™ | 964 DC |
-| 17 | G3SG1 | Safari Mesh | milspec | FN | - | 1 207 DC |
-| 18 | G3SG1 | Safari Mesh | milspec | FN | StatTrak™ | 1 629 DC |
+| 1 | AWP | Man-o'-war | covert | FN | - | 44 800 DC |
+| 2 | AWP | Man-o'-war | covert | MW | - | 36 000 DC |
+| 3 | AWP | Man-o'-war | covert | FT | - | 28 000 DC |
+| 4 | M4A1-S | Golden Coil | covert | FN | - | 62 300 DC |
+| 5 | M4A1-S | Golden Coil | covert | MW | - | 49 000 DC |
+| 6 | M4A1-S | Golden Coil | covert | FT | - | 38 000 DC |
+| 7 | Desert Eagle | Golden Koi | covert | FN | - | 46 900 DC |
+| 8 | Desert Eagle | Golden Koi | covert | MW | - | 38 458 DC |
+| 9 | Desert Eagle | Golden Koi | covert | FT | - | 30 485 DC |
+| 10 | Bayonet | Safari Mesh | covert | FN | - | 204 000 DC |
+| 11 | Bayonet | Safari Mesh | covert | MW | - | 160 000 DC |
+| 12 | AK-47 | Safari Mesh | industrial | FN | - | 320 DC |
+| 13 | AK-47 | Safari Mesh | industrial | MW | - | 262 DC |
+| 14 | AWP | Safari Mesh | industrial | FN | - | 385 DC |
+| 15 | AWP | Safari Mesh | industrial | MW | - | 316 DC |
+| 16 | PP-Bizon | Modern Hunter | milspec | FN | - | 1 241 DC |
+| 17 | G3SG1 | Hunter | milspec | FN | - | 714 DC |
+| 18 | AK-47 | Predator | industrial | FN | - | 440 DC |
 
 ---
 
@@ -7476,24 +5883,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
-| 2 | AK-47 | AUTOEXEC | covert | FN | StatTrak™ | 64 260 DC |
-| 3 | AK-47 | Consequence of the Jinn | covert | FN | - | 55 300 DC |
-| 4 | AK-47 | Consequence of the Jinn | covert | FN | StatTrak™ | 74 655 DC |
-| 5 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
-| 6 | AK-47 | The Oligarch | covert | FN | StatTrak™ | 62 370 DC |
-| 7 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
-| 8 | AK-47 | Inheritance | covert | FN | StatTrak™ | 37 800 DC |
-| 9 | AK-47 | Neon Revolution | covert | FN | - | 52 500 DC |
-| 10 | AK-47 | Neon Revolution | covert | FN | StatTrak™ | 70 875 DC |
-| 11 | AK-47 | Legion of Anubis | covert | FN | - | 43 400 DC |
-| 12 | AK-47 | Legion of Anubis | covert | FN | StatTrak™ | 58 590 DC |
-| 13 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
-| 14 | AK-47 | Asiimov | covert | FN | StatTrak™ | 21 600 DC |
-| 15 | AK-47 | Aquamarine Revenge | covert | FN | - | 32 900 DC |
-| 16 | AK-47 | Aquamarine Revenge | covert | FN | StatTrak™ | 44 415 DC |
-| 17 | AK-47 | Nightwish | covert | FN | - | 49 700 DC |
-| 18 | AK-47 | Nightwish | covert | FN | StatTrak™ | 67 095 DC |
+| 1 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 2 | AK-47 | Vulcan | covert | FN | - | 31 500 DC |
+| 3 | AK-47 | Neon Revolution | covert | FN | - | 52 500 DC |
+| 4 | AK-47 | Legion of Anubis | covert | FN | - | 43 400 DC |
+| 5 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
+| 6 | AK-47 | Aquamarine Revenge | covert | FN | - | 32 900 DC |
+| 7 | AK-47 | Nightwish | covert | FN | - | 49 700 DC |
+| 8 | AK-47 | Head Shot | covert | FN | - | 48 299 DC |
+| 9 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 10 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 11 | AK-47 | Consequence of the Jinn | covert | FN | - | 55 300 DC |
+| 12 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 13 | Karambit | Doppler | covert | FN | - | 280 000 DC |
+| 14 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
+| 15 | M9 Bayonet | Slaughter | covert | FN | - | 150 000 DC |
+| 16 | Talon Knife | Tiger Tooth | covert | FN | - | 139 200 DC |
+| 17 | Bayonet | Marble Fade | covert | FN | - | 240 000 DC |
+| 18 | Skeleton Knife | Fade | covert | FN | - | 240 000 DC |
 
 ---
 
@@ -7503,26 +5910,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **850 DC**
 - **Описание:** Космические и звездные скины CS2
-- **Количество предметов в кейсе:** 16 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AWP | Sun in Leo | industrial | - | - | 330 DC |
-| 2 | P90 | Mustard Gas | industrial | - | - | 390 DC |
-| 3 | Nova | Moon in Libra | milspec | - | - | 799 DC |
-| 4 | MAG-7 | Firestarter | milspec | - | - | 1 156 DC |
-| 5 | P90 | Off World | milspec | - | - | 1 309 DC |
-| 6 | Dual Berettas | Moon in Libra | milspec | - | - | 1 411 DC |
-| 7 | Glock-18 | Off World | milspec | - | - | 1 445 DC |
-| 8 | P90 | Astral Jörmungandr | restricted | - | - | 2 576 DC |
-| 9 | PP-Bizon | Space Cat | restricted | - | - | 3 584 DC |
-| 10 | P2000 | Space Race | restricted | - | - | 3 752 DC |
-| 11 | Tec-9 | Decimator | classified | - | - | 11 900 DC |
-| 12 | M4A1-S | Decimator | classified | - | - | 13 600 DC |
-| 13 | Desert Eagle | Starcade | classified | - | - | 14 110 DC |
-| 14 | M4A4 | Desolate Space | classified | - | - | 14 280 DC |
-| 15 | M4A4 | The Battlestar | covert | - | - | 44 100 DC |
-| 16 | MP9 | Starlight Protector | covert | - | - | 59 500 DC |
+| 1 | AWP | Sun in Leo | industrial | FN | - | 330 DC |
+| 2 | M4A4 | Desolate Space | classified | FN | - | 14 280 DC |
+| 3 | M4A4 | The Battlestar | covert | FN | - | 44 100 DC |
+| 4 | MP9 | Starlight Protector | covert | FN | - | 59 500 DC |
+| 5 | P90 | Astral Jörmungandr | restricted | FN | - | 2 576 DC |
+| 6 | PP-Bizon | Space Cat | restricted | FN | - | 3 584 DC |
+| 7 | P2000 | Space Race | restricted | FN | - | 3 752 DC |
+| 8 | Desert Eagle | Starcade | classified | FN | - | 14 110 DC |
+| 9 | M4A1-S | Decimator | classified | FN | - | 13 600 DC |
+| 10 | Tec-9 | Decimator | classified | FN | - | 11 900 DC |
+| 11 | Nova | Moon in Libra | milspec | FN | - | 799 DC |
+| 12 | Dual Berettas | Moon in Libra | milspec | FN | - | 1 411 DC |
+| 13 | P90 | Off World | milspec | FN | - | 1 309 DC |
+| 14 | Glock-18 | Off World | milspec | FN | - | 1 445 DC |
+| 15 | MAG-7 | Firestarter | milspec | FN | - | 1 156 DC |
+| 16 | P90 | Mustard Gas | industrial | FN | - | 390 DC |
+| 17 | AWP | Worm God | restricted | FN | - | 2 744 DC |
+| 18 | SCAR-20 | Blueprint | milspec | FN | - | 833 DC |
 
 ---
 
@@ -7536,24 +5945,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Nova | Wood Fired | milspec | - | - | 1 088 DC |
-| 2 | MAG-7 | Firestarter | milspec | - | - | 1 156 DC |
-| 3 | Dual Berettas | Dualing Dragons | milspec | - | - | 1 173 DC |
-| 4 | SG 553 | Dragon Tech | restricted | - | - | 3 080 DC |
-| 5 | Galil AR | Firefight | restricted | - | - | 4 032 DC |
-| 6 | Desert Eagle | Firebreathing | restricted | - | - | 4 536 DC |
-| 7 | Glock-18 | Dragon Tattoo | restricted | - | - | 4 592 DC |
-| 8 | P90 | Emerald Dragon | classified | - | - | 9 350 DC |
-| 9 | M4A4 | 龍王 (Dragon King) | classified | - | - | 10 200 DC |
-| 10 | P2000 | Imperial Dragon | classified | - | - | 13 770 DC |
-| 11 | M4A4 | Hellfire | classified | - | - | 13 940 DC |
-| 12 | Zeus x27 | Dragon Snore | classified | - | - | 13 940 DC |
-| 13 | AWP | Wildfire | covert | - | - | 36 400 DC |
-| 14 | M4A1-S | Chantico's Fire | covert | - | - | 39 200 DC |
-| 15 | P2000 | Fire Elemental | covert | - | - | 59 500 DC |
-| 16 | AK-47 | Fire Serpent | covert | - | - | 120 000 DC |
-| 17 | Driver Gloves | Dragon Fists | extraordinary | - | - | 124 800 DC |
-| 18 | AWP | Dragon Lore | covert | - | - | 850 000 DC |
+| 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
+| 2 | SSG 08 | Dragonfire | covert | FN | - | 35 000 DC |
+| 3 | Desert Eagle | Kumicho Dragon | classified | FN | - | 10 710 DC |
+| 4 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 5 | AWP | Wildfire | covert | FN | - | 36 400 DC |
+| 6 | M4A1-S | Chantico's Fire | covert | FN | - | 39 200 DC |
+| 7 | P2000 | Fire Elemental | covert | FN | - | 59 500 DC |
+| 8 | M4A4 | 龍王 (Dragon King) | classified | FN | - | 10 200 DC |
+| 9 | P2000 | Imperial Dragon | classified | FN | - | 13 770 DC |
+| 10 | P90 | Emerald Dragon | classified | FN | - | 9 350 DC |
+| 11 | Glock-18 | Dragon Tattoo | restricted | FN | - | 4 592 DC |
+| 12 | SG 553 | Dragon Tech | restricted | FN | - | 3 080 DC |
+| 13 | Dual Berettas | Dualing Dragons | milspec | FN | - | 1 173 DC |
+| 14 | M4A4 | Hellfire | classified | FN | - | 13 940 DC |
+| 15 | Zeus x27 | Dragon Snore | classified | FN | - | 13 940 DC |
+| 16 | Zeus x27 | Dragon Snore | classified | FN | - | 13 940 DC |
+| 17 | Galil AR | Firefight | restricted | FN | - | 4 032 DC |
+| 18 | Driver Gloves | Dragon Fists | extraordinary | FN | - | 124 800 DC |
 
 ---
 
@@ -7567,24 +5976,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | PP-Bizon | Traitor | industrial | - | - | 405 DC |
-| 2 | MP9 | Mount Fuji | restricted | - | - | 2 632 DC |
-| 3 | Galil AR | Crimson Tsunami | restricted | - | - | 3 472 DC |
-| 4 | AK-47 | Hydroponic | classified | - | - | 13 090 DC |
-| 5 | SCAR-20 | Bloodsport | classified | - | - | 14 280 DC |
-| 6 | AWP | Oni Taiji | covert | - | - | 39 200 DC |
-| 7 | M4A4 | Temukau | covert | - | - | 56 000 DC |
-| 8 | USP-S | The Traitor | covert | - | - | 58 100 DC |
-| 9 | MP7 | Bloodsport | covert | - | - | 59 500 DC |
-| 10 | Karambit | Autotronic | covert | - | - | 96 000 DC |
-| 11 | Falchion Knife | Autotronic | covert | - | - | 98 400 DC |
-| 12 | M9 Bayonet | Autotronic | covert | - | - | 100 800 DC |
-| 13 | Gut Knife | Autotronic | covert | - | - | 105 600 DC |
-| 14 | Shadow Daggers | Autotronic | covert | - | - | 122 400 DC |
-| 15 | Butterfly Knife | Autotronic | covert | - | - | 151 200 DC |
-| 16 | Bowie Knife | Autotronic | covert | - | - | 204 000 DC |
-| 17 | Flip Knife | Autotronic | covert | - | - | 206 400 DC |
-| 18 | Bayonet | Autotronic | covert | - | - | 213 600 DC |
+| 1 | AWP | Oni Taiji | covert | FN | - | 39 200 DC |
+| 2 | M4A4 | Temukau | covert | FN | - | 56 000 DC |
+| 3 | USP-S | The Traitor | covert | FN | - | 58 100 DC |
+| 4 | MP7 | Bloodsport | covert | FN | - | 59 500 DC |
+| 5 | SCAR-20 | Bloodsport | classified | FN | - | 14 280 DC |
+| 6 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 7 | MP9 | Mount Fuji | restricted | FN | - | 2 632 DC |
+| 8 | Galil AR | Crimson Tsunami | restricted | FN | - | 3 472 DC |
+| 9 | PP-Bizon | Traitor | industrial | FN | - | 405 DC |
+| 10 | Karambit | Autotronic | covert | FN | - | 96 000 DC |
+| 11 | M9 Bayonet | Autotronic | covert | FN | - | 100 800 DC |
+| 12 | Butterfly Knife | Autotronic | covert | FN | - | 151 200 DC |
+| 13 | Bayonet | Autotronic | covert | FN | - | 213 600 DC |
+| 14 | Flip Knife | Autotronic | covert | FN | - | 206 400 DC |
+| 15 | Bowie Knife | Autotronic | covert | FN | - | 204 000 DC |
+| 16 | Falchion Knife | Autotronic | covert | FN | - | 98 400 DC |
+| 17 | Gut Knife | Autotronic | covert | FN | - | 105 600 DC |
+| 18 | Shadow Daggers | Autotronic | covert | MW | - | 122 400 DC |
 
 ---
 
@@ -7594,27 +6003,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **1 600 DC**
 - **Описание:** Кибернетические сбои и неоновый код
-- **Количество предметов в кейсе:** 17 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | UMP-45 | Mechanism | industrial | - | - | 335 DC |
-| 2 | MAG-7 | Popdog | milspec | - | - | 1 071 DC |
-| 3 | M4A1-S | Fizzy POP | milspec | - | - | 1 156 DC |
-| 4 | Galil AR | Rocket Pop | milspec | - | - | 1 292 DC |
-| 5 | MAC-10 | Poplar Thicket | milspec | - | - | 1 377 DC |
-| 6 | AWP | POP AWP | restricted | - | - | 2 352 DC |
-| 7 | SG 553 | Dragon Tech | restricted | - | - | 3 080 DC |
-| 8 | M4A1-S | Glitched Paint | restricted | - | - | 4 256 DC |
-| 9 | MAC-10 | Disco Tech | classified | - | - | 6 970 DC |
-| 10 | AUG | Momentum | classified | - | - | 9 180 DC |
-| 11 | FAMAS | Mecha Industries | classified | - | - | 9 180 DC |
-| 12 | M4A1-S | Fatal Glitch | classified | - | - | 10 030 DC |
-| 13 | USP-S | Spiral Glitch | classified | - | - | 10 200 DC |
-| 14 | Desert Eagle | Mecha Industries | classified | - | - | 11 220 DC |
-| 15 | UMP-45 | Momentum | classified | - | - | 14 450 DC |
-| 16 | M4A1-S | Mecha Industries | covert | - | - | 46 900 DC |
-| 17 | M4A1-S | Player Two | covert | - | - | 58 800 DC |
+| 1 | M4A1-S | Player Two | covert | FN | - | 58 800 DC |
+| 2 | M4A1-S | Mecha Industries | covert | FN | - | 46 900 DC |
+| 3 | M4A1-S | Fatal Glitch | classified | FN | - | 10 030 DC |
+| 4 | M4A1-S | Glitched Paint | restricted | FN | - | 4 256 DC |
+| 5 | USP-S | Spiral Glitch | classified | FN | - | 10 200 DC |
+| 6 | Desert Eagle | Mecha Industries | classified | FN | - | 11 220 DC |
+| 7 | FAMAS | Mecha Industries | classified | FN | - | 9 180 DC |
+| 8 | UMP-45 | Momentum | classified | FN | - | 14 450 DC |
+| 9 | AUG | Momentum | classified | FN | - | 9 180 DC |
+| 10 | MAC-10 | Disco Tech | classified | FN | - | 6 970 DC |
+| 11 | AWP | POP AWP | restricted | FN | - | 2 352 DC |
+| 12 | Galil AR | Rocket Pop | milspec | FN | - | 1 292 DC |
+| 13 | M4A1-S | Fizzy POP | milspec | FN | - | 1 156 DC |
+| 14 | MAG-7 | Popdog | milspec | FN | - | 1 071 DC |
+| 15 | MAC-10 | Poplar Thicket | milspec | FN | - | 1 377 DC |
+| 16 | SG 553 | Dragon Tech | restricted | FN | - | 3 080 DC |
+| 17 | UMP-45 | Mechanism | industrial | FN | - | 335 DC |
+| 18 | P90 | Vent Rush | restricted | FN | - | 3 200 DC |
 
 ---
 
@@ -7628,24 +6038,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AUG | Radiation Hazard | industrial | - | - | 200 DC |
-| 2 | SG 553 | Fallout Warning | industrial | - | - | 215 DC |
-| 3 | UMP-45 | Fallout Warning | industrial | - | - | 245 DC |
-| 4 | Negev | Nuclear Waste | industrial | - | - | 250 DC |
-| 5 | XM1014 | Fallout Warning | industrial | - | - | 265 DC |
-| 6 | P90 | Fallout Warning | industrial | - | - | 425 DC |
-| 7 | MAC-10 | Nuclear Garden | milspec | - | - | 799 DC |
-| 8 | Tec-9 | Toxic | milspec | - | - | 867 DC |
-| 9 | MP7 | Urban Hazard | milspec | - | - | 884 DC |
-| 10 | M4A4 | Radiation Hazard | milspec | - | - | 1 122 DC |
-| 11 | P2000 | Urban Hazard | milspec | - | - | 1 190 DC |
-| 12 | MAG-7 | Hazard | milspec | - | - | 1 377 DC |
-| 13 | Five-SeveN | Urban Hazard | milspec | - | - | 1 428 DC |
-| 14 | Glock-18 | Nuclear Garden | restricted | - | - | 2 296 DC |
-| 15 | P250 | Nuclear Threat | restricted | - | - | 2 688 DC |
-| 16 | Tec-9 | Nuclear Threat | restricted | - | - | 3 863 DC |
-| 17 | Five-SeveN | Fall Hazard | classified | - | - | 9 860 DC |
-| 18 | SG 553 | Hazard Pay | classified | - | - | 11 560 DC |
+| 1 | M4A4 | Radiation Hazard | milspec | FN | - | 1 122 DC |
+| 2 | AUG | Radiation Hazard | industrial | FN | - | 200 DC |
+| 3 | SG 553 | Fallout Warning | industrial | FN | - | 215 DC |
+| 4 | UMP-45 | Fallout Warning | industrial | FN | - | 245 DC |
+| 5 | XM1014 | Fallout Warning | industrial | FN | - | 265 DC |
+| 6 | P90 | Fallout Warning | industrial | FN | - | 425 DC |
+| 7 | Negev | Nuclear Waste | industrial | FN | - | 250 DC |
+| 8 | MAC-10 | Nuclear Garden | milspec | FN | - | 799 DC |
+| 9 | Glock-18 | Nuclear Garden | restricted | FN | - | 2 296 DC |
+| 10 | P250 | Nuclear Threat | restricted | FN | - | 2 688 DC |
+| 11 | Tec-9 | Nuclear Threat | restricted | FN | - | 3 863 DC |
+| 12 | Tec-9 | Toxic | milspec | FN | - | 867 DC |
+| 13 | MP7 | Urban Hazard | milspec | FN | - | 884 DC |
+| 14 | P2000 | Urban Hazard | milspec | FN | - | 1 190 DC |
+| 15 | Five-SeveN | Urban Hazard | milspec | FN | - | 1 428 DC |
+| 16 | MAG-7 | Hazard | milspec | FN | - | 1 377 DC |
+| 17 | Five-SeveN | Fall Hazard | classified | FN | - | 9 860 DC |
+| 18 | SG 553 | Hazard Pay | classified | FN | - | 11 560 DC |
 
 ---
 
@@ -7659,24 +6069,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | UMP-45 | Blaze | milspec | - | - | 697 DC |
-| 2 | Five-SeveN | Flame Test | milspec | - | - | 731 DC |
-| 3 | Desert Eagle | Oxide Blaze | milspec | - | - | 782 DC |
-| 4 | XM1014 | Oxide Blaze | milspec | - | - | 850 DC |
-| 5 | R8 Revolver | Blaze | milspec | - | - | 969 DC |
-| 6 | Nova | Blaze Orange | milspec | - | - | 1 054 DC |
-| 7 | Glock-18 | Oxide Blaze | milspec | - | - | 1 071 DC |
-| 8 | M249 | Magma | milspec | - | - | 1 071 DC |
-| 9 | Glock-18 | Bunsen Burner | milspec | - | - | 1 105 DC |
-| 10 | SCAR-20 | Trail Blazer | milspec | - | - | 1 326 DC |
-| 11 | Five-SeveN | Heat Treated | restricted | - | - | 2 240 DC |
-| 12 | MAG-7 | Heat | restricted | - | - | 2 296 DC |
-| 13 | XM1014 | Teclu Burner | restricted | - | - | 3 136 DC |
-| 14 | MAC-10 | Heat | restricted | - | - | 4 256 DC |
-| 15 | AUG | Flame Jörmungandr | restricted | - | - | 4 704 DC |
-| 16 | Desert Eagle | Heat Treated | classified | - | - | 11 050 DC |
-| 17 | AWP | Sovereign Flame | covert | - | - | 49 700 DC |
-| 18 | Sport Gloves | Blaze | extraordinary | - | - | 108 000 DC |
+| 1 | Sport Gloves | Blaze | extraordinary | FN | - | 108 000 DC |
+| 2 | AWP | Sovereign Flame | covert | FN | - | 49 700 DC |
+| 3 | Desert Eagle | Blaze | restricted | FN | - | 3 976 DC |
+| 4 | Desert Eagle | Heat Treated | classified | FN | - | 11 050 DC |
+| 5 | Five-SeveN | Heat Treated | restricted | FN | - | 2 240 DC |
+| 6 | MAC-10 | Heat | restricted | FN | - | 4 256 DC |
+| 7 | MAG-7 | Heat | restricted | FN | - | 2 296 DC |
+| 8 | XM1014 | Teclu Burner | restricted | FN | - | 3 136 DC |
+| 9 | AUG | Flame Jörmungandr | restricted | FN | - | 4 704 DC |
+| 10 | Desert Eagle | Oxide Blaze | milspec | FN | - | 782 DC |
+| 11 | Glock-18 | Oxide Blaze | milspec | FN | - | 1 071 DC |
+| 12 | XM1014 | Oxide Blaze | milspec | FN | - | 850 DC |
+| 13 | UMP-45 | Blaze | milspec | FN | - | 697 DC |
+| 14 | R8 Revolver | Blaze | milspec | FN | - | 969 DC |
+| 15 | Nova | Blaze Orange | milspec | FN | - | 1 054 DC |
+| 16 | Glock-18 | Bunsen Burner | milspec | FN | - | 1 105 DC |
+| 17 | SCAR-20 | Trail Blazer | milspec | FN | - | 1 326 DC |
+| 18 | M249 | Magma | milspec | FN | - | 1 071 DC |
 
 ---
 
@@ -7686,23 +6096,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **1 400 DC**
 - **Описание:** Белоснежные скины Whiteout и метели
-- **Количество предметов в кейсе:** 13 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | MAC-10 | Snow Splash | industrial | - | - | 285 DC |
-| 2 | M249 | Blizzard Marbleized | industrial | - | - | 415 DC |
-| 3 | MP5-SD | Snow Splash | industrial | - | - | 420 DC |
-| 4 | G3SG1 | Polar Camo | milspec | - | - | 1 088 DC |
-| 5 | Nova | Polar Mesh | milspec | - | - | 1 105 DC |
-| 6 | XM1014 | Frost Borre | milspec | - | - | 1 207 DC |
-| 7 | P90 | Glacier Mesh | milspec | - | - | 1 258 DC |
-| 8 | P250 | Whiteout | milspec | - | - | 1 292 DC |
-| 9 | MP7 | Whiteout | milspec | - | - | 1 309 DC |
-| 10 | Tec-9 | Whiteout | restricted | - | - | 2 632 DC |
-| 11 | USP-S | Whiteout | classified | - | - | 11 220 DC |
-| 12 | Sport Gloves | Frosty | extraordinary | - | - | 139 200 DC |
-| 13 | Driver Gloves | Snow Leopard | extraordinary | - | - | 146 400 DC |
+| 1 | Driver Gloves | Snow Leopard | extraordinary | FN | - | 146 400 DC |
+| 2 | Sport Gloves | Frosty | extraordinary | FN | - | 139 200 DC |
+| 3 | USP-S | Whiteout | classified | FN | - | 11 220 DC |
+| 4 | USP-S | Whiteout | classified | MW | - | 9 200 DC |
+| 5 | P250 | Whiteout | milspec | FN | - | 1 292 DC |
+| 6 | P250 | Whiteout | milspec | MW | - | 1 059 DC |
+| 7 | MP7 | Whiteout | milspec | FN | - | 1 309 DC |
+| 8 | MP7 | Whiteout | milspec | MW | - | 1 073 DC |
+| 9 | Tec-9 | Whiteout | restricted | FN | - | 2 632 DC |
+| 10 | Tec-9 | Whiteout | restricted | MW | - | 2 158 DC |
+| 11 | XM1014 | Frost Borre | milspec | FN | - | 1 207 DC |
+| 12 | XM1014 | Frost Borre | milspec | MW | - | 950 DC |
+| 13 | P90 | Glacier Mesh | milspec | FN | - | 1 258 DC |
+| 14 | G3SG1 | Polar Camo | milspec | FN | - | 1 088 DC |
+| 15 | Nova | Polar Mesh | milspec | FN | - | 1 105 DC |
+| 16 | M249 | Blizzard Marbleized | industrial | FN | - | 415 DC |
+| 17 | MP5-SD | Snow Splash | industrial | FN | - | 420 DC |
+| 18 | MAC-10 | Snow Splash | industrial | FN | - | 285 DC |
 
 ---
 
@@ -7716,24 +6131,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Jungle Spray | industrial | - | - | 255 DC |
-| 2 | M4A4 | Jungle Tiger | industrial | - | - | 415 DC |
-| 3 | G3SG1 | Jungle Dashed | milspec | - | - | 765 DC |
-| 4 | M249 | Predator | milspec | - | - | 867 DC |
-| 5 | SG 553 | Safari Print | milspec | - | - | 1 020 DC |
-| 6 | Five-SeveN | Jungle | milspec | - | - | 1 292 DC |
-| 7 | SG 553 | Tiger Moth | restricted | - | - | 4 816 DC |
-| 8 | M4A1-S | Welcome to the Jungle | covert | - | - | 32 900 DC |
-| 9 | Gut Knife | Safari Mesh | covert | - | - | 96 000 DC |
-| 10 | Kukri Knife | Safari Mesh | covert | - | - | 103 200 DC |
-| 11 | Survival Knife | Safari Mesh | covert | - | - | 112 800 DC |
-| 12 | Talon Knife | Tiger Tooth | covert | - | - | 139 200 DC |
-| 13 | Bowie Knife | Safari Mesh | covert | - | - | 163 200 DC |
-| 14 | Huntsman Knife | Safari Mesh | covert | - | - | 182 400 DC |
-| 15 | Classic Knife | Safari Mesh | covert | - | - | 189 600 DC |
-| 16 | Navaja Knife | Tiger Tooth | covert | - | - | 201 600 DC |
-| 17 | Paracord Knife | Safari Mesh | covert | - | - | 204 000 DC |
-| 18 | Nomad Knife | Safari Mesh | covert | - | - | 213 600 DC |
+| 1 | M4A1-S | Welcome to the Jungle | covert | FN | - | 32 900 DC |
+| 2 | AK-47 | Jungle Spray | industrial | FN | - | 255 DC |
+| 3 | M4A4 | Jungle Tiger | industrial | FN | - | 415 DC |
+| 4 | SG 553 | Tiger Moth | restricted | FN | - | 4 816 DC |
+| 5 | M249 | Predator | milspec | FN | - | 867 DC |
+| 6 | AK-47 | Predator | industrial | FN | - | 440 DC |
+| 7 | G3SG1 | Jungle Dashed | milspec | FN | - | 765 DC |
+| 8 | Five-SeveN | Jungle | milspec | FN | - | 1 292 DC |
+| 9 | SG 553 | Safari Print | milspec | FN | - | 1 020 DC |
+| 10 | Talon Knife | Tiger Tooth | covert | FN | - | 139 200 DC |
+| 11 | Navaja Knife | Tiger Tooth | covert | FN | - | 201 600 DC |
+| 12 | Karambit | Safari Mesh | covert | FN | - | 206 400 DC |
+| 13 | Butterfly Knife | Safari Mesh | covert | FN | - | 110 400 DC |
+| 14 | M9 Bayonet | Safari Mesh | covert | FN | - | 211 200 DC |
+| 15 | Bayonet | Safari Mesh | covert | FN | - | 204 000 DC |
+| 16 | Huntsman Knife | Safari Mesh | covert | FN | - | 182 400 DC |
+| 17 | Bowie Knife | Safari Mesh | covert | FN | - | 163 200 DC |
+| 18 | Survival Knife | Safari Mesh | covert | FN | - | 112 800 DC |
 
 ---
 
@@ -7747,24 +6162,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Asiimov | covert | - | - | 16 000 DC |
-| 2 | M4A4 | Desert-Strike | covert | - | - | 28 700 DC |
-| 3 | AK-47 | Vulcan | covert | - | - | 31 500 DC |
-| 4 | AK-47 | Jaguar | covert | - | - | 36 400 DC |
-| 5 | Desert Eagle | Code Red | covert | - | - | 38 500 DC |
-| 6 | M4A4 | Neo-Noir | covert | - | - | 39 200 DC |
-| 7 | AK-47 | Gold Arabesque | covert | - | - | 42 700 DC |
-| 8 | AWP | Medusa | covert | - | - | 44 100 DC |
-| 9 | AK-47 | B the Monster | covert | - | - | 45 500 DC |
-| 10 | AWP | Neo-Noir | covert | - | - | 46 900 DC |
-| 11 | AK-47 | Head Shot | covert | - | - | 48 299 DC |
-| 12 | AWP | Sovereign Flame | covert | - | - | 49 700 DC |
-| 13 | M4A4 | Buzz Kill | covert | - | - | 51 800 DC |
-| 14 | AK-47 | Wasteland Rebel | covert | - | - | 53 200 DC |
-| 15 | AK-47 | Consequence of the Jinn | covert | - | - | 55 300 DC |
-| 16 | AK-47 | Aphrodite | covert | - | - | 58 100 DC |
-| 17 | AK-47 | Bloodsport | covert | - | - | 60 900 DC |
-| 18 | AWP | Dragon Lore | covert | - | - | 850 000 DC |
+| 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
+| 2 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
+| 3 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
+| 4 | AWP | Medusa | covert | FN | - | 44 100 DC |
+| 5 | AK-47 | Vulcan | covert | FN | - | 31 500 DC |
+| 6 | M4A4 | Buzz Kill | covert | FN | - | 51 800 DC |
+| 7 | M4A4 | Neo-Noir | covert | FN | - | 39 200 DC |
+| 8 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
+| 9 | AK-47 | Head Shot | covert | FN | - | 48 299 DC |
+| 10 | AWP | Sovereign Flame | covert | FN | - | 49 700 DC |
+| 11 | AK-47 | Wasteland Rebel | covert | FN | - | 53 200 DC |
+| 12 | AK-47 | Consequence of the Jinn | covert | FN | - | 55 300 DC |
+| 13 | AK-47 | Aphrodite | covert | FN | - | 58 100 DC |
+| 14 | AK-47 | Jaguar | covert | FN | - | 36 400 DC |
+| 15 | Desert Eagle | Code Red | covert | FN | - | 38 500 DC |
+| 16 | M4A4 | Desert-Strike | covert | FN | - | 28 700 DC |
+| 17 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
+| 18 | AK-47 | B the Monster | covert | FN | - | 45 500 DC |
 
 ---
 
@@ -7778,24 +6193,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | MP5-SD | Neon Squeezer | industrial | - | - | 280 DC |
-| 2 | AK-47 | Crossfade | milspec | - | - | 697 DC |
-| 3 | AK-47 | Elite Build | milspec | - | - | 1 428 DC |
-| 4 | AK-47 | Uncharted | milspec | - | - | 1 462 DC |
-| 5 | Five-SeveN | Neon Kimono | restricted | - | - | 3 640 DC |
-| 6 | MP7 | Neon Ply | restricted | - | - | 4 144 DC |
-| 7 | AK-47 | First Class | restricted | - | - | 4 368 DC |
-| 8 | AK-47 | Emerald Pinstripe | restricted | - | - | 4 984 DC |
-| 9 | AK-47 | Searing Rage | classified | - | - | 7 140 DC |
-| 10 | AK-47 | Panthera onca | classified | - | - | 7 310 DC |
-| 11 | UMP-45 | Neo-Noir | classified | - | - | 14 280 DC |
-| 12 | M4A4 | Neo-Noir | covert | - | - | 39 200 DC |
-| 13 | Glock-18 | Neo-Noir | covert | - | - | 41 300 DC |
-| 14 | USP-S | Neo-Noir | covert | - | - | 41 300 DC |
-| 15 | AWP | Neo-Noir | covert | - | - | 46 900 DC |
-| 16 | AK-47 | Neon Revolution | covert | - | - | 52 500 DC |
-| 17 | MAC-10 | Neon Rider | covert | - | - | 54 600 DC |
-| 18 | AK-47 | Neon Rider | covert | - | - | 56 000 DC |
+| 1 | AK-47 | Neon Rider | covert | FN | - | 56 000 DC |
+| 2 | MAC-10 | Neon Rider | covert | FN | - | 54 600 DC |
+| 3 | AK-47 | Neon Revolution | covert | FN | - | 52 500 DC |
+| 4 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
+| 5 | M4A4 | Neo-Noir | covert | FN | - | 39 200 DC |
+| 6 | USP-S | Neo-Noir | covert | FN | - | 41 300 DC |
+| 7 | Glock-18 | Neo-Noir | covert | FN | - | 41 300 DC |
+| 8 | UMP-45 | Neo-Noir | classified | FN | - | 14 280 DC |
+| 9 | Five-SeveN | Neon Kimono | restricted | FN | - | 3 640 DC |
+| 10 | MP7 | Neon Ply | restricted | FN | - | 4 144 DC |
+| 11 | AK-47 | First Class | restricted | FN | - | 4 368 DC |
+| 12 | AK-47 | Emerald Pinstripe | restricted | FN | - | 4 984 DC |
+| 13 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 14 | AK-47 | Panthera onca | classified | FN | - | 7 310 DC |
+| 15 | AK-47 | Crossfade | milspec | FN | - | 697 DC |
+| 16 | AK-47 | Elite Build | milspec | FN | - | 1 428 DC |
+| 17 | AK-47 | Uncharted | milspec | FN | - | 1 462 DC |
+| 18 | MP5-SD | Neon Squeezer | industrial | FN | - | 280 DC |
 
 ---
 
@@ -7809,24 +6224,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Searing Rage | classified | - | - | 7 140 DC |
-| 2 | AK-47 | Case Hardened | classified | - | - | 8 670 DC |
-| 3 | AK-47 | The Outsiders | classified | - | - | 9 010 DC |
-| 4 | AK-47 | Crane Flight | classified | - | - | 9 350 DC |
-| 5 | AK-47 | Point Disarray | classified | - | - | 9 860 DC |
-| 6 | AK-47 | Ice Coaled | classified | - | - | 10 200 DC |
-| 7 | AK-47 | Cartel | classified | - | - | 10 880 DC |
-| 8 | AK-47 | Redline | classified | - | - | 12 410 DC |
-| 9 | AK-47 | Hydroponic | classified | - | - | 13 090 DC |
-| 10 | AK-47 | Phantom Disruptor | classified | - | - | 14 960 DC |
-| 11 | AK-47 | Asiimov | covert | - | - | 16 000 DC |
-| 12 | AK-47 | Inheritance | covert | - | - | 28 000 DC |
-| 13 | AK-47 | Vulcan | covert | - | - | 31 500 DC |
-| 14 | AK-47 | Aquamarine Revenge | covert | - | - | 32 900 DC |
-| 15 | AK-47 | Legion of Anubis | covert | - | - | 43 400 DC |
-| 16 | AK-47 | The Oligarch | covert | - | - | 46 200 DC |
-| 17 | AK-47 | AUTOEXEC | covert | - | - | 47 600 DC |
-| 18 | AWP | Gungnir | covert | - | - | 59 500 DC |
+| 1 | AWP | Gungnir | covert | FN | - | 59 500 DC |
+| 2 | Negev | Mjölnir | classified | FN | - | 7 310 DC |
+| 3 | Desert Eagle | Emerald Jörmungandr | restricted | FN | - | 2 408 DC |
+| 4 | AUG | Flame Jörmungandr | restricted | FN | - | 4 704 DC |
+| 5 | P90 | Astral Jörmungandr | restricted | FN | - | 2 576 DC |
+| 6 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 7 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 8 | AK-47 | Vulcan | covert | FN | - | 31 500 DC |
+| 9 | AK-47 | Aquamarine Revenge | covert | FN | - | 32 900 DC |
+| 10 | AK-47 | Legion of Anubis | covert | FN | - | 43 400 DC |
+| 11 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 12 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 13 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
+| 14 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
+| 15 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 16 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 17 | AK-47 | Point Disarray | classified | FN | - | 9 860 DC |
+| 18 | AK-47 | Ice Coaled | classified | FN | - | 10 200 DC |
 
 ---
 
@@ -7836,22 +6251,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **7 500 DC**
 - **Описание:** Чистое золото высшей пробы
-- **Количество предметов в кейсе:** 12 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | MP5-SD | Gold Leaf | milspec | - | - | 799 DC |
-| 2 | Tec-9 | Brass | milspec | - | - | 1 071 DC |
-| 3 | MAC-10 | Arabesque Mosaic | milspec | - | - | 1 156 DC |
-| 4 | PP-Bizon | Brass | milspec | - | - | 1 190 DC |
-| 5 | SCAR-20 | Brass | milspec | - | - | 1 275 DC |
-| 6 | UMP-45 | Gold Bismuth | restricted | - | - | 3 192 DC |
-| 7 | MAC-10 | Gold Brick | restricted | - | - | 4 200 DC |
-| 8 | Glock-18 | Brass | restricted | - | - | 4 368 DC |
-| 9 | AK-47 | Gold Arabesque | covert | - | - | 42 700 DC |
-| 10 | Desert Eagle | Golden Koi | covert | - | - | 46 900 DC |
-| 11 | Glock-18 | Gold Toof | covert | - | - | 56 700 DC |
-| 12 | M4A1-S | Golden Coil | covert | - | - | 62 300 DC |
+| 1 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
+| 2 | AK-47 | Gold Arabesque | covert | MW | - | 35 014 DC |
+| 3 | AK-47 | Gold Arabesque | covert | FT | - | 27 755 DC |
+| 4 | Desert Eagle | Golden Koi | covert | FN | - | 46 900 DC |
+| 5 | Desert Eagle | Golden Koi | covert | MW | - | 38 458 DC |
+| 6 | Glock-18 | Gold Toof | covert | FN | - | 56 700 DC |
+| 7 | Glock-18 | Gold Toof | covert | MW | - | 45 000 DC |
+| 8 | M4A1-S | Golden Coil | covert | FN | - | 62 300 DC |
+| 9 | M4A1-S | Golden Coil | covert | MW | - | 49 000 DC |
+| 10 | MAC-10 | Gold Brick | restricted | FN | - | 4 200 DC |
+| 11 | MAC-10 | Gold Brick | restricted | MW | - | 3 300 DC |
+| 12 | UMP-45 | Gold Bismuth | restricted | FN | - | 3 192 DC |
+| 13 | Glock-18 | Brass | restricted | FN | - | 4 368 DC |
+| 14 | Tec-9 | Brass | milspec | FN | - | 1 071 DC |
+| 15 | PP-Bizon | Brass | milspec | FN | - | 1 190 DC |
+| 16 | SCAR-20 | Brass | milspec | FN | - | 1 275 DC |
+| 17 | MAC-10 | Arabesque Mosaic | milspec | FN | - | 1 156 DC |
+| 18 | MP5-SD | Gold Leaf | milspec | FN | - | 799 DC |
 
 ---
 
@@ -7865,24 +6286,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Desert Eagle | Midnight Storm | industrial | - | - | 205 DC |
-| 2 | CZ75-Auto | Midnight Palm | industrial | - | - | 235 DC |
-| 3 | Five-SeveN | Midnight Paintover | industrial | - | - | 260 DC |
-| 4 | SSG 08 | Dark Water | milspec | - | - | 884 DC |
-| 5 | FAMAS | Dark Water | milspec | - | - | 1 054 DC |
-| 6 | AK-47 | Midnight Laminate | restricted | - | - | 2 968 DC |
-| 7 | USP-S | Dark Water | restricted | - | - | 4 480 DC |
-| 8 | AUG | Midnight Lily | restricted | - | - | 4 816 DC |
-| 9 | M4A1-S | Dark Water | restricted | - | - | 4 928 DC |
-| 10 | Talon Knife | Night Stripe | covert | - | - | 124 800 DC |
-| 11 | Stiletto Knife | Night Stripe | covert | - | - | 144 000 DC |
-| 12 | Ursus Knife | Night Stripe | covert | - | - | 153 600 DC |
-| 13 | Classic Knife | Night Stripe | covert | - | - | 158 400 DC |
-| 14 | Paracord Knife | Night Stripe | covert | - | - | 172 800 DC |
-| 15 | Skeleton Knife | Night Stripe | covert | - | - | 172 800 DC |
-| 16 | Navaja Knife | Night Stripe | covert | - | - | 187 200 DC |
-| 17 | Kukri Knife | Night Stripe | covert | - | - | 192 000 DC |
-| 18 | Survival Knife | Night Stripe | covert | - | - | 201 600 DC |
+| 1 | M4A1-S | Dark Water | restricted | FN | - | 4 928 DC |
+| 2 | USP-S | Dark Water | restricted | FN | - | 4 480 DC |
+| 3 | FAMAS | Dark Water | milspec | FN | - | 1 054 DC |
+| 4 | SSG 08 | Dark Water | milspec | FN | - | 884 DC |
+| 5 | AK-47 | Midnight Laminate | restricted | FN | - | 3 800 DC |
+| 6 | AK-47 | Midnight Laminate | restricted | MW | - | 2 968 DC |
+| 7 | AUG | Midnight Lily | restricted | FN | - | 5 500 DC |
+| 8 | Desert Eagle | Midnight Storm | industrial | FN | - | 205 DC |
+| 9 | CZ75-Auto | Midnight Palm | industrial | FN | - | 235 DC |
+| 10 | Five-SeveN | Midnight Paintover | industrial | FN | - | 260 DC |
+| 11 | Talon Knife | Night Stripe | covert | FN | - | 124 800 DC |
+| 12 | Stiletto Knife | Night Stripe | covert | FN | - | 144 000 DC |
+| 13 | Ursus Knife | Night Stripe | covert | FN | - | 153 600 DC |
+| 14 | Classic Knife | Night Stripe | covert | FN | - | 158 400 DC |
+| 15 | Paracord Knife | Night Stripe | covert | FN | - | 172 800 DC |
+| 16 | Skeleton Knife | Night Stripe | covert | FN | - | 172 800 DC |
+| 17 | Navaja Knife | Night Stripe | covert | FN | - | 187 200 DC |
+| 18 | Kukri Knife | Night Stripe | covert | FN | - | 192 000 DC |
 
 ---
 
@@ -7896,24 +6317,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | M4A4 | Faded Zebra | milspec | - | - | 680 DC |
-| 2 | MAC-10 | Amber Fade | milspec | - | - | 867 DC |
-| 3 | Sawed-Off | Amber Fade | milspec | - | - | 1 394 DC |
-| 4 | Glock-18 | Synth Leaf | restricted | - | - | 4 088 DC |
-| 5 | R8 Revolver | Amber Fade | classified | - | - | 14 110 DC |
-| 6 | AWP | Fade | covert | - | - | 53 900 DC |
-| 7 | Specialist Gloves | Marble Fade | extraordinary | - | - | 240 000 DC |
-| 8 | Butterfly Knife | Marble Fade | covert | - | - | 240 000 DC |
-| 9 | Paracord Knife | Fade | covert | - | - | 240 000 DC |
-| 10 | Falchion Knife | Marble Fade | covert | - | - | 240 000 DC |
-| 11 | Gut Knife | Fade | covert | - | - | 240 000 DC |
-| 12 | Karambit | Fade | covert | - | - | 240 000 DC |
-| 13 | M9 Bayonet | Fade | covert | - | - | 240 000 DC |
-| 14 | Nomad Knife | Marble Fade | covert | - | - | 240 000 DC |
-| 15 | Skeleton Knife | Marble Fade | covert | - | - | 240 000 DC |
-| 16 | Bowie Knife | Fade | covert | - | - | 240 000 DC |
-| 17 | Ursus Knife | Fade | covert | - | - | 240 000 DC |
-| 18 | Talon Knife | Marble Fade | covert | - | - | 240 000 DC |
+| 1 | AWP | Fade | covert | FN | - | 53 900 DC |
+| 2 | R8 Revolver | Amber Fade | classified | FN | - | 14 110 DC |
+| 3 | Glock-18 | Synth Leaf | restricted | FN | - | 4 088 DC |
+| 4 | MAC-10 | Amber Fade | milspec | FN | - | 867 DC |
+| 5 | Sawed-Off | Amber Fade | milspec | FN | - | 1 394 DC |
+| 6 | M4A4 | Faded Zebra | milspec | FN | - | 680 DC |
+| 7 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
+| 8 | Butterfly Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 9 | Paracord Knife | Fade | covert | FN | - | 240 000 DC |
+| 10 | Falchion Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 11 | Gut Knife | Fade | covert | FN | - | 240 000 DC |
+| 12 | Karambit | Fade | covert | FN | - | 240 000 DC |
+| 13 | M9 Bayonet | Fade | covert | FN | - | 240 000 DC |
+| 14 | Nomad Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 15 | Skeleton Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 16 | Bowie Knife | Fade | covert | FN | - | 240 000 DC |
+| 17 | Ursus Knife | Fade | covert | FN | - | 240 000 DC |
+| 18 | Talon Knife | Marble Fade | covert | FN | - | 240 000 DC |
 
 ---
 
@@ -7927,24 +6348,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Crossfade | milspec | - | - | 697 DC |
-| 2 | Glock-18 | Reactor | milspec | - | - | 918 DC |
-| 3 | AK-47 | Elite Build | milspec | - | - | 1 428 DC |
-| 4 | AK-47 | Uncharted | milspec | - | - | 1 462 DC |
-| 5 | AK-47 | First Class | restricted | - | - | 4 368 DC |
-| 6 | AK-47 | Searing Rage | classified | - | - | 7 140 DC |
-| 7 | AK-47 | Panthera onca | classified | - | - | 7 310 DC |
-| 8 | AK-47 | Case Hardened | classified | - | - | 8 670 DC |
-| 9 | AK-47 | The Outsiders | classified | - | - | 9 010 DC |
-| 10 | AK-47 | Crane Flight | classified | - | - | 9 350 DC |
-| 11 | AK-47 | Point Disarray | classified | - | - | 9 860 DC |
-| 12 | AK-47 | Ice Coaled | classified | - | - | 10 200 DC |
-| 13 | AK-47 | Cartel | classified | - | - | 10 880 DC |
-| 14 | MP9 | Food Chain | classified | - | - | 11 050 DC |
-| 15 | G3SG1 | Flux | classified | - | - | 11 220 DC |
-| 16 | AK-47 | Redline | classified | - | - | 12 410 DC |
-| 17 | AK-47 | Hydroponic | classified | - | - | 13 090 DC |
-| 18 | AWP | Containment Breach | covert | - | - | 45 500 DC |
+| 1 | AWP | Containment Breach | covert | FN | - | 45 500 DC |
+| 2 | Glock-18 | Reactor | milspec | FN | - | 918 DC |
+| 3 | MP9 | Food Chain | classified | FN | - | 11 050 DC |
+| 4 | G3SG1 | Flux | classified | FN | - | 11 220 DC |
+| 5 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 6 | AK-47 | Phantom Disruptor | classified | FN | - | 14 960 DC |
+| 7 | AK-47 | Redline | classified | FN | - | 12 410 DC |
+| 8 | AK-47 | Cartel | classified | FN | - | 10 880 DC |
+| 9 | AK-47 | Ice Coaled | classified | FN | - | 10 200 DC |
+| 10 | AK-47 | Point Disarray | classified | FN | - | 9 860 DC |
+| 11 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 12 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 13 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
+| 14 | AK-47 | Panthera onca | classified | FN | - | 7 310 DC |
+| 15 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 16 | AK-47 | First Class | restricted | FN | - | 4 368 DC |
+| 17 | AK-47 | Crossfade | milspec | FN | - | 697 DC |
+| 18 | AK-47 | Elite Build | milspec | FN | - | 1 428 DC |
 
 ---
 
@@ -7958,24 +6379,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | P250 | Crimson Kimono | industrial | - | - | 225 DC |
-| 2 | R8 Revolver | Crimson Web | milspec | - | - | 1 054 DC |
-| 3 | CZ75-Auto | Crimson Web | milspec | - | - | 1 275 DC |
-| 4 | Galil AR | Crimson Tsunami | restricted | - | - | 3 472 DC |
-| 5 | AWP | Redline | classified | - | - | 11 730 DC |
-| 6 | SCAR-20 | Bloodsport | classified | - | - | 14 280 DC |
-| 7 | MP7 | Bloodsport | covert | - | - | 59 500 DC |
-| 8 | Gut Knife | Crimson Web | covert | - | - | 100 800 DC |
-| 9 | Butterfly Knife | Crimson Web | covert | - | - | 115 200 DC |
-| 10 | Classic Knife | Crimson Web | covert | - | - | 132 000 DC |
-| 11 | Specialist Gloves | Crimson Kimono | extraordinary | - | - | 148 800 DC |
-| 12 | Ursus Knife | Crimson Web | covert | - | - | 158 400 DC |
-| 13 | Bowie Knife | Crimson Web | covert | - | - | 168 000 DC |
-| 14 | Skeleton Knife | Crimson Web | covert | - | - | 177 600 DC |
-| 15 | Nomad Knife | Crimson Web | covert | - | - | 187 200 DC |
-| 16 | Survival Knife | Crimson Web | covert | - | - | 206 400 DC |
-| 17 | Bayonet | Crimson Web | covert | - | - | 208 800 DC |
-| 18 | M4A4 | Howl | milspec | - | - | 420 000 DC |
+| 1 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 2 | Specialist Gloves | Crimson Kimono | extraordinary | FN | - | 148 800 DC |
+| 3 | Karambit | Crimson Web | covert | FN | - | 211 200 DC |
+| 4 | M9 Bayonet | Crimson Web | covert | FN | - | 96 000 DC |
+| 5 | Butterfly Knife | Crimson Web | covert | FN | - | 115 200 DC |
+| 6 | Survival Knife | Crimson Web | covert | FN | - | 206 400 DC |
+| 7 | Nomad Knife | Crimson Web | covert | FN | - | 187 200 DC |
+| 8 | Skeleton Knife | Crimson Web | covert | FN | - | 177 600 DC |
+| 9 | Bowie Knife | Crimson Web | covert | FN | - | 168 000 DC |
+| 10 | Ursus Knife | Crimson Web | covert | FN | - | 158 400 DC |
+| 11 | Classic Knife | Crimson Web | covert | FN | - | 132 000 DC |
+| 12 | Gut Knife | Crimson Web | covert | FN | - | 100 800 DC |
+| 13 | MP7 | Bloodsport | covert | FN | - | 59 500 DC |
+| 14 | SCAR-20 | Bloodsport | classified | FN | - | 14 280 DC |
+| 15 | AWP | Redline | classified | FN | - | 11 730 DC |
+| 16 | Galil AR | Crimson Tsunami | restricted | FN | - | 3 472 DC |
+| 17 | CZ75-Auto | Crimson Web | milspec | FN | - | 1 275 DC |
+| 18 | R8 Revolver | Crimson Web | milspec | FN | - | 1 054 DC |
 
 ---
 
@@ -7989,24 +6410,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | PP-Bizon | Chemical Green | industrial | - | - | 215 DC |
-| 2 | Galil AR | Green Apple | industrial | - | - | 330 DC |
-| 3 | G3SG1 | Green Apple | industrial | - | - | 430 DC |
-| 4 | AK-47 | Wintergreen | milspec | - | - | 680 DC |
-| 5 | CZ75-Auto | Green Plaid | milspec | - | - | 867 DC |
-| 6 | Glock-18 | Green Line | milspec | - | - | 901 DC |
-| 7 | UMP-45 | Green Swirl | milspec | - | - | 1 275 DC |
-| 8 | CZ75-Auto | Emerald Quartz | milspec | - | - | 1 292 DC |
-| 9 | AK-47 | Green Laminate | milspec | - | - | 1 377 DC |
-| 10 | G3SG1 | Green Cell | milspec | - | - | 1 428 DC |
-| 11 | Desert Eagle | Emerald Jörmungandr | restricted | - | - | 2 408 DC |
-| 12 | P250 | Lotus Imprint | restricted | - | - | 3 640 DC |
-| 13 | SCAR-20 | Emerald | restricted | - | - | 4 928 DC |
-| 14 | M4A1-S | Black Lotus | classified | - | - | 7 820 DC |
-| 15 | AK-47 | Hydroponic | classified | - | - | 13 090 DC |
-| 16 | AWP | Green Energy | classified | - | - | 14 790 DC |
-| 17 | Specialist Gloves | Emerald Web | extraordinary | - | - | 153 600 DC |
-| 18 | Driver Gloves | Racing Green | extraordinary | - | - | 194 400 DC |
+| 1 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
+| 2 | Driver Gloves | Racing Green | extraordinary | FN | - | 194 400 DC |
+| 3 | Desert Eagle | Emerald Jörmungandr | restricted | FN | - | 2 408 DC |
+| 4 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 5 | SCAR-20 | Emerald | restricted | FN | - | 4 928 DC |
+| 6 | AWP | Green Energy | classified | FN | - | 14 790 DC |
+| 7 | M4A1-S | Black Lotus | classified | FN | - | 7 820 DC |
+| 8 | P250 | Lotus Imprint | restricted | FN | - | 3 640 DC |
+| 9 | AK-47 | Emerald Pinstripe | restricted | FN | - | 4 984 DC |
+| 10 | CZ75-Auto | Emerald | milspec | FN | - | 1 445 DC |
+| 11 | CZ75-Auto | Emerald Quartz | milspec | FN | - | 1 292 DC |
+| 12 | G3SG1 | Green Cell | milspec | FN | - | 1 428 DC |
+| 13 | AK-47 | Green Laminate | milspec | FN | - | 1 377 DC |
+| 14 | UMP-45 | Green Swirl | milspec | FN | - | 1 275 DC |
+| 15 | Glock-18 | Green Line | milspec | FN | - | 901 DC |
+| 16 | CZ75-Auto | Green Plaid | milspec | FN | - | 867 DC |
+| 17 | AK-47 | Wintergreen | milspec | FN | - | 680 DC |
+| 18 | G3SG1 | Green Apple | industrial | FN | - | 430 DC |
 
 ---
 
@@ -8020,24 +6441,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | P250 | Dark Filigree | industrial | - | - | 240 DC |
-| 2 | M4A4 | Dark Blossom | industrial | - | - | 395 DC |
-| 3 | MP9 | Dark Age | milspec | - | - | 765 DC |
-| 4 | UMP-45 | Facility Dark | milspec | - | - | 935 DC |
-| 5 | Nova | Dark Sigil | milspec | - | - | 1 207 DC |
-| 6 | SG 553 | Darkwing | restricted | - | - | 3 696 DC |
-| 7 | USP-S | Dark Water | restricted | - | - | 4 480 DC |
-| 8 | P2000 | Corticera | classified | - | - | 12 580 DC |
-| 9 | Shadow Daggers | Case Hardened | covert | - | - | 96 000 DC |
-| 10 | Shadow Daggers | Freehand | covert | - | - | 105 600 DC |
-| 11 | Shadow Daggers | Autotronic | covert | - | - | 122 400 DC |
-| 12 | Shadow Daggers | Ultraviolet | covert | - | - | 144 000 DC |
-| 13 | Shadow Daggers | Lore | covert | - | - | 153 600 DC |
-| 14 | Shadow Daggers | Night | covert | - | - | 175 200 DC |
-| 15 | Shadow Daggers | Blue Steel | covert | - | - | 189 600 DC |
-| 16 | Shadow Daggers | Crimson Web | covert | - | - | 206 400 DC |
-| 17 | Shadow Daggers | Fade | covert | - | - | 240 000 DC |
-| 18 | Shadow Daggers | Gamma Doppler | covert | - | - | 280 000 DC |
+| 1 | Shadow Daggers | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 2 | Shadow Daggers | Fade | covert | FN | - | 240 000 DC |
+| 3 | Shadow Daggers | Crimson Web | covert | FN | - | 206 400 DC |
+| 4 | Shadow Daggers | Blue Steel | covert | FN | - | 189 600 DC |
+| 5 | Shadow Daggers | Night | covert | FN | - | 175 200 DC |
+| 6 | Shadow Daggers | Lore | covert | FN | - | 153 600 DC |
+| 7 | Shadow Daggers | Ultraviolet | covert | FN | - | 144 000 DC |
+| 8 | Shadow Daggers | Autotronic | covert | FN | - | 122 400 DC |
+| 9 | Shadow Daggers | Freehand | covert | FN | - | 105 600 DC |
+| 10 | Shadow Daggers | Case Hardened | covert | FN | - | 96 000 DC |
+| 11 | P2000 | Corticera | classified | FN | - | 12 580 DC |
+| 12 | USP-S | Dark Water | restricted | FN | - | 4 480 DC |
+| 13 | SG 553 | Darkwing | restricted | FN | - | 3 696 DC |
+| 14 | Nova | Dark Sigil | milspec | FN | - | 1 207 DC |
+| 15 | UMP-45 | Facility Dark | milspec | FN | - | 935 DC |
+| 16 | MP9 | Dark Age | milspec | FN | - | 765 DC |
+| 17 | M4A4 | Dark Blossom | industrial | FN | - | 395 DC |
+| 18 | P250 | Dark Filigree | industrial | FN | - | 240 DC |
 
 ---
 
@@ -8051,24 +6472,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | R8 Revolver | Phoenix Marker | industrial | - | - | 220 DC |
-| 2 | UMP-45 | Blaze | milspec | - | - | 697 DC |
-| 3 | Desert Eagle | Oxide Blaze | milspec | - | - | 782 DC |
-| 4 | XM1014 | Oxide Blaze | milspec | - | - | 850 DC |
-| 5 | Negev | Phoenix Stencil | milspec | - | - | 918 DC |
-| 6 | R8 Revolver | Blaze | milspec | - | - | 969 DC |
-| 7 | AUG | Hot Rod | milspec | - | - | 986 DC |
-| 8 | XM1014 | Blaze Orange | milspec | - | - | 1 003 DC |
-| 9 | Nova | Blaze Orange | milspec | - | - | 1 054 DC |
-| 10 | MP9 | Hot Rod | milspec | - | - | 1 139 DC |
-| 11 | SCAR-20 | Trail Blazer | milspec | - | - | 1 326 DC |
-| 12 | Tec-9 | Phoenix Chalk | milspec | - | - | 1 496 DC |
-| 13 | Desert Eagle | Blaze | restricted | - | - | 3 976 DC |
-| 14 | Galil AR | Phoenix Blacklight | restricted | - | - | 4 088 DC |
-| 15 | M4A1-S | Hot Rod | classified | - | - | 12 750 DC |
-| 16 | AWP | Wildfire | covert | - | - | 36 400 DC |
-| 17 | Sport Gloves | Blaze | extraordinary | - | - | 108 000 DC |
-| 18 | AK-47 | Fire Serpent | covert | - | - | 120 000 DC |
+| 1 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 2 | Sport Gloves | Blaze | extraordinary | FN | - | 108 000 DC |
+| 3 | AWP | Wildfire | covert | FN | - | 36 400 DC |
+| 4 | M4A1-S | Hot Rod | classified | FN | - | 12 750 DC |
+| 5 | Galil AR | Phoenix Blacklight | restricted | FN | - | 4 088 DC |
+| 6 | Desert Eagle | Blaze | restricted | FN | - | 3 976 DC |
+| 7 | Tec-9 | Phoenix Chalk | milspec | FN | - | 1 496 DC |
+| 8 | SCAR-20 | Trail Blazer | milspec | FN | - | 1 326 DC |
+| 9 | MP9 | Hot Rod | milspec | FN | - | 1 139 DC |
+| 10 | Nova | Blaze Orange | milspec | FN | - | 1 054 DC |
+| 11 | XM1014 | Blaze Orange | milspec | FN | - | 1 003 DC |
+| 12 | AUG | Hot Rod | milspec | FN | - | 986 DC |
+| 13 | R8 Revolver | Blaze | milspec | FN | - | 969 DC |
+| 14 | Negev | Phoenix Stencil | milspec | FN | - | 918 DC |
+| 15 | XM1014 | Oxide Blaze | milspec | FN | - | 850 DC |
+| 16 | Desert Eagle | Oxide Blaze | milspec | FN | - | 782 DC |
+| 17 | UMP-45 | Blaze | milspec | FN | - | 697 DC |
+| 18 | R8 Revolver | Phoenix Marker | industrial | FN | - | 220 DC |
 
 ---
 
@@ -8078,25 +6499,28 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 200 DC**
 - **Описание:** Турбо-спорткары и реактивное ускорение
-- **Количество предметов в кейсе:** 15 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | P250 | Wingshot | restricted | - | - | 3 863 DC |
-| 2 | Dual Berettas | Twin Turbo | classified | - | - | 13 940 DC |
-| 3 | SSG 08 | Turbo Peek | classified | - | - | 14 110 DC |
-| 4 | FAMAS | Commemoration | covert | - | - | 46 900 DC |
-| 5 | M4A4 | The Coalition | covert | - | - | 62 300 DC |
-| 6 | Karambit | Autotronic | covert | - | - | 96 000 DC |
-| 7 | Falchion Knife | Autotronic | covert | - | - | 98 400 DC |
-| 8 | M9 Bayonet | Autotronic | covert | - | - | 100 800 DC |
-| 9 | Gut Knife | Autotronic | covert | - | - | 105 600 DC |
-| 10 | Shadow Daggers | Autotronic | covert | - | - | 122 400 DC |
-| 11 | Butterfly Knife | Autotronic | covert | - | - | 151 200 DC |
-| 12 | Huntsman Knife | Autotronic | covert | - | - | 192 000 DC |
-| 13 | Bowie Knife | Autotronic | covert | - | - | 204 000 DC |
-| 14 | Flip Knife | Autotronic | covert | - | - | 206 400 DC |
-| 15 | Bayonet | Autotronic | covert | - | - | 213 600 DC |
+| 1 | Dual Berettas | Twin Turbo | classified | FN | - | 13 940 DC |
+| 2 | SSG 08 | Turbo Peek | classified | FN | - | 14 110 DC |
+| 3 | FAMAS | Commemoration | covert | FN | - | 46 900 DC |
+| 4 | M4A4 | The Coalition | covert | FN | - | 62 300 DC |
+| 5 | P250 | Wingshot | restricted | FN | - | 3 863 DC |
+| 6 | Karambit | Autotronic | covert | FN | - | 96 000 DC |
+| 7 | M9 Bayonet | Autotronic | covert | FN | - | 100 800 DC |
+| 8 | Butterfly Knife | Autotronic | covert | FN | - | 151 200 DC |
+| 9 | Bayonet | Autotronic | covert | FN | - | 213 600 DC |
+| 10 | Flip Knife | Autotronic | covert | FN | - | 206 400 DC |
+| 11 | Bowie Knife | Autotronic | covert | FN | - | 204 000 DC |
+| 12 | Huntsman Knife | Autotronic | covert | FN | - | 192 000 DC |
+| 13 | Falchion Knife | Autotronic | covert | FN | - | 98 400 DC |
+| 14 | Gut Knife | Autotronic | covert | FN | - | 105 600 DC |
+| 15 | Shadow Daggers | Autotronic | covert | MW | - | 122 400 DC |
+| 16 | Moto Gloves | Finish Line | extraordinary | FN | - | 108 000 DC |
+| 17 | Moto Gloves | Blood Pressure | extraordinary | FN | - | 139 200 DC |
+| 18 | Driver Gloves | Rezan the Red | extraordinary | FN | - | 110 400 DC |
 
 ---
 
@@ -8110,24 +6534,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Glock-18 | Ocean Topo | industrial | - | - | 420 DC |
-| 2 | P2000 | Oceanic | milspec | - | - | 714 DC |
-| 3 | M249 | Deep Relief | milspec | - | - | 850 DC |
-| 4 | MAC-10 | Oceanic | milspec | - | - | 1 020 DC |
-| 5 | SSG 08 | Abyss | milspec | - | - | 1 513 DC |
-| 6 | MP7 | Ocean Foam | restricted | - | - | 2 296 DC |
-| 7 | AK-47 | Searing Rage | classified | - | - | 7 140 DC |
-| 8 | AK-47 | Case Hardened | classified | - | - | 8 670 DC |
-| 9 | AK-47 | The Outsiders | classified | - | - | 9 010 DC |
-| 10 | M4A4 | Poseidon | classified | - | - | 9 180 DC |
-| 11 | AK-47 | Crane Flight | classified | - | - | 9 350 DC |
-| 12 | M4A1-S | Blue Phosphor | classified | - | - | 10 880 DC |
-| 13 | AK-47 | Cartel | classified | - | - | 10 880 DC |
-| 14 | P2000 | Ocean Foam | classified | - | - | 11 050 DC |
-| 15 | MP7 | Abyssal Apparition | classified | - | - | 12 920 DC |
-| 16 | AK-47 | Hydroponic | classified | - | - | 13 090 DC |
-| 17 | AK-47 | Phantom Disruptor | classified | - | - | 14 960 DC |
-| 18 | Desert Eagle | Ocean Drive | covert | - | - | 50 400 DC |
+| 1 | M4A4 | Poseidon | classified | FN | - | 9 180 DC |
+| 2 | Desert Eagle | Ocean Drive | covert | FN | - | 50 400 DC |
+| 3 | M4A1-S | Blue Phosphor | classified | FN | - | 10 880 DC |
+| 4 | P2000 | Ocean Foam | classified | FN | - | 11 050 DC |
+| 5 | MP7 | Abyssal Apparition | classified | FN | - | 12 920 DC |
+| 6 | MP7 | Ocean Foam | restricted | FN | - | 2 296 DC |
+| 7 | SSG 08 | Abyss | milspec | FN | - | 1 513 DC |
+| 8 | MAC-10 | Oceanic | milspec | FN | - | 1 020 DC |
+| 9 | P2000 | Oceanic | milspec | FN | - | 714 DC |
+| 10 | Glock-18 | Ocean Topo | industrial | FN | - | 420 DC |
+| 11 | M249 | Deep Relief | milspec | FN | - | 850 DC |
+| 12 | AK-47 | Phantom Disruptor | classified | FN | - | 14 960 DC |
+| 13 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 14 | AK-47 | Cartel | classified | FN | - | 10 880 DC |
+| 15 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 16 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 17 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
+| 18 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
 
 ---
 
@@ -8141,24 +6565,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | SSG 08 | Tiger Tear | industrial | - | - | 320 DC |
-| 2 | AK-47 | Searing Rage | classified | - | - | 7 140 DC |
-| 3 | AK-47 | Case Hardened | classified | - | - | 8 670 DC |
-| 4 | AK-47 | The Outsiders | classified | - | - | 9 010 DC |
-| 5 | AK-47 | Crane Flight | classified | - | - | 9 350 DC |
-| 6 | AK-47 | Ice Coaled | classified | - | - | 10 200 DC |
-| 7 | AWP | Silk Tiger | classified | - | - | 10 540 DC |
-| 8 | AK-47 | Cartel | classified | - | - | 10 880 DC |
-| 9 | AK-47 | Redline | classified | - | - | 12 410 DC |
-| 10 | AK-47 | Hydroponic | classified | - | - | 13 090 DC |
-| 11 | AK-47 | Phantom Disruptor | classified | - | - | 14 960 DC |
-| 12 | AWP | Asiimov | covert | - | - | 16 000 DC |
-| 13 | AK-47 | Asiimov | covert | - | - | 16 000 DC |
-| 14 | AK-47 | Inheritance | covert | - | - | 28 000 DC |
-| 15 | AWP | Hyper Beast | covert | - | - | 30 100 DC |
-| 16 | AWP | Wildfire | covert | - | - | 36 400 DC |
-| 17 | AWP | Desert Hydra | covert | - | - | 50 400 DC |
-| 18 | SSG 08 | Blood in the Water | covert | - | - | 53 200 DC |
+| 1 | AWP | Desert Hydra | covert | FN | - | 50 400 DC |
+| 2 | AWP | Silk Tiger | classified | FN | - | 10 540 DC |
+| 3 | SSG 08 | Blood in the Water | covert | FN | - | 53 200 DC |
+| 4 | AWP | Wildfire | covert | FN | - | 36 400 DC |
+| 5 | AWP | Hyper Beast | covert | FN | - | 30 100 DC |
+| 6 | AWP | Asiimov | covert | FN | - | 16 000 DC |
+| 7 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 8 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
+| 9 | AK-47 | Phantom Disruptor | classified | FN | - | 14 960 DC |
+| 10 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 11 | AK-47 | Redline | classified | FN | - | 12 410 DC |
+| 12 | AK-47 | Cartel | classified | FN | - | 10 880 DC |
+| 13 | AK-47 | Ice Coaled | classified | FN | - | 10 200 DC |
+| 14 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 15 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 16 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
+| 17 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 18 | SSG 08 | Tiger Tear | industrial | FN | - | 320 DC |
 
 ---
 
@@ -8172,24 +6596,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Galil AR | Blue Titanium | milspec | - | - | 731 DC |
-| 2 | Five-SeveN | Case Hardened | restricted | - | - | 3 584 DC |
-| 3 | Tec-9 | Titanium Bit | restricted | - | - | 4 368 DC |
-| 4 | AK-47 | Case Hardened | classified | - | - | 8 670 DC |
-| 5 | Bayonet | Case Hardened | covert | - | - | 98 400 DC |
-| 6 | Karambit | Case Hardened | covert | - | - | 100 800 DC |
-| 7 | M9 Bayonet | Case Hardened | covert | - | - | 105 600 DC |
-| 8 | Butterfly Knife | Case Hardened | covert | - | - | 124 800 DC |
-| 9 | Talon Knife | Case Hardened | covert | - | - | 134 400 DC |
-| 10 | Kukri Knife | Case Hardened | covert | - | - | 139 200 DC |
-| 11 | Stiletto Knife | Case Hardened | covert | - | - | 153 600 DC |
-| 12 | Bowie Knife | Case Hardened | covert | - | - | 177 600 DC |
-| 13 | Skeleton Knife | Case Hardened | covert | - | - | 182 400 DC |
-| 14 | Falchion Knife | Case Hardened | covert | - | - | 192 000 DC |
-| 15 | Navaja Knife | Case Hardened | covert | - | - | 196 800 DC |
-| 16 | Survival Knife | Case Hardened | covert | - | - | 211 200 DC |
-| 17 | Flip Knife | Case Hardened | covert | - | - | 211 200 DC |
-| 18 | AWP | Dragon Lore | covert | - | - | 850 000 DC |
+| 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
+| 2 | Karambit | Case Hardened | covert | FN | - | 100 800 DC |
+| 3 | Butterfly Knife | Case Hardened | covert | FN | - | 124 800 DC |
+| 4 | M9 Bayonet | Case Hardened | covert | FN | - | 105 600 DC |
+| 5 | Bayonet | Case Hardened | covert | FN | - | 98 400 DC |
+| 6 | Talon Knife | Case Hardened | covert | FN | - | 134 400 DC |
+| 7 | Skeleton Knife | Case Hardened | covert | FN | - | 182 400 DC |
+| 8 | Survival Knife | Case Hardened | covert | FN | - | 211 200 DC |
+| 9 | Flip Knife | Case Hardened | covert | FN | - | 211 200 DC |
+| 10 | Stiletto Knife | Case Hardened | covert | FN | - | 153 600 DC |
+| 11 | Bowie Knife | Case Hardened | covert | FN | - | 177 600 DC |
+| 12 | Falchion Knife | Case Hardened | covert | FN | - | 192 000 DC |
+| 13 | Navaja Knife | Case Hardened | covert | FN | - | 196 800 DC |
+| 14 | Kukri Knife | Case Hardened | covert | FN | - | 139 200 DC |
+| 15 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
+| 16 | Five-SeveN | Case Hardened | restricted | FN | - | 3 584 DC |
+| 17 | Tec-9 | Titanium Bit | restricted | FN | - | 4 368 DC |
+| 18 | Galil AR | Blue Titanium | milspec | FN | - | 731 DC |
 
 ---
 
@@ -8203,24 +6627,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Nova | Candy Apple | industrial | - | - | 215 DC |
-| 2 | MAC-10 | Candy Apple | industrial | - | - | 255 DC |
-| 3 | AK-47 | Olive Polycam | industrial | - | - | 350 DC |
-| 4 | PP-Bizon | Candy Apple | industrial | - | - | 400 DC |
-| 5 | SG 553 | Candy Apple | industrial | - | - | 420 DC |
-| 6 | Five-SeveN | Candy Apple | industrial | - | - | 435 DC |
-| 7 | AK-47 | Crossfade | milspec | - | - | 697 DC |
-| 8 | Glock-18 | Candy Apple | milspec | - | - | 765 DC |
-| 9 | AK-47 | Steel Delta | milspec | - | - | 1 224 DC |
-| 10 | AK-47 | Elite Build | milspec | - | - | 1 428 DC |
-| 11 | AK-47 | Uncharted | milspec | - | - | 1 462 DC |
-| 12 | AK-47 | Orbit Mk01 | restricted | - | - | 2 576 DC |
-| 13 | AK-47 | Rat Rod | restricted | - | - | 2 688 DC |
-| 14 | AK-47 | Blue Laminate | restricted | - | - | 3 192 DC |
-| 15 | SSG 08 | Fever Dream | restricted | - | - | 4 144 DC |
-| 16 | AK-47 | First Class | restricted | - | - | 4 368 DC |
-| 17 | AWP | Fever Dream | classified | - | - | 9 180 DC |
-| 18 | Galil AR | Sugar Rush | classified | - | - | 13 260 DC |
+| 1 | Galil AR | Sugar Rush | classified | FN | - | 13 260 DC |
+| 2 | AWP | Fever Dream | classified | FN | - | 9 180 DC |
+| 3 | SSG 08 | Fever Dream | restricted | FN | - | 4 144 DC |
+| 4 | Glock-18 | Candy Apple | milspec | FN | - | 765 DC |
+| 5 | MAC-10 | Candy Apple | industrial | FN | - | 255 DC |
+| 6 | Nova | Candy Apple | industrial | FN | - | 215 DC |
+| 7 | Five-SeveN | Candy Apple | industrial | FN | - | 435 DC |
+| 8 | PP-Bizon | Candy Apple | industrial | FN | - | 400 DC |
+| 9 | SG 553 | Candy Apple | industrial | FN | - | 420 DC |
+| 10 | AK-47 | First Class | restricted | FN | - | 4 368 DC |
+| 11 | AK-47 | Blue Laminate | restricted | FN | - | 3 192 DC |
+| 12 | AK-47 | Rat Rod | restricted | FN | - | 2 688 DC |
+| 13 | AK-47 | Orbit Mk01 | restricted | FN | - | 2 576 DC |
+| 14 | AK-47 | Uncharted | milspec | FN | - | 1 462 DC |
+| 15 | AK-47 | Elite Build | milspec | FN | - | 1 428 DC |
+| 16 | AK-47 | Steel Delta | milspec | FN | - | 1 224 DC |
+| 17 | AK-47 | Crossfade | milspec | FN | - | 697 DC |
+| 18 | AK-47 | Olive Polycam | industrial | FN | - | 350 DC |
 
 ---
 
@@ -8234,24 +6658,24 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Asiimov | covert | - | - | 16 000 DC |
-| 2 | AWP | Oni Taiji | covert | - | - | 39 200 DC |
-| 3 | P90 | Death by Kitty | covert | - | - | 47 600 DC |
-| 4 | AWP | Queen's Gambit | covert | - | - | 58 800 DC |
-| 5 | Karambit | Case Hardened | covert | - | - | 100 800 DC |
-| 6 | M9 Bayonet | Tiger Tooth | covert | - | - | 110 400 DC |
-| 7 | Survival Knife | Stained | covert | - | - | 122 400 DC |
-| 8 | Classic Knife | Crimson Web | covert | - | - | 132 000 DC |
-| 9 | M9 Bayonet | Slaughter | covert | - | - | 141 600 DC |
-| 10 | M9 Bayonet | Ultraviolet | covert | - | - | 153 600 DC |
-| 11 | Gut Knife | Boreal Forest | covert | - | - | 163 200 DC |
-| 12 | Survival Knife | Ultraviolet | covert | - | - | 175 200 DC |
-| 13 | Shadow Daggers | Rust Coat | covert | - | - | 184 800 DC |
-| 14 | Karambit | Blue Steel | covert | - | - | 194 400 DC |
-| 15 | Survival Knife | Crimson Web | covert | - | - | 206 400 DC |
-| 16 | Butterfly Knife | Marble Fade | covert | - | - | 240 000 DC |
-| 17 | Ursus Knife | Marble Fade | covert | - | - | 240 000 DC |
-| 18 | AWP | Dragon Lore | covert | - | - | 850 000 DC |
+| 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
+| 2 | Butterfly Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 3 | Karambit | Blue Steel | covert | FN | - | 194 400 DC |
+| 4 | Karambit | Case Hardened | covert | FN | - | 100 800 DC |
+| 5 | M9 Bayonet | Tiger Tooth | covert | FN | - | 110 400 DC |
+| 6 | M9 Bayonet | Slaughter | covert | FN | - | 141 600 DC |
+| 7 | M9 Bayonet | Ultraviolet | covert | FN | - | 153 600 DC |
+| 8 | Ursus Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 9 | Survival Knife | Crimson Web | covert | FN | - | 206 400 DC |
+| 10 | Survival Knife | Ultraviolet | covert | FN | - | 175 200 DC |
+| 11 | Survival Knife | Stained | covert | FN | - | 122 400 DC |
+| 12 | Classic Knife | Crimson Web | covert | FN | - | 132 000 DC |
+| 13 | Gut Knife | Boreal Forest | covert | FN | - | 163 200 DC |
+| 14 | Shadow Daggers | Rust Coat | covert | FN | - | 184 800 DC |
+| 15 | AWP | Queen's Gambit | covert | FN | - | 58 800 DC |
+| 16 | P90 | Death by Kitty | covert | FN | - | 47 600 DC |
+| 17 | AWP | Oni Taiji | covert | FN | - | 39 200 DC |
+| 18 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
 
 ---
 
@@ -8263,29 +6687,28 @@
 - **Категория:** `stickers`
 - **Цена открытия:** **71 000 DC**
 - **Описание:** Titan Holo, iBUYPOWER Holo и раритетные наклейки
-- **Количество предметов в кейсе:** 19 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Sticker | iBUYPOWER (Holo) | Katowice 2014 | restricted | - | - | 7 500 000 DC |
-| 2 | Sticker | Team Dignitas (Holo) | Katowice 2014 | restricted | - | - | 2 200 000 DC |
-| 3 | Sticker | 3DMAX (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
-| 4 | Sticker | compLexity Gaming (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
-| 5 | Sticker | Fnatic (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
-| 6 | Sticker | HellRaisers (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
-| 7 | Sticker | Team LDLC.com (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
-| 8 | Sticker | LGB eSports (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
-| 9 | Sticker | mousesports (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
-| 10 | Sticker | Clan-Mystik (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
-| 11 | Sticker | Team LDLC.com | Katowice 2014 | milspec | - | - | 120 763 DC |
-| 12 | Sticker | Team Dignitas | Katowice 2014 | milspec | - | - | 96 783 DC |
-| 13 | Sticker | Fnatic | Katowice 2014 | milspec | - | - | 94 733 DC |
-| 14 | Sticker | HellRaisers | Katowice 2014 | milspec | - | - | 90 316 DC |
-| 15 | Sticker | LGB eSports | Katowice 2014 | milspec | - | - | 76 833 DC |
-| 16 | Sticker | iBUYPOWER | Katowice 2014 | milspec | - | - | 74 629 DC |
-| 17 | Sticker | mousesports | Katowice 2014 | milspec | - | - | 60 037 DC |
-| 18 | Sticker | Clan-Mystik | Katowice 2014 | milspec | - | - | 54 601 DC |
-| 19 | Sticker | 3DMAX | Katowice 2014 | milspec | - | - | 54 359 DC |
+| 2 | Sticker | Titan (Holo) | Katowice 2014 | restricted | - | - | 6 500 000 DC |
+| 3 | Sticker | Team Dignitas (Holo) | Katowice 2014 | restricted | - | - | 2 200 000 DC |
+| 4 | Sticker | Reason Gaming (Holo) | Katowice 2014 | restricted | - | - | 3 800 000 DC |
+| 5 | Sticker | Natus Vincere (Holo) | Katowice 2014 | restricted | - | - | 2 200 000 DC |
+| 6 | Sticker | Virtus.Pro (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
+| 7 | Sticker | HellRaisers (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
+| 8 | Sticker | Team LDLC.com (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
+| 9 | Sticker | LGB eSports (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
+| 10 | Sticker | mousesports (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
+| 11 | Sticker | Clan-Mystik (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
+| 12 | Sticker | 3DMAX (Holo) | Katowice 2014 | restricted | - | - | 1 200 000 DC |
+| 13 | Sticker | Titan | Katowice 2014 | milspec | - | - | 66 293 DC |
+| 14 | Sticker | iBUYPOWER | Katowice 2014 | milspec | - | - | 74 629 DC |
+| 15 | Sticker | Team LDLC.com | Katowice 2014 | milspec | - | - | 120 763 DC |
+| 16 | Sticker | Team Dignitas | Katowice 2014 | milspec | - | - | 96 783 DC |
+| 17 | Sticker | Fnatic | Katowice 2014 | milspec | - | - | 94 733 DC |
+| 18 | Sticker | HellRaisers | Katowice 2014 | milspec | - | - | 90 316 DC |
 
 ---
 
@@ -8295,27 +6718,28 @@
 - **Категория:** `stickers`
 - **Цена открытия:** **250 DC**
 - **Описание:** Официальные брелоки CS2 на оружие всех редкостей
-- **Количество предметов в кейсе:** 17 шт.
+- **Количество предметов в кейсе:** 18 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | Брелок | Lil' Ava | milspec | - | - | 462 DC |
-| 2 | Брелок | That's Bananas | consumer | - | - | 32 DC |
-| 3 | Брелок | Lil' Whiskers | consumer | - | - | 30 DC |
-| 4 | Sticker | Shooter | milspec | - | - | 353 DC |
-| 5 | Sticker | Shooter (Foil) | classified | - | - | 1 431 DC |
-| 6 | Sticker | Shooter Close | milspec | - | - | 333 DC |
-| 7 | Sticker | Shooter Close (Foil) | classified | - | - | 2 507 DC |
-| 8 | Sticker | Blue Snowflake | milspec | - | - | 47 DC |
-| 9 | Sticker | Blue Snowflake (Foil) | classified | - | - | 9 556 DC |
-| 10 | Sticker | Polar Bears | milspec | - | - | 51 DC |
-| 11 | Sticker | Polar Bears (Foil) | classified | - | - | 7 245 DC |
-| 12 | Sticker | Mountain | milspec | - | - | 237 DC |
-| 13 | Sticker | Mountain (Foil) | classified | - | - | 2 629 DC |
-| 14 | Sticker | Frosty the Hitman | milspec | - | - | 370 DC |
-| 15 | Sticker | Frosty the Hitman (Foil) | classified | - | - | 1 983 DC |
-| 16 | Sticker | Lucky 13 | milspec | - | - | 332 DC |
-| 17 | Sticker | Aces High | milspec | - | - | 212 DC |
+| 1 | Брелок | Hot Howl | gold | - | - | 119 000 DC |
+| 2 | Брелок | Baby Karat T | gold | - | - | 95 000 DC |
+| 3 | Брелок | Diamond Dog | consumer | - | - | 85 000 DC |
+| 4 | Брелок | Hot Howl | gold | - | - | 3 359 DC |
+| 5 | Брелок | Backsplash | milspec | - | - | 2 400 DC |
+| 6 | Брелок | Hot Hands | consumer | - | - | 2 100 DC |
+| 7 | Брелок | Pinch O' Salt | milspec | - | - | 1 800 DC |
+| 8 | Брелок | Titeenium AWP | consumer | - | - | 1 500 DC |
+| 9 | Брелок | Lil' Eldritch | gold | - | - | 890 DC |
+| 10 | Брелок | Lil' Eco | consumer | - | - | 1 003 DC |
+| 11 | Брелок | Lil' Ava | milspec | - | - | 462 DC |
+| 12 | Брелок | Lil' SAS | milspec | - | - | 410 DC |
+| 13 | Брелок | Lil' Teacup | consumer | - | - | 380 DC |
+| 14 | Брелок | Lil' Monster | consumer | - | - | 350 DC |
+| 15 | Брелок | Lil' Tusk | milspec | - | - | 270 DC |
+| 16 | Брелок | That's Bananas | consumer | - | - | 32 DC |
+| 17 | Брелок | Lil' Whiskers | consumer | - | - | 30 DC |
+| 18 | Брелок | Diner Dog | consumer | - | - | 15 DC |
 
 ---
 
