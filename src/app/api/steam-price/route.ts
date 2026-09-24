@@ -9,9 +9,9 @@ interface PriceCacheEntry {
   timestamp: number;
 }
 
-// In-memory cache for Steam Market prices with 30-minute TTL
+// In-memory cache for Steam Market prices with 10-minute TTL (live refresh every 10 min)
 const priceCache = new Map<string, PriceCacheEntry>();
-const CACHE_TTL_MS = 30 * 60 * 1000;
+const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minutes live cache
 
 function parseSteamPrice(priceStr: string | undefined): number | null {
   if (!priceStr) return null;
@@ -61,7 +61,7 @@ export async function GET(req: NextRequest) {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
         'Accept': 'application/json',
       },
-      next: { revalidate: 1800 },
+      next: { revalidate: 600 }, // 10 minutes live revalidation
     });
 
     clearTimeout(timeoutId);
@@ -138,5 +138,75 @@ export async function GET(req: NextRequest) {
       error: err?.message || 'Fetch failed',
       marketHashName,
     }, { status: 200 });
+  }
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+    const names: string[] = Array.isArray(body?.names) ? body.names.slice(0, 30) : [];
+    if (names.length === 0) {
+      return NextResponse.json({ success: true, prices: {} });
+    }
+
+    const now = Date.now();
+    const results: Record<string, { priceUsd: number; priceDc: number; source: string }> = {};
+
+    for (const name of names) {
+      const cleanName = String(name).trim();
+      if (!cleanName) continue;
+
+      const cached = priceCache.get(cleanName);
+      if (cached && now - cached.timestamp < CACHE_TTL_MS) {
+        results[cleanName] = {
+          priceUsd: cached.priceUsd,
+          priceDc: cached.priceDc,
+          source: 'cache',
+        };
+        continue;
+      }
+
+      try {
+        const steamUrl = `https://steamcommunity.com/market/priceoverview/?appid=730&currency=1&market_hash_name=${encodeURIComponent(cleanName)}`;
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+
+        const res = await fetch(steamUrl, {
+          signal: controller.signal,
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+            'Accept': 'application/json',
+          },
+        });
+        clearTimeout(timeoutId);
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.success) {
+            const priceUsd = parseSteamPrice(data.lowest_price) ?? parseSteamPrice(data.median_price);
+            if (priceUsd !== null && priceUsd > 0) {
+              const priceDc = Math.max(10, Math.round(priceUsd * 100));
+              priceCache.set(cleanName, {
+                priceUsd,
+                priceDc,
+                lowestPriceRaw: data.lowest_price || null,
+                medianPriceRaw: data.median_price || null,
+                volume: data.volume || null,
+                timestamp: now,
+              });
+              results[cleanName] = { priceUsd, priceDc, source: 'steam_live' };
+            }
+          }
+        }
+      } catch (_) {}
+    }
+
+    return NextResponse.json({
+      success: true,
+      prices: results,
+      timestamp: now,
+    });
+  } catch (err: any) {
+    return NextResponse.json({ error: err?.message || 'Batch price sync failed' }, { status: 500 });
   }
 }

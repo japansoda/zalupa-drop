@@ -44,20 +44,10 @@ export default function AdminPage() {
 
   // Sync fakeDropsEnabled status from server on mount
   useEffect(() => {
-    const localSaved = typeof window !== 'undefined' ? localStorage.getItem('zalupa_fake_drops_enabled') : null;
     fetch('/api/live-drops', { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
-        if (localSaved === 'false') {
-          setFakeDropsEnabled(false);
-          if (data?.fakeDropsEnabled === true) {
-            fetch('/api/live-drops', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ action: 'setFakeDrops', enabled: false }),
-            }).catch(() => {});
-          }
-        } else if (typeof data?.fakeDropsEnabled === 'boolean') {
+        if (typeof data?.fakeDropsEnabled === 'boolean') {
           setFakeDropsEnabled(data.fakeDropsEnabled);
         }
       })

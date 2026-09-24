@@ -5,7 +5,7 @@ import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { RARITY_CONFIG } from '../../data/skins';
 import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
-import allCasesJson from '../../data/all_cases.json';
+import { CASES_DATABASE } from '../../data/cases';
 import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, ShieldCheck, Percent, LayoutGrid, Sword, Hand, Crosshair, Zap, Target, Flame, Shield, Sticker, User, KeyRound, FlaskConical, Anchor } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { CashbackModal } from './CashbackModal';
@@ -970,7 +970,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           currentLostAmount >= 500 ? Math.random() < 0.40 : false;
 
         if (shouldTriggerConsolation) {
-          const casesList = allCasesJson as CaseItem[];
+          const casesList = CASES_DATABASE;
           const validCases = casesList.filter((c) => c.skins && c.skins.length > 0);
 
           const maxCasePrice = Math.min(2500, Math.max(300, Math.floor(currentLostAmount * 0.12)));

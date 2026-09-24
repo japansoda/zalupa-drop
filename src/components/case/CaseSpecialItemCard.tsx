@@ -7,7 +7,7 @@ interface CaseSpecialItemCardProps {
   caseId: string;
 }
 
-export const CaseSpecialItemCard: React.FC<CaseSpecialItemCardProps> = () => {
+export const CaseSpecialItemCard = React.memo<CaseSpecialItemCardProps>(() => {
   const { locale } = useLanguage();
 
   return (
@@ -53,4 +53,5 @@ export const CaseSpecialItemCard: React.FC<CaseSpecialItemCardProps> = () => {
       </div>
     </div>
   );
-};
+});
+CaseSpecialItemCard.displayName = 'CaseSpecialItemCard';

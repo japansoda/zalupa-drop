@@ -11,7 +11,7 @@ import { DropCoinIcon } from '../components/ui/DropCoinIcon';
 import { SkinImage } from '../components/ui/SkinImage';
 import { CASES_DATABASE } from '../data/cases';
 import { sound } from '../lib/sound';
-import { useLanguage, getCaseName, getCaseBadge } from '../lib/i18n';
+import { useLanguage, getCaseName, getCaseBadge, Locale } from '../lib/i18n';
 import { useGameStore } from '../store/useGameStore';
 import { ChevronRight, Search, ArrowUpDown, X } from 'lucide-react';
 import { handleHorizontalWheel } from '../components/layout/HorizontalScrollManager';
@@ -44,7 +44,152 @@ const CASE_BASE_POPULARITY: Record<string, number> = {
   chroma_case: 7300,
 };
 
+import { CaseItem } from '../lib/types';
 import { getCaseThemeGlow, getOptimizedCaseImageUrl } from '../lib/caseTheme';
+
+interface CaseGridCardProps {
+  caseItem: CaseItem;
+  idx: number;
+  locale: Locale;
+}
+
+const CaseGridCard = React.memo<CaseGridCardProps>(({ caseItem, idx, locale }) => {
+  const isHighroller = caseItem.priceDc >= 25000;
+  const isUltra = caseItem.priceDc >= 60000;
+  const glow = getCaseThemeGlow(caseItem);
+  const caseName = getCaseName(caseItem, locale);
+  const optimizedImg = getOptimizedCaseImageUrl(caseItem.image);
+
+  return (
+    <Link
+      href={`/case/${caseItem.id}`}
+      onClick={() => sound.playClick()}
+      style={{
+        boxShadow: `0 0 16px rgba(${glow.rgb}, 0.1)`,
+        contain: 'content',
+      }}
+      className={`group relative rounded-2xl glass-card p-3 sm:p-3.5 flex flex-col justify-between transition-all duration-200 overflow-hidden ${
+        isUltra
+          ? 'border border-amber-400/50 bg-gradient-to-b from-amber-500/10 via-black/50 to-black/70 hover:border-amber-300 hover:shadow-[0_0_35px_rgba(251,191,36,0.4)]'
+          : isHighroller
+          ? 'border border-yellow-500/35 bg-gradient-to-b from-yellow-500/5 via-black/40 to-black/60 hover:border-yellow-400 hover:shadow-[0_0_30px_rgba(234,179,8,0.35)]'
+          : 'border border-white/10 hover:border-[rgba(var(--card-glow),0.55)]'
+      }`}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderColor = `rgba(${glow.rgb}, 0.55)`;
+        e.currentTarget.style.boxShadow = `0 0 28px rgba(${glow.rgb}, 0.3)`;
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderColor = '';
+        e.currentTarget.style.boxShadow = `0 0 16px rgba(${glow.rgb}, 0.1)`;
+      }}
+    >
+      {/* Luxury Sheen sweep for highroller cases */}
+      {isHighroller && (
+        <div className="luxury-sheen opacity-40 group-hover:opacity-85 transition-opacity" />
+      )}
+
+      {caseItem.badge && (
+        <div className={`absolute top-2.5 right-2.5 z-20 px-2 py-0.5 rounded-full font-black text-[8.5px] uppercase tracking-wider shadow ${
+          isUltra
+            ? 'bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 text-black shadow-[0_0_10px_rgba(251,191,36,0.5)]'
+            : isHighroller
+            ? 'bg-gradient-to-r from-yellow-400 to-amber-400 text-black shadow-[0_0_8px_rgba(234,179,8,0.35)]'
+            : 'bg-yellow-400 text-black'
+        }`}>
+          {getCaseBadge(caseItem.badge, caseItem.badgeEn, locale)}
+        </div>
+      )}
+
+      {/* Case Visual Showcase with Compact Volumetric Glow */}
+      <div className="relative w-full h-32 sm:h-36 flex items-center justify-center my-0.5 overflow-visible">
+        {/* Core Volumetric Glow */}
+        <div
+          className="absolute w-24 h-24 sm:w-28 sm:h-28 rounded-full blur-xl z-0 transition-all duration-300 group-hover:scale-115 group-hover:opacity-100 opacity-80 pointer-events-none"
+          style={{
+            background: `radial-gradient(circle, rgba(${glow.rgb}, 0.75) 0%, rgba(${glow.rgb}, 0.25) 50%, transparent 72%)`
+          }}
+        />
+
+        <img
+          src={optimizedImg}
+          alt={caseName}
+          loading={idx < 12 ? 'eager' : 'lazy'}
+          decoding="async"
+          referrerPolicy="no-referrer"
+          onError={(e) => {
+            if (e.currentTarget.src !== caseItem.image) {
+              e.currentTarget.src = caseItem.image;
+            }
+          }}
+          style={{
+            filter: `drop-shadow(0 0 14px rgba(${glow.rgb}, 0.65)) drop-shadow(0 8px 16px rgba(0,0,0,0.85))`
+          }}
+          className="relative z-10 w-32 h-28 sm:w-36 sm:h-32 max-h-32 object-contain group-hover:scale-108 transition-transform duration-200 select-none"
+        />
+      </div>
+
+      {/* Case Name */}
+      <div className="flex flex-col mb-1.5 z-10">
+        <h3 className={`font-black text-xs sm:text-sm transition-colors truncate ${
+          isHighroller ? 'text-white group-hover:text-amber-300' : 'text-white group-hover:text-yellow-400'
+        }`}>
+          {caseName}
+        </h3>
+      </div>
+
+      {/* Skin Previews (4 mini items) */}
+      <div className="flex items-center gap-1 py-1.5 border-t border-b border-white/5 mb-2.5 overflow-hidden z-10">
+        {caseItem.skins.slice(0, 4).map((skin, i) => (
+          <div
+            key={i}
+            className="w-6 h-6 sm:w-7 sm:h-7 rounded bg-black/60 border border-white/10 p-0.5 shrink-0 flex items-center justify-center relative"
+            title={skin.name}
+          >
+            <SkinImage
+              src={skin.image}
+              alt={skin.name}
+              size={48}
+              thumb
+              className="w-full h-full object-contain"
+            />
+            {skin.statTrak && (
+              <div className="absolute top-0.5 right-0.5 w-1 h-1 rounded-full bg-amber-500 shadow-[0_0_3px_#f59e0b]" />
+            )}
+          </div>
+        ))}
+        {caseItem.skins.length > 4 && (
+          <span className="text-[9px] text-white/50 font-bold ml-0.5">
+            +{caseItem.skins.length - 4}
+          </span>
+        )}
+      </div>
+
+      {/* Price & Action */}
+      <div className="flex items-center justify-between z-10">
+        <div className="flex items-center gap-1">
+          <DropCoinIcon size={15} />
+          <span className={`font-mono font-black text-xs sm:text-sm transition-colors ${
+            isHighroller
+              ? 'text-amber-300 group-hover:text-yellow-300 drop-shadow-[0_0_6px_rgba(251,191,36,0.35)]'
+              : 'text-white group-hover:text-yellow-400'
+          }`}>
+            {caseItem.priceDc.toLocaleString('ru-RU')} DC
+          </span>
+        </div>
+
+        <div className={`w-7 h-7 rounded-lg border flex items-center justify-center transition-all ${
+          isHighroller
+            ? 'bg-amber-400/10 border-amber-400/30 text-amber-300 group-hover:bg-amber-400 group-hover:text-black'
+            : 'bg-white/5 border-white/10 text-white group-hover:bg-yellow-400 group-hover:text-black'
+        }`}>
+          <ChevronRight className="w-3.5 h-3.5" />
+        </div>
+      </div>
+    </Link>
+  );
+});
+CaseGridCard.displayName = 'CaseGridCard';
 
 export default function HomePage() {
   const { t, locale } = useLanguage();
@@ -251,142 +396,14 @@ export default function HomePage() {
                   style={{ transform: 'translateZ(0)' }}
                 >
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2.5 sm:gap-3">
-                {filteredCases.slice(0, displayLimit).map((caseItem, idx) => {
-                  const isHighroller = caseItem.priceDc >= 25000;
-                  const isUltra = caseItem.priceDc >= 60000;
-                  const glow = getCaseThemeGlow(caseItem);
-
-                  return (
-                    <Link
-                      key={caseItem.id}
-                      href={`/case/${caseItem.id}`}
-                      onClick={() => sound.playClick()}
-                      style={{
-                        boxShadow: `0 0 16px rgba(${glow.rgb}, 0.1)`,
-                      }}
-                      className={`group relative rounded-2xl glass-card p-3 sm:p-3.5 flex flex-col justify-between transition-all duration-200 overflow-hidden ${
-                        isUltra
-                          ? 'border border-amber-400/50 bg-gradient-to-b from-amber-500/10 via-black/50 to-black/70 hover:border-amber-300 hover:shadow-[0_0_35px_rgba(251,191,36,0.4)]'
-                          : isHighroller
-                          ? 'border border-yellow-500/35 bg-gradient-to-b from-yellow-500/5 via-black/40 to-black/60 hover:border-yellow-400 hover:shadow-[0_0_30px_rgba(234,179,8,0.35)]'
-                          : 'border border-white/10 hover:border-[rgba(var(--card-glow),0.55)]'
-                      }`}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.borderColor = `rgba(${glow.rgb}, 0.55)`;
-                        e.currentTarget.style.boxShadow = `0 0 28px rgba(${glow.rgb}, 0.3)`;
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.borderColor = '';
-                        e.currentTarget.style.boxShadow = `0 0 16px rgba(${glow.rgb}, 0.1)`;
-                      }}
-                    >
-                      {/* Luxury Sheen sweep for highroller cases */}
-                      {isHighroller && (
-                        <div className="luxury-sheen opacity-40 group-hover:opacity-85 transition-opacity" />
-                      )}
-
-
-
-                      {caseItem.badge && (
-                        <div className={`absolute top-2.5 right-2.5 z-20 px-2 py-0.5 rounded-full font-black text-[8.5px] uppercase tracking-wider shadow ${
-                          isUltra
-                            ? 'bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 text-black shadow-[0_0_10px_rgba(251,191,36,0.5)]'
-                            : isHighroller
-                            ? 'bg-gradient-to-r from-yellow-400 to-amber-400 text-black shadow-[0_0_8px_rgba(234,179,8,0.35)]'
-                            : 'bg-yellow-400 text-black'
-                        }`}>
-                          {getCaseBadge(caseItem.badge, caseItem.badgeEn, locale)}
-                        </div>
-                      )}
-
-                      {/* Case Visual Showcase with Compact Volumetric Glow */}
-                      <div className="relative w-full h-32 sm:h-36 flex items-center justify-center my-0.5 overflow-visible">
-                        {/* Core Volumetric Glow */}
-                        <div
-                          className="absolute w-24 h-24 sm:w-28 sm:h-28 rounded-full blur-xl z-0 transition-all duration-300 group-hover:scale-115 group-hover:opacity-100 opacity-80 pointer-events-none"
-                          style={{
-                            background: `radial-gradient(circle, rgba(${glow.rgb}, 0.75) 0%, rgba(${glow.rgb}, 0.25) 50%, transparent 72%)`
-                          }}
-                        />
-
-                        <img
-                          src={getOptimizedCaseImageUrl(caseItem.image)}
-                          alt={getCaseName(caseItem, locale)}
-                          loading={idx < 18 ? 'eager' : 'lazy'}
-                          decoding="async"
-                          referrerPolicy="no-referrer"
-                          onError={(e) => {
-                            if (e.currentTarget.src !== caseItem.image) {
-                              e.currentTarget.src = caseItem.image;
-                            }
-                          }}
-                          style={{
-                            filter: `drop-shadow(0 0 14px rgba(${glow.rgb}, 0.65)) drop-shadow(0 8px 16px rgba(0,0,0,0.85))`
-                          }}
-                          className="relative z-10 w-32 h-28 sm:w-36 sm:h-32 max-h-32 object-contain group-hover:scale-108 transition-transform duration-200 select-none"
-                        />
-                      </div>
-
-                      {/* Case Name */}
-                      <div className="flex flex-col mb-1.5 z-10">
-                        <h3 className={`font-black text-xs sm:text-sm transition-colors truncate ${
-                          isHighroller ? 'text-white group-hover:text-amber-300' : 'text-white group-hover:text-yellow-400'
-                        }`}>
-                          {getCaseName(caseItem, locale)}
-                        </h3>
-                      </div>
-
-                      {/* Skin Previews (4 mini items) */}
-                      <div className="flex items-center gap-1 py-1.5 border-t border-b border-white/5 mb-2.5 overflow-hidden z-10">
-                        {caseItem.skins.slice(0, 4).map((skin, i) => (
-                          <div
-                            key={i}
-                            className="w-6 h-6 sm:w-7 sm:h-7 rounded bg-black/60 border border-white/10 p-0.5 shrink-0 flex items-center justify-center relative"
-                            title={skin.name}
-                          >
-                            <SkinImage
-                              src={skin.image}
-                              alt={skin.name}
-                              size={48}
-                              thumb
-                              className="w-full h-full object-contain"
-                            />
-                            {skin.statTrak && (
-                              <div className="absolute top-0.5 right-0.5 w-1 h-1 rounded-full bg-amber-500 shadow-[0_0_3px_#f59e0b]" />
-                            )}
-                          </div>
-                        ))}
-                        {caseItem.skins.length > 4 && (
-                          <span className="text-[9px] text-white/50 font-bold ml-0.5">
-                            +{caseItem.skins.length - 4}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Price & Action */}
-                      <div className="flex items-center justify-between z-10">
-                        <div className="flex items-center gap-1">
-                          <DropCoinIcon size={15} />
-                          <span className={`font-mono font-black text-xs sm:text-sm transition-colors ${
-                            isHighroller
-                              ? 'text-amber-300 group-hover:text-yellow-300 drop-shadow-[0_0_6px_rgba(251,191,36,0.35)]'
-                              : 'text-white group-hover:text-yellow-400'
-                          }`}>
-                            {caseItem.priceDc.toLocaleString('ru-RU')} DC
-                          </span>
-                        </div>
-
-                        <div className={`w-7 h-7 rounded-lg border flex items-center justify-center transition-all ${
-                          isHighroller
-                            ? 'bg-amber-400/10 border-amber-400/30 text-amber-300 group-hover:bg-amber-400 group-hover:text-black'
-                            : 'bg-white/5 border-white/10 text-white group-hover:bg-yellow-400 group-hover:text-black'
-                        }`}>
-                          <ChevronRight className="w-3.5 h-3.5" />
-                        </div>
-                      </div>
-                    </Link>
-                  );
-                })}
+                {filteredCases.slice(0, displayLimit).map((caseItem, idx) => (
+                  <CaseGridCard
+                    key={caseItem.id}
+                    caseItem={caseItem}
+                    idx={idx}
+                    locale={locale}
+                  />
+                ))}
                 </div>
               </motion.div>
             </AnimatePresence>

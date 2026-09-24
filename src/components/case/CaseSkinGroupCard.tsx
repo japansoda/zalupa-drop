@@ -16,33 +16,46 @@ interface CaseSkinGroupCardProps {
   variants: SkinEntity[];
 }
 
-export const CaseSkinGroupCard: React.FC<CaseSkinGroupCardProps> = ({ variants }) => {
+export const CaseSkinGroupCard = React.memo<CaseSkinGroupCardProps>(({ variants }) => {
   const { locale } = useLanguage();
   const baseSkin = variants[0];
-  const config = RARITY_CONFIG[baseSkin.rarity] || RARITY_CONFIG.milspec;
+  const config = RARITY_CONFIG[baseSkin?.rarity] || RARITY_CONFIG.milspec;
 
   // Clean skin name for drop list display (no pre-baked wear or ST in the listing)
-  const cleanWeapon = baseSkin.weapon.replace(/^★\s*StatTrak™\s*/i, '★ ').replace(/^StatTrak™\s*/i, '').trim();
-  const cleanSkinName = (baseSkin.skinName || baseSkin.name)
-    .replace(/\s*\((Factory New|Minimal Wear|Field-Tested|Well-Worn|Battle-Scarred|Прямо с завода|Немного поношенное|После полевых испытаний|Поношенное|Закаленное в боях)\)$/i, '')
-    .trim();
+  const cleanWeapon = React.useMemo(() => {
+    return (baseSkin?.weapon || '').replace(/^★\s*StatTrak™\s*/i, '★ ').replace(/^StatTrak™\s*/i, '').trim();
+  }, [baseSkin?.weapon]);
 
-  const hasStatTrak = variants.some((v) => v.statTrak) || isStatTrakableItem(baseSkin);
+  const cleanSkinName = React.useMemo(() => {
+    return ((baseSkin?.skinName || baseSkin?.name) || '')
+      .replace(/\s*\((Factory New|Minimal Wear|Field-Tested|Well-Worn|Battle-Scarred|Прямо с завода|Немного поношенное|После полевых испытаний|Поношенное|Закаленное в боях)\)$/i, '')
+      .trim();
+  }, [baseSkin?.skinName, baseSkin?.name]);
+
+  const hasStatTrak = React.useMemo(() => variants.some((v) => v.statTrak) || isStatTrakableItem(baseSkin), [variants, baseSkin]);
   const isWearable = isWearableItem(baseSkin);
-  const detectedWear = baseSkin.wear || variants.find((v) => v.wear)?.wear || (isWearable ? 'FN' : '');
+  const detectedWear = baseSkin?.wear || variants.find((v) => v.wear)?.wear || (isWearable ? 'FN' : '');
+
+  const steamUrl = React.useMemo(() => {
+    return getSteamMarketListingUrl({ ...baseSkin, weapon: cleanWeapon, skinName: cleanSkinName });
+  }, [baseSkin, cleanWeapon, cleanSkinName]);
+
+  if (!baseSkin) return null;
 
   return (
     <div
       className="rounded-2xl glass-card p-2 sm:p-3 flex flex-col justify-between border hover:border-yellow-400/40 transition-all group relative overflow-hidden"
-      style={{ borderBottomWidth: '3px', borderBottomColor: config.color }}
+      style={{ borderBottomWidth: '3px', borderBottomColor: config.color, contain: 'content' }}
     >
-      {/* Top Header: Quality & StatTrak on Left, Rarity on Right (Same as Upgrader & Inventory) */}
-      <div className="flex items-center justify-between gap-1 z-10 min-h-[22px]">
-        <div className="flex items-center gap-1">
+      {/* Top Header: Quality & StatTrak on Left, Rarity on Right */}
+      <div className="flex items-center justify-between gap-1.5 z-10 min-h-[22px] overflow-hidden">
+        <div className="flex items-center gap-1 shrink-0 min-w-0">
           {hasStatTrak && <StatTrakBadge size="xs" />}
           {isWearable && detectedWear && <WearBadge wear={detectedWear} size="xs" />}
         </div>
-        <RarityBadge rarity={baseSkin.rarity} size="sm" />
+        <div className="shrink min-w-0 flex justify-end">
+          <RarityBadge rarity={baseSkin.rarity} size="xs" short className="max-w-[85px]" />
+        </div>
       </div>
 
       {/* Central Skin Image with Smooth Zoom */}
@@ -72,7 +85,7 @@ export const CaseSkinGroupCard: React.FC<CaseSkinGroupCardProps> = ({ variants }
           </div>
 
           <a
-            href={getSteamMarketListingUrl({ ...baseSkin, weapon: cleanWeapon, skinName: cleanSkinName })}
+            href={steamUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/30 hover:text-white transition-colors"
@@ -84,4 +97,5 @@ export const CaseSkinGroupCard: React.FC<CaseSkinGroupCardProps> = ({ variants }
       </div>
     </div>
   );
-};
+});
+CaseSkinGroupCard.displayName = 'CaseSkinGroupCard';

@@ -10,7 +10,8 @@ export const runtime = 'nodejs';
 const NTFY_TOPIC = 'zalupa_live_drops_v3';
 const NTFY_URL = `https://ntfy.sh/${NTFY_TOPIC}`;
 const DISK_FILE = path.join(os.tmpdir(), 'zalupa_live_drops_v3.json');
-const SETTINGS_FILE = path.join(os.tmpdir(), 'zalupa_settings_v1.json');
+const PERSISTENT_SETTINGS_FILE = path.resolve(process.cwd(), 'src/data/live_settings.json');
+const FALLBACK_SETTINGS_FILE = path.join(os.tmpdir(), 'zalupa_settings_v1.json');
 const MAX_DROPS = 50;
 
 // Global memory buffer for warm serverless instances
@@ -26,8 +27,14 @@ if (!globalStore.__liveDropsBuffer) {
 
 function loadSettings(): { fakeDropsEnabled: boolean } {
   try {
-    if (fs.existsSync(SETTINGS_FILE)) {
-      const data = JSON.parse(fs.readFileSync(SETTINGS_FILE, 'utf-8'));
+    if (fs.existsSync(PERSISTENT_SETTINGS_FILE)) {
+      const data = JSON.parse(fs.readFileSync(PERSISTENT_SETTINGS_FILE, 'utf-8'));
+      if (typeof data.fakeDropsEnabled === 'boolean') return data;
+    }
+  } catch (_) {}
+  try {
+    if (fs.existsSync(FALLBACK_SETTINGS_FILE)) {
+      const data = JSON.parse(fs.readFileSync(FALLBACK_SETTINGS_FILE, 'utf-8'));
       if (typeof data.fakeDropsEnabled === 'boolean') return data;
     }
   } catch (_) {}
@@ -36,7 +43,10 @@ function loadSettings(): { fakeDropsEnabled: boolean } {
 
 function saveSettings(settings: { fakeDropsEnabled: boolean }) {
   try {
-    fs.writeFileSync(SETTINGS_FILE, JSON.stringify(settings), 'utf-8');
+    fs.writeFileSync(PERSISTENT_SETTINGS_FILE, JSON.stringify(settings, null, 2), 'utf-8');
+  } catch (_) {}
+  try {
+    fs.writeFileSync(FALLBACK_SETTINGS_FILE, JSON.stringify(settings, null, 2), 'utf-8');
   } catch (_) {}
 }
 

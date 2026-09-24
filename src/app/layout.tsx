@@ -4,6 +4,7 @@ import { LanguageProvider } from "../lib/i18n";
 import { HorizontalScrollManager } from "../components/layout/HorizontalScrollManager";
 import { MobileNav } from "../components/layout/MobileNav";
 import { PresenceTracker } from "../components/layout/PresenceTracker";
+import { PriceSyncManager } from "../components/layout/PriceSyncManager";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
         <LanguageProvider>
           <HorizontalScrollManager />
           <PresenceTracker />
+          <PriceSyncManager />
           {children}
           <MobileNav />
           <Analytics />

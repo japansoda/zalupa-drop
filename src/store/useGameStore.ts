@@ -3,6 +3,7 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import { InventoryItem, LiveDrop, SkinEntity, UserStats } from '../lib/types';
 import { sound } from '../lib/sound';
 import { SKINS_DATABASE } from '../data/skins';
+import { getSteamMarketHashName } from '../lib/steam';
 
 interface GameState {
   balance: number;
@@ -47,6 +48,7 @@ interface GameState {
   addPotion: (count?: number) => void;
   drinkPotion: () => boolean;
   consumePotionCharge: () => boolean;
+  syncLivePrices: () => Promise<void>;
 }
 
 export const useGameStore = create<GameState>()(
@@ -57,10 +59,10 @@ export const useGameStore = create<GameState>()(
       soundEnabled: true,
       isRefillOpen: false,
       caseOpenCounts: {},
-      saveTokensCount: 1,
-      zeusCount: 1,
-      potionsCount: 1,
-      hookCount: 1,
+      saveTokensCount: 0,
+      zeusCount: 0,
+      potionsCount: 0,
+      hookCount: 0,
       activePotionCharges: 0,
       stats: {
         casesOpened: 0,
@@ -291,9 +293,39 @@ export const useGameStore = create<GameState>()(
           },
         }));
       },
+
+      syncLivePrices: async () => {
+        const inv = get().inventory;
+        if (!inv || inv.length === 0) return;
+
+        const names = Array.from(new Set(inv.map((item) => getSteamMarketHashName(item)).filter(Boolean)));
+        if (names.length === 0) return;
+
+        try {
+          const res = await fetch('/api/steam-price', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ names }),
+          });
+          if (!res.ok) return;
+          const data = await res.json();
+          if (data && data.prices && Object.keys(data.prices).length > 0) {
+            set((state) => ({
+              inventory: state.inventory.map((item) => {
+                const hashName = getSteamMarketHashName(item);
+                const live = data.prices[hashName];
+                if (live && typeof live.priceDc === 'number' && live.priceDc > 0) {
+                  return { ...item, priceDc: live.priceDc };
+                }
+                return item;
+              }),
+            }));
+          }
+        } catch (_) {}
+      },
     }),
     {
-      name: 'zalupa_drop_state_v1',
+      name: 'zalupa_drop_state_v3',
       storage: createJSONStorage(() => localStorage),
       onRehydrateStorage: () => (state) => {
         if (!state) return;

@@ -6,28 +6,15 @@ import { useGameStore } from '../../store/useGameStore';
 import { SKINS_DATABASE, RARITY_CONFIG } from '../../data/skins';
 import { LiveDrop } from '../../lib/types';
 import { useLanguage } from '../../lib/i18n';
-import allCasesData from '../../data/all_cases.json';
+import { CASE_NAME_EN_MAP } from '../../lib/caseNamesMap';
 
 const BLEND_WINDOW_MS = 3 * 60 * 1000; // 3 minutes dynamic window
 
 const CASE_EN_MAP: Record<string, string> = {
   'Контракт обмена': 'Trade-Up',
   'Апгрейдер': 'Upgrader',
-  'Кейс «Революция»': 'Revolution Case',
-  'Грёзы и кошмары': 'Dreams & Nightmares',
-  'Кейс «Разлом»': 'Fracture Case',
-  'Кейс «Легенда Howl»': 'Howl Legend Case',
-  'Кейс «Градиентный Раш»': 'Fade Rush Case',
-  'Кейс «Галактика Допплер»': 'Doppler Galaxy Case',
-  'Кейс «Дикий Лотос»': 'Wild Lotus Case',
-  'Кейс «Хранилище Перчаток»': 'Glove Vault Case',
+  ...CASE_NAME_EN_MAP,
 };
-
-(allCasesData as any[]).forEach((c) => {
-  if (c.name && c.nameEn) {
-    CASE_EN_MAP[c.name] = c.nameEn;
-  }
-});
 
 const SIMULATED_CASES = [
   'Кейс «Революция»',
@@ -169,22 +156,11 @@ export const LiveDropBar: React.FC = () => {
   // Real-time synchronization for new drops (ntfy.sh SSE + local BroadcastChannel)
   // No preloading of old historical drops: fresh start on reload
   useEffect(() => {
-    // Sync fake drops configuration from server, respecting local override
+    // Sync fake drops configuration from server (global for all users forever)
     fetch('/api/live-drops', { cache: 'no-store' })
       .then((r) => r.json())
       .then((data) => {
-        const localSaved = typeof window !== 'undefined' ? localStorage.getItem('zalupa_fake_drops_enabled') : null;
-        if (localSaved === 'false') {
-          // If locally explicitly turned off, ensure store is off and sync server if server restarted with true
-          useGameStore.getState().setFakeDropsEnabled(false);
-          if (data?.fakeDropsEnabled === true) {
-            fetch('/api/live-drops', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ action: 'setFakeDrops', enabled: false }),
-            }).catch(() => {});
-          }
-        } else if (typeof data?.fakeDropsEnabled === 'boolean') {
+        if (typeof data?.fakeDropsEnabled === 'boolean') {
           useGameStore.getState().setFakeDropsEnabled(data.fakeDropsEnabled);
         }
       })

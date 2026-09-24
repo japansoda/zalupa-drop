@@ -33,6 +33,114 @@ const WIN_INDEX = WINNER_INDEX;
 const ITEM_WIDTH = 180;
 const ITEM_GAP = 12;
 
+interface ReelTapeCardProps {
+  skin: SkinEntity;
+  idx: number;
+  reelIdx: number;
+  openCount: number;
+  caseId?: string;
+  isRevealed: boolean;
+  isHookPicked: boolean;
+  hookArmed: boolean;
+  locale: string;
+  onPointerDown: (reelIdx: number, itemIdx: number, e: React.PointerEvent) => void;
+}
+
+const ReelTapeCard = React.memo<ReelTapeCardProps>(({
+  skin,
+  idx,
+  reelIdx,
+  openCount,
+  caseId,
+  isRevealed,
+  isHookPicked,
+  hookArmed,
+  locale,
+  onPointerDown,
+}) => {
+  const isOfficial = Boolean(caseId && isOfficialCase(caseId));
+  const isKnife = isKnifeOrGlove(skin);
+  const isWinSlot = idx === WIN_INDEX;
+  const showAsSpecial = isOfficial && isKnife && (!isWinSlot || !isRevealed);
+
+  const displayRarity = showAsSpecial ? 'gold' : skin.rarity;
+  const config = RARITY_CONFIG[displayRarity] || RARITY_CONFIG.milspec;
+  const displayImage = showAsSpecial ? '/images/special_item.png' : skin.image;
+  const displayWeapon = showAsSpecial ? '★' : skin.weapon;
+  const displaySkinName = showAsSpecial ? (locale === 'en' ? '★ Rare Special Item' : '★ Редкий особый предмет') : skin.skinName;
+
+  // Winning slot and adjacent items prioritized; others use lightweight thumbnails
+  const isPrioritySlot = idx >= 44 && idx <= 50;
+
+  return (
+    <div
+      onPointerDown={(e) => onPointerDown(reelIdx, idx, e)}
+      className={`relative rounded-2xl bg-[#11121a] border shrink-0 flex flex-col items-center justify-between p-3 select-none overflow-hidden transition-all ${
+        isHookPicked
+          ? 'border-orange-400 shadow-[0_0_22px_rgba(249,115,22,0.6)]'
+          : showAsSpecial
+          ? 'border-yellow-400/50 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
+          : hookArmed
+          ? 'border-white/10 cursor-pointer touch-manipulation hover:border-orange-400/80 hover:shadow-[0_0_18px_rgba(249,115,22,0.45)]'
+          : 'border-white/10'
+      }`}
+      style={{
+        width: `${ITEM_WIDTH}px`,
+        height: openCount > 1 ? '180px' : '210px',
+        borderBottomWidth: '4px',
+        borderBottomColor: config.color,
+        contain: 'layout paint',
+        willChange: 'transform',
+        transform: 'translateZ(0)',
+      }}
+    >
+      <div className="w-full flex justify-between items-center gap-1.5 z-10 min-h-[20px] overflow-hidden">
+        <div className="flex items-center gap-1 shrink-0 min-w-0">
+          {!showAsSpecial && skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
+          {!showAsSpecial && <WearBadge skin={skin} size="xs" />}
+          {showAsSpecial && (
+            <span className="text-[8.5px] font-black font-mono tracking-wider px-1.5 py-0.5 rounded-full text-white bg-[#ea580c] shadow-[0_0_8px_rgba(234,88,12,0.4)] uppercase shrink-0">
+              ★
+            </span>
+          )}
+        </div>
+        <div className="shrink min-w-0 flex justify-end">
+          {showAsSpecial ? (
+            <span className="text-[8.5px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full text-black bg-[#facc15] shadow-[0_0_10px_rgba(250,204,21,0.4)] truncate">
+              ★ {locale === 'en' ? 'SPECIAL' : 'ОСОБЫЙ'}
+            </span>
+          ) : (
+            <RarityBadge rarity={skin.rarity} size="xs" short className="max-w-[85px]" />
+          )}
+        </div>
+      </div>
+
+      <div className={`relative ${
+        showAsSpecial 
+          ? (openCount > 1 ? 'w-28 h-20' : 'w-36 h-28') 
+          : (openCount > 1 ? 'w-28 h-24' : 'w-36 h-32')
+      } my-auto flex items-center justify-center z-10`}>
+        <SkinImage
+          src={displayImage}
+          alt={displayWeapon}
+          size={160}
+          priority={isPrioritySlot}
+          thumb={!isPrioritySlot}
+          className={`w-full h-full object-contain filter drop-shadow-md ${
+            showAsSpecial ? 'drop-shadow-[0_0_15px_rgba(250,204,21,0.55)]' : ''
+          }`}
+        />
+      </div>
+
+      <div className="w-full text-center z-10">
+        <p className="text-xs font-bold text-white truncate">{displayWeapon}</p>
+        <p className="text-[11px] truncate font-semibold" style={{ color: config.color }}>{displaySkinName}</p>
+      </div>
+    </div>
+  );
+});
+ReelTapeCard.displayName = 'ReelTapeCard';
+
 export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   caseSkins,
   casePriceDc,
@@ -1185,87 +1293,21 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                   transform: 'translateZ(0)'
                 }}
               >
-                {(reels[reelIdx] || []).map((skin, idx) => {
-                  const isOfficial = Boolean(caseId && isOfficialCase(caseId));
-                  const isKnife = isKnifeOrGlove(skin);
-                  const isWinSlot = idx === WIN_INDEX;
-
-                  // In official cases: knives on the tape appear as the gold Special Item
-                  // and reveal the actual dropped knife once the spin completes
-                  const showAsSpecial = isOfficial && isKnife && (!isWinSlot || !isRevealed);
-
-                  const displayRarity = showAsSpecial ? 'gold' : skin.rarity;
-                  const config = RARITY_CONFIG[displayRarity] || RARITY_CONFIG.milspec;
-                  const displayImage = showAsSpecial ? '/images/special_item.png' : skin.image;
-                  const displayWeapon = showAsSpecial ? '★' : skin.weapon;
-                  const displaySkinName = showAsSpecial ? (locale === 'en' ? '★ Rare Special Item' : '★ Редкий особый предмет') : skin.skinName;
-
-                  const isHookPicked = hookPicked?.reelIdx === reelIdx && hookPicked?.itemIdx === idx;
-                  return (
-                    <div
-                      key={`${skin.id}_${idx}`}
-                      onPointerDown={(e) => handleCardPointerDown(reelIdx, idx, e)}
-                      onPointerCancel={() => {
-                        tapDownRef.current = null;
-                      }}
-                      className={`relative rounded-2xl bg-[#11121a] border shrink-0 flex flex-col items-center justify-between p-3 select-none overflow-hidden transition-all ${
-                        isHookPicked
-                          ? 'border-orange-400 shadow-[0_0_22px_rgba(249,115,22,0.6)]'
-                          : showAsSpecial
-                          ? 'border-yellow-400/50 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
-                          : hookArmed
-                          ? 'border-white/10 cursor-pointer touch-manipulation hover:border-orange-400/80 hover:shadow-[0_0_18px_rgba(249,115,22,0.45)]'
-                          : 'border-white/10'
-                      }`}
-                      style={{
-                        width: `${ITEM_WIDTH}px`,
-                        height: openCount > 1 ? '180px' : '210px',
-                        borderBottomWidth: '4px',
-                        borderBottomColor: config.color,
-                        transform: 'translateZ(0)',
-                      }}
-                    >
-                      <div className="w-full flex justify-between items-center gap-1 z-10">
-                        <div className="flex items-center gap-1 min-w-0">
-                          {!showAsSpecial && skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
-                          {!showAsSpecial && <WearBadge skin={skin} size="xs" />}
-                          {showAsSpecial && (
-                            <span className="text-[9px] font-black font-mono tracking-wider px-2 py-0.5 rounded-full text-white bg-[#ea580c] shadow-[0_0_8px_rgba(234,88,12,0.4)] uppercase">
-                              ★
-                            </span>
-                          )}
-                        </div>
-                        {showAsSpecial ? (
-                          <span className="text-[9.5px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full text-black bg-[#facc15] shadow-[0_0_10px_rgba(250,204,21,0.4)]">
-                            ★ {locale === 'en' ? 'SPECIAL' : 'ОСОБЫЙ'}
-                          </span>
-                        ) : (
-                          <RarityBadge rarity={skin.rarity} size="sm" />
-                        )}
-                      </div>
-
-                      <div className={`relative ${
-                        showAsSpecial 
-                          ? (openCount > 1 ? 'w-28 h-20' : 'w-36 h-28') 
-                          : (openCount > 1 ? 'w-28 h-24' : 'w-36 h-32')
-                      } my-auto flex items-center justify-center z-10`}>
-                        <SkinImage
-                          src={displayImage}
-                          alt={displayWeapon}
-                          size={160}
-                          className={`w-full h-full object-contain filter drop-shadow-md ${
-                            showAsSpecial ? 'drop-shadow-[0_0_15px_rgba(250,204,21,0.55)]' : ''
-                          }`}
-                        />
-                      </div>
-
-                      <div className="w-full text-center z-10">
-                        <p className="text-xs font-bold text-white truncate">{displayWeapon}</p>
-                        <p className="text-[11px] truncate font-semibold" style={{ color: config.color }}>{displaySkinName}</p>
-                      </div>
-                    </div>
-                  );
-                })}
+                {(reels[reelIdx] || []).map((skin, idx) => (
+                  <ReelTapeCard
+                    key={`${skin.id}_${idx}`}
+                    skin={skin}
+                    idx={idx}
+                    reelIdx={reelIdx}
+                    openCount={openCount}
+                    caseId={caseId}
+                    isRevealed={isRevealed}
+                    isHookPicked={hookPicked?.reelIdx === reelIdx && hookPicked?.itemIdx === idx}
+                    hookArmed={hookArmed}
+                    locale={locale}
+                    onPointerDown={handleCardPointerDown}
+                  />
+                ))}
               </motion.div>
               {/* Живая железная цепь крюка (верёвочная физика, пишет rAF напрямую в DOM) */}
               {ropeOn && (
