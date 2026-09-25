@@ -15,32 +15,30 @@ export const handleHorizontalWheel = (e: React.WheelEvent<HTMLElement>) => {
 export const HorizontalScrollManager: React.FC = () => {
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {
-      // Find the closest ancestor that is horizontally scrollable
-      let el = e.target as HTMLElement | null;
+      // Only handle if vertical delta is clearly dominant
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX) || e.deltaY === 0) return;
 
-      while (el && el !== document.body && el !== document.documentElement) {
-        const style = window.getComputedStyle(el);
-        const overflowX = style.overflowX;
-        if (el.dataset.noWheel === 'true' || el.classList.contains('no-wheel-scroll')) {
-          el = el.parentElement;
-          continue;
-        }
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
 
-        const isHorizontalCandidate =
-          overflowX === 'auto' ||
-          overflowX === 'scroll' ||
-          el.classList.contains('overflow-x-auto') ||
-          el.classList.contains('overflow-x-scroll');
+      // FAST path: Never call window.getComputedStyle in a loop!
+      // Only intercept elements that explicitly request horizontal wheel translation
+      const el = target.closest<HTMLElement>(
+        '[data-horizontal-scroll="true"], .horizontal-wheel-scroll, .live-drop-ticker'
+      );
 
-        if (isHorizontalCandidate && el.scrollWidth > el.clientWidth) {
-          // If vertical scroll delta is dominant, translate to horizontal scroll
-          if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && e.deltaY !== 0) {
-            el.scrollLeft += e.deltaY * 1.1;
-            e.preventDefault();
-            return;
-          }
-        }
-        el = el.parentElement;
+      if (!el) return;
+
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      if (maxScroll <= 0) return;
+
+      // Check if container can actually scroll in the desired direction
+      const canScrollRight = e.deltaY > 0 && el.scrollLeft < maxScroll - 1;
+      const canScrollLeft = e.deltaY < 0 && el.scrollLeft > 1;
+
+      if (canScrollRight || canScrollLeft) {
+        el.scrollLeft += e.deltaY * 1.1;
+        e.preventDefault();
       }
     };
 

@@ -49,7 +49,7 @@ const PISTOL_MODELS = ['desert eagle', 'usp-s', 'glock-18', 'five-seven', 'p250'
 const SMG_MODELS = ['mp9', 'mac-10', 'mp7', 'mp5-sd', 'ump-45', 'p90', 'pp-bizon'];
 const HEAVY_MODELS = ['nova', 'xm1014', 'mag-7', 'sawed-off', 'm249', 'negev'];
 
-// Memoized Card Component for smooth, fast scrolling with contentVisibility
+// Memoized Card Component for smooth, fast scrolling with contentVisibility and GPU isolation
 const MarketSkinCard = React.memo<{
   skin: SkinEntity;
   canAfford: boolean;
@@ -60,11 +60,14 @@ const MarketSkinCard = React.memo<{
 
   return (
     <div
-      className="relative rounded-3xl p-3 flex flex-col justify-between border bg-[#0d0e14] transition-all hover:-translate-y-1 hover:shadow-xl group"
+      className="relative rounded-3xl p-3 flex flex-col justify-between border bg-[#0d0e14] transition-[border-color,transform] duration-150 hover:-translate-y-1 hover:shadow-xl group"
       style={{
         borderColor: rarityCfg.border,
         contentVisibility: 'auto',
         containIntrinsicSize: '270px',
+        contain: 'content',
+        transform: 'translateZ(0)',
+        willChange: 'transform',
       }}
     >
       {/* Top Badges */}
@@ -82,7 +85,7 @@ const MarketSkinCard = React.memo<{
           src={skin.image}
           alt={skin.name}
           size={150}
-          className="w-full h-24 sm:h-28 object-contain group-hover:scale-108 transition-transform duration-200"
+          className="w-full h-24 sm:h-28 object-contain group-hover:scale-105 transition-transform duration-150"
         />
       </div>
 
@@ -119,7 +122,10 @@ const MarketSkinCard = React.memo<{
 MarketSkinCard.displayName = 'MarketSkinCard';
 
 export default function MarketplacePage() {
-  const { balance, deductBalance, addToInventory, setRefillOpen } = useGameStore();
+  const balance = useGameStore((s) => s.balance);
+  const deductBalance = useGameStore((s) => s.deductBalance);
+  const addToInventory = useGameStore((s) => s.addToInventory);
+  const setRefillOpen = useGameStore((s) => s.setRefillOpen);
   const { locale } = useLanguage();
 
   const [search, setSearch] = useState('');
@@ -514,7 +520,10 @@ export default function MarketplacePage() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
+              <div
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4"
+                style={{ contain: 'layout' }}
+              >
                 {filteredSkins.slice(0, visibleCount).map((skin) => (
                   <MarketSkinCard
                     key={skin.id}

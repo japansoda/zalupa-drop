@@ -25,7 +25,10 @@ export const Header: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 w-full glass-panel border-b border-white/10 bg-[#08080a]/95 max-w-full overflow-hidden">
+    <header
+      className="sticky top-0 z-40 w-full bg-[#0a0b12] border-b border-white/10 shadow-lg shadow-black/40 max-w-full overflow-hidden"
+      style={{ transform: 'translateZ(0)', contain: 'paint layout' }}
+    >
       <div className="max-w-7xl mx-auto px-3 sm:px-6 min-h-13 sm:h-15 py-1 sm:py-0 flex items-center justify-between gap-2 sm:gap-4">
         {/* Sleek SVG Logo */}
         <Link 

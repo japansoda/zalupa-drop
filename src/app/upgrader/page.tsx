@@ -12,7 +12,7 @@ import { useLanguage } from '../../lib/i18n';
 import { Zap } from 'lucide-react';
 
 export default function UpgraderPage() {
-  const { inventory } = useGameStore();
+  const inventory = useGameStore((s) => s.inventory);
   const { t } = useLanguage();
 
   return (

@@ -27,12 +27,12 @@ const UpgraderInventoryCard = React.memo<{
     <button
       type="button"
       onClick={() => onToggle(item)}
-      className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
+      className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-[border-color,background-color] duration-150 cursor-pointer text-left ${
         isSelected
           ? 'border-yellow-400 bg-yellow-400/10 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
           : 'border-white/10 bg-black/40 hover:border-white/20'
       }`}
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '160px' }}
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '160px', contain: 'content', transform: 'translateZ(0)', willChange: 'transform' }}
     >
       {isSelected && (
         <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
@@ -89,14 +89,14 @@ const UpgraderCatalogCard = React.memo<{
     <button
       type="button"
       onClick={() => onSelect(skin)}
-      className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-all cursor-pointer text-left ${
+      className={`relative rounded-2xl p-2.5 flex flex-col items-center justify-between border transition-[border-color,background-color] duration-150 cursor-pointer text-left ${
         isSelected
           ? 'border-yellow-400 bg-yellow-400/15 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
           : isTooCheap
           ? 'border-white/5 bg-black/20 opacity-40 cursor-not-allowed'
           : 'border-white/10 bg-black/40 hover:border-white/20'
       }`}
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '160px' }}
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '160px', contain: 'content', transform: 'translateZ(0)', willChange: 'transform' }}
     >
       {isSelected && (
         <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
@@ -148,8 +148,8 @@ const UpgraderMiniMarketCard = React.memo<{
 }>(({ item, canAfford, locale, onBuyAndSelect }) => {
   return (
     <div
-      className="rounded-2xl p-2.5 flex flex-col justify-between border border-white/10 bg-black/40 hover:border-yellow-400/40 transition-all text-left group"
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '210px' }}
+      className="rounded-2xl p-2.5 flex flex-col justify-between border border-white/10 bg-black/40 hover:border-yellow-400/40 transition-[border-color,background-color] duration-150 text-left group"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '210px', contain: 'content', transform: 'translateZ(0)', willChange: 'transform' }}
     >
       <div className="w-full flex items-center justify-between z-10 min-h-[18px] mb-1">
         <div className="flex items-center gap-1">
@@ -273,28 +273,27 @@ interface RadialGaugeProps {
 import { LUCK_POTION, SAVE_TOKEN, ZEUS_ITEM, rollConsolationPrize } from '../../lib/consumables';
 
 export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkins }) => {
-  const {
-    balance,
-    deductBalance,
-    addToInventory,
-    removeFromInventory,
-    recordUpgrade,
-    potionsCount,
-    activePotionCharges,
-    drinkPotion,
-    consumePotionCharge,
-    saveTokensCount,
-    useSaveToken,
-    zeusCount,
-    useZeus,
-    addPotion,
-    addSaveToken,
-    addZeus,
-    hookCount,
-    useHook,
-    addHook,
-    addLiveDrop,
-  } = useGameStore();
+  const balance = useGameStore((s) => s.balance);
+  const potionsCount = useGameStore((s) => s.potionsCount);
+  const activePotionCharges = useGameStore((s) => s.activePotionCharges);
+  const saveTokensCount = useGameStore((s) => s.saveTokensCount);
+  const zeusCount = useGameStore((s) => s.zeusCount);
+  const hookCount = useGameStore((s) => s.hookCount);
+
+  const deductBalance = useGameStore((s) => s.deductBalance);
+  const addToInventory = useGameStore((s) => s.addToInventory);
+  const removeFromInventory = useGameStore((s) => s.removeFromInventory);
+  const recordUpgrade = useGameStore((s) => s.recordUpgrade);
+  const drinkPotion = useGameStore((s) => s.drinkPotion);
+  const consumePotionCharge = useGameStore((s) => s.consumePotionCharge);
+  const useSaveToken = useGameStore((s) => s.useSaveToken);
+  const useZeus = useGameStore((s) => s.useZeus);
+  const addPotion = useGameStore((s) => s.addPotion);
+  const addSaveToken = useGameStore((s) => s.addSaveToken);
+  const addZeus = useGameStore((s) => s.addZeus);
+  const useHook = useGameStore((s) => s.useHook);
+  const addHook = useGameStore((s) => s.addHook);
+  const addLiveDrop = useGameStore((s) => s.addLiveDrop);
   const { t, locale } = useLanguage();
 
   const [selectedItems, setSelectedItems] = useState<InventoryItem[]>([]);
@@ -2718,7 +2717,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       {/* ── BOTTOM SECTION: INVENTORY & CATALOG ── */}
       <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 pb-12">
         {/* Left Bottom: МОИ СКИНЫ */}
-        <div className="rounded-3xl p-5 sm:p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col h-[780px]">
+        <div
+          className="rounded-3xl p-5 sm:p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col h-[780px]"
+          style={{ transform: 'translateZ(0)', contain: 'layout' }}
+        >
           <div className="shrink-0 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-white/10">
             {/* Miniature Toggle: Inventory vs Market */}
             <div className="flex items-center gap-2">
@@ -2910,7 +2912,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         </div>
 
         {/* Right Bottom: ВЫ ПОЛУЧАЕТЕ (Catalog, only items > bet) */}
-        <div className="rounded-3xl p-5 sm:p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col h-[780px]">
+        <div
+          className="rounded-3xl p-5 sm:p-6 bg-[#0d0e14] border border-white/10 shadow-xl flex flex-col h-[780px]"
+          style={{ transform: 'translateZ(0)', contain: 'layout' }}
+        >
           <div className="shrink-0 flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10">
             <div className="flex items-center gap-2">
               <h2 className="text-base font-black text-white uppercase">{t('upg.targetCatalog')}</h2>
