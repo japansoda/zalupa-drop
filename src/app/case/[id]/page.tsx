@@ -44,7 +44,35 @@ export default function CaseOpenPage() {
       }
       map.get(key)!.push(skin);
     }
-    return Array.from(map.values());
+    const list = Array.from(map.values());
+
+    // Sort cheapest on top (ascending), most expensive at the bottom
+    const rarityRank: Record<string, number> = {
+      consumer: 1,
+      industrial: 2,
+      milspec: 3,
+      restricted: 4,
+      classified: 5,
+      covert: 6,
+      contraband: 7,
+      extraordinary: 8,
+      gold: 9,
+    };
+
+    list.sort((a, b) => {
+      const minPriceA = Math.min(...a.map((s) => s.priceDc || 0));
+      const minPriceB = Math.min(...b.map((s) => s.priceDc || 0));
+
+      if (minPriceA !== minPriceB) {
+        return minPriceA - minPriceB;
+      }
+
+      const rankA = rarityRank[a[0]?.rarity] || 0;
+      const rankB = rarityRank[b[0]?.rarity] || 0;
+      return rankA - rankB;
+    });
+
+    return list;
   }, [currentCase, isOfficial]);
 
   if (!currentCase) {
@@ -162,12 +190,12 @@ export default function CaseOpenPage() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5 sm:gap-4">
-            {isOfficial && (
-              <CaseSpecialItemCard caseId={currentCase.id} />
-            )}
             {groupedSkins.map((variants, idx) => (
               <CaseSkinGroupCard key={variants[0]?.id || idx} variants={variants} />
             ))}
+            {isOfficial && (
+              <CaseSpecialItemCard caseId={currentCase.id} />
+            )}
           </div>
         </section>
       </div>

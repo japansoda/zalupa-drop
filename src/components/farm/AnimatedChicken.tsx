@@ -494,7 +494,7 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
 
       {/* CS2 StatTrak™ Digital Counter LED Box */}
       {isStatTrak && (
-        <div className="absolute bottom-2.5 z-30 px-3 py-1 rounded-md bg-black/95 border-[1.5px] border-amber-500 shadow-[0_0_16px_rgba(245,158,11,0.7)] flex items-center gap-1.5 pointer-events-none select-none">
+        <div className="absolute bottom-0 z-30 px-3 py-1 rounded-md bg-black/95 border-[1.5px] border-amber-500 shadow-[0_0_16px_rgba(245,158,11,0.7)] flex items-center gap-1.5 pointer-events-none select-none">
           <span className="text-[10px] font-black text-amber-500 font-mono tracking-tight">ST™</span>
           <span className="text-[13px] font-black text-amber-400 font-mono tracking-widest leading-none">
             {String(eggsLaidCount || 0).padStart(6, '0')}
