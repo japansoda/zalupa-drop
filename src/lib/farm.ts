@@ -413,7 +413,7 @@ export function calculateChickenSellPrice(
 export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 'ru', isStatTrak = false) {
   const breed = CHICKEN_BREEDS[breedId] || CHICKEN_BREEDS.white_inferno;
   const isRu = locale === 'ru';
-  const mult = isStatTrak ? 1.075 : 1.0;
+  const mult = isStatTrak ? 1.10 : 1.0;
 
   switch (breed.eggDropTier) {
     case 'tier_legendary':
@@ -422,8 +422,8 @@ export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 
         covert: `${(11.0 * mult).toFixed(1)}%`,
         classified: '39.0%',
         summary: isRu
-          ? `${(2.8 * mult).toFixed(1)}% Ножи & Перчатки · ${(11.0 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +7.5% удачи)' : ''}`
-          : `${(2.8 * mult).toFixed(1)}% Knives & Gloves · ${(11.0 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +7.5% luck)' : ''}`,
+          ? `${(2.8 * mult).toFixed(1)}% Ножи & Перчатки · ${(11.0 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +10% удачи)' : ''}`
+          : `${(2.8 * mult).toFixed(1)}% Knives & Gloves · ${(11.0 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +10% luck)' : ''}`,
       };
     case 'tier_covert':
       return {
@@ -431,8 +431,8 @@ export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 
         covert: `${(8.5 * mult).toFixed(1)}%`,
         classified: '36.0%',
         summary: isRu
-          ? `${(2.0 * mult).toFixed(1)}% Ножи · ${(8.5 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +7.5% удачи)' : ''}`
-          : `${(2.0 * mult).toFixed(1)}% Knives · ${(8.5 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +7.5% luck)' : ''}`,
+          ? `${(2.0 * mult).toFixed(1)}% Ножи · ${(8.5 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +10% удачи)' : ''}`
+          : `${(2.0 * mult).toFixed(1)}% Knives · ${(8.5 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +10% luck)' : ''}`,
       };
     case 'tier_classified':
       return {
@@ -440,8 +440,8 @@ export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 
         covert: `${(6.5 * mult).toFixed(1)}%`,
         classified: '33.0%',
         summary: isRu
-          ? `${(1.5 * mult).toFixed(1)}% Ножи · ${(6.5 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +7.5% удачи)' : ''}`
-          : `${(1.5 * mult).toFixed(1)}% Knives · ${(6.5 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +7.5% luck)' : ''}`,
+          ? `${(1.5 * mult).toFixed(1)}% Ножи · ${(6.5 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +10% удачи)' : ''}`
+          : `${(1.5 * mult).toFixed(1)}% Knives · ${(6.5 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +10% luck)' : ''}`,
       };
     case 'tier_restricted':
       return {
@@ -449,8 +449,8 @@ export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 
         covert: `${(4.8 * mult).toFixed(1)}%`,
         classified: '30.0%',
         summary: isRu
-          ? `${(1.1 * mult).toFixed(1)}% Ножи · ${(4.8 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +7.5% удачи)' : ''}`
-          : `${(1.1 * mult).toFixed(1)}% Knives · ${(4.8 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +7.5% luck)' : ''}`,
+          ? `${(1.1 * mult).toFixed(1)}% Ножи · ${(4.8 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +10% удачи)' : ''}`
+          : `${(1.1 * mult).toFixed(1)}% Knives · ${(4.8 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +10% luck)' : ''}`,
       };
     case 'tier_common':
     default:
@@ -459,8 +459,8 @@ export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 
         covert: `${(3.6 * mult).toFixed(1)}%`,
         classified: '27.0%',
         summary: isRu
-          ? `${(0.8 * mult).toFixed(1)}% Ножи · ${(3.6 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +7.5% удачи)' : ''}`
-          : `${(0.8 * mult).toFixed(1)}% Knives · ${(3.6 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +7.5% luck)' : ''}`,
+          ? `${(0.8 * mult).toFixed(1)}% Ножи · ${(3.6 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +10% удачи)' : ''}`
+          : `${(0.8 * mult).toFixed(1)}% Knives · ${(3.6 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +10% luck)' : ''}`,
       };
   }
 }
@@ -470,7 +470,7 @@ export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 
  * STRICT: Absolutely NO stickers, NO charms, NO agents!
  * Calibrated for ~98.5% overall RTP on 7,500 DC chicken feed cost.
  * When hasLuckPotion is true, knife/glove and covert chances are boosted.
- * When isStatTrak is true, an additional +7.5% luck buff is applied!
+ * When isStatTrak is true, an additional +10% luck buff is applied!
  */
 export function rollEggSkinDrop(
   breedId: ChickenBreedId,
@@ -493,7 +493,7 @@ export function rollEggSkinDrop(
   const milspecPool = weaponsPool.filter((s) => s.rarity === 'milspec' || s.rarity === 'industrial' || s.rarity === 'consumer');
 
   const roll = Math.random() * 100;
-  const stMult = isStatTrak ? 1.075 : 1.0;
+  const stMult = isStatTrak ? 1.10 : 1.0;
 
   let candidateBucket: SkinEntity[] = [];
 

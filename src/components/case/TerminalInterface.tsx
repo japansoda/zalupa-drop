@@ -73,18 +73,19 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
 
     for (let i = 0; i < 5; i++) {
       let candidate: SkinEntity;
-      // Normal: 4% Gold/Glove, 10% Covert, 26% Classified, 36% Restricted, 24% Mil-Spec
-      // With Luck Potion: 9.5% Gold/Glove, 22% Covert, 34% Classified, 24.5% Restricted, 10% Mil-Spec
+      // Normal: 1.3% Gold/Glove, 6.5% Covert, 22% Classified, 38% Restricted, 32.2% Mil-Spec
+      // With Luck Potion: 3.5% Gold/Glove, 14.5% Covert, 34% Classified, 30% Restricted, 18% Mil-Spec
       const roll = Math.random() * 100;
       const golds = pool.filter((s) => s.rarity === 'gold' || s.rarity === 'extraordinary' || (s.weapon || '').toLowerCase().includes('glove'));
       const coverts = pool.filter((s) => s.rarity === 'covert');
       const classifieds = pool.filter((s) => s.rarity === 'classified');
       const restricteds = pool.filter((s) => s.rarity === 'restricted');
+      const milspecs = pool.filter((s) => s.rarity === 'milspec' || s.rarity === 'industrial' || s.rarity === 'consumer');
 
-      const goldThreshold = hasLuck ? 9.5 : 4;
-      const covertThreshold = hasLuck ? (goldThreshold + 22) : 14;
-      const classifiedThreshold = hasLuck ? (covertThreshold + 34) : 40;
-      const restrictedThreshold = hasLuck ? (classifiedThreshold + 24.5) : 76;
+      const goldThreshold = hasLuck ? 3.5 : 1.3;
+      const covertThreshold = goldThreshold + (hasLuck ? 14.5 : 6.5);
+      const classifiedThreshold = covertThreshold + (hasLuck ? 34.0 : 22.0);
+      const restrictedThreshold = classifiedThreshold + (hasLuck ? 30.0 : 38.0);
 
       if (roll < goldThreshold && golds.length > 0) {
         candidate = golds[Math.floor(Math.random() * golds.length)];
@@ -93,6 +94,10 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
       } else if (roll < classifiedThreshold && classifieds.length > 0) {
         candidate = classifieds[Math.floor(Math.random() * classifieds.length)];
       } else if (roll < restrictedThreshold && restricteds.length > 0) {
+        candidate = restricteds[Math.floor(Math.random() * restricteds.length)];
+      } else if (milspecs.length > 0) {
+        candidate = milspecs[Math.floor(Math.random() * milspecs.length)];
+      } else if (restricteds.length > 0) {
         candidate = restricteds[Math.floor(Math.random() * restricteds.length)];
       } else {
         candidate = pool[Math.floor(Math.random() * pool.length)];
