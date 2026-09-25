@@ -359,11 +359,11 @@ export function rollHatchedChickenBreed(hasLuckPotion = false): ChickenBreedId {
 }
 
 /**
- * 15% probability for a hatched chicken to be StatTrak™
- * Luck potion increases it to 35%!
+ * 10% probability for a hatched chicken to be StatTrak™
+ * Luck potion increases it to 25%!
  */
 export function rollIsStatTrakChicken(hasLuckPotion = false): boolean {
-  return Math.random() < (hasLuckPotion ? 0.35 : 0.15);
+  return Math.random() < (hasLuckPotion ? 0.25 : 0.10);
 }
 
 /**

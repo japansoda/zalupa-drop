@@ -303,6 +303,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const [zeusStriking, setZeusStriking] = useState<boolean>(false);
   const [isSpinning, setIsSpinning] = useState<boolean>(false);
   const [zeusUsedThisSpin, setZeusUsedThisSpin] = useState<boolean>(false);
+  const [isZeusProtected, setIsZeusProtected] = useState<boolean>(false);
+  const zeusProtectTimerRef = useRef<NodeJS.Timeout | null>(null);
   const spinResolveRef = useRef<(() => void) | null>(null);
 
   const [targetChance, setTargetChance] = useState<number>(50);
@@ -667,7 +669,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
   // Zeus: можно прожать ТОЛЬКО когда спин уже идёт и ещё не завершился.
   // Просто прерывает текущий спин и запускает перекрут (+5% к шансу).
-  const canPressZeus = isSpinning && isUpgrading && !zeusUsedThisSpin && !zeusStriking && !hookUsedThisSpin && !hookArmed && !hookFlying && zeusCount > 0;
+  const canPressZeus = isSpinning && isUpgrading && !zeusUsedThisSpin && !zeusStriking && !hookUsedThisSpin && !hookArmed && !hookFlying && zeusCount > 0 && !isZeusProtected;
   const handleActivateZeus = () => {
     if (!canPressZeus) return;
     // Consume zeus and interrupt current spin for re-spin
@@ -873,6 +875,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
   useEffect(() => {
     return () => {
+      if (zeusProtectTimerRef.current) clearTimeout(zeusProtectTimerRef.current);
       ropeModeRef.current = 'off';
       cancelAnimationFrame(ropeRafRef.current);
     };
@@ -920,6 +923,15 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     setIsSpinning(true);
     setLastResult(null);
     setZeusUsedThisSpin(false);
+    if (zeusProtectTimerRef.current) clearTimeout(zeusProtectTimerRef.current);
+    if (zeusCount > 0) {
+      setIsZeusProtected(true);
+      zeusProtectTimerRef.current = setTimeout(() => {
+        setIsZeusProtected(false);
+      }, 1500);
+    } else {
+      setIsZeusProtected(false);
+    }
     setHookArmed(false);
     setHookUsedThisSpin(false);
     setHookFlying(false);
@@ -1022,6 +1034,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
     const isWin = await doSpin(chance);
 
+    if (zeusProtectTimerRef.current) clearTimeout(zeusProtectTimerRef.current);
+    setIsZeusProtected(false);
     setIsSpinning(false);
     setIsUpgrading(false);
 
@@ -1750,7 +1764,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       onClick={handleActivateZeus}
                       disabled={!canPressZeus}
                       className={`w-full py-1 rounded-lg text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-1 ${
-                        zeusUsedThisSpin
+                        isZeusProtected
+                          ? 'bg-neutral-800 text-neutral-500 border border-neutral-700/60 cursor-not-allowed shadow-none'
+                          : zeusUsedThisSpin
                           ? 'bg-sky-500/20 text-sky-300 border border-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.3)] cursor-default'
                           : canPressZeus
                           ? 'bg-sky-500 hover:bg-sky-400 text-black active:scale-95 shadow-[0_0_12px_rgba(56,189,248,0.3)] cursor-pointer'
@@ -1760,7 +1776,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       <span>
                         {zeusUsedThisSpin
                           ? (locale === 'ru' ? 'Zeus использован (+5%)' : 'Zeus Used (+5%)')
-                          : canPressZeus
+                          : isZeusProtected || canPressZeus
                           ? (locale === 'ru' ? 'Вжать Zeus! (+5% перекрут)' : 'Hit Zeus! (+5% reroll)')
                           : zeusCount <= 0
                           ? (locale === 'ru' ? 'Нет Zeus' : 'No Zeus')
@@ -2475,13 +2491,15 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             <div className="mt-4 w-full max-w-xs flex flex-col gap-2">
               {isUpgrading ? (
                 // Во время спина: если есть Zeus — показываем кнопку Zeus вместо "Улучшить"
-                canPressZeus || zeusUsedThisSpin || zeusStriking ? (
+                canPressZeus || isZeusProtected || zeusUsedThisSpin || zeusStriking ? (
                   <button
                     type="button"
                     onClick={handleActivateZeus}
                     disabled={!canPressZeus}
                     className={`w-full py-4 rounded-2xl font-black text-base sm:text-lg uppercase tracking-wider transition-all flex items-center justify-center gap-2 border-2 ${
-                      canPressZeus
+                      isZeusProtected
+                        ? 'bg-neutral-800 text-neutral-500 border-neutral-700/60 cursor-not-allowed shadow-none'
+                        : canPressZeus
                         ? 'bg-sky-500 hover:bg-sky-400 text-black border-sky-200 shadow-[0_0_35px_rgba(56,189,248,0.7)] cursor-pointer active:scale-95 animate-pulse'
                         : 'bg-sky-500/20 border-sky-400/50 text-sky-300 cursor-default'
                     }`}

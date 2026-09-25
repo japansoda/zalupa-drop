@@ -11,7 +11,7 @@
 - [Оружейные кейсы (Weapons) (25 кейсов)](#weapons)
 - [Хайроллер кейсы (Highroller) (22 кейсов)](#highroller)
 - [Бюджетные кейсы (Budget) (9 кейсов)](#budget)
-- [Авторские кейсы (Custom) (92 кейсов)](#custom)
+- [Авторские кейсы (Custom) (97 кейсов)](#custom)
 - [Капсулы и наклейки (Stickers & Capsules) (241 кейсов)](#stickers)
 
 ---
@@ -149,7 +149,7 @@
 
 - **ID кейса:** `case-graphic-design`
 - **Категория:** `official`
-- **Цена открытия:** **2 750 DC**
+- **Цена открытия:** **3 200 DC**
 - **Описание:** Коллекция Арсенала CS2 с редким AWP CMYK
 - **Количество предметов в кейсе:** 46 шт.
 
@@ -208,7 +208,7 @@
 
 - **ID кейса:** `case-sport-and-field`
 - **Категория:** `official`
-- **Цена открытия:** **2 900 DC**
+- **Цена открытия:** **3 600 DC**
 - **Описание:** Коллекция Арсенала CS2 с легендарным M4A1-S Fade
 - **Количество предметов в кейсе:** 42 шт.
 
@@ -263,7 +263,7 @@
 
 - **ID кейса:** `case-overpass-2024`
 - **Категория:** `official`
-- **Цена открытия:** **3 200 DC**
+- **Цена открытия:** **3 500 DC**
 - **Описание:** Официальная коллекция Арсенала CS2 с B the Monster
 - **Количество предметов в кейсе:** 52 шт.
 
@@ -3646,7 +3646,7 @@
 
 - **ID кейса:** `case-arabesque-2026`
 - **Категория:** `highroller`
-- **Цена открытия:** **7 500 DC**
+- **Цена открытия:** **9 800 DC**
 - **Описание:** Золотая коллекция с AK-47 Gold Arabesque
 - **Количество предметов в кейсе:** 52 шт.
 
@@ -4711,11 +4711,263 @@
 
 ## <a id="custom"></a>Авторские кейсы (Custom)
 
+### Коллекция «Radiant» (The Radiant Collection)
+
+- **ID кейса:** `case-radiant-2025`
+- **Категория:** `custom`
+- **Цена открытия:** **2 750 DC**
+- **Описание:** Коллекция багряных и рубиновых оттенков CS2
+- **Количество предметов в кейсе:** 35 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AK-47 | Nouveau Rouge | classified | FN | - | 13 430 DC |
+| 2 | AK-47 | Nouveau Rouge | classified | FN | StatTrak™ | 18 131 DC |
+| 3 | USP-S | Bleeding Edge | restricted | FN | - | 2 464 DC |
+| 4 | USP-S | Bleeding Edge | restricted | FN | StatTrak™ | 3 326 DC |
+| 5 | Desert Eagle | Mulberry | restricted | FN | - | 3 472 DC |
+| 6 | Desert Eagle | Mulberry | restricted | FN | StatTrak™ | 4 687 DC |
+| 7 | M4A1-S | Glitched Paint | restricted | FN | - | 4 256 DC |
+| 8 | M4A1-S | Glitched Paint | restricted | FN | StatTrak™ | 5 746 DC |
+| 9 | M4A1-S | Rose Hex | milspec | FN | - | 850 DC |
+| 10 | M4A1-S | Rose Hex | milspec | FN | StatTrak™ | 1 148 DC |
+| 11 | AWP | Arsenic Spill | milspec | FN | - | 1 343 DC |
+| 12 | AWP | Arsenic Spill | milspec | FN | StatTrak™ | 1 813 DC |
+| 13 | SSG 08 | Blush Pour | milspec | FN | - | 1 462 DC |
+| 14 | SSG 08 | Blush Pour | milspec | FN | StatTrak™ | 1 974 DC |
+| 15 | P250 | Red Tide | milspec | FN | - | 1 139 DC |
+| 16 | P250 | Red Tide | milspec | FN | StatTrak™ | 1 538 DC |
+| 17 | Glock-18 | Coral Bloom | milspec | FN | - | 1 173 DC |
+| 18 | Glock-18 | Coral Bloom | milspec | FN | StatTrak™ | 1 584 DC |
+| 19 | MP9 | Shredded | milspec | FN | - | 748 DC |
+| 20 | MP9 | Shredded | milspec | FN | StatTrak™ | 1 010 DC |
+| 21 | FAMAS | Grey Ghost | industrial | FN | - | 360 DC |
+| 22 | FAMAS | Grey Ghost | industrial | FN | StatTrak™ | 486 DC |
+| 23 | P250 | Sedimentary | industrial | FN | - | 250 DC |
+| 24 | P250 | Sedimentary | industrial | FN | StatTrak™ | 338 DC |
+| 25 | M4A4 | Steel Work | industrial | FN | - | 305 DC |
+| 26 | M4A4 | Steel Work | industrial | FN | StatTrak™ | 412 DC |
+| 27 | CZ75-Auto | Red Astor | restricted | FN | - | 2 968 DC |
+| 28 | CZ75-Auto | Red Astor | restricted | FN | StatTrak™ | 4 007 DC |
+| 29 | Galil AR | Firefight | restricted | FN | - | 4 032 DC |
+| 30 | Galil AR | Firefight | restricted | FN | StatTrak™ | 5 443 DC |
+| 31 | Karambit | Crimson Web | covert | FN | - | 211 200 DC |
+| 32 | Karambit | Crimson Web | covert | FN | StatTrak™ | 285 120 DC |
+| 33 | Bayonet | Slaughter | covert | FN | - | 134 400 DC |
+| 34 | Bayonet | Slaughter | covert | FN | StatTrak™ | 181 440 DC |
+| 35 | Specialist Gloves | Crimson Kimono | extraordinary | FN | - | 148 800 DC |
+
+---
+
+### Коллекция «Арлекин» (The Harlequin Collection)
+
+- **ID кейса:** `case-harlequin-2026`
+- **Категория:** `custom`
+- **Цена открытия:** **2 600 DC**
+- **Описание:** Экспрессивные яркие геометрические паттерны CS2
+- **Количество предметов в кейсе:** 34 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | M4A1-S | Party Animal | classified | FN | - | 12 240 DC |
+| 2 | M4A1-S | Party Animal | classified | FN | StatTrak™ | 16 524 DC |
+| 3 | USP-S | Sleeping Potion | restricted | FN | - | 2 240 DC |
+| 4 | USP-S | Sleeping Potion | restricted | FN | StatTrak™ | 3 024 DC |
+| 5 | AWP | Exothermic | restricted | FN | - | 2 968 DC |
+| 6 | AWP | Exothermic | restricted | FN | StatTrak™ | 4 007 DC |
+| 7 | Five-SeveN | Fraise Crane | milspec | FN | - | 1 037 DC |
+| 8 | Five-SeveN | Fraise Crane | milspec | FN | StatTrak™ | 1 400 DC |
+| 9 | Galil AR | Sky Mandala | milspec | FN | - | 714 DC |
+| 10 | Galil AR | Sky Mandala | milspec | FN | StatTrak™ | 964 DC |
+| 11 | UMP-45 | Warm Blooded | milspec | FN | - | 1 088 DC |
+| 12 | UMP-45 | Warm Blooded | milspec | FN | StatTrak™ | 1 469 DC |
+| 13 | Zeus x27 | Earth Mandala | milspec | FN | - | 952 DC |
+| 14 | Zeus x27 | Earth Mandala | milspec | FN | StatTrak™ | 1 285 DC |
+| 15 | AK-47 | Point Disarray | classified | FN | - | 9 860 DC |
+| 16 | AK-47 | Point Disarray | classified | FN | StatTrak™ | 13 311 DC |
+| 17 | Glock-18 | Vogue | classified | FN | - | 10 370 DC |
+| 18 | Glock-18 | Vogue | classified | FN | StatTrak™ | 14 000 DC |
+| 19 | MAC-10 | Disco Tech | classified | FN | - | 6 970 DC |
+| 20 | MAC-10 | Disco Tech | classified | FN | StatTrak™ | 9 410 DC |
+| 21 | P250 | Visions | classified | FN | - | 10 540 DC |
+| 22 | P250 | Visions | classified | FN | StatTrak™ | 14 229 DC |
+| 23 | MP9 | Starlight Protector | covert | FN | - | 59 500 DC |
+| 24 | MP9 | Starlight Protector | covert | FN | StatTrak™ | 80 325 DC |
+| 25 | Desert Eagle | Ocean Drive | covert | FN | - | 50 400 DC |
+| 26 | Desert Eagle | Ocean Drive | covert | FN | StatTrak™ | 68 040 DC |
+| 27 | SG 553 | Integrale | classified | FN | - | 6 800 DC |
+| 28 | SG 553 | Integrale | classified | FN | StatTrak™ | 9 180 DC |
+| 29 | FAMAS | Eye of Athena | classified | FN | - | 9 860 DC |
+| 30 | FAMAS | Eye of Athena | classified | FN | StatTrak™ | 13 311 DC |
+| 31 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
+| 32 | Butterfly Knife | Fade | covert | FN | StatTrak™ | 324 000 DC |
+| 33 | Sport Gloves | Vice | extraordinary | FN | - | 160 800 DC |
+| 34 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
+
+---
+
+### Коллекция «Boreal» (The Boreal Collection)
+
+- **ID кейса:** `case-boreal-2025`
+- **Категория:** `custom`
+- **Цена открытия:** **2 100 DC**
+- **Описание:** Лесная и природная коллекция CS2 Spring Forward
+- **Количество предметов в кейсе:** 36 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AWP | Green Energy | classified | FN | - | 14 790 DC |
+| 2 | AWP | Green Energy | classified | FN | StatTrak™ | 19 967 DC |
+| 3 | M4A4 | Sheet Lightning | restricted | FN | - | 4 312 DC |
+| 4 | M4A4 | Sheet Lightning | restricted | FN | StatTrak™ | 5 821 DC |
+| 5 | Glock-18 | Glockingbird | restricted | FN | - | 2 408 DC |
+| 6 | Glock-18 | Glockingbird | restricted | FN | StatTrak™ | 3 251 DC |
+| 7 | AK-47 | Wintergreen | milspec | FN | - | 680 DC |
+| 8 | AK-47 | Wintergreen | milspec | FN | StatTrak™ | 918 DC |
+| 9 | USP-S | Tropical Breeze | milspec | FN | - | 1 309 DC |
+| 10 | USP-S | Tropical Breeze | milspec | FN | StatTrak™ | 1 767 DC |
+| 11 | MP5-SD | Gold Leaf | milspec | FN | - | 799 DC |
+| 12 | MP5-SD | Gold Leaf | milspec | FN | StatTrak™ | 1 079 DC |
+| 13 | MAC-10 | Poplar Thicket | milspec | FN | - | 1 377 DC |
+| 14 | MAC-10 | Poplar Thicket | milspec | FN | StatTrak™ | 1 859 DC |
+| 15 | XM1014 | Copperflage | milspec | FN | - | 816 DC |
+| 16 | XM1014 | Copperflage | milspec | FN | StatTrak™ | 1 102 DC |
+| 17 | Dual Berettas | Polished Malachite | industrial | FN | - | 275 DC |
+| 18 | Dual Berettas | Polished Malachite | industrial | FN | StatTrak™ | 371 DC |
+| 19 | SSG 08 | Tiger Tear | industrial | FN | - | 320 DC |
+| 20 | SSG 08 | Tiger Tear | industrial | FN | StatTrak™ | 432 DC |
+| 21 | Zeus x27 | Swamp DDPAT | milspec | FN | - | 1 173 DC |
+| 22 | Zeus x27 | Swamp DDPAT | milspec | FN | StatTrak™ | 1 584 DC |
+| 23 | MAG-7 | Copper Oxide | milspec | FN | - | 782 DC |
+| 24 | MAG-7 | Copper Oxide | milspec | FN | StatTrak™ | 1 056 DC |
+| 25 | Negev | Raw Ceramic | milspec | FN | - | 884 DC |
+| 26 | Negev | Raw Ceramic | milspec | FN | StatTrak™ | 1 193 DC |
+| 27 | Bayonet | Boreal Forest | covert | FN | - | 151 200 DC |
+| 28 | Bayonet | Boreal Forest | covert | FN | StatTrak™ | 204 120 DC |
+| 29 | P250 | Forest Night | milspec | FN | - | 1 428 DC |
+| 30 | P250 | Forest Night | milspec | FN | StatTrak™ | 1 928 DC |
+| 31 | MP9 | Green Plaid | milspec | FN | - | 1 411 DC |
+| 32 | MP9 | Green Plaid | milspec | FN | StatTrak™ | 1 905 DC |
+| 33 | Huntsman Knife | Boreal Forest | covert | FN | - | 98 400 DC |
+| 34 | Huntsman Knife | Boreal Forest | covert | FN | StatTrak™ | 132 840 DC |
+| 35 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
+| 36 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
+
+---
+
+### Коллекция «Ascent» (The Ascent Collection)
+
+- **ID кейса:** `case-ascent-2025`
+- **Категория:** `custom`
+- **Цена открытия:** **2 400 DC**
+- **Описание:** Королевская сине-фиолетовая коллекция CS2 Spring Forward
+- **Количество предметов в кейсе:** 39 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | M4A1-S | Stratosphere | classified | FN | - | 7 310 DC |
+| 2 | M4A1-S | Stratosphere | classified | FN | StatTrak™ | 9 869 DC |
+| 3 | AK-47 | Midnight Laminate | restricted | FN | - | 2 968 DC |
+| 4 | AK-47 | Midnight Laminate | restricted | FN | StatTrak™ | 4 007 DC |
+| 5 | USP-S | Royal Guard | restricted | FN | - | 2 968 DC |
+| 6 | USP-S | Royal Guard | restricted | FN | StatTrak™ | 4 007 DC |
+| 7 | Desert Eagle | Mint Fan | milspec | FN | - | 901 DC |
+| 8 | Desert Eagle | Mint Fan | milspec | FN | StatTrak™ | 1 216 DC |
+| 9 | FAMAS | Yeti Camo | milspec | FN | - | 816 DC |
+| 10 | FAMAS | Yeti Camo | milspec | FN | StatTrak™ | 1 102 DC |
+| 11 | P2000 | Royal Baroque | milspec | FN | - | 1 275 DC |
+| 12 | P2000 | Royal Baroque | milspec | FN | StatTrak™ | 1 721 DC |
+| 13 | MP9 | Cobalt Paisley | milspec | FN | - | 969 DC |
+| 14 | MP9 | Cobalt Paisley | milspec | FN | StatTrak™ | 1 308 DC |
+| 15 | P90 | Reef Grief | milspec | FN | - | 697 DC |
+| 16 | P90 | Reef Grief | milspec | FN | StatTrak™ | 941 DC |
+| 17 | Zeus x27 | Electric Blue | industrial | FN | - | 215 DC |
+| 18 | Zeus x27 | Electric Blue | industrial | FN | StatTrak™ | 290 DC |
+| 19 | Nova | Turquoise Pour | industrial | FN | - | 335 DC |
+| 20 | Nova | Turquoise Pour | industrial | FN | StatTrak™ | 452 DC |
+| 21 | M4A4 | Naval Shred Camo | industrial | FN | - | 285 DC |
+| 22 | M4A4 | Naval Shred Camo | industrial | FN | StatTrak™ | 385 DC |
+| 23 | Galil AR | Robin's Egg | industrial | FN | - | 255 DC |
+| 24 | Galil AR | Robin's Egg | industrial | FN | StatTrak™ | 344 DC |
+| 25 | Glock-18 | Ocean Topo | industrial | FN | - | 420 DC |
+| 26 | Glock-18 | Ocean Topo | industrial | FN | StatTrak™ | 567 DC |
+| 27 | Dual Berettas | Rose Nacre | industrial | FN | - | 395 DC |
+| 28 | Dual Berettas | Rose Nacre | industrial | FN | StatTrak™ | 533 DC |
+| 29 | Five-SeveN | Sky Blue | industrial | FN | - | 370 DC |
+| 30 | Five-SeveN | Sky Blue | industrial | FN | StatTrak™ | 500 DC |
+| 31 | XM1014 | Gum Wall Camo | industrial | FN | - | 405 DC |
+| 32 | XM1014 | Gum Wall Camo | industrial | FN | StatTrak™ | 547 DC |
+| 33 | Negev | Sour Grapes | industrial | FN | - | 445 DC |
+| 34 | Negev | Sour Grapes | industrial | FN | StatTrak™ | 601 DC |
+| 35 | Tec-9 | Blue Blast | milspec | FN | - | 1 241 DC |
+| 36 | Tec-9 | Blue Blast | milspec | FN | StatTrak™ | 1 675 DC |
+| 37 | Bayonet | Doppler | covert | FN | - | 280 000 DC |
+| 38 | Bayonet | Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 39 | Hand Wraps | Cobalt Skulls | extraordinary | FN | - | 180 000 DC |
+
+---
+
+### Коллекция «Achroma» (The Achroma Collection)
+
+- **ID кейса:** `case-achroma-2026`
+- **Категория:** `custom`
+- **Цена открытия:** **1 850 DC**
+- **Описание:** Монохромная эстетика из обновления Season 4 CS2
+- **Количество предметов в кейсе:** 43 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AWP | The End | classified | FN | - | 6 800 DC |
+| 2 | AWP | The End | classified | FN | StatTrak™ | 9 180 DC |
+| 3 | AK-47 | Breakthrough | restricted | FN | - | 3 696 DC |
+| 4 | AK-47 | Breakthrough | restricted | FN | StatTrak™ | 4 990 DC |
+| 5 | Glock-18 | Trace Lock | restricted | FN | - | 3 472 DC |
+| 6 | Glock-18 | Trace Lock | restricted | FN | StatTrak™ | 4 687 DC |
+| 7 | Desert Eagle | The Daily Deagle | milspec | FN | - | 1 496 DC |
+| 8 | Desert Eagle | The Daily Deagle | milspec | FN | StatTrak™ | 2 020 DC |
+| 9 | AUG | Creep | milspec | FN | - | 714 DC |
+| 10 | AUG | Creep | milspec | FN | StatTrak™ | 964 DC |
+| 11 | P2000 | Grip Tape | milspec | FN | - | 1 309 DC |
+| 12 | P2000 | Grip Tape | milspec | FN | StatTrak™ | 1 767 DC |
+| 13 | P90 | Aeolian Light | milspec | FN | - | 918 DC |
+| 14 | P90 | Aeolian Light | milspec | FN | StatTrak™ | 1 239 DC |
+| 15 | FAMAS | Vendetta | industrial | FN | - | 425 DC |
+| 16 | FAMAS | Vendetta | industrial | FN | StatTrak™ | 574 DC |
+| 17 | M4A4 | Aeolian Dark | industrial | FN | - | 350 DC |
+| 18 | M4A4 | Aeolian Dark | industrial | FN | StatTrak™ | 473 DC |
+| 19 | MAC-10 | Snow Splash | industrial | FN | - | 285 DC |
+| 20 | MAC-10 | Snow Splash | industrial | FN | StatTrak™ | 385 DC |
+| 21 | MP5-SD | Snow Splash | industrial | FN | - | 420 DC |
+| 22 | MP5-SD | Snow Splash | industrial | FN | StatTrak™ | 567 DC |
+| 23 | R8 Revolver | Dark Chamber | industrial | FN | - | 355 DC |
+| 24 | R8 Revolver | Dark Chamber | industrial | FN | StatTrak™ | 479 DC |
+| 25 | Dual Berettas | Silver Pour | milspec | FN | - | 714 DC |
+| 26 | Dual Berettas | Silver Pour | milspec | FN | StatTrak™ | 964 DC |
+| 27 | M249 | Sleet | milspec | FN | - | 748 DC |
+| 28 | M249 | Sleet | milspec | FN | StatTrak™ | 1 010 DC |
+| 29 | MP9 | Dizzy | milspec | FN | - | 1 309 DC |
+| 30 | MP9 | Dizzy | milspec | FN | StatTrak™ | 1 767 DC |
+| 31 | Nova | Currents | milspec | FN | - | 1 428 DC |
+| 32 | Nova | Currents | milspec | FN | StatTrak™ | 1 928 DC |
+| 33 | P250 | Sleet | milspec | FN | - | 1 360 DC |
+| 34 | P250 | Sleet | milspec | FN | StatTrak™ | 1 836 DC |
+| 35 | PP-Bizon | Bizoom | milspec | FN | - | 1 394 DC |
+| 36 | PP-Bizon | Bizoom | milspec | FN | StatTrak™ | 1 882 DC |
+| 37 | SCAR-20 | Zinc | milspec | FN | - | 697 DC |
+| 38 | SCAR-20 | Zinc | milspec | FN | StatTrak™ | 941 DC |
+| 39 | SSG 08 | Sans Comic | milspec | FN | - | 1 309 DC |
+| 40 | SSG 08 | Sans Comic | milspec | FN | StatTrak™ | 1 767 DC |
+| 41 | Karambit | Damascus Steel | covert | FN | - | 163 200 DC |
+| 42 | Karambit | Damascus Steel | covert | FN | StatTrak™ | 220 320 DC |
+| 43 | Driver Gloves | Black Tie | extraordinary | FN | - | 105 600 DC |
+
+---
+
 ### Коллекция «Шпионские технологии» (Spy Tech 2026 Collection)
 
 - **ID кейса:** `case-spy-tech-2026`
 - **Категория:** `custom`
-- **Цена открытия:** **4 200 DC**
+- **Цена открытия:** **4 900 DC**
 - **Описание:** Секретные образцы вооружения с AK-47 The Oligarch
 - **Количество предметов в кейсе:** 47 шт.
 
@@ -4775,7 +5027,7 @@
 
 - **ID кейса:** `case_casino_jackpot_ultra`
 - **Категория:** `custom`
-- **Цена открытия:** **1 800 DC**
+- **Цена открытия:** **18 500 DC**
 - **Описание:** Крути рулетку, срывай главный куш сервера
 - **Количество предметов в кейсе:** 34 шт.
 
@@ -4822,7 +5074,7 @@
 
 - **ID кейса:** `case_toxic_biohazard`
 - **Категория:** `custom`
-- **Цена открытия:** **320 DC**
+- **Цена открытия:** **2 800 DC**
 - **Описание:** Зона биологического заражения 4-го уровня
 - **Количество предметов в кейсе:** 34 шт.
 
@@ -4869,7 +5121,7 @@
 
 - **ID кейса:** `case_mecha_overdrive`
 - **Категория:** `custom`
-- **Цена открытия:** **380 DC**
+- **Цена открытия:** **4 200 DC**
 - **Описание:** Тяжелая роботизированная броня и нано-технологии
 - **Количество предметов в кейсе:** 34 шт.
 
@@ -4916,7 +5168,7 @@
 
 - **ID кейса:** `case_monkey_business`
 - **Категория:** `custom`
-- **Цена открытия:** **260 DC**
+- **Цена открытия:** **1 750 DC**
 - **Описание:** Тропический хаос, джунгли и банановый задор
 - **Количество предметов в кейсе:** 34 шт.
 
@@ -4963,7 +5215,7 @@
 
 - **ID кейса:** `case_quantum_dimension`
 - **Категория:** `custom`
-- **Цена открытия:** **420 DC**
+- **Цена открытия:** **2 900 DC**
 - **Описание:** Энергия квантовых полей и антиматерии
 - **Количество предметов в кейсе:** 35 шт.
 
@@ -5011,7 +5263,7 @@
 
 - **ID кейса:** `case_gold_bar_24k`
 - **Категория:** `custom`
-- **Цена открытия:** **1 250 DC**
+- **Цена открытия:** **9 500 DC**
 - **Описание:** Премиальное золото высшей пробы
 - **Количество предметов в кейсе:** 33 шт.
 
@@ -5057,7 +5309,7 @@
 
 - **ID кейса:** `case_inferno_banana_rush`
 - **Категория:** `custom`
-- **Цена открытия:** **290 DC**
+- **Цена открытия:** **1 850 DC**
 - **Описание:** Легендарный пуш через банан прямо на плент B
 - **Количество предметов в кейсе:** 34 шт.
 
@@ -5104,7 +5356,7 @@
 
 - **ID кейса:** `case_cyber_protocol`
 - **Категория:** `custom`
-- **Цена открытия:** **390 DC**
+- **Цена открытия:** **4 900 DC**
 - **Описание:** Футуристический арсенал кибер-бойца
 - **Количество предметов в кейсе:** 35 шт.
 
@@ -5152,7 +5404,7 @@
 
 - **ID кейса:** `case-heat-treated`
 - **Категория:** `custom`
-- **Цена открытия:** **6 500 DC**
+- **Цена открытия:** **8 900 DC**
 - **Описание:** Лимитированный кейс Five-SeveN и закаленной серии
 - **Количество предметов в кейсе:** 46 шт.
 

@@ -186,5 +186,10 @@ export const CASE_NAME_EN_MAP: Record<string, string> = {
   "Кейс «Monkey Business & Бананы»": "Monkey Business & Bananas Case",
   "Кейс «Меха-Банан Овердрайв»": "Mecha Banana Overdrive Case",
   "Кейс «Токсичный Банан Biohazard»": "Toxic Banana Biohazard Case",
+  "Коллекция «Achroma»": "The Achroma Collection",
+  "Коллекция «Ascent»": "The Ascent Collection",
+  "Коллекция «Boreal»": "The Boreal Collection",
+  "Коллекция «Арлекин»": "The Harlequin Collection",
+  "Коллекция «Radiant»": "The Radiant Collection",
   "Кейс «Джекпот Банана Ultra»": "Banana Jackpot Ultra Case"
 };

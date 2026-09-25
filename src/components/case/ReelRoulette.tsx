@@ -226,9 +226,11 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   const rafIdRef = useRef(0);
   const rafCancelRef = useRef(false);
   const reelsRef = useRef<SkinEntity[][]>([[], [], []]);
+  const [isZeusProtected, setIsZeusProtected] = useState(false);
+  const zeusProtectTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const canPressZeus =
-    isSpinning && !isRevealed && !zeusUsedThisSpin && !zeusStriking && !hookUsedThisSpin && !hookArmed && !hookFlying && zeusCount > 0 && !fastOpen;
+    isSpinning && !isRevealed && !zeusUsedThisSpin && !zeusStriking && !hookUsedThisSpin && !hookArmed && !hookFlying && zeusCount > 0 && !fastOpen && !isZeusProtected;
 
   const handleActivateZeus = () => {
     if (!canPressZeus) return;
@@ -245,6 +247,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   // Чистим rAF-циклы при размонтировании
   useEffect(() => {
     return () => {
+      if (zeusProtectTimerRef.current) clearTimeout(zeusProtectTimerRef.current);
       ropeModeRef.current = 'off';
       cancelAnimationFrame(ropeRafRef.current);
       rafCancelRef.current = true;
@@ -629,6 +632,15 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     setShowModal(false);
     setZeusUsedThisSpin(false);
     setZeusStriking(false);
+    if (zeusProtectTimerRef.current) clearTimeout(zeusProtectTimerRef.current);
+    if (!fastOpen && zeusCount > 0) {
+      setIsZeusProtected(true);
+      zeusProtectTimerRef.current = setTimeout(() => {
+        setIsZeusProtected(false);
+      }, 3000);
+    } else {
+      setIsZeusProtected(false);
+    }
     spinResolveRef.current = null;
     setHookArmed(false);
     setHookUsedThisSpin(false);
@@ -723,6 +735,8 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       }, finalWinners[0]);
 
       sound.playWin(highestWinner.rarity);
+      if (zeusProtectTimerRef.current) clearTimeout(zeusProtectTimerRef.current);
+      setIsZeusProtected(false);
       setIsSpinning(false);
       setShowModal(true);
 
@@ -1472,13 +1486,15 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
 
           {isSpinning ? (
             // Во время спина кнопка Открыть заменяется кнопкой Zeus (только если есть Zeus)
-            canPressZeus || zeusUsedThisSpin || zeusStriking ? (
+            canPressZeus || isZeusProtected || zeusUsedThisSpin || zeusStriking ? (
               <button
                 type="button"
                 onClick={handleActivateZeus}
                 disabled={!canPressZeus}
                 className={`w-full sm:w-auto px-10 py-4 rounded-2xl font-black text-base uppercase tracking-wider flex items-center justify-center gap-2 border-2 transition-all ${
-                  canPressZeus
+                  isZeusProtected
+                    ? 'bg-neutral-800 text-neutral-500 border-neutral-700/60 cursor-not-allowed shadow-none'
+                    : canPressZeus
                     ? 'bg-sky-500 hover:bg-sky-400 text-black border-sky-200 shadow-[0_0_35px_rgba(56,189,248,0.7)] cursor-pointer active:scale-95 animate-pulse'
                     : 'bg-sky-500/20 border-sky-400/50 text-sky-300 cursor-default'
                 }`}
