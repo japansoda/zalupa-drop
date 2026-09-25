@@ -171,5 +171,13 @@ export const CASE_NAME_EN_MAP: Record<string, string> = {
   "Кейс «Термообработка»": "Heat Treated Limited Edition",
   "Коллекция «Шпионские технологии»": "Spy Tech 2026 Collection",
   "Коллекция «Арабеска Востока»": "Arabesque 2026 Collection",
-  "Ферма": "Farm"
+  "Ферма": "Farm",
+  "Кейс «Nano Banana Киберпанк»": "Nano Banana Cyber Case",
+  "Кейс «Раш Банана на Inferno»": "Inferno Banana Rush Case",
+  "Кейс «Nano Banana 24K Золото»": "Nano Banana 24K Gold Case",
+  "Кейс «Квантовый Банан»": "Quantum Banana Case",
+  "Кейс «Monkey Business & Бананы»": "Monkey Business & Bananas Case",
+  "Кейс «Меха-Банан Овердрайв»": "Mecha Banana Overdrive Case",
+  "Кейс «Токсичный Банан Biohazard»": "Toxic Banana Biohazard Case",
+  "Кейс «Джекпот Банана Ultra»": "Banana Jackpot Ultra Case"
 };

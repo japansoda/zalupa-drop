@@ -9,9 +9,9 @@
 - [Официальные кейсы CS2 / CS:GO (Official) (47 кейсов)](#official)
 - [Ножевые кейсы (Knives) (33 кейсов)](#knives)
 - [Оружейные кейсы (Weapons) (25 кейсов)](#weapons)
-- [Хайроллер кейсы (Highroller) (22 кейсов)](#highroller)
-- [Бюджетные кейсы (Budget) (9 кейсов)](#budget)
-- [Авторские кейсы (Custom) (84 кейсов)](#custom)
+- [Хайроллер кейсы (Highroller) (24 кейсов)](#highroller)
+- [Бюджетные кейсы (Budget) (10 кейсов)](#budget)
+- [Авторские кейсы (Custom) (89 кейсов)](#custom)
 - [Капсулы и наклейки (Stickers & Capsules) (241 кейсов)](#stickers)
 
 ---
@@ -3613,6 +3613,65 @@
 
 ---
 
+### Кейс «Джекпот Банана Ultra» (Banana Jackpot Ultra Case)
+
+- **ID кейса:** `case_banana_jackpot_ultra`
+- **Категория:** `highroller`
+- **Цена открытия:** **35 000 DC**
+- **Описание:** Сверхдорогой кейс с величайшими скинами в истории CS2
+- **Количество предметов в кейсе:** 16 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
+| 2 | AWP | Dragon Lore | covert | FN | StatTrak™ | 1 147 500 DC |
+| 3 | AWP | Gungnir | covert | FN | - | 59 500 DC |
+| 4 | AWP | Gungnir | covert | FN | StatTrak™ | 80 325 DC |
+| 5 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 6 | AK-47 | Wild Lotus | covert | FN | StatTrak™ | 52 920 DC |
+| 7 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 8 | M4A4 | Howl | milspec | FN | StatTrak™ | 567 000 DC |
+| 9 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 10 | AK-47 | Fire Serpent | covert | FN | StatTrak™ | 162 000 DC |
+| 11 | Karambit | Doppler | covert | FN | - | 280 000 DC |
+| 12 | Karambit | Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 13 | Butterfly Knife | Doppler | covert | FN | - | 280 000 DC |
+| 14 | Butterfly Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 15 | Sport Gloves | Vice | extraordinary | FN | - | 160 800 DC |
+| 16 | Specialist Gloves | Crimson Kimono | extraordinary | FN | - | 148 800 DC |
+
+---
+
+### Кейс «Nano Banana 24K Золото» (Nano Banana 24K Gold Case)
+
+- **ID кейса:** `case_nano_banana_gold`
+- **Категория:** `highroller`
+- **Цена открытия:** **12 500 DC**
+- **Описание:** Королевская коллекция чистого золота 999 пробы
+- **Количество предметов в кейсе:** 17 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
+| 2 | AK-47 | Gold Arabesque | covert | FN | StatTrak™ | 57 645 DC |
+| 3 | M4A1-S | Welcome to the Jungle | covert | FN | - | 32 900 DC |
+| 4 | M4A1-S | Welcome to the Jungle | covert | FN | StatTrak™ | 44 415 DC |
+| 5 | AWP | The Prince | covert | FN | - | 42 700 DC |
+| 6 | AWP | The Prince | covert | FN | StatTrak™ | 57 645 DC |
+| 7 | Desert Eagle | Fennec Fox | classified | FN | - | 13 430 DC |
+| 8 | Desert Eagle | Fennec Fox | classified | FN | StatTrak™ | 18 131 DC |
+| 9 | CZ75-Auto | Yellow Jacket | classified | FN | - | 11 560 DC |
+| 10 | CZ75-Auto | Yellow Jacket | classified | FN | StatTrak™ | 15 606 DC |
+| 11 | Glock-18 | Brass | restricted | FN | - | 4 368 DC |
+| 12 | Glock-18 | Brass | restricted | FN | StatTrak™ | 5 897 DC |
+| 13 | Butterfly Knife | Lore | covert | FN | - | 182 400 DC |
+| 14 | Butterfly Knife | Lore | covert | FN | StatTrak™ | 246 240 DC |
+| 15 | Specialist Gloves | Tiger Strike | extraordinary | FN | - | 144 000 DC |
+| 16 | Skeleton Knife | Fade | covert | FN | - | 240 000 DC |
+| 17 | Skeleton Knife | Fade | covert | FN | StatTrak™ | 324 000 DC |
+
+---
+
 ### Cobblestone Souvenir Package
 
 - **ID кейса:** `souvenir_1`
@@ -4266,6 +4325,37 @@
 
 ## <a id="budget"></a>Бюджетные кейсы (Budget)
 
+### Кейс «Monkey Business & Бананы» (Monkey Business & Bananas Case)
+
+- **ID кейса:** `case_monkey_business_bananas`
+- **Категория:** `budget`
+- **Цена открытия:** **850 DC**
+- **Описание:** Веселый и мемный банановый арсенал CS2
+- **Количество предметов в кейсе:** 18 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | Five-SeveN | Monkey Business | classified | FN | - | 14 620 DC |
+| 2 | Five-SeveN | Monkey Business | classified | FN | StatTrak™ | 19 737 DC |
+| 3 | R8 Revolver | Banana Cannon | restricted | FN | - | 4 424 DC |
+| 4 | R8 Revolver | Banana Cannon | restricted | FN | StatTrak™ | 5 972 DC |
+| 5 | XM1014 | Banana Leaf | industrial | FN | - | 230 DC |
+| 6 | XM1014 | Banana Leaf | industrial | FN | StatTrak™ | 311 DC |
+| 7 | P90 | Death by Kitty | covert | FN | - | 47 600 DC |
+| 8 | P90 | Death by Kitty | covert | FN | StatTrak™ | 64 260 DC |
+| 9 | Galil AR | Sugar Rush | classified | FN | - | 13 260 DC |
+| 10 | Galil AR | Sugar Rush | classified | FN | StatTrak™ | 17 901 DC |
+| 11 | MP7 | Cirrus | milspec | FN | - | 816 DC |
+| 12 | MP7 | Cirrus | milspec | FN | StatTrak™ | 1 102 DC |
+| 13 | P250 | Valence | milspec | FN | - | 1 003 DC |
+| 14 | P250 | Valence | milspec | FN | StatTrak™ | 1 354 DC |
+| 15 | Gut Knife | Lore | covert | FN | - | 168 000 DC |
+| 16 | Gut Knife | Lore | covert | FN | StatTrak™ | 226 800 DC |
+| 17 | Bowie Knife | Tiger Tooth | covert | FN | - | 182 400 DC |
+| 18 | Bowie Knife | Tiger Tooth | covert | FN | StatTrak™ | 246 240 DC |
+
+---
+
 ### Мусорка Залупы (Zalupa Trash Crate)
 
 - **ID кейса:** `case_zalupa`
@@ -4619,6 +4709,159 @@
 | 28 | MAC-10 | Cat Fight | restricted | FN | - | 2 352 DC |
 | 29 | MAC-10 | Cat Fight | restricted | FT | - | 1 529 DC |
 | 30 | MAC-10 | Cat Fight | restricted | FT | StatTrak™ | 2 070 DC |
+
+---
+
+### Кейс «Токсичный Банан Biohazard» (Toxic Banana Biohazard Case)
+
+- **ID кейса:** `case_toxic_banana_biohazard`
+- **Категория:** `custom`
+- **Цена открытия:** **3 100 DC**
+- **Описание:** Радиоактивный контейнер с мутировавшим оружием
+- **Количество предметов в кейсе:** 17 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 2 | AK-47 | Hydroponic | classified | FN | StatTrak™ | 17 672 DC |
+| 3 | M4A4 | Radiation Hazard | milspec | FN | - | 1 122 DC |
+| 4 | M4A4 | Radiation Hazard | milspec | FN | StatTrak™ | 1 515 DC |
+| 5 | AWP | Containment Breach | covert | FN | - | 45 500 DC |
+| 6 | AWP | Containment Breach | covert | FN | StatTrak™ | 61 425 DC |
+| 7 | P250 | Nuclear Threat | restricted | FN | - | 2 688 DC |
+| 8 | P250 | Nuclear Threat | restricted | FN | StatTrak™ | 3 629 DC |
+| 9 | Tec-9 | Nuclear Threat | restricted | FN | - | 3 863 DC |
+| 10 | Tec-9 | Nuclear Threat | restricted | FN | StatTrak™ | 5 215 DC |
+| 11 | Galil AR | Eco | classified | FN | - | 15 130 DC |
+| 12 | Galil AR | Eco | classified | FN | StatTrak™ | 20 426 DC |
+| 13 | Glock-18 | Nuclear Garden | restricted | FN | - | 2 296 DC |
+| 14 | Glock-18 | Nuclear Garden | restricted | FN | StatTrak™ | 3 100 DC |
+| 15 | Karambit | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 16 | Karambit | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 17 | Sport Gloves | Hedge Maze | extraordinary | FN | - | 129 600 DC |
+
+---
+
+### Кейс «Меха-Банан Овердрайв» (Mecha Banana Overdrive Case)
+
+- **ID кейса:** `case_mecha_banana_overdrive`
+- **Категория:** `custom`
+- **Цена открытия:** **4 500 DC**
+- **Описание:** Роботизированный высокоточный комплекс вооружения
+- **Количество предметов в кейсе:** 17 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | M4A1-S | Mecha Industries | covert | FN | - | 46 900 DC |
+| 2 | M4A1-S | Mecha Industries | covert | FN | StatTrak™ | 63 315 DC |
+| 3 | FAMAS | Mecha Industries | classified | FN | - | 9 180 DC |
+| 4 | FAMAS | Mecha Industries | classified | FN | StatTrak™ | 12 393 DC |
+| 5 | Desert Eagle | Mecha Industries | classified | FN | - | 11 220 DC |
+| 6 | Desert Eagle | Mecha Industries | classified | FN | StatTrak™ | 15 147 DC |
+| 7 | AK-47 | Vulcan | covert | FN | - | 31 500 DC |
+| 8 | AK-47 | Vulcan | covert | FN | StatTrak™ | 42 525 DC |
+| 9 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
+| 10 | AWP | Neo-Noir | covert | FN | StatTrak™ | 63 315 DC |
+| 11 | M4A4 | In Living Color | covert | FN | - | 48 299 DC |
+| 12 | M4A4 | In Living Color | covert | FN | StatTrak™ | 65 204 DC |
+| 13 | Karambit | Autotronic | covert | FN | - | 96 000 DC |
+| 14 | Karambit | Autotronic | covert | FN | StatTrak™ | 129 600 DC |
+| 15 | Moto Gloves | POW! | extraordinary | FN | - | 196 800 DC |
+| 16 | Classic Knife | Crimson Web | covert | FN | - | 132 000 DC |
+| 17 | Classic Knife | Crimson Web | covert | FN | StatTrak™ | 178 200 DC |
+
+---
+
+### Кейс «Квантовый Банан» (Quantum Banana Case)
+
+- **ID кейса:** `case_quantum_banana`
+- **Категория:** `custom`
+- **Цена открытия:** **3 400 DC**
+- **Описание:** Квантовые наночастицы и хроматические искажения
+- **Количество предметов в кейсе:** 17 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AWP | Chromatic Aberration | covert | FN | - | 57 400 DC |
+| 2 | AWP | Chromatic Aberration | covert | FN | StatTrak™ | 77 490 DC |
+| 3 | M4A4 | Cyber Security | classified | FN | - | 7 990 DC |
+| 4 | M4A4 | Cyber Security | classified | FN | StatTrak™ | 10 787 DC |
+| 5 | AK-47 | Nightwish | covert | FN | - | 49 700 DC |
+| 6 | AK-47 | Nightwish | covert | FN | StatTrak™ | 67 095 DC |
+| 7 | MAC-10 | Propaganda | classified | FN | - | 15 130 DC |
+| 8 | MAC-10 | Propaganda | classified | FN | StatTrak™ | 20 426 DC |
+| 9 | USP-S | Printstream | covert | FN | - | 38 000 DC |
+| 10 | USP-S | Printstream | covert | FN | StatTrak™ | 51 300 DC |
+| 11 | SSG 08 | Turbo Peek | classified | FN | - | 14 110 DC |
+| 12 | SSG 08 | Turbo Peek | classified | FN | StatTrak™ | 19 049 DC |
+| 13 | Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 14 | Bayonet | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 15 | Talon Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 16 | Talon Knife | Marble Fade | covert | FN | StatTrak™ | 324 000 DC |
+| 17 | Sport Gloves | Vice | extraordinary | FN | - | 160 800 DC |
+
+---
+
+### Кейс «Раш Банана на Inferno» (Inferno Banana Rush Case)
+
+- **ID кейса:** `case_inferno_banana_rush`
+- **Категория:** `custom`
+- **Цена открытия:** **2 800 DC**
+- **Описание:** Легендарный штурм позиции Банан с огненным арсеналом
+- **Количество предметов в кейсе:** 18 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | Tec-9 | Banana Leaf | industrial | FN | - | 310 DC |
+| 2 | Tec-9 | Banana Leaf | industrial | FN | StatTrak™ | 419 DC |
+| 3 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 4 | AK-47 | Fire Serpent | covert | FN | StatTrak™ | 162 000 DC |
+| 5 | AWP | Wildfire | covert | FN | - | 36 400 DC |
+| 6 | AWP | Wildfire | covert | FN | StatTrak™ | 49 140 DC |
+| 7 | Desert Eagle | Blaze | restricted | FN | - | 3 976 DC |
+| 8 | Desert Eagle | Blaze | restricted | FN | StatTrak™ | 5 368 DC |
+| 9 | M4A4 | Hellfire | classified | FN | - | 13 940 DC |
+| 10 | M4A4 | Hellfire | classified | FN | StatTrak™ | 18 819 DC |
+| 11 | P90 | Traction | milspec | FN | - | 1 428 DC |
+| 12 | P90 | Traction | milspec | FN | StatTrak™ | 1 928 DC |
+| 13 | P250 | Inferno | restricted | FN | - | 4 928 DC |
+| 14 | P250 | Inferno | restricted | FN | StatTrak™ | 6 653 DC |
+| 15 | Butterfly Knife | Slaughter | covert | FN | - | 160 800 DC |
+| 16 | Butterfly Knife | Slaughter | covert | FN | StatTrak™ | 217 080 DC |
+| 17 | Flip Knife | Crimson Web | covert | FN | - | 201 600 DC |
+| 18 | Flip Knife | Crimson Web | covert | FN | StatTrak™ | 272 160 DC |
+
+---
+
+### Кейс «Nano Banana Киберпанк» (Nano Banana Cyber Case)
+
+- **ID кейса:** `case_nano_banana_cyber`
+- **Категория:** `custom`
+- **Цена открытия:** **1 950 DC**
+- **Описание:** Высокотехнологичный банановый кейс с неоновым арсеналом
+- **Количество предметов в кейсе:** 19 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | R8 Revolver | Banana Cannon | restricted | FN | - | 4 424 DC |
+| 2 | R8 Revolver | Banana Cannon | restricted | FN | StatTrak™ | 5 972 DC |
+| 3 | AK-47 | Neon Revolution | covert | FN | - | 52 500 DC |
+| 4 | AK-47 | Neon Revolution | covert | FN | StatTrak™ | 70 875 DC |
+| 5 | M4A1-S | Player Two | covert | FN | - | 58 800 DC |
+| 6 | M4A1-S | Player Two | covert | FN | StatTrak™ | 79 380 DC |
+| 7 | MP9 | Starlight Protector | covert | FN | - | 59 500 DC |
+| 8 | MP9 | Starlight Protector | covert | FN | StatTrak™ | 80 325 DC |
+| 9 | Glock-18 | Bullet Queen | covert | FN | - | 35 000 DC |
+| 10 | Glock-18 | Bullet Queen | covert | FN | StatTrak™ | 47 250 DC |
+| 11 | MAC-10 | Neon Rider | covert | FN | - | 54 600 DC |
+| 12 | MAC-10 | Neon Rider | covert | FN | StatTrak™ | 73 710 DC |
+| 13 | USP-S | Cortex | classified | FN | - | 11 050 DC |
+| 14 | USP-S | Cortex | classified | FN | StatTrak™ | 14 918 DC |
+| 15 | Karambit | Lore | covert | FN | - | 158 400 DC |
+| 16 | Karambit | Lore | covert | FN | StatTrak™ | 213 840 DC |
+| 17 | Sport Gloves | Omega | extraordinary | FN | - | 192 000 DC |
+| 18 | Stiletto Knife | Tiger Tooth | covert | FN | - | 158 400 DC |
+| 19 | Stiletto Knife | Tiger Tooth | covert | FN | StatTrak™ | 213 840 DC |
 
 ---
 

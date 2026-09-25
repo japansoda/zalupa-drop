@@ -12,7 +12,8 @@ import {
   RotateCcw, 
   AlertTriangle,
   Award,
-  Zap
+  Zap,
+  Clover
 } from 'lucide-react';
 import { SkinEntity, SkinWear } from '../../lib/types';
 import { RARITY_CONFIG } from '../../data/skins';
@@ -43,7 +44,16 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
   terminalPriceDc,
   terminalSkins,
 }) => {
-  const { balance, deductBalance, addToInventory, addLiveDrop } = useGameStore();
+  const { 
+    balance, 
+    deductBalance, 
+    addToInventory, 
+    addLiveDrop,
+    activePotionCharges,
+    consumePotionCharge,
+    potionsCount,
+    drinkPotion
+  } = useGameStore();
   const { locale } = useLanguage();
   const isRu = locale === 'ru';
 
@@ -54,36 +64,44 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
   const [acceptedSkin, setAcceptedSkin] = useState<SkinEntity | null>(null);
   const [isTerminated, setIsTerminated] = useState<boolean>(false);
   const [isGlitching, setIsGlitching] = useState<boolean>(false);
+  const [sessionHasLuck, setSessionHasLuck] = useState<boolean>(false);
 
   // Generate 5 offers for this terminal unseal session
-  const generateOffers = (): SkinEntity[] => {
+  const generateOffers = (hasLuck = false): SkinEntity[] => {
     const list: SkinEntity[] = [];
     const pool = terminalSkins.length > 0 ? terminalSkins : [];
 
     for (let i = 0; i < 5; i++) {
       let candidate: SkinEntity;
-      // Weighted roll: 4% Gold/Glove, 10% Covert, 26% Classified, 36% Restricted, 24% Mil-Spec
+      // Normal: 4% Gold/Glove, 10% Covert, 26% Classified, 36% Restricted, 24% Mil-Spec
+      // With Luck Potion: 9.5% Gold/Glove, 22% Covert, 34% Classified, 24.5% Restricted, 10% Mil-Spec
       const roll = Math.random() * 100;
       const golds = pool.filter((s) => s.rarity === 'gold' || s.rarity === 'extraordinary' || (s.weapon || '').toLowerCase().includes('glove'));
       const coverts = pool.filter((s) => s.rarity === 'covert');
       const classifieds = pool.filter((s) => s.rarity === 'classified');
       const restricteds = pool.filter((s) => s.rarity === 'restricted');
 
-      if (roll < 4 && golds.length > 0) {
+      const goldThreshold = hasLuck ? 9.5 : 4;
+      const covertThreshold = hasLuck ? (goldThreshold + 22) : 14;
+      const classifiedThreshold = hasLuck ? (covertThreshold + 34) : 40;
+      const restrictedThreshold = hasLuck ? (classifiedThreshold + 24.5) : 76;
+
+      if (roll < goldThreshold && golds.length > 0) {
         candidate = golds[Math.floor(Math.random() * golds.length)];
-      } else if (roll < 14 && coverts.length > 0) {
+      } else if (roll < covertThreshold && coverts.length > 0) {
         candidate = coverts[Math.floor(Math.random() * coverts.length)];
-      } else if (roll < 40 && classifieds.length > 0) {
+      } else if (roll < classifiedThreshold && classifieds.length > 0) {
         candidate = classifieds[Math.floor(Math.random() * classifieds.length)];
-      } else if (roll < 76 && restricteds.length > 0) {
+      } else if (roll < restrictedThreshold && restricteds.length > 0) {
         candidate = restricteds[Math.floor(Math.random() * restricteds.length)];
       } else {
         candidate = pool[Math.floor(Math.random() * pool.length)];
       }
 
-      // Roll authentic wear & StatTrak
+      // Roll authentic wear & StatTrak (boosted StatTrak with luck)
       const wear = WEARS[Math.floor(Math.random() * WEARS.length)];
-      const isSt = Math.random() < 0.12 && !candidate.name.startsWith('★');
+      const stChance = hasLuck ? 0.28 : 0.12;
+      const isSt = Math.random() < stChance && !candidate.name.startsWith('★');
       const instanceSkin: SkinEntity = {
         ...candidate,
         id: `term_${Date.now()}_${i}_${Math.random().toString(36).substring(2, 7)}`,
@@ -106,8 +124,18 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
     const deducted = deductBalance(terminalPriceDc);
     if (!deducted) return;
 
-    sound.playClick();
-    const offers = generateOffers();
+    let hasLuck = false;
+    if (activePotionCharges > 0) {
+      consumePotionCharge();
+      hasLuck = true;
+      setSessionHasLuck(true);
+      sound.playAngelicChime();
+    } else {
+      setSessionHasLuck(false);
+      sound.playClick();
+    }
+
+    const offers = generateOffers(hasLuck);
     setSessionOffers(offers);
     setCurrentOfferIdx(0);
     setDeclinedCount(0);
@@ -172,6 +200,42 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
       />
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
 
+      {/* Luck Potion Floating Clovers & Radiant Aura Background */}
+      {sessionHasLuck && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.18)_0%,rgba(6,95,70,0.1)_60%,transparent_100%)]" />
+          {[
+            { top: '12%', left: '7%', size: 36, delay: '0s', dur: '4s', opacity: 0.4 },
+            { top: '42%', left: '12%', size: 48, delay: '1s', dur: '5.2s', opacity: 0.5 },
+            { top: '72%', left: '8%', size: 30, delay: '2s', dur: '4.5s', opacity: 0.35 },
+            { top: '15%', right: '10%', size: 40, delay: '0.5s', dur: '4.8s', opacity: 0.45 },
+            { top: '48%', right: '14%', size: 52, delay: '1.8s', dur: '5.5s', opacity: 0.55 },
+            { top: '78%', right: '7%', size: 34, delay: '2.5s', dur: '4.2s', opacity: 0.35 },
+            { top: '8%', left: '46%', size: 28, delay: '1.2s', dur: '3.9s', opacity: 0.3 },
+            { top: '82%', left: '50%', size: 38, delay: '0.8s', dur: '4.6s', opacity: 0.4 },
+          ].map((p, idx) => (
+            <div
+              key={idx}
+              className="absolute animate-pulse pointer-events-none transition-transform"
+              style={{
+                top: p.top,
+                left: p.left,
+                right: p.right,
+                opacity: p.opacity,
+                animationDuration: p.dur,
+                animationDelay: p.delay,
+                filter: 'drop-shadow(0 0 16px rgba(16,185,129,0.85))'
+              }}
+            >
+              <Clover 
+                style={{ width: p.size, height: p.size }} 
+                className="text-emerald-400 fill-emerald-400/40" 
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Terminal Header */}
       <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between pb-5 border-b border-emerald-500/30 gap-3">
         <div className="flex items-center gap-3">
@@ -192,7 +256,14 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
         </div>
 
         {/* Status / Negotiation Slots Indicator */}
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          {sessionHasLuck && (
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/25 border border-emerald-500/50 text-emerald-300 text-xs font-black shadow-[0_0_18px_rgba(16,185,129,0.45)] animate-pulse">
+              <Clover className="w-4 h-4 text-emerald-400 fill-emerald-400/40 animate-spin" style={{ animationDuration: '10s' }} />
+              <span>{isRu ? 'ЗЕЛЬЕ УДАЧИ АКТИВНО (+35% К РЕДКОСТИ)' : 'LUCK POTION ACTIVE (+35% ODDS)'}</span>
+            </div>
+          )}
+
           {sessionActive ? (
             <div className="flex items-center gap-1.5 bg-black/60 px-3 py-1.5 rounded-xl border border-emerald-500/30">
               <span className="text-[10px] text-emerald-400/70 font-bold uppercase mr-1">
@@ -244,6 +315,34 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
                 : 'Unseal the terminal to initiate contact with the arms dealer. You will receive up to 5 sequential offers — accept the best deal or decline!'}
             </p>
 
+            {/* Luck Potion status & drink shortcut */}
+            {activePotionCharges > 0 ? (
+              <div className="mb-4 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 font-bold text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.3)] animate-pulse">
+                <Clover className="w-4 h-4 text-emerald-400 fill-emerald-400/30" />
+                <span>
+                  {isRu 
+                    ? `Зелье удачи активно (${activePotionCharges} зар.) — усилит офферы терминала!`
+                    : `Luck Potion active (${activePotionCharges} ch.) — boosts terminal offers!`}
+                </span>
+              </div>
+            ) : potionsCount > 0 ? (
+              <button
+                type="button"
+                onClick={() => {
+                  drinkPotion();
+                  sound.playAngelicChime();
+                }}
+                className="mb-4 px-4 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-bold text-xs flex items-center gap-2 cursor-pointer transition-all active:scale-95 shadow-sm"
+              >
+                <Clover className="w-4 h-4 text-emerald-400 fill-emerald-400/30" />
+                <span>
+                  {isRu
+                    ? `Выпить Зелье удачи (+35% к редкости, в запасе: ${potionsCount})`
+                    : `Drink Luck Potion (+35% rarity, in stock: ${potionsCount})`}
+                </span>
+              </button>
+            ) : null}
+
             <button
               type="button"
               onClick={handleUnsealTerminal}
@@ -281,8 +380,15 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
                 style={{ backgroundColor: config.color }}
               />
 
+              {/* Watermark Clover if luck potion was active */}
+              {sessionHasLuck && (
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+                  <Clover className="w-64 h-64 text-emerald-400/10 fill-emerald-400/5 animate-pulse" />
+                </div>
+              )}
+
               {/* Weapon image */}
-              <div className="relative w-48 h-36 sm:w-56 sm:h-40 flex items-center justify-center mb-4">
+              <div className="relative z-10 w-48 h-36 sm:w-56 sm:h-40 flex items-center justify-center mb-4">
                 <img
                   src={currentSkin.image}
                   alt={currentSkin.name}

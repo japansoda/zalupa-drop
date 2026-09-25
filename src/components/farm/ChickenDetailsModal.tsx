@@ -124,7 +124,7 @@ export const ChickenDetailsModal: React.FC<ChickenDetailsModalProps> = ({
                   ST™
                 </span>
                 <span className="text-xs font-bold text-amber-300">
-                  {locale === 'ru' ? '+20% к удаче' : '+20% Luck'}
+                  {locale === 'ru' ? '+7.5% к удаче' : '+7.5% Luck'}
                 </span>
               </div>
             ) : (

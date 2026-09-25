@@ -31,7 +31,11 @@ const CATEGORIES = [
 const CASE_BASE_POPULARITY: Record<string, number> = {
   'terminal-genesis': 9950,
   'terminal-dead-hand': 9900,
+  case_nano_banana_cyber: 9880,
+  case_inferno_banana_rush: 9870,
+  case_nano_banana_gold: 9860,
   'case-the-gallery': 9850,
+  case_banana_jackpot_ultra: 9820,
   'case-fever-2025': 9800,
   'case-overpass-2024': 9750,
   'case-heat-treated': 9700,
