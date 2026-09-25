@@ -22,10 +22,13 @@ import {
   Sparkles,
   Award,
   AlertTriangle,
-  Server
+  Server,
+  Bird,
+  CheckCircle,
 } from 'lucide-react';
 import { useGameStore } from '../../store/useGameStore';
 import { CASES_DATABASE } from '../../data/cases';
+import { CHICKEN_BREEDS, ChickenBreedId } from '../../lib/farm';
 import { DropCoinIcon } from '../../components/ui/DropCoinIcon';
 import { sound } from '../../lib/sound';
 
@@ -39,6 +42,25 @@ export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'cases' | 'controls'>('overview');
 
   const { balance, inventory, stats, addBalance, addLiveDrop, fakeDropsEnabled, setFakeDropsEnabled } = useGameStore();
+
+  const [selectedBreed, setSelectedBreed] = useState<ChickenBreedId>('golden_nugget');
+  const [giveStatTrak, setGiveStatTrak] = useState<boolean>(true);
+  const [selectedSlot, setSelectedSlot] = useState<number>(-1);
+  const [giveSuccessMsg, setGiveSuccessMsg] = useState<string>('');
+
+  const handleGiveChicken = () => {
+    sound.playReward();
+    const success = useGameStore.getState().giveChicken(
+      selectedBreed,
+      giveStatTrak,
+      selectedSlot === -1 ? undefined : selectedSlot
+    );
+    if (success) {
+      const breed = CHICKEN_BREEDS[selectedBreed];
+      setGiveSuccessMsg(`Курица «${breed?.name}» ${giveStatTrak ? 'StatTrak™' : ''} успешно выдана на ферму!`);
+      setTimeout(() => setGiveSuccessMsg(''), 4500);
+    }
+  };
 
   const [isTogglingFakeDrops, setIsTogglingFakeDrops] = useState<boolean>(false);
 
@@ -684,6 +706,93 @@ export default function AdminPage() {
                 <DollarSign className="w-4 h-4" />
                 +1,000,000 DropCoin на баланс
               </button>
+            </div>
+
+            {/* Chicken Farm Generator Card */}
+            <div className="p-6 rounded-2xl glass-panel border border-amber-500/30 shadow-[0_0_20px_rgba(245,158,11,0.1)] flex flex-col justify-between md:col-span-2">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-sm font-black uppercase text-white/90 flex items-center gap-2">
+                    <Bird className="w-4 h-4 text-amber-400" />
+                    Выдача боевой курочки (Куриная ферма)
+                  </h3>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                    CS2 FARM CHEAT
+                  </span>
+                </div>
+                <p className="text-xs text-white/50 mb-5">
+                  Мгновенно спавнит выбранную породу курочки с опциональным счетчиком StatTrak™ на указанный насест фермы.
+                </p>
+
+                {giveSuccessMsg && (
+                  <div className="mb-4 p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold flex items-center gap-2 animate-in fade-in">
+                    <CheckCircle className="w-4 h-4 shrink-0 text-emerald-400" />
+                    <span>{giveSuccessMsg}</span>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                  {/* Breed Picker */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[11px] font-bold text-white/60 uppercase">Порода курочки</label>
+                    <select
+                      value={selectedBreed}
+                      onChange={(e) => setSelectedBreed(e.target.value as ChickenBreedId)}
+                      className="bg-black/60 border border-white/20 rounded-xl px-3 py-2.5 text-xs font-bold text-white focus:outline-none focus:border-amber-400 cursor-pointer"
+                    >
+                      {Object.values(CHICKEN_BREEDS).map((b) => (
+                        <option key={b.id} value={b.id} className="bg-[#0d0e14] text-white">
+                          {b.name} ({b.rarityName})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Slot Picker */}
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[11px] font-bold text-white/60 uppercase">Насест курятника</label>
+                    <select
+                      value={selectedSlot}
+                      onChange={(e) => setSelectedSlot(Number(e.target.value))}
+                      className="bg-black/60 border border-white/20 rounded-xl px-3 py-2.5 text-xs font-bold text-white focus:outline-none focus:border-amber-400 cursor-pointer"
+                    >
+                      <option value={-1} className="bg-[#0d0e14] text-white">Первый свободный насест</option>
+                      <option value={0} className="bg-[#0d0e14] text-white">Насест #1</option>
+                      <option value={1} className="bg-[#0d0e14] text-white">Насест #2</option>
+                      <option value={2} className="bg-[#0d0e14] text-white">Насест #3</option>
+                      <option value={3} className="bg-[#0d0e14] text-white">Насест #4</option>
+                      <option value={4} className="bg-[#0d0e14] text-white">Насест #5</option>
+                    </select>
+                  </div>
+
+                  {/* StatTrak Toggle */}
+                  <div className="flex flex-col gap-1.5 justify-center">
+                    <label className="text-[11px] font-bold text-white/60 uppercase">Модификатор StatTrak™</label>
+                    <label className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-black/40 border border-white/10 cursor-pointer hover:border-white/20 select-none">
+                      <input
+                        type="checkbox"
+                        checked={giveStatTrak}
+                        onChange={(e) => setGiveStatTrak(e.target.checked)}
+                        className="w-4 h-4 rounded text-amber-500 focus:ring-0 cursor-pointer accent-amber-500"
+                      />
+                      <span className="text-xs font-mono font-black text-amber-400">
+                        {giveStatTrak ? 'StatTrak™ ВКЛ (+20% удачи)' : 'Обычная (Без ST)'}
+                      </span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-end pt-2">
+                <button
+                  type="button"
+                  onClick={handleGiveChicken}
+                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(245,158,11,0.35)] active:scale-95 transition-all"
+                >
+                  <Bird className="w-4 h-4" />
+                  <span>Выдать курочку на ферму</span>
+                </button>
+              </div>
             </div>
 
             {/* Global Fake Drops Controller */}

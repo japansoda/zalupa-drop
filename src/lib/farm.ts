@@ -410,46 +410,57 @@ export function calculateChickenSellPrice(
 /**
  * Helper to get human-readable loot odds description for ChickenDetailsModal
  */
-export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 'ru') {
+export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 'ru', isStatTrak = false) {
   const breed = CHICKEN_BREEDS[breedId] || CHICKEN_BREEDS.white_inferno;
   const isRu = locale === 'ru';
+  const mult = isStatTrak ? 1.2 : 1.0;
 
   switch (breed.eggDropTier) {
     case 'tier_legendary':
       return {
-        knivesGloves: '2.8%',
-        covert: '11.0%',
+        knivesGloves: `${(2.8 * mult).toFixed(1)}%`,
+        covert: `${(11.0 * mult).toFixed(1)}%`,
         classified: '39.0%',
-        summary: isRu ? '2.8% Ножи & Перчатки · 11% Тайное · 39% Засекреченное' : '2.8% Knives & Gloves · 11% Covert · 39% Classified',
+        summary: isRu
+          ? `${(2.8 * mult).toFixed(1)}% Ножи & Перчатки · ${(11.0 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +20% удачи)' : ''}`
+          : `${(2.8 * mult).toFixed(1)}% Knives & Gloves · ${(11.0 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +20% luck)' : ''}`,
       };
     case 'tier_covert':
       return {
-        knivesGloves: '2.0%',
-        covert: '8.5%',
+        knivesGloves: `${(2.0 * mult).toFixed(1)}%`,
+        covert: `${(8.5 * mult).toFixed(1)}%`,
         classified: '36.0%',
-        summary: isRu ? '2.0% Ножи & Перчатки · 8.5% Тайное · 36% Засекреченное' : '2.0% Knives & Gloves · 8.5% Covert · 36% Classified',
+        summary: isRu
+          ? `${(2.0 * mult).toFixed(1)}% Ножи · ${(8.5 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +20% удачи)' : ''}`
+          : `${(2.0 * mult).toFixed(1)}% Knives · ${(8.5 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +20% luck)' : ''}`,
       };
     case 'tier_classified':
       return {
-        knivesGloves: '1.5%',
-        covert: '6.5%',
+        knivesGloves: `${(1.5 * mult).toFixed(1)}%`,
+        covert: `${(6.5 * mult).toFixed(1)}%`,
         classified: '33.0%',
-        summary: isRu ? '1.5% Ножи · 6.5% Тайное · 33% Засекреченное' : '1.5% Knives · 6.5% Covert · 33% Classified',
+        summary: isRu
+          ? `${(1.5 * mult).toFixed(1)}% Ножи · ${(6.5 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +20% удачи)' : ''}`
+          : `${(1.5 * mult).toFixed(1)}% Knives · ${(6.5 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +20% luck)' : ''}`,
       };
     case 'tier_restricted':
       return {
-        knivesGloves: '1.1%',
-        covert: '4.8%',
+        knivesGloves: `${(1.1 * mult).toFixed(1)}%`,
+        covert: `${(4.8 * mult).toFixed(1)}%`,
         classified: '30.0%',
-        summary: isRu ? '1.1% Ножи · 4.8% Тайное · 30% Засекреченное' : '1.1% Knives · 4.8% Covert · 30% Classified',
+        summary: isRu
+          ? `${(1.1 * mult).toFixed(1)}% Ножи · ${(4.8 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +20% удачи)' : ''}`
+          : `${(1.1 * mult).toFixed(1)}% Knives · ${(4.8 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +20% luck)' : ''}`,
       };
     case 'tier_common':
     default:
       return {
-        knivesGloves: '0.8%',
-        covert: '3.6%',
+        knivesGloves: `${(0.8 * mult).toFixed(1)}%`,
+        covert: `${(3.6 * mult).toFixed(1)}%`,
         classified: '27.0%',
-        summary: isRu ? '0.8% Ножи · 3.6% Тайное · 27% Засекреченное' : '0.8% Knives · 3.6% Covert · 27% Classified',
+        summary: isRu
+          ? `${(0.8 * mult).toFixed(1)}% Ножи · ${(3.6 * mult).toFixed(1)}% Тайное${isStatTrak ? ' (StatTrak™ +20% удачи)' : ''}`
+          : `${(0.8 * mult).toFixed(1)}% Knives · ${(3.6 * mult).toFixed(1)}% Covert${isStatTrak ? ' (StatTrak™ +20% luck)' : ''}`,
       };
   }
 }
@@ -459,8 +470,13 @@ export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 
  * STRICT: Absolutely NO stickers, NO charms, NO agents!
  * Calibrated for ~98.5% overall RTP on 7,500 DC chicken feed cost.
  * When hasLuckPotion is true, knife/glove and covert chances are boosted.
+ * When isStatTrak is true, an additional +20% luck buff is applied!
  */
-export function rollEggSkinDrop(breedId: ChickenBreedId, hasLuckPotion = false): SkinEntity {
+export function rollEggSkinDrop(
+  breedId: ChickenBreedId,
+  hasLuckPotion = false,
+  isStatTrak = false
+): SkinEntity {
   const breed = CHICKEN_BREEDS[breedId] || CHICKEN_BREEDS.white_inferno;
   
   // Filter all weapons/knives/gloves
@@ -477,14 +493,15 @@ export function rollEggSkinDrop(breedId: ChickenBreedId, hasLuckPotion = false):
   const milspecPool = weaponsPool.filter((s) => s.rarity === 'milspec' || s.rarity === 'industrial' || s.rarity === 'consumer');
 
   const roll = Math.random() * 100;
+  const stMult = isStatTrak ? 1.20 : 1.0;
 
   let candidateBucket: SkinEntity[] = [];
 
   switch (breed.eggDropTier) {
     case 'tier_legendary': {
       // Golden / Dragon / Howl: 2.8% Knife, 11% Covert, 39% Classified, 36% Restricted, 11.2% Milspec
-      const knifeCut = hasLuckPotion ? 5.0 : 2.8;
-      const covCut = knifeCut + (hasLuckPotion ? 16.0 : 11.0);
+      const knifeCut = (hasLuckPotion ? 5.0 : 2.8) * stMult;
+      const covCut = knifeCut + (hasLuckPotion ? 16.0 : 11.0) * stMult;
       const classCut = covCut + (hasLuckPotion ? 42.0 : 39.0);
       const resCut = classCut + (hasLuckPotion ? 30.0 : 36.0);
 
@@ -504,8 +521,8 @@ export function rollEggSkinDrop(breedId: ChickenBreedId, hasLuckPotion = false):
 
     case 'tier_covert': {
       // Blaze / Printstream / Fade: 2.0% Knife, 8.5% Covert, 36% Classified, 40% Restricted, 13.5% Milspec
-      const knifeCut = hasLuckPotion ? 3.5 : 2.0;
-      const covCut = knifeCut + (hasLuckPotion ? 12.0 : 8.5);
+      const knifeCut = (hasLuckPotion ? 3.5 : 2.0) * stMult;
+      const covCut = knifeCut + (hasLuckPotion ? 12.0 : 8.5) * stMult;
       const classCut = covCut + (hasLuckPotion ? 40.0 : 36.0);
       const resCut = classCut + (hasLuckPotion ? 35.0 : 40.0);
 
@@ -525,8 +542,8 @@ export function rollEggSkinDrop(breedId: ChickenBreedId, hasLuckPotion = false):
 
     case 'tier_classified': {
       // Cyber Neon / Case Hardened: 1.5% Knife, 6.5% Covert, 33% Classified, 42% Restricted, 17% Milspec
-      const knifeCut = hasLuckPotion ? 2.6 : 1.5;
-      const covCut = knifeCut + (hasLuckPotion ? 9.0 : 6.5);
+      const knifeCut = (hasLuckPotion ? 2.6 : 1.5) * stMult;
+      const covCut = knifeCut + (hasLuckPotion ? 9.0 : 6.5) * stMult;
       const classCut = covCut + (hasLuckPotion ? 38.0 : 33.0);
       const resCut = classCut + (hasLuckPotion ? 38.0 : 42.0);
 
@@ -546,8 +563,8 @@ export function rollEggSkinDrop(breedId: ChickenBreedId, hasLuckPotion = false):
 
     case 'tier_restricted': {
       // Toxic Zombie / Asiimov: 1.1% Knife, 4.8% Covert, 30% Classified, 43% Restricted, 21.1% Milspec
-      const knifeCut = hasLuckPotion ? 2.0 : 1.1;
-      const covCut = knifeCut + (hasLuckPotion ? 7.0 : 4.8);
+      const knifeCut = (hasLuckPotion ? 2.0 : 1.1) * stMult;
+      const covCut = knifeCut + (hasLuckPotion ? 7.0 : 4.8) * stMult;
       const classCut = covCut + (hasLuckPotion ? 36.0 : 30.0);
       const resCut = classCut + (hasLuckPotion ? 40.0 : 43.0);
 
@@ -568,9 +585,9 @@ export function rollEggSkinDrop(breedId: ChickenBreedId, hasLuckPotion = false):
     case 'tier_common':
     default: {
       // White Inferno / Village Rooster: 0.8% Knife, 3.6% Covert, 27% Classified, 44% Restricted, 24.6% Milspec
-      const knifeCut = hasLuckPotion ? 1.5 : 0.8;
-      const covCut = knifeCut + (hasLuckPotion ? 5.5 : 3.6);
-      const classCut = covCut + (hasLuckPotion ? 35.0 : 27.0);
+      const knifeCut = (hasLuckPotion ? 1.6 : 0.8) * stMult;
+      const covCut = knifeCut + (hasLuckPotion ? 5.5 : 3.6) * stMult;
+      const classCut = covCut + (hasLuckPotion ? 33.0 : 27.0);
       const resCut = classCut + (hasLuckPotion ? 40.0 : 44.0);
 
       if (roll < knifeCut && knivesAndGloves.length > 0) {

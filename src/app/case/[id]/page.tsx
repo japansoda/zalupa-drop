@@ -8,6 +8,7 @@ import { Footer } from '../../../components/layout/Footer';
 import { LiveDropBar } from '../../../components/layout/LiveDropBar';
 import { RefillModal } from '../../../components/layout/RefillModal';
 import { ReelRoulette } from '../../../components/case/ReelRoulette';
+import { TerminalInterface } from '../../../components/case/TerminalInterface';
 import { CaseSkinGroupCard } from '../../../components/case/CaseSkinGroupCard';
 import { DropCoinIcon } from '../../../components/ui/DropCoinIcon';
 import { CASES_DATABASE } from '../../../data/cases';
@@ -26,6 +27,7 @@ export default function CaseOpenPage() {
   const currentCase = CASES_DATABASE.find((c) => c.id === caseId);
 
   const isOfficial = Boolean(currentCase && isOfficialCase(currentCase.id, currentCase.category));
+  const isTerminal = Boolean(currentCase && (currentCase.id.startsWith('terminal-') || currentCase.category === 'terminal'));
 
   const groupedSkins = React.useMemo(() => {
     if (!currentCase?.skins) return [];
@@ -132,12 +134,21 @@ export default function CaseOpenPage() {
         </section>
 
         <section className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
-          <ReelRoulette
-            caseId={currentCase.id}
-            caseSkins={currentCase.skins}
-            casePriceDc={currentCase.priceDc}
-            caseName={getCaseName(currentCase, locale)}
-          />
+          {isTerminal ? (
+            <TerminalInterface
+              terminalId={currentCase.id}
+              terminalName={getCaseName(currentCase, locale)}
+              terminalPriceDc={currentCase.priceDc}
+              terminalSkins={currentCase.skins}
+            />
+          ) : (
+            <ReelRoulette
+              caseId={currentCase.id}
+              caseSkins={currentCase.skins}
+              casePriceDc={currentCase.priceDc}
+              caseName={getCaseName(currentCase, locale)}
+            />
+          )}
         </section>
 
         <section className="max-w-7xl mx-auto px-3 sm:px-6 py-6 sm:py-10">

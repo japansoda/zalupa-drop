@@ -13,6 +13,17 @@ const BLEND_WINDOW_MS = 3 * 60 * 1000; // 3 minutes dynamic window
 const CASE_EN_MAP: Record<string, string> = {
   'Контракт обмена': 'Trade-Up',
   'Апгрейдер': 'Upgrader',
+  'Ферма': 'Farm',
+  'Кейс «Галерея»': 'The Gallery Case',
+  'Fever Case': 'Fever Case',
+  'Sealed Genesis Terminal': 'Sealed Genesis Terminal',
+  'Sealed Dead Hand Terminal': 'Sealed Dead Hand Terminal',
+  'Коллекция «Overpass 2024»': 'Overpass 2024 Collection',
+  'Коллекция «Спорт и отдых»': 'Sport & Field Collection',
+  'Коллекция «Графика»': 'The Graphic Collection',
+  'Коллекция «Шпионские технологии»': 'The Spy Tech Collection',
+  'Коллекция «Арабеска»': 'The Arabesque Collection',
+  'Кейс «Термообработка»': 'Heat Treated Case',
   ...CASE_NAME_EN_MAP,
 };
 
@@ -21,6 +32,11 @@ const SIMULATED_CASES = [
   'Грёзы и кошмары',
   'Kilowatt Case',
   'CS:GO Weapon Case',
+  'Кейс «Галерея»',
+  'Fever Case',
+  'Sealed Genesis Terminal',
+  'Sealed Dead Hand Terminal',
+  'Ферма',
   'Кейс «Разлом»',
   'Кейс «Легенда Howl»',
   'Кейс «Градиентный Раш»',
@@ -38,6 +54,7 @@ const isRealDrop = (drop: LiveDrop): boolean => {
     drop.id.startsWith('real_') ||
     drop.id.startsWith('contract_') ||
     drop.id.startsWith('upgrade_') ||
+    drop.id.startsWith('chickendrop_') ||
     drop.id.startsWith('net_') ||
     isOwnDrop(drop)
   );
@@ -256,12 +273,6 @@ export const LiveDropBar: React.FC = () => {
         (d) => isRealDrop(d) && now - (d.timestamp || 0) < BLEND_WINDOW_MS
       ).length;
 
-      // Only shut off fake drops if >= 6 real drops in the last 3 minutes!
-      if (realCount >= 6) {
-        timerId = setTimeout(tick, 4000);
-        return;
-      }
-
       // Pick balanced skin: 50% guns, 25% gloves, 25% knives
       const roll = Math.random();
       let pool = eliteGuns;
@@ -292,12 +303,8 @@ export const LiveDropBar: React.FC = () => {
         state.addLiveDrop(newDrop);
       }
 
-      // Dynamic blend:
-      // If 1-5 real drops: 7-11 seconds (smoothly blended with real drops!)
-      // If 0 real drops: 5-9 seconds
-      const nextDelay = realCount > 0
-        ? 7000 + Math.random() * 4000
-        : 5000 + Math.random() * 4000;
+      // Smooth continuous ticker: 4.5s to 7.5s, keeps live drops always active for all users
+      const nextDelay = 4500 + Math.random() * 3000;
 
       timerId = setTimeout(tick, nextDelay);
     };

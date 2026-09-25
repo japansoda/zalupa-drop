@@ -40,7 +40,7 @@ export const ChickenDetailsModal: React.FC<ChickenDetailsModalProps> = ({
     chicken.isStatTrak,
     chicken.eggsLaidCount
   );
-  const tierStats = getBreedDropTierStats(chicken.breedId, locale);
+  const tierStats = getBreedDropTierStats(chicken.breedId, locale, Boolean(chicken.isStatTrak));
 
   const handleSell = () => {
     sound.playCashout();
@@ -115,12 +115,23 @@ export const ChickenDetailsModal: React.FC<ChickenDetailsModalProps> = ({
         <div className="grid grid-cols-2 gap-2.5 w-full mb-6">
           <div className="p-3 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-start text-left">
             <div className="flex items-center gap-1.5 text-white/40 text-[11px] mb-1">
-              <Egg className="w-3.5 h-3.5 text-yellow-400" />
-              <span>{locale === 'ru' ? 'Снесено яиц' : 'Eggs Laid'}</span>
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span>{locale === 'ru' ? 'Модификатор' : 'Modifier'}</span>
             </div>
-            <span className="font-mono font-black text-lg text-white">
-              {chicken.eggsLaidCount || 0}
-            </span>
+            {chicken.isStatTrak ? (
+              <div className="flex items-center gap-1.5 mt-0.5">
+                <span className="font-mono font-black text-[11px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/40">
+                  ST™
+                </span>
+                <span className="text-xs font-bold text-amber-300">
+                  {locale === 'ru' ? '+20% к удаче' : '+20% Luck'}
+                </span>
+              </div>
+            ) : (
+              <span className="font-mono font-bold text-sm text-white/70 mt-0.5">
+                {locale === 'ru' ? 'Обычная' : 'Standard'}
+              </span>
+            )}
           </div>
 
           <div className="p-3 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-start text-left">

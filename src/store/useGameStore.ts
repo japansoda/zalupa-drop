@@ -7,6 +7,7 @@ import { getSteamMarketHashName } from '../lib/steam';
 import {
   FarmSlot,
   ChickenEntity,
+  ChickenBreedId,
   INCUBATION_DURATION_MS,
   EGG_PRODUCTION_DURATION_MS,
   rollHatchedChickenBreed,
@@ -24,6 +25,9 @@ interface GameState {
   liveDrops: LiveDrop[];
   stats: UserStats;
   isRefillOpen: boolean;
+
+  // Farm Admin & Cheats
+  giveChicken: (breedId: ChickenBreedId, isStatTrak?: boolean, slotIndex?: number) => boolean;
 
   // Consumables (save tokens, zeus, luck potion, grappling hook)
   saveTokensCount: number;
@@ -197,7 +201,8 @@ export const useGameStore = create<GameState>()(
         const isLocalRealDrop =
           drop.id.startsWith('real_') ||
           drop.id.startsWith('contract_') ||
-          drop.id.startsWith('upgrade_');
+          drop.id.startsWith('upgrade_') ||
+          drop.id.startsWith('chickendrop_');
 
         if (isLocalRealDrop && typeof window !== 'undefined') {
           // 1. Same-device local tabs
@@ -522,7 +527,11 @@ export const useGameStore = create<GameState>()(
 
         const breedId = slot.readyEggBreed || slot.chicken.breedId;
         const breed = CHICKEN_BREEDS[breedId] || CHICKEN_BREEDS.white_inferno;
-        const droppedSkin = rollEggSkinDrop(breedId, Boolean(slot.hasLuckPotion));
+        const droppedSkin = rollEggSkinDrop(
+          breedId,
+          Boolean(slot.hasLuckPotion),
+          Boolean(slot.chicken.isStatTrak)
+        );
 
         get().addToInventory([droppedSkin]);
 
@@ -533,7 +542,7 @@ export const useGameStore = create<GameState>()(
             user: 'Вы',
             avatar: '',
             skin: droppedSkin,
-            caseName: `🐔 ${breed.name}`,
+            caseName: 'Ферма',
             timestamp: Date.now(),
           });
         }
@@ -554,6 +563,40 @@ export const useGameStore = create<GameState>()(
         set({ farmSlots: slots });
         sound.playWin(droppedSkin.rarity);
         return droppedSkin;
+      },
+
+      giveChicken: (breedId, isStatTrak = false, slotIndex) => {
+        const slots = [...get().farmSlots];
+        let targetIdx = slotIndex;
+        if (targetIdx === undefined || targetIdx < 0 || targetIdx >= slots.length) {
+          targetIdx = slots.findIndex((s) => s.status === 'empty');
+          if (targetIdx === -1) {
+            targetIdx = 0;
+          }
+        }
+
+        const breed = CHICKEN_BREEDS[breedId] || CHICKEN_BREEDS.white_inferno;
+        const chicken: ChickenEntity = {
+          id: `chicken_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+          breedId,
+          name: isStatTrak ? `StatTrak™ ${breed.name}` : breed.name,
+          nameEn: isStatTrak ? `StatTrak™ ${breed.nameEn}` : breed.nameEn,
+          hatchedAt: Date.now(),
+          eggsLaidCount: 0,
+          isStatTrak,
+          hasLuckPotion: false,
+        };
+
+        slots[targetIdx] = {
+          index: targetIdx,
+          status: 'chicken',
+          chicken,
+          feedStatus: 'hungry',
+        };
+
+        set({ farmSlots: slots });
+        sound.playReward();
+        return true;
       },
 
       sellChicken: (slotIndex) => {

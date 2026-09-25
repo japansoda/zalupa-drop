@@ -1,0 +1,408 @@
+{
+  "M4A1-S | Vaporwave": {
+    "query": "M4A1-S | Vaporwave",
+    "notFound": true
+  },
+  "Glock-18 | Gold Toof": {
+    "query": "Glock-18 | Gold Toof",
+    "name": "Glock-18 | Gold Toof (Battle-Scarred)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1c4_2tY5tuKP-eHmKC_uZzsfdwAXzmlhhz6j7RnNn_dX_FaQUhD8NzFOdYshO5x9e2Y7vktVDZ2tlGnirgznQetWdhWVs",
+    "priceDc": 29370
+  },
+  "AK-47 | The Outsiders": {
+    "query": "AK-47 | The Outsiders",
+    "name": "AK-47 | The Outsiders (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiNQu6WRfJtvNeOsA2KUyPt7_rg5GHHmk050622Gz9uqcn2RaQ8iX8MhQLML4Ra-ktzjPrzq4FDagt5bjXKpsd_j5Qg",
+    "priceDc": 6430
+  },
+  "UMP-45 | Neo-Noir": {
+    "query": "UMP-45 | Neo-Noir",
+    "notFound": true
+  },
+  "P250 | Epicenter": {
+    "query": "P250 | Epicenter",
+    "notFound": true
+  },
+  "SSG 08 | Rapid Transit": {
+    "query": "SSG 08 | Rapid Transit",
+    "name": "SSG 08 | Rapid Transit (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1I_PX-MJt5MvGdHW6E_vl-ufVscCS2kRQyvnOHwon4dSqUa1d2W8AkEOALtRG7k4bjZunk5VHeidgTzyr5h3xB63s__a9cBry9ZXNI",
+    "priceDc": 1220
+  },
+  "MAC-10 | Saibā Oni": {
+    "query": "MAC-10 | Saibā Oni",
+    "name": "MAC-10 | Saibā Oni (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1W7vH_OJtiOvGYB1idxOp_pewnTnzqlksh4Dndw9r8ciiSaFUoXJAlF-UCtkO-ltKxNe_q4QTegt1GxDK-0H0O2S-Bcg",
+    "priceDc": 1000
+  },
+  "M4A4 | Turbine": {
+    "query": "M4A4 | Turbine",
+    "notFound": true
+  },
+  "Dual Berettas | Hydro Strike": {
+    "query": "Dual Berettas | Hydro Strike",
+    "name": "Dual Berettas | Hydro Strike (Factory New)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1f-vOiV6FhKeSWMW-Jxfx5j_J9XSC4kCIrujqNjsGgeHrGa1B2W5t1Q7NetkOwk4C2Ybzq4FDWjI0TzS6viilLv3tp6rwLT-N7rWtjCU_P",
+    "priceDc": 5490
+  },
+  "P90 | Randy Rush": {
+    "query": "P90 | Randy Rush",
+    "name": "P90 | Randy Rush (Factory New)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf7XsL0OCvZqB0H-KGHW-vzedxuPUnGCy3lhsj6zmAyYn6eXyQbwMhApAmFu8C5xTpktHjMejl71aPjtkQnjK-0H3AcMEIag",
+    "priceDc": 3150
+  },
+  "USP-S | 27": {
+    "query": "USP-S | 27",
+    "notFound": true
+  },
+  "Desert Eagle | Calligraffiti": {
+    "query": "Desert Eagle | Calligraffiti",
+    "name": "Desert Eagle | Calligraffiti (Minimal Wear)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk6_evb6hoH_OSAmuZxvx3tudWQyC0nQlp52rQmNv_IC7DaFR0ApB4QbMKs0W8k9zuPr6xtAGMjoITmymohyMa6jErvbhrxmEjWA",
+    "priceDc": 540
+  },
+  "AUG | Luxe Trim": {
+    "query": "AUG | Luxe Trim",
+    "name": "AUG | Luxe Trim (Minimal Wear)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf_Ddc0OK7bqJoMs-fB2CY1aAntOUwSivrwksmtTyBnI2udijFZ1cmDZt0QeUCsRG7xoWzNu3r5gPelcsbmlZvKhNj",
+    "priceDc": 420
+  },
+  "SCAR-20 | Trail Blazer": {
+    "query": "SCAR-20 | Trail Blazer",
+    "name": "SCAR-20 | Trail Blazer (Factory New)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLinZfyr3Jk_PGvevY9H_aGHH6v1eFmv95lRi67gVN_5D6Bzo38cXOVOA52DZolReBbt0K5k9DvM-Pr4VHXjI9Enn6sjHkb8G81tIsMy8R0",
+    "priceDc": 790
+  },
+  "R8 Revolver | Tango": {
+    "query": "R8 Revolver | Tango",
+    "name": "StatTrak™ R8 Revolver | Tango (Minimal Wear)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLjm4Dv8TRe_c28MJt_L-OWHViRz-pJt_RnXBa_nBovp3PSm4urdy7Da1UjWJolF-RbshfqldXuMuqxsgGKi45HmXj4iS5IuCxi_a9cBo6oJFLo",
+    "priceDc": 1630
+  },
+  "MP5-SD | Statics": {
+    "query": "MP5-SD | Statics",
+    "notFound": true
+  },
+  "M249 | Hypnosis": {
+    "query": "M249 | Hypnosis",
+    "notFound": true
+  },
+  "AWP | Printstream": {
+    "query": "AWP | Printstream",
+    "notFound": true
+  },
+  "FAMAS | Bad Trip": {
+    "query": "FAMAS | Bad Trip",
+    "name": "FAMAS | Bad Trip (Well-Worn)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3n5vh7h1d7v-ve5tvIfSHHG6A_uNztOh8Qmewwxgm4jvVm9ytcHmValIjWZIjReZe5xHqkoLjN-vgtgPdj95BzSX7kGoXuRHyWhnd",
+    "priceDc": 51690
+  },
+  "AK-47 | Searing Rage": {
+    "query": "AK-47 | Searing Rage",
+    "name": "AK-47 | Searing Rage (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiNQu6WRbbx9LP-AB3GV_uNztOh8QmexlhtwsW7Qno6vc3ufaAd2WZR4TOcJ4RC-lYezMbngsgCLiolHzimvkGoXuYrtgXO6",
+    "priceDc": 5180
+  },
+  "Glock-18 | Shinobu": {
+    "query": "Glock-18 | Shinobu",
+    "notFound": true
+  },
+  "UMP-45 | K.O. Factory": {
+    "query": "UMP-45 | K.O. Factory",
+    "name": "UMP-45 | K.O. Factory (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkk4a0qB1O4uL6PZtiLPSsDWaC1eF5vt5kSi26gBBp4W-Hm4mvJC3FPwJzApYkR-ENtkLtw9DhZOvgslaIjopEzyr6jCgY5zErvbgrVMxSIg",
+    "priceDc": 4890
+  },
+  "Desert Eagle | Serpent Strike": {
+    "query": "Desert Eagle | Serpent Strike",
+    "name": "Desert Eagle | Serpent Strike (Minimal Wear)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk6_evb6hoH-OdD2yV_v53pPVsXSeMmRQguynLzdmsIHOVPVciXMN3QuVeuxexmtHuP77m7gDd34kRxXj_3ChKvS9p5fFCD_SJMmxOXA",
+    "priceDc": 860
+  },
+  "Galil AR | Control": {
+    "query": "Galil AR | Control",
+    "name": "Galil AR | Control (Minimal Wear)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0PWvZK1hH_OcAHOCzuJJo_V7RiK2qhEutDWR1Nmvcn6RPFVxW5txTbRZuxDuxNKzZu2x7wCMiNpExCSshyof7Xlt5-scEf1y6paUA5M",
+    "priceDc": 880
+  },
+  "Nova | Rising Sun": {
+    "query": "Nova | Rising Sun",
+    "name": "Nova | Rising Sun (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwixU-fOReq1-Kf6UMXSFz9F7teVgWiT9l00j4DmHnNz9IymTP1UhX8B1EONc4UGwkoCzMuzgsVeKjYtAxH3-2jQJsHjoTQvx9w",
+    "priceDc": 550
+  },
+  "P90 | Wave Breaker": {
+    "query": "P90 | Wave Breaker",
+    "name": "P90 | Wave Breaker (Factory New)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf7XsL0PChZ7d5H_KfG2KvzedxuPUnTHrlzU9xt2qHzd-rJ3yQb1cmXJNzF-Vc5BS6wdLjMe60tAyP3dhNzTK-0H3NvEQllg",
+    "priceDc": 3450
+  },
+  "Zeus x27 | Tosai": {
+    "query": "Zeus x27 | Tosai",
+    "name": "Zeus x27 | Tosai (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLln4Xl7x1B6ue9V7BiM_GaMWqVxedjva86TXrmxktx4GTRy46rcH6TbgYiD8AkELQC4Rm9kN22YbnqsQXd2dlH02yg2Y8fat_m",
+    "priceDc": 540
+  },
+  "M4A4 | Choppa": {
+    "query": "M4A4 | Choppa",
+    "notFound": true
+  },
+  "MAG-7 | Resupply": {
+    "query": "MAG-7 | Resupply",
+    "notFound": true
+  },
+  "MP9 | Nexus": {
+    "query": "MP9 | Nexus",
+    "notFound": true
+  },
+  "P2000 | Sure Grip": {
+    "query": "P2000 | Sure Grip",
+    "name": "P2000 | Sure Grip (Minimal Wear)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL5lYayrXIL0OL8Y5trMvGQGmac_uJ_t-l9AS2wwxx06mTUw9b7JH2RZlQoDZYkRLQD5hW4lNPiYePktgzWj45CmSzgznQeV1pFuQ0",
+    "priceDc": 150
+  },
+  "SSG 08 | Memorial": {
+    "query": "SSG 08 | Memorial",
+    "name": "StatTrak™ SSG 08 | Memorial (Factory New)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1I_PX-MJtvMuWHD2uZ0vpJvOhuRz39x0UlsWmEnt37IHyfaFAkWZR5RuALtRKxlYKxMLnn4leL3t5FmSv9ijQJsHj6GwByAQ",
+    "priceDc": 3580
+  },
+  "USP-S | PC-GRN": {
+    "query": "USP-S | PC-GRN",
+    "notFound": true
+  },
+  "AK-47 | B the Monster": {
+    "query": "AK-47 | B the Monster",
+    "name": "AK-47 | B the Monster (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0P24bbZ9IeOAMWqfz_1itfNWTiLnwiIqtjmMj4K3IC-Xb1d2WZUmEbMN4xDrmoDlPujktgONjY1HmH_4jCJJ7C454LsHAL1lpPMPrvuW_g",
+    "priceDc": 85850
+  },
+  "Zeus x27 | Dragon Snore": {
+    "query": "Zeus x27 | Dragon Snore",
+    "name": "Souvenir Zeus x27 | Dragon Snore (Factory New)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLln4Xl7x1Y-s2hfqF_MPGAHViU0-9xv-9WVSymhiIrujqNjsH6dH7FOA8pXJZ0Q-MPshe-lte0Pu6z7lbXio5GmSv83yNJ73k54rlWT-N7rWv6YDXa",
+    "priceDc": 121420
+  },
+  "AWP | Crakow!": {
+    "query": "AWP | Crakow!",
+    "notFound": true
+  },
+  "XM1014 | Monster Melt": {
+    "query": "XM1014 | Monster Melt",
+    "name": "XM1014 | Monster Melt (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLpk8ewrHZk7OeRZ7JoMuCSHXSvzOF4o_VsXTqMjRAYvjiBk5r0bymfbwV0ApVzEeIM4BTuxoXlP7jq5VPcjthBy372iiNB6H5i4OsEUaY7uvqAG3xZSDM",
+    "priceDc": 2200
+  },
+  "Dual Berettas | Sweet Little Angels": {
+    "query": "Dual Berettas | Sweet Little Angels",
+    "name": "Dual Berettas | Sweet Little Angels (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL0kp_0-B1Y-s2hfqF_MPGAHViSwOxvj-V8TiW6kA4YvjiBk5r0b3meaA8gC5UjE-4PtRXtwdDuN7y0s1ONi4gRnCv_jHgb7Sdt4-gHWas7uvqAtzA3iaY",
+    "priceDc": 2300
+  },
+  "AUG | Eye of Zapems": {
+    "query": "AUG | Eye of Zapems",
+    "name": "AUG | Eye of Zapems (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf_jdk4OSrerRsM-OsCXWRx9F3peZWQiy3nAgq_W3Syd2ueX_FPFdyW5dyQ-ACsRW7wYHnM--34FffiYsQmymoiClBuCt1o7FVWWhxfAY",
+    "priceDc": 2310
+  },
+  "MAC-10 | Pipsqueak": {
+    "query": "MAC-10 | Pipsqueak",
+    "notFound": true
+  },
+  "Nova | Wurst Hölle": {
+    "query": "Nova | Wurst Hölle",
+    "name": "Nova | Wurst Hölle (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwiFO0P24bbZ9IeOAMXCF0_1ij-9mWSiMmBgjuiiI1Ir9cnqQbVBzXsN4QbNc4BLtlNHlYurh5QPfgooXyij433xI7Xs56uccEf1yiMDkmPw",
+    "priceDc": 300
+  },
+  "Glock-18 | Teal Graf": {
+    "query": "Glock-18 | Teal Graf",
+    "name": "Glock-18 | Teal Graf (Factory New)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1T9s2hfqF_MPGAHViEwOlxteVWWyyymSIrujqNjsGueXyfaVN0X5N5Ru4O5he_k9XkM-7ltlPe2YJExX2tiXlN5yo6474LT-N7rZcNkc7T",
+    "priceDc": 680
+  },
+  "MP5-SD | Neon Squeezer": {
+    "query": "MP5-SD | Neon Squeezer",
+    "name": "MP5-SD | Neon Squeezer (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsPz-R1I_82hfqF_MPGAHViAwOd4pN55SieMmxgovQKIn4vwNCaJPAN2DZJ2Te9Y50a-wYW1Menh41fZi9oRni6sii1P6idu4usHUqUi87qX0V_tTvsQDw",
+    "priceDc": 120
+  },
+  "M4A1-S | Fade": {
+    "query": "M4A1-S | Fade",
+    "notFound": true
+  },
+  "Glock-18 | AXIA": {
+    "query": "Glock-18 | AXIA",
+    "notFound": true
+  },
+  "Galil AR | Rainbow Spoon": {
+    "query": "Galil AR | Rainbow Spoon",
+    "name": "Souvenir Galil AR | Rainbow Spoon (Factory New)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0PO_V7BkNPGdB3Kd_vx3ue9rQD6MkhwrujGEiLD1KCzPKhhxCMclQeAPtUK-xoWxPrvkslOKg4tHzXn-3Xsbvyo647sLVqoh_6XekUifZrx5Pjj5",
+    "priceDc": 384190
+  },
+  "UMP-45 | Crimson Foil": {
+    "query": "UMP-45 | Crimson Foil",
+    "name": "UMP-45 | Crimson Foil (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkk4a0qB1c_PGmV7d9L-KHMXKd0bojj-xsSyCmmFMktjvVzYyqdnmQPFAgA8ZyEbUNthG_m4LnYr7lsVeLiIlDnC_33y0f8G81tBK3b6jz",
+    "priceDc": 2810
+  },
+  "Five-SeveN | Heat Treated": {
+    "query": "Five-SeveN | Heat Treated",
+    "name": "Five-SeveN | Heat Treated (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3l4Dl7idN6vyRabVSI_GAC1iYwPxyte9sSxa1nAsioDiTn4HGLC7DN0N9FJIlEOMIthXtw4fgPri3tAPX2t0RyHr5iSNNvCZp4eYKVqoirKGD3ADfcepqHsDjkWs",
+    "priceDc": 2990
+  },
+  "MP9 | Arctic Tri-Tone": {
+    "query": "MP9 | Arctic Tri-Tone",
+    "name": "MP9 | Arctic Tri-Tone (Minimal Wear)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f-jFk7uCtfK1uH_2DV1icyOl-pK86HHrrwE5ztWSGydv_eCifOAF2DMB5Fu5etEK9lt3hMuLh5gWPitgX02yg2dKG9WA-",
+    "priceDc": 3530
+  },
+  "USP-S | Alpine Camo": {
+    "query": "USP-S | Alpine Camo",
+    "name": "USP-S | Alpine Camo (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSJ-OQBliS0-dxuPVWTCi-miIyoC26l4r9KD7KcFJzApchROIDskS5k4bhYe-z5AbbjoMRyX_5iXhO63lttewKAqUiqKXJz1aWFa0B3OY",
+    "priceDc": 330
+  },
+  "SSG 08 | Zeno": {
+    "query": "SSG 08 | Zeno",
+    "name": "SSG 08 | Zeno (Factory New)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1c_PGmV75oLv-sHXSXkbZJvOhuRz39xhkitW-Hzduvc3zEPQJxWZMhR7NZ4xOwm9DjN7mx41GM2IoUzSmsijQJsHibvaeasA",
+    "priceDc": 1170
+  },
+  "AWP | CMYK": {
+    "query": "AWP | CMYK",
+    "notFound": true
+  },
+  "Desert Eagle | Starcade": {
+    "query": "Desert Eagle | Starcade",
+    "name": "Desert Eagle | Starcade (Well-Worn)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7OeRb6hkNOSWHFiUxO9xvORWQiy3nAgq_TyBmd-vdnyQOlBxX5N5RbVf5Ea9wdziZunk5AzfjYoUmyitiSsYu3x1o7FVQTjRQV0",
+    "priceDc": 40770
+  },
+  "AUG | Lil' Pig": {
+    "query": "AUG | Lil' Pig",
+    "name": "AUG | Lil' Pig (Minimal Wear)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf-jFk4_uieK1qH_GGCVicyOl-pK84TXCwxRhx627SmNj6J3PFaQV2X5R1R7JctBixldfvY7u24ATY2owX02yg2cUR6r7A",
+    "priceDc": 57970
+  },
+  "M4A4 | Polysoup": {
+    "query": "M4A4 | Polysoup",
+    "notFound": true
+  },
+  "P90 | Attack Vector": {
+    "query": "P90 | Attack Vector",
+    "name": "Souvenir P90 | Attack Vector (Factory New)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf_jdk__2icZt7Kf-fC3Ov0bcmj-1gSCGn20QhtW_Vm9r8InmVbFJyDJMkE-IJsEOwm9G1Mu3jswSP2t1Hyy-s3yJXrnE8K5R_WCY",
+    "priceDc": 505760
+  },
+  "CZ75-Auto | Slalom": {
+    "query": "CZ75-Auto | Slalom",
+    "notFound": true
+  },
+  "XM1014 | Halftone Shift": {
+    "query": "XM1014 | Halftone Shift",
+    "name": "XM1014 | Halftone Shift (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLpk8ewrHZk5-aRe6xsMPWAMX-dkL4n5N5kSi26gBBp626AytegdS-eawYmW5t4FOdftRe9kdLjNO3gsQLe345GnCyrjy5JvTErvbhjLYOwHA",
+    "priceDc": 1000
+  },
+  "AK-47 | The Oligarch": {
+    "query": "AK-47 | The Oligarch",
+    "name": "AK-47 | The Oligarch (Battle-Scarred)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiNQu6WReLFrJvWBMWSF0vp5vd5hSiiljFNztmzRyYqrcnKQPQEjX5V5EbQNskK6ktS2Yurm7wPdi4MWyy_2inwd8G81tA-6bZcJ",
+    "priceDc": 26430
+  },
+  "M4A4 | Full Throttle": {
+    "query": "M4A4 | Full Throttle",
+    "name": "M4A4 | Full Throttle (Well-Worn)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwi8P7qaRe69_MuKHMWCCxOt4j-xsSyCmmFMl4WvSzY74d3_COAB2A5pyQOAOtxW_kYexY-O35QzWiYhNyH_93y5P8G81tNq8CZTf",
+    "priceDc": 32590
+  },
+  "AWP | Ice Coaled": {
+    "query": "AWP | Ice Coaled",
+    "name": "AWP | Ice Coaled (Battle-Scarred)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_DVL0PutbZtuL_GfC2Ovyet3pvgnTn6xzEh24G7RmN2qI3_Gb1QkD5IkEOMDt0TsltKyY-2wslTfiowXmTK-0H2_BAXxRg",
+    "priceDc": 3830
+  },
+  "Glock-18 | Mirror Mosaic": {
+    "query": "Glock-18 | Mirror Mosaic",
+    "name": "Glock-18 | Mirror Mosaic (Minimal Wear)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1c4_2tY5tgKeKBAXWvzO9std5_HRajkBw1vwKJk4jxNWXFP1UhDsYkRbUMsxC6lNSzNO7lsQaK2dpCyH2rjS5J5i054exUVqQi5OSJ2C0RseXl",
+    "priceDc": 10990
+  },
+  "MP7 | Smoking Kills": {
+    "query": "MP7 | Smoking Kills",
+    "name": "MP7 | Smoking Kills (Battle-Scarred)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsHf8DIM0OGjZ69kLvesBW6czf1JprNWRyyygwRp6mzdnNisdymeawAhC5pyE-ICuhO6m4K1Pu_j5VOKio5CyHqoj3gfvTErvbgU-ZVOwA",
+    "priceDc": 3760
+  },
+  "M4A1-S | Liquidation": {
+    "query": "M4A1-S | Liquidation",
+    "notFound": true
+  },
+  "UMP-45 | Continuum": {
+    "query": "UMP-45 | Continuum",
+    "notFound": true
+  },
+  "MAC-10 | Cat Fight": {
+    "query": "MAC-10 | Cat Fight",
+    "name": "MAC-10 | Cat Fight (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1W7vH_OJtmIf2aDWaE2-tJveRtRjy-2x9-tWzSz4z6cymTPFQjW5pxTO5Z5Bi8ktflMbmx5lfbi44WmH7_jSlXrnE85dLwvOo",
+    "priceDc": 700
+  },
+  "AWP | Queen's Gambit": {
+    "query": "AWP | Queen's Gambit",
+    "name": "StatTrak™ AWP | Queen's Gambit (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_DVL0OO7baFjM8-UD2qSyPpJveRtRjy-201xsmvdnoyqcyqfbgInCpQmEOMOuxGxlt3uY-ix4gTbjIlGzyn4iilXrnE8m6eb_Sc",
+    "priceDc": 67610
+  },
+  "Glock-18 | Fully Tuned": {
+    "query": "Glock-18 | Fully Tuned",
+    "name": "Glock-18 | Fully Tuned (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1c4_2tY5tnJOCWC2yvzOtyufRkASjklhhwtzmGyI77dCjFOAEjXsQmRuFYs0TtxNflM7u04gaI3Y1MmX_gznQeT_sZuyk",
+    "priceDc": 58960
+  },
+  "AK-47 | Crane Flight": {
+    "query": "AK-47 | Crane Flight",
+    "name": "AK-47 | Crane Flight (Minimal Wear)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiNQu6WRa7ZsLvWsCGuZxuZij-1gSCGn20wksT7Xzo6ueX6VOgUmWZQiTO5btxDrldbmNru05QLfiN5EmHmsj3hXrnE8mi375M8",
+    "priceDc": 24650
+  },
+  "P90 | Deathgaze": {
+    "query": "P90 | Deathgaze",
+    "notFound": true
+  },
+  "P250 | Kintsugi": {
+    "query": "P250 | Kintsugi",
+    "notFound": true
+  },
+  "Desert Eagle | Firebreathing": {
+    "query": "Desert Eagle | Firebreathing",
+    "name": "Desert Eagle | Firebreathing (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk6_evb6hoH_aaHGKS0-t3pOlgQS6MmBgjuiiI1N-qdnyUZgUgXJp3Q-cDshG_lNTkZLjltQ2Pj4pCyiirjXkYv3k6te0cEf1yeTwHsiQ",
+    "priceDc": 1080
+  },
+  "Galil AR | Galigator": {
+    "query": "Galil AR | Galigator",
+    "name": "Galil AR | Galigator (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2n5rp8SNJ0PWvZK1hH_eSAm6XwPp5ot5kSi26gBBp5TvRn42qdCqQPQQlW5R2QOZY5ha4wILgZbnisQGIiINAzySojy1A7DErvbgfPKwBkw",
+    "priceDc": 940
+  },
+  "M4A1-S | Electrum": {
+    "query": "M4A1-S | Electrum",
+    "notFound": true
+  },
+  "Sport Gloves | Blaze": {
+    "query": "Sport Gloves | Blaze",
+    "name": "★ Sport Gloves | Blaze (Battle-Scarred)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Tk5UvzWCL2kpn2-DFk6P6hfqFSM-CcHHOvx-J3veR6cCahlBMgtgKNn47vOGXDbQRyW8YiR7INshDrx4W0Yuvg4gTa3YoWyyX3hnhJ5ydj6-4GB6sl5OSJ2KSxnSZW",
+    "priceDc": 116170
+  },
+  "Specialist Gloves | Big Swell": {
+    "query": "Specialist Gloves | Big Swell",
+    "name": "★ Specialist Gloves | Big Swell (Field-Tested)",
+    "icon": "https://community.cloudflare.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Tk71ruQBH4jYLf-i5U-fe9V6NhL-aWMXSAxO1_se1gXD2MghwxtgKHlpr8HibCOl9lV4x0R-BfukHtkYW0M-Lk4lDY3t5ExS3-jH5Iui4_57lRAqUs__GDiFmTL_RjtrOkxUi0",
+    "priceDc": 199750
+  }
+}

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { Clover, Sparkles, Heart } from 'lucide-react';
 import { ChickenBreedId, CHICKEN_BREEDS } from '../../lib/farm';
 import { BreedEgg } from './BreedEgg';
 
@@ -127,18 +128,18 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
       <style jsx>{`
         @keyframes chickenIdleBob {
           0%, 100% {
-            transform: translateY(0px) rotate(0deg);
+            transform: translate3d(0, 0px, 0) rotate(0deg);
           }
           50% {
-            transform: translateY(-4px) rotate(1deg);
+            transform: translate3d(0, -4px, 0) rotate(1deg);
           }
         }
         @keyframes chickenNestingBob {
           0%, 100% {
-            transform: translateY(2px) scale(1.02, 0.98);
+            transform: translate3d(0, 2px, 0) scale(1.02, 0.98);
           }
           50% {
-            transform: translateY(4px) scale(1.04, 0.96);
+            transform: translate3d(0, 4px, 0) scale(1.04, 0.96);
           }
         }
         @keyframes chickenWingFlap {
@@ -146,7 +147,7 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
             transform: rotate(0deg);
           }
           50% {
-            transform: rotate(-6deg) translateY(-2px);
+            transform: rotate(-6deg) translate3d(0, -2px, 0);
           }
         }
         @keyframes chickenCombWiggle {
@@ -168,48 +169,51 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
         @keyframes auraGlow {
           0%, 100% {
             opacity: 0.6;
-            transform: scale(1);
+            transform: translate3d(0, 0, 0) scale(1);
           }
           50% {
             opacity: 0.9;
-            transform: scale(1.08);
+            transform: translate3d(0, 0, 0) scale(1.08);
           }
         }
         @keyframes floatLayingHeart {
           0% {
             opacity: 0;
-            transform: translateY(0) scale(0.6);
+            transform: translate3d(0, 0px, 0) scale(0.6);
           }
           40% {
             opacity: 1;
-            transform: translateY(-10px) scale(1);
+            transform: translate3d(0, -10px, 0) scale(1);
           }
           100% {
             opacity: 0;
-            transform: translateY(-24px) scale(0.8);
+            transform: translate3d(0, -24px, 0) scale(0.8);
           }
         }
         @keyframes cloverFloat {
           0%, 100% {
-            transform: translateY(0px) rotate(0deg) scale(0.9);
+            transform: translate3d(0, 0px, 0) rotate(0deg) scale(0.9);
             opacity: 0.75;
           }
           50% {
-            transform: translateY(-8px) rotate(18deg) scale(1.1);
+            transform: translate3d(0, -8px, 0) rotate(18deg) scale(1.1);
             opacity: 1;
           }
         }
         .chicken-body-motion {
           animation: ${isLaying ? 'chickenNestingBob 3.2s ease-in-out infinite' : 'chickenIdleBob 2.4s ease-in-out infinite'};
           transform-origin: 50% 80%;
+          will-change: transform;
         }
         .chicken-wing-motion {
           animation: chickenWingFlap 1.8s ease-in-out infinite;
           transform-origin: 35% 45%;
+          will-change: transform;
         }
         .chicken-comb-motion {
           animation: chickenCombWiggle 2.8s ease-in-out infinite;
           transform-origin: 65% 30%;
+          will-change: transform;
         }
         .chicken-eye-motion {
           animation: chickenEyeBlink 3.6s infinite;
@@ -217,18 +221,23 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
         }
         .chicken-aura {
           animation: auraGlow 2.5s ease-in-out infinite;
+          will-change: transform, opacity;
         }
         .laying-particle-1 {
           animation: floatLayingHeart 2.5s ease-out infinite;
+          will-change: transform, opacity;
         }
         .laying-particle-2 {
           animation: floatLayingHeart 2.5s ease-out infinite 1.25s;
+          will-change: transform, opacity;
         }
         .clover-p1 {
           animation: cloverFloat 2.6s ease-in-out infinite;
+          will-change: transform, opacity;
         }
         .clover-p2 {
           animation: cloverFloat 3.1s ease-in-out infinite 1.3s;
+          will-change: transform, opacity;
         }
       `}</style>
 
@@ -245,11 +254,11 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
       {/* Floating Clovers when Luck Potion is Active */}
       {hasLuckPotion && (
         <>
-          <div className="clover-p1 absolute -top-2 left-6 text-sm pointer-events-none z-20 select-none filter drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]">
-            🍀
+          <div className="clover-p1 absolute -top-2 left-6 pointer-events-none z-20 select-none text-emerald-400 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]">
+            <Clover className="w-4 h-4 fill-emerald-400/30" />
           </div>
-          <div className="clover-p2 absolute top-1 right-5 text-xs pointer-events-none z-20 select-none filter drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]">
-            🍀
+          <div className="clover-p2 absolute top-1 right-5 pointer-events-none z-20 select-none text-emerald-300 filter drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]">
+            <Clover className="w-3.5 h-3.5 fill-emerald-300/30" />
           </div>
         </>
       )}
@@ -257,11 +266,11 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
       {/* Floating Sparkles / Hearts during Egg Laying */}
       {isLaying && (
         <>
-          <div className="laying-particle-1 absolute -top-1 left-8 text-amber-400 pointer-events-none z-20 text-xs">
-            ✨
+          <div className="laying-particle-1 absolute -top-1 left-8 text-amber-400 pointer-events-none z-20">
+            <Sparkles className="w-3.5 h-3.5" />
           </div>
-          <div className="laying-particle-2 absolute 0 right-8 text-yellow-300 pointer-events-none z-20 text-xs">
-            💛
+          <div className="laying-particle-2 absolute 0 right-8 text-yellow-300 pointer-events-none z-20">
+            <Heart className="w-3 h-3 fill-yellow-400/40 text-yellow-300" />
           </div>
         </>
       )}
@@ -485,7 +494,7 @@ export const AnimatedChicken: React.FC<AnimatedChickenProps> = ({
 
       {/* CS2 StatTrak™ Digital Counter LED Box */}
       {isStatTrak && (
-        <div className="absolute -bottom-2 z-30 px-2 py-0.5 rounded bg-black/90 border border-amber-500/80 shadow-[0_0_10px_rgba(245,158,11,0.5)] flex items-center gap-1">
+        <div className="absolute bottom-2.5 z-30 px-2 py-0.5 rounded bg-black/95 border border-amber-500/90 shadow-[0_0_12px_rgba(245,158,11,0.6)] flex items-center gap-1 pointer-events-none">
           <span className="text-[7px] font-black text-amber-500 font-mono tracking-tighter">ST™</span>
           <span className="text-[9px] font-black text-amber-400 font-mono tracking-wider">
             {String(eggsLaidCount || 0).padStart(6, '0')}

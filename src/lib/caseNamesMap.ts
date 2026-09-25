@@ -160,5 +160,16 @@ export const CASE_NAME_EN_MAP: Record<string, string> = {
   "Кейс «Снайперский Дозор»": "Sniper Watch Case",
   "Кейс «Хранилище Титанов»": "Titan Vault Case",
   "Кейс «Карамельный Раш»": "Candy Rush Case",
-  "Кейс «Бриллиантовый Джекпот»": "Diamond Jackpot Case"
+  "Кейс «Бриллиантовый Джекпот»": "Diamond Jackpot Case",
+  "Запечатанный терминал «Генезис»": "Sealed Genesis Terminal",
+  "Запечатанный терминал «Мёртвая рука»": "Sealed Dead Hand Terminal",
+  "Кейс «Галерея»": "The Gallery Case",
+  "Кейс «Лихорадка»": "The Fever Case",
+  "Коллекция «Overpass 2024»": "The Overpass 2024 Collection",
+  "Коллекция «Спорт и отдых»": "The Sport & Field Collection",
+  "Коллекция «Графика»": "The Graphic Collection",
+  "Кейс «Термообработка»": "Heat Treated Limited Edition",
+  "Коллекция «Шпионские технологии»": "Spy Tech 2026 Collection",
+  "Коллекция «Арабеска Востока»": "Arabesque 2026 Collection",
+  "Ферма": "Farm"
 };

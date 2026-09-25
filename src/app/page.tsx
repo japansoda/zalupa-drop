@@ -18,6 +18,7 @@ import { handleHorizontalWheel } from '../components/layout/HorizontalScrollMana
 
 const CATEGORIES = [
   { id: 'all' },
+  { id: 'terminal' },
   { id: 'custom' },
   { id: 'official' },
   { id: 'knives' },
@@ -28,6 +29,12 @@ const CATEGORIES = [
 ];
 
 const CASE_BASE_POPULARITY: Record<string, number> = {
+  'terminal-genesis': 9950,
+  'terminal-dead-hand': 9900,
+  'case-the-gallery': 9850,
+  'case-fever-2025': 9800,
+  'case-overpass-2024': 9750,
+  'case-heat-treated': 9700,
   revolution_case: 9500,
   dreams_and_nightmares: 9200,
   kilowatt_case: 8900,

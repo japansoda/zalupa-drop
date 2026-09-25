@@ -7,6 +7,7 @@ const outputPath = path.join(__dirname, '..', 'CASES.md');
 const cases = JSON.parse(fs.readFileSync(casesPath, 'utf8'));
 
 const categoryTitles = {
+  terminal: 'Официальные CS2 Терминалы (Terminals)',
   official: 'Официальные кейсы CS2 / CS:GO (Official)',
   knives: 'Ножевые кейсы (Knives)',
   weapons: 'Оружейные кейсы (Weapons)',
@@ -16,7 +17,7 @@ const categoryTitles = {
   stickers: 'Капсулы и наклейки (Stickers & Capsules)'
 };
 
-const categoryOrder = ['official', 'knives', 'weapons', 'highroller', 'budget', 'custom', 'stickers'];
+const categoryOrder = ['terminal', 'official', 'knives', 'weapons', 'highroller', 'budget', 'custom', 'stickers'];
 
 let md = '# База кейсов Zalupa Drop (Названия, описания и полное содержимое)\n\n';
 md += '> Данный файл содержит полный список всех кейсов сайта, их ID, цены, описания и перечень скинов внутри каждого кейса.\n';

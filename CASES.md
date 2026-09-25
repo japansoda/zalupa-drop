@@ -5,17 +5,413 @@
 
 ## 📑 Содержание по категориям:
 
-- [Официальные кейсы CS2 / CS:GO (Official) (42 кейсов)](#official)
+- [Официальные CS2 Терминалы (Terminals) (2 кейсов)](#terminal)
+- [Официальные кейсы CS2 / CS:GO (Official) (47 кейсов)](#official)
 - [Ножевые кейсы (Knives) (33 кейсов)](#knives)
 - [Оружейные кейсы (Weapons) (25 кейсов)](#weapons)
-- [Хайроллер кейсы (Highroller) (21 кейсов)](#highroller)
+- [Хайроллер кейсы (Highroller) (22 кейсов)](#highroller)
 - [Бюджетные кейсы (Budget) (9 кейсов)](#budget)
-- [Авторские кейсы (Custom) (82 кейсов)](#custom)
+- [Авторские кейсы (Custom) (84 кейсов)](#custom)
 - [Капсулы и наклейки (Stickers & Capsules) (241 кейсов)](#stickers)
 
 ---
 
+## <a id="terminal"></a>Официальные CS2 Терминалы (Terminals)
+
+### Запечатанный терминал «Мёртвая рука» (Sealed Dead Hand Terminal)
+
+- **ID кейса:** `terminal-dead-hand`
+- **Категория:** `terminal`
+- **Цена открытия:** **1 200 DC**
+- **Описание:** CS2 Терминал: редкие перчатки и военные прототипы
+- **Количество предметов в кейсе:** 42 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | ★ Sport Gloves | Blaze | extraordinary | MW | - | 253 500 DC |
+| 2 | ★ Specialist Gloves | Big Swell | extraordinary | MW | - | 227 500 DC |
+| 3 | ★ Sport Gloves | Amphibious | extraordinary | FT | - | 120 000 DC |
+| 4 | ★ Specialist Gloves | Crimson Kimono | extraordinary | FT | - | 240 000 DC |
+| 5 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 6 | AK-47 | Searing Rage | classified | MW | - | 5 855 DC |
+| 7 | AK-47 | Searing Rage | classified | FT | - | 4 641 DC |
+| 8 | AK-47 | Searing Rage | classified | FT | StatTrak™ | 6 283 DC |
+| 9 | Desert Eagle | Serpent Strike | restricted | FN | - | 3 808 DC |
+| 10 | Desert Eagle | Serpent Strike | restricted | MW | - | 3 123 DC |
+| 11 | Desert Eagle | Serpent Strike | restricted | FT | - | 2 475 DC |
+| 12 | Desert Eagle | Serpent Strike | restricted | FT | StatTrak™ | 3 351 DC |
+| 13 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 14 | AK-47 | The Oligarch | covert | MW | - | 37 884 DC |
+| 15 | AK-47 | The Oligarch | covert | FT | - | 30 030 DC |
+| 16 | AK-47 | The Oligarch | covert | FT | StatTrak™ | 40 656 DC |
+| 17 | M4A4 | Full Throttle | covert | FN | - | 29 400 DC |
+| 18 | M4A4 | Full Throttle | covert | MW | - | 24 108 DC |
+| 19 | M4A4 | Full Throttle | covert | FT | - | 19 110 DC |
+| 20 | M4A4 | Full Throttle | covert | FT | StatTrak™ | 25 872 DC |
+| 21 | AWP | Ice Coaled | classified | FN | - | 12 410 DC |
+| 22 | AWP | Ice Coaled | classified | MW | - | 10 176 DC |
+| 23 | AWP | Ice Coaled | classified | FT | - | 8 067 DC |
+| 24 | AWP | Ice Coaled | classified | FT | StatTrak™ | 10 921 DC |
+| 25 | Glock-18 | Mirror Mosaic | classified | FN | - | 13 430 DC |
+| 26 | Glock-18 | Mirror Mosaic | classified | MW | - | 11 013 DC |
+| 27 | Glock-18 | Mirror Mosaic | classified | FT | - | 8 730 DC |
+| 28 | Glock-18 | Mirror Mosaic | classified | FT | StatTrak™ | 11 818 DC |
+| 29 | MP7 | Smoking Kills | classified | FN | - | 11 220 DC |
+| 30 | MP7 | Smoking Kills | classified | MW | - | 9 200 DC |
+| 31 | MP7 | Smoking Kills | classified | FT | - | 7 293 DC |
+| 32 | MP7 | Smoking Kills | classified | FT | StatTrak™ | 9 874 DC |
+| 33 | M4A1-S | Liquidation | restricted | FN | - | 3 919 DC |
+| 34 | M4A1-S | Liquidation | restricted | MW | - | 3 214 DC |
+| 35 | M4A1-S | Liquidation | restricted | FT | - | 2 547 DC |
+| 36 | M4A1-S | Liquidation | restricted | FT | StatTrak™ | 3 449 DC |
+| 37 | UMP-45 | Continuum | restricted | FN | - | 2 632 DC |
+| 38 | UMP-45 | Continuum | restricted | FT | - | 1 711 DC |
+| 39 | UMP-45 | Continuum | restricted | FT | StatTrak™ | 2 316 DC |
+| 40 | MAC-10 | Cat Fight | restricted | FN | - | 2 352 DC |
+| 41 | MAC-10 | Cat Fight | restricted | FT | - | 1 529 DC |
+| 42 | MAC-10 | Cat Fight | restricted | FT | StatTrak™ | 2 070 DC |
+
+---
+
+### Запечатанный терминал «Генезис» (Sealed Genesis Terminal)
+
+- **ID кейса:** `terminal-genesis`
+- **Категория:** `terminal`
+- **Цена открытия:** **950 DC**
+- **Описание:** CS2 Терминал: 5 предложений торгов и выбор сделки
+- **Количество предметов в кейсе:** 53 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 2 | AK-47 | The Outsiders | classified | MW | - | 7 388 DC |
+| 3 | AK-47 | The Outsiders | classified | FT | - | 5 857 DC |
+| 4 | AK-47 | The Outsiders | classified | FT | StatTrak™ | 7 929 DC |
+| 5 | M4A1-S | Vaporwave | covert | FN | - | 39 900 DC |
+| 6 | M4A1-S | Vaporwave | covert | MW | - | 32 718 DC |
+| 7 | M4A1-S | Vaporwave | covert | FT | - | 25 935 DC |
+| 8 | M4A1-S | Vaporwave | covert | FT | StatTrak™ | 35 112 DC |
+| 9 | Glock-18 | Gold Toof | covert | FN | - | 56 700 DC |
+| 10 | Glock-18 | Gold Toof | covert | MW | - | 46 494 DC |
+| 11 | Glock-18 | Gold Toof | covert | FT | - | 36 855 DC |
+| 12 | Glock-18 | Gold Toof | covert | FT | StatTrak™ | 49 896 DC |
+| 13 | AWP | Printstream | covert | FN | - | 38 000 DC |
+| 14 | AWP | Printstream | covert | MW | - | 31 160 DC |
+| 15 | AWP | Printstream | covert | FT | - | 24 700 DC |
+| 16 | AWP | Printstream | covert | FT | StatTrak™ | 33 440 DC |
+| 17 | FAMAS | Bad Trip | covert | FN | - | 48 299 DC |
+| 18 | FAMAS | Bad Trip | covert | MW | - | 39 605 DC |
+| 19 | FAMAS | Bad Trip | covert | FT | - | 31 394 DC |
+| 20 | FAMAS | Bad Trip | covert | FT | StatTrak™ | 42 503 DC |
+| 21 | SSG 08 | Rapid Transit | restricted | FN | - | 2 520 DC |
+| 22 | SSG 08 | Rapid Transit | restricted | MW | - | 2 066 DC |
+| 23 | SSG 08 | Rapid Transit | restricted | FT | - | 1 638 DC |
+| 24 | SSG 08 | Rapid Transit | restricted | FT | StatTrak™ | 2 218 DC |
+| 25 | MAC-10 | Saibā Oni | restricted | FN | - | 4 424 DC |
+| 26 | MAC-10 | Saibā Oni | restricted | MW | - | 3 628 DC |
+| 27 | MAC-10 | Saibā Oni | restricted | FT | - | 2 876 DC |
+| 28 | MAC-10 | Saibā Oni | restricted | FT | StatTrak™ | 3 893 DC |
+| 29 | UMP-45 | Neo-Noir | classified | FN | - | 14 280 DC |
+| 30 | UMP-45 | Neo-Noir | classified | MW | - | 11 710 DC |
+| 31 | UMP-45 | Neo-Noir | classified | FT | - | 9 282 DC |
+| 32 | UMP-45 | Neo-Noir | classified | FT | StatTrak™ | 12 566 DC |
+| 33 | P250 | Epicenter | classified | FN | - | 6 970 DC |
+| 34 | P250 | Epicenter | classified | MW | - | 5 715 DC |
+| 35 | P250 | Epicenter | classified | FT | - | 4 531 DC |
+| 36 | P250 | Epicenter | classified | FT | StatTrak™ | 6 134 DC |
+| 37 | USP-S | 27 | milspec | FN | - | 1 054 DC |
+| 38 | USP-S | 27 | milspec | FT | - | 685 DC |
+| 39 | USP-S | 27 | milspec | FT | StatTrak™ | 928 DC |
+| 40 | Desert Eagle | Calligraffiti | milspec | FN | - | 969 DC |
+| 41 | Desert Eagle | Calligraffiti | milspec | FT | - | 630 DC |
+| 42 | Desert Eagle | Calligraffiti | milspec | FT | StatTrak™ | 853 DC |
+| 43 | Dual Berettas | Hydro Strike | restricted | FN | - | 3 640 DC |
+| 44 | Dual Berettas | Hydro Strike | restricted | MW | - | 2 985 DC |
+| 45 | Dual Berettas | Hydro Strike | restricted | FT | - | 2 366 DC |
+| 46 | Dual Berettas | Hydro Strike | restricted | FT | StatTrak™ | 3 203 DC |
+| 47 | P90 | Randy Rush | restricted | FN | - | 4 984 DC |
+| 48 | P90 | Randy Rush | restricted | MW | - | 4 087 DC |
+| 49 | P90 | Randy Rush | restricted | FT | - | 3 240 DC |
+| 50 | P90 | Randy Rush | restricted | FT | StatTrak™ | 4 386 DC |
+| 51 | ★ Kukri Knife | Fade | gold | FN | - | 333 000 DC |
+| 52 | ★ Kukri Knife | Slaughter | gold | MW | - | 156 000 DC |
+| 53 | ★ Kukri Knife | Crimson Web | gold | FT | - | 95 000 DC |
+
+---
+
 ## <a id="official"></a>Официальные кейсы CS2 / CS:GO (Official)
+
+### Коллекция «Графика» (The Graphic Collection)
+
+- **ID кейса:** `case-graphic-design`
+- **Категория:** `official`
+- **Цена открытия:** **2 750 DC**
+- **Описание:** Коллекция Арсенала CS2 с редким AWP CMYK
+- **Количество предметов в кейсе:** 26 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AWP | CMYK | covert | FN | - | 49 000 DC |
+| 2 | AWP | CMYK | covert | MW | - | 40 180 DC |
+| 3 | AWP | CMYK | covert | FT | - | 31 850 DC |
+| 4 | AWP | CMYK | covert | FT | StatTrak™ | 43 120 DC |
+| 5 | Desert Eagle | Starcade | classified | FN | - | 14 110 DC |
+| 6 | Desert Eagle | Starcade | classified | MW | - | 11 570 DC |
+| 7 | Desert Eagle | Starcade | classified | FT | - | 9 172 DC |
+| 8 | Desert Eagle | Starcade | classified | FT | StatTrak™ | 12 417 DC |
+| 9 | AUG | Lil' Pig | classified | FN | - | 8 160 DC |
+| 10 | AUG | Lil' Pig | classified | MW | - | 6 691 DC |
+| 11 | AUG | Lil' Pig | classified | FT | - | 5 304 DC |
+| 12 | AUG | Lil' Pig | classified | FT | StatTrak™ | 7 181 DC |
+| 13 | M4A4 | Polysoup | restricted | FN | - | 2 352 DC |
+| 14 | M4A4 | Polysoup | restricted | MW | - | 1 929 DC |
+| 15 | M4A4 | Polysoup | restricted | FT | - | 1 529 DC |
+| 16 | M4A4 | Polysoup | restricted | FT | StatTrak™ | 2 070 DC |
+| 17 | P90 | Attack Vector | restricted | FN | - | 3 472 DC |
+| 18 | P90 | Attack Vector | restricted | MW | - | 2 847 DC |
+| 19 | P90 | Attack Vector | restricted | FT | - | 2 257 DC |
+| 20 | P90 | Attack Vector | restricted | FT | StatTrak™ | 3 055 DC |
+| 21 | CZ75-Auto | Slalom | restricted | FN | - | 2 576 DC |
+| 22 | CZ75-Auto | Slalom | restricted | FT | - | 1 674 DC |
+| 23 | CZ75-Auto | Slalom | restricted | FT | StatTrak™ | 2 267 DC |
+| 24 | XM1014 | Halftone Shift | milspec | MW | - | 1 185 DC |
+| 25 | XM1014 | Halftone Shift | milspec | FT | - | 939 DC |
+| 26 | XM1014 | Halftone Shift | milspec | FT | StatTrak™ | 1 272 DC |
+
+---
+
+### Коллекция «Спорт и отдых» (The Sport & Field Collection)
+
+- **ID кейса:** `case-sport-and-field`
+- **Категория:** `official`
+- **Цена открытия:** **2 900 DC**
+- **Описание:** Коллекция Арсенала CS2 с легендарным M4A1-S Fade
+- **Количество предметов в кейсе:** 26 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | M4A1-S | Fade | covert | FN | - | 37 100 DC |
+| 2 | M4A1-S | Fade | covert | MW | - | 30 422 DC |
+| 3 | M4A1-S | Fade | covert | FT | - | 24 115 DC |
+| 4 | M4A1-S | Fade | covert | FT | StatTrak™ | 32 648 DC |
+| 5 | Glock-18 | AXIA | classified | FN | - | 12 750 DC |
+| 6 | Glock-18 | AXIA | classified | MW | - | 10 455 DC |
+| 7 | Glock-18 | AXIA | classified | FT | - | 8 288 DC |
+| 8 | Glock-18 | AXIA | classified | FT | StatTrak™ | 11 220 DC |
+| 9 | Galil AR | Rainbow Spoon | classified | FN | - | 13 600 DC |
+| 10 | Galil AR | Rainbow Spoon | classified | MW | - | 11 152 DC |
+| 11 | Galil AR | Rainbow Spoon | classified | FT | - | 8 840 DC |
+| 12 | Galil AR | Rainbow Spoon | classified | FT | StatTrak™ | 11 968 DC |
+| 13 | UMP-45 | Crimson Foil | restricted | FN | - | 4 536 DC |
+| 14 | UMP-45 | Crimson Foil | restricted | MW | - | 3 720 DC |
+| 15 | UMP-45 | Crimson Foil | restricted | FT | - | 2 948 DC |
+| 16 | UMP-45 | Crimson Foil | restricted | FT | StatTrak™ | 3 992 DC |
+| 17 | MP9 | Arctic Tri-Tone | restricted | FN | - | 3 416 DC |
+| 18 | MP9 | Arctic Tri-Tone | restricted | MW | - | 2 801 DC |
+| 19 | MP9 | Arctic Tri-Tone | restricted | FT | - | 2 220 DC |
+| 20 | MP9 | Arctic Tri-Tone | restricted | FT | StatTrak™ | 3 006 DC |
+| 21 | USP-S | Alpine Camo | milspec | FN | - | 969 DC |
+| 22 | USP-S | Alpine Camo | milspec | FT | - | 630 DC |
+| 23 | USP-S | Alpine Camo | milspec | FT | StatTrak™ | 853 DC |
+| 24 | SSG 08 | Zeno | milspec | MW | - | 1 129 DC |
+| 25 | SSG 08 | Zeno | milspec | FT | - | 895 DC |
+| 26 | SSG 08 | Zeno | milspec | FT | StatTrak™ | 1 212 DC |
+
+---
+
+### Коллекция «Overpass 2024» (The Overpass 2024 Collection)
+
+- **ID кейса:** `case-overpass-2024`
+- **Категория:** `official`
+- **Цена открытия:** **3 200 DC**
+- **Описание:** Официальная коллекция Арсенала CS2 с B the Monster
+- **Количество предметов в кейсе:** 36 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AK-47 | B the Monster | covert | FN | - | 45 500 DC |
+| 2 | AK-47 | B the Monster | covert | MW | - | 37 310 DC |
+| 3 | AK-47 | B the Monster | covert | FT | - | 29 575 DC |
+| 4 | AK-47 | B the Monster | covert | FT | StatTrak™ | 40 040 DC |
+| 5 | Zeus x27 | Dragon Snore | classified | FN | - | 13 940 DC |
+| 6 | Zeus x27 | Dragon Snore | classified | MW | - | 11 431 DC |
+| 7 | Zeus x27 | Dragon Snore | classified | FT | - | 9 061 DC |
+| 8 | Zeus x27 | Dragon Snore | classified | FT | StatTrak™ | 12 267 DC |
+| 9 | AWP | Crakow! | classified | FN | - | 8 500 DC |
+| 10 | AWP | Crakow! | classified | MW | - | 6 970 DC |
+| 11 | AWP | Crakow! | classified | FT | - | 5 525 DC |
+| 12 | AWP | Crakow! | classified | FT | StatTrak™ | 7 480 DC |
+| 13 | XM1014 | Monster Melt | restricted | FN | - | 3 640 DC |
+| 14 | XM1014 | Monster Melt | restricted | MW | - | 2 985 DC |
+| 15 | XM1014 | Monster Melt | restricted | FT | - | 2 366 DC |
+| 16 | XM1014 | Monster Melt | restricted | FT | StatTrak™ | 3 203 DC |
+| 17 | Dual Berettas | Sweet Little Angels | restricted | FN | - | 4 480 DC |
+| 18 | Dual Berettas | Sweet Little Angels | restricted | MW | - | 3 674 DC |
+| 19 | Dual Berettas | Sweet Little Angels | restricted | FT | - | 2 912 DC |
+| 20 | Dual Berettas | Sweet Little Angels | restricted | FT | StatTrak™ | 3 942 DC |
+| 21 | AUG | Eye of Zapems | restricted | FN | - | 4 984 DC |
+| 22 | AUG | Eye of Zapems | restricted | MW | - | 4 087 DC |
+| 23 | AUG | Eye of Zapems | restricted | FT | - | 3 240 DC |
+| 24 | AUG | Eye of Zapems | restricted | FT | StatTrak™ | 4 386 DC |
+| 25 | MAC-10 | Pipsqueak | milspec | FN | - | 1 258 DC |
+| 26 | MAC-10 | Pipsqueak | milspec | FT | - | 818 DC |
+| 27 | MAC-10 | Pipsqueak | milspec | FT | StatTrak™ | 1 107 DC |
+| 28 | Nova | Wurst Hölle | milspec | MW | - | 1 101 DC |
+| 29 | Nova | Wurst Hölle | milspec | FT | - | 873 DC |
+| 30 | Nova | Wurst Hölle | milspec | FT | StatTrak™ | 1 182 DC |
+| 31 | Glock-18 | Teal Graf | milspec | FN | - | 799 DC |
+| 32 | Glock-18 | Teal Graf | milspec | FT | - | 519 DC |
+| 33 | Glock-18 | Teal Graf | milspec | FT | StatTrak™ | 703 DC |
+| 34 | MP5-SD | Neon Squeezer | industrial | MW | - | 230 DC |
+| 35 | MP5-SD | Neon Squeezer | industrial | FT | - | 182 DC |
+| 36 | MP5-SD | Neon Squeezer | industrial | FT | StatTrak™ | 246 DC |
+
+---
+
+### Кейс «Лихорадка» (The Fever Case)
+
+- **ID кейса:** `case-fever-2025`
+- **Категория:** `official`
+- **Цена открытия:** **2 400 DC**
+- **Описание:** Официальный кейс с AWP Printstream и ножами Хрома
+- **Количество предметов в кейсе:** 58 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AWP | Printstream | covert | FN | - | 38 000 DC |
+| 2 | AWP | Printstream | covert | MW | - | 31 160 DC |
+| 3 | AWP | Printstream | covert | FT | - | 24 700 DC |
+| 4 | AWP | Printstream | covert | FT | StatTrak™ | 33 440 DC |
+| 5 | FAMAS | Bad Trip | covert | FN | - | 48 299 DC |
+| 6 | FAMAS | Bad Trip | covert | MW | - | 39 605 DC |
+| 7 | FAMAS | Bad Trip | covert | FT | - | 31 394 DC |
+| 8 | FAMAS | Bad Trip | covert | FT | StatTrak™ | 42 503 DC |
+| 9 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 10 | AK-47 | Searing Rage | classified | MW | - | 5 855 DC |
+| 11 | AK-47 | Searing Rage | classified | FT | - | 4 641 DC |
+| 12 | AK-47 | Searing Rage | classified | FT | StatTrak™ | 6 283 DC |
+| 13 | Glock-18 | Shinobu | classified | FN | - | 11 220 DC |
+| 14 | Glock-18 | Shinobu | classified | MW | - | 9 200 DC |
+| 15 | Glock-18 | Shinobu | classified | FT | - | 7 293 DC |
+| 16 | Glock-18 | Shinobu | classified | FT | StatTrak™ | 9 874 DC |
+| 17 | UMP-45 | K.O. Factory | classified | FN | - | 12 070 DC |
+| 18 | UMP-45 | K.O. Factory | classified | MW | - | 9 897 DC |
+| 19 | UMP-45 | K.O. Factory | classified | FT | - | 7 846 DC |
+| 20 | UMP-45 | K.O. Factory | classified | FT | StatTrak™ | 10 622 DC |
+| 21 | Desert Eagle | Serpent Strike | restricted | FN | - | 3 808 DC |
+| 22 | Desert Eagle | Serpent Strike | restricted | MW | - | 3 123 DC |
+| 23 | Desert Eagle | Serpent Strike | restricted | FT | - | 2 475 DC |
+| 24 | Desert Eagle | Serpent Strike | restricted | FT | StatTrak™ | 3 351 DC |
+| 25 | Galil AR | Control | restricted | FN | - | 4 872 DC |
+| 26 | Galil AR | Control | restricted | MW | - | 3 995 DC |
+| 27 | Galil AR | Control | restricted | FT | - | 3 167 DC |
+| 28 | Galil AR | Control | restricted | FT | StatTrak™ | 4 287 DC |
+| 29 | Nova | Rising Sun | restricted | FN | - | 4 592 DC |
+| 30 | Nova | Rising Sun | restricted | MW | - | 3 765 DC |
+| 31 | Nova | Rising Sun | restricted | FT | - | 2 985 DC |
+| 32 | Nova | Rising Sun | restricted | FT | StatTrak™ | 4 041 DC |
+| 33 | P90 | Wave Breaker | restricted | FN | - | 3 640 DC |
+| 34 | P90 | Wave Breaker | restricted | MW | - | 2 985 DC |
+| 35 | P90 | Wave Breaker | restricted | FT | - | 2 366 DC |
+| 36 | P90 | Wave Breaker | restricted | FT | StatTrak™ | 3 203 DC |
+| 37 | Zeus x27 | Tosai | restricted | FN | - | 3 024 DC |
+| 38 | Zeus x27 | Tosai | restricted | MW | - | 2 480 DC |
+| 39 | Zeus x27 | Tosai | restricted | FT | - | 1 966 DC |
+| 40 | Zeus x27 | Tosai | restricted | FT | StatTrak™ | 2 661 DC |
+| 41 | M4A4 | Choppa | milspec | FN | - | 935 DC |
+| 42 | M4A4 | Choppa | milspec | FT | - | 608 DC |
+| 43 | M4A4 | Choppa | milspec | FT | StatTrak™ | 823 DC |
+| 44 | MAG-7 | Resupply | milspec | MW | - | 1 185 DC |
+| 45 | MAG-7 | Resupply | milspec | FT | - | 939 DC |
+| 46 | MAG-7 | Resupply | milspec | FT | StatTrak™ | 1 272 DC |
+| 47 | MP9 | Nexus | milspec | MW | - | 948 DC |
+| 48 | MP9 | Nexus | milspec | FT | - | 751 DC |
+| 49 | MP9 | Nexus | milspec | FT | StatTrak™ | 1 017 DC |
+| 50 | P2000 | Sure Grip | milspec | MW | - | 739 DC |
+| 51 | P2000 | Sure Grip | milspec | FT | - | 586 DC |
+| 52 | P2000 | Sure Grip | milspec | FT | StatTrak™ | 793 DC |
+| 53 | SSG 08 | Memorial | milspec | MW | - | 990 DC |
+| 54 | SSG 08 | Memorial | milspec | FT | - | 785 DC |
+| 55 | SSG 08 | Memorial | milspec | FT | StatTrak™ | 1 062 DC |
+| 56 | USP-S | PC-GRN | milspec | FN | - | 833 DC |
+| 57 | USP-S | PC-GRN | milspec | FT | - | 541 DC |
+| 58 | USP-S | PC-GRN | milspec | FT | StatTrak™ | 733 DC |
+
+---
+
+### Кейс «Галерея» (The Gallery Case)
+
+- **ID кейса:** `case-the-gallery`
+- **Категория:** `official`
+- **Цена открытия:** **1 850 DC**
+- **Описание:** Официальный кейс CS2 с ножами Кукри
+- **Количество предметов в кейсе:** 61 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | M4A1-S | Vaporwave | covert | FN | - | 39 900 DC |
+| 2 | M4A1-S | Vaporwave | covert | MW | - | 32 718 DC |
+| 3 | M4A1-S | Vaporwave | covert | FT | - | 25 935 DC |
+| 4 | M4A1-S | Vaporwave | covert | FT | StatTrak™ | 35 112 DC |
+| 5 | Glock-18 | Gold Toof | covert | FN | - | 56 700 DC |
+| 6 | Glock-18 | Gold Toof | covert | MW | - | 46 494 DC |
+| 7 | Glock-18 | Gold Toof | covert | FT | - | 36 855 DC |
+| 8 | Glock-18 | Gold Toof | covert | FT | StatTrak™ | 49 896 DC |
+| 9 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 10 | AK-47 | The Outsiders | classified | MW | - | 7 388 DC |
+| 11 | AK-47 | The Outsiders | classified | FT | - | 5 857 DC |
+| 12 | AK-47 | The Outsiders | classified | FT | StatTrak™ | 7 929 DC |
+| 13 | UMP-45 | Neo-Noir | classified | FN | - | 14 280 DC |
+| 14 | UMP-45 | Neo-Noir | classified | MW | - | 11 710 DC |
+| 15 | UMP-45 | Neo-Noir | classified | FT | - | 9 282 DC |
+| 16 | UMP-45 | Neo-Noir | classified | FT | StatTrak™ | 12 566 DC |
+| 17 | P250 | Epicenter | classified | FN | - | 6 970 DC |
+| 18 | P250 | Epicenter | classified | MW | - | 5 715 DC |
+| 19 | P250 | Epicenter | classified | FT | - | 4 531 DC |
+| 20 | P250 | Epicenter | classified | FT | StatTrak™ | 6 134 DC |
+| 21 | SSG 08 | Rapid Transit | restricted | FN | - | 2 520 DC |
+| 22 | SSG 08 | Rapid Transit | restricted | MW | - | 2 066 DC |
+| 23 | SSG 08 | Rapid Transit | restricted | FT | - | 1 638 DC |
+| 24 | SSG 08 | Rapid Transit | restricted | FT | StatTrak™ | 2 218 DC |
+| 25 | MAC-10 | Saibā Oni | restricted | FN | - | 4 424 DC |
+| 26 | MAC-10 | Saibā Oni | restricted | MW | - | 3 628 DC |
+| 27 | MAC-10 | Saibā Oni | restricted | FT | - | 2 876 DC |
+| 28 | MAC-10 | Saibā Oni | restricted | FT | StatTrak™ | 3 893 DC |
+| 29 | M4A4 | Turbine | restricted | FN | - | 3 808 DC |
+| 30 | M4A4 | Turbine | restricted | MW | - | 3 123 DC |
+| 31 | M4A4 | Turbine | restricted | FT | - | 2 475 DC |
+| 32 | M4A4 | Turbine | restricted | FT | StatTrak™ | 3 351 DC |
+| 33 | Dual Berettas | Hydro Strike | restricted | FN | - | 3 640 DC |
+| 34 | Dual Berettas | Hydro Strike | restricted | MW | - | 2 985 DC |
+| 35 | Dual Berettas | Hydro Strike | restricted | FT | - | 2 366 DC |
+| 36 | Dual Berettas | Hydro Strike | restricted | FT | StatTrak™ | 3 203 DC |
+| 37 | P90 | Randy Rush | restricted | FN | - | 4 984 DC |
+| 38 | P90 | Randy Rush | restricted | MW | - | 4 087 DC |
+| 39 | P90 | Randy Rush | restricted | FT | - | 3 240 DC |
+| 40 | P90 | Randy Rush | restricted | FT | StatTrak™ | 4 386 DC |
+| 41 | USP-S | 27 | milspec | FN | - | 1 054 DC |
+| 42 | USP-S | 27 | milspec | FT | - | 685 DC |
+| 43 | USP-S | 27 | milspec | FT | StatTrak™ | 928 DC |
+| 44 | Desert Eagle | Calligraffiti | milspec | FN | - | 969 DC |
+| 45 | Desert Eagle | Calligraffiti | milspec | FT | - | 630 DC |
+| 46 | Desert Eagle | Calligraffiti | milspec | FT | StatTrak™ | 853 DC |
+| 47 | AUG | Luxe Trim | milspec | MW | - | 781 DC |
+| 48 | AUG | Luxe Trim | milspec | FT | - | 619 DC |
+| 49 | AUG | Luxe Trim | milspec | FT | StatTrak™ | 838 DC |
+| 50 | SCAR-20 | Trail Blazer | milspec | MW | - | 1 087 DC |
+| 51 | SCAR-20 | Trail Blazer | milspec | FT | - | 862 DC |
+| 52 | SCAR-20 | Trail Blazer | milspec | FT | StatTrak™ | 1 167 DC |
+| 53 | R8 Revolver | Tango | milspec | MW | - | 1 199 DC |
+| 54 | R8 Revolver | Tango | milspec | FT | - | 950 DC |
+| 55 | R8 Revolver | Tango | milspec | FT | StatTrak™ | 1 287 DC |
+| 56 | MP5-SD | Statics | milspec | MW | - | 990 DC |
+| 57 | MP5-SD | Statics | milspec | FT | - | 785 DC |
+| 58 | MP5-SD | Statics | milspec | FT | StatTrak™ | 1 062 DC |
+| 59 | M249 | Hypnosis | milspec | MW | - | 767 DC |
+| 60 | M249 | Hypnosis | milspec | FT | - | 608 DC |
+| 61 | M249 | Hypnosis | milspec | FT | StatTrak™ | 823 DC |
+
+---
 
 ### CS:GO Weapon Case
 
@@ -3171,6 +3567,52 @@
 
 ## <a id="highroller"></a>Хайроллер кейсы (Highroller)
 
+### Коллекция «Арабеска Востока» (Arabesque 2026 Collection)
+
+- **ID кейса:** `case-arabesque-2026`
+- **Категория:** `highroller`
+- **Цена открытия:** **7 500 DC**
+- **Описание:** Золотая коллекция с AK-47 Gold Arabesque
+- **Количество предметов в кейсе:** 33 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
+| 2 | AK-47 | Gold Arabesque | covert | MW | - | 35 014 DC |
+| 3 | AK-47 | Gold Arabesque | covert | FT | - | 27 755 DC |
+| 4 | AK-47 | Gold Arabesque | covert | FT | StatTrak™ | 37 576 DC |
+| 5 | AWP | Queen's Gambit | covert | FN | - | 58 800 DC |
+| 6 | AWP | Queen's Gambit | covert | MW | - | 48 216 DC |
+| 7 | AWP | Queen's Gambit | covert | FT | - | 38 220 DC |
+| 8 | AWP | Queen's Gambit | covert | FT | StatTrak™ | 51 744 DC |
+| 9 | Glock-18 | Fully Tuned | covert | FN | - | 29 400 DC |
+| 10 | Glock-18 | Fully Tuned | covert | MW | - | 24 108 DC |
+| 11 | Glock-18 | Fully Tuned | covert | FT | - | 19 110 DC |
+| 12 | Glock-18 | Fully Tuned | covert | FT | StatTrak™ | 25 872 DC |
+| 13 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 14 | AK-47 | Crane Flight | classified | MW | - | 7 667 DC |
+| 15 | AK-47 | Crane Flight | classified | FT | - | 6 078 DC |
+| 16 | AK-47 | Crane Flight | classified | FT | StatTrak™ | 8 228 DC |
+| 17 | P90 | Deathgaze | classified | FN | - | 8 840 DC |
+| 18 | P90 | Deathgaze | classified | MW | - | 7 249 DC |
+| 19 | P90 | Deathgaze | classified | FT | - | 5 746 DC |
+| 20 | P90 | Deathgaze | classified | FT | StatTrak™ | 7 779 DC |
+| 21 | P250 | Kintsugi | classified | FN | - | 13 260 DC |
+| 22 | P250 | Kintsugi | classified | FT | - | 8 619 DC |
+| 23 | P250 | Kintsugi | classified | FT | StatTrak™ | 11 669 DC |
+| 24 | Desert Eagle | Firebreathing | restricted | FN | - | 4 536 DC |
+| 25 | Desert Eagle | Firebreathing | restricted | FT | - | 2 948 DC |
+| 26 | Desert Eagle | Firebreathing | restricted | FT | StatTrak™ | 3 992 DC |
+| 27 | Galil AR | Galigator | restricted | FN | - | 4 144 DC |
+| 28 | Galil AR | Galigator | restricted | FT | - | 2 694 DC |
+| 29 | Galil AR | Galigator | restricted | FT | StatTrak™ | 3 647 DC |
+| 30 | M4A1-S | Electrum | restricted | FN | - | 4 648 DC |
+| 31 | M4A1-S | Electrum | restricted | MW | - | 3 811 DC |
+| 32 | M4A1-S | Electrum | restricted | FT | - | 3 021 DC |
+| 33 | M4A1-S | Electrum | restricted | FT | StatTrak™ | 4 090 DC |
+
+---
+
 ### Cobblestone Souvenir Package
 
 - **ID кейса:** `souvenir_1`
@@ -4136,6 +4578,86 @@
 ---
 
 ## <a id="custom"></a>Авторские кейсы (Custom)
+
+### Коллекция «Шпионские технологии» (Spy Tech 2026 Collection)
+
+- **ID кейса:** `case-spy-tech-2026`
+- **Категория:** `custom`
+- **Цена открытия:** **4 200 DC**
+- **Описание:** Секретные образцы вооружения с AK-47 The Oligarch
+- **Количество предметов в кейсе:** 30 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 2 | AK-47 | The Oligarch | covert | MW | - | 37 884 DC |
+| 3 | AK-47 | The Oligarch | covert | FT | - | 30 030 DC |
+| 4 | AK-47 | The Oligarch | covert | FT | StatTrak™ | 40 656 DC |
+| 5 | M4A4 | Full Throttle | covert | FN | - | 29 400 DC |
+| 6 | M4A4 | Full Throttle | covert | MW | - | 24 108 DC |
+| 7 | M4A4 | Full Throttle | covert | FT | - | 19 110 DC |
+| 8 | M4A4 | Full Throttle | covert | FT | StatTrak™ | 25 872 DC |
+| 9 | AWP | Ice Coaled | classified | FN | - | 12 410 DC |
+| 10 | AWP | Ice Coaled | classified | MW | - | 10 176 DC |
+| 11 | AWP | Ice Coaled | classified | FT | - | 8 067 DC |
+| 12 | AWP | Ice Coaled | classified | FT | StatTrak™ | 10 921 DC |
+| 13 | Glock-18 | Mirror Mosaic | classified | FN | - | 13 430 DC |
+| 14 | Glock-18 | Mirror Mosaic | classified | MW | - | 11 013 DC |
+| 15 | Glock-18 | Mirror Mosaic | classified | FT | - | 8 730 DC |
+| 16 | Glock-18 | Mirror Mosaic | classified | FT | StatTrak™ | 11 818 DC |
+| 17 | MP7 | Smoking Kills | classified | FN | - | 11 220 DC |
+| 18 | MP7 | Smoking Kills | classified | MW | - | 9 200 DC |
+| 19 | MP7 | Smoking Kills | classified | FT | - | 7 293 DC |
+| 20 | MP7 | Smoking Kills | classified | FT | StatTrak™ | 9 874 DC |
+| 21 | M4A1-S | Liquidation | restricted | FN | - | 3 919 DC |
+| 22 | M4A1-S | Liquidation | restricted | MW | - | 3 214 DC |
+| 23 | M4A1-S | Liquidation | restricted | FT | - | 2 547 DC |
+| 24 | M4A1-S | Liquidation | restricted | FT | StatTrak™ | 3 449 DC |
+| 25 | UMP-45 | Continuum | restricted | FN | - | 2 632 DC |
+| 26 | UMP-45 | Continuum | restricted | FT | - | 1 711 DC |
+| 27 | UMP-45 | Continuum | restricted | FT | StatTrak™ | 2 316 DC |
+| 28 | MAC-10 | Cat Fight | restricted | FN | - | 2 352 DC |
+| 29 | MAC-10 | Cat Fight | restricted | FT | - | 1 529 DC |
+| 30 | MAC-10 | Cat Fight | restricted | FT | StatTrak™ | 2 070 DC |
+
+---
+
+### Кейс «Термообработка» (Heat Treated Limited Edition)
+
+- **ID кейса:** `case-heat-treated`
+- **Категория:** `custom`
+- **Цена открытия:** **6 500 DC**
+- **Описание:** Лимитированный кейс Five-SeveN и закаленной серии
+- **Количество предметов в кейсе:** 24 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | Five-SeveN | Heat Treated | restricted | FN | - | 2 240 DC |
+| 2 | Five-SeveN | Heat Treated | restricted | MW | - | 1 837 DC |
+| 3 | Five-SeveN | Heat Treated | restricted | FT | - | 1 456 DC |
+| 4 | Five-SeveN | Heat Treated | restricted | WW | - | 1 165 DC |
+| 5 | Five-SeveN | Heat Treated | restricted | BS | - | 941 DC |
+| 6 | Five-SeveN | Heat Treated | restricted | FT | StatTrak™ | 1 971 DC |
+| 7 | Desert Eagle | Heat Treated | classified | FN | - | 11 050 DC |
+| 8 | Desert Eagle | Heat Treated | classified | MW | - | 9 061 DC |
+| 9 | Desert Eagle | Heat Treated | classified | FT | - | 7 183 DC |
+| 10 | Desert Eagle | Heat Treated | classified | FT | StatTrak™ | 9 724 DC |
+| 11 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
+| 12 | AK-47 | Case Hardened | classified | MW | - | 7 109 DC |
+| 13 | AK-47 | Case Hardened | classified | FT | - | 5 636 DC |
+| 14 | AK-47 | Case Hardened | classified | WW | - | 4 508 DC |
+| 15 | AK-47 | Case Hardened | classified | FT | StatTrak™ | 7 630 DC |
+| 16 | MAC-10 | Case Hardened | restricted | FN | - | 4 592 DC |
+| 17 | MAC-10 | Case Hardened | restricted | MW | - | 3 765 DC |
+| 18 | MAC-10 | Case Hardened | restricted | FT | - | 2 985 DC |
+| 19 | MAC-10 | Case Hardened | restricted | FT | StatTrak™ | 4 041 DC |
+| 20 | Five-SeveN | Case Hardened | restricted | FN | - | 3 584 DC |
+| 21 | Five-SeveN | Case Hardened | restricted | MW | - | 2 939 DC |
+| 22 | Five-SeveN | Case Hardened | restricted | FT | - | 2 330 DC |
+| 23 | Five-SeveN | Case Hardened | restricted | BS | - | 1 505 DC |
+| 24 | Five-SeveN | Case Hardened | restricted | FT | StatTrak™ | 3 154 DC |
+
+---
 
 ### Printstream Лаборатория (Printstream Laboratory)
 

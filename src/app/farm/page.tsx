@@ -26,6 +26,8 @@ import {
   Zap,
   Check,
   Info,
+  Bird,
+  Clover,
 } from 'lucide-react';
 
 function formatTimer(msRemaining: number): string {
@@ -189,7 +191,7 @@ export default function ChickenFarmPage() {
             <div className="flex flex-wrap items-center gap-3">
               <div className="bg-[#0d0e14] px-4 py-3 rounded-2xl border border-white/10 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400">
-                  <span className="text-lg">🐔</span>
+                  <Bird className="w-5 h-5 text-amber-400" />
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[10px] font-bold text-white/40 uppercase">
@@ -201,19 +203,21 @@ export default function ChickenFarmPage() {
                 </div>
               </div>
 
-              <div className="bg-[#0d0e14] px-4 py-3 rounded-2xl border border-white/10 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center text-yellow-400">
-                  <Egg className="w-5 h-5" />
+              {farmEggTokens > 0 && (
+                <div className="bg-[#0d0e14] px-4 py-3 rounded-2xl border border-amber-500/30 shadow-[0_0_15px_rgba(245,158,11,0.2)] flex items-center gap-3 animate-pulse">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/15 flex items-center justify-center text-amber-400">
+                    <Egg className="w-5 h-5 text-amber-400" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-[10px] font-bold text-amber-400/80 uppercase">
+                      {locale === 'ru' ? 'В корзине (запас)' : 'In Basket (Reserve)'}
+                    </span>
+                    <span className="font-mono font-black text-lg text-amber-300">
+                      {farmEggTokens}
+                    </span>
+                  </div>
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-[10px] font-bold text-white/40 uppercase">
-                    {locale === 'ru' ? 'Снесено яиц' : 'Eggs Laid'}
-                  </span>
-                  <span className="font-mono font-black text-lg text-yellow-400">
-                    {totalEggsLaid}
-                  </span>
-                </div>
-              </div>
+              )}
 
               <button
                 type="button"
@@ -357,10 +361,10 @@ export default function ChickenFarmPage() {
                     <div className="flex items-center gap-1">
                       {slot.hasLuckPotion && (
                         <span
-                          className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 animate-pulse"
+                          className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 animate-pulse flex items-center gap-0.5"
                           title={locale === 'ru' ? 'Зелье удачи активно' : 'Luck potion active'}
                         >
-                          🍀
+                          <Clover className="w-3 h-3 text-emerald-300 fill-emerald-300/30" />
                         </span>
                       )}
 
@@ -403,14 +407,23 @@ export default function ChickenFarmPage() {
                         </p>
 
                         {farmEggTokens > 0 ? (
-                          <button
-                            type="button"
-                            onClick={() => placeEggToken(index)}
-                            className="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black text-xs uppercase tracking-wider transition-all cursor-pointer active:scale-95 shadow-md flex items-center gap-1.5"
-                          >
-                            <Egg className="w-3.5 h-3.5" />
-                            <span>{locale === 'ru' ? 'Поставить яйцо' : 'Place Egg'}</span>
-                          </button>
+                          <div className="flex flex-col items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => placeEggToken(index)}
+                              className="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black text-xs uppercase tracking-wider transition-all cursor-pointer active:scale-95 shadow-[0_0_15px_rgba(245,158,11,0.3)] flex items-center gap-1.5"
+                            >
+                              <Egg className="w-3.5 h-3.5" />
+                              <span>{locale === 'ru' ? 'Поставить яйцо' : 'Place Egg'}</span>
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleOpenDepositModal(index)}
+                              className="text-[10px] text-white/40 hover:text-yellow-400 underline transition-colors"
+                            >
+                              {locale === 'ru' ? 'Или внести 10 скинов' : 'Or deposit 10 skins'}
+                            </button>
+                          </div>
                         ) : (
                           <button
                             type="button"
@@ -466,7 +479,7 @@ export default function ChickenFarmPage() {
                             title={balance < 100000 ? (locale === 'ru' ? 'Нужно 100 000 DC' : '100,000 DC required') : ''}
                           >
                             <Zap className="w-3.5 h-3.5 text-yellow-400" />
-                            <span>{locale === 'ru' ? '⚡ Ускорить (100 000 DC)' : '⚡ Speed up (100k DC)'}</span>
+                            <span>{locale === 'ru' ? 'Ускорить (100 000 DC)' : 'Speed up (100k DC)'}</span>
                           </button>
                         )}
 
@@ -474,9 +487,10 @@ export default function ChickenFarmPage() {
                           <button
                             type="button"
                             onClick={() => handleHatch(index)}
-                            className="mt-3 w-full py-2.5 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(250,204,21,0.4)] active:scale-95 cursor-pointer animate-bounce"
+                            className="mt-3 w-full py-2.5 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(250,204,21,0.4)] active:scale-95 cursor-pointer animate-bounce flex items-center justify-center gap-1.5"
                           >
-                            🐣 {locale === 'ru' ? 'Вылупить курочку!' : 'Hatch Chicken!'}
+                            <Sparkles className="w-4 h-4" />
+                            <span>{locale === 'ru' ? 'Вылупить курочку!' : 'Hatch Chicken!'}</span>
                           </button>
                         )}
                       </div>
@@ -496,9 +510,10 @@ export default function ChickenFarmPage() {
                         <button
                           type="button"
                           onClick={() => handleHatch(index)}
-                          className="mt-3 w-full py-2.5 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(250,204,21,0.4)] active:scale-95 cursor-pointer animate-pulse"
+                          className="mt-3 w-full py-2.5 rounded-xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(250,204,21,0.4)] active:scale-95 cursor-pointer animate-pulse flex items-center justify-center gap-1.5"
                         >
-                          🐣 {locale === 'ru' ? 'Вылупить курочку!' : 'Hatch Chicken!'}
+                          <Sparkles className="w-4 h-4" />
+                          <span>{locale === 'ru' ? 'Вылупить курочку!' : 'Hatch Chicken!'}</span>
                         </button>
                       </div>
                     )}
@@ -523,7 +538,7 @@ export default function ChickenFarmPage() {
                             size={135}
                           />
 
-                          <div className="flex items-center gap-1 mt-1 max-w-[150px]">
+                          <div className="flex items-center gap-1 mt-2.5 mb-1 max-w-[150px]">
                             <span className="text-xs font-black text-white truncate group-hover:text-yellow-400 transition-colors">
                               {locale === 'ru' ? breed?.name : breed?.nameEn}
                             </span>
@@ -536,8 +551,8 @@ export default function ChickenFarmPage() {
                           <div className="flex flex-col items-center w-full mt-3">
                             <div className="relative mb-2">
                               {slot.hasLuckPotion && (
-                                <div className="absolute -top-2 -right-2 text-sm z-20 animate-bounce pointer-events-none">
-                                  🍀
+                                <div className="absolute -top-2 -right-2 z-20 animate-bounce pointer-events-none">
+                                  <Clover className="w-4 h-4 text-emerald-400 fill-emerald-400/40" />
                                 </div>
                               )}
                               <BreedEgg
@@ -583,7 +598,7 @@ export default function ChickenFarmPage() {
                               title={balance < 10000 ? (locale === 'ru' ? 'Нужно 10 000 DC' : '10,000 DC required') : ''}
                             >
                               <Zap className="w-3.5 h-3.5 text-yellow-400" />
-                              <span>{locale === 'ru' ? '⚡ Ускорить (10 000 DC)' : '⚡ Speed up (10k DC)'}</span>
+                              <span>{locale === 'ru' ? 'Ускорить (10 000 DC)' : 'Speed up (10k DC)'}</span>
                             </button>
                           </div>
                         ) : (
