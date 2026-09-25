@@ -369,7 +369,7 @@ export default function ChickenFarmPage() {
                       )}
 
                       {slot.chicken?.isStatTrak && (
-                        <span className="text-[9px] font-mono font-black px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-400 border border-amber-500/40">
+                        <span className="text-[11px] font-mono font-black px-2 py-0.5 rounded-md bg-amber-500/25 text-amber-400 border border-amber-500/60 shadow-[0_0_8px_rgba(245,158,11,0.35)]">
                           ST™
                         </span>
                       )}
