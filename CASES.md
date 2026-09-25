@@ -9,9 +9,9 @@
 - [Официальные кейсы CS2 / CS:GO (Official) (47 кейсов)](#official)
 - [Ножевые кейсы (Knives) (33 кейсов)](#knives)
 - [Оружейные кейсы (Weapons) (25 кейсов)](#weapons)
-- [Хайроллер кейсы (Highroller) (24 кейсов)](#highroller)
-- [Бюджетные кейсы (Budget) (10 кейсов)](#budget)
-- [Авторские кейсы (Custom) (89 кейсов)](#custom)
+- [Хайроллер кейсы (Highroller) (22 кейсов)](#highroller)
+- [Бюджетные кейсы (Budget) (9 кейсов)](#budget)
+- [Авторские кейсы (Custom) (92 кейсов)](#custom)
 - [Капсулы и наклейки (Stickers & Capsules) (241 кейсов)](#stickers)
 
 ---
@@ -24,7 +24,7 @@
 - **Категория:** `terminal`
 - **Цена открытия:** **1 200 DC**
 - **Описание:** CS2 Терминал: редкие перчатки и военные прототипы
-- **Количество предметов в кейсе:** 42 шт.
+- **Количество предметов в кейсе:** 46 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -70,6 +70,10 @@
 | 40 | MAC-10 | Cat Fight | restricted | FN | - | 2 352 DC |
 | 41 | MAC-10 | Cat Fight | restricted | FT | - | 1 529 DC |
 | 42 | MAC-10 | Cat Fight | restricted | FT | StatTrak™ | 2 070 DC |
+| 43 | Driver Gloves | Black Tie | extraordinary | FN | - | 105 600 DC |
+| 44 | Specialist Gloves | Crimson Web | extraordinary | FN | - | 112 800 DC |
+| 45 | Moto Gloves | Smoke Out | extraordinary | FN | - | 192 000 DC |
+| 46 | Hand Wraps | Badlands | extraordinary | FN | - | 153 600 DC |
 
 ---
 
@@ -147,7 +151,7 @@
 - **Категория:** `official`
 - **Цена открытия:** **2 750 DC**
 - **Описание:** Коллекция Арсенала CS2 с редким AWP CMYK
-- **Количество предметов в кейсе:** 26 шт.
+- **Количество предметов в кейсе:** 46 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -177,6 +181,26 @@
 | 24 | XM1014 | Halftone Shift | milspec | MW | - | 1 185 DC |
 | 25 | XM1014 | Halftone Shift | milspec | FT | - | 939 DC |
 | 26 | XM1014 | Halftone Shift | milspec | FT | StatTrak™ | 1 272 DC |
+| 27 | M4A4 | In Living Color | covert | FN | - | 48 299 DC |
+| 28 | M4A4 | In Living Color | covert | FN | StatTrak™ | 65 204 DC |
+| 29 | AK-47 | Head Shot | covert | FN | - | 48 299 DC |
+| 30 | AK-47 | Head Shot | covert | FN | StatTrak™ | 65 204 DC |
+| 31 | USP-S | Printstream | covert | FN | - | 38 000 DC |
+| 32 | USP-S | Printstream | covert | FN | StatTrak™ | 51 300 DC |
+| 33 | Desert Eagle | Printstream | covert | FN | - | 38 000 DC |
+| 34 | Desert Eagle | Printstream | covert | FN | StatTrak™ | 51 300 DC |
+| 35 | M4A1-S | Printstream | covert | FN | - | 38 000 DC |
+| 36 | M4A1-S | Printstream | covert | FN | StatTrak™ | 51 300 DC |
+| 37 | AWP | Chromatic Aberration | covert | FN | - | 57 400 DC |
+| 38 | AWP | Chromatic Aberration | covert | FN | StatTrak™ | 77 490 DC |
+| 39 | MP9 | Mount Fuji | restricted | FN | - | 2 632 DC |
+| 40 | MP9 | Mount Fuji | restricted | FN | StatTrak™ | 3 553 DC |
+| 41 | Glock-18 | Vogue | classified | FN | - | 10 370 DC |
+| 42 | Glock-18 | Vogue | classified | FN | StatTrak™ | 14 000 DC |
+| 43 | MAC-10 | Disco Tech | classified | FN | - | 6 970 DC |
+| 44 | MAC-10 | Disco Tech | classified | FN | StatTrak™ | 9 410 DC |
+| 45 | FAMAS | Eye of Athena | classified | FN | - | 9 860 DC |
+| 46 | FAMAS | Eye of Athena | classified | FN | StatTrak™ | 13 311 DC |
 
 ---
 
@@ -186,7 +210,7 @@
 - **Категория:** `official`
 - **Цена открытия:** **2 900 DC**
 - **Описание:** Коллекция Арсенала CS2 с легендарным M4A1-S Fade
-- **Количество предметов в кейсе:** 26 шт.
+- **Количество предметов в кейсе:** 42 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -216,6 +240,22 @@
 | 24 | SSG 08 | Zeno | milspec | MW | - | 1 129 DC |
 | 25 | SSG 08 | Zeno | milspec | FT | - | 895 DC |
 | 26 | SSG 08 | Zeno | milspec | FT | StatTrak™ | 1 212 DC |
+| 27 | AK-47 | Point Disarray | classified | FN | - | 9 860 DC |
+| 28 | AK-47 | Point Disarray | classified | FN | StatTrak™ | 13 311 DC |
+| 29 | AWP | Wildfire | covert | FN | - | 36 400 DC |
+| 30 | AWP | Wildfire | covert | FN | StatTrak™ | 49 140 DC |
+| 31 | Desert Eagle | Ocean Drive | covert | FN | - | 50 400 DC |
+| 32 | Desert Eagle | Ocean Drive | covert | FN | StatTrak™ | 68 040 DC |
+| 33 | Glock-18 | Water Elemental | classified | FN | - | 12 920 DC |
+| 34 | Glock-18 | Water Elemental | classified | FN | StatTrak™ | 17 442 DC |
+| 35 | USP-S | Kill Confirmed | covert | FN | - | 44 100 DC |
+| 36 | USP-S | Kill Confirmed | covert | FN | StatTrak™ | 59 535 DC |
+| 37 | P250 | See Ya Later | covert | FN | - | 38 500 DC |
+| 38 | P250 | See Ya Later | covert | FN | StatTrak™ | 51 975 DC |
+| 39 | Five-SeveN | Hyper Beast | covert | FN | - | 42 000 DC |
+| 40 | Five-SeveN | Hyper Beast | covert | FN | StatTrak™ | 56 700 DC |
+| 41 | Sport Gloves | Vice | extraordinary | FN | - | 160 800 DC |
+| 42 | Sport Gloves | Amphibious | extraordinary | FN | - | 182 400 DC |
 
 ---
 
@@ -225,7 +265,7 @@
 - **Категория:** `official`
 - **Цена открытия:** **3 200 DC**
 - **Описание:** Официальная коллекция Арсенала CS2 с B the Monster
-- **Количество предметов в кейсе:** 36 шт.
+- **Количество предметов в кейсе:** 52 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -265,6 +305,22 @@
 | 34 | MP5-SD | Neon Squeezer | industrial | MW | - | 230 DC |
 | 35 | MP5-SD | Neon Squeezer | industrial | FT | - | 182 DC |
 | 36 | MP5-SD | Neon Squeezer | industrial | FT | StatTrak™ | 246 DC |
+| 37 | AK-47 | Green Laminate | milspec | FN | - | 1 377 DC |
+| 38 | AK-47 | Green Laminate | milspec | FN | StatTrak™ | 1 859 DC |
+| 39 | M4A1-S | Nitro | restricted | FN | - | 2 464 DC |
+| 40 | M4A1-S | Nitro | restricted | FN | StatTrak™ | 3 326 DC |
+| 41 | USP-S | Road Rash | restricted | FN | - | 3 416 DC |
+| 42 | USP-S | Road Rash | restricted | FN | StatTrak™ | 4 612 DC |
+| 43 | Glock-18 | Brass | restricted | FN | - | 4 368 DC |
+| 44 | Glock-18 | Brass | restricted | FN | StatTrak™ | 5 897 DC |
+| 45 | Desert Eagle | Urban Rubble | milspec | FN | - | 1 088 DC |
+| 46 | Desert Eagle | Urban Rubble | milspec | FN | StatTrak™ | 1 469 DC |
+| 47 | AWP | Pink DDPAT | restricted | FN | - | 2 464 DC |
+| 48 | AWP | Pink DDPAT | restricted | FN | StatTrak™ | 3 326 DC |
+| 49 | SSG 08 | Detour | milspec | FN | - | 901 DC |
+| 50 | SSG 08 | Detour | milspec | FN | StatTrak™ | 1 216 DC |
+| 51 | CZ75-Auto | Nitro | milspec | FN | - | 1 462 DC |
+| 52 | CZ75-Auto | Nitro | milspec | FN | StatTrak™ | 1 974 DC |
 
 ---
 
@@ -2267,7 +2323,7 @@
 - **Категория:** `knives`
 - **Цена открытия:** **157 000 DC**
 - **Описание:** Новейший непальский клинок Kukri Knife из Kilowatt
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 21 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -2289,6 +2345,9 @@
 | 16 | Kukri Knife | Boreal Forest | covert | MW | - | 161 376 DC |
 | 17 | Kukri Knife | Case Hardened | covert | MW | - | 114 144 DC |
 | 18 | Kukri Knife | Fade | covert | MW | - | 196 800 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 21 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
 
 ---
 
@@ -2608,7 +2667,7 @@
 - **Категория:** `knives`
 - **Цена открытия:** **170 000 DC**
 - **Описание:** Коллекция клинков Gamma Doppler Фазы 1-4
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 22 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -2630,6 +2689,10 @@
 | 16 | Glock-18 | Gamma Doppler | covert | FN | - | 48 299 DC |
 | 17 | Glock-18 | Gamma Doppler | covert | MW | - | 39 605 DC |
 | 18 | Hydra Gloves | Emerald | extraordinary | FN | - | 168 000 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
+| 21 | Hand Wraps | Slaughter | extraordinary | BS | - | 47 376 DC |
+| 22 | Moto Gloves | Finish Line | extraordinary | BS | - | 45 360 DC |
 
 ---
 
@@ -2701,7 +2764,7 @@
 - **Категория:** `knives`
 - **Цена открытия:** **68 000 DC**
 - **Описание:** Moto Gloves: Spearmint, POW!, Polygon, Smoke Out, Blood Pressure, Finish Line, Cool Mint
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 22 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -2723,6 +2786,10 @@
 | 16 | Moto Gloves | Finish Line | extraordinary | MW | - | 88 560 DC |
 | 17 | Moto Gloves | Blood Pressure | extraordinary | MW | - | 114 144 DC |
 | 18 | Moto Gloves | Eclipse | extraordinary | MW | - | 165 312 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
+| 21 | Hand Wraps | Slaughter | extraordinary | BS | - | 47 376 DC |
+| 22 | Driver Gloves | Queen Jaguar | extraordinary | BS | - | 48 384 DC |
 
 ---
 
@@ -2763,7 +2830,7 @@
 - **Категория:** `knives`
 - **Цена открытия:** **69 000 DC**
 - **Описание:** Hand Wraps: Cobalt Skulls, Overprint, CAUTION!, Slaughter, Leather, Giraffe
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 22 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -2785,6 +2852,10 @@
 | 16 | Hand Wraps | Slaughter | extraordinary | MW | - | 92 496 DC |
 | 17 | Hand Wraps | Badlands | extraordinary | MW | - | 125 952 DC |
 | 18 | Hand Wraps | Spruce DDPAT | extraordinary | MW | - | 78 720 DC |
+| 19 | Moto Gloves | Finish Line | extraordinary | BS | - | 45 360 DC |
+| 20 | Moto Gloves | Boom! | extraordinary | BS | - | 43 344 DC |
+| 21 | Moto Gloves | Transport | extraordinary | BS | - | 41 328 DC |
+| 22 | Driver Gloves | Queen Jaguar | extraordinary | BS | - | 48 384 DC |
 
 ---
 
@@ -3478,7 +3549,7 @@
 - **Категория:** `weapons`
 - **Цена открытия:** **18 500 DC**
 - **Описание:** Стритрейсинг: M4A1-S Hot Rod, Glock-18 Twilight Galaxy, SG 553 Bulldozer, Urban Rubble
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 22 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -3500,6 +3571,10 @@
 | 16 | MP7 | Whiteout | milspec | MW | - | 1 073 DC |
 | 17 | Desert Eagle | Urban Rubble | milspec | MW | - | 892 DC |
 | 18 | Galil AR | Urban Rubble | industrial | FN | - | 275 DC |
+| 19 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 20 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 21 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 22 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
 
 ---
 
@@ -3573,7 +3648,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **7 500 DC**
 - **Описание:** Золотая коллекция с AK-47 Gold Arabesque
-- **Количество предметов в кейсе:** 33 шт.
+- **Количество предметов в кейсе:** 52 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -3610,65 +3685,25 @@
 | 31 | M4A1-S | Electrum | restricted | MW | - | 3 811 DC |
 | 32 | M4A1-S | Electrum | restricted | FT | - | 3 021 DC |
 | 33 | M4A1-S | Electrum | restricted | FT | StatTrak™ | 4 090 DC |
-
----
-
-### Кейс «Джекпот Банана Ultra» (Banana Jackpot Ultra Case)
-
-- **ID кейса:** `case_banana_jackpot_ultra`
-- **Категория:** `highroller`
-- **Цена открытия:** **35 000 DC**
-- **Описание:** Сверхдорогой кейс с величайшими скинами в истории CS2
-- **Количество предметов в кейсе:** 16 шт.
-
-| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
-|---|---|---|---|---|---|---|
-| 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
-| 2 | AWP | Dragon Lore | covert | FN | StatTrak™ | 1 147 500 DC |
-| 3 | AWP | Gungnir | covert | FN | - | 59 500 DC |
-| 4 | AWP | Gungnir | covert | FN | StatTrak™ | 80 325 DC |
-| 5 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
-| 6 | AK-47 | Wild Lotus | covert | FN | StatTrak™ | 52 920 DC |
-| 7 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
-| 8 | M4A4 | Howl | milspec | FN | StatTrak™ | 567 000 DC |
-| 9 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
-| 10 | AK-47 | Fire Serpent | covert | FN | StatTrak™ | 162 000 DC |
-| 11 | Karambit | Doppler | covert | FN | - | 280 000 DC |
-| 12 | Karambit | Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 13 | Butterfly Knife | Doppler | covert | FN | - | 280 000 DC |
-| 14 | Butterfly Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 15 | Sport Gloves | Vice | extraordinary | FN | - | 160 800 DC |
-| 16 | Specialist Gloves | Crimson Kimono | extraordinary | FN | - | 148 800 DC |
-
----
-
-### Кейс «Nano Banana 24K Золото» (Nano Banana 24K Gold Case)
-
-- **ID кейса:** `case_nano_banana_gold`
-- **Категория:** `highroller`
-- **Цена открытия:** **12 500 DC**
-- **Описание:** Королевская коллекция чистого золота 999 пробы
-- **Количество предметов в кейсе:** 17 шт.
-
-| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
-|---|---|---|---|---|---|---|
-| 1 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
-| 2 | AK-47 | Gold Arabesque | covert | FN | StatTrak™ | 57 645 DC |
-| 3 | M4A1-S | Welcome to the Jungle | covert | FN | - | 32 900 DC |
-| 4 | M4A1-S | Welcome to the Jungle | covert | FN | StatTrak™ | 44 415 DC |
-| 5 | AWP | The Prince | covert | FN | - | 42 700 DC |
-| 6 | AWP | The Prince | covert | FN | StatTrak™ | 57 645 DC |
-| 7 | Desert Eagle | Fennec Fox | classified | FN | - | 13 430 DC |
-| 8 | Desert Eagle | Fennec Fox | classified | FN | StatTrak™ | 18 131 DC |
-| 9 | CZ75-Auto | Yellow Jacket | classified | FN | - | 11 560 DC |
-| 10 | CZ75-Auto | Yellow Jacket | classified | FN | StatTrak™ | 15 606 DC |
-| 11 | Glock-18 | Brass | restricted | FN | - | 4 368 DC |
-| 12 | Glock-18 | Brass | restricted | FN | StatTrak™ | 5 897 DC |
-| 13 | Butterfly Knife | Lore | covert | FN | - | 182 400 DC |
-| 14 | Butterfly Knife | Lore | covert | FN | StatTrak™ | 246 240 DC |
-| 15 | Specialist Gloves | Tiger Strike | extraordinary | FN | - | 144 000 DC |
-| 16 | Skeleton Knife | Fade | covert | FN | - | 240 000 DC |
-| 17 | Skeleton Knife | Fade | covert | FN | StatTrak™ | 324 000 DC |
+| 34 | Desert Eagle | Golden Koi | covert | FN | - | 46 900 DC |
+| 35 | Desert Eagle | Golden Koi | covert | FN | StatTrak™ | 63 315 DC |
+| 36 | M4A4 | Royal Paladin | covert | FN | - | 60 900 DC |
+| 37 | M4A4 | Royal Paladin | covert | FN | StatTrak™ | 82 215 DC |
+| 38 | USP-S | Orion | classified | FN | - | 8 160 DC |
+| 39 | USP-S | Orion | classified | FN | StatTrak™ | 11 016 DC |
+| 40 | CZ75-Auto | Yellow Jacket | classified | FN | - | 11 560 DC |
+| 41 | CZ75-Auto | Yellow Jacket | classified | FN | StatTrak™ | 15 606 DC |
+| 42 | Glock-18 | Brass | restricted | FN | - | 4 368 DC |
+| 43 | Glock-18 | Brass | restricted | FN | StatTrak™ | 5 897 DC |
+| 44 | Five-SeveN | Copper Galaxy | restricted | FN | - | 2 352 DC |
+| 45 | Five-SeveN | Copper Galaxy | restricted | FN | StatTrak™ | 3 175 DC |
+| 46 | MAC-10 | Gold Brick | restricted | FN | - | 4 200 DC |
+| 47 | MAC-10 | Gold Brick | restricted | FN | StatTrak™ | 5 670 DC |
+| 48 | P250 | Wingshot | restricted | FN | - | 3 863 DC |
+| 49 | P250 | Wingshot | restricted | FN | StatTrak™ | 5 215 DC |
+| 50 | Karambit | Tiger Tooth | covert | FN | - | 105 600 DC |
+| 51 | Karambit | Tiger Tooth | covert | FN | StatTrak™ | 142 560 DC |
+| 52 | Specialist Gloves | Tiger Strike | extraordinary | FN | - | 144 000 DC |
 
 ---
 
@@ -4081,7 +4116,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **180 000 DC**
 - **Описание:** Howl, Dragon Lore, Fire Serpent, Medusa
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 26 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4103,6 +4138,14 @@
 | 16 | AK-47 | Wild Lotus | covert | MW | - | 32 144 DC |
 | 17 | Karambit | Fade | covert | FN | - | 240 000 DC |
 | 18 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 21 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 22 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 23 | AK-47 | Neon Revolution | covert | MW | - | 43 050 DC |
+| 24 | AK-47 | Legion of Anubis | covert | FN | - | 43 400 DC |
+| 25 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
+| 26 | AK-47 | Uncharted | milspec | FN | - | 1 462 DC |
 
 ---
 
@@ -4143,7 +4186,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **150 000 DC**
 - **Описание:** Шанс на Dragon Lore, Gungnir, Medusa, Desert Hydra, Eye of Horus, Fire Serpent
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 20 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4165,6 +4208,8 @@
 | 16 | M9 Bayonet | Lore | covert | FN | - | 180 000 DC |
 | 17 | Bayonet | Lore | covert | FN | - | 156 000 DC |
 | 18 | Huntsman Knife | Lore | covert | MW | - | 110 208 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
 
 ---
 
@@ -4174,7 +4219,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **85 000 DC**
 - **Описание:** Северные реликвии: AWP Gungnir, Negev Mjölnir, Emerald Jörmungandr, Flame Jörmungandr
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 23 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4196,6 +4241,11 @@
 | 16 | MP9 | Dark Age | milspec | FN | - | 765 DC |
 | 17 | P2000 | Amber Fade | restricted | FN | - | 4 480 DC |
 | 18 | UMP-45 | Fade | classified | FN | - | 9 180 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
 
 ---
 
@@ -4205,7 +4255,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **92 000 DC**
 - **Описание:** Райские тропические скины: AK-47 Wild Lotus, MP9 Wild Lily, Synth Leaf, Sea Calico
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 23 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4227,6 +4277,11 @@
 | 16 | AUG | Copperhead | milspec | FN | - | 1 224 DC |
 | 17 | M4A4 | Jungle Tiger | industrial | FN | - | 415 DC |
 | 18 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
+| 21 | Hand Wraps | Slaughter | extraordinary | BS | - | 47 376 DC |
+| 22 | Moto Gloves | Finish Line | extraordinary | BS | - | 45 360 DC |
+| 23 | Moto Gloves | Boom! | extraordinary | BS | - | 43 344 DC |
 
 ---
 
@@ -4236,7 +4291,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **68 000 DC**
 - **Описание:** Итальянская роскошь: AWP The Prince, MAG-7 Cinquedea, Baroque Purple, Red Filigree
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 23 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4258,6 +4313,11 @@
 | 16 | P250 | Vino Primo | restricted | FN | - | 3 584 DC |
 | 17 | SG 553 | Integrale | classified | FN | - | 6 800 DC |
 | 18 | Stiletto Knife | Fade | covert | FN | - | 240 000 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
 
 ---
 
@@ -4267,7 +4327,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **74 000 DC**
 - **Описание:** Редчайшие японские скины: AUG Akihabara Accept, Hydroponic, Sunset Storm, Neon Kimono
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 22 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4289,6 +4349,10 @@
 | 16 | Tec-9 | Bamboo Forest | milspec | FN | - | 900 DC |
 | 17 | AWP | Oni Taiji | covert | FN | - | 39 200 DC |
 | 18 | Specialist Gloves | Crimson Kimono | extraordinary | FN | - | 230 000 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
+| 21 | Hand Wraps | Slaughter | extraordinary | BS | - | 47 376 DC |
+| 22 | Moto Gloves | Finish Line | extraordinary | BS | - | 45 360 DC |
 
 ---
 
@@ -4298,7 +4362,7 @@
 - **Категория:** `highroller`
 - **Цена открытия:** **82 000 DC**
 - **Описание:** Античный пантеон: M4A4 Poseidon, AWP Medusa, M4A1-S Icarus Fell, Emerald Dragon, Chronos
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 23 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4320,41 +4384,15 @@
 | 16 | Zeus x27 | Olympus | classified | FN | - | 12 000 DC |
 | 17 | UMP-45 | Minotaur's Labyrinth | milspec | FN | - | 1 100 DC |
 | 18 | Tec-9 | Hades | industrial | FN | - | 280 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
+| 21 | Hand Wraps | Slaughter | extraordinary | BS | - | 47 376 DC |
+| 22 | Moto Gloves | Finish Line | extraordinary | BS | - | 45 360 DC |
+| 23 | Moto Gloves | Boom! | extraordinary | BS | - | 43 344 DC |
 
 ---
 
 ## <a id="budget"></a>Бюджетные кейсы (Budget)
-
-### Кейс «Monkey Business & Бананы» (Monkey Business & Bananas Case)
-
-- **ID кейса:** `case_monkey_business_bananas`
-- **Категория:** `budget`
-- **Цена открытия:** **850 DC**
-- **Описание:** Веселый и мемный банановый арсенал CS2
-- **Количество предметов в кейсе:** 18 шт.
-
-| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
-|---|---|---|---|---|---|---|
-| 1 | Five-SeveN | Monkey Business | classified | FN | - | 14 620 DC |
-| 2 | Five-SeveN | Monkey Business | classified | FN | StatTrak™ | 19 737 DC |
-| 3 | R8 Revolver | Banana Cannon | restricted | FN | - | 4 424 DC |
-| 4 | R8 Revolver | Banana Cannon | restricted | FN | StatTrak™ | 5 972 DC |
-| 5 | XM1014 | Banana Leaf | industrial | FN | - | 230 DC |
-| 6 | XM1014 | Banana Leaf | industrial | FN | StatTrak™ | 311 DC |
-| 7 | P90 | Death by Kitty | covert | FN | - | 47 600 DC |
-| 8 | P90 | Death by Kitty | covert | FN | StatTrak™ | 64 260 DC |
-| 9 | Galil AR | Sugar Rush | classified | FN | - | 13 260 DC |
-| 10 | Galil AR | Sugar Rush | classified | FN | StatTrak™ | 17 901 DC |
-| 11 | MP7 | Cirrus | milspec | FN | - | 816 DC |
-| 12 | MP7 | Cirrus | milspec | FN | StatTrak™ | 1 102 DC |
-| 13 | P250 | Valence | milspec | FN | - | 1 003 DC |
-| 14 | P250 | Valence | milspec | FN | StatTrak™ | 1 354 DC |
-| 15 | Gut Knife | Lore | covert | FN | - | 168 000 DC |
-| 16 | Gut Knife | Lore | covert | FN | StatTrak™ | 226 800 DC |
-| 17 | Bowie Knife | Tiger Tooth | covert | FN | - | 182 400 DC |
-| 18 | Bowie Knife | Tiger Tooth | covert | FN | StatTrak™ | 246 240 DC |
-
----
 
 ### Мусорка Залупы (Zalupa Trash Crate)
 
@@ -4611,7 +4649,7 @@
 - **Категория:** `budget`
 - **Цена открытия:** **500 DC**
 - **Описание:** Куча сеток Safari Mesh и 1 скрытый Dragon Lore
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 22 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4633,6 +4671,10 @@
 | 16 | G3SG1 | Safari Mesh | milspec | FT | - | 500 DC |
 | 17 | Glock-18 | Sand Dune | industrial | FN | - | 410 DC |
 | 18 | MAG-7 | Sand Dune | milspec | FN | - | 1 411 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 21 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 22 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
 
 ---
 
@@ -4675,7 +4717,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 200 DC**
 - **Описание:** Секретные образцы вооружения с AK-47 The Oligarch
-- **Количество предметов в кейсе:** 30 шт.
+- **Количество предметов в кейсе:** 47 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4709,46 +4751,127 @@
 | 28 | MAC-10 | Cat Fight | restricted | FN | - | 2 352 DC |
 | 29 | MAC-10 | Cat Fight | restricted | FT | - | 1 529 DC |
 | 30 | MAC-10 | Cat Fight | restricted | FT | StatTrak™ | 2 070 DC |
+| 31 | USP-S | Dark Water | restricted | FN | - | 4 480 DC |
+| 32 | USP-S | Dark Water | restricted | FN | StatTrak™ | 6 048 DC |
+| 33 | AWP | Graphite | classified | FN | - | 14 960 DC |
+| 34 | AWP | Graphite | classified | FN | StatTrak™ | 20 196 DC |
+| 35 | Desert Eagle | Conspiracy | classified | FN | - | 14 450 DC |
+| 36 | Desert Eagle | Conspiracy | classified | FN | StatTrak™ | 19 508 DC |
+| 37 | MP9 | Dark Age | milspec | FN | - | 765 DC |
+| 38 | MP9 | Dark Age | milspec | FN | StatTrak™ | 1 033 DC |
+| 39 | MAC-10 | Silver | industrial | FN | - | 355 DC |
+| 40 | MAC-10 | Silver | industrial | FN | StatTrak™ | 479 DC |
+| 41 | Galil AR | Tuxedo | milspec | FN | - | 901 DC |
+| 42 | Galil AR | Tuxedo | milspec | FN | StatTrak™ | 1 216 DC |
+| 43 | P250 | Steel Disruption | milspec | FN | - | 1 479 DC |
+| 44 | P250 | Steel Disruption | milspec | FN | StatTrak™ | 1 997 DC |
+| 45 | Glock-18 | Ironwork | milspec | FN | - | 1 513 DC |
+| 46 | Glock-18 | Ironwork | milspec | FN | StatTrak™ | 2 043 DC |
+| 47 | Specialist Gloves | Field Agent | extraordinary | FN | - | 211 200 DC |
 
 ---
 
-### Кейс «Токсичный Банан Biohazard» (Toxic Banana Biohazard Case)
+### Кейс «Казино Джекпот Ultra» (Casino Jackpot Ultra Case)
 
-- **ID кейса:** `case_toxic_banana_biohazard`
+- **ID кейса:** `case_casino_jackpot_ultra`
 - **Категория:** `custom`
-- **Цена открытия:** **3 100 DC**
-- **Описание:** Радиоактивный контейнер с мутировавшим оружием
-- **Количество предметов в кейсе:** 17 шт.
+- **Цена открытия:** **1 800 DC**
+- **Описание:** Крути рулетку, срывай главный куш сервера
+- **Количество предметов в кейсе:** 34 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
-| 2 | AK-47 | Hydroponic | classified | FN | StatTrak™ | 17 672 DC |
-| 3 | M4A4 | Radiation Hazard | milspec | FN | - | 1 122 DC |
-| 4 | M4A4 | Radiation Hazard | milspec | FN | StatTrak™ | 1 515 DC |
-| 5 | AWP | Containment Breach | covert | FN | - | 45 500 DC |
-| 6 | AWP | Containment Breach | covert | FN | StatTrak™ | 61 425 DC |
-| 7 | P250 | Nuclear Threat | restricted | FN | - | 2 688 DC |
-| 8 | P250 | Nuclear Threat | restricted | FN | StatTrak™ | 3 629 DC |
-| 9 | Tec-9 | Nuclear Threat | restricted | FN | - | 3 863 DC |
-| 10 | Tec-9 | Nuclear Threat | restricted | FN | StatTrak™ | 5 215 DC |
-| 11 | Galil AR | Eco | classified | FN | - | 15 130 DC |
-| 12 | Galil AR | Eco | classified | FN | StatTrak™ | 20 426 DC |
-| 13 | Glock-18 | Nuclear Garden | restricted | FN | - | 2 296 DC |
-| 14 | Glock-18 | Nuclear Garden | restricted | FN | StatTrak™ | 3 100 DC |
-| 15 | Karambit | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 16 | Karambit | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 17 | Sport Gloves | Hedge Maze | extraordinary | FN | - | 129 600 DC |
+| 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
+| 2 | AWP | Dragon Lore | covert | FN | StatTrak™ | 1 147 500 DC |
+| 3 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
+| 4 | AK-47 | Case Hardened | classified | FN | StatTrak™ | 11 705 DC |
+| 5 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 6 | M4A4 | Howl | milspec | FN | StatTrak™ | 567 000 DC |
+| 7 | Desert Eagle | Golden Koi | covert | FN | - | 46 900 DC |
+| 8 | Desert Eagle | Golden Koi | covert | FN | StatTrak™ | 63 315 DC |
+| 9 | USP-S | Kill Confirmed | covert | FN | - | 44 100 DC |
+| 10 | USP-S | Kill Confirmed | covert | FN | StatTrak™ | 59 535 DC |
+| 11 | Glock-18 | Fade | restricted | FN | - | 2 632 DC |
+| 12 | Glock-18 | Fade | restricted | FN | StatTrak™ | 3 553 DC |
+| 13 | Five-SeveN | Case Hardened | restricted | FN | - | 3 584 DC |
+| 14 | Five-SeveN | Case Hardened | restricted | FN | StatTrak™ | 4 838 DC |
+| 15 | P250 | Cartel | classified | FN | - | 12 240 DC |
+| 16 | P250 | Cartel | classified | FN | StatTrak™ | 16 524 DC |
+| 17 | MP9 | Wild Lily | classified | FN | - | 12 920 DC |
+| 18 | MP9 | Wild Lily | classified | FN | StatTrak™ | 17 442 DC |
+| 19 | MAC-10 | Heat | restricted | FN | - | 4 256 DC |
+| 20 | MAC-10 | Heat | restricted | FN | StatTrak™ | 5 746 DC |
+| 21 | CZ75-Auto | Victoria | covert | FN | - | 41 300 DC |
+| 22 | CZ75-Auto | Victoria | covert | FN | StatTrak™ | 55 755 DC |
+| 23 | SSG 08 | Blood in the Water | covert | FN | - | 53 200 DC |
+| 24 | SSG 08 | Blood in the Water | covert | FN | StatTrak™ | 71 820 DC |
+| 25 | Dual Berettas | Cobra Strike | classified | FN | - | 12 580 DC |
+| 26 | Dual Berettas | Cobra Strike | classified | FN | StatTrak™ | 16 983 DC |
+| 27 | Butterfly Knife | Doppler | covert | FN | - | 280 000 DC |
+| 28 | Butterfly Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 29 | Karambit | Fade | covert | FN | - | 240 000 DC |
+| 30 | Karambit | Fade | covert | FN | StatTrak™ | 324 000 DC |
+| 31 | Bayonet | Lore | covert | FN | - | 156 000 DC |
+| 32 | Bayonet | Lore | covert | FN | StatTrak™ | 210 600 DC |
+| 33 | Sport Gloves | Pandora's Box | extraordinary | FN | - | 120 000 DC |
+| 34 | Specialist Gloves | Crimson Kimono | extraordinary | FN | - | 148 800 DC |
 
 ---
 
-### Кейс «Меха-Банан Овердрайв» (Mecha Banana Overdrive Case)
+### Кейс «Токсичная Угроза Biohazard» (Toxic Biohazard Case)
 
-- **ID кейса:** `case_mecha_banana_overdrive`
+- **ID кейса:** `case_toxic_biohazard`
 - **Категория:** `custom`
-- **Цена открытия:** **4 500 DC**
-- **Описание:** Роботизированный высокоточный комплекс вооружения
-- **Количество предметов в кейсе:** 17 шт.
+- **Цена открытия:** **320 DC**
+- **Описание:** Зона биологического заражения 4-го уровня
+- **Количество предметов в кейсе:** 34 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | Tec-9 | Toxic | milspec | FN | - | 867 DC |
+| 2 | Tec-9 | Toxic | milspec | FN | StatTrak™ | 1 170 DC |
+| 3 | Glock-18 | Nuclear Garden | restricted | FN | - | 2 296 DC |
+| 4 | Glock-18 | Nuclear Garden | restricted | FN | StatTrak™ | 3 100 DC |
+| 5 | MP9 | Bioleak | milspec | FN | - | 1 173 DC |
+| 6 | MP9 | Bioleak | milspec | FN | StatTrak™ | 1 584 DC |
+| 7 | MAC-10 | Nuclear Garden | milspec | FN | - | 799 DC |
+| 8 | MAC-10 | Nuclear Garden | milspec | FN | StatTrak™ | 1 079 DC |
+| 9 | M4A4 | Radiation Hazard | milspec | FN | - | 1 122 DC |
+| 10 | M4A4 | Radiation Hazard | milspec | FN | StatTrak™ | 1 515 DC |
+| 11 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 12 | AK-47 | Hydroponic | classified | FN | StatTrak™ | 17 672 DC |
+| 13 | AWP | Containment Breach | covert | FN | - | 45 500 DC |
+| 14 | AWP | Containment Breach | covert | FN | StatTrak™ | 61 425 DC |
+| 15 | Galil AR | Cerberus | restricted | FN | - | 3 752 DC |
+| 16 | Galil AR | Cerberus | restricted | FN | StatTrak™ | 5 065 DC |
+| 17 | P250 | Contamination | industrial | FN | - | 410 DC |
+| 18 | P250 | Contamination | industrial | FN | StatTrak™ | 554 DC |
+| 19 | M4A1-S | Mud-Spec | industrial | FN | - | 325 DC |
+| 20 | M4A1-S | Mud-Spec | industrial | FN | StatTrak™ | 439 DC |
+| 21 | SG 553 | Fallout Warning | industrial | FN | - | 215 DC |
+| 22 | SG 553 | Fallout Warning | industrial | FN | StatTrak™ | 290 DC |
+| 23 | XM1014 | Bone Machine | milspec | FN | - | 765 DC |
+| 24 | XM1014 | Bone Machine | milspec | FN | StatTrak™ | 1 033 DC |
+| 25 | UMP-45 | Crime Scene | restricted | FN | - | 4 648 DC |
+| 26 | UMP-45 | Crime Scene | restricted | FN | StatTrak™ | 6 275 DC |
+| 27 | PP-Bizon | Chemical Green | industrial | FN | - | 215 DC |
+| 28 | PP-Bizon | Chemical Green | industrial | FN | StatTrak™ | 290 DC |
+| 29 | Karambit | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 30 | Karambit | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 31 | Bowie Knife | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 32 | Bowie Knife | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 33 | Moto Gloves | Finish Line | extraordinary | FN | - | 108 000 DC |
+| 34 | Specialist Gloves | Field Agent | extraordinary | FN | - | 211 200 DC |
+
+---
+
+### Кейс «Меха-Овердрайв» (Mecha Overdrive Case)
+
+- **ID кейса:** `case_mecha_overdrive`
+- **Категория:** `custom`
+- **Цена открытия:** **380 DC**
+- **Описание:** Тяжелая роботизированная броня и нано-технологии
+- **Количество предметов в кейсе:** 34 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4760,25 +4883,89 @@
 | 6 | Desert Eagle | Mecha Industries | classified | FN | StatTrak™ | 15 147 DC |
 | 7 | AK-47 | Vulcan | covert | FN | - | 31 500 DC |
 | 8 | AK-47 | Vulcan | covert | FN | StatTrak™ | 42 525 DC |
-| 9 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
-| 10 | AWP | Neo-Noir | covert | FN | StatTrak™ | 63 315 DC |
-| 11 | M4A4 | In Living Color | covert | FN | - | 48 299 DC |
-| 12 | M4A4 | In Living Color | covert | FN | StatTrak™ | 65 204 DC |
-| 13 | Karambit | Autotronic | covert | FN | - | 96 000 DC |
-| 14 | Karambit | Autotronic | covert | FN | StatTrak™ | 129 600 DC |
-| 15 | Moto Gloves | POW! | extraordinary | FN | - | 196 800 DC |
-| 16 | Classic Knife | Crimson Web | covert | FN | - | 132 000 DC |
-| 17 | Classic Knife | Crimson Web | covert | FN | StatTrak™ | 178 200 DC |
+| 9 | AWP | Elite Build | classified | FN | - | 13 600 DC |
+| 10 | AWP | Elite Build | classified | FN | StatTrak™ | 18 360 DC |
+| 11 | P90 | Grim | milspec | FN | - | 1 122 DC |
+| 12 | P90 | Grim | milspec | FN | StatTrak™ | 1 515 DC |
+| 13 | USP-S | Cyrex | restricted | FN | - | 2 912 DC |
+| 14 | USP-S | Cyrex | restricted | FN | StatTrak™ | 3 931 DC |
+| 15 | M4A1-S | Cyrex | covert | FN | - | 49 700 DC |
+| 16 | M4A1-S | Cyrex | covert | FN | StatTrak™ | 67 095 DC |
+| 17 | SG 553 | Cyrex | classified | FN | - | 13 430 DC |
+| 18 | SG 553 | Cyrex | classified | FN | StatTrak™ | 18 131 DC |
+| 19 | SCAR-20 | Cyrex | classified | FN | - | 7 990 DC |
+| 20 | SCAR-20 | Cyrex | classified | FN | StatTrak™ | 10 787 DC |
+| 21 | Glock-18 | Ironwork | milspec | FN | - | 1 513 DC |
+| 22 | Glock-18 | Ironwork | milspec | FN | StatTrak™ | 2 043 DC |
+| 23 | MP9 | Airlock | classified | FN | - | 8 500 DC |
+| 24 | MP9 | Airlock | classified | FN | StatTrak™ | 11 475 DC |
+| 25 | Galil AR | Stone Cold | restricted | FN | - | 3 416 DC |
+| 26 | Galil AR | Stone Cold | restricted | FN | StatTrak™ | 4 612 DC |
+| 27 | P250 | Iron Clad | milspec | FN | - | 1 275 DC |
+| 28 | P250 | Iron Clad | milspec | FN | StatTrak™ | 1 721 DC |
+| 29 | Skeleton Knife | Slaughter | covert | FN | - | 98 400 DC |
+| 30 | Skeleton Knife | Slaughter | covert | FN | StatTrak™ | 132 840 DC |
+| 31 | Paracord Knife | Crimson Web | covert | FN | - | 177 600 DC |
+| 32 | Paracord Knife | Crimson Web | covert | FN | StatTrak™ | 239 760 DC |
+| 33 | Driver Gloves | King Snake | extraordinary | FN | - | 199 200 DC |
+| 34 | Specialist Gloves | Foundation | extraordinary | FN | - | 206 400 DC |
 
 ---
 
-### Кейс «Квантовый Банан» (Quantum Banana Case)
+### Кейс «Обезьяний Бизнес» (Monkey Business Case)
 
-- **ID кейса:** `case_quantum_banana`
+- **ID кейса:** `case_monkey_business`
 - **Категория:** `custom`
-- **Цена открытия:** **3 400 DC**
-- **Описание:** Квантовые наночастицы и хроматические искажения
-- **Количество предметов в кейсе:** 17 шт.
+- **Цена открытия:** **260 DC**
+- **Описание:** Тропический хаос, джунгли и банановый задор
+- **Количество предметов в кейсе:** 34 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | Five-SeveN | Monkey Business | classified | FN | - | 14 620 DC |
+| 2 | Five-SeveN | Monkey Business | classified | FN | StatTrak™ | 19 737 DC |
+| 3 | Tec-9 | Bamboozle | restricted | FN | - | 3 416 DC |
+| 4 | Tec-9 | Bamboozle | restricted | FN | StatTrak™ | 4 612 DC |
+| 5 | AK-47 | Jaguar | covert | FN | - | 36 400 DC |
+| 6 | AK-47 | Jaguar | covert | FN | StatTrak™ | 49 140 DC |
+| 7 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
+| 8 | AK-47 | Wild Lotus | covert | FN | StatTrak™ | 52 920 DC |
+| 9 | M4A4 | Jungle Tiger | industrial | FN | - | 415 DC |
+| 10 | M4A4 | Jungle Tiger | industrial | FN | StatTrak™ | 560 DC |
+| 11 | SSG 08 | Jungle Dashed | milspec | FN | - | 799 DC |
+| 12 | SSG 08 | Jungle Dashed | milspec | FN | StatTrak™ | 1 079 DC |
+| 13 | P90 | Shallow Grave | classified | FN | - | 10 200 DC |
+| 14 | P90 | Shallow Grave | classified | FN | StatTrak™ | 13 770 DC |
+| 15 | Desert Eagle | Emerald Jörmungandr | restricted | FN | - | 2 408 DC |
+| 16 | Desert Eagle | Emerald Jörmungandr | restricted | FN | StatTrak™ | 3 251 DC |
+| 17 | MP7 | Skulls | milspec | FN | - | 748 DC |
+| 18 | MP7 | Skulls | milspec | FN | StatTrak™ | 1 010 DC |
+| 19 | USP-S | Forest Leaves | industrial | FN | - | 440 DC |
+| 20 | USP-S | Forest Leaves | industrial | FN | StatTrak™ | 594 DC |
+| 21 | Glock-18 | Groundwater | industrial | FN | - | 290 DC |
+| 22 | Glock-18 | Groundwater | industrial | FN | StatTrak™ | 392 DC |
+| 23 | MAC-10 | Palm | industrial | FN | - | 245 DC |
+| 24 | MAC-10 | Palm | industrial | FN | StatTrak™ | 331 DC |
+| 25 | Nova | Wild Six | restricted | FN | - | 4 312 DC |
+| 26 | Nova | Wild Six | restricted | FN | StatTrak™ | 5 821 DC |
+| 27 | P250 | Forest Night | milspec | FN | - | 1 428 DC |
+| 28 | P250 | Forest Night | milspec | FN | StatTrak™ | 1 928 DC |
+| 29 | Huntsman Knife | Doppler | covert | FN | - | 280 000 DC |
+| 30 | Huntsman Knife | Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 31 | Survival Knife | Case Hardened | covert | FN | - | 211 200 DC |
+| 32 | Survival Knife | Case Hardened | covert | FN | StatTrak™ | 285 120 DC |
+| 33 | Specialist Gloves | Emerald Web | extraordinary | FN | - | 153 600 DC |
+| 34 | Hand Wraps | Arboreal | extraordinary | FN | - | 206 400 DC |
+
+---
+
+### Кейс «Квантовое Измерение» (Quantum Dimension Case)
+
+- **ID кейса:** `case_quantum_dimension`
+- **Категория:** `custom`
+- **Цена открытия:** **420 DC**
+- **Описание:** Энергия квантовых полей и антиматерии
+- **Количество предметов в кейсе:** 35 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4794,11 +4981,75 @@
 | 10 | USP-S | Printstream | covert | FN | StatTrak™ | 51 300 DC |
 | 11 | SSG 08 | Turbo Peek | classified | FN | - | 14 110 DC |
 | 12 | SSG 08 | Turbo Peek | classified | FN | StatTrak™ | 19 049 DC |
-| 13 | Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
-| 14 | Bayonet | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
-| 15 | Talon Knife | Marble Fade | covert | FN | - | 240 000 DC |
-| 16 | Talon Knife | Marble Fade | covert | FN | StatTrak™ | 324 000 DC |
-| 17 | Sport Gloves | Vice | extraordinary | FN | - | 160 800 DC |
+| 13 | Galil AR | Signal | restricted | FN | - | 3 192 DC |
+| 14 | Galil AR | Signal | restricted | FN | StatTrak™ | 4 309 DC |
+| 15 | Glock-18 | High Beam | industrial | FN | - | 355 DC |
+| 16 | Glock-18 | High Beam | industrial | FN | StatTrak™ | 479 DC |
+| 17 | MP5-SD | Gauss | restricted | FN | - | 4 200 DC |
+| 18 | MP5-SD | Gauss | restricted | FN | StatTrak™ | 5 670 DC |
+| 19 | Desert Eagle | Ocean Drive | covert | FN | - | 50 400 DC |
+| 20 | Desert Eagle | Ocean Drive | covert | FN | StatTrak™ | 68 040 DC |
+| 21 | P250 | Cyber Shell | restricted | FN | - | 2 856 DC |
+| 22 | P250 | Cyber Shell | restricted | FN | StatTrak™ | 3 856 DC |
+| 23 | M4A1-S | Decimator | classified | FN | - | 13 600 DC |
+| 24 | M4A1-S | Decimator | classified | FN | StatTrak™ | 18 360 DC |
+| 25 | AUG | Momentum | classified | FN | - | 9 180 DC |
+| 26 | AUG | Momentum | classified | FN | StatTrak™ | 12 393 DC |
+| 27 | SG 553 | Darkwing | restricted | FN | - | 3 696 DC |
+| 28 | SG 553 | Darkwing | restricted | FN | StatTrak™ | 4 990 DC |
+| 29 | Bayonet | Gamma Doppler | covert | FN | - | 280 000 DC |
+| 30 | Bayonet | Gamma Doppler | covert | FN | StatTrak™ | 378 000 DC |
+| 31 | Talon Knife | Marble Fade | covert | FN | - | 240 000 DC |
+| 32 | Talon Knife | Marble Fade | covert | FN | StatTrak™ | 324 000 DC |
+| 33 | Sport Gloves | Vice | extraordinary | FN | - | 160 800 DC |
+| 34 | Nomad Knife | Blue Steel | covert | FN | - | 165 600 DC |
+| 35 | Nomad Knife | Blue Steel | covert | FN | StatTrak™ | 223 560 DC |
+
+---
+
+### Кейс «Золотой Слиток 24K» (24K Gold Bar Case)
+
+- **ID кейса:** `case_gold_bar_24k`
+- **Категория:** `custom`
+- **Цена открытия:** **1 250 DC**
+- **Описание:** Премиальное золото высшей пробы
+- **Количество предметов в кейсе:** 33 шт.
+
+| # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
+|---|---|---|---|---|---|---|
+| 1 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
+| 2 | AK-47 | Gold Arabesque | covert | FN | StatTrak™ | 57 645 DC |
+| 3 | M4A1-S | Welcome to the Jungle | covert | FN | - | 32 900 DC |
+| 4 | M4A1-S | Welcome to the Jungle | covert | FN | StatTrak™ | 44 415 DC |
+| 5 | AWP | The Prince | covert | FN | - | 42 700 DC |
+| 6 | AWP | The Prince | covert | FN | StatTrak™ | 57 645 DC |
+| 7 | Desert Eagle | Fennec Fox | classified | FN | - | 13 430 DC |
+| 8 | Desert Eagle | Fennec Fox | classified | FN | StatTrak™ | 18 131 DC |
+| 9 | CZ75-Auto | Yellow Jacket | classified | FN | - | 11 560 DC |
+| 10 | CZ75-Auto | Yellow Jacket | classified | FN | StatTrak™ | 15 606 DC |
+| 11 | Glock-18 | Brass | restricted | FN | - | 4 368 DC |
+| 12 | Glock-18 | Brass | restricted | FN | StatTrak™ | 5 897 DC |
+| 13 | USP-S | Orion | classified | FN | - | 8 160 DC |
+| 14 | USP-S | Orion | classified | FN | StatTrak™ | 11 016 DC |
+| 15 | MP9 | Bulldozer | restricted | FN | - | 2 968 DC |
+| 16 | MP9 | Bulldozer | restricted | FN | StatTrak™ | 4 007 DC |
+| 17 | MAC-10 | Gold Brick | restricted | FN | - | 4 200 DC |
+| 18 | MAC-10 | Gold Brick | restricted | FN | StatTrak™ | 5 670 DC |
+| 19 | P250 | Wingshot | restricted | FN | - | 3 863 DC |
+| 20 | P250 | Wingshot | restricted | FN | StatTrak™ | 5 215 DC |
+| 21 | FAMAS | Meltdown | classified | FN | - | 8 670 DC |
+| 22 | FAMAS | Meltdown | classified | FN | StatTrak™ | 11 705 DC |
+| 23 | Five-SeveN | Copper Galaxy | restricted | FN | - | 2 352 DC |
+| 24 | Five-SeveN | Copper Galaxy | restricted | FN | StatTrak™ | 3 175 DC |
+| 25 | XM1014 | Entombed | classified | FN | - | 8 840 DC |
+| 26 | XM1014 | Entombed | classified | FN | StatTrak™ | 11 934 DC |
+| 27 | Butterfly Knife | Lore | covert | FN | - | 182 400 DC |
+| 28 | Butterfly Knife | Lore | covert | FN | StatTrak™ | 246 240 DC |
+| 29 | Specialist Gloves | Tiger Strike | extraordinary | FN | - | 144 000 DC |
+| 30 | Skeleton Knife | Fade | covert | FN | - | 240 000 DC |
+| 31 | Skeleton Knife | Fade | covert | FN | StatTrak™ | 324 000 DC |
+| 32 | Karambit | Tiger Tooth | covert | FN | - | 105 600 DC |
+| 33 | Karambit | Tiger Tooth | covert | FN | StatTrak™ | 142 560 DC |
 
 ---
 
@@ -4806,40 +5057,56 @@
 
 - **ID кейса:** `case_inferno_banana_rush`
 - **Категория:** `custom`
-- **Цена открытия:** **2 800 DC**
-- **Описание:** Легендарный штурм позиции Банан с огненным арсеналом
-- **Количество предметов в кейсе:** 18 шт.
+- **Цена открытия:** **290 DC**
+- **Описание:** Легендарный пуш через банан прямо на плент B
+- **Количество предметов в кейсе:** 34 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | Tec-9 | Banana Leaf | industrial | FN | - | 310 DC |
 | 2 | Tec-9 | Banana Leaf | industrial | FN | StatTrak™ | 419 DC |
-| 3 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
-| 4 | AK-47 | Fire Serpent | covert | FN | StatTrak™ | 162 000 DC |
-| 5 | AWP | Wildfire | covert | FN | - | 36 400 DC |
-| 6 | AWP | Wildfire | covert | FN | StatTrak™ | 49 140 DC |
-| 7 | Desert Eagle | Blaze | restricted | FN | - | 3 976 DC |
-| 8 | Desert Eagle | Blaze | restricted | FN | StatTrak™ | 5 368 DC |
-| 9 | M4A4 | Hellfire | classified | FN | - | 13 940 DC |
-| 10 | M4A4 | Hellfire | classified | FN | StatTrak™ | 18 819 DC |
-| 11 | P90 | Traction | milspec | FN | - | 1 428 DC |
-| 12 | P90 | Traction | milspec | FN | StatTrak™ | 1 928 DC |
-| 13 | P250 | Inferno | restricted | FN | - | 4 928 DC |
-| 14 | P250 | Inferno | restricted | FN | StatTrak™ | 6 653 DC |
-| 15 | Butterfly Knife | Slaughter | covert | FN | - | 160 800 DC |
-| 16 | Butterfly Knife | Slaughter | covert | FN | StatTrak™ | 217 080 DC |
-| 17 | Flip Knife | Crimson Web | covert | FN | - | 201 600 DC |
-| 18 | Flip Knife | Crimson Web | covert | FN | StatTrak™ | 272 160 DC |
+| 3 | R8 Revolver | Banana Cannon | restricted | FN | - | 4 424 DC |
+| 4 | R8 Revolver | Banana Cannon | restricted | FN | StatTrak™ | 5 972 DC |
+| 5 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
+| 6 | AK-47 | Fire Serpent | covert | FN | StatTrak™ | 162 000 DC |
+| 7 | AWP | Wildfire | covert | FN | - | 36 400 DC |
+| 8 | AWP | Wildfire | covert | FN | StatTrak™ | 49 140 DC |
+| 9 | Desert Eagle | Blaze | restricted | FN | - | 3 976 DC |
+| 10 | Desert Eagle | Blaze | restricted | FN | StatTrak™ | 5 368 DC |
+| 11 | M4A4 | Hellfire | classified | FN | - | 13 940 DC |
+| 12 | M4A4 | Hellfire | classified | FN | StatTrak™ | 18 819 DC |
+| 13 | P90 | Traction | milspec | FN | - | 1 428 DC |
+| 14 | P90 | Traction | milspec | FN | StatTrak™ | 1 928 DC |
+| 15 | P250 | Inferno | restricted | FN | - | 4 928 DC |
+| 16 | P250 | Inferno | restricted | FN | StatTrak™ | 6 653 DC |
+| 17 | Galil AR | Firefight | restricted | FN | - | 4 032 DC |
+| 18 | Galil AR | Firefight | restricted | FN | StatTrak™ | 5 443 DC |
+| 19 | SG 553 | Integrale | classified | FN | - | 6 800 DC |
+| 20 | SG 553 | Integrale | classified | FN | StatTrak™ | 9 180 DC |
+| 21 | MP7 | Bloodsport | covert | FN | - | 59 500 DC |
+| 22 | MP7 | Bloodsport | covert | FN | StatTrak™ | 80 325 DC |
+| 23 | Glock-18 | Reactor | milspec | FN | - | 918 DC |
+| 24 | Glock-18 | Reactor | milspec | FN | StatTrak™ | 1 239 DC |
+| 25 | CZ75-Auto | Xiangliu | classified | FN | - | 6 800 DC |
+| 26 | CZ75-Auto | Xiangliu | classified | FN | StatTrak™ | 9 180 DC |
+| 27 | Five-SeveN | Angry Mob | covert | FN | - | 35 700 DC |
+| 28 | Five-SeveN | Angry Mob | covert | FN | StatTrak™ | 48 195 DC |
+| 29 | MAG-7 | Heat | restricted | FN | - | 2 296 DC |
+| 30 | MAG-7 | Heat | restricted | FN | StatTrak™ | 3 100 DC |
+| 31 | Butterfly Knife | Slaughter | covert | FN | - | 160 800 DC |
+| 32 | Butterfly Knife | Slaughter | covert | FN | StatTrak™ | 217 080 DC |
+| 33 | Flip Knife | Crimson Web | covert | FN | - | 201 600 DC |
+| 34 | Flip Knife | Crimson Web | covert | FN | StatTrak™ | 272 160 DC |
 
 ---
 
-### Кейс «Nano Banana Киберпанк» (Nano Banana Cyber Case)
+### Кейс «Кибер-Протокол» (Cyber Protocol Case)
 
-- **ID кейса:** `case_nano_banana_cyber`
+- **ID кейса:** `case_cyber_protocol`
 - **Категория:** `custom`
-- **Цена открытия:** **1 950 DC**
-- **Описание:** Высокотехнологичный банановый кейс с неоновым арсеналом
-- **Количество предметов в кейсе:** 19 шт.
+- **Цена открытия:** **390 DC**
+- **Описание:** Футуристический арсенал кибер-бойца
+- **Количество предметов в кейсе:** 35 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4857,11 +5124,27 @@
 | 12 | MAC-10 | Neon Rider | covert | FN | StatTrak™ | 73 710 DC |
 | 13 | USP-S | Cortex | classified | FN | - | 11 050 DC |
 | 14 | USP-S | Cortex | classified | FN | StatTrak™ | 14 918 DC |
-| 15 | Karambit | Lore | covert | FN | - | 158 400 DC |
-| 16 | Karambit | Lore | covert | FN | StatTrak™ | 213 840 DC |
-| 17 | Sport Gloves | Omega | extraordinary | FN | - | 192 000 DC |
-| 18 | Stiletto Knife | Tiger Tooth | covert | FN | - | 158 400 DC |
-| 19 | Stiletto Knife | Tiger Tooth | covert | FN | StatTrak™ | 213 840 DC |
+| 15 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
+| 16 | AWP | Neo-Noir | covert | FN | StatTrak™ | 63 315 DC |
+| 17 | Desert Eagle | Mecha Industries | classified | FN | - | 11 220 DC |
+| 18 | Desert Eagle | Mecha Industries | classified | FN | StatTrak™ | 15 147 DC |
+| 19 | FAMAS | Commemoration | covert | FN | - | 46 900 DC |
+| 20 | FAMAS | Commemoration | covert | FN | StatTrak™ | 63 315 DC |
+| 21 | Galil AR | Chatterbox | covert | FN | - | 37 800 DC |
+| 22 | Galil AR | Chatterbox | covert | FN | StatTrak™ | 51 030 DC |
+| 23 | P90 | Asiimov | covert | FN | - | 16 000 DC |
+| 24 | P90 | Asiimov | covert | FN | StatTrak™ | 21 600 DC |
+| 25 | SSG 08 | Turbo Peek | classified | FN | - | 14 110 DC |
+| 26 | SSG 08 | Turbo Peek | classified | FN | StatTrak™ | 19 049 DC |
+| 27 | Five-SeveN | Hyper Beast | covert | FN | - | 42 000 DC |
+| 28 | Five-SeveN | Hyper Beast | covert | FN | StatTrak™ | 56 700 DC |
+| 29 | CZ75-Auto | Tacticat | restricted | FN | - | 2 352 DC |
+| 30 | CZ75-Auto | Tacticat | restricted | FN | StatTrak™ | 3 175 DC |
+| 31 | Karambit | Lore | covert | FN | - | 158 400 DC |
+| 32 | Karambit | Lore | covert | FN | StatTrak™ | 213 840 DC |
+| 33 | Sport Gloves | Omega | extraordinary | FN | - | 192 000 DC |
+| 34 | Stiletto Knife | Tiger Tooth | covert | FN | - | 158 400 DC |
+| 35 | Stiletto Knife | Tiger Tooth | covert | FN | StatTrak™ | 213 840 DC |
 
 ---
 
@@ -4871,7 +5154,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **6 500 DC**
 - **Описание:** Лимитированный кейс Five-SeveN и закаленной серии
-- **Количество предметов в кейсе:** 24 шт.
+- **Количество предметов в кейсе:** 46 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4899,6 +5182,28 @@
 | 22 | Five-SeveN | Case Hardened | restricted | FT | - | 2 330 DC |
 | 23 | Five-SeveN | Case Hardened | restricted | BS | - | 1 505 DC |
 | 24 | Five-SeveN | Case Hardened | restricted | FT | StatTrak™ | 3 154 DC |
+| 25 | Karambit | Case Hardened | covert | FN | - | 100 800 DC |
+| 26 | Karambit | Case Hardened | covert | FN | StatTrak™ | 136 080 DC |
+| 27 | Bayonet | Case Hardened | covert | FN | - | 98 400 DC |
+| 28 | Bayonet | Case Hardened | covert | FN | StatTrak™ | 132 840 DC |
+| 29 | Butterfly Knife | Case Hardened | covert | FN | - | 124 800 DC |
+| 30 | Butterfly Knife | Case Hardened | covert | FN | StatTrak™ | 168 480 DC |
+| 31 | Stiletto Knife | Case Hardened | covert | FN | - | 153 600 DC |
+| 32 | Stiletto Knife | Case Hardened | covert | FN | StatTrak™ | 207 360 DC |
+| 33 | Skeleton Knife | Case Hardened | covert | FN | - | 182 400 DC |
+| 34 | Skeleton Knife | Case Hardened | covert | FN | StatTrak™ | 246 240 DC |
+| 35 | Survival Knife | Case Hardened | covert | FN | - | 211 200 DC |
+| 36 | Survival Knife | Case Hardened | covert | FN | StatTrak™ | 285 120 DC |
+| 37 | Paracord Knife | Case Hardened | covert | FN | - | 182 400 DC |
+| 38 | Paracord Knife | Case Hardened | covert | FN | StatTrak™ | 246 240 DC |
+| 39 | Ursus Knife | Case Hardened | covert | FN | - | 163 200 DC |
+| 40 | Ursus Knife | Case Hardened | covert | FN | StatTrak™ | 220 320 DC |
+| 41 | Nomad Knife | Case Hardened | covert | FN | - | 192 000 DC |
+| 42 | Nomad Knife | Case Hardened | covert | FN | StatTrak™ | 259 200 DC |
+| 43 | Kukri Knife | Case Hardened | covert | FN | - | 139 200 DC |
+| 44 | Kukri Knife | Case Hardened | covert | FN | StatTrak™ | 187 920 DC |
+| 45 | Five-SeveN | Case Hardened | restricted | FN | StatTrak™ | 4 838 DC |
+| 46 | MAC-10 | Case Hardened | restricted | FN | StatTrak™ | 6 199 DC |
 
 ---
 
@@ -4908,7 +5213,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 500 DC**
 - **Описание:** Перламутровый дизайн Printstream для Deagle, M4A1-S, USP-S и monochrome скины
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 20 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4930,6 +5235,8 @@
 | 16 | Galil AR | Tuxedo | milspec | FN | - | 901 DC |
 | 17 | CZ75-Auto | Tuxedo | milspec | FN | - | 1 241 DC |
 | 18 | Desert Eagle | Hypnotic | classified | FN | - | 8 500 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
 
 ---
 
@@ -4939,7 +5246,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **3 900 DC**
 - **Описание:** Культовая футуристическая коллекция Asiimov и кибернетический арсенал
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 24 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4961,6 +5268,12 @@
 | 16 | M4A1-S | Cyrex | covert | FN | - | 49 700 DC |
 | 17 | SCAR-20 | Cyrex | classified | FN | - | 7 990 DC |
 | 18 | M4A1-S | Mecha Industries | covert | FN | - | 46 900 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
 
 ---
 
@@ -4970,7 +5283,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **10 000 DC**
 - **Описание:** Кислотные монстры Скоростной Зверь для AWP, M4A1-S, Nova, Five-SeveN
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 26 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -4992,6 +5305,14 @@
 | 16 | Sawed-Off | The Kraken | covert | FN | - | 35 000 DC |
 | 17 | AWP | Wildfire | covert | FN | - | 36 400 DC |
 | 18 | AK-47 | Aquamarine Revenge | covert | FN | - | 32 900 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 25 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 26 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
 
 ---
 
@@ -5032,7 +5353,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **3 900 DC**
 - **Описание:** Карбоновые Redline, Bloodsport, Crimson Web, Hot Rod, Code Red
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 20 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5054,6 +5375,8 @@
 | 16 | M9 Bayonet | Crimson Web | covert | FT | - | 96 000 DC |
 | 17 | Karambit | Crimson Web | covert | FT | - | 110 000 DC |
 | 18 | Specialist Gloves | Crimson Web | extraordinary | FT | - | 92 000 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
 
 ---
 
@@ -5063,7 +5386,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **19 500 DC**
 - **Описание:** Неоновые шедевры Neon Rider, Neon Revolution, Decimator, Disco Tech
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 24 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5085,6 +5408,12 @@
 | 16 | Glock-18 | Neo-Noir | covert | FN | - | 41 300 DC |
 | 17 | M4A4 | Neo-Noir | covert | FN | - | 39 200 DC |
 | 18 | USP-S | Neo-Noir | covert | FN | - | 41 300 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
 
 ---
 
@@ -5218,7 +5547,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **5 800 DC**
 - **Описание:** M4A4 Temukau, Player Two, Neo-Noir, Kumicho Dragon, Bullet Queen
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 23 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5240,6 +5569,11 @@
 | 16 | Five-SeveN | Fairy Tale | classified | FN | - | 12 750 DC |
 | 17 | MAC-10 | Saibā Oni | restricted | FN | - | 4 911 DC |
 | 18 | Glock-18 | Shinobu | classified | FN | - | 15 147 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
 
 ---
 
@@ -5249,7 +5583,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **16 500 DC**
 - **Описание:** Коллекция стильного комикс-нуара для AWP, M4A4, USP-S, Glock-18
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 29 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5271,6 +5605,17 @@
 | 16 | Glock-18 | Neo-Noir | covert | BS | - | 18 000 DC |
 | 17 | UMP-45 | Neo-Noir | classified | FN | - | 14 280 DC |
 | 18 | UMP-45 | Neo-Noir | classified | MW | - | 11 500 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 25 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 26 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 27 | AK-47 | Cartel | classified | FN | - | 10 880 DC |
+| 28 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
+| 29 | AK-47 | Phantom Disruptor | classified | FN | - | 14 960 DC |
 
 ---
 
@@ -5311,7 +5656,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **5 400 DC**
 - **Описание:** AK-47 Head Shot, Disco Tech, In Living Color, Mount Fuji, Visions, Chromatic
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 22 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5333,6 +5678,10 @@
 | 16 | USP-S | Ancient Visions | restricted | MW | - | 2 939 DC |
 | 17 | AWP | Neo-Noir | covert | FN | - | 46 900 DC |
 | 18 | Glock-18 | Vogue | classified | FN | - | 9 126 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
 
 ---
 
@@ -5342,7 +5691,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **12 000 DC**
 - **Описание:** Zeus x27 Olympus, AK-47 Inheritance, AWP Chrome Cannon, M4A1-S Black Lotus, Kukri
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 21 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5364,6 +5713,9 @@
 | 16 | M4A4 | Etch Lord | restricted | MW | - | 4 911 DC |
 | 17 | Five-SeveN | Hybrid | restricted | FT | - | 2 985 DC |
 | 18 | UMP-45 | Motorized | milspec | FN | - | 1 377 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
 
 ---
 
@@ -5373,7 +5725,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 800 DC**
 - **Описание:** AK-47 Nightwish, MP9 Starlight Protector, Melondrama, Rapid Eye Movement, Ticket to Hell
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 26 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5395,6 +5747,14 @@
 | 16 | MP7 | Abyssal Apparition | classified | FN | - | 12 920 DC |
 | 17 | PP-Bizon | Space Cat | restricted | FN | - | 4 838 DC |
 | 18 | M4A1-S | Night Terror | restricted | FN | - | 3 500 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 25 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 26 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
 
 ---
 
@@ -5404,7 +5764,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **5 200 DC**
 - **Описание:** USP-S Printstream, AK-47 Ice Coaled, AWP Chromatic Aberration, Sawed-Off Kiss♥Love
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 25 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5426,6 +5786,13 @@
 | 16 | SG 553 | Dragon Tech | restricted | MW | - | 2 526 DC |
 | 17 | Dual Berettas | Flora Carnivora | restricted | FN | - | 2 520 DC |
 | 18 | P90 | Vent Rush | restricted | FN | - | 3 200 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 25 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
 
 ---
 
@@ -5435,7 +5802,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **5 900 DC**
 - **Описание:** M4A4 Temukau, AK-47 Head Shot, AWP Duality, P90 Neoqueen, MAC-10 Sakkaku
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 25 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5457,6 +5824,13 @@
 | 16 | MAC-10 | Sakkaku | restricted | FN | - | 3 528 DC |
 | 17 | MAC-10 | Sakkaku | restricted | FT | - | 2 500 DC |
 | 18 | M4A1-S | Emphorosaur-S | restricted | FN | - | 3 248 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 25 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
 
 ---
 
@@ -5466,7 +5840,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **5 600 DC**
 - **Описание:** Desert Eagle Printstream, AK-47 Legion of Anubis, Glock-18 Vogue, M4A4 Tooth Fairy
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 25 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5488,6 +5862,13 @@
 | 16 | MAG-7 | Monster Call | restricted | FT | - | 3 200 DC |
 | 17 | Tec-9 | Brother | restricted | FN | - | 6 124 DC |
 | 18 | MAC-10 | Allure | restricted | FN | - | 3 500 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 25 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
 
 ---
 
@@ -5497,7 +5878,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 300 DC**
 - **Описание:** M4A4 The Emperor, Five-SeveN Angry Mob, AWP Atheris, Desert Eagle Light Rail
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 26 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5519,6 +5900,14 @@
 | 16 | XM1014 | Incinegator | classified | MW | - | 5 800 DC |
 | 17 | R8 Revolver | Skull Crusher | classified | MW | - | 5 500 DC |
 | 18 | UMP-45 | Moonrise | restricted | FN | - | 4 368 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 25 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 26 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
 
 ---
 
@@ -5528,7 +5917,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 600 DC**
 - **Описание:** AK-47 Asiimov, AWP Neo-Noir, Desert Eagle Mecha Industries, MP5-SD Gauss
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 26 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5550,6 +5939,14 @@
 | 16 | USP-S | Flashback | restricted | MW | - | 4 200 DC |
 | 17 | Glock-18 | Oxide Blaze | milspec | FN | - | 1 071 DC |
 | 18 | G3SG1 | Scavenger | restricted | FN | - | 2 800 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 25 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 26 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
 
 ---
 
@@ -5559,7 +5956,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 900 DC**
 - **Описание:** M4A4 Neo-Noir, MP7 Bloodsport, USP-S Cortex, AWP Mortis, Nova Wild Six
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 26 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5581,6 +5978,14 @@
 | 16 | Nova | Wild Six | restricted | MW | - | 2 400 DC |
 | 17 | Glock-18 | Moonrise | restricted | FN | - | 4 704 DC |
 | 18 | UMP-45 | Arctic Wolf | restricted | FN | - | 4 200 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 25 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 26 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
 
 ---
 
@@ -5590,7 +5995,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 100 DC**
 - **Описание:** AK-47 Neon Rider, Desert Eagle Code Red, M4A1-S Nightmare, FAMAS Eye of Athena
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 26 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5612,6 +6017,14 @@
 | 16 | AWP | PAW | restricted | MW | - | 2 200 DC |
 | 17 | Glock-18 | Warhawk | milspec | FN | - | 1 496 DC |
 | 18 | MP7 | Powercore | restricted | MW | - | 2 709 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 25 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 26 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
 
 ---
 
@@ -5621,7 +6034,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **6 200 DC**
 - **Описание:** AK-47 Bloodsport, USP-S Neo-Noir, M4A1-S Decimator, AWP Fever Dream
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 26 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5643,6 +6056,14 @@
 | 16 | MAC-10 | Last Dive | restricted | MW | - | 3 800 DC |
 | 17 | Galil AR | Crimson Tsunami | restricted | FN | - | 3 472 DC |
 | 18 | Desert Eagle | Oxide Blaze | milspec | FN | - | 1 056 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 25 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 26 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
 
 ---
 
@@ -5652,7 +6073,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **15 000 DC**
 - **Описание:** Спортивный агрессивный дизайн Bloodsport для AK-47, MP7, SCAR-20 и красные клинки
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 21 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5674,6 +6095,9 @@
 | 16 | Moto Gloves | Blood Pressure | extraordinary | FN | - | 139 200 DC |
 | 17 | Moto Gloves | Finish Line | extraordinary | FN | - | 108 000 DC |
 | 18 | Specialist Gloves | Crimson Kimono | extraordinary | MW | - | 122 016 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
+| 21 | Hand Wraps | Slaughter | extraordinary | BS | - | 47 376 DC |
 
 ---
 
@@ -5683,7 +6107,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **7 500 DC**
 - **Описание:** Высокотехнологичный сплав Mecha Industries, Vulcan, Asiimov, Cyber Security
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 23 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5705,6 +6129,11 @@
 | 16 | AK-47 | Fuel Injector | covert | MW | - | 33 866 DC |
 | 17 | Tec-9 | Fuel Injector | classified | FN | - | 9 350 DC |
 | 18 | SG 553 | Cyrex | classified | FN | - | 13 430 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
 
 ---
 
@@ -5714,7 +6143,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **11 500 DC**
 - **Описание:** Японская мифология: AWP Oni Taiji, Kumicho Dragon, Galil Kami, Bloodsport, Mount Fuji
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 24 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5736,6 +6165,12 @@
 | 16 | MAC-10 | Saibā Oni | restricted | MW | - | 3 500 DC |
 | 17 | AUG | Akihabara Accept | covert | FN | - | 56 000 DC |
 | 18 | Five-SeveN | Neon Kimono | restricted | FN | - | 3 640 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
 
 ---
 
@@ -5745,7 +6180,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **7 200 DC**
 - **Описание:** Морозная свежесть Frontside Misty, Ice Coaled, Shallow Grave, Water Elemental, Frostborre
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 26 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5767,6 +6202,14 @@
 | 16 | XM1014 | Frost Borre | milspec | MW | - | 950 DC |
 | 17 | M4A1-S | Blue Phosphor | classified | FN | - | 10 880 DC |
 | 18 | P2000 | Ocean Foam | classified | FN | - | 11 050 DC |
+| 19 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 20 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 21 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 22 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
+| 23 | AK-47 | Cartel | classified | FN | - | 10 880 DC |
+| 24 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
+| 25 | AK-47 | Phantom Disruptor | classified | FN | - | 14 960 DC |
+| 26 | AK-47 | Uncharted | milspec | FN | - | 1 462 DC |
 
 ---
 
@@ -5776,7 +6219,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **6 900 DC**
 - **Описание:** Ядерные заражения: Nuclear Threat, Nuclear Garden, Bone Machine, Bioleak, Eco
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 24 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5798,6 +6241,12 @@
 | 16 | MP9 | Bioleak | milspec | MW | - | 962 DC |
 | 17 | Tec-9 | Toxic | milspec | FN | - | 867 DC |
 | 18 | P90 | Grim | milspec | FN | - | 950 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
 
 ---
 
@@ -5807,7 +6256,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **3 700 DC**
 - **Описание:** Неоновые волны 80-х: MAC-10 Neon Rider, Signal, Pulse, High Beam, Decimator
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 24 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5829,6 +6278,12 @@
 | 16 | AUG | Signal Scanner | milspec | FN | - | 1 882 DC |
 | 17 | Galil AR | Signal | restricted | FN | - | 3 200 DC |
 | 18 | Galil AR | Signal | restricted | MW | - | 2 617 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
 
 ---
 
@@ -5838,7 +6293,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **14 500 DC**
 - **Описание:** Золото фараонов: M4A4 Eye of Horus, AK-47 Legion of Anubis, Desert Blossom, Sundown
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 26 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5860,6 +6315,14 @@
 | 16 | P90 | ScaraB Rush | restricted | MW | - | 2 939 DC |
 | 17 | Glock-18 | Ramese's Reach | restricted | FN | - | 2 576 DC |
 | 18 | FAMAS | Waters of Nephthys | classified | FN | - | 7 990 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 25 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 26 | AK-47 | Hydroponic | classified | FN | - | 13 090 DC |
 
 ---
 
@@ -5931,7 +6394,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **13 000 DC**
 - **Описание:** Агрессивная мощь AK-47 Vulcan и огненная линейка CS2
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 22 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -5953,6 +6416,10 @@
 | 16 | AWP | Asiimov | covert | FN | - | 16 000 DC |
 | 17 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
 | 18 | Bayonet | Doppler | covert | FN | - | 280 000 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
 
 ---
 
@@ -6148,7 +6615,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **9 100 DC**
 - **Описание:** Яркие кислотные всплески, граффити и киберпанк
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 24 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6170,6 +6637,12 @@
 | 16 | AWP | Fever Dream | classified | MW | - | 7 500 DC |
 | 17 | MAC-10 | Disco Tech | classified | FN | - | 6 970 DC |
 | 18 | UMP-45 | Neo-Noir | classified | FN | - | 14 280 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
 
 ---
 
@@ -6179,7 +6652,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **4 800 DC**
 - **Описание:** Смертоносные винтовки: Gungnir, Medusa, The Prince
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 21 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6201,6 +6674,9 @@
 | 16 | AWP | PAW | restricted | FN | - | 2 856 DC |
 | 17 | AWP | Worm God | restricted | FN | - | 2 744 DC |
 | 18 | AWP | Black Box | restricted | FN | - | 4 816 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
 
 ---
 
@@ -6272,7 +6748,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **3 900 DC**
 - **Описание:** Строгая красно-черная классика карбона и стали
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 25 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6294,6 +6770,13 @@
 | 16 | M4A1-S | Cyrex | covert | FN | - | 49 700 DC |
 | 17 | SCAR-20 | Cyrex | classified | FN | - | 7 990 DC |
 | 18 | USP-S | Cyrex | restricted | FN | - | 2 912 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 25 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
 
 ---
 
@@ -6303,7 +6786,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **2 400 DC**
 - **Описание:** Кибернетический изумруд, Hydroponic и ядерная энергия
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 21 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6325,6 +6808,9 @@
 | 16 | PP-Bizon | Chemical Green | industrial | FN | - | 215 DC |
 | 17 | Glock-18 | Nuclear Garden | restricted | FN | - | 2 296 DC |
 | 18 | P250 | Nuclear Threat | restricted | FN | - | 2 688 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
+| 21 | Hand Wraps | Slaughter | extraordinary | BS | - | 47 376 DC |
 
 ---
 
@@ -6334,7 +6820,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **1 800 DC**
 - **Описание:** Эстетика неонового Токио, драконы и восточные мотивы
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 23 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6356,6 +6842,11 @@
 | 16 | Glock-18 | Shinobu | classified | FN | - | 15 147 DC |
 | 17 | Driver Gloves | Dragon Fists | extraordinary | FN | - | 124 800 DC |
 | 18 | MAC-10 | Saibā Oni | restricted | FN | - | 4 500 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
+| 21 | Hand Wraps | Slaughter | extraordinary | BS | - | 47 376 DC |
+| 22 | Moto Gloves | Finish Line | extraordinary | BS | - | 45 360 DC |
+| 23 | Moto Gloves | Boom! | extraordinary | BS | - | 43 344 DC |
 
 ---
 
@@ -6365,7 +6856,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **430 DC**
 - **Описание:** Милитари, камуфляж спецназа и боевая классика
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 24 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6387,6 +6878,12 @@
 | 16 | AK-47 | VariCamo Grey | industrial | MW | - | 300 DC |
 | 17 | AK-47 | Safari Mesh | industrial | FN | - | 320 DC |
 | 18 | AWP | Safari Mesh | industrial | FN | - | 385 DC |
+| 19 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
+| 20 | Hand Wraps | Slaughter | extraordinary | BS | - | 47 376 DC |
+| 21 | Moto Gloves | Finish Line | extraordinary | BS | - | 45 360 DC |
+| 22 | Moto Gloves | Boom! | extraordinary | BS | - | 43 344 DC |
+| 23 | Moto Gloves | Transport | extraordinary | BS | - | 41 328 DC |
+| 24 | Driver Gloves | Queen Jaguar | extraordinary | BS | - | 48 384 DC |
 
 ---
 
@@ -6396,7 +6893,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **13 500 DC**
 - **Описание:** Королевские масти Таро: The Empress, The Emperor, Mortis
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 25 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6418,6 +6915,13 @@
 | 16 | Five-SeveN | Fairy Tale | classified | FN | - | 12 750 DC |
 | 17 | Driver Gloves | Queen Jaguar | extraordinary | FN | - | 115 200 DC |
 | 18 | Driver Gloves | King Snake | extraordinary | FN | - | 199 200 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
+| 21 | Hand Wraps | Slaughter | extraordinary | BS | - | 47 376 DC |
+| 22 | Moto Gloves | Finish Line | extraordinary | BS | - | 45 360 DC |
+| 23 | Moto Gloves | Boom! | extraordinary | BS | - | 43 344 DC |
+| 24 | Moto Gloves | Transport | extraordinary | BS | - | 41 328 DC |
+| 25 | Driver Gloves | Rezan the Red | extraordinary | BS | - | 46 368 DC |
 
 ---
 
@@ -6427,7 +6931,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **6 200 DC**
 - **Описание:** Электрический лазурный холод и плазменный заряд
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 25 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6449,6 +6953,13 @@
 | 16 | Dual Berettas | Cobalt Quartz | restricted | FN | - | 4 816 DC |
 | 17 | Dual Berettas | Cobalt Quartz | restricted | MW | - | 3 800 DC |
 | 18 | PP-Bizon | Cobalt Halftone | milspec | FN | - | 1 411 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
+| 21 | Hand Wraps | Slaughter | extraordinary | BS | - | 47 376 DC |
+| 22 | Moto Gloves | Finish Line | extraordinary | BS | - | 45 360 DC |
+| 23 | Moto Gloves | Boom! | extraordinary | BS | - | 43 344 DC |
+| 24 | Moto Gloves | Transport | extraordinary | BS | - | 41 328 DC |
+| 25 | Driver Gloves | Queen Jaguar | extraordinary | BS | - | 48 384 DC |
 
 ---
 
@@ -6458,7 +6969,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **5 200 DC**
 - **Описание:** Битва двух стихий: ледяной Marble Fade и огненный жар
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 20 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6480,6 +6991,8 @@
 | 16 | Desert Eagle | Blaze | restricted | FN | - | 3 976 DC |
 | 17 | AUG | Flame Jörmungandr | restricted | FN | - | 4 704 DC |
 | 18 | M4A4 | Hellfire | classified | FN | - | 13 940 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
 
 ---
 
@@ -6489,7 +7002,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **800 DC**
 - **Описание:** Тайная магия теней, экзоскелеты и кошмары бездны
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 22 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6511,6 +7024,10 @@
 | 16 | SSG 08 | Abyss | milspec | FN | - | 1 513 DC |
 | 17 | Karambit | Night | covert | FN | - | 180 000 DC |
 | 18 | M4A1-S | Night Terror | restricted | FN | - | 3 500 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
 
 ---
 
@@ -6520,7 +7037,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **1 650 DC**
 - **Описание:** Яркие конфетные оттенки, каваи и поп-арт стилистика
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 22 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6542,6 +7059,10 @@
 | 16 | Galil AR | Sugar Rush | classified | FN | - | 13 260 DC |
 | 17 | Specialist Gloves | Fade | extraordinary | FN | - | 240 000 DC |
 | 18 | Specialist Gloves | Marble Fade | extraordinary | FN | - | 240 000 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
+| 21 | Hand Wraps | Slaughter | extraordinary | BS | - | 47 376 DC |
+| 22 | Moto Gloves | Finish Line | extraordinary | BS | - | 45 360 DC |
 
 ---
 
@@ -6551,7 +7072,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **1 550 DC**
 - **Описание:** Бунтарский стрит-арт, теги баллончиком и Head Shot
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 25 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6573,6 +7094,13 @@
 | 16 | AK-47 | Cartel | classified | MW | - | 8 500 DC |
 | 17 | Galil AR | Vandal | milspec | FN | - | 1 445 DC |
 | 18 | Dual Berettas | Cartel | milspec | FN | - | 1 207 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
+| 25 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
 
 ---
 
@@ -6582,7 +7110,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **1 100 DC**
 - **Описание:** Скрытные убийцы киберпанка, титан и нано-сталь
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 24 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6604,6 +7132,12 @@
 | 16 | Galil AR | Sugar Rush | classified | MW | - | 10 500 DC |
 | 17 | PP-Bizon | Carbon Fiber | industrial | FN | - | 230 DC |
 | 18 | P90 | Elite Build | milspec | FN | - | 1 200 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Crane Flight | classified | FN | - | 9 350 DC |
+| 21 | AK-47 | Searing Rage | classified | FN | - | 7 140 DC |
+| 22 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 23 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 24 | AK-47 | The Outsiders | classified | FN | - | 9 010 DC |
 
 ---
 
@@ -6613,7 +7147,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **1 400 DC**
 - **Описание:** Охотничьи трофеи королей: Man-o-war, Golden Coil, Koi
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 25 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6635,6 +7169,13 @@
 | 16 | PP-Bizon | Modern Hunter | milspec | FN | - | 1 241 DC |
 | 17 | G3SG1 | Hunter | milspec | FN | - | 714 DC |
 | 18 | AK-47 | Predator | industrial | FN | - | 440 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 21 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 22 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
+| 23 | AK-47 | Neon Revolution | covert | MW | - | 43 050 DC |
+| 24 | AK-47 | Legion of Anubis | covert | FN | - | 43 400 DC |
+| 25 | AK-47 | Asiimov | covert | FN | - | 16 000 DC |
 
 ---
 
@@ -6861,7 +7402,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **1 400 DC**
 - **Описание:** Белоснежные скины Whiteout и метели
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 21 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -6883,6 +7424,9 @@
 | 16 | M249 | Blizzard Marbleized | industrial | FN | - | 415 DC |
 | 17 | MP5-SD | Snow Splash | industrial | FN | - | 420 DC |
 | 18 | MAC-10 | Snow Splash | industrial | FN | - | 285 DC |
+| 19 | Hand Wraps | Spruce DDPAT | extraordinary | WW | - | 49 920 DC |
+| 20 | Hand Wraps | Giraffe | extraordinary | BS | - | 49 392 DC |
+| 21 | Hand Wraps | Slaughter | extraordinary | BS | - | 47 376 DC |
 
 ---
 
@@ -7016,7 +7560,7 @@
 - **Категория:** `custom`
 - **Цена открытия:** **7 500 DC**
 - **Описание:** Чистое золото высшей пробы
-- **Количество предметов в кейсе:** 18 шт.
+- **Количество предметов в кейсе:** 22 шт.
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
@@ -7038,6 +7582,10 @@
 | 16 | SCAR-20 | Brass | milspec | FN | - | 1 275 DC |
 | 17 | MAC-10 | Arabesque Mosaic | milspec | FN | - | 1 156 DC |
 | 18 | MP5-SD | Gold Leaf | milspec | FN | - | 799 DC |
+| 19 | AK-47 | AUTOEXEC | covert | FN | - | 47 600 DC |
+| 20 | AK-47 | Consequence of the Jinn | covert | MW | - | 45 346 DC |
+| 21 | AK-47 | The Oligarch | covert | FN | - | 46 200 DC |
+| 22 | AK-47 | Inheritance | covert | FN | - | 28 000 DC |
 
 ---
 
