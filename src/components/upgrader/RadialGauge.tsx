@@ -957,8 +957,19 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         targetAngle = 90 + halfSpan + Math.random() * loseSpan;
       }
 
-      const totalRotation = 360 * 5 + targetAngle;
-      const duration = 4.2;
+      // Unpredictable spin dynamics: randomize rotations (4 to 7), duration (3.6s to 5.2s), and deceleration ease curve
+      const fullRotations = Math.floor(Math.random() * 4) + 4; // 4, 5, 6, or 7 full turns
+      const totalRotation = 360 * fullRotations + targetAngle;
+      const duration = Number((3.6 + Math.random() * 1.6).toFixed(2));
+
+      const easeCurves: [number, number, number, number][] = [
+        [0.08, 0.96, 0.14, 1.0], // Sudden aggressive brake
+        [0.18, 0.72, 0.08, 1.0], // Lingering crawl
+        [0.05, 0.84, 0.20, 1.0], // Parabolic coast
+        [0.22, 0.88, 0.12, 1.0], // Heavy inertia drag
+        [0.14, 0.92, 0.25, 1.0], // Snappy finish
+      ];
+      const selectedEase = easeCurves[Math.floor(Math.random() * easeCurves.length)];
 
       sound.startSpinWhoosh(duration);
       await needleControls.set({ rotate: 0 });
@@ -966,7 +977,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       // Race: spin animation vs zeus/hook interrupt
       const spinPromise = needleControls.start({
         rotate: totalRotation,
-        transition: { duration, ease: [0.12, 0.85, 0.18, 1] },
+        transition: { duration, ease: selectedEase },
       });
       const consumableInterrupt = new Promise<'interrupt'>((resolve) => {
         spinResolveRef.current = () => resolve('interrupt');

@@ -11,8 +11,8 @@ import { SkinImage } from '../../components/ui/SkinImage';
 import { WearBadge } from '../../components/ui/WearBadge';
 import { StatTrakBadge } from '../../components/ui/StatTrakBadge';
 import { RarityBadge } from '../../components/ui/RarityBadge';
-import { SKINS_DATABASE, RARITY_CONFIG } from '../../data/skins';
-import { SkinEntity, SkinRarity } from '../../lib/types';
+import { SKINS_DATABASE, RARITY_CONFIG, WEAR_CONFIG } from '../../data/skins';
+import { SkinEntity, SkinRarity, SkinWear } from '../../lib/types';
 import { useGameStore } from '../../store/useGameStore';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
@@ -30,6 +30,8 @@ import {
   Zap,
   Shield,
   Layers,
+  X,
+  Sparkles,
 } from 'lucide-react';
 
 export const ITEM_CATEGORIES = [
@@ -49,14 +51,36 @@ const PISTOL_MODELS = ['desert eagle', 'usp-s', 'glock-18', 'five-seven', 'p250'
 const SMG_MODELS = ['mp9', 'mac-10', 'mp7', 'mp5-sd', 'ump-45', 'p90', 'pp-bizon'];
 const HEAVY_MODELS = ['nova', 'xm1014', 'mag-7', 'sawed-off', 'm249', 'negev'];
 
-// Memoized Card Component for smooth, fast scrolling with contentVisibility and GPU isolation
-const MarketSkinCard = React.memo<{
-  skin: SkinEntity;
-  canAfford: boolean;
-  onBuy: (skin: SkinEntity) => void;
+const WEAR_ORDER: SkinWear[] = ['FN', 'MW', 'FT', 'WW', 'BS'];
+const WEAR_LABELS: Record<SkinWear, { ru: string; en: string }> = {
+  FN: { ru: 'Прямо с завода', en: 'Factory New' },
+  MW: { ru: 'Немного поношенное', en: 'Minimal Wear' },
+  FT: { ru: 'После полевых испытаний', en: 'Field-Tested' },
+  WW: { ru: 'Поношенное', en: 'Well-Worn' },
+  BS: { ru: 'Закалённое в боях', en: 'Battle-Scarred' },
+};
+
+export interface GroupedMarketSkin {
+  groupKey: string;
+  weapon: string;
+  skinName: string;
+  rarity: SkinRarity;
+  image: string;
+  minPriceDc: number;
+  maxPriceDc: number;
+  hasStatTrak: boolean;
+  hasNonStatTrak: boolean;
+  variants: SkinEntity[];
+}
+
+// Grouped Skin Card Component: only weapon, rarity, and price range!
+const MarketGroupCard = React.memo<{
+  group: GroupedMarketSkin;
+  canAffordAny: boolean;
+  onSelect: (group: GroupedMarketSkin) => void;
   locale: string;
-}>(({ skin, canAfford, onBuy, locale }) => {
-  const rarityCfg = RARITY_CONFIG[skin.rarity] || RARITY_CONFIG.milspec;
+}>(({ group, canAffordAny, onSelect, locale }) => {
+  const rarityCfg = RARITY_CONFIG[group.rarity] || RARITY_CONFIG.milspec;
 
   return (
     <div
@@ -70,44 +94,52 @@ const MarketSkinCard = React.memo<{
         willChange: 'transform',
       }}
     >
-      {/* Top Badges */}
+      {/* Top Rarity Badge only (clean design per user request) */}
       <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
-        <div className="flex items-center gap-1">
-          {skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
-          <WearBadge skin={skin} size="xs" />
-        </div>
-        <RarityBadge rarity={skin.rarity} size="xs" />
+        <RarityBadge rarity={group.rarity} size="xs" />
+        {group.hasStatTrak && (
+          <span className="text-[9px] font-black text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded-md">
+            ST™
+          </span>
+        )}
       </div>
 
       {/* Skin Image */}
-      <div className="w-full h-28 sm:h-32 flex items-center justify-center my-2">
+      <div className="w-full h-28 sm:h-32 flex items-center justify-center my-2 relative">
+        <div
+          className="absolute w-24 h-24 rounded-full blur-2xl opacity-20 pointer-events-none"
+          style={{ background: rarityCfg.color }}
+        />
         <SkinImage
-          src={skin.image}
-          alt={skin.name}
+          src={group.image}
+          alt={group.skinName}
           size={150}
-          className="w-full h-24 sm:h-28 object-contain group-hover:scale-105 transition-transform duration-150"
+          className="w-full h-24 sm:h-28 object-contain group-hover:scale-105 transition-transform duration-150 relative z-10"
         />
       </div>
 
       {/* Info & Buy Button */}
       <div className="w-full flex flex-col pt-2 border-t border-white/5">
-        <span className="text-xs font-black text-white truncate" title={skin.skinName || skin.name}>
-          {skin.skinName || skin.name}
+        <span className="text-xs font-black text-white truncate" title={group.skinName}>
+          {group.skinName}
         </span>
-        <span className="text-[10px] text-white/40 truncate">{skin.weapon}</span>
+        <span className="text-[10px] text-white/40 truncate">{group.weapon}</span>
 
+        {/* Price Range */}
         <div className="flex items-center gap-1.5 mt-1.5 mb-2">
           <DropCoinIcon className="w-3.5 h-3.5" />
-          <span className="font-mono font-black text-xs text-yellow-400">
-            {skin.priceDc.toLocaleString('ru-RU')} DC
+          <span className="font-mono font-black text-xs text-yellow-400 truncate">
+            {group.minPriceDc === group.maxPriceDc
+              ? `${group.minPriceDc.toLocaleString('ru-RU')} DC`
+              : `${group.minPriceDc.toLocaleString('ru-RU')} – ${group.maxPriceDc.toLocaleString('ru-RU')} DC`}
           </span>
         </div>
 
         <button
           type="button"
-          onClick={() => onBuy(skin)}
+          onClick={() => onSelect(group)}
           className={`w-full py-2 px-3 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-            canAfford
+            canAffordAny
               ? 'bg-yellow-400 hover:bg-yellow-300 text-black shadow-[0_0_15px_rgba(250,204,21,0.25)] active:scale-95'
               : 'bg-white/5 hover:bg-white/10 text-white/40 border border-white/5'
           }`}
@@ -119,7 +151,272 @@ const MarketSkinCard = React.memo<{
     </div>
   );
 });
-MarketSkinCard.displayName = 'MarketSkinCard';
+MarketGroupCard.displayName = 'MarketGroupCard';
+
+// Purchase Modal: select quality (wear) and StatTrak to see exact price and buy!
+interface SkinPurchaseModalProps {
+  group: GroupedMarketSkin;
+  balance: number;
+  locale: string;
+  onClose: () => void;
+  onBuy: (skin: SkinEntity) => void;
+  onRefill: () => void;
+}
+
+const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
+  group,
+  balance,
+  locale,
+  onClose,
+  onBuy,
+  onRefill,
+}) => {
+  const isRu = locale === 'ru';
+  const rarityCfg = RARITY_CONFIG[group.rarity] || RARITY_CONFIG.milspec;
+
+  // StatTrak mode: default to false if non-ST available, else true
+  const [isStatTrak, setIsStatTrak] = useState<boolean>(() => {
+    return group.hasNonStatTrak ? false : true;
+  });
+
+  // Filter variants matching current StatTrak mode
+  const currentStVariants = useMemo(() => {
+    const list = group.variants.filter((v) => Boolean(v.statTrak) === isStatTrak);
+    return list.length > 0 ? list : group.variants;
+  }, [group.variants, isStatTrak]);
+
+  // Selected wear quality
+  const [selectedWear, setSelectedWear] = useState<SkinWear>(() => {
+    // Pick first available wear in current variants
+    for (const w of WEAR_ORDER) {
+      if (currentStVariants.some((v) => v.wear === w)) return w;
+    }
+    return (currentStVariants[0]?.wear as SkinWear) || 'FN';
+  });
+
+  // Ensure selectedWear is valid when isStatTrak changes
+  const activeVariant = useMemo<SkinEntity>(() => {
+    const exact = currentStVariants.find((v) => v.wear === selectedWear);
+    if (exact) return exact;
+    return currentStVariants[0] || group.variants[0];
+  }, [currentStVariants, selectedWear, group.variants]);
+
+  const canAfford = balance >= activeVariant.priceDc;
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div className="relative w-full max-w-lg rounded-3xl bg-[#0d0e14] border border-white/15 p-5 sm:p-7 shadow-[0_0_60px_rgba(0,0,0,0.9)] flex flex-col gap-5 overflow-hidden animate-in zoom-in-95 duration-150">
+        {/* Ambient background glow matching skin rarity */}
+        <div
+          className="absolute -top-24 -left-24 w-72 h-72 rounded-full blur-3xl opacity-25 pointer-events-none"
+          style={{ background: rarityCfg.color }}
+        />
+        <div
+          className="absolute -bottom-24 -right-24 w-72 h-72 rounded-full blur-3xl opacity-20 pointer-events-none"
+          style={{ background: rarityCfg.color }}
+        />
+
+        {/* Modal Header */}
+        <div className="flex items-start justify-between gap-3 relative z-10">
+          <div className="flex flex-col">
+            <div className="flex items-center gap-2 mb-1">
+              <RarityBadge rarity={group.rarity} size="xs" />
+              <span className="text-xs text-white/40 font-bold">{group.weapon}</span>
+            </div>
+            <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+              {group.skinName}
+            </h2>
+          </div>
+
+          <button
+            type="button"
+            onClick={onClose}
+            className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all cursor-pointer"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Skin Preview Display */}
+        <div className="relative w-full h-36 sm:h-44 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center p-4 overflow-hidden z-10">
+          <SkinImage
+            src={activeVariant.image}
+            alt={activeVariant.name}
+            size={220}
+            className="w-full h-full object-contain filter drop-shadow-[0_8px_20px_rgba(0,0,0,0.7)]"
+          />
+
+          <div className="absolute bottom-2.5 left-3 flex items-center gap-1.5">
+            {activeVariant.statTrak && isStatTrakableItem(activeVariant) && <StatTrakBadge size="sm" />}
+            <WearBadge skin={activeVariant} size="sm" />
+          </div>
+        </div>
+
+        {/* Configuration Options */}
+        <div className="flex flex-col gap-4 relative z-10">
+          {/* StatTrak Toggle: only shown if skin supports both regular and StatTrak */}
+          {group.hasStatTrak && group.hasNonStatTrak && (
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[11px] font-black uppercase text-white/50 tracking-wider">
+                {isRu ? 'Тип предмета' : 'Item Type'}
+              </label>
+              <div className="grid grid-cols-2 gap-2 p-1 rounded-xl bg-black/60 border border-white/10">
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playClick();
+                    setIsStatTrak(false);
+                  }}
+                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    !isStatTrak
+                      ? 'bg-white/15 text-white shadow font-black border border-white/20'
+                      : 'text-white/60 hover:text-white'
+                  }`}
+                >
+                  {isRu ? 'Обычный' : 'Regular'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playClick();
+                    setIsStatTrak(true);
+                  }}
+                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                    isStatTrak
+                      ? 'bg-amber-500/25 text-amber-300 border border-amber-500/50 shadow font-black'
+                      : 'text-white/60 hover:text-amber-400'
+                  }`}
+                >
+                  <span>StatTrak™</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Quality / Wear Selector */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-[11px] font-black uppercase text-white/50 tracking-wider">
+              {isRu ? 'Качество предмета' : 'Item Wear Quality'}
+            </label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1">
+              {WEAR_ORDER.map((w) => {
+                const variant = currentStVariants.find((v) => v.wear === w);
+                const isAvailable = Boolean(variant);
+                const isSelected = activeVariant.wear === w && isAvailable;
+                const wearCfg = WEAR_CONFIG[w];
+
+                if (!isAvailable) {
+                  return (
+                    <div
+                      key={w}
+                      className="p-2.5 rounded-xl border border-white/5 bg-white/[0.02] flex items-center justify-between opacity-35 cursor-not-allowed select-none"
+                    >
+                      <span className="text-xs font-medium text-white/40">
+                        {isRu ? WEAR_LABELS[w].ru : WEAR_LABELS[w].en} ({w})
+                      </span>
+                      <span className="text-[10px] text-white/30">{isRu ? 'Нет' : 'N/A'}</span>
+                    </div>
+                  );
+                }
+
+                return (
+                  <button
+                    key={w}
+                    type="button"
+                    onClick={() => {
+                      sound.playClick();
+                      setSelectedWear(w);
+                    }}
+                    className={`p-2.5 rounded-xl border text-left flex items-center justify-between transition-all cursor-pointer ${
+                      isSelected
+                        ? 'bg-yellow-400/15 border-yellow-400 text-white shadow-[0_0_15px_rgba(250,204,21,0.2)]'
+                        : 'bg-black/40 border-white/10 hover:border-white/25 text-white/80'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span
+                        className="w-2 h-2 rounded-full shrink-0"
+                        style={{ background: wearCfg?.color || '#10b981' }}
+                      />
+                      <span className="text-xs font-bold truncate">
+                        {isRu ? WEAR_LABELS[w].ru : WEAR_LABELS[w].en} ({w})
+                      </span>
+                    </div>
+                    <span className="font-mono font-black text-xs text-yellow-400 shrink-0 ml-1">
+                      {variant!.priceDc.toLocaleString('ru-RU')} DC
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Price & Action Section */}
+        <div className="pt-3 border-t border-white/10 flex flex-col gap-3 relative z-10">
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col">
+              <span className="text-[10px] font-bold uppercase text-white/40">
+                {isRu ? 'Итоговая цена' : 'Final Price'}
+              </span>
+              <div className="flex items-center gap-1.5 mt-0.5">
+                <DropCoinIcon size={20} />
+                <span className="font-mono font-black text-xl text-yellow-400">
+                  {activeVariant.priceDc.toLocaleString('ru-RU')} DC
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-end">
+              <span className="text-[10px] font-bold uppercase text-white/40">
+                {isRu ? 'Ваш баланс' : 'Your Balance'}
+              </span>
+              <span className="font-mono font-bold text-sm text-white/80">
+                {balance.toLocaleString('ru-RU')} DC
+              </span>
+            </div>
+          </div>
+
+          {canAfford ? (
+            <button
+              type="button"
+              onClick={() => {
+                onBuy(activeVariant);
+                onClose();
+              }}
+              className="w-full py-3.5 px-4 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(250,204,21,0.35)] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <ShoppingBag className="w-4 h-4" />
+              <span>
+                {isRu
+                  ? `Купить за ${activeVariant.priceDc.toLocaleString('ru-RU')} DC`
+                  : `Purchase for ${activeVariant.priceDc.toLocaleString('ru-RU')} DC`}
+              </span>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={onRefill}
+              className="w-full py-3.5 px-4 rounded-2xl bg-white/10 hover:bg-white/20 text-yellow-400 font-black text-sm uppercase tracking-wider border border-yellow-400/40 shadow-lg active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>
+                {isRu ? 'Недостаточно DC (Пополнить)' : 'Insufficient DC (Top Up)'}
+              </span>
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function MarketplacePage() {
   const balance = useGameStore((s) => s.balance);
@@ -134,28 +431,70 @@ export default function MarketplacePage() {
   const [selectedSubWeapon, setSelectedSubWeapon] = useState('all');
   const [selectedRarity, setSelectedRarity] = useState('all');
   const [sortOption, setSortOption] = useState<'price_asc' | 'price_desc' | 'name_asc'>('price_asc');
-  const [statTrakOnly, setStatTrakOnly] = useState(false);
   const [priceRange, setPriceRange] = useState<'all' | 'under1k' | '1k_10k' | 'over10k'>('all');
   const [visibleCount, setVisibleCount] = useState(48);
 
   const [purchasedSkinName, setPurchasedSkinName] = useState<string | null>(null);
+  const [selectedGroupForModal, setSelectedGroupForModal] = useState<GroupedMarketSkin | null>(null);
 
-  // BASE POOL: Strictly weapons, knives, and gloves by default!
+  // BASE POOL: Strictly weapons, knives, and gloves
   const basePool = useMemo(() => {
     return SKINS_DATABASE.filter(isActualWeaponOrKnifeGlove);
   }, []);
 
-  // Filtered skins
-  const filteredSkins = useMemo(() => {
-    let list = basePool;
+  // GROUPED SKINS POOL: unique weapon + skin name
+  const groupedPool = useMemo<GroupedMarketSkin[]>(() => {
+    const map = new Map<string, SkinEntity[]>();
+    for (const s of basePool) {
+      const key = `${s.weapon || ''}___${s.skinName || s.name}`;
+      if (!map.has(key)) {
+        map.set(key, []);
+      }
+      map.get(key)!.push(s);
+    }
+
+    const result: GroupedMarketSkin[] = [];
+    for (const [key, variants] of map.entries()) {
+      const prices = variants.map((v) => v.priceDc).filter((p) => typeof p === 'number' && p > 0);
+      if (prices.length === 0) continue;
+      const minPrice = Math.min(...prices);
+      const maxPrice = Math.max(...prices);
+
+      // Best image: preferably clean FN/MW or first
+      const best =
+        variants.find((v) => !v.statTrak && v.wear === 'FN') ||
+        variants.find((v) => !v.statTrak && v.wear === 'MW') ||
+        variants.find((v) => !v.statTrak) ||
+        variants[0];
+
+      result.push({
+        groupKey: key,
+        weapon: best.weapon,
+        skinName: best.skinName || best.name,
+        rarity: best.rarity,
+        image: best.image,
+        minPriceDc: minPrice,
+        maxPriceDc: maxPrice,
+        hasStatTrak: variants.some((v) => v.statTrak),
+        hasNonStatTrak: variants.some((v) => !v.statTrak),
+        variants,
+      });
+    }
+
+    return result;
+  }, [basePool]);
+
+  // Filtered grouped skins
+  const filteredGroups = useMemo(() => {
+    let list = groupedPool;
 
     // Category filter
     if (selectedCategory !== 'all') {
-      list = list.filter((skin) => {
-        const w = (skin.weapon || '').toLowerCase();
+      list = list.filter((group) => {
+        const w = (group.weapon || '').toLowerCase();
         const isGlove = w.includes('gloves') || w.includes('wraps') || w.includes('перчатки');
         const isKnife =
-          (skin.name.startsWith('★') && !isGlove) ||
+          (group.skinName.startsWith('★') && !isGlove) ||
           w.includes('knife') ||
           w.includes('нож') ||
           w.includes('bayonet') ||
@@ -180,61 +519,55 @@ export default function MarketplacePage() {
     // Sub-weapon model filter
     if (selectedSubWeapon !== 'all') {
       const q = selectedSubWeapon.toLowerCase();
-      list = list.filter((skin) => (skin.weapon || '').toLowerCase().includes(q));
+      list = list.filter((group) => (group.weapon || '').toLowerCase().includes(q));
     }
 
     // Rarity filter
     if (selectedRarity !== 'all') {
-      list = list.filter((skin) => skin.rarity === selectedRarity);
+      list = list.filter((group) => group.rarity === selectedRarity);
     }
 
-    // StatTrak filter
-    if (statTrakOnly) {
-      list = list.filter((skin) => skin.statTrak);
-    }
-
-    // Price range filter
+    // Price range filter (based on min price)
     if (priceRange === 'under1k') {
-      list = list.filter((s) => s.priceDc < 1000);
+      list = list.filter((g) => g.minPriceDc < 1000);
     } else if (priceRange === '1k_10k') {
-      list = list.filter((s) => s.priceDc >= 1000 && s.priceDc <= 10000);
+      list = list.filter((g) => g.minPriceDc <= 10000 && g.maxPriceDc >= 1000);
     } else if (priceRange === 'over10k') {
-      list = list.filter((s) => s.priceDc > 10000);
+      list = list.filter((g) => g.maxPriceDc > 10000);
     }
 
     // Text search
     if (deferredSearch.trim()) {
       const q = deferredSearch.toLowerCase().trim();
       list = list.filter(
-        (s) =>
-          s.name.toLowerCase().includes(q) ||
-          (s.skinName || '').toLowerCase().includes(q) ||
-          (s.weapon || '').toLowerCase().includes(q)
+        (g) =>
+          g.skinName.toLowerCase().includes(q) ||
+          g.weapon.toLowerCase().includes(q)
       );
     }
 
     // Sorting
     const sorted = [...list].sort((a, b) => {
-      if (sortOption === 'price_asc') return a.priceDc - b.priceDc;
-      if (sortOption === 'price_desc') return b.priceDc - a.priceDc;
-      if (sortOption === 'name_asc') return (a.skinName || a.name).localeCompare(b.skinName || b.name);
+      if (sortOption === 'price_asc') return a.minPriceDc - b.minPriceDc;
+      if (sortOption === 'price_desc') return b.maxPriceDc - a.maxPriceDc;
+      if (sortOption === 'name_asc') return a.skinName.localeCompare(b.skinName);
       return 0;
     });
 
     return sorted;
-  }, [basePool, selectedCategory, selectedSubWeapon, selectedRarity, statTrakOnly, priceRange, deferredSearch, sortOption]);
+  }, [groupedPool, selectedCategory, selectedSubWeapon, selectedRarity, priceRange, deferredSearch, sortOption]);
 
   // Sub-weapons available in current category
   const availableSubWeapons = useMemo(() => {
     if (selectedCategory === 'all') return [];
     const counts: Record<string, number> = {};
-    for (const s of basePool) {
-      const w = s.weapon || '';
+    for (const g of groupedPool) {
+      const w = g.weapon || '';
       if (!w) continue;
       const lw = w.toLowerCase();
       const isGlove = lw.includes('gloves') || lw.includes('wraps') || lw.includes('перчатки');
       const isKnife =
-        (s.name.startsWith('★') && !isGlove) ||
+        (g.skinName.startsWith('★') && !isGlove) ||
         lw.includes('knife') ||
         lw.includes('нож') ||
         lw.includes('bayonet') ||
@@ -262,24 +595,27 @@ export default function MarketplacePage() {
     return Object.entries(counts)
       .map(([name, count]) => ({ name, count }))
       .sort((a, b) => b.count - a.count);
-  }, [basePool, selectedCategory]);
+  }, [groupedPool, selectedCategory]);
 
-  const handleBuy = useCallback((skin: SkinEntity) => {
-    if (balance < skin.priceDc) {
-      sound.playError();
-      setRefillOpen(true);
-      return;
-    }
+  const handleBuy = useCallback(
+    (skin: SkinEntity) => {
+      if (balance < skin.priceDc) {
+        sound.playError();
+        setRefillOpen(true);
+        return;
+      }
 
-    deductBalance(skin.priceDc);
-    addToInventory([skin]);
-    sound.playBuy();
+      deductBalance(skin.priceDc);
+      addToInventory([skin]);
+      sound.playBuy();
 
-    setPurchasedSkinName(skin.skinName || skin.name);
-    setTimeout(() => {
-      setPurchasedSkinName(null);
-    }, 2800);
-  }, [balance, deductBalance, addToInventory, setRefillOpen]);
+      setPurchasedSkinName(`${skin.weapon} | ${skin.skinName || skin.name}`);
+      setTimeout(() => {
+        setPurchasedSkinName(null);
+      }, 2800);
+    },
+    [balance, deductBalance, addToInventory, setRefillOpen]
+  );
 
   const handleLoadMore = () => {
     sound.playClick();
@@ -309,8 +645,8 @@ export default function MarketplacePage() {
               </h1>
               <p className="text-sm text-white/50 max-w-xl mt-1">
                 {locale === 'ru'
-                  ? 'Покупайте любые ножи, перчатки и оружие CS2 напрямую за DropCoins (DC) без наценок и комиссий.'
-                  : 'Buy any CS2 knife, gloves, and weapons directly using DropCoins (DC) with zero fees.'}
+                  ? 'Выберите оружие и скин, выберите качество и StatTrak в удобном меню и покупайте напрямую за DropCoins (DC).'
+                  : 'Select any CS2 skin, choose your desired wear and StatTrak in the purchase menu, and buy directly using DropCoins (DC).'}
               </p>
             </div>
 
@@ -422,7 +758,7 @@ export default function MarketplacePage() {
               />
             </div>
 
-            {/* Dropdown Filters & Toggles */}
+            {/* Dropdown Filters & Sort */}
             <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto justify-end">
               {/* Rarity */}
               <select
@@ -434,11 +770,14 @@ export default function MarketplacePage() {
                 className="bg-black/60 border border-white/10 rounded-xl px-3 py-2 text-xs text-white outline-none cursor-pointer"
               >
                 <option value="all">{locale === 'ru' ? 'Все редкости' : 'All rarities'}</option>
+                <option value="contraband">★ {locale === 'ru' ? 'Контрабанда' : 'Contraband'}</option>
                 <option value="extraordinary">★ {locale === 'ru' ? 'Экстраординарное' : 'Extraordinary'}</option>
                 <option value="covert">★ {locale === 'ru' ? 'Тайное' : 'Covert'}</option>
                 <option value="classified">{locale === 'ru' ? 'Засекреченное' : 'Classified'}</option>
                 <option value="restricted">{locale === 'ru' ? 'Запрещенное' : 'Restricted'}</option>
                 <option value="milspec">{locale === 'ru' ? 'Армейское' : 'Mil-Spec'}</option>
+                <option value="industrial">{locale === 'ru' ? 'Промышленное' : 'Industrial'}</option>
+                <option value="consumer">{locale === 'ru' ? 'Ширпотреб' : 'Consumer'}</option>
                 <option value="gold">★ {locale === 'ru' ? 'Редкий особый' : 'Rare Special'}</option>
               </select>
 
@@ -456,23 +795,6 @@ export default function MarketplacePage() {
                 <option value="1k_10k">{locale === 'ru' ? '1 000 – 10 000 DC' : '1k – 10k DC'}</option>
                 <option value="over10k">{locale === 'ru' ? 'От 10 000 DC' : 'Above 10k DC'}</option>
               </select>
-
-              {/* StatTrak Toggle */}
-              <button
-                type="button"
-                onClick={() => {
-                  sound.playClick();
-                  setStatTrakOnly((prev) => !prev);
-                  setVisibleCount(48);
-                }}
-                className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
-                  statTrakOnly
-                    ? 'bg-amber-500/20 text-amber-400 border-amber-500/50 shadow-sm font-black'
-                    : 'bg-black/60 text-white/60 border-white/10 hover:text-white'
-                }`}
-              >
-                StatTrak™
-              </button>
 
               {/* Sort */}
               <select
@@ -492,12 +814,12 @@ export default function MarketplacePage() {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 py-6 pb-20">
           <div className="flex items-center justify-between mb-4">
             <span className="text-xs font-mono font-bold text-white/50">
-              {locale === 'ru' ? 'Найдено скинов:' : 'Items found:'}{' '}
-              <span className="text-yellow-400 font-black">{filteredSkins.length}</span>
+              {locale === 'ru' ? 'Найдено моделей скинов:' : 'Skin models found:'}{' '}
+              <span className="text-yellow-400 font-black">{filteredGroups.length}</span>
             </span>
           </div>
 
-          {filteredSkins.length === 0 ? (
+          {filteredGroups.length === 0 ? (
             <div className="py-20 text-center flex flex-col items-center">
               <Store className="w-12 h-12 text-white/20 mb-3" />
               <span className="text-sm font-bold text-white/50 mb-4">
@@ -511,7 +833,6 @@ export default function MarketplacePage() {
                   setSelectedSubWeapon('all');
                   setSelectedRarity('all');
                   setPriceRange('all');
-                  setStatTrakOnly(false);
                 }}
                 className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-white cursor-pointer"
               >
@@ -524,19 +845,22 @@ export default function MarketplacePage() {
                 className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4"
                 style={{ contain: 'layout' }}
               >
-                {filteredSkins.slice(0, visibleCount).map((skin) => (
-                  <MarketSkinCard
-                    key={skin.id}
-                    skin={skin}
-                    canAfford={balance >= skin.priceDc}
-                    onBuy={handleBuy}
+                {filteredGroups.slice(0, visibleCount).map((group) => (
+                  <MarketGroupCard
+                    key={group.groupKey}
+                    group={group}
+                    canAffordAny={balance >= group.minPriceDc}
+                    onSelect={(g) => {
+                      sound.playClick();
+                      setSelectedGroupForModal(g);
+                    }}
                     locale={locale}
                   />
                 ))}
               </div>
 
               {/* Load More Button */}
-              {visibleCount < filteredSkins.length && (
+              {visibleCount < filteredGroups.length && (
                 <div className="flex justify-center mt-8">
                   <button
                     type="button"
@@ -544,14 +868,29 @@ export default function MarketplacePage() {
                     className="px-8 py-3.5 rounded-2xl bg-[#0d0e14] hover:bg-white/10 text-white font-black text-xs uppercase tracking-wider border border-white/10 shadow-lg active:scale-95 transition-all cursor-pointer"
                   >
                     {locale === 'ru'
-                      ? `Показать еще (+36 из ${filteredSkins.length - visibleCount})`
-                      : `Load More (+36 of ${filteredSkins.length - visibleCount})`}
+                      ? `Показать еще (+36 из ${filteredGroups.length - visibleCount})`
+                      : `Load More (+36 of ${filteredGroups.length - visibleCount})`}
                   </button>
                 </div>
               )}
             </>
           )}
         </section>
+
+        {/* Selected Skin Purchase Modal */}
+        {selectedGroupForModal && (
+          <SkinPurchaseModal
+            group={selectedGroupForModal}
+            balance={balance}
+            locale={locale}
+            onClose={() => setSelectedGroupForModal(null)}
+            onBuy={handleBuy}
+            onRefill={() => {
+              setSelectedGroupForModal(null);
+              setRefillOpen(true);
+            }}
+          />
+        )}
 
         {/* Purchase Notification Toast */}
         {purchasedSkinName && (

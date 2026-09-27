@@ -2933,7 +2933,7 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 1 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
 | 2 | M4A1-S | Fade | covert | FN | - | 68 000 DC |
 | 3 | M4A1-S | Vaporwave | covert | FN | - | 35 000 DC |
 | 4 | M4A1-S | Welcome to the Jungle | covert | FN | - | 32 900 DC |
@@ -3181,7 +3181,7 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 1 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
 | 2 | AK-47 | Bloodsport | covert | FN | - | 60 900 DC |
 | 3 | AK-47 | Redline | classified | FN | - | 12 410 DC |
 | 4 | AWP | Redline | classified | FN | - | 11 730 DC |
@@ -3460,7 +3460,7 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 1 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
 | 2 | M4A1-S | Fade | covert | FN | - | 68 000 DC |
 | 3 | M4A1-S | Vaporwave | covert | FN | - | 35 000 DC |
 | 4 | M4A4 | Poseidon | classified | FN | - | 12 393 DC |
@@ -3966,7 +3966,7 @@
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
-| 2 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 2 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
 | 3 | Butterfly Knife | Fade | covert | FN | - | 240 000 DC |
 | 4 | Karambit | Doppler | covert | FN | - | 280 000 DC |
 | 5 | AK-47 | Olive Polycam | industrial | BS | - | 147 DC |
@@ -4029,7 +4029,7 @@
 |---|---|---|---|---|---|---|
 | 1 | AWP | Gungnir | covert | FN | - | 59 500 DC |
 | 2 | AWP | The Prince | covert | FN | - | 42 700 DC |
-| 3 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 3 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
 | 4 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
 | 5 | AK-47 | Gold Arabesque | covert | FN | - | 42 700 DC |
 | 6 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
@@ -4059,7 +4059,7 @@
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
-| 2 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 2 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
 | 3 | AWP | Gungnir | covert | FN | - | 59 500 DC |
 | 4 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
 | 5 | Sport Gloves | Pandora's Box | extraordinary | FN | - | 380 000 DC |
@@ -4091,8 +4091,8 @@
 |---|---|---|---|---|---|---|
 | 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
 | 2 | AWP | Dragon Lore | covert | MW | - | 697 000 DC |
-| 3 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
-| 4 | M4A4 | Howl | milspec | MW | - | 344 400 DC |
+| 3 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
+| 4 | M4A4 | Howl | contraband | MW | - | 344 400 DC |
 | 5 | Sport Gloves | Pandora's Box | extraordinary | FN | - | 380 000 DC |
 | 6 | Sport Gloves | Vice | extraordinary | FN | - | 350 000 DC |
 | 7 | AWP | Gungnir | covert | FN | - | 59 500 DC |
@@ -4123,9 +4123,9 @@
 | 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
 | 2 | AWP | Dragon Lore | covert | MW | - | 697 000 DC |
 | 3 | AWP | Dragon Lore | covert | FT | - | 552 500 DC |
-| 4 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
-| 5 | M4A4 | Howl | milspec | MW | - | 344 400 DC |
-| 6 | M4A4 | Howl | milspec | FT | - | 273 000 DC |
+| 4 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
+| 5 | M4A4 | Howl | contraband | MW | - | 344 400 DC |
+| 6 | M4A4 | Howl | contraband | FT | - | 273 000 DC |
 | 7 | AK-47 | Fire Serpent | covert | FN | - | 120 000 DC |
 | 8 | AK-47 | Fire Serpent | covert | MW | - | 98 400 DC |
 | 9 | AK-47 | Fire Serpent | covert | FT | - | 78 000 DC |
@@ -4405,7 +4405,7 @@
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
 | 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
-| 2 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 2 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
 | 3 | Nomad Knife | Safari Mesh | covert | FN | - | 213 600 DC |
 | 4 | M9 Bayonet | Safari Mesh | covert | FN | - | 211 200 DC |
 | 5 | Karambit | Safari Mesh | covert | FN | - | 206 400 DC |
@@ -5037,8 +5037,8 @@
 | 2 | AWP | Dragon Lore | covert | FN | StatTrak™ | 1 147 500 DC |
 | 3 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
 | 4 | AK-47 | Case Hardened | classified | FN | StatTrak™ | 11 705 DC |
-| 5 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
-| 6 | M4A4 | Howl | milspec | FN | StatTrak™ | 567 000 DC |
+| 5 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
+| 6 | M4A4 | Howl | contraband | FN | StatTrak™ | 567 000 DC |
 | 7 | Desert Eagle | Golden Koi | covert | FN | - | 46 900 DC |
 | 8 | Desert Eagle | Golden Koi | covert | FN | StatTrak™ | 63 315 DC |
 | 9 | USP-S | Kill Confirmed | covert | FN | - | 44 100 DC |
@@ -5881,7 +5881,7 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 1 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
 | 2 | AK-47 | Wild Lotus | covert | FN | - | 39 200 DC |
 | 3 | AK-47 | Jaguar | covert | FN | - | 36 400 DC |
 | 4 | Sawed-Off | The Kraken | covert | FN | - | 35 000 DC |
@@ -6619,9 +6619,9 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
-| 2 | M4A4 | Howl | milspec | MW | - | 344 400 DC |
-| 3 | M4A4 | Howl | milspec | FT | - | 273 000 DC |
+| 1 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
+| 2 | M4A4 | Howl | contraband | MW | - | 344 400 DC |
+| 3 | M4A4 | Howl | contraband | FT | - | 273 000 DC |
 | 4 | Брелок | Hot Howl | gold | - | - | 119 000 DC |
 | 5 | Брелок | Hot Howl | gold | - | - | 3 359 DC |
 | 6 | M4A1-S | Hot Rod | classified | FN | - | 12 750 DC |
@@ -6944,8 +6944,8 @@
 |---|---|---|---|---|---|---|
 | 1 | AWP | Dragon Lore | covert | FN | - | 850 000 DC |
 | 2 | AWP | Dragon Lore | covert | MW | - | 697 000 DC |
-| 3 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
-| 4 | M4A4 | Howl | milspec | MW | - | 344 400 DC |
+| 3 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
+| 4 | M4A4 | Howl | contraband | MW | - | 344 400 DC |
 | 5 | AK-47 | Case Hardened | classified | FN | - | 8 670 DC |
 | 6 | AK-47 | Case Hardened | classified | MW | - | 7 000 DC |
 | 7 | AWP | Gungnir | covert | FN | - | 59 500 DC |
@@ -7944,7 +7944,7 @@
 
 | # | Оружие | Название скина | Редкость | Качество | StatTrak | Цена (DC) |
 |---|---|---|---|---|---|---|
-| 1 | M4A4 | Howl | milspec | FN | - | 420 000 DC |
+| 1 | M4A4 | Howl | contraband | FN | - | 420 000 DC |
 | 2 | Specialist Gloves | Crimson Kimono | extraordinary | FN | - | 148 800 DC |
 | 3 | Karambit | Crimson Web | covert | FN | - | 211 200 DC |
 | 4 | M9 Bayonet | Crimson Web | covert | FN | - | 96 000 DC |
