@@ -11,6 +11,7 @@ import confetti from 'canvas-confetti';
 import { CashbackModal } from './CashbackModal';
 import { WearBadge } from '../ui/WearBadge';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
+import { RarityBadge } from '../ui/RarityBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
@@ -46,12 +47,7 @@ const UpgraderInventoryCard = React.memo<{
           {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
           <WearBadge skin={item} size="xs" />
         </div>
-        <span
-          className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
-          style={{ color: rarityCfg.color, backgroundColor: `${rarityCfg.color}15` }}
-        >
-          {item.rarity.slice(0, 3)}
-        </span>
+        <RarityBadge rarity={item.rarity} size="xs" short />
       </div>
 
       <div className="w-full h-16 flex items-center justify-center my-1">
@@ -110,12 +106,7 @@ const UpgraderCatalogCard = React.memo<{
           {skin.statTrak && isStatTrakableItem(skin) && <StatTrakBadge size="xs" />}
           <WearBadge skin={skin} size="xs" />
         </div>
-        <span
-          className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded"
-          style={{ color: rarityCfg.color, backgroundColor: `${rarityCfg.color}15` }}
-        >
-          {skin.rarity.slice(0, 3)}
-        </span>
+        <RarityBadge rarity={skin.rarity} size="xs" short />
       </div>
 
       <div className="w-full h-16 flex items-center justify-center my-1">
@@ -156,6 +147,7 @@ const UpgraderMiniMarketCard = React.memo<{
           {item.statTrak && isStatTrakableItem(item) && <StatTrakBadge size="xs" />}
           <WearBadge skin={item} size="xs" />
         </div>
+        <RarityBadge rarity={item.rarity} size="xs" short />
       </div>
 
       <div className="w-full h-20 flex items-center justify-center my-1">
@@ -957,17 +949,18 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         targetAngle = 90 + halfSpan + Math.random() * loseSpan;
       }
 
-      // Unpredictable spin dynamics: randomize rotations (4 to 7), duration (3.6s to 5.2s), and deceleration ease curve
-      const fullRotations = Math.floor(Math.random() * 4) + 4; // 4, 5, 6, or 7 full turns
+      // Unpredictable spin dynamics: randomize rotations (6 to 12), duration (5.5s to 10.3s), and deceleration ease curve
+      const fullRotations = Math.floor(Math.random() * 7) + 6; // 6 to 12 full turns
       const totalRotation = 360 * fullRotations + targetAngle;
-      const duration = Number((3.6 + Math.random() * 1.6).toFixed(2));
+      const duration = Number((5.5 + Math.random() * (10.3 - 5.5)).toFixed(2));
 
       const easeCurves: [number, number, number, number][] = [
-        [0.08, 0.96, 0.14, 1.0], // Sudden aggressive brake
+        [0.08, 0.98, 0.12, 1.0], // Sudden aggressive brake
         [0.18, 0.72, 0.08, 1.0], // Lingering crawl
-        [0.05, 0.84, 0.20, 1.0], // Parabolic coast
-        [0.22, 0.88, 0.12, 1.0], // Heavy inertia drag
-        [0.14, 0.92, 0.25, 1.0], // Snappy finish
+        [0.05, 0.85, 0.20, 1.0], // Parabolic coast
+        [0.22, 0.90, 0.12, 1.0], // Heavy inertia drag
+        [0.15, 0.94, 0.22, 1.0], // Snappy finish
+        [0.25, 0.65, 0.05, 1.0], // Slow creeping crawl
       ];
       const selectedEase = easeCurves[Math.floor(Math.random() * easeCurves.length)];
 
@@ -2649,6 +2642,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   </span>
                   <div className="flex items-center gap-2 mt-1">
                     <span className="text-xs text-white/50">{targetSkin.weapon}</span>
+                    <RarityBadge rarity={targetSkin.rarity} size="sm" />
                     {targetSkin.statTrak && isStatTrakableItem(targetSkin) && <StatTrakBadge size="sm" />}
                     <WearBadge skin={targetSkin} size="sm" showFullLabel />
                   </div>

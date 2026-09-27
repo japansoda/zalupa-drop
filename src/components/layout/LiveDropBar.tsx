@@ -2,8 +2,10 @@
 
 import React, { useEffect, useState, useMemo, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import { useGameStore } from '../../store/useGameStore';
 import { SKINS_DATABASE, RARITY_CONFIG } from '../../data/skins';
+import { CASES_DATABASE } from '../../data/cases';
 import { LiveDrop } from '../../lib/types';
 import { useLanguage } from '../../lib/i18n';
 import { CASE_NAME_EN_MAP } from '../../lib/caseNamesMap';
@@ -25,6 +27,49 @@ const CASE_EN_MAP: Record<string, string> = {
   'Коллекция «Арабеска»': 'The Arabesque Collection',
   'Кейс «Термообработка»': 'Heat Treated Case',
   ...CASE_NAME_EN_MAP,
+};
+
+const getDropDestination = (drop: LiveDrop): string => {
+  const caseName = (drop.caseName || '').toLowerCase().trim();
+  const id = drop.id || '';
+
+  if (caseName.includes('апгрейдер') || caseName.includes('upgrader') || id.startsWith('upgrade_')) {
+    return '/upgrader';
+  }
+  if (caseName.includes('контракт') || caseName.includes('trade-up') || id.startsWith('contract_')) {
+    return '/contract';
+  }
+  if (caseName.includes('ферма') || caseName.includes('farm') || id.startsWith('chickendrop_')) {
+    return '/farm';
+  }
+  if (caseName.includes('краш') || caseName.includes('crash')) {
+    return '/crash';
+  }
+
+  // Look up in CASES_DATABASE
+  const match = CASES_DATABASE.find(
+    (c) =>
+      c.name.toLowerCase() === caseName ||
+      (c.nameEn && c.nameEn.toLowerCase() === caseName) ||
+      caseName.includes(c.name.toLowerCase()) ||
+      c.name.toLowerCase().includes(caseName)
+  );
+
+  if (match) {
+    return `/case/${match.id}`;
+  }
+
+  // Fallback: look up by skin
+  if (drop.skin?.id || drop.skin?.name) {
+    const skinCase = CASES_DATABASE.find((c) =>
+      c.skins?.some((s) => s.id === drop.skin.id || s.name === drop.skin.name)
+    );
+    if (skinCase) {
+      return `/case/${skinCase.id}`;
+    }
+  }
+
+  return '/';
 };
 
 const SIMULATED_CASES = [
@@ -68,23 +113,38 @@ interface CardProps {
 }
 
 const LiveDropCard = memo(({ drop, isUser, locale }: CardProps) => {
+  const router = useRouter();
   const config = RARITY_CONFIG[drop.skin.rarity] || RARITY_CONFIG.milspec;
   const rawImg = drop.skin?.image || '';
   const isDangerousPath = !rawImg || rawImg.startsWith('file:') || rawImg.includes('file://') || rawImg.includes('C:/') || rawImg.includes('C:\\');
   const safeImg = isDangerousPath ? '/logo.png' : rawImg;
+  const dest = getDropDestination(drop);
 
   return (
     <div
-      className={`flex items-center gap-2 px-2 py-1 rounded-lg glass-card shrink-0 transition-transform group border ${
+      role="button"
+      tabIndex={0}
+      onClick={() => router.push(dest)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          router.push(dest);
+        }
+      }}
+      className={`flex items-center gap-2 px-2 py-1 rounded-lg glass-card shrink-0 transition-all group border cursor-pointer select-none hover:scale-[1.03] active:scale-95 ${
         isUser
-          ? 'border-yellow-400/60 bg-yellow-400/10 shadow-[0_0_10px_rgba(250,204,21,0.2)]'
-          : 'border-white/5 hover:border-white/20'
+          ? 'border-yellow-400/60 bg-yellow-400/10 shadow-[0_0_10px_rgba(250,204,21,0.2)] hover:border-yellow-400'
+          : 'border-white/5 hover:border-white/30 hover:bg-white/5'
       }`}
       style={{
         borderLeftWidth: '2.5px',
         borderLeftColor: config.color,
       }}
-      title={`${drop.skin.name} — ${drop.caseName}`}
+      title={
+        locale === 'ru'
+          ? `${drop.skin.name} — ${drop.caseName} (Нажмите, чтобы перейти)`
+          : `${drop.skin.name} — ${drop.caseName} (Click to view)`
+      }
     >
       {/* Skin Icon */}
       <div className="relative w-8 h-8 rounded-md bg-black/60 overflow-hidden flex items-center justify-center p-0.5 border border-white/5 shrink-0">

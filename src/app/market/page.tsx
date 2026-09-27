@@ -207,24 +207,14 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="relative w-full max-w-lg rounded-3xl bg-[#0d0e14] border border-white/15 p-5 sm:p-7 shadow-[0_0_60px_rgba(0,0,0,0.9)] flex flex-col gap-5 overflow-hidden animate-in zoom-in-95 duration-150">
-        {/* Ambient background glow matching skin rarity */}
-        <div
-          className="absolute -top-24 -left-24 w-72 h-72 rounded-full blur-3xl opacity-25 pointer-events-none"
-          style={{ background: rarityCfg.color }}
-        />
-        <div
-          className="absolute -bottom-24 -right-24 w-72 h-72 rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: rarityCfg.color }}
-        />
-
+      <div className="relative w-full max-w-3xl sm:max-w-4xl rounded-3xl bg-[#0e0f17] border border-white/10 p-5 sm:p-7 shadow-[0_0_60px_rgba(0,0,0,0.9)] flex flex-col gap-6 overflow-hidden animate-in zoom-in-95 duration-150">
         {/* Modal Header */}
-        <div className="flex items-start justify-between gap-3 relative z-10">
+        <div className="flex items-start justify-between gap-3 relative z-10 pb-3 border-b border-white/10">
           <div className="flex flex-col">
             <div className="flex items-center gap-2 mb-1">
               <RarityBadge rarity={group.rarity} size="xs" />
@@ -244,68 +234,82 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
           </button>
         </div>
 
-        {/* Skin Preview Display */}
-        <div className="relative w-full h-36 sm:h-44 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center p-4 overflow-hidden z-10">
-          <SkinImage
-            src={activeVariant.image}
-            alt={activeVariant.name}
-            size={220}
-            className="w-full h-full object-contain filter drop-shadow-[0_8px_20px_rgba(0,0,0,0.7)]"
-          />
+        {/* 2-Column Body: Left (Weapon Top + StatTrak Bottom) | Right (Wear Qualities) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 relative z-10">
+          {/* Left Column: Top Weapon Preview + Bottom StatTrak Selector */}
+          <div className="flex flex-col gap-4">
+            {/* Skin Preview Card */}
+            <div className="relative w-full h-52 sm:h-60 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center p-4 overflow-hidden">
+              <SkinImage
+                src={activeVariant.image}
+                alt={activeVariant.name}
+                size={240}
+                className="w-full h-full object-contain filter drop-shadow-[0_8px_20px_rgba(0,0,0,0.7)]"
+              />
 
-          <div className="absolute bottom-2.5 left-3 flex items-center gap-1.5">
-            {activeVariant.statTrak && isStatTrakableItem(activeVariant) && <StatTrakBadge size="sm" />}
-            <WearBadge skin={activeVariant} size="sm" />
-          </div>
-        </div>
+              <div className="absolute bottom-3 left-3 flex items-center gap-1.5">
+                {activeVariant.statTrak && isStatTrakableItem(activeVariant) && <StatTrakBadge size="sm" />}
+                <WearBadge skin={activeVariant} size="sm" />
+              </div>
+            </div>
 
-        {/* Configuration Options */}
-        <div className="flex flex-col gap-4 relative z-10">
-          {/* StatTrak Toggle: only shown if skin supports both regular and StatTrak */}
-          {group.hasStatTrak && group.hasNonStatTrak && (
+            {/* StatTrak Selection (слева снизу) */}
             <div className="flex flex-col gap-1.5">
               <label className="text-[11px] font-black uppercase text-white/50 tracking-wider">
                 {isRu ? 'Тип предмета' : 'Item Type'}
               </label>
-              <div className="grid grid-cols-2 gap-2 p-1 rounded-xl bg-black/60 border border-white/10">
-                <button
-                  type="button"
-                  onClick={() => {
-                    sound.playClick();
-                    setIsStatTrak(false);
-                  }}
-                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                    !isStatTrak
-                      ? 'bg-white/15 text-white shadow font-black border border-white/20'
-                      : 'text-white/60 hover:text-white'
-                  }`}
-                >
-                  {isRu ? 'Обычный' : 'Regular'}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    sound.playClick();
-                    setIsStatTrak(true);
-                  }}
-                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
-                    isStatTrak
-                      ? 'bg-amber-500/25 text-amber-300 border border-amber-500/50 shadow font-black'
-                      : 'text-white/60 hover:text-amber-400'
-                  }`}
-                >
-                  <span>StatTrak™</span>
-                </button>
-              </div>
-            </div>
-          )}
 
-          {/* Quality / Wear Selector */}
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[11px] font-black uppercase text-white/50 tracking-wider">
+              {group.hasStatTrak && group.hasNonStatTrak ? (
+                <div className="grid grid-cols-2 gap-2 p-1 rounded-xl bg-black/60 border border-white/10">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.playClick();
+                      setIsStatTrak(false);
+                    }}
+                    className={`py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer text-center ${
+                      !isStatTrak
+                        ? 'bg-white/15 text-white shadow font-black border border-white/20'
+                        : 'text-white/60 hover:text-white'
+                    }`}
+                  >
+                    {isRu ? 'Обычный' : 'Regular'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      sound.playClick();
+                      setIsStatTrak(true);
+                    }}
+                    className={`py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                      isStatTrak
+                        ? 'bg-amber-500/25 text-amber-300 border border-amber-500/50 shadow font-black'
+                        : 'text-white/60 hover:text-amber-400'
+                    }`}
+                  >
+                    <span>StatTrak™</span>
+                  </button>
+                </div>
+              ) : group.hasStatTrak ? (
+                <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-bold text-xs flex items-center gap-2">
+                  <StatTrakBadge size="xs" />
+                  <span>{isRu ? 'Доступен только в версии StatTrak™' : 'Only available as StatTrak™'}</span>
+                </div>
+              ) : (
+                <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-white/60 font-bold text-xs">
+                  <span>{isRu ? 'Обычный (StatTrak™ недоступен)' : 'Regular (No StatTrak™ version)'}</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right Column: Wear Quality Selector (справа выбор качества) */}
+          <div className="flex flex-col gap-2">
+            <label className="text-[11px] font-black uppercase text-white/50 tracking-wider mb-0.5">
               {isRu ? 'Качество предмета' : 'Item Wear Quality'}
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto pr-1">
+
+            <div className="flex flex-col gap-2 flex-1 justify-center">
               {WEAR_ORDER.map((w) => {
                 const variant = currentStVariants.find((v) => v.wear === w);
                 const isAvailable = Boolean(variant);
@@ -316,12 +320,15 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
                   return (
                     <div
                       key={w}
-                      className="p-2.5 rounded-xl border border-white/5 bg-white/[0.02] flex items-center justify-between opacity-35 cursor-not-allowed select-none"
+                      className="p-3 rounded-xl border border-white/5 bg-white/[0.02] flex items-center justify-between opacity-35 cursor-not-allowed select-none"
                     >
-                      <span className="text-xs font-medium text-white/40">
-                        {isRu ? WEAR_LABELS[w].ru : WEAR_LABELS[w].en} ({w})
-                      </span>
-                      <span className="text-[10px] text-white/30">{isRu ? 'Нет' : 'N/A'}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-white/20 shrink-0" />
+                        <span className="text-xs font-medium text-white/40">
+                          {isRu ? WEAR_LABELS[w].ru : WEAR_LABELS[w].en} ({w})
+                        </span>
+                      </div>
+                      <span className="text-[11px] text-white/30">{isRu ? 'Нет в наличии' : 'N/A'}</span>
                     </div>
                   );
                 }
@@ -334,15 +341,15 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
                       sound.playClick();
                       setSelectedWear(w);
                     }}
-                    className={`p-2.5 rounded-xl border text-left flex items-center justify-between transition-all cursor-pointer ${
+                    className={`p-3 rounded-xl border text-left flex items-center justify-between transition-all cursor-pointer ${
                       isSelected
                         ? 'bg-yellow-400/15 border-yellow-400 text-white shadow-[0_0_15px_rgba(250,204,21,0.2)]'
                         : 'bg-black/40 border-white/10 hover:border-white/25 text-white/80'
                     }`}
                   >
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2.5">
                       <span
-                        className="w-2 h-2 rounded-full shrink-0"
+                        className="w-2.5 h-2.5 rounded-full shrink-0"
                         style={{ background: wearCfg?.color || '#10b981' }}
                       />
                       <span className="text-xs font-bold truncate">
@@ -359,9 +366,9 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
           </div>
         </div>
 
-        {/* Price & Action Section */}
-        <div className="pt-3 border-t border-white/10 flex flex-col gap-3 relative z-10">
-          <div className="flex items-center justify-between">
+        {/* Price & Action Section (Full Width Footer) */}
+        <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
+          <div className="flex items-center justify-between w-full sm:w-auto gap-8">
             <div className="flex flex-col">
               <span className="text-[10px] font-bold uppercase text-white/40">
                 {isRu ? 'Итоговая цена' : 'Final Price'}
@@ -374,7 +381,7 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
               </div>
             </div>
 
-            <div className="flex flex-col items-end">
+            <div className="flex flex-col items-end sm:items-start">
               <span className="text-[10px] font-bold uppercase text-white/40">
                 {isRu ? 'Ваш баланс' : 'Your Balance'}
               </span>
@@ -384,34 +391,36 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
             </div>
           </div>
 
-          {canAfford ? (
-            <button
-              type="button"
-              onClick={() => {
-                onBuy(activeVariant);
-                onClose();
-              }}
-              className="w-full py-3.5 px-4 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(250,204,21,0.35)] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2"
-            >
-              <ShoppingBag className="w-4 h-4" />
-              <span>
-                {isRu
-                  ? `Купить за ${activeVariant.priceDc.toLocaleString('ru-RU')} DC`
-                  : `Purchase for ${activeVariant.priceDc.toLocaleString('ru-RU')} DC`}
-              </span>
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={onRefill}
-              className="w-full py-3.5 px-4 rounded-2xl bg-white/10 hover:bg-white/20 text-yellow-400 font-black text-sm uppercase tracking-wider border border-yellow-400/40 shadow-lg active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span>
-                {isRu ? 'Недостаточно DC (Пополнить)' : 'Insufficient DC (Top Up)'}
-              </span>
-            </button>
-          )}
+          <div className="w-full sm:w-auto flex-1 max-w-sm flex justify-end">
+            {canAfford ? (
+              <button
+                type="button"
+                onClick={() => {
+                  onBuy(activeVariant);
+                  onClose();
+                }}
+                className="w-full py-3.5 px-6 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(250,204,21,0.35)] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2"
+              >
+                <ShoppingBag className="w-4 h-4" />
+                <span>
+                  {isRu
+                    ? `Купить за ${activeVariant.priceDc.toLocaleString('ru-RU')} DC`
+                    : `Purchase for ${activeVariant.priceDc.toLocaleString('ru-RU')} DC`}
+                </span>
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={onRefill}
+                className="w-full py-3.5 px-6 rounded-2xl bg-white/10 hover:bg-white/20 text-yellow-400 font-black text-sm uppercase tracking-wider border border-yellow-400/40 shadow-lg active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2"
+              >
+                <Sparkles className="w-4 h-4" />
+                <span>
+                  {isRu ? 'Недостаточно DC (Пополнить)' : 'Insufficient DC (Top Up)'}
+                </span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

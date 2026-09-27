@@ -330,14 +330,20 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   const ropeLoop = () => {
     if (ropeModeRef.current === 'off') return;
     const { w, h } = ropeDimsRef.current;
-    const ax = w / 2;
-    const ay = 4;
+    const isVert = openCount === 3;
+    const ax = isVert ? 12 : w / 2;
+    const ay = isVert ? h / 2 : 4;
     let bx = ropeBRef.current.x;
     let by = ropeBRef.current.y;
     if (ropeModeRef.current === 'card') {
       const { reelIdx, itemIdx } = ropeCardRef.current;
-      bx = itemIdx * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 + liveXRef.current[reelIdx];
-      by = h / 2;
+      if (isVert) {
+        bx = w / 2;
+        by = itemIdx * (ITEM_HEIGHT_V + ITEM_GAP_V) + ITEM_HEIGHT_V / 2 + liveXRef.current[reelIdx];
+      } else {
+        bx = itemIdx * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 + liveXRef.current[reelIdx];
+        by = h / 2;
+      }
       ropeBRef.current = { x: bx, y: by };
     } else if (ropeModeRef.current === 'snapped') {
       // Разрыв пополам: кусок на стрелке болтается и падает, кусок на карте лежит.
@@ -429,11 +435,16 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     }
     if (!canPressHook) return;
     sound.playClick();
-    const w = containerRef0.current?.offsetWidth || 800;
-    const h = containerRef0.current?.offsetHeight || 220;
+    const isVert = openCount === 3;
+    const w = containerRef0.current?.offsetWidth || (isVert ? 300 : 800);
+    const h = containerRef0.current?.offsetHeight || (isVert ? 390 : 220);
     ropeDimsRef.current = { w, h };
-    resetRope(ropePtsRef.current, w / 2, 4, w / 2, h * 0.4);
-    ropeBRef.current = { x: w / 2, y: h * 0.4 };
+    const ax = isVert ? 12 : w / 2;
+    const ay = isVert ? h / 2 : 4;
+    const bx = isVert ? w * 0.4 : w / 2;
+    const by = isVert ? h / 2 : h * 0.4;
+    resetRope(ropePtsRef.current, ax, ay, bx, by);
+    ropeBRef.current = { x: bx, y: by };
     ropeModeRef.current = 'cursor';
     setHookArmed(true);
     setRopeOn(true);
@@ -868,14 +879,30 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       controls1.set({ x: 0, y: 0 });
       controls2.set({ x: 0, y: 0 });
 
-      const duration = isVertical ? 5.2 : 6.0;
+      // Unpredictable roulette spin dynamics: randomize duration, deceleration ease curve, and landing jitter
+      const duration = isVertical
+        ? Number((4.8 + Math.random() * 2.2).toFixed(2)) // 4.8s - 7.0s
+        : Number((5.4 + Math.random() * 2.2).toFixed(2)); // 5.4s - 7.6s
+
+      const rouletteEaseCurves: [number, number, number, number][] = [
+        [0.08, 0.98, 0.12, 1.0], // Sharp sudden brake
+        [0.18, 0.76, 0.08, 1.0], // Lingering crawl
+        [0.05, 0.85, 0.20, 1.0], // Smooth parabolic glide
+        [0.22, 0.90, 0.12, 1.0], // Heavy drag inertia
+        [0.12, 0.82, 0.16, 1.0], // Classic CS snap
+      ];
+      const selectedEase = rouletteEaseCurves[Math.floor(Math.random() * rouletteEaseCurves.length)];
+
       const startTime = Date.now();
       lastSoundTickPos.current = 0;
 
       const step = isVertical ? (ITEM_HEIGHT_V + ITEM_GAP_V) : (ITEM_WIDTH + ITEM_GAP);
       const dim = isVertical ? ITEM_HEIGHT_V : ITEM_WIDTH;
       const centerOffset = (isVertical ? containerHeight : containerWidth) / 2;
-      const targetOffset = -(targetWinIdx * step + dim / 2 - centerOffset);
+      // Landing sub-offset (jitter) within the winning card bounds for natural unpredictability
+      const maxJitter = isVertical ? 20 : 30;
+      const jitter = (Math.random() - 0.5) * 2 * maxJitter;
+      const targetOffset = -(targetWinIdx * step + dim / 2 - centerOffset) + jitter;
 
       rafCancelRef.current = false;
       const updateSoundTick = () => {
@@ -900,27 +927,27 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
         ? [
             controls0.start({
               y: targetOffset,
-              transition: { duration, ease: [0.12, 0.8, 0.15, 1] },
+              transition: { duration, ease: selectedEase },
             }),
             controls1.start({
               y: targetOffset,
-              transition: { duration: duration + 0.08, ease: [0.12, 0.8, 0.15, 1] },
+              transition: { duration: duration + 0.1, ease: selectedEase },
             }),
             controls2.start({
               y: targetOffset,
-              transition: { duration: duration + 0.16, ease: [0.12, 0.8, 0.15, 1] },
+              transition: { duration: duration + 0.2, ease: selectedEase },
             }),
           ]
         : [
             controls0.start({
               x: targetOffset,
-              transition: { duration, ease: [0.12, 0.8, 0.15, 1] },
+              transition: { duration, ease: selectedEase },
             }),
             ...(spinOpenCount >= 2
               ? [
                   controls1.start({
                     x: targetOffset,
-                    transition: { duration: duration + 0.05, ease: [0.12, 0.8, 0.15, 1] },
+                    transition: { duration: duration + 0.08, ease: selectedEase },
                   }),
                 ]
               : []),
@@ -979,22 +1006,25 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
         }
         const { reelIdx, itemIdx } = target;
         frozenXRef.current = [...liveXRef.current];
-        const containerW = containerRef0.current?.offsetWidth || 800;
-        const centerHook = containerW / 2;
-        const cardCenter = itemIdx * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2;
-        ropeDimsRef.current = { w: containerW, h: containerRef0.current?.offsetHeight || 220 };
+        const isVert = spinOpenCount === 3;
+        const containerW = containerRef0.current?.offsetWidth || (isVert ? 300 : 800);
+        const containerH = containerRef0.current?.offsetHeight || (isVert ? 390 : 220);
+        const centerHook = isVert ? containerH / 2 : containerW / 2;
+        const cardStep = isVert ? (ITEM_HEIGHT_V + ITEM_GAP_V) : (ITEM_WIDTH + ITEM_GAP);
+        const cardDim = isVert ? ITEM_HEIGHT_V : ITEM_WIDTH;
+        const cardCenter = itemIdx * cardStep + cardDim / 2;
+        const winIdx = isVert ? WIN_INDEX_V : WIN_INDEX;
+        ropeDimsRef.current = { w: containerW, h: containerH };
         ropeReelRef.current = reelIdx;
         // Цепь долетает до карты (rope loop сам тянет конец к карте)
         await new Promise<void>((r) => setTimeout(r, 600));
         const hooked = Math.random() < 0.5;
         const ctrls = [controls0, controls1, controls2];
         // Точка искр — текущее положение карты
-        const sparkX = cardCenter + liveXRef.current[reelIdx];
-        const sparkY = ropeDimsRef.current.h / 2;
+        const sparkX = isVert ? containerW / 2 : cardCenter + liveXRef.current[reelIdx];
+        const sparkY = isVert ? cardCenter + liveXRef.current[reelIdx] : containerH / 2;
         if (hooked) {
           // ЗАЦЕПИЛАСЬ: искры + звон, карта становится выигрышем.
-          // Фаза 1 — быстрое плавное гашение скорости, фаза 2 — довод в секцию.
-          // Цепь всё время следует за картой (rope loop читает liveXRef).
           setHookResult('hooked');
           setHookSparks({ reelIdx, x: sparkX, y: sparkY, key: Date.now() });
           sound.playHookLatch();
@@ -1006,23 +1036,29 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             winners = newWinners;
             setWinningSkins(newWinners);
           }
-          const hookTx = -(itemIdx * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook);
-          const hookDist = Math.abs(hookTx - frozenXRef.current[reelIdx]);
-          // Одно fluid-движение: резкий рывок цепи и плавная посадка.
-          // Длительность от дистанции — и рядом, и далеко едет естественно.
+          const hookOffset = -(itemIdx * cardStep + cardDim / 2 - centerHook);
+          const hookDist = Math.abs(hookOffset - frozenXRef.current[reelIdx]);
           const glideDur = Math.max(0.9, Math.min(2.1, 0.85 + hookDist / 5200));
           const glides = [];
           for (let i = 0; i < spinOpenCount; i++) {
-            const tx = -((i === reelIdx ? itemIdx : WIN_INDEX) * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook);
-            // Крюк тащит только свой барабан; остальные докручиваются как шли
-            const hooked = i === reelIdx;
+            const offset = -((i === reelIdx ? itemIdx : winIdx) * cardStep + cardDim / 2 - centerHook);
+            const isHooked = i === reelIdx;
             glides.push(
-              ctrls[i].start({
-                x: tx,
-                transition: hooked
-                  ? { duration: glideDur, ease: [0.2, 0.9, 0.25, 1] }
-                  : { duration: glideDur, ease: [0.12, 0.8, 0.15, 1] },
-              })
+              ctrls[i].start(
+                isVert
+                  ? {
+                      y: offset,
+                      transition: isHooked
+                        ? { duration: glideDur, ease: [0.2, 0.9, 0.25, 1] }
+                        : { duration: glideDur, ease: [0.12, 0.8, 0.15, 1] },
+                    }
+                  : {
+                      x: offset,
+                      transition: isHooked
+                        ? { duration: glideDur, ease: [0.2, 0.9, 0.25, 1] }
+                        : { duration: glideDur, ease: [0.12, 0.8, 0.15, 1] },
+                    }
+              )
             );
           }
           sound.startSpinWhoosh(glideDur);
@@ -1033,9 +1069,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           finishSpin(winners);
           break;
         } else {
-          // СОРВАЛАСЬ: цепь РВЁТСЯ пополам с искрами — кусок остаётся
-          // на стрелке, кусок на карте, оба быстро и плавно исчезают.
-          // Лента стартует с места, быстро разгоняется и мягко садится в цель.
+          // СОРВАЛАСЬ: цепь РВЁТСЯ пополам с искрами
           await new Promise<void>((r) => setTimeout(r, 250));
           setHookFlying(false);
           {
@@ -1051,22 +1085,29 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           ropeModeRef.current = 'snapped';
           setHookResult('slipped');
           sound.playHookSlip();
-          // Старт с места: быстрый разгон и мягкая посадка точно в цель.
-          // ease [0.5,0,0.2,1] — нулевая скорость на старте и на финише.
-          const remain = Math.abs(
-            -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook) - frozenXRef.current[0]
-          );
+          const winOffset = -(winIdx * cardStep + cardDim / 2 - centerHook);
+          const remain = Math.abs(winOffset - frozenXRef.current[0]);
           const resumeDur = Math.max(0.9, Math.min(2.0, 0.8 + remain / 6000));
           const resume = [];
           for (let i = 0; i < spinOpenCount; i++) {
-            const tx = -(WIN_INDEX * (ITEM_WIDTH + ITEM_GAP) + ITEM_WIDTH / 2 - centerHook);
-            ctrls[i].set({ x: frozenXRef.current[i] });
-            resume.push(
-              ctrls[i].start({
-                x: tx,
-                transition: { duration: resumeDur, ease: [0.5, 0, 0.2, 1] },
-              })
-            );
+            const offset = -(winIdx * cardStep + cardDim / 2 - centerHook);
+            if (isVert) {
+              ctrls[i].set({ y: frozenXRef.current[i] });
+              resume.push(
+                ctrls[i].start({
+                  y: offset,
+                  transition: { duration: resumeDur, ease: [0.5, 0, 0.2, 1] },
+                })
+              );
+            } else {
+              ctrls[i].set({ x: frozenXRef.current[i] });
+              resume.push(
+                ctrls[i].start({
+                  x: offset,
+                  transition: { duration: resumeDur, ease: [0.5, 0, 0.2, 1] },
+                })
+              );
+            }
           }
           setTimeout(() => setHookResult(null), 1500);
           await Promise.all(resume);
@@ -1132,6 +1173,12 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             85% { opacity: 1; }
             100% { transform: translateY(250px); opacity: 0; }
           }
+          @keyframes caseZeusPulseH {
+            0% { transform: translateX(-20px); opacity: 0; }
+            15% { opacity: 1; }
+            85% { opacity: 1; }
+            100% { transform: translateX(360px); opacity: 0; }
+          }
           @keyframes caseZeusSpark {
             0%, 100% { transform: scale(0.65) rotate(-12deg); opacity: 0.35; }
             50% { transform: scale(1.35) rotate(10deg); opacity: 1; }
@@ -1147,6 +1194,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           }
           .case-zeus-pulse {
             animation: caseZeusPulse 1.1s ease-in infinite;
+          }
+          .case-zeus-pulse-h {
+            animation: caseZeusPulseH 1.1s ease-in infinite;
           }
           .case-zeus-spark {
             animation: caseZeusSpark ease-in-out infinite;
@@ -1286,11 +1336,45 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                           <path d="M 4 12 L 9.5 10.4 L 9.5 12.4 L 15 11" fill="none" stroke="#ffffff" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" className="case-zeus-stripe" />
                         </svg>
                       </div>
-                      {/* Горизонтальная полоса */}
-                      <div className="relative flex-1 h-[10px] flex items-center">
+                      {/* Горизонтальная полоса с бегущей молнией, пульсом и искрами */}
+                      <div className="relative flex-1 h-[14px] flex items-center overflow-visible">
                         <div className="case-zeus-stripe absolute inset-x-0 h-[10px] bg-sky-400/20" />
                         <div className="case-zeus-stripe absolute inset-x-0 h-[3px] bg-sky-400 opacity-95" />
                         <div className="case-zeus-glow absolute inset-x-0 h-[1px] bg-white opacity-90" />
+                        {/* Бегущая по полосе молния слева направо (dash-flow) */}
+                        <svg viewBox="0 0 100 14" className="absolute inset-x-0 top-1/2 -translate-y-1/2 w-full h-[14px] filter drop-shadow-[0_0_7px_#38bdf8]" preserveAspectRatio="none">
+                          <path
+                            d="M 0 8 L 22 4.5 L 22 8.5 L 45 5 L 45 9 L 68 6 L 55 9.5 L 55 6.5 L 30 10 L 30 6 L 10 9.5 Z"
+                            fill="none"
+                            stroke="#f0f9ff"
+                            strokeWidth="1.7"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeDasharray="7 5"
+                            className="case-zeus-bolt"
+                          />
+                          <path
+                            d="M 0 8 L 22 4.5 L 22 8.5 L 45 5 L 45 9 L 68 6 L 55 9.5 L 55 6.5 L 30 10 L 30 6 L 10 9.5 Z"
+                            fill="none"
+                            stroke="#38bdf8"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            opacity="0.45"
+                          />
+                        </svg>
+                        {/* Бегущий энергетический сгусток слева направо */}
+                        <div className="absolute top-1/2 left-0 -mt-[3px] h-[6px] w-[18px] rounded-full bg-gradient-to-r from-white via-sky-200 to-transparent case-zeus-pulse-h" />
+                        {/* Искры сверху и снизу полосы */}
+                        <svg viewBox="0 0 14 10" className="case-zeus-spark absolute left-[15%] -top-[9px] w-[14px] h-[10px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0s', animationDuration: '0.5s' }}>
+                          <path d="M 1 6 L 8 2.5 L 8 5.5 L 13 4" fill="none" stroke="#fefce8" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <svg viewBox="0 0 14 10" className="case-zeus-spark absolute left-[50%] -bottom-[9px] w-[14px] h-[10px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0.18s', animationDuration: '0.6s' }}>
+                          <path d="M 1 4 L 8 7.5 L 8 4.5 L 13 6" fill="none" stroke="#bae6fd" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <svg viewBox="0 0 14 10" className="case-zeus-spark absolute left-[82%] -top-[9px] w-[14px] h-[10px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0.32s', animationDuration: '0.55s' }}>
+                          <path d="M 1 6 L 8 2.5 L 8 5.5 L 13 4" fill="none" stroke="#e0f2fe" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
                       </div>
                       {/* Правая стрелка: наконечник влево */}
                       <div className="relative w-[18px] h-6 flex items-center justify-end">
