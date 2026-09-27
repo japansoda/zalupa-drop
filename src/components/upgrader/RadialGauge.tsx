@@ -949,18 +949,20 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         targetAngle = 90 + halfSpan + Math.random() * loseSpan;
       }
 
-      // Unpredictable spin dynamics: randomize rotations (6 to 12), duration (5.5s to 10.3s), and deceleration ease curve
-      const fullRotations = Math.floor(Math.random() * 7) + 6; // 6 to 12 full turns
+      // Unpredictable spin dynamics: randomize rotations (6 to 14), duration (5.5s to 8.1s), and sudden brake ease curves
+      const fullRotations = Math.floor(Math.random() * 9) + 6; // 6 to 14 full turns
       const totalRotation = 360 * fullRotations + targetAngle;
-      const duration = Number((5.5 + Math.random() * (10.3 - 5.5)).toFixed(2));
+      const duration = Number((5.5 + Math.random() * (8.1 - 5.5)).toFixed(2));
 
       const easeCurves: [number, number, number, number][] = [
+        [0.02, 0.99, 0.05, 1.0], // Hyper-abrupt slam brake (ultra sudden freeze)
+        [0.05, 0.98, 0.10, 1.0], // Sharp mechanical brake
+        [0.01, 0.95, 0.08, 1.0], // Violent stop from full velocity
+        [0.12, 0.98, 0.04, 1.0], // Staccato braking curve
         [0.08, 0.98, 0.12, 1.0], // Sudden aggressive brake
-        [0.18, 0.72, 0.08, 1.0], // Lingering crawl
-        [0.05, 0.85, 0.20, 1.0], // Parabolic coast
-        [0.22, 0.90, 0.12, 1.0], // Heavy inertia drag
+        [0.20, 0.85, 0.02, 1.0], // Crawl into instant full stop
         [0.15, 0.94, 0.22, 1.0], // Snappy finish
-        [0.25, 0.65, 0.05, 1.0], // Slow creeping crawl
+        [0.04, 1.0, 0.08, 1.0],  // Slamming dead-stop
       ];
       const selectedEase = easeCurves[Math.floor(Math.random() * easeCurves.length)];
 

@@ -325,14 +325,12 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   const canPressHook =
     isSpinning && !isRevealed && !hookUsedThisSpin && !hookFlying && !zeusUsedThisSpin && !zeusStriking && hookCount > 0 && !fastOpen;
 
-  // Один rAF-цикл живой цепи: якорь A (стрелка сверху), цель B (курсор/карта).
-  // Пишет напрямую в DOM через ref — React не ре-рендерится каждый кадр.
   const ropeLoop = () => {
     if (ropeModeRef.current === 'off') return;
     const { w, h } = ropeDimsRef.current;
     const isVert = openCount === 3;
-    const ax = isVert ? 12 : w / 2;
-    const ay = isVert ? h / 2 : 4;
+    const ax = w / 2;
+    const ay = h / 2;
     let bx = ropeBRef.current.x;
     let by = ropeBRef.current.y;
     if (ropeModeRef.current === 'card') {
@@ -439,10 +437,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     const w = containerRef0.current?.offsetWidth || (isVert ? 300 : 800);
     const h = containerRef0.current?.offsetHeight || (isVert ? 390 : 220);
     ropeDimsRef.current = { w, h };
-    const ax = isVert ? 12 : w / 2;
-    const ay = isVert ? h / 2 : 4;
-    const bx = isVert ? w * 0.4 : w / 2;
-    const by = isVert ? h / 2 : h * 0.4;
+    const ax = w / 2;
+    const ay = h / 2;
+    const bx = w / 2;
+    const by = isVert ? h * 0.65 : h * 0.65;
     resetRope(ropePtsRef.current, ax, ay, bx, by);
     ropeBRef.current = { x: bx, y: by };
     ropeModeRef.current = 'cursor';
@@ -1043,23 +1041,27 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           for (let i = 0; i < spinOpenCount; i++) {
             const offset = -((i === reelIdx ? itemIdx : winIdx) * cardStep + cardDim / 2 - centerHook);
             const isHooked = i === reelIdx;
-            glides.push(
-              ctrls[i].start(
-                isVert
-                  ? {
-                      y: offset,
-                      transition: isHooked
-                        ? { duration: glideDur, ease: [0.2, 0.9, 0.25, 1] }
-                        : { duration: glideDur, ease: [0.12, 0.8, 0.15, 1] },
-                    }
-                  : {
-                      x: offset,
-                      transition: isHooked
-                        ? { duration: glideDur, ease: [0.2, 0.9, 0.25, 1] }
-                        : { duration: glideDur, ease: [0.12, 0.8, 0.15, 1] },
-                    }
-              )
-            );
+            if (isVert) {
+              ctrls[i].set({ y: frozenXRef.current[i] });
+              glides.push(
+                ctrls[i].start({
+                  y: offset,
+                  transition: isHooked
+                    ? { duration: glideDur, ease: [0.2, 0.9, 0.25, 1] }
+                    : { duration: glideDur, ease: [0.12, 0.8, 0.15, 1] },
+                })
+              );
+            } else {
+              ctrls[i].set({ x: frozenXRef.current[i] });
+              glides.push(
+                ctrls[i].start({
+                  x: offset,
+                  transition: isHooked
+                    ? { duration: glideDur, ease: [0.2, 0.9, 0.25, 1] }
+                    : { duration: glideDur, ease: [0.12, 0.8, 0.15, 1] },
+                })
+              );
+            }
           }
           sound.startSpinWhoosh(glideDur);
           await Promise.all(glides);

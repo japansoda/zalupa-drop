@@ -11,27 +11,27 @@ interface RarityBadgeProps {
 }
 
 const SHORT_LABELS_RU: Record<string, string> = {
-  consumer: 'Ширп',
-  industrial: 'Пром',
-  milspec: 'Армейка',
-  restricted: 'Запрещ.',
-  classified: 'Засекреч.',
-  covert: '★ Тайное',
+  consumer: 'Ширп.',
+  industrial: 'Пром.',
+  milspec: 'Арм.',
+  restricted: 'Запр.',
+  classified: 'Засек.',
+  covert: '★ Тайн.',
   extraordinary: '★ Экстра',
-  gold: '★ Особый',
+  gold: '★ Особое',
   contraband: 'Контраб.',
 };
 
 const SHORT_LABELS_EN: Record<string, string> = {
-  consumer: 'Consumer',
-  industrial: 'Industrial',
+  consumer: 'Cons.',
+  industrial: 'Ind.',
   milspec: 'Mil-Spec',
-  restricted: 'Restricted',
-  classified: 'Classified',
-  covert: '★ Covert',
+  restricted: 'Restr.',
+  classified: 'Class.',
+  covert: '★ Cov.',
   extraordinary: '★ Extra',
   gold: '★ Special',
-  contraband: 'Contraband',
+  contraband: 'Contrab.',
 };
 
 export const RarityBadge: React.FC<RarityBadgeProps> = ({

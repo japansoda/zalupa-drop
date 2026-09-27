@@ -94,14 +94,10 @@ const MarketGroupCard = React.memo<{
         willChange: 'transform',
       }}
     >
-      {/* Top Rarity Badge only (clean design per user request) */}
-      <div className="w-full flex items-center justify-between z-10 min-h-[20px] mb-1">
-        <RarityBadge rarity={group.rarity} size="xs" />
-        {group.hasStatTrak && (
-          <span className="text-[9px] font-black text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded-md">
-            ST™
-          </span>
-        )}
+      {/* Top Rarity Badge & Unified StatTrak Badge */}
+      <div className="w-full flex items-center justify-between z-10 min-h-[22px] mb-1">
+        <RarityBadge rarity={group.rarity} size="xs" short />
+        {group.hasStatTrak && <StatTrakBadge size="xs" />}
       </div>
 
       {/* Skin Image */}
@@ -260,17 +256,17 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
               </label>
 
               {group.hasStatTrak && group.hasNonStatTrak ? (
-                <div className="grid grid-cols-2 gap-2 p-1 rounded-xl bg-black/60 border border-white/10">
+                <div className="grid grid-cols-2 gap-2 p-1.5 rounded-2xl bg-black/60 border border-white/10">
                   <button
                     type="button"
                     onClick={() => {
                       sound.playClick();
                       setIsStatTrak(false);
                     }}
-                    className={`py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer text-center ${
+                    className={`py-3 px-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer text-center ${
                       !isStatTrak
-                        ? 'bg-white/15 text-white shadow font-black border border-white/20'
-                        : 'text-white/60 hover:text-white'
+                        ? 'bg-white/20 text-white shadow-lg border border-white/30'
+                        : 'text-white/50 hover:text-white'
                     }`}
                   >
                     {isRu ? 'Обычный' : 'Regular'}
@@ -281,22 +277,23 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
                       sound.playClick();
                       setIsStatTrak(true);
                     }}
-                    className={`py-2 px-3 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                    className={`py-3 px-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer flex items-center justify-center gap-2 ${
                       isStatTrak
-                        ? 'bg-amber-500/25 text-amber-300 border border-amber-500/50 shadow font-black'
-                        : 'text-white/60 hover:text-amber-400'
+                        ? 'bg-amber-500/25 text-amber-300 border border-amber-500/60 shadow-[0_0_15px_rgba(245,158,11,0.3)]'
+                        : 'text-white/50 hover:text-amber-400'
                     }`}
                   >
+                    <StatTrakBadge size="xs" />
                     <span>StatTrak™</span>
                   </button>
                 </div>
               ) : group.hasStatTrak ? (
-                <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-bold text-xs flex items-center gap-2">
+                <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-bold text-xs flex items-center gap-2">
                   <StatTrakBadge size="xs" />
                   <span>{isRu ? 'Доступен только в версии StatTrak™' : 'Only available as StatTrak™'}</span>
                 </div>
               ) : (
-                <div className="p-2.5 rounded-xl bg-white/5 border border-white/10 text-white/60 font-bold text-xs">
+                <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white/60 font-bold text-xs">
                   <span>{isRu ? 'Обычный (StatTrak™ недоступен)' : 'Regular (No StatTrak™ version)'}</span>
                 </div>
               )}
@@ -309,7 +306,7 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
               {isRu ? 'Качество предмета' : 'Item Wear Quality'}
             </label>
 
-            <div className="flex flex-col gap-2 flex-1 justify-center">
+            <div className="flex flex-col gap-2.5 flex-1 justify-center">
               {WEAR_ORDER.map((w) => {
                 const variant = currentStVariants.find((v) => v.wear === w);
                 const isAvailable = Boolean(variant);
@@ -320,10 +317,10 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
                   return (
                     <div
                       key={w}
-                      className="p-3 rounded-xl border border-white/5 bg-white/[0.02] flex items-center justify-between opacity-35 cursor-not-allowed select-none"
+                      className="py-3 px-4 rounded-2xl border border-white/5 bg-white/[0.02] flex items-center justify-between opacity-35 cursor-not-allowed select-none"
                     >
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-white/20 shrink-0" />
+                      <div className="flex items-center gap-2.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-white/20 shrink-0" />
                         <span className="text-xs font-medium text-white/40">
                           {isRu ? WEAR_LABELS[w].ru : WEAR_LABELS[w].en} ({w})
                         </span>
@@ -341,22 +338,30 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
                       sound.playClick();
                       setSelectedWear(w);
                     }}
-                    className={`p-3 rounded-xl border text-left flex items-center justify-between transition-all cursor-pointer ${
+                    className={`py-3.5 px-4 sm:py-4 sm:px-5 rounded-2xl border text-left flex items-center justify-between transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-yellow-400/15 border-yellow-400 text-white shadow-[0_0_15px_rgba(250,204,21,0.2)]'
-                        : 'bg-black/40 border-white/10 hover:border-white/25 text-white/80'
+                        ? 'bg-yellow-400/20 border-yellow-400 text-white shadow-[0_0_20px_rgba(250,204,21,0.25)] ring-1 ring-yellow-400/50'
+                        : 'bg-black/50 border-white/10 hover:border-white/30 text-white/80 hover:bg-white/5'
                     }`}
                   >
-                    <div className="flex items-center gap-2.5">
+                    <div className="flex items-center gap-3">
                       <span
-                        className="w-2.5 h-2.5 rounded-full shrink-0"
-                        style={{ background: wearCfg?.color || '#10b981' }}
+                        className="w-3.5 h-3.5 rounded-full shrink-0 shadow-sm"
+                        style={{
+                          background: wearCfg?.color || '#10b981',
+                          boxShadow: `0 0 10px ${wearCfg?.color || '#10b981'}80`,
+                        }}
                       />
-                      <span className="text-xs font-bold truncate">
-                        {isRu ? WEAR_LABELS[w].ru : WEAR_LABELS[w].en} ({w})
-                      </span>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-black tracking-wide text-white">
+                          {isRu ? WEAR_LABELS[w].ru : WEAR_LABELS[w].en}
+                        </span>
+                        <span className="text-[11px] font-bold text-white/40">
+                          {wearCfg?.label || w} • {wearCfg?.short || w}
+                        </span>
+                      </div>
                     </div>
-                    <span className="font-mono font-black text-xs text-yellow-400 shrink-0 ml-1">
+                    <span className="font-mono font-black text-sm sm:text-base text-yellow-400 shrink-0 ml-2">
                       {variant!.priceDc.toLocaleString('ru-RU')} DC
                     </span>
                   </button>
@@ -451,6 +456,94 @@ export default function MarketplacePage() {
     return SKINS_DATABASE.filter(isActualWeaponOrKnifeGlove);
   }, []);
 
+// Synthesize complete 5 wears + StatTrak variants for every skin so users can buy any quality
+function synthesizeCompleteVariants(rawVariants: SkinEntity[]): SkinEntity[] {
+  if (rawVariants.length === 0) return rawVariants;
+
+  const best =
+    rawVariants.find((v) => !v.statTrak && v.wear === 'FN') ||
+    rawVariants.find((v) => !v.statTrak && v.wear === 'MW') ||
+    rawVariants.find((v) => !v.statTrak && v.wear === 'FT') ||
+    rawVariants.find((v) => !v.statTrak) ||
+    rawVariants[0];
+
+  const canBeSt = isStatTrakableItem(best);
+
+  // Derive base FT price from existing variants
+  const ftVariant = rawVariants.find((v) => !v.statTrak && v.wear === 'FT');
+  const mwVariant = rawVariants.find((v) => !v.statTrak && v.wear === 'MW');
+  const fnVariant = rawVariants.find((v) => !v.statTrak && v.wear === 'FN');
+  const wwVariant = rawVariants.find((v) => !v.statTrak && v.wear === 'WW');
+  const bsVariant = rawVariants.find((v) => !v.statTrak && v.wear === 'BS');
+
+  let baseFtPrice = 100;
+  if (ftVariant && ftVariant.priceDc > 0) {
+    baseFtPrice = ftVariant.priceDc;
+  } else if (mwVariant && mwVariant.priceDc > 0) {
+    baseFtPrice = Math.round(mwVariant.priceDc / 1.25);
+  } else if (fnVariant && fnVariant.priceDc > 0) {
+    baseFtPrice = Math.round(fnVariant.priceDc / 1.6);
+  } else if (wwVariant && wwVariant.priceDc > 0) {
+    baseFtPrice = Math.round(wwVariant.priceDc / 0.82);
+  } else if (bsVariant && bsVariant.priceDc > 0) {
+    baseFtPrice = Math.round(bsVariant.priceDc / 0.68);
+  } else {
+    const p = rawVariants[0].priceDc || 100;
+    baseFtPrice = rawVariants[0].statTrak ? Math.round(p / 1.95) : p;
+  }
+  baseFtPrice = Math.max(1, baseFtPrice);
+
+  const WEAR_RATES: Record<SkinWear, number> = {
+    FN: 1.6,
+    MW: 1.25,
+    FT: 1.0,
+    WW: 0.82,
+    BS: 0.68,
+  };
+  const ST_RATE = 1.95;
+
+  const result: SkinEntity[] = [];
+  const stOptions = canBeSt ? [false, true] : [false];
+
+  for (const st of stOptions) {
+    for (const wear of WEAR_ORDER) {
+      const existing = rawVariants.find((v) => v.wear === wear && Boolean(v.statTrak) === st);
+      if (existing) {
+        result.push(existing);
+      } else {
+        const price = Math.max(1, Math.round(baseFtPrice * WEAR_RATES[wear] * (st ? ST_RATE : 1.0)));
+        const wearName = WEAR_LABELS[wear]?.en || wear;
+        const cleanName = (best.skinName || best.name)
+          .replace(/^StatTrak™\s*/i, '')
+          .replace(/^★\s*StatTrak™\s*/i, '★ ')
+          .replace(/\s*\([^)]*\)$/, '')
+          .trim();
+
+        const formattedName = st
+          ? (best.weapon.startsWith('★') || cleanName.startsWith('★')
+              ? `★ StatTrak™ ${best.weapon.replace(/^★\s*/, '')} | ${cleanName.replace(/^★\s*/, '')} (${wearName})`
+              : `StatTrak™ ${best.weapon} | ${cleanName} (${wearName})`)
+          : (best.weapon.startsWith('★') || cleanName.startsWith('★')
+              ? `★ ${best.weapon.replace(/^★\s*/, '')} | ${cleanName.replace(/^★\s*/, '')} (${wearName})`
+              : `${best.weapon} | ${cleanName} (${wearName})`);
+
+        result.push({
+          ...best,
+          id: `${best.id || best.name}_${wear}_${st ? 'st' : 'reg'}`,
+          name: formattedName,
+          skinName: cleanName,
+          wear,
+          statTrak: st,
+          priceDc: price,
+          priceUsd: Number((price * 0.01).toFixed(2)),
+        });
+      }
+    }
+  }
+
+  return result;
+}
+
   // GROUPED SKINS POOL: unique weapon + skin name
   const groupedPool = useMemo<GroupedMarketSkin[]>(() => {
     const map = new Map<string, SkinEntity[]>();
@@ -463,7 +556,8 @@ export default function MarketplacePage() {
     }
 
     const result: GroupedMarketSkin[] = [];
-    for (const [key, variants] of map.entries()) {
+    for (const [key, rawVariants] of map.entries()) {
+      const variants = synthesizeCompleteVariants(rawVariants);
       const prices = variants.map((v) => v.priceDc).filter((p) => typeof p === 'number' && p > 0);
       if (prices.length === 0) continue;
       const minPrice = Math.min(...prices);
