@@ -1,4 +1,4 @@
-import { SkinEntity, SkinWear } from './types';
+import { SkinEntity, SkinWear, LivePricesMap } from './types';
 import { isWearableItem, isStatTrakableItem, WEAR_NAME_MAP } from './steam';
 import { getCanonicalPrice } from './marketPricing';
 
@@ -22,7 +22,7 @@ const WEAR_CHANCES: { wear: SkinWear; chance: number }[] = [
  */
 export function rollWearAndStatTrak(
   baseSkin: SkinEntity,
-  livePrices?: Record<string, { priceDc: number; priceUsd?: number }>
+  livePrices?: LivePricesMap
 ): SkinEntity {
   const result: SkinEntity = { ...baseSkin };
 

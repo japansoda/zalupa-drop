@@ -11,6 +11,11 @@ export type SkinRarity =
 
 export type SkinWear = 'FN' | 'MW' | 'FT' | 'WW' | 'BS';
 
+export type LivePricesMap = Record<
+  string,
+  number | { priceDc: number; priceUsd?: number; source?: string; timestamp?: number }
+>;
+
 export interface SkinEntity {
   id: string;
   name: string;

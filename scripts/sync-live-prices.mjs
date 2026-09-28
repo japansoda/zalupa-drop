@@ -25,6 +25,15 @@ async function syncPrices() {
     }
   }
 
+  // Merge collector prices for ultra-exotic and grail items
+  const collectorPath = path.resolve(__dirname, '../src/data/collector_prices.json');
+  if (fs.existsSync(collectorPath)) {
+    const collectorPrices = JSON.parse(fs.readFileSync(collectorPath, 'utf8'));
+    for (const [k, v] of Object.entries(collectorPrices)) {
+      pricesMap[k] = v;
+    }
+  }
+
   const targetPath = path.resolve(__dirname, '../src/data/live_market_prices.json');
   fs.writeFileSync(targetPath, JSON.stringify(pricesMap));
   console.log(`Saved ${Object.keys(pricesMap).length} real live CS2 prices to ${targetPath}`);

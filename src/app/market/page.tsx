@@ -12,7 +12,7 @@ import { WearBadge } from '../../components/ui/WearBadge';
 import { StatTrakBadge } from '../../components/ui/StatTrakBadge';
 import { RarityBadge } from '../../components/ui/RarityBadge';
 import { SKINS_DATABASE, RARITY_CONFIG, WEAR_CONFIG } from '../../data/skins';
-import { SkinEntity, SkinRarity, SkinWear } from '../../lib/types';
+import { SkinEntity, SkinRarity, SkinWear, LivePricesMap } from '../../lib/types';
 import { useGameStore } from '../../store/useGameStore';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
@@ -530,7 +530,7 @@ export default function MarketplacePage() {
 // Synthesize complete 5 wears + StatTrak variants for every skin so users can buy any quality
 function synthesizeCompleteVariants(
   rawVariants: SkinEntity[],
-  livePrices?: Record<string, { priceDc: number; priceUsd?: number }>
+  livePrices?: LivePricesMap
 ): SkinEntity[] {
   if (rawVariants.length === 0) return rawVariants;
 

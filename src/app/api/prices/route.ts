@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import livePricesJson from '../../../data/live_market_prices.json';
+import collectorPricesJson from '../../../data/collector_prices.json';
 
-// Pre-seeded authentic CS2 prices dataset (25,073 items)
-const FALLBACK_PRICES: Record<string, number> = livePricesJson as Record<string, number>;
+const COLLECTOR_PRICES: Record<string, number> = collectorPricesJson as Record<string, number>;
+
+// Pre-seeded authentic CS2 prices dataset with collector grails protected
+const FALLBACK_PRICES: Record<string, number> = {
+  ...(livePricesJson as Record<string, number>),
+  ...COLLECTOR_PRICES,
+};
 
 // 24-hour revalidation (86,400 seconds)
 export const revalidate = 86400;
@@ -67,8 +73,16 @@ async function fetchSkinportItemsDaily(): Promise<CachedPricesState> {
           const usd = item.suggested_price || item.min_price || item.median_price || 0;
           if (usd > 0 && item.market_hash_name) {
             const dc = Math.max(1, Math.round(usd * 100));
-            priceMap[item.market_hash_name] = dc;
+            // Do not downgrade ultra-exotic collector grails with retail low prices
+            if (!COLLECTOR_PRICES[item.market_hash_name]) {
+              priceMap[item.market_hash_name] = dc;
+            }
           }
+        }
+
+        // Guarantee collector prices are applied
+        for (const [k, v] of Object.entries(COLLECTOR_PRICES)) {
+          priceMap[k] = v;
         }
 
         const newState: CachedPricesState = {

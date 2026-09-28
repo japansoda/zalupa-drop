@@ -50,7 +50,7 @@ export function getSteamMarketHashName(skin: Partial<SkinEntity>): string {
   const isSticker = !isWearableItem(skin) && ((skin.weapon || '').toLowerCase().includes('sticker') || (skin.weapon || '').toLowerCase().includes('наклейка') || (skin.name || '').toLowerCase().includes('sticker'));
 
   // Clean raw name from any previous StatTrak or wear string
-  let cleanName = skin.name || '';
+  let cleanName = skin.name || (skin.weapon && skin.skinName ? `${skin.weapon} | ${skin.skinName}` : skin.skinName || skin.weapon || '');
   cleanName = cleanName.replace(/^StatTrak™\s*/i, '').replace(/^★\s*StatTrak™\s*/i, '★ ').trim();
   cleanName = cleanName.replace(/\s*\((Factory New|Minimal Wear|Field-Tested|Well-Worn|Battle-Scarred|Прямо с завода|Немного поношенное|После полевых испытаний|Поношенное|Закаленное в боях)\)$/i, '').trim();
 
@@ -76,9 +76,32 @@ export function getSteamMarketHashName(skin: Partial<SkinEntity>): string {
   }
 
   // 4. Knives & Gloves & Weapons with Wear
+  const rawWeapon = (skin.weapon || '').toLowerCase();
+  const rawName = (cleanName || '').toLowerCase();
+  const isKnifeOrGlove =
+    cleanName.startsWith('★') ||
+    rawWeapon.includes('knife') ||
+    rawWeapon.includes('bayonet') ||
+    rawWeapon.includes('karambit') ||
+    rawWeapon.includes('daggers') ||
+    rawWeapon.includes('gloves') ||
+    rawWeapon.includes('wraps') ||
+    rawWeapon.includes('нож') ||
+    rawWeapon.includes('перчатки') ||
+    rawWeapon.includes('обмотки') ||
+    rawName.includes('knife') ||
+    rawName.includes('bayonet') ||
+    rawName.includes('karambit') ||
+    rawName.includes('daggers') ||
+    rawName.includes('gloves') ||
+    rawName.includes('wraps');
+
+  if (isKnifeOrGlove && !cleanName.startsWith('★')) {
+    cleanName = `★ ${cleanName}`;
+  }
+
   const wear = skin.wear ? WEAR_NAME_MAP[skin.wear.toUpperCase()] : null;
   const isStatTrak = Boolean(skin.statTrak && isStatTrakableItem(skin));
-  const isKnifeOrGlove = cleanName.startsWith('★');
 
   let marketName = cleanName;
 

@@ -1,9 +1,21 @@
-import { SkinEntity, SkinWear } from './types';
+import { SkinEntity, SkinWear, LivePricesMap } from './types';
 import { SKINS_DATABASE } from '../data/skins';
 import { isWearableItem, isStatTrakableItem, getSteamMarketHashName } from './steam';
 import livePricesJson from '../data/live_market_prices.json';
+import collectorPricesJson from '../data/collector_prices.json';
 
-const LIVE_MARKET_PRICES: Record<string, number> = livePricesJson as Record<string, number>;
+const LIVE_MARKET_PRICES: Record<string, number> = {
+  ...(livePricesJson as Record<string, number>),
+  ...(collectorPricesJson as Record<string, number>),
+};
+
+function extractPriceDc(source: any, key: string): number {
+  if (!source || !key) return 0;
+  const val = source[key];
+  if (typeof val === 'number' && val > 0) return val;
+  if (val && typeof val === 'object' && typeof val.priceDc === 'number' && val.priceDc > 0) return val.priceDc;
+  return 0;
+}
 
 // Canonical wear multipliers (identical across Marketplace, Cases, Upgrader, Farm, Contracts)
 export const WEAR_RATES: Record<SkinWear, number> = {
@@ -150,18 +162,20 @@ export function getBaseDesignPrice(weapon?: string, skinName?: string, name?: st
  */
 export function getCanonicalPrice(
   skin: Partial<SkinEntity>,
-  livePrices?: Record<string, { priceDc: number; priceUsd?: number }>
+  livePrices?: LivePricesMap
 ): { priceDc: number; priceUsd: number } {
   const hashName = getSteamMarketHashName(skin);
 
-  // 1. Dynamic live prices from 5-minute background refresh
-  if (livePrices && livePrices[hashName] && livePrices[hashName].priceDc > 0) {
-    const pDc = livePrices[hashName].priceDc;
-    const pUsd = livePrices[hashName].priceUsd ?? Number((pDc * 0.01).toFixed(2));
-    return { priceDc: pDc, priceUsd: pUsd };
+  // 1. Dynamic live prices from 24-hour background refresh
+  if (livePrices) {
+    const pDc = extractPriceDc(livePrices, hashName);
+    if (pDc > 0) {
+      const pUsd = Number((pDc * 0.01).toFixed(2));
+      return { priceDc: pDc, priceUsd: pUsd };
+    }
   }
 
-  // 2. Direct match in authentic CS2 market dataset
+  // 2. Direct match in authentic CS2 market dataset & collector grails
   const realMarketPrice = LIVE_MARKET_PRICES[hashName];
   if (realMarketPrice && realMarketPrice > 0) {
     return {
@@ -176,6 +190,16 @@ export function getCanonicalPrice(
 
   // 3. Non-wearable items (Stickers, Charms, Agents, Patches, Music Kits)
   if (!wearable) {
+    if (livePrices) {
+      const pDc =
+        extractPriceDc(livePrices, hashName) ||
+        (skin.name ? extractPriceDc(livePrices, skin.name) : 0) ||
+        (skin.skinName ? extractPriceDc(livePrices, skin.skinName) : 0);
+      if (pDc > 0) {
+        return { priceDc: pDc, priceUsd: Number((pDc * 0.01).toFixed(2)) };
+      }
+    }
+
     const directLookup =
       LIVE_MARKET_PRICES[hashName] ||
       (skin.name ? LIVE_MARKET_PRICES[skin.name] : 0) ||
@@ -207,8 +231,9 @@ export function getCanonicalPrice(
   // Check client livePrices for base FT
   if (livePrices) {
     const ftHash = getSteamMarketHashName({ weapon: cleanW, skinName: cleanN, wear: 'FT', statTrak: false });
-    if (livePrices[ftHash]?.priceDc && livePrices[ftHash].priceDc > 0) {
-      baseFtPrice = livePrices[ftHash].priceDc;
+    const ftP = extractPriceDc(livePrices, ftHash);
+    if (ftP > 0) {
+      baseFtPrice = ftP;
     }
   }
 
@@ -246,7 +271,7 @@ export function getCanonicalPrice(
  */
 export function applyCanonicalPrice<T extends Partial<SkinEntity>>(
   skin: T,
-  livePrices?: Record<string, { priceDc: number; priceUsd?: number }>
+  livePrices?: LivePricesMap
 ): T {
   const { priceDc, priceUsd } = getCanonicalPrice(skin, livePrices);
   return {
