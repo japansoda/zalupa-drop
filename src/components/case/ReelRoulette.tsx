@@ -669,7 +669,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       if (i === targetIdx) {
         list.push(winner);
       } else {
-        list.push(rollWearAndStatTrak(pickVisualTapeSkin(caseSkins)));
+        list.push(rollWearAndStatTrak(pickVisualTapeSkin(caseSkins), useGameStore.getState().livePrices));
       }
     }
     return list;
@@ -681,10 +681,11 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     const initial0: SkinEntity[] = [];
     const initial1: SkinEntity[] = [];
     const initial2: SkinEntity[] = [];
+    const currentPrices = useGameStore.getState().livePrices;
     for (let i = 0; i < size; i++) {
-      initial0.push(rollWearAndStatTrak(pickVisualTapeSkin(caseSkins)));
-      initial1.push(rollWearAndStatTrak(pickVisualTapeSkin(caseSkins)));
-      initial2.push(rollWearAndStatTrak(pickVisualTapeSkin(caseSkins)));
+      initial0.push(rollWearAndStatTrak(pickVisualTapeSkin(caseSkins), currentPrices));
+      initial1.push(rollWearAndStatTrak(pickVisualTapeSkin(caseSkins), currentPrices));
+      initial2.push(rollWearAndStatTrak(pickVisualTapeSkin(caseSkins), currentPrices));
     }
     setReels([initial0, initial1, initial2]);
     reelsRef.current = [initial0, initial1, initial2];
@@ -784,12 +785,14 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           if (hasCharge) {
             useGameStore.getState().consumePotionCharge();
           }
+          const currentPrices = useGameStore.getState().livePrices;
           const baseSkin = pickWeightedSkin(hasCharge, false);
-          out.push(rollWearAndStatTrak(baseSkin));
+          out.push(rollWearAndStatTrak(baseSkin, currentPrices));
         } else {
           // Zeus reroll: small luck boost, potion charges NOT consumed again
+          const currentPrices = useGameStore.getState().livePrices;
           const baseSkin = pickWeightedSkin(false, true);
-          out.push(rollWearAndStatTrak(baseSkin));
+          out.push(rollWearAndStatTrak(baseSkin, currentPrices));
         }
       }
       return out;

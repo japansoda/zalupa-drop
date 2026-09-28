@@ -1,5 +1,7 @@
 import { SkinEntity, SkinRarity, SkinWear } from './types';
 import { SKINS_DATABASE } from '../data/skins';
+import { getCanonicalPrice } from './marketPricing';
+import { WEAR_NAME_MAP } from './steam';
 
 export type ChickenBreedId =
   | 'white_inferno'
@@ -615,10 +617,39 @@ export function rollEggSkinDrop(
   const wears: SkinWear[] = ['FN', 'MW', 'FT'];
   const wearIdx = Math.floor(Math.random() * wears.length);
   const isSt = (Math.random() < (hasLuckPotion ? 0.35 : 0.15)) && !selectedSkin.name.startsWith('★');
+  const wear = wears[wearIdx];
+  const wearEnglish = WEAR_NAME_MAP[wear] || 'Field-Tested';
+
+  let cleanName = (selectedSkin.skinName || selectedSkin.name)
+    .replace(/^StatTrak™\s*/i, '')
+    .replace(/^★\s*StatTrak™\s*/i, '★ ')
+    .replace(/\s*\([^)]*\)$/, '')
+    .trim();
+
+  const formattedName = isSt
+    ? (selectedSkin.weapon.startsWith('★') || cleanName.startsWith('★')
+        ? `★ StatTrak™ ${selectedSkin.weapon.replace(/^★\s*/, '')} | ${cleanName.replace(/^★\s*/, '')} (${wearEnglish})`
+        : `StatTrak™ ${selectedSkin.weapon} | ${cleanName} (${wearEnglish})`)
+    : (selectedSkin.weapon.startsWith('★') || cleanName.startsWith('★')
+        ? `★ ${selectedSkin.weapon.replace(/^★\s*/, '')} | ${cleanName.replace(/^★\s*/, '')} (${wearEnglish})`
+        : `${selectedSkin.weapon} | ${cleanName} (${wearEnglish})`);
+
+  const canonical = getCanonicalPrice({
+    weapon: selectedSkin.weapon,
+    skinName: cleanName,
+    name: formattedName,
+    wear,
+    statTrak: isSt,
+  });
 
   return {
     ...selectedSkin,
-    wear: wears[wearIdx],
+    id: `${selectedSkin.id}_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+    name: formattedName,
+    skinName: cleanName,
+    wear,
     statTrak: isSt,
+    priceDc: canonical.priceDc,
+    priceUsd: canonical.priceUsd,
   };
 }

@@ -15,6 +15,7 @@ import { RarityBadge } from '../ui/RarityBadge';
 import { SkinImage } from '../ui/SkinImage';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
+import { applyCanonicalPrice, getCanonicalPrice } from '../../lib/marketPricing';
 import { createRope, stepRope, stepFree, ropePath, resetRope, RopePoint } from '../../lib/ropeChain';
 
 // Memoized Inventory Card for ultra-fast 60-120fps scrolling
@@ -286,7 +287,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const useHook = useGameStore((s) => s.useHook);
   const addHook = useGameStore((s) => s.addHook);
   const addLiveDrop = useGameStore((s) => s.addLiveDrop);
+  const livePrices = useGameStore((s) => s.livePrices);
   const { t, locale } = useLanguage();
+
+  const effectiveCatalogSkins = useMemo(() => {
+    return catalogSkins.map((s) => applyCanonicalPrice(s, livePrices));
+  }, [catalogSkins, livePrices]);
 
   const [selectedItems, setSelectedItems] = useState<InventoryItem[]>([]);
   const [customBetDc, setCustomBetDc] = useState<number>(1000);
@@ -387,11 +393,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     const typeToMatch = forceType !== undefined ? forceType : catalogType;
 
     // Filter all skins that are eligible by bet price and category
-    let allEligible = catalogSkins.filter(
+    let allEligible = effectiveCatalogSkins.filter(
       (s) => s.priceDc > currentBet && s.priceDc <= maxTargetPrice && matchesCatalogType(s, typeToMatch)
     );
     if (allEligible.length === 0) {
-      allEligible = catalogSkins.filter(
+      allEligible = effectiveCatalogSkins.filter(
         (s) => s.priceDc > currentBet && s.priceDc <= maxTargetPrice
       );
     }
@@ -1241,7 +1247,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               candidateSkins = [cheapest];
             }
 
-            const cashbackDrop = candidateSkins[Math.floor(Math.random() * candidateSkins.length)];
+            const rawCashback = candidateSkins[Math.floor(Math.random() * candidateSkins.length)];
+            const cashbackDrop = applyCanonicalPrice(rawCashback, livePrices);
             setCashbackModal({
               isOpen: true,
               caseItem: selectedCase,
@@ -1268,7 +1275,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const filteredCatalogSkins = useMemo(() => {
     const minPrice = Math.max(1, effectiveBetDc);
     const q = deferredCatalogSearch.toLowerCase().trim();
-    let result = catalogSkins.filter((skin) => {
+    let result = effectiveCatalogSkins.filter((skin) => {
       if (skin.priceDc <= minPrice) return false;
       if (skin.priceDc > maxTargetPrice) return false;
 
@@ -1294,11 +1301,11 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
     result.sort((a, b) => (catalogSort === 'asc' ? a.priceDc - b.priceDc : b.priceDc - a.priceDc));
     return result;
-  }, [catalogSkins, deferredCatalogSearch, catalogRarity, catalogType, catalogWeapon, catalogSort, effectiveBetDc, maxTargetPrice]);
+  }, [effectiveCatalogSkins, deferredCatalogSearch, catalogRarity, catalogType, catalogWeapon, catalogSort, effectiveBetDc, maxTargetPrice]);
 
   // Mini-Marketplace skins pool for instant in-upgrader purchase
   const filteredMiniMarketSkins = useMemo((): SkinEntity[] => {
-    let pool: SkinEntity[] = SKINS_DATABASE.filter(isActualWeapon);
+    let pool: SkinEntity[] = SKINS_DATABASE.filter(isActualWeapon).map((s) => applyCanonicalPrice(s, livePrices));
 
     if (miniMarketType !== 'all') {
       pool = pool.filter((s: SkinEntity) => matchesCatalogType(s, miniMarketType));
@@ -1319,7 +1326,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     );
 
     return pool.slice(0, 100);
-  }, [miniMarketType, deferredMiniMarketSearch, miniMarketSort]);
+  }, [miniMarketType, deferredMiniMarketSearch, miniMarketSort, livePrices]);
 
   const handleBuyAndSelectSkin = (skin: SkinEntity) => {
     sound.playClick();
@@ -1355,7 +1362,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   // Dynamic list of unique weapons present in the catalog matching current bet and catalogType
   const availableWeapons = useMemo(() => {
     const minPrice = Math.max(1, effectiveBetDc);
-    const matching = catalogSkins.filter(
+    const matching = effectiveCatalogSkins.filter(
       (s) =>
         s.priceDc > minPrice &&
         s.priceDc <= maxTargetPrice &&
@@ -1373,19 +1380,19 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     return Array.from(counts.entries())
       .sort((a, b) => b[1] - a[1])
       .map(([name, count]) => ({ name, count }));
-  }, [catalogSkins, effectiveBetDc, maxTargetPrice, catalogType]);
+  }, [effectiveCatalogSkins, effectiveBetDc, maxTargetPrice, catalogType]);
 
   // Count matching skins per category based on current bet
   const categoryCounts = useMemo(() => {
     const minPrice = Math.max(1, effectiveBetDc);
     const counts: Record<string, number> = {};
     ITEM_TYPES.forEach((t) => {
-      counts[t.id] = catalogSkins.filter(
+      counts[t.id] = effectiveCatalogSkins.filter(
         (s) => s.priceDc > minPrice && s.priceDc <= maxTargetPrice && matchesCatalogType(s, t.id)
       ).length;
     });
     return counts;
-  }, [catalogSkins, effectiveBetDc, maxTargetPrice]);
+  }, [effectiveCatalogSkins, effectiveBetDc, maxTargetPrice]);
 
   // Circular gauge constants
   const gaugeR = 100;

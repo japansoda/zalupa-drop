@@ -1,14 +1,15 @@
 import { SkinEntity, SkinWear } from './types';
 import { isWearableItem, isStatTrakableItem, WEAR_NAME_MAP } from './steam';
+import { getCanonicalPrice } from './marketPricing';
 
 // Wear probabilities: "чем выше тем реже" (higher quality is rarer)
 // FN (8%) < MW (16%) < BS (16%) < WW (22%) < FT (38%)
-const WEAR_CHANCES: { wear: SkinWear; chance: number; multiplier: number }[] = [
-  { wear: 'FN', chance: 0.08, multiplier: 2.2 },
-  { wear: 'MW', chance: 0.16, multiplier: 1.4 },
-  { wear: 'FT', chance: 0.38, multiplier: 1.0 },
-  { wear: 'WW', chance: 0.22, multiplier: 0.8 },
-  { wear: 'BS', chance: 0.16, multiplier: 0.65 },
+const WEAR_CHANCES: { wear: SkinWear; chance: number }[] = [
+  { wear: 'FN', chance: 0.08 },
+  { wear: 'MW', chance: 0.16 },
+  { wear: 'FT', chance: 0.38 },
+  { wear: 'WW', chance: 0.22 },
+  { wear: 'BS', chance: 0.16 },
 ];
 
 /**
@@ -17,8 +18,12 @@ const WEAR_CHANCES: { wear: SkinWear; chance: number; multiplier: number }[] = [
  * - Non-stattrakable items (Gloves, Agents, Charms, Stickers) never receive StatTrak.
  * - Higher wear condition is significantly rarer.
  * - StatTrak is rare (~10% chance).
+ * - Price is strictly derived from canonical marketplace pricing (unified across site).
  */
-export function rollWearAndStatTrak(baseSkin: SkinEntity): SkinEntity {
+export function rollWearAndStatTrak(
+  baseSkin: SkinEntity,
+  livePrices?: Record<string, { priceDc: number; priceUsd?: number }>
+): SkinEntity {
   const result: SkinEntity = { ...baseSkin };
 
   // Generate a unique instance ID for inventory tracking
@@ -29,26 +34,21 @@ export function rollWearAndStatTrak(baseSkin: SkinEntity): SkinEntity {
   cleanName = cleanName.replace(/^StatTrak™\s*/i, '').replace(/^★\s*StatTrak™\s*/i, '★ ').trim();
   cleanName = cleanName.replace(/\s*\((Factory New|Minimal Wear|Field-Tested|Well-Worn|Battle-Scarred|Прямо с завода|Немного поношенное|После полевых испытаний|Поношенное|Закаленное в боях)\)$/i, '').trim();
 
-  let priceMultiplier = 1.0;
-
   // 1. Wear Quality Roll
   if (isWearableItem(baseSkin)) {
     const rnd = Math.random();
     let accumulated = 0;
     let selectedWear: SkinWear = 'FT';
-    let wearMul = 1.0;
 
     for (const item of WEAR_CHANCES) {
       accumulated += item.chance;
       if (rnd <= accumulated) {
         selectedWear = item.wear;
-        wearMul = item.multiplier;
         break;
       }
     }
 
     result.wear = selectedWear;
-    priceMultiplier *= wearMul;
   } else {
     result.wear = undefined;
   }
@@ -57,15 +57,14 @@ export function rollWearAndStatTrak(baseSkin: SkinEntity): SkinEntity {
   if (isStatTrakableItem(baseSkin)) {
     const rollST = Math.random() < 0.10;
     result.statTrak = rollST;
-    if (rollST) {
-      priceMultiplier *= 1.7;
-    }
   } else {
     result.statTrak = false;
   }
 
-  // 3. Compute final price in DropCoin (DC)
-  result.priceDc = Math.max(10, Math.round((baseSkin.priceDc || 100) * priceMultiplier));
+  // 3. Compute canonical marketplace price in DropCoin (DC) and USD
+  const canonical = getCanonicalPrice(result, livePrices);
+  result.priceDc = canonical.priceDc;
+  result.priceUsd = canonical.priceUsd;
 
   // 4. Construct formatted display name
   const wearEnglish = result.wear ? WEAR_NAME_MAP[result.wear] : null;

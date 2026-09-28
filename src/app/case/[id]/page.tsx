@@ -18,6 +18,7 @@ import { ArrowLeft, ShieldCheck } from 'lucide-react';
 import { CaseSpecialItemCard } from '../../../components/case/CaseSpecialItemCard';
 import { isOfficialCase, isKnifeOrGlove } from '../../../lib/caseSpecials';
 import { getCaseThemeGlow, getOptimizedCaseImageUrl } from '../../../lib/caseTheme';
+import { getCanonicalPrice } from '../../../lib/marketPricing';
 
 export default function CaseOpenPage() {
   const params = useParams();
@@ -60,8 +61,8 @@ export default function CaseOpenPage() {
     };
 
     list.sort((a, b) => {
-      const minPriceA = Math.min(...a.map((s) => s.priceDc || 0));
-      const minPriceB = Math.min(...b.map((s) => s.priceDc || 0));
+      const minPriceA = Math.min(...a.map((s) => getCanonicalPrice(s).priceDc));
+      const minPriceB = Math.min(...b.map((s) => getCanonicalPrice(s).priceDc));
 
       if (minPriceA !== minPriceB) {
         return minPriceA - minPriceB;

@@ -4,6 +4,7 @@ import { InventoryItem, LiveDrop, SkinEntity, UserStats } from '../lib/types';
 import { sound } from '../lib/sound';
 import { SKINS_DATABASE } from '../data/skins';
 import { getSteamMarketHashName } from '../lib/steam';
+import { getCanonicalPrice, applyCanonicalPrice } from '../lib/marketPricing';
 import {
   FarmSlot,
   ChickenEntity,
@@ -21,6 +22,8 @@ import {
 interface GameState {
   balance: number;
   inventory: InventoryItem[];
+  livePrices: Record<string, { priceDc: number; priceUsd: number; source?: string; timestamp?: number }>;
+  lastPriceSyncTime: number;
   soundEnabled: boolean;
   liveDrops: LiveDrop[];
   stats: UserStats;
@@ -86,6 +89,8 @@ export const useGameStore = create<GameState>()(
     (set, get) => ({
       balance: 10000,
       inventory: [],
+      livePrices: {},
+      lastPriceSyncTime: 0,
       soundEnabled: true,
       isRefillOpen: false,
       caseOpenCounts: {},
@@ -133,18 +138,22 @@ export const useGameStore = create<GameState>()(
           const img = skin?.image || '';
           return !img.startsWith('file:') && !img.includes('file://') && !img.includes('C:/') && !img.includes('C:\\');
         });
-        const newItems: InventoryItem[] = safeSkins.map((skin) => ({
-          ...skin,
-          instanceId: `${skin.id}_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`,
-          obtainedAt: Date.now(),
-        }));
+        const currentLivePrices = get().livePrices;
+        const newItems: InventoryItem[] = safeSkins.map((skin) => {
+          const canonical = applyCanonicalPrice(skin, currentLivePrices);
+          return {
+            ...canonical,
+            instanceId: `${skin.id}_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`,
+            obtainedAt: Date.now(),
+          };
+        });
 
         set((state) => ({
           inventory: [...newItems, ...state.inventory],
           stats: {
             ...state.stats,
             casesOpened: state.stats.casesOpened + skins.length,
-            totalWonDc: state.stats.totalWonDc + safeSkins.reduce((acc, s) => acc + s.priceDc, 0),
+            totalWonDc: state.stats.totalWonDc + newItems.reduce((acc, s) => acc + s.priceDc, 0),
           },
         }));
       },
@@ -684,31 +693,50 @@ export const useGameStore = create<GameState>()(
 
       syncLivePrices: async () => {
         const inv = get().inventory;
-        if (!inv || inv.length === 0) return;
+        const currentLivePrices = get().livePrices || {};
 
-        const names = Array.from(new Set(inv.map((item) => getSteamMarketHashName(item)).filter(Boolean)));
-        if (names.length === 0) return;
+        const invNames = inv ? inv.map((item) => getSteamMarketHashName(item)).filter(Boolean) : [];
+        const names = Array.from(new Set(invNames)).slice(0, 45);
 
         try {
-          const res = await fetch('/api/steam-price', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ names }),
-          });
-          if (!res.ok) return;
-          const data = await res.json();
-          if (data && data.prices && Object.keys(data.prices).length > 0) {
-            set((state) => ({
-              inventory: state.inventory.map((item) => {
-                const hashName = getSteamMarketHashName(item);
-                const live = data.prices[hashName];
-                if (live && typeof live.priceDc === 'number' && live.priceDc > 0) {
-                  return { ...item, priceDc: live.priceDc };
-                }
-                return item;
-              }),
-            }));
+          let fetchedPrices: Record<string, { priceDc: number; priceUsd: number; source?: string }> = {};
+          if (names.length > 0) {
+            const res = await fetch('/api/steam-price', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ names }),
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (data && data.prices) {
+                fetchedPrices = data.prices;
+              }
+            }
           }
+
+          const mergedPrices = { ...currentLivePrices, ...fetchedPrices };
+
+          set((state) => ({
+            livePrices: mergedPrices,
+            lastPriceSyncTime: Date.now(),
+            inventory: state.inventory.map((item) => {
+              const hashName = getSteamMarketHashName(item);
+              const live = mergedPrices[hashName];
+              if (live && typeof live.priceDc === 'number' && live.priceDc > 0) {
+                return {
+                  ...item,
+                  priceDc: live.priceDc,
+                  priceUsd: live.priceUsd ?? Number((live.priceDc * 0.01).toFixed(2)),
+                };
+              }
+              const canonical = getCanonicalPrice(item, mergedPrices);
+              return {
+                ...item,
+                priceDc: canonical.priceDc,
+                priceUsd: canonical.priceUsd,
+              };
+            }),
+          }));
         } catch (_) {}
       },
     }),
@@ -718,10 +746,19 @@ export const useGameStore = create<GameState>()(
       onRehydrateStorage: () => (state) => {
         if (!state) return;
         if (Array.isArray(state.inventory)) {
-          state.inventory = state.inventory.filter((item) => {
-            const img = item?.image || '';
-            return !img.startsWith('file:') && !img.includes('file://') && !img.includes('C:/') && !img.includes('C:\\');
-          });
+          state.inventory = state.inventory
+            .filter((item) => {
+              const img = item?.image || '';
+              return !img.startsWith('file:') && !img.includes('file://') && !img.includes('C:/') && !img.includes('C:\\');
+            })
+            .map((item) => {
+              const canonical = applyCanonicalPrice(item, state.livePrices);
+              return {
+                ...item,
+                priceDc: canonical.priceDc,
+                priceUsd: canonical.priceUsd,
+              };
+            });
         }
         if (Array.isArray(state.liveDrops)) {
           state.liveDrops = state.liveDrops.filter((d) => {
@@ -742,6 +779,8 @@ export const useGameStore = create<GameState>()(
       partialize: (state) => ({
         balance: state.balance,
         inventory: state.inventory,
+        livePrices: state.livePrices,
+        lastPriceSyncTime: state.lastPriceSyncTime,
         soundEnabled: state.soundEnabled,
         stats: state.stats,
         saveTokensCount: state.saveTokensCount,

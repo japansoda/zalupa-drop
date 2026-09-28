@@ -20,6 +20,7 @@ import { RARITY_CONFIG } from '../../data/skins';
 import { useGameStore } from '../../store/useGameStore';
 import { useLanguage } from '../../lib/i18n';
 import { sound } from '../../lib/sound';
+import { applyCanonicalPrice } from '../../lib/marketPricing';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 
 interface TerminalInterfaceProps {
@@ -107,13 +108,14 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
       const wear = WEARS[Math.floor(Math.random() * WEARS.length)];
       const stChance = hasLuck ? 0.28 : 0.12;
       const isSt = Math.random() < stChance && !candidate.name.startsWith('★');
-      const instanceSkin: SkinEntity = {
+      const rawInstanceSkin: SkinEntity = {
         ...candidate,
         id: `term_${Date.now()}_${i}_${Math.random().toString(36).substring(2, 7)}`,
         wear,
         wearLabel: isRu ? WEAR_LABELS[wear].ru : WEAR_LABELS[wear].en,
         statTrak: isSt,
       };
+      const instanceSkin = applyCanonicalPrice(rawInstanceSkin, useGameStore.getState().livePrices);
 
       list.push(instanceSkin);
     }

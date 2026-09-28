@@ -18,6 +18,7 @@ import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
 import { isActualWeaponOrKnifeGlove } from '../../lib/farm';
+import { getCanonicalPrice } from '../../lib/marketPricing';
 import {
   Search,
   ShoppingBag,
@@ -434,6 +435,7 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
 
 export default function MarketplacePage() {
   const balance = useGameStore((s) => s.balance);
+  const livePrices = useGameStore((s) => s.livePrices);
   const deductBalance = useGameStore((s) => s.deductBalance);
   const addToInventory = useGameStore((s) => s.addToInventory);
   const setRefillOpen = useGameStore((s) => s.setRefillOpen);
@@ -457,7 +459,10 @@ export default function MarketplacePage() {
   }, []);
 
 // Synthesize complete 5 wears + StatTrak variants for every skin so users can buy any quality
-function synthesizeCompleteVariants(rawVariants: SkinEntity[]): SkinEntity[] {
+function synthesizeCompleteVariants(
+  rawVariants: SkinEntity[],
+  livePrices?: Record<string, { priceDc: number; priceUsd?: number }>
+): SkinEntity[] {
   if (rawVariants.length === 0) return rawVariants;
 
   const best =
@@ -469,38 +474,11 @@ function synthesizeCompleteVariants(rawVariants: SkinEntity[]): SkinEntity[] {
 
   const canBeSt = isStatTrakableItem(best);
 
-  // Derive base FT price from existing variants
-  const ftVariant = rawVariants.find((v) => !v.statTrak && v.wear === 'FT');
-  const mwVariant = rawVariants.find((v) => !v.statTrak && v.wear === 'MW');
-  const fnVariant = rawVariants.find((v) => !v.statTrak && v.wear === 'FN');
-  const wwVariant = rawVariants.find((v) => !v.statTrak && v.wear === 'WW');
-  const bsVariant = rawVariants.find((v) => !v.statTrak && v.wear === 'BS');
-
-  let baseFtPrice = 100;
-  if (ftVariant && ftVariant.priceDc > 0) {
-    baseFtPrice = ftVariant.priceDc;
-  } else if (mwVariant && mwVariant.priceDc > 0) {
-    baseFtPrice = Math.round(mwVariant.priceDc / 1.25);
-  } else if (fnVariant && fnVariant.priceDc > 0) {
-    baseFtPrice = Math.round(fnVariant.priceDc / 1.6);
-  } else if (wwVariant && wwVariant.priceDc > 0) {
-    baseFtPrice = Math.round(wwVariant.priceDc / 0.82);
-  } else if (bsVariant && bsVariant.priceDc > 0) {
-    baseFtPrice = Math.round(bsVariant.priceDc / 0.68);
-  } else {
-    const p = rawVariants[0].priceDc || 100;
-    baseFtPrice = rawVariants[0].statTrak ? Math.round(p / 1.95) : p;
-  }
-  baseFtPrice = Math.max(1, baseFtPrice);
-
-  const WEAR_RATES: Record<SkinWear, number> = {
-    FN: 1.6,
-    MW: 1.25,
-    FT: 1.0,
-    WW: 0.82,
-    BS: 0.68,
-  };
-  const ST_RATE = 1.95;
+  const cleanName = (best.skinName || best.name)
+    .replace(/^StatTrak™\s*/i, '')
+    .replace(/^★\s*StatTrak™\s*/i, '★ ')
+    .replace(/\s*\([^)]*\)$/, '')
+    .trim();
 
   const result: SkinEntity[] = [];
   const stOptions = canBeSt ? [false, true] : [false];
@@ -508,25 +486,34 @@ function synthesizeCompleteVariants(rawVariants: SkinEntity[]): SkinEntity[] {
   for (const st of stOptions) {
     for (const wear of WEAR_ORDER) {
       const existing = rawVariants.find((v) => v.wear === wear && Boolean(v.statTrak) === st);
+      const wearName = WEAR_LABELS[wear]?.en || wear;
+
+      const formattedName = st
+        ? (best.weapon.startsWith('★') || cleanName.startsWith('★')
+            ? `★ StatTrak™ ${best.weapon.replace(/^★\s*/, '')} | ${cleanName.replace(/^★\s*/, '')} (${wearName})`
+            : `StatTrak™ ${best.weapon} | ${cleanName} (${wearName})`)
+        : (best.weapon.startsWith('★') || cleanName.startsWith('★')
+            ? `★ ${best.weapon.replace(/^★\s*/, '')} | ${cleanName.replace(/^★\s*/, '')} (${wearName})`
+            : `${best.weapon} | ${cleanName} (${wearName})`);
+
+      const canonical = getCanonicalPrice(
+        existing || {
+          weapon: best.weapon,
+          skinName: cleanName,
+          name: formattedName,
+          wear,
+          statTrak: st,
+        },
+        livePrices
+      );
+
       if (existing) {
-        result.push(existing);
+        result.push({
+          ...existing,
+          priceDc: canonical.priceDc,
+          priceUsd: canonical.priceUsd,
+        });
       } else {
-        const price = Math.max(1, Math.round(baseFtPrice * WEAR_RATES[wear] * (st ? ST_RATE : 1.0)));
-        const wearName = WEAR_LABELS[wear]?.en || wear;
-        const cleanName = (best.skinName || best.name)
-          .replace(/^StatTrak™\s*/i, '')
-          .replace(/^★\s*StatTrak™\s*/i, '★ ')
-          .replace(/\s*\([^)]*\)$/, '')
-          .trim();
-
-        const formattedName = st
-          ? (best.weapon.startsWith('★') || cleanName.startsWith('★')
-              ? `★ StatTrak™ ${best.weapon.replace(/^★\s*/, '')} | ${cleanName.replace(/^★\s*/, '')} (${wearName})`
-              : `StatTrak™ ${best.weapon} | ${cleanName} (${wearName})`)
-          : (best.weapon.startsWith('★') || cleanName.startsWith('★')
-              ? `★ ${best.weapon.replace(/^★\s*/, '')} | ${cleanName.replace(/^★\s*/, '')} (${wearName})`
-              : `${best.weapon} | ${cleanName} (${wearName})`);
-
         result.push({
           ...best,
           id: `${best.id || best.name}_${wear}_${st ? 'st' : 'reg'}`,
@@ -534,8 +521,8 @@ function synthesizeCompleteVariants(rawVariants: SkinEntity[]): SkinEntity[] {
           skinName: cleanName,
           wear,
           statTrak: st,
-          priceDc: price,
-          priceUsd: Number((price * 0.01).toFixed(2)),
+          priceDc: canonical.priceDc,
+          priceUsd: canonical.priceUsd,
         });
       }
     }
@@ -557,7 +544,7 @@ function synthesizeCompleteVariants(rawVariants: SkinEntity[]): SkinEntity[] {
 
     const result: GroupedMarketSkin[] = [];
     for (const [key, rawVariants] of map.entries()) {
-      const variants = synthesizeCompleteVariants(rawVariants);
+      const variants = synthesizeCompleteVariants(rawVariants, livePrices);
       const prices = variants.map((v) => v.priceDc).filter((p) => typeof p === 'number' && p > 0);
       if (prices.length === 0) continue;
       const minPrice = Math.min(...prices);
@@ -585,7 +572,7 @@ function synthesizeCompleteVariants(rawVariants: SkinEntity[]): SkinEntity[] {
     }
 
     return result;
-  }, [basePool]);
+  }, [basePool, livePrices]);
 
   // Filtered grouped skins
   const filteredGroups = useMemo(() => {

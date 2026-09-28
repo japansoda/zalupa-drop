@@ -13,6 +13,7 @@ import { SkinImage } from '../ui/SkinImage';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
+import { applyCanonicalPrice } from '../../lib/marketPricing';
 import { 
   FileText, 
   Sparkles, 
@@ -218,22 +219,23 @@ export const TradeUpContract: React.FC = () => {
       // Remove input items
       removeFromInventory(selectedInstanceIds);
 
-      // Add won item
-      addToInventory([pickedSkin]);
+      // Add won item with canonical marketplace price
+      const canonicalWonSkin = applyCanonicalPrice(pickedSkin, useGameStore.getState().livePrices);
+      addToInventory([canonicalWonSkin]);
 
       // Add to live drop feed (strictly >= 25,000 DC)
-      if (pickedSkin.priceDc >= 25000) {
+      if (canonicalWonSkin.priceDc >= 25000) {
         addLiveDrop({
           id: `contract_${Date.now()}`,
           user: 'Вы',
           avatar: '',
-          skin: pickedSkin,
+          skin: canonicalWonSkin,
           caseName: 'Контракт CS2',
           timestamp: Date.now(),
         });
       }
 
-      setWonSkin(pickedSkin);
+      setWonSkin(canonicalWonSkin);
       setShowWinModal(true);
       setIsSigning(false);
       setStamped(false);
