@@ -99,18 +99,70 @@ export function isWearableItem(skin: Partial<SkinEntity>): boolean {
   return true;
 }
 
+// Collection-exclusive skins and finishes that never drop from weapon cases and NEVER have StatTrak in CS2
+const NON_STATTRAK_PATTERNS = [
+  'dragon lore', 'knight', 'hand cannon', 'chalice',
+  'gungnir', 'emerald jörmungandr', 'flame jörmungandr', 'mjölnir',
+  'wild lotus', 'wild lily', 'sea calico', 'sunset lily',
+  'the prince', 'baroque purple',
+  'medusa', 'poseidon', 'icarus fell', 'chronos', "minotaur's labyrinth",
+  'hydroponic', 'akihabara accept', 'sunset storm', 'bamboo print',
+  'hot rod', 'bulldozer', 'whiteout',
+  'welcome to the jungle', 'panthera onca', 'run / hide',
+  'gold arabesque',
+  'desert hydra', 'fennec fox',
+  'imminent danger',
+  'blue phosphor', 'target acquired',
+  'eye of horus',
+  'radiation hazard', 'nuclear threat', 'master piece',
+  'blaze', 'integrale'
+];
+
 /**
  * Check if skin type can have StatTrak in CS2.
- * In CS2, Agents, Charms, Stickers, and Gloves CANNOT have StatTrak.
+ * In CS2:
+ * - Agents, Charms, Stickers, Patches, Pins, and Gloves CANNOT have StatTrak.
+ * - Map collection / Operation exclusive skins (e.g. Dragon Lore, Gungnir, Wild Lotus, Medusa) NEVER have StatTrak.
+ * - Knives CAN have StatTrak.
+ * - Case weapons CAN have StatTrak.
  */
 export function isStatTrakableItem(skin: Partial<SkinEntity>): boolean {
   const w = (skin.weapon || '').toLowerCase();
   const n = (skin.name || '').toLowerCase();
+  const sn = (skin.skinName || '').toLowerCase();
 
   if (w === 'charm' || w === 'брелок' || n.startsWith('charm |') || n.startsWith('брелок |')) return false;
   if (w === 'agent' || w === 'оперативник' || n.startsWith('agent |')) return false;
   if (w === 'sticker' || w === 'наклейка' || n.startsWith('sticker |') || n.startsWith('наклейка |')) return false;
   if (w.includes('gloves') || w.includes('wraps') || w.includes('перчатки') || w.includes('обмотки')) return false;
+  if (w === 'patch' || n.startsWith('patch |') || w.includes('music kit') || w.includes('pin')) return false;
+
+  // Vanilla Knives and standard knives can have StatTrak
+  if (isVanillaKnife(skin)) return true;
+
+  const isKnife =
+    w.includes('knife') ||
+    w.includes('bayonet') ||
+    w.includes('karambit') ||
+    w.includes('daggers') ||
+    n.includes('knife') ||
+    n.includes('bayonet') ||
+    n.includes('karambit') ||
+    n.includes('daggers');
+
+  if (isKnife) return true;
+
+  const fullName = `${w} ${n} ${sn}`.toLowerCase();
+
+  // Weapon Fades: only R8 Revolver Fade is from a weapon case (can be StatTrak), other non-knife Fades are collections
+  if (fullName.includes('fade') || fullName.includes('градиент')) {
+    if (!w.includes('r8') && !n.includes('r8')) return false;
+  }
+
+  // Non-case collection skins
+  for (const pattern of NON_STATTRAK_PATTERNS) {
+    if (fullName.includes(pattern)) return false;
+  }
 
   return true;
 }
