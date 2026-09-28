@@ -6,7 +6,7 @@ import { Loader2, CheckCircle2 } from 'lucide-react';
 import { useGameStore } from '../../store/useGameStore';
 import { useLanguage } from '../../lib/i18n';
 
-const PRICE_SYNC_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes live update
+const PRICE_SYNC_INTERVAL_MS = 24 * 60 * 60 * 1000; // 24 hours daily update (synced with Vercel Edge Cache)
 
 export const PriceSyncManager: React.FC = () => {
   const syncLivePrices = useGameStore((state) => state.syncLivePrices);
@@ -50,7 +50,7 @@ export const PriceSyncManager: React.FC = () => {
       performSync();
     }, 2500);
 
-    // Live price sync every 5 minutes
+    // Live price sync every 24 hours
     const interval = setInterval(() => {
       performSync();
     }, PRICE_SYNC_INTERVAL_MS);
@@ -58,8 +58,8 @@ export const PriceSyncManager: React.FC = () => {
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
         const lastSync = useGameStore.getState().lastPriceSyncTime || 0;
-        // If more than 2 minutes elapsed since last sync, trigger refresh
-        if (Date.now() - lastSync > 2 * 60 * 1000) {
+        // If more than 24 hours elapsed since last sync, trigger refresh
+        if (Date.now() - lastSync > 24 * 60 * 60 * 1000) {
           performSync();
         }
       }
@@ -105,7 +105,7 @@ export const PriceSyncManager: React.FC = () => {
                   : (isRu ? 'Цены актуальны' : 'Prices up to date')}
               </span>
               <span className="text-[10px] font-mono text-blue-300/80 font-bold">
-                Steam & CS2 Market
+                Skinport & CS2 Market (Daily Sync)
               </span>
             </div>
           </div>

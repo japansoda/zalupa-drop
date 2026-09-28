@@ -701,7 +701,7 @@ export const useGameStore = create<GameState>()(
         try {
           let fetchedPrices: Record<string, { priceDc: number; priceUsd: number; source?: string }> = {};
           if (names.length > 0) {
-            const res = await fetch('/api/steam-price', {
+            const res = await fetch('/api/prices', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ names }),

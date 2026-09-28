@@ -17,7 +17,7 @@ interface PriceCacheEntry {
 
 // In-memory cache for Steam Market prices with 5-minute TTL
 const priceCache = new Map<string, PriceCacheEntry>();
-const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes live cache
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours daily sync (Vercel Edge & Serverless)
 
 // Seed in-memory cache with baseline live market prices
 for (const [hashName, dc] of Object.entries(BASE_LIVE_PRICES)) {
@@ -37,7 +37,7 @@ for (const [hashName, dc] of Object.entries(BASE_LIVE_PRICES)) {
 let lastSkinportSync = Date.now();
 let isSyncingSkinport = false;
 
-// Background updater: refresh entire 25,000 CS2 live prices every 5 minutes
+// Background updater: refresh entire 25,000 CS2 live prices once a day
 async function triggerSkinportSyncIfNeeded(): Promise<void> {
   const now = Date.now();
   if (now - lastSkinportSync < CACHE_TTL_MS || isSyncingSkinport) {
@@ -46,8 +46,20 @@ async function triggerSkinportSyncIfNeeded(): Promise<void> {
 
   isSyncingSkinport = true;
   try {
+    const headers: Record<string, string> = {
+      'Accept': 'application/json',
+      'User-Agent': 'ZalupaDrop-Vercel-Serverless/4.5 (CS2 Case Simulator)',
+    };
+
+    const clientId = process.env.SKINPORT_CLIENT_ID;
+    const clientSecret = process.env.SKINPORT_CLIENT_SECRET;
+    if (clientId && clientSecret) {
+      headers['Authorization'] = `Basic ${Buffer.from(`${clientId}:${clientSecret}`).toString('base64')}`;
+    }
+
     const res = await fetch('https://api.skinport.com/v1/items?app_id=730&currency=USD', {
-      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+      headers,
+      next: { revalidate: 86400 },
     });
     if (res.ok) {
       const items = await res.json();
