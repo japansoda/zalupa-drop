@@ -3,6 +3,7 @@ class SoundController {
   private ctx: AudioContext | null = null;
   private noiseBuffer: AudioBuffer | null = null;
   private activeWhooshNodes: { stop: () => void } | null = null;
+  private lastTickTime: number = 0;
   public enabled: boolean = true;
 
   private getContext(): AudioContext | null {
@@ -77,6 +78,9 @@ class SoundController {
 
   public playTick(pitchRatio: number = 1) {
     if (!this.enabled) return;
+    const now = typeof performance !== 'undefined' ? performance.now() : Date.now();
+    if (now - this.lastTickTime < 35) return;
+    this.lastTickTime = now;
     const ctx = this.getContext();
     if (!ctx) return;
 

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import confetti from 'canvas-confetti';
+import { fireConfetti } from '../../lib/confetti';
 import { X, Sparkles, Check, Flame, Trophy } from 'lucide-react';
 import { SkinEntity } from '../../lib/types';
 import { ChickenBreedId, CHICKEN_BREEDS } from '../../lib/farm';
@@ -107,23 +107,20 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
           const isMidTier = skin.priceDc >= 1000;
 
           if (isHighTier) {
-            confetti({
-              particleCount: 260,
-              spread: 110,
+            fireConfetti({
+              tier: 'legendary',
               origin: { y: 0.5 },
               colors: ['#ffd700', '#f59e0b', '#ef4444', '#38bdf8', '#ffffff', '#22c55e'],
             });
           } else if (isMidTier) {
-            confetti({
-              particleCount: 150,
-              spread: 80,
+            fireConfetti({
+              tier: 'high',
               origin: { y: 0.6 },
               colors: ['#facc15', '#ffffff', '#38bdf8', '#eab308', '#ec4899'],
             });
           } else {
-            confetti({
-              particleCount: 75,
-              spread: 55,
+            fireConfetti({
+              tier: 'low',
               origin: { y: 0.6 },
               colors: ['#38bdf8', '#ffffff', '#facc15'],
             });

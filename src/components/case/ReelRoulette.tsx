@@ -86,7 +86,7 @@ const ReelTapeCard = React.memo<ReelTapeCardProps>(({
     return (
       <div
         onPointerDown={(e) => onPointerDown(reelIdx, idx, e)}
-        className={`relative rounded-2xl bg-[#11121a] border shrink-0 flex items-center justify-between p-2.5 select-none overflow-hidden transition-all ${
+        className={`relative rounded-2xl bg-[#11121a] border shrink-0 flex items-center justify-between p-2.5 select-none overflow-hidden transition-[border-color,box-shadow] duration-150 ${
           isHookPicked
             ? 'border-orange-400 shadow-[0_0_22px_rgba(249,115,22,0.6)]'
             : showAsSpecial
@@ -100,9 +100,7 @@ const ReelTapeCard = React.memo<ReelTapeCardProps>(({
           height: `${ITEM_HEIGHT_V}px`,
           borderLeftWidth: '4px',
           borderLeftColor: config.color,
-          contain: 'layout paint',
-          willChange: 'transform',
-          transform: 'translateZ(0)',
+          contain: 'layout paint style',
         }}
       >
         <div className="relative w-20 h-20 shrink-0 flex items-center justify-center z-10 my-auto">
@@ -112,8 +110,12 @@ const ReelTapeCard = React.memo<ReelTapeCardProps>(({
             size={110}
             priority={isPrioritySlot}
             thumb={!isPrioritySlot}
-            className={`w-full h-full object-contain filter drop-shadow-md ${
-              showAsSpecial ? 'drop-shadow-[0_0_15px_rgba(250,204,21,0.55)]' : ''
+            className={`w-full h-full object-contain ${
+              showAsSpecial
+                ? 'filter drop-shadow-[0_0_12px_rgba(250,204,21,0.55)]'
+                : isWinSlot && isRevealed
+                ? 'filter drop-shadow-md'
+                : ''
             }`}
           />
         </div>
@@ -142,7 +144,7 @@ const ReelTapeCard = React.memo<ReelTapeCardProps>(({
   return (
     <div
       onPointerDown={(e) => onPointerDown(reelIdx, idx, e)}
-      className={`relative rounded-2xl bg-[#11121a] border shrink-0 flex flex-col items-center justify-between p-3 select-none overflow-hidden transition-all ${
+      className={`relative rounded-2xl bg-[#11121a] border shrink-0 flex flex-col items-center justify-between p-3 select-none overflow-hidden transition-[border-color,box-shadow] duration-150 ${
         isHookPicked
           ? 'border-orange-400 shadow-[0_0_22px_rgba(249,115,22,0.6)]'
           : showAsSpecial
@@ -156,9 +158,7 @@ const ReelTapeCard = React.memo<ReelTapeCardProps>(({
         height: openCount > 1 ? '180px' : '210px',
         borderBottomWidth: '4px',
         borderBottomColor: config.color,
-        contain: 'layout paint',
-        willChange: 'transform',
-        transform: 'translateZ(0)',
+        contain: 'layout paint style',
       }}
     >
       <div className="w-full flex justify-between items-center gap-1.5 z-10 min-h-[20px] overflow-hidden">
@@ -193,8 +193,12 @@ const ReelTapeCard = React.memo<ReelTapeCardProps>(({
           size={160}
           priority={isPrioritySlot}
           thumb={!isPrioritySlot}
-          className={`w-full h-full object-contain filter drop-shadow-md ${
-            showAsSpecial ? 'drop-shadow-[0_0_15px_rgba(250,204,21,0.55)]' : ''
+          className={`w-full h-full object-contain ${
+            showAsSpecial
+              ? 'filter drop-shadow-[0_0_12px_rgba(250,204,21,0.55)]'
+              : isWinSlot && isRevealed
+              ? 'filter drop-shadow-md'
+              : ''
           }`}
         />
       </div>
@@ -1267,13 +1271,13 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
               )}
               {/* Пузырьки и клевер вверх при активном зелье — фон ЗА карточками, летят до самого верха */}
               {showPotionBg && (
-                <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden>
-                  {Array.from({ length: 8 }).map((__, bi) => {
+                <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden style={{ contain: 'strict' }}>
+                  {Array.from({ length: 3 }).map((__, bi) => {
                     const seed = (reelIdx * 37 + bi * 17) % 100;
-                    const left = (seed * 0.9 + 2) % 96;
-                    const size = 5 + (seed % 10);
-                    const delay = ((seed % 40) / 10).toFixed(2);
-                    const dur = (3.8 + ((seed * 7) % 30) / 10).toFixed(2);
+                    const left = (seed * 0.9 + 5) % 90;
+                    const size = 6 + (seed % 6);
+                    const delay = ((seed % 30) / 10).toFixed(2);
+                    const dur = (3.5 + ((seed * 7) % 20) / 10).toFixed(2);
                     return (
                       <span
                         key={bi}
@@ -1290,13 +1294,13 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                       />
                     );
                   })}
-                  {/* Частицы четырёхлистного клевера — тот же дешёвый rise, только transform+opacity */}
-                  {Array.from({ length: 5 }).map((__, ci) => {
+                  {/* Частица клевера — 1 легкий SVG на ленту */}
+                  {Array.from({ length: 1 }).map((__, ci) => {
                     const seed = (reelIdx * 53 + ci * 29 + 11) % 100;
-                    const left = (seed * 1.1 + 4) % 94;
-                    const size = 9 + (seed % 6);
-                    const delay = ((seed % 50) / 10).toFixed(2);
-                    const dur = (4.6 + ((seed * 5) % 24) / 10).toFixed(2);
+                    const left = (seed * 1.1 + 10) % 80;
+                    const size = 10;
+                    const delay = '0.4s';
+                    const dur = '4.5s';
                     return (
                       <svg
                         key={`clover-${ci}`}
@@ -1318,7 +1322,6 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                           <circle cx="13" cy="13" r="3.6" />
                         </g>
                         <path d="M10 12 C10 15 11.5 17 14 18" fill="none" stroke="#10b981" strokeWidth="1.6" strokeLinecap="round" />
-                        <circle cx="7.6" cy="6.4" r="1" fill="#ecfdf5" opacity="0.9" />
                       </svg>
                     );
                   })}
@@ -1389,9 +1392,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                     </>
                   ) : (
                     <>
-                      <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[12px] border-l-yellow-400 filter drop-shadow-[0_0_10px_#facc15]" />
-                      <div className="h-[2px] w-full bg-yellow-400 opacity-90 shadow-[0_0_12px_#facc15]" />
-                      <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[12px] border-r-yellow-400 filter drop-shadow-[0_0_10px_#facc15]" />
+                      <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[12px] border-l-yellow-400" />
+                      <div className="h-[2px] w-full bg-yellow-400 opacity-95 shadow-[0_0_8px_#facc15]" />
+                      <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[12px] border-r-yellow-400" />
                     </>
                   )}
                 </div>
@@ -1410,10 +1413,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                       {/* Вертикаль: внешнее свечение + синее ядро + белое горячее ядро + бегущая молния + пульс */}
                       <div className="relative flex-1 w-[10px] flex justify-center">
                         <div className="case-zeus-stripe absolute inset-y-0 w-[10px] bg-sky-400/20" />
-                        <div className="case-zeus-stripe absolute inset-y-0 w-[3px] bg-sky-400 opacity-95" />
+                        <div className="case-zeus-stripe absolute inset-y-0 w-[3px] bg-sky-400 opacity-95 shadow-[0_0_8px_#38bdf8]" />
                         <div className="case-zeus-glow absolute inset-y-0 w-[1px] bg-white opacity-90" />
                         {/* Бегущая по полосе молния (dash-flow) */}
-                        <svg viewBox="0 0 14 100" className="absolute inset-y-0 left-1/2 -translate-x-1/2 h-full w-[14px] filter drop-shadow-[0_0_7px_#38bdf8]" preserveAspectRatio="none">
+                        <svg viewBox="0 0 14 100" className="absolute inset-y-0 left-1/2 -translate-x-1/2 h-full w-[14px]" preserveAspectRatio="none">
                           <path
                             d="M 8 0 L 4.5 22 L 8.5 22 L 5 45 L 9 45 L 6 68 L 9.5 55 L 6.5 55 L 10 30 L 6 30 L 9.5 10 Z"
                             fill="none"
@@ -1437,13 +1440,13 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                         {/* Бегущий энергетический сгусток сверху вниз */}
                         <div className="absolute left-1/2 top-0 -ml-[3px] w-[6px] h-[16px] rounded-full bg-gradient-to-b from-white via-sky-200 to-transparent case-zeus-pulse" />
                         {/* Боковые искры-молнии */}
-                        <svg viewBox="0 0 10 14" className="case-zeus-spark absolute -left-[9px] top-[10%] w-[10px] h-[14px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0s', animationDuration: '0.5s' }}>
+                        <svg viewBox="0 0 10 14" className="case-zeus-spark absolute -left-[9px] top-[10%] w-[10px] h-[14px]" style={{ animationDelay: '0s', animationDuration: '0.5s' }}>
                           <path d="M 6 1 L 2.5 8 L 5.5 8 L 4 13" fill="none" stroke="#fefce8" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                        <svg viewBox="0 0 10 14" className="case-zeus-spark absolute -right-[9px] top-[38%] w-[10px] h-[14px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0.18s', animationDuration: '0.6s' }}>
+                        <svg viewBox="0 0 10 14" className="case-zeus-spark absolute -right-[9px] top-[38%] w-[10px] h-[14px]" style={{ animationDelay: '0.18s', animationDuration: '0.6s' }}>
                           <path d="M 4 1 L 7.5 8 L 4.5 8 L 6 13" fill="none" stroke="#bae6fd" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                        <svg viewBox="0 0 10 14" className="case-zeus-spark absolute -left-[9px] bottom-[12%] w-[10px] h-[14px] filter drop-shadow-[0_0_6px_#38bdf8]" style={{ animationDelay: '0.32s', animationDuration: '0.55s' }}>
+                        <svg viewBox="0 0 10 14" className="case-zeus-spark absolute -left-[9px] bottom-[12%] w-[10px] h-[14px]" style={{ animationDelay: '0.32s', animationDuration: '0.55s' }}>
                           <path d="M 6 1 L 2.5 8 L 5.5 8 L 4 13" fill="none" stroke="#e0f2fe" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </div>
@@ -1458,9 +1461,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                     </>
                   ) : (
                     <>
-                      <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[14px] border-t-yellow-400 filter drop-shadow-[0_0_10px_#facc15]" />
-                      <div className="w-[2px] h-full bg-yellow-400 opacity-90 shadow-[0_0_12px_#facc15]" />
-                      <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[14px] border-b-yellow-400 filter drop-shadow-[0_0_10px_#facc15]" />
+                      <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[14px] border-t-yellow-400" />
+                      <div className="w-[2px] h-full bg-yellow-400 opacity-95 shadow-[0_0_8px_#facc15]" />
+                      <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[14px] border-b-yellow-400" />
                     </>
                   )}
                 </div>
@@ -1527,18 +1530,22 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
               <div
                 ref={reelIdx === 0 ? containerRef0 : undefined}
                 className={`relative z-[1] w-full overflow-hidden ${isVertical ? 'h-[390px] py-1' : 'py-3'}`}
+                style={{ contain: 'layout paint' }}
               >
                 {isVertical ? (
                   <motion.div
                     animate={animControls[reelIdx]}
                     onUpdate={(latest) => {
+                      if (!hookArmed && !hookFlying) return;
                       const v = (latest as { y?: unknown }).y;
                       if (typeof v === 'number') liveXRef.current[reelIdx] = v;
                     }}
                     className="flex flex-col gap-2.5 will-change-transform"
                     style={{
                       height: `${(reels[reelIdx] || []).length * (ITEM_HEIGHT_V + ITEM_GAP_V)}px`,
-                      transform: 'translateZ(0)',
+                      transform: 'translate3d(0, 0, 0)',
+                      backfaceVisibility: 'hidden',
+                      WebkitBackfaceVisibility: 'hidden',
                     }}
                   >
                     {(reels[reelIdx] || []).map((skin, idx) => (
@@ -1562,13 +1569,16 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                   <motion.div
                     animate={animControls[reelIdx]}
                     onUpdate={(latest) => {
+                      if (!hookArmed && !hookFlying) return;
                       const v = (latest as { x?: unknown }).x;
                       if (typeof v === 'number') liveXRef.current[reelIdx] = v;
                     }}
                     className="flex gap-3 will-change-transform"
                     style={{
                       width: `${(reels[reelIdx] || []).length * (ITEM_WIDTH + ITEM_GAP)}px`,
-                      transform: 'translateZ(0)'
+                      transform: 'translate3d(0, 0, 0)',
+                      backfaceVisibility: 'hidden',
+                      WebkitBackfaceVisibility: 'hidden',
                     }}
                   >
                     {(reels[reelIdx] || []).map((skin, idx) => (

@@ -412,11 +412,12 @@ export const LiveDropBar: React.FC = () => {
                 return (
                   <motion.div
                     key={drop.id}
-                    layout
-                    initial={{ opacity: 0, x: -28, scale: 0.9 }}
+                    layout="position"
+                    initial={{ opacity: 0, x: -22, scale: 0.92 }}
                     animate={{ opacity: 1, x: 0, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.85, transition: { duration: 0.2 } }}
-                    transition={{ type: 'spring', damping: 25, stiffness: 350 }}
+                    exit={{ opacity: 0, scale: 0.85, transition: { duration: 0.15 } }}
+                    transition={{ duration: 0.22, ease: 'easeOut' }}
+                    style={{ willChange: 'transform, opacity' }}
                     className="shrink-0"
                   >
                     <LiveDropCard

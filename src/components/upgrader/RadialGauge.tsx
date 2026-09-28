@@ -7,7 +7,7 @@ import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
 import { CASES_DATABASE } from '../../data/cases';
 import { Check, X, Search, ChevronRight, RotateCcw, AlertCircle, Plus, Gift, ShieldCheck, Percent, LayoutGrid, Sword, Hand, Crosshair, Zap, Target, Flame, Shield, Sticker, User, KeyRound, FlaskConical, Anchor, Store, ShoppingBag, Briefcase } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { fireConfetti } from '../../lib/confetti';
 import { CashbackModal } from './CashbackModal';
 import { WearBadge } from '../ui/WearBadge';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
@@ -33,7 +33,7 @@ const UpgraderInventoryCard = React.memo<{
           ? 'border-yellow-400 bg-yellow-400/10 shadow-[0_0_15px_rgba(250,204,21,0.25)]'
           : 'border-white/10 bg-black/40 hover:border-white/20'
       }`}
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '160px', contain: 'content', transform: 'translateZ(0)', willChange: 'transform' }}
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '160px', contain: 'content' }}
     >
       {isSelected && (
         <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
@@ -92,7 +92,7 @@ const UpgraderCatalogCard = React.memo<{
           ? 'border-white/5 bg-black/20 opacity-40 cursor-not-allowed'
           : 'border-white/10 bg-black/40 hover:border-white/20'
       }`}
-      style={{ contentVisibility: 'auto', containIntrinsicSize: '160px', contain: 'content', transform: 'translateZ(0)', willChange: 'transform' }}
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '160px', contain: 'content' }}
     >
       {isSelected && (
         <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-yellow-400 text-black flex items-center justify-center shadow-md">
@@ -303,6 +303,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const [targetSkin, setTargetSkin] = useState<SkinEntity | null>(null);
   const [isUpgrading, setIsUpgrading] = useState(false);
   const [lastResult, setLastResult] = useState<'win' | 'lose' | null>(null);
+  const loseTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const settledBetSignatureRef = useRef<string | null>(null);
+  const lastResultSettledAtRef = useRef<number>(0);
 
   // Cashback state
   const [cashbackModal, setCashbackModal] = useState<{
@@ -515,6 +518,31 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     }
   }, [effectiveBetDc, maxTargetPrice]);
 
+  // Auto-hide "НЕ БЕДА" / "NO WORRIES" after 5 seconds and restore chance display
+  useEffect(() => {
+    if (lastResult === 'lose') {
+      if (loseTimerRef.current) clearTimeout(loseTimerRef.current);
+      loseTimerRef.current = setTimeout(() => {
+        setLastResult(null);
+      }, 5000);
+    } else {
+      if (loseTimerRef.current) clearTimeout(loseTimerRef.current);
+    }
+    return () => {
+      if (loseTimerRef.current) clearTimeout(loseTimerRef.current);
+    };
+  }, [lastResult]);
+
+  // Immediately clear "НЕ БЕДА" if any item or bet configuration changes in upgrader
+  useEffect(() => {
+    if (lastResult && Date.now() - lastResultSettledAtRef.current > 120) {
+      const currentSig = `${targetSkin?.id || ''}_${selectedItems.map((i) => i.instanceId).sort().join(',')}_${customBetDc}_${betMode}`;
+      if (settledBetSignatureRef.current !== null && settledBetSignatureRef.current !== currentSig) {
+        setLastResult(null);
+      }
+    }
+  }, [targetSkin, selectedItems, customBetDc, betMode, lastResult]);
+
   // Base raw chance from bet vs target (capped at max 80%)
   const baseChance = useMemo(() => {
     if (!targetSkin || targetSkin.priceDc <= 0 || effectiveBetDc <= 0) return 0;
@@ -562,6 +590,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const handleToggleInventoryItem = (item: InventoryItem) => {
     if (isUpgrading) return;
     sound.playClick();
+    setLastResult(null);
     setBetMode('skin');
 
     setSelectedItems((prev) => {
@@ -582,6 +611,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const handleRemoveSelectedItem = (instanceId: string) => {
     if (isUpgrading) return;
     sound.playClick();
+    setLastResult(null);
     setSelectedItems((prev) => {
       const next = prev.filter((i) => i.instanceId !== instanceId);
       const nextBet = next.reduce((sum, i) => sum + i.priceDc, 0);
@@ -595,6 +625,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
   const handleClearAllSelected = () => {
     if (isUpgrading) return;
     sound.playClick();
+    setLastResult(null);
     setSelectedItems([]);
   };
 
@@ -619,6 +650,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
   const handleSelectPreset = (desiredChance: number) => {
     sound.playClick();
+    setLastResult(null);
     setTargetChance(desiredChance);
     autoSelectTargetSkin(desiredChance, effectiveBetDc);
   };
@@ -1092,17 +1124,18 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         });
       }
 
-      confetti({
-        particleCount: 130,
-        spread: 80,
+      fireConfetti({
+        tier: 'high',
         origin: { y: 0.6 },
         colors: ['#FACC15', '#FFFFFF', '#10B981'],
       });
     } else {
       sound.playCrash();
       setLastResult('lose');
+      lastResultSettledAtRef.current = Date.now();
       recordUpgrade(false, -effectiveBetDc);
 
+      let remainingSelected: InventoryItem[] = [];
       if (betMode === 'skin') {
         if (wasProtected) {
           // Remove all items EXCEPT the protected one
@@ -1118,13 +1151,16 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
           // Keep protected item in inventory & selection
           const savedItem = selectedItems.find((i) => i.instanceId === protectedInstanceId);
-          setSelectedItems(savedItem ? [savedItem] : []);
+          remainingSelected = savedItem ? [savedItem] : [];
+          setSelectedItems(remainingSelected);
         } else {
           const idsToRemove = selectedItems.map((i) => i.instanceId);
           removeFromInventory(idsToRemove);
           setSelectedItems([]);
         }
       }
+
+      settledBetSignatureRef.current = `${targetSkin?.id || ''}_${remainingSelected.map((i) => i.instanceId).sort().join(',')}_${customBetDc}_${betMode}`;
 
       setZeusStriking(false);
       setZeusUsedThisSpin(false);
@@ -1287,6 +1323,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
   const handleBuyAndSelectSkin = (skin: SkinEntity) => {
     sound.playClick();
+    setLastResult(null);
     if (balance < skin.priceDc) {
       sound.playError();
       alert(locale === 'ru' ? 'Недостаточно DC для покупки этого скина!' : 'Not enough DC to purchase this skin!');
@@ -1850,6 +1887,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                         value={customBetDc}
                         onChange={(e) => {
                           const val = Math.max(10, Number(e.target.value));
+                          setLastResult(null);
                           setCustomBetDc(val);
                           autoSelectTargetSkin(targetChance, val);
                         }}
@@ -1866,6 +1904,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                         type="button"
                         onClick={() => {
                           const val = amt;
+                          setLastResult(null);
                           setCustomBetDc(val);
                           autoSelectTargetSkin(targetChance, val);
                         }}
@@ -2250,13 +2289,19 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   if (typeof v === 'number') needleAngleRef.current = v;
                 }}
                 className="absolute w-full h-full flex items-center justify-center pointer-events-none z-10"
-                style={{ transformOrigin: 'center center', willChange: 'transform' }}
+                style={{
+                  transformOrigin: 'center center',
+                  willChange: 'transform',
+                  transform: 'translate3d(0, 0, 0)',
+                  backfaceVisibility: 'hidden',
+                  WebkitBackfaceVisibility: 'hidden',
+                }}
               >
                 <div className="relative w-full h-4 flex items-center justify-end pr-1.5">
                   {(zeusUsedThisSpin || zeusStriking) ? (
                     <div className="relative">
                       <svg
-                        className="w-9 h-9 transition-all duration-300 scale-110 zeus-arrow-charged filter drop-shadow-[0_0_14px_#38bdf8]"
+                        className="w-9 h-9 scale-110 zeus-arrow-charged"
                         viewBox="0 0 24 24"
                         fill="none"
                       >
@@ -2265,9 +2310,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                           points="2,12 20,4 20,20"
                           fill="#38bdf8"
                           stroke="#38bdf8"
-                          strokeWidth="4"
+                          strokeWidth="5"
                           strokeLinejoin="round"
-                          opacity="0.35"
+                          opacity="0.45"
                           className="zeus-electric-arc"
                         />
                         <polygon
@@ -2291,7 +2336,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeDasharray="4 2"
-                          className="zeus-bolt-flow filter drop-shadow-[0_0_4px_#ffffff]"
+                          className="zeus-bolt-flow"
                         />
                       </svg>
                       {/* Трещащие разряды вокруг наэлектризованной стрелки */}
@@ -2313,7 +2358,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeDasharray="3 2"
-                          className="zeus-bolt-flow filter drop-shadow-[0_0_6px_#e0f2fe]"
+                          className="zeus-bolt-flow"
                         />
                         <path
                           d="M 9 24 L 12.5 27.5 L 10 30.5"
@@ -2322,7 +2367,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                           fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          className="zeus-spark-item filter drop-shadow-[0_0_5px_#38bdf8]"
+                          className="zeus-spark-item"
                           style={{ animationDelay: '0.2s', animationDuration: '0.55s' }}
                         />
                         <path
@@ -2332,12 +2377,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                           fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          className="zeus-spark-item filter drop-shadow-[0_0_6px_#38bdf8]"
+                          className="zeus-spark-item"
                           style={{ animationDelay: '0s', animationDuration: '0.5s' }}
                         />
                       </svg>
                       {/* SVG-молния вместо эмодзи над стрелкой */}
-                      <svg viewBox="0 0 10 14" className="zeus-spark-item absolute right-0 -top-3 w-[11px] h-[15px] filter drop-shadow-[0_0_8px_#38bdf8]" style={{ animationDuration: '0.45s' }}>
+                      <svg viewBox="0 0 10 14" className="zeus-spark-item absolute right-0 -top-3 w-[11px] h-[15px]" style={{ animationDuration: '0.45s' }}>
                         <path
                           d="M 6 1 L 2.5 8 L 5.5 8 L 4 13"
                           fill="#e0f2fe"
@@ -2349,10 +2394,18 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     </div>
                   ) : (
                     <svg
-                      className="w-7 h-7 transition-all duration-300 filter drop-shadow-[0_0_12px_rgba(250,204,21,0.95)]"
+                      className="w-7 h-7"
                       viewBox="0 0 24 24"
                       fill="none"
                     >
+                      <polygon
+                        points="2,12 20,4 20,20"
+                        fill="#FACC15"
+                        stroke="#FACC15"
+                        strokeWidth="5"
+                        strokeLinejoin="round"
+                        opacity="0.45"
+                      />
                       <polygon
                         points="2,12 20,4 20,20"
                         fill="#FACC15"
@@ -2589,7 +2642,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               {targetSkin && (
                 <button
                   type="button"
-                  onClick={() => setTargetSkin(null)}
+                  onClick={() => {
+                    setTargetSkin(null);
+                    setLastResult(null);
+                  }}
                   disabled={isUpgrading}
                   className="text-xs text-white/50 hover:text-red-400 transition-colors cursor-pointer"
                 >
@@ -2612,7 +2668,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   {targetSkin && (
                     <button
                       type="button"
-                      onClick={() => setTargetSkin(null)}
+                      onClick={() => {
+                        setTargetSkin(null);
+                        setLastResult(null);
+                      }}
                       className="px-2 py-0.5 rounded-lg bg-white/5 hover:bg-red-500/15 border border-white/10 hover:border-red-500/30 text-[11px] font-bold text-white/50 hover:text-red-400 transition-all flex items-center gap-1 cursor-pointer"
                       title={locale === 'ru' ? 'Убрать целевой скин' : 'Remove target skin'}
                     >
@@ -3170,6 +3229,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                           return;
                         }
                         sound.playClick();
+                        setLastResult(null);
                         setTargetSkin(s);
                       }}
                     />

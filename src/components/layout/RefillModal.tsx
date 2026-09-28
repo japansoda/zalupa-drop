@@ -18,7 +18,7 @@ import {
   Flame,
   ArrowRight,
 } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { fireConfetti } from '../../lib/confetti';
 import { useGameStore } from '../../store/useGameStore';
 import { DropCoinIcon } from '../ui/DropCoinIcon';
 import { sound } from '../../lib/sound';
@@ -143,9 +143,8 @@ export const RefillModal: React.FC = () => {
   const triggerRewardAnimation = (amount: number, labelText?: string) => {
     sound.playReward();
     refillDemoBalance(amount);
-    confetti({
-      particleCount: 50,
-      spread: 60,
+    fireConfetti({
+      tier: 'mid',
       origin: { y: 0.65 },
       colors: ['#FACC15', '#FFFFFF', '#38BDF8', '#10B981'],
     });

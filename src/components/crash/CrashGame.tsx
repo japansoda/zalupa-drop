@@ -4,7 +4,7 @@ import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
 import { useLanguage } from '../../lib/i18n';
 import { Rocket, AlertTriangle, Check, RotateCcw } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { fireConfetti } from '../../lib/confetti';
 
 export const CrashGame: React.FC = () => {
   const { balance, deductBalance, addBalance, recordCrash } = useGameStore();
@@ -137,9 +137,8 @@ export const CrashGame: React.FC = () => {
     setGameState('cashed_out');
     recordCrash(winAmount - betDc);
 
-    confetti({
-      particleCount: 70,
-      spread: 70,
+    fireConfetti({
+      tier: 'mid',
       origin: { y: 0.6 },
       colors: ['#FACC15', '#FFFFFF', '#10B981'],
     });

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
-import confetti from 'canvas-confetti';
+import { fireConfetti } from '../../lib/confetti';
 import { ExternalLink, Check, ShoppingBag, FlaskConical, ShieldCheck, Zap, Sparkles, Ticket, Anchor, Egg, RotateCcw } from 'lucide-react';
 import { SkinEntity } from '../../lib/types';
 import { RARITY_CONFIG } from '../../data/skins';
@@ -63,10 +63,8 @@ export const DropModal: React.FC<DropModalProps> = ({
 
   useEffect(() => {
     if (hasHighTier || isMulti || hasBonus) {
-      confetti({
-        particleCount: hasBonus ? 160 : isMulti ? 180 : 140,
-        spread: 85,
-        origin: { y: 0.6 },
+      fireConfetti({
+        tier: hasBonus ? 'legendary' : hasHighTier ? 'high' : 'mid',
         colors: hasBonus
           ? ['#34d399', '#facc15', '#10b981', '#a7f3d0', '#ffffff']
           : ['#facc15', '#ffffff', '#10b981', '#84cc16'],

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import confetti from 'canvas-confetti';
+import { fireConfetti } from '../../lib/confetti';
 import { X, Sparkles, Check, Egg, Trophy } from 'lucide-react';
 import { ChickenBreedId, CHICKEN_BREEDS, ChickenEntity } from '../../lib/farm';
 import { useGameStore } from '../../store/useGameStore';
@@ -103,9 +103,8 @@ export const ChickenHatchModal: React.FC<ChickenHatchModalProps> = ({
             b?.rarity === 'covert' ||
             chicken.isStatTrak;
 
-          confetti({
-            particleCount: isHighRarity ? 220 : 120,
-            spread: isHighRarity ? 100 : 75,
+          fireConfetti({
+            tier: isHighRarity ? 'legendary' : 'mid',
             origin: { y: 0.55 },
             colors: ['#ffd700', '#f59e0b', '#38bdf8', '#ffffff', '#22c55e', '#ef4444'],
           });
