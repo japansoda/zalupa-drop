@@ -38,7 +38,7 @@ export const CaseSkinGroupCard = React.memo<CaseSkinGroupCardProps>(({ variants 
   return (
     <div
       className="rounded-2xl glass-card p-2.5 sm:p-3 flex flex-col justify-between border hover:border-yellow-400/40 transition-all group relative overflow-hidden"
-      style={{ borderBottomWidth: '3px', borderBottomColor: config.color, contain: 'content' }}
+      style={{ borderBottomWidth: '3px', borderBottomColor: config.color, contain: 'content', contentVisibility: 'auto', containIntrinsicSize: '240px' }}
     >
       {/* Top Header: Only Rarity Badge + Steam external link */}
       <div className="flex items-center justify-between gap-1.5 z-10 min-h-[22px]">

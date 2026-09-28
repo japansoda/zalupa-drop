@@ -56,6 +56,8 @@ export interface LiveDrop {
   timestamp: number;
   /** Шанс апгрейда в % (только для дропов из апгрейдера) */
   chance?: number;
+  caseId?: string;
+  destination?: string;
 }
 
 export interface UserStats {

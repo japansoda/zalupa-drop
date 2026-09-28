@@ -12,7 +12,6 @@ import {
   Egg,
   Coins,
   Sliders,
-  CheckCircle2,
   Shield,
   CreditCard,
   Flame,
@@ -105,13 +104,6 @@ const THEME_STYLES: Record<
     glow: 'group-hover:shadow-[0_0_35px_rgba(245,158,11,0.5)]',
   },
 };
-
-const PAYMENT_METHODS = [
-  { name: 'CS2 Skins', icon: Flame, color: '#f59e0b' },
-  { name: 'Steam Pay', icon: Shield, color: '#38bdf8' },
-  { name: 'СБП / МИР', icon: CreditCard, color: '#10b981' },
-  { name: 'USDT / BTC', icon: Coins, color: '#eab308' },
-];
 
 export const RefillModal: React.FC = () => {
   const {
@@ -600,29 +592,6 @@ export const RefillModal: React.FC = () => {
             </button>
           </div>
         )}
-
-        {/* Footer Payment Providers & Security Bar */}
-        <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-white/40">
-          <div className="flex items-center gap-2 flex-wrap justify-center sm:justify-start">
-            {PAYMENT_METHODS.map((method) => {
-              const Icon = method.icon;
-              return (
-                <div
-                  key={method.name}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/5 text-[10px] font-bold text-white/50 select-none"
-                >
-                  <Icon className="w-3 h-3" style={{ color: method.color }} />
-                  <span>{method.name}</span>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="flex items-center gap-1.5 text-[10px] text-white/40">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-            <span>{isRu ? 'Безопасное мгновенное начисление' : 'Instant free demo refill'}</span>
-          </div>
-        </div>
       </motion.div>
     </div>
   );

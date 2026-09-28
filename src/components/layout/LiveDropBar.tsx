@@ -30,25 +30,29 @@ const CASE_EN_MAP: Record<string, string> = {
 };
 
 const getDropDestination = (drop: LiveDrop): string => {
-  const caseName = (drop.caseName || '').toLowerCase().trim();
-  const id = drop.id || '';
+  if (drop.destination) return drop.destination;
+  if (drop.caseId) return `/case/${drop.caseId}`;
 
-  if (caseName.includes('апгрейдер') || caseName.includes('upgrader') || id.startsWith('upgrade_')) {
+  const caseName = (drop.caseName || '').toLowerCase().trim();
+  const id = (drop.id || '').toLowerCase();
+
+  if (caseName.includes('апгрейдер') || caseName.includes('upgrader') || id.includes('upgrade')) {
     return '/upgrader';
   }
-  if (caseName.includes('контракт') || caseName.includes('trade-up') || id.startsWith('contract_')) {
+  if (caseName.includes('контракт') || caseName.includes('trade-up') || caseName.includes('contract') || id.includes('contract')) {
     return '/contract';
   }
-  if (caseName.includes('ферма') || caseName.includes('farm') || id.startsWith('chickendrop_')) {
+  if (caseName.includes('ферма') || caseName.includes('farm') || id.includes('chickendrop') || id.includes('farm')) {
     return '/farm';
   }
-  if (caseName.includes('краш') || caseName.includes('crash')) {
+  if (caseName.includes('краш') || caseName.includes('crash') || id.includes('crash')) {
     return '/crash';
   }
 
   // Look up in CASES_DATABASE
   const match = CASES_DATABASE.find(
     (c) =>
+      c.id.toLowerCase() === caseName ||
       c.name.toLowerCase() === caseName ||
       (c.nameEn && c.nameEn.toLowerCase() === caseName) ||
       caseName.includes(c.name.toLowerCase()) ||
@@ -71,24 +75,6 @@ const getDropDestination = (drop: LiveDrop): string => {
 
   return '/';
 };
-
-const SIMULATED_CASES = [
-  'Кейс «Революция»',
-  'Грёзы и кошмары',
-  'Kilowatt Case',
-  'CS:GO Weapon Case',
-  'Кейс «Галерея»',
-  'Fever Case',
-  'Sealed Genesis Terminal',
-  'Sealed Dead Hand Terminal',
-  'Ферма',
-  'Кейс «Разлом»',
-  'Кейс «Легенда Howl»',
-  'Кейс «Градиентный Раш»',
-  'Кейс «Галактика Допплер»',
-  'Кейс «Дикий Лотос»',
-  'Кейс «Хранилище Перчаток»',
-];
 
 const isOwnDrop = (drop: LiveDrop): boolean => {
   return drop.user === 'Вы' || drop.user === 'YOU';
@@ -142,8 +128,8 @@ const LiveDropCard = memo(({ drop, isUser, locale }: CardProps) => {
       }}
       title={
         locale === 'ru'
-          ? `${drop.skin.name} — ${drop.caseName} (Нажмите, чтобы перейти)`
-          : `${drop.skin.name} — ${drop.caseName} (Click to view)`
+          ? `${drop.skin.name} — ${drop.caseName}${drop.chance != null ? ` (${drop.chance}%)` : ''} (Нажмите, чтобы перейти)`
+          : `${drop.skin.name} — ${drop.caseName}${drop.chance != null ? ` (${drop.chance}%)` : ''} (Click to view)`
       }
     >
       {/* Skin Icon */}
@@ -158,7 +144,7 @@ const LiveDropCard = memo(({ drop, isUser, locale }: CardProps) => {
       </div>
 
       {/* Skin Details */}
-      <div className="flex flex-col leading-tight pr-1 min-w-[85px] max-w-[130px]">
+      <div className="flex flex-col leading-tight pr-1 min-w-[90px] max-w-[140px]">
         <div className="flex items-center justify-between gap-1 mb-0.5">
           <span
             className="text-[10px] font-black truncate"
@@ -176,14 +162,18 @@ const LiveDropCard = memo(({ drop, isUser, locale }: CardProps) => {
         <span className="text-[9px] font-semibold text-white/80 truncate">
           {drop.skin.skinName}
         </span>
-        <div className="flex items-center justify-between gap-1 text-[8px] text-white/40 mt-0.5">
-          <span className="truncate max-w-[70px]">
-            {locale === 'en' ? (CASE_EN_MAP[drop.caseName] || drop.caseName) : drop.caseName}
+        <div className="flex items-center justify-between gap-1.5 text-[8px] text-white/40 mt-0.5">
+          <div className="flex items-center gap-1 min-w-0 max-w-[80px]">
+            <span className="truncate" title={drop.caseName}>
+              {locale === 'en' ? (CASE_EN_MAP[drop.caseName] || drop.caseName) : drop.caseName}
+            </span>
             {drop.chance != null && (
-              <span className="font-mono text-sky-400/90"> · {drop.chance}%</span>
+              <span className="font-mono text-sky-400 font-bold shrink-0 bg-sky-400/10 px-1 py-0.2 rounded border border-sky-400/20">
+                {drop.chance}%
+              </span>
             )}
-          </span>
-          <span className="font-mono text-yellow-400/90 font-bold shrink-0">
+          </div>
+          <span className="font-mono text-yellow-400/90 font-bold shrink-0 ml-auto">
             {drop.skin.priceDc.toLocaleString('ru-RU')} DC
           </span>
         </div>
@@ -198,14 +188,16 @@ export const LiveDropBar: React.FC = () => {
   const { liveDrops, addLiveDrop } = useGameStore();
   const { t, locale } = useLanguage();
 
-  // Categorized pools for diverse drop generation (50% guns, 25% gloves, 25% knives, strictly >= 25,000 DC)
-  const { eliteGuns, eliteGloves, eliteKnives } = useMemo(() => {
+  // Categorized pools for diverse drop generation (exact cases, upgrader, farm, trade-up contracts)
+  const { eliteGuns, eliteGloves, eliteKnives, contractGuns, farmSkins, caseDropPools } = useMemo(() => {
     const guns: typeof SKINS_DATABASE = [];
     const gloves: typeof SKINS_DATABASE = [];
     const knives: typeof SKINS_DATABASE = [];
+    const contr: typeof SKINS_DATABASE = [];
+    const farm: typeof SKINS_DATABASE = [];
 
     for (const s of SKINS_DATABASE) {
-      if (!s || !s.image || !s.weapon || s.priceDc < 25000) continue;
+      if (!s || !s.image || !s.weapon) continue;
       const w = s.weapon.toLowerCase();
       if (
         w.includes('sticker') ||
@@ -218,16 +210,64 @@ export const LiveDropBar: React.FC = () => {
         continue;
       }
 
-      if (w.includes('knife') || w.includes('bayonet') || w.includes('karambit') || w.includes('daggers')) {
-        knives.push(s);
-      } else if (w.includes('gloves') || w.includes('wraps')) {
-        gloves.push(s);
-      } else {
-        guns.push(s);
+      if (s.priceDc >= 25000) {
+        if (w.includes('knife') || w.includes('bayonet') || w.includes('karambit') || w.includes('daggers')) {
+          knives.push(s);
+        } else if (w.includes('gloves') || w.includes('wraps')) {
+          gloves.push(s);
+        } else {
+          guns.push(s);
+        }
+      }
+
+      // Trade-up contract drops: guns of classified, covert, or contraband rarity
+      if (
+        (s.rarity === 'classified' || s.rarity === 'covert' || s.rarity === 'contraband') &&
+        !w.includes('knife') && !w.includes('bayonet') && !w.includes('karambit') && !w.includes('daggers') &&
+        !w.includes('gloves') && !w.includes('wraps') &&
+        s.priceDc >= 3000
+      ) {
+        contr.push(s);
+      }
+
+      // Farm egg rewards: valuable drops
+      if (s.priceDc >= 4000) {
+        farm.push(s);
       }
     }
 
-    return { eliteGuns: guns, eliteGloves: gloves, eliteKnives: knives };
+    // Precompute authentic top skins per case so that case drops STRICTLY come from that case's skins
+    const validCases = (CASES_DATABASE || []).filter((c) => c && c.id && c.name && c.skins && c.skins.length > 0);
+    const pools = validCases.map((c) => {
+      // Top-tier skins from this exact case
+      let topSkins = c.skins.filter(
+        (s) =>
+          s &&
+          s.image &&
+          (s.rarity === 'gold' ||
+            s.rarity === 'covert' ||
+            s.rarity === 'extraordinary' ||
+            s.rarity === 'contraband' ||
+            s.rarity === 'classified' ||
+            s.priceDc >= 15000)
+      );
+      if (topSkins.length === 0) {
+        topSkins = [...c.skins].sort((a, b) => b.priceDc - a.priceDc).slice(0, 3);
+      }
+      return {
+        caseItem: c,
+        topSkins,
+      };
+    }).filter((entry) => entry.topSkins.length > 0);
+
+    return {
+      eliteGuns: guns.length > 0 ? guns : SKINS_DATABASE.slice(0, 20),
+      eliteGloves: gloves.length > 0 ? gloves : SKINS_DATABASE.slice(0, 10),
+      eliteKnives: knives.length > 0 ? knives : SKINS_DATABASE.slice(0, 10),
+      contractGuns: contr.length > 0 ? contr : guns,
+      farmSkins: farm.length > 0 ? farm : guns,
+      caseDropPools: pools,
+    };
   }, []);
 
   // Real-time synchronization for new drops (ntfy.sh SSE + local BroadcastChannel)
@@ -333,33 +373,68 @@ export const LiveDropBar: React.FC = () => {
         (d) => isRealDrop(d) && now - (d.timestamp || 0) < BLEND_WINDOW_MS
       ).length;
 
-      // Pick balanced skin: 50% guns, 25% gloves, 25% knives
       const roll = Math.random();
-      let pool = eliteGuns;
-      if (roll < 0.50 && eliteGuns.length > 0) {
-        pool = eliteGuns;
-      } else if (roll < 0.75 && eliteGloves.length > 0) {
-        pool = eliteGloves;
-      } else if (eliteKnives.length > 0) {
-        pool = eliteKnives;
-      } else if (eliteGuns.length > 0) {
-        pool = eliteGuns;
-      }
+      const timestamp = Date.now();
+      let newDrop: LiveDrop | null = null;
 
-      if (pool.length > 0) {
-        const randomSkin = pool[Math.floor(Math.random() * pool.length)];
-        const randomCase = SIMULATED_CASES[Math.floor(Math.random() * SIMULATED_CASES.length)];
-        const timestamp = Date.now();
-
-        const newDrop: LiveDrop = {
-          id: `sim_${timestamp}_${Math.random().toString(36).substring(2, 6)}`,
+      if (roll < 0.60 && caseDropPools.length > 0) {
+        // 1. CASE DROP: 100% matched to case skins & exact case page link
+        const entry = caseDropPools[Math.floor(Math.random() * caseDropPools.length)];
+        const randomSkin = entry.topSkins[Math.floor(Math.random() * entry.topSkins.length)];
+        newDrop = {
+          id: `sim_case_${entry.caseItem.id}_${timestamp}_${Math.random().toString(36).substring(2, 6)}`,
           user: '',
           avatar: '',
           skin: randomSkin,
-          caseName: randomCase,
+          caseName: entry.caseItem.name,
+          caseId: entry.caseItem.id,
+          destination: `/case/${entry.caseItem.id}`,
           timestamp,
         };
+      } else if (roll < 0.80) {
+        // 2. UPGRADER DROP: With realistic chance %, links directly to /upgrader
+        const pool = Math.random() < 0.5 ? eliteGuns : (Math.random() < 0.5 ? eliteKnives : eliteGloves);
+        const randomSkin = pool[Math.floor(Math.random() * pool.length)];
+        const realisticChances = [1.5, 3.2, 5.0, 7.5, 9.8, 12.0, 15.4, 21.0, 26.5, 33.3, 45.0, 52.5];
+        const chance = realisticChances[Math.floor(Math.random() * realisticChances.length)];
+        newDrop = {
+          id: `sim_upgrade_${timestamp}_${Math.random().toString(36).substring(2, 6)}`,
+          user: '',
+          avatar: '',
+          skin: randomSkin,
+          caseName: 'Апгрейдер',
+          chance,
+          destination: '/upgrader',
+          timestamp,
+        };
+      } else if (roll < 0.90 && farmSkins.length > 0) {
+        // 3. FARM DROP: Links directly to /farm
+        const randomSkin = farmSkins[Math.floor(Math.random() * farmSkins.length)];
+        newDrop = {
+          id: `sim_farm_${timestamp}_${Math.random().toString(36).substring(2, 6)}`,
+          user: '',
+          avatar: '',
+          skin: randomSkin,
+          caseName: 'Ферма',
+          destination: '/farm',
+          timestamp,
+        };
+      } else {
+        // 4. TRADE-UP CONTRACT DROP: Links directly to /contract
+        const pool = contractGuns.length > 0 ? contractGuns : eliteGuns;
+        const randomSkin = pool[Math.floor(Math.random() * pool.length)];
+        newDrop = {
+          id: `sim_contract_${timestamp}_${Math.random().toString(36).substring(2, 6)}`,
+          user: '',
+          avatar: '',
+          skin: randomSkin,
+          caseName: 'Контракт обмена',
+          destination: '/contract',
+          timestamp,
+        };
+      }
 
+      if (newDrop) {
         state.addLiveDrop(newDrop);
       }
 
@@ -377,7 +452,7 @@ export const LiveDropBar: React.FC = () => {
       isCancelled = true;
       if (timerId) clearTimeout(timerId);
     };
-  }, [eliteGuns, eliteGloves, eliteKnives]);
+  }, [eliteGuns, eliteGloves, eliteKnives, contractGuns, farmSkins, caseDropPools]);
 
   // Strict chronological left-to-right flow:
   // Newest drop always enters on the left, pushing older drops smoothly to the right!

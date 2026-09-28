@@ -111,10 +111,8 @@ const ReelTapeCard = React.memo<ReelTapeCardProps>(({
             priority={isPrioritySlot}
             thumb={!isPrioritySlot}
             className={`w-full h-full object-contain ${
-              showAsSpecial
-                ? 'filter drop-shadow-[0_0_12px_rgba(250,204,21,0.55)]'
-                : isWinSlot && isRevealed
-                ? 'filter drop-shadow-md'
+              isWinSlot && isRevealed
+                ? (showAsSpecial ? 'filter drop-shadow-[0_0_12px_rgba(250,204,21,0.55)]' : 'filter drop-shadow-md')
                 : ''
             }`}
           />
@@ -194,10 +192,8 @@ const ReelTapeCard = React.memo<ReelTapeCardProps>(({
           priority={isPrioritySlot}
           thumb={!isPrioritySlot}
           className={`w-full h-full object-contain ${
-            showAsSpecial
-              ? 'filter drop-shadow-[0_0_12px_rgba(250,204,21,0.55)]'
-              : isWinSlot && isRevealed
-              ? 'filter drop-shadow-md'
+            isWinSlot && isRevealed
+              ? (showAsSpecial ? 'filter drop-shadow-[0_0_12px_rgba(250,204,21,0.55)]' : 'filter drop-shadow-md')
               : ''
           }`}
         />
