@@ -539,10 +539,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       return caseId && isOfficialCase(caseId) && isKnifeOrGlove(last) ? rollSpecialKnifeDrop(caseId) : last;
     }
 
-    // 3. Calibrated 98.5% RTP for ALL cases:
-    // Target EV = 0.985 * casePriceDc.
-    // Solves alpha power exponent via binary search so expected drop return is strictly 98.5%!
-    const targetEV = Math.max(15, casePriceDc * 0.985);
+    // 3. Calibrated high-payout 102% RTP for ALL cases:
+    // Target EV = 1.02 * casePriceDc ensuring cases break even frequently and feel rewarding!
+    // Solves alpha power exponent via binary search so expected drop return is strictly ~102%!
+    const targetEV = Math.max(15, casePriceDc * 1.02);
     const prices = caseSkins.map((s) => Math.max(1, s.priceDc));
     const minP = Math.min(...prices);
     const maxP = Math.max(...prices);
