@@ -10,10 +10,84 @@ export const WEAR_NAME_MAP: Record<string, string> = {
 };
 
 /**
+ * Check if item is a Vanilla Knife in CS2 (e.g. ★ Flip Knife, ★ Karambit, ★ Butterfly Knife).
+ * Vanilla knives DO NOT have wear quality (Factory New, Field-Tested, etc.) on Steam or in CS2.
+ */
+export function isVanillaKnife(skin: Partial<SkinEntity>): boolean {
+  const w = (skin.weapon || '').replace(/^★\s*/, '').trim().toLowerCase();
+  const n = (skin.name || '').replace(/^StatTrak™\s*/i, '').replace(/^★\s*StatTrak™\s*/i, '').replace(/^★\s*/, '').trim().toLowerCase();
+  const sn = (skin.skinName || '').replace(/^★\s*/, '').trim().toLowerCase();
+
+  const isKnife =
+    w.includes('knife') ||
+    w.includes('bayonet') ||
+    w.includes('karambit') ||
+    w.includes('daggers') ||
+    n.includes('knife') ||
+    n.includes('bayonet') ||
+    n.includes('karambit') ||
+    n.includes('daggers');
+
+  if (!isKnife) return false;
+
+  // If it has a distinct skinName (like "Rust Coat", "Doppler", "Fade"), it is NOT vanilla!
+  if (sn && sn !== w && sn !== n && sn !== 'vanilla') return false;
+
+  // If the full name has " | " with a skin pattern, it is NOT vanilla!
+  if (n.includes('|')) {
+    const parts = n.split('|');
+    if (parts[1] && parts[1].trim().length > 0) return false;
+  }
+
+  // Otherwise, it is a vanilla knife (e.g. "★ Flip Knife", "★ Karambit")
+  return true;
+}
+
+/**
+ * Returns the exact list of valid wear qualities that exist in CS2 for this skin finish.
+ * For example:
+ * - Vanilla knives: [] (no wear exists)
+ * - Rust Coat: ['WW', 'BS'] (FN, MW, FT do NOT exist)
+ * - Doppler / Gamma Doppler / Fade / Marble Fade / Tiger Tooth: ['FN', 'MW'] (FT, WW, BS do NOT exist)
+ * - Asiimov: ['FT', 'WW', 'BS'] (FN, MW do NOT exist)
+ * - Other wearable weapons: ['FN', 'MW', 'FT', 'WW', 'BS']
+ */
+export function getValidWearList(skin: Partial<SkinEntity>): SkinWear[] {
+  if (!isWearableItem(skin)) return [];
+
+  const name = `${skin.weapon || ''} ${skin.skinName || ''} ${skin.name || ''}`.toLowerCase();
+
+  if (name.includes('rust coat') || name.includes('пыльник')) {
+    return ['WW', 'BS'];
+  }
+
+  if (
+    name.includes('doppler') ||
+    name.includes('волны') ||
+    name.includes('tiger tooth') ||
+    name.includes('зуб тигра') ||
+    name.includes('marble fade') ||
+    name.includes('мраморный градиент') ||
+    name.includes('fade') ||
+    name.includes('градиент')
+  ) {
+    return ['FN', 'MW'];
+  }
+
+  if (name.includes('asiimov') || name.includes('азимов')) {
+    return ['FT', 'WW', 'BS'];
+  }
+
+  return ['FN', 'MW', 'FT', 'WW', 'BS'];
+}
+
+/**
  * Check if skin type has wear qualities in CS2.
- * In CS2, Charms, Agents, and Stickers DO NOT have wear qualities.
+ * In CS2, Vanilla Knives, Charms, Agents, and Stickers DO NOT have wear qualities.
  */
 export function isWearableItem(skin: Partial<SkinEntity>): boolean {
+  if (isVanillaKnife(skin)) return false;
+
   const w = (skin.weapon || '').toLowerCase();
   const n = (skin.name || '').toLowerCase();
 
@@ -53,6 +127,18 @@ export function getSteamMarketHashName(skin: Partial<SkinEntity>): string {
   let cleanName = skin.name || (skin.weapon && skin.skinName ? `${skin.weapon} | ${skin.skinName}` : skin.skinName || skin.weapon || '');
   cleanName = cleanName.replace(/^StatTrak™\s*/i, '').replace(/^★\s*StatTrak™\s*/i, '★ ').trim();
   cleanName = cleanName.replace(/\s*\((Factory New|Minimal Wear|Field-Tested|Well-Worn|Battle-Scarred|Прямо с завода|Немного поношенное|После полевых испытаний|Поношенное|Закаленное в боях)\)$/i, '').trim();
+
+  // 0. Vanilla Knives: exact hash is ★ {Knife} or ★ StatTrak™ {Knife} (NO wear string)
+  if (isVanillaKnife(skin)) {
+    let knifeName = (skin.weapon || cleanName || '').replace(/^StatTrak™\s*/i, '').replace(/^★\s*StatTrak™\s*/i, '').replace(/^★\s*/, '').trim();
+    if (knifeName.includes('|')) {
+      knifeName = knifeName.split('|')[0].trim();
+    }
+    if (skin.statTrak) {
+      return `★ StatTrak™ ${knifeName}`;
+    }
+    return `★ ${knifeName}`;
+  }
 
   // 1. Stickers: exact name as registered on Steam
   if (isSticker) {

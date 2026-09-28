@@ -16,7 +16,7 @@ import { SkinEntity, SkinRarity, SkinWear, LivePricesMap } from '../../lib/types
 import { useGameStore } from '../../store/useGameStore';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
-import { isStatTrakableItem, isWearableItem } from '../../lib/steam';
+import { isStatTrakableItem, isWearableItem, isVanillaKnife, getValidWearList } from '../../lib/steam';
 import { isActualWeaponOrKnifeGlove } from '../../lib/farm';
 import { getCanonicalPrice } from '../../lib/marketPricing';
 import {
@@ -527,7 +527,7 @@ export default function MarketplacePage() {
     return SKINS_DATABASE.filter(isMarketAllowedItem);
   }, []);
 
-// Synthesize complete 5 wears + StatTrak variants for every skin so users can buy any quality
+// Synthesize only the genuine wear variants that actually exist in CS2 for this skin
 function synthesizeCompleteVariants(
   rawVariants: SkinEntity[],
   livePrices?: LivePricesMap
@@ -541,7 +541,44 @@ function synthesizeCompleteVariants(
     rawVariants.find((v) => !v.statTrak) ||
     rawVariants[0];
 
-  // For non-wearables (Stickers, Charms, Agents, Patches, etc.): keep single item
+  // 1. Vanilla Knives: Only Regular and StatTrak (NO wear qualities exist in CS2)
+  if (isVanillaKnife(best)) {
+    const cleanW = (best.weapon || '').replace(/^★\s*/, '').trim();
+    const regName = `★ ${cleanW}`;
+    const stName = `★ StatTrak™ ${cleanW}`;
+
+    const regCanonical = getCanonicalPrice({ weapon: cleanW, name: regName, statTrak: false }, livePrices);
+    const stCanonical = getCanonicalPrice({ weapon: cleanW, name: stName, statTrak: true }, livePrices);
+
+    return [
+      {
+        ...best,
+        id: `${best.id}_reg`,
+        name: regName,
+        weapon: cleanW,
+        skinName: cleanW,
+        priceDc: regCanonical.priceDc,
+        priceUsd: regCanonical.priceUsd,
+        statTrak: false,
+        wear: undefined,
+        wearLabel: undefined,
+      },
+      {
+        ...best,
+        id: `${best.id}_st`,
+        name: stName,
+        weapon: cleanW,
+        skinName: cleanW,
+        priceDc: stCanonical.priceDc,
+        priceUsd: stCanonical.priceUsd,
+        statTrak: true,
+        wear: undefined,
+        wearLabel: undefined,
+      },
+    ];
+  }
+
+  // 2. For non-wearables (Stickers, Charms, Agents, Patches, etc.): keep single item
   if (!isWearableItem(best)) {
     const canonical = getCanonicalPrice(best, livePrices);
     return [
@@ -565,9 +602,10 @@ function synthesizeCompleteVariants(
 
   const result: SkinEntity[] = [];
   const stOptions = canBeSt ? [false, true] : [false];
+  const allowedWears = getValidWearList(best);
 
   for (const st of stOptions) {
-    for (const wear of WEAR_ORDER) {
+    for (const wear of allowedWears) {
       const existing = rawVariants.find((v) => v.wear === wear && Boolean(v.statTrak) === st);
       const wearName = WEAR_LABELS[wear]?.en || wear;
 
