@@ -444,6 +444,27 @@ export const LiveDropBar: React.FC = () => {
       timerId = setTimeout(tick, nextDelay);
     };
 
+    // If fewer than 15 drops exist, populate initial authentic drops so the bar stretches edge-to-edge immediately on PC
+    const st = useGameStore.getState();
+    if (st.liveDrops.length < 15 && caseDropPools.length > 0) {
+      const needed = 15 - st.liveDrops.length;
+      for (let i = 0; i < needed; i++) {
+        const poolEntry = caseDropPools[Math.floor(Math.random() * caseDropPools.length)];
+        const skin = poolEntry.topSkins[Math.floor(Math.random() * poolEntry.topSkins.length)];
+        const ts = Date.now() - (needed - i) * 12000;
+        st.addLiveDrop({
+          id: `sim_init_${poolEntry.caseItem.id}_${ts}_${i}`,
+          user: '',
+          avatar: '',
+          skin,
+          caseName: poolEntry.caseItem.name,
+          caseId: poolEntry.caseItem.id,
+          destination: `/case/${poolEntry.caseItem.id}`,
+          timestamp: ts,
+        });
+      }
+    }
+
     // First fake drop appears in 1.5s if empty, or in 4s
     const initialDelay = useGameStore.getState().liveDrops.length === 0 ? 1500 : 4000;
     timerId = setTimeout(tick, initialDelay);
@@ -456,13 +477,14 @@ export const LiveDropBar: React.FC = () => {
 
   // Strict chronological left-to-right flow:
   // Newest drop always enters on the left, pushing older drops smoothly to the right!
+  // Visible slice is 32 to guarantee full edge-to-edge coverage on all PC and ultrawide resolutions
   const visibleDrops = useMemo(() => {
-    return liveDrops.slice(0, 12);
+    return liveDrops.slice(0, 32);
   }, [liveDrops]);
 
   return (
     <div className="w-full bg-[#0a0a0d] border-b border-white/5 py-1 overflow-hidden backdrop-blur-md max-w-full select-none">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 flex items-center gap-2 sm:gap-3">
+      <div className="w-full px-2 sm:px-4 flex items-center gap-2 sm:gap-3">
         <div className="flex items-center gap-1.5 shrink-0 pr-2.5 border-r border-white/10">
           <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-ping" />
           <span className="text-[10px] font-black text-white/60 tracking-wider uppercase">
@@ -470,11 +492,11 @@ export const LiveDropBar: React.FC = () => {
           </span>
         </div>
 
-        {/* PC Version: strictly non-scrollable (md:overflow-x-hidden, no-wheel-scroll) */}
+        {/* PC Version: strictly non-scrollable (md:overflow-x-hidden, no-wheel-scroll), spans edge-to-edge */}
         {/* Mobile: touch swipeable (overflow-x-auto) */}
         <div
           data-no-wheel="true"
-          className="flex items-center gap-2 overflow-x-auto md:overflow-x-hidden no-scrollbar no-wheel-scroll py-0.5 max-w-full min-h-[42px]"
+          className="flex-1 min-w-0 flex items-center gap-2 overflow-x-auto md:overflow-x-hidden no-scrollbar no-wheel-scroll py-0.5 min-h-[42px]"
         >
           {visibleDrops.length === 0 ? (
             <div className="flex items-center gap-2 text-xs text-white/30 font-medium italic animate-pulse py-1 pl-1">

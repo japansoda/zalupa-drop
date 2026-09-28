@@ -202,7 +202,7 @@ export const useGameStore = create<GameState>()(
           );
           if (isDuplicate) return state;
           return {
-            liveDrops: [drop, ...state.liveDrops.slice(0, 19)],
+            liveDrops: [drop, ...state.liveDrops.slice(0, 39)],
           };
         });
 

@@ -1,6 +1,9 @@
 import { SkinEntity, SkinWear } from './types';
 import { SKINS_DATABASE } from '../data/skins';
 import { isWearableItem, isStatTrakableItem, getSteamMarketHashName } from './steam';
+import livePricesJson from '../data/live_market_prices.json';
+
+const LIVE_MARKET_PRICES: Record<string, number> = livePricesJson as Record<string, number>;
 
 // Canonical wear multipliers (identical across Marketplace, Cases, Upgrader, Farm, Contracts)
 export const WEAR_RATES: Record<SkinWear, number> = {
@@ -62,8 +65,26 @@ function initPricingCaches(): void {
 
   for (const [key, variants] of groupedVariants.entries()) {
     // Record general base price for non-wearable designs (stickers, charms, agents)
-    const baseP = variants[0]?.priceDc || 100;
+    const bestSkin = variants[0];
+    const bestHash = getSteamMarketHashName(bestSkin);
+    const realLiveBase = LIVE_MARKET_PRICES[bestHash] || LIVE_MARKET_PRICES[bestSkin.name] || 0;
+    const baseP = realLiveBase > 0 ? realLiveBase : (bestSkin?.priceDc || 100);
     designMap.set(key, Math.max(1, baseP));
+
+    // Check if live market prices database has exact Field-Tested price
+    const cleanW = (bestSkin.weapon || '').replace(/^★\s*StatTrak™\s*/i, '★ ').replace(/^StatTrak™\s*/i, '').trim();
+    const cleanN = (bestSkin.skinName || bestSkin.name || '')
+      .replace(/^★\s*StatTrak™\s*/i, '★ ')
+      .replace(/^StatTrak™\s*/i, '')
+      .replace(/\s*\([^)]*\)$/, '')
+      .trim();
+
+    const ftHash = getSteamMarketHashName({ weapon: cleanW, skinName: cleanN, wear: 'FT', statTrak: false });
+    const realFtPrice = LIVE_MARKET_PRICES[ftHash];
+    if (realFtPrice && realFtPrice > 0) {
+      ftMap.set(key, realFtPrice);
+      continue;
+    }
 
     // Derive canonical Field-Tested price using Marketplace standard hierarchy
     const ftVariant = variants.find((v) => !v.statTrak && v.wear === 'FT');
@@ -104,7 +125,6 @@ export function getBaseFtPrice(weapon?: string, skinName?: string, name?: string
   const found = baseFtPriceCache?.get(key);
   if (found && found > 0) return found;
 
-  // Fallback try without weapon prefix or with name
   if (name) {
     const keyAlt = getSkinDesignKey('', '', name);
     const foundAlt = baseFtPriceCache?.get(keyAlt);
@@ -126,50 +146,82 @@ export function getBaseDesignPrice(weapon?: string, skinName?: string, name?: st
 /**
  * Computes canonical price in DropCoin (DC) and USD for ANY skin entity.
  * - Single source of truth across Marketplace, Cases, Roulette, Upgrader, Farm, Contracts.
- * - If livePrices contains an exact Steam price for this item's Steam hash name, it takes precedence.
- * - Otherwise computes exact Marketplace formula price.
+ * - Prioritizes dynamic live prices, then real CS2 market dataset (25,000+ items), then exact formula.
  */
 export function getCanonicalPrice(
   skin: Partial<SkinEntity>,
   livePrices?: Record<string, { priceDc: number; priceUsd?: number }>
 ): { priceDc: number; priceUsd: number } {
-  // 1. Direct match in live Steam prices
   const hashName = getSteamMarketHashName(skin);
+
+  // 1. Dynamic live prices from 5-minute background refresh
   if (livePrices && livePrices[hashName] && livePrices[hashName].priceDc > 0) {
     const pDc = livePrices[hashName].priceDc;
     const pUsd = livePrices[hashName].priceUsd ?? Number((pDc * 0.01).toFixed(2));
     return { priceDc: pDc, priceUsd: pUsd };
   }
 
+  // 2. Direct match in authentic CS2 market dataset
+  const realMarketPrice = LIVE_MARKET_PRICES[hashName];
+  if (realMarketPrice && realMarketPrice > 0) {
+    return {
+      priceDc: realMarketPrice,
+      priceUsd: Number((realMarketPrice * 0.01).toFixed(2)),
+    };
+  }
+
   const wearable = isWearableItem(skin);
   const stattrakable = isStatTrakableItem(skin);
   const isSt = Boolean(skin.statTrak && stattrakable);
 
-  // 2. Non-wearable items (Stickers, Charms, Agents, Patches, Music Kits)
+  // 3. Non-wearable items (Stickers, Charms, Agents, Patches, Music Kits)
   if (!wearable) {
+    const directLookup =
+      LIVE_MARKET_PRICES[hashName] ||
+      (skin.name ? LIVE_MARKET_PRICES[skin.name] : 0) ||
+      (skin.skinName ? LIVE_MARKET_PRICES[skin.skinName] : 0);
+
+    if (directLookup && directLookup > 0) {
+      return {
+        priceDc: directLookup,
+        priceUsd: Number((directLookup * 0.01).toFixed(2)),
+      };
+    }
+
     const baseP = getBaseDesignPrice(skin.weapon, skin.skinName, skin.name) || skin.priceDc || 100;
     const priceDc = Math.max(1, baseP);
     const priceUsd = Number((priceDc * 0.01).toFixed(2));
     return { priceDc, priceUsd };
   }
 
-  // 3. Wearable items (Guns, Knives, Gloves)
-  // Check if livePrices has the base Field-Tested price for this skin design
-  let baseFtPrice = 0;
-  if (livePrices) {
-    const cleanW = (skin.weapon || '').replace(/^★\s*StatTrak™\s*/i, '★ ').replace(/^StatTrak™\s*/i, '').trim();
-    const cleanN = (skin.skinName || skin.name || '')
-      .replace(/^★\s*StatTrak™\s*/i, '★ ')
-      .replace(/^StatTrak™\s*/i, '')
-      .replace(/\s*\([^)]*\)$/, '')
-      .trim();
+  // 4. Wearable items (Guns, Knives, Gloves)
+  const cleanW = (skin.weapon || '').replace(/^★\s*StatTrak™\s*/i, '★ ').replace(/^StatTrak™\s*/i, '').trim();
+  const cleanN = (skin.skinName || skin.name || '')
+    .replace(/^★\s*StatTrak™\s*/i, '★ ')
+    .replace(/^StatTrak™\s*/i, '')
+    .replace(/\s*\([^)]*\)$/, '')
+    .trim();
 
+  let baseFtPrice = 0;
+
+  // Check client livePrices for base FT
+  if (livePrices) {
     const ftHash = getSteamMarketHashName({ weapon: cleanW, skinName: cleanN, wear: 'FT', statTrak: false });
     if (livePrices[ftHash]?.priceDc && livePrices[ftHash].priceDc > 0) {
       baseFtPrice = livePrices[ftHash].priceDc;
     }
   }
 
+  // Check authentic CS2 market dataset for base FT
+  if (baseFtPrice <= 0) {
+    const ftHash = getSteamMarketHashName({ weapon: cleanW, skinName: cleanN, wear: 'FT', statTrak: false });
+    const realFt = LIVE_MARKET_PRICES[ftHash];
+    if (realFt && realFt > 0) {
+      baseFtPrice = realFt;
+    }
+  }
+
+  // Fallback to indexed base price
   if (baseFtPrice <= 0) {
     baseFtPrice = getBaseFtPrice(skin.weapon, skin.skinName, skin.name);
     if (baseFtPrice <= 0 && skin.priceDc && skin.priceDc > 0) {

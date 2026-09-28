@@ -16,7 +16,7 @@ import { SkinEntity, SkinRarity, SkinWear } from '../../lib/types';
 import { useGameStore } from '../../store/useGameStore';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
-import { isStatTrakableItem } from '../../lib/steam';
+import { isStatTrakableItem, isWearableItem } from '../../lib/steam';
 import { isActualWeaponOrKnifeGlove } from '../../lib/farm';
 import { getCanonicalPrice } from '../../lib/marketPricing';
 import {
@@ -33,10 +33,13 @@ import {
   Layers,
   X,
   Sparkles,
+  Anchor,
+  Sticker,
+  User,
 } from 'lucide-react';
 
 export const ITEM_CATEGORIES = [
-  { id: 'all', labelRu: 'Все оружие', labelEn: 'All Weapons', icon: LayoutGrid },
+  { id: 'all', labelRu: 'Все товары', labelEn: 'All Items', icon: LayoutGrid },
   { id: 'knives', labelRu: 'Ножи', labelEn: 'Knives', icon: Sword },
   { id: 'gloves', labelRu: 'Перчатки', labelEn: 'Gloves', icon: Hand },
   { id: 'snipers', labelRu: 'Снайперки', labelEn: 'Snipers', icon: Crosshair },
@@ -44,6 +47,9 @@ export const ITEM_CATEGORIES = [
   { id: 'pistols', labelRu: 'Пистолеты', labelEn: 'Pistols', icon: Zap },
   { id: 'smgs', labelRu: 'ПП', labelEn: 'SMGs', icon: Layers },
   { id: 'heavy', labelRu: 'Дробовики & Пулеметы', labelEn: 'Heavy & Shotguns', icon: Shield },
+  { id: 'charms', labelRu: 'Брелоки', labelEn: 'Charms', icon: Anchor },
+  { id: 'stickers', labelRu: 'Стикеры', labelEn: 'Stickers', icon: Sticker },
+  { id: 'agents', labelRu: 'Агенты', labelEn: 'Agents', icon: User },
 ];
 
 const SNIPER_MODELS = ['awp', 'ssg 08', 'scar-20', 'g3sg1'];
@@ -95,10 +101,9 @@ const MarketGroupCard = React.memo<{
         willChange: 'transform',
       }}
     >
-      {/* Top Rarity Badge & Unified StatTrak Badge */}
+      {/* Top Rarity Badge */}
       <div className="w-full flex items-center justify-between z-10 min-h-[22px] mb-1">
         <RarityBadge rarity={group.rarity} size="xs" short />
-        {group.hasStatTrak && <StatTrakBadge size="xs" />}
       </div>
 
       {/* Skin Image */}
@@ -182,6 +187,8 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
     return list.length > 0 ? list : group.variants;
   }, [group.variants, isStatTrak]);
 
+  const isWearable = isWearableItem(group.variants[0] || {});
+
   // Selected wear quality
   const [selectedWear, setSelectedWear] = useState<SkinWear>(() => {
     // Pick first available wear in current variants
@@ -193,10 +200,13 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
 
   // Ensure selectedWear is valid when isStatTrak changes
   const activeVariant = useMemo<SkinEntity>(() => {
+    if (!isWearable) {
+      return currentStVariants[0] || group.variants[0];
+    }
     const exact = currentStVariants.find((v) => v.wear === selectedWear);
     if (exact) return exact;
     return currentStVariants[0] || group.variants[0];
-  }, [currentStVariants, selectedWear, group.variants]);
+  }, [isWearable, currentStVariants, selectedWear, group.variants]);
 
   const canAfford = balance >= activeVariant.priceDc;
 
@@ -231,146 +241,181 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
           </button>
         </div>
 
-        {/* 2-Column Body: Left (Weapon Top + StatTrak Bottom) | Right (Wear Qualities) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 relative z-10">
-          {/* Left Column: Top Weapon Preview + Bottom StatTrak Selector */}
-          <div className="flex flex-col gap-4">
-            {/* Skin Preview Card */}
-            <div className="relative w-full h-52 sm:h-60 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center p-4 overflow-hidden">
-              <SkinImage
-                src={activeVariant.image}
-                alt={activeVariant.name}
-                size={240}
-                className="w-full h-full object-contain filter drop-shadow-[0_8px_20px_rgba(0,0,0,0.7)]"
-              />
+        {isWearable ? (
+          /* 2-Column Body for Weapons: Left (Weapon Top + StatTrak Bottom) | Right (Wear Qualities) */
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 relative z-10">
+            {/* Left Column: Top Weapon Preview + Bottom StatTrak Selector */}
+            <div className="flex flex-col gap-4">
+              {/* Skin Preview Card */}
+              <div className="relative w-full h-52 sm:h-60 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center p-4 overflow-hidden">
+                <SkinImage
+                  src={activeVariant.image}
+                  alt={activeVariant.name}
+                  size={240}
+                  className="w-full h-full object-contain filter drop-shadow-[0_8px_20px_rgba(0,0,0,0.7)]"
+                />
 
-              <div className="absolute bottom-3 left-3 flex items-center gap-1.5">
-                {activeVariant.statTrak && isStatTrakableItem(activeVariant) && <StatTrakBadge size="sm" />}
-                <WearBadge skin={activeVariant} size="sm" />
+                <div className="absolute bottom-3 left-3 flex items-center gap-1.5">
+                  {activeVariant.statTrak && isStatTrakableItem(activeVariant) && <StatTrakBadge size="sm" />}
+                  <WearBadge skin={activeVariant} size="sm" />
+                </div>
+              </div>
+
+              {/* StatTrak Selection */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-[11px] font-black uppercase text-white/50 tracking-wider">
+                  {isRu ? 'Тип предмета' : 'Item Type'}
+                </label>
+
+                {group.hasStatTrak && group.hasNonStatTrak ? (
+                  <div className="grid grid-cols-2 gap-2 p-1.5 rounded-2xl bg-black/60 border border-white/10">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        sound.playClick();
+                        setIsStatTrak(false);
+                      }}
+                      className={`py-3 px-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer text-center ${
+                        !isStatTrak
+                          ? 'bg-white/20 text-white shadow-lg border border-white/30'
+                          : 'text-white/50 hover:text-white'
+                      }`}
+                    >
+                      {isRu ? 'Обычный' : 'Regular'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        sound.playClick();
+                        setIsStatTrak(true);
+                      }}
+                      className={`py-3 px-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer flex items-center justify-center gap-2 ${
+                        isStatTrak
+                          ? 'bg-amber-500/25 text-amber-300 border border-amber-500/60 shadow-[0_0_15px_rgba(245,158,11,0.3)]'
+                          : 'text-white/50 hover:text-amber-400'
+                      }`}
+                    >
+                      <StatTrakBadge size="xs" />
+                      <span>StatTrak™</span>
+                    </button>
+                  </div>
+                ) : group.hasStatTrak ? (
+                  <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-bold text-xs flex items-center gap-2">
+                    <StatTrakBadge size="xs" />
+                    <span>{isRu ? 'Доступен только в версии StatTrak™' : 'Only available as StatTrak™'}</span>
+                  </div>
+                ) : (
+                  <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white/60 font-bold text-xs">
+                    <span>{isRu ? 'Обычный (StatTrak™ недоступен)' : 'Regular (No StatTrak™ version)'}</span>
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* StatTrak Selection (слева снизу) */}
-            <div className="flex flex-col gap-1.5">
-              <label className="text-[11px] font-black uppercase text-white/50 tracking-wider">
-                {isRu ? 'Тип предмета' : 'Item Type'}
+            {/* Right Column: Wear Quality Selector */}
+            <div className="flex flex-col gap-2">
+              <label className="text-[11px] font-black uppercase text-white/50 tracking-wider mb-0.5">
+                {isRu ? 'Качество предмета' : 'Item Wear Quality'}
               </label>
 
-              {group.hasStatTrak && group.hasNonStatTrak ? (
-                <div className="grid grid-cols-2 gap-2 p-1.5 rounded-2xl bg-black/60 border border-white/10">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      sound.playClick();
-                      setIsStatTrak(false);
-                    }}
-                    className={`py-3 px-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer text-center ${
-                      !isStatTrak
-                        ? 'bg-white/20 text-white shadow-lg border border-white/30'
-                        : 'text-white/50 hover:text-white'
-                    }`}
-                  >
-                    {isRu ? 'Обычный' : 'Regular'}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      sound.playClick();
-                      setIsStatTrak(true);
-                    }}
-                    className={`py-3 px-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer flex items-center justify-center gap-2 ${
-                      isStatTrak
-                        ? 'bg-amber-500/25 text-amber-300 border border-amber-500/60 shadow-[0_0_15px_rgba(245,158,11,0.3)]'
-                        : 'text-white/50 hover:text-amber-400'
-                    }`}
-                  >
-                    <StatTrakBadge size="xs" />
-                    <span>StatTrak™</span>
-                  </button>
-                </div>
-              ) : group.hasStatTrak ? (
-                <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 font-bold text-xs flex items-center gap-2">
-                  <StatTrakBadge size="xs" />
-                  <span>{isRu ? 'Доступен только в версии StatTrak™' : 'Only available as StatTrak™'}</span>
-                </div>
-              ) : (
-                <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white/60 font-bold text-xs">
-                  <span>{isRu ? 'Обычный (StatTrak™ недоступен)' : 'Regular (No StatTrak™ version)'}</span>
-                </div>
-              )}
-            </div>
-          </div>
+              <div className="flex flex-col gap-2.5 flex-1 justify-center">
+                {WEAR_ORDER.map((w) => {
+                  const variant = currentStVariants.find((v) => v.wear === w);
+                  const isAvailable = Boolean(variant);
+                  const isSelected = activeVariant.wear === w && isAvailable;
+                  const wearCfg = WEAR_CONFIG[w];
 
-          {/* Right Column: Wear Quality Selector (справа выбор качества) */}
-          <div className="flex flex-col gap-2">
-            <label className="text-[11px] font-black uppercase text-white/50 tracking-wider mb-0.5">
-              {isRu ? 'Качество предмета' : 'Item Wear Quality'}
-            </label>
+                  if (!isAvailable) {
+                    return (
+                      <div
+                        key={w}
+                        className="py-3 px-4 rounded-2xl border border-white/5 bg-white/[0.02] flex items-center justify-between opacity-35 cursor-not-allowed select-none"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <span className="w-2.5 h-2.5 rounded-full bg-white/20 shrink-0" />
+                          <span className="text-xs font-medium text-white/40">
+                            {isRu ? WEAR_LABELS[w].ru : WEAR_LABELS[w].en} ({w})
+                          </span>
+                        </div>
+                        <span className="text-[11px] text-white/30">{isRu ? 'Нет в наличии' : 'N/A'}</span>
+                      </div>
+                    );
+                  }
 
-            <div className="flex flex-col gap-2.5 flex-1 justify-center">
-              {WEAR_ORDER.map((w) => {
-                const variant = currentStVariants.find((v) => v.wear === w);
-                const isAvailable = Boolean(variant);
-                const isSelected = activeVariant.wear === w && isAvailable;
-                const wearCfg = WEAR_CONFIG[w];
-
-                if (!isAvailable) {
                   return (
-                    <div
+                    <button
                       key={w}
-                      className="py-3 px-4 rounded-2xl border border-white/5 bg-white/[0.02] flex items-center justify-between opacity-35 cursor-not-allowed select-none"
+                      type="button"
+                      onClick={() => {
+                        sound.playClick();
+                        setSelectedWear(w);
+                      }}
+                      className={`py-3.5 px-4 sm:py-4 sm:px-5 rounded-2xl border text-left flex items-center justify-between transition-all cursor-pointer ${
+                        isSelected
+                          ? 'bg-yellow-400/20 border-yellow-400 text-white shadow-[0_0_20px_rgba(250,204,21,0.25)] ring-1 ring-yellow-400/50'
+                          : 'bg-black/50 border-white/10 hover:border-white/30 text-white/80 hover:bg-white/5'
+                      }`}
                     >
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-white/20 shrink-0" />
-                        <span className="text-xs font-medium text-white/40">
-                          {isRu ? WEAR_LABELS[w].ru : WEAR_LABELS[w].en} ({w})
-                        </span>
+                      <div className="flex items-center gap-3">
+                        <span
+                          className="w-3.5 h-3.5 rounded-full shrink-0 shadow-sm"
+                          style={{
+                            background: wearCfg?.color || '#10b981',
+                            boxShadow: `0 0 10px ${wearCfg?.color || '#10b981'}80`,
+                          }}
+                        />
+                        <div className="flex flex-col">
+                          <span className="text-sm font-black tracking-wide text-white">
+                            {isRu ? WEAR_LABELS[w].ru : WEAR_LABELS[w].en}
+                          </span>
+                          <span className="text-[11px] font-bold text-white/40">
+                            {wearCfg?.label || w} • {wearCfg?.short || w}
+                          </span>
+                        </div>
                       </div>
-                      <span className="text-[11px] text-white/30">{isRu ? 'Нет в наличии' : 'N/A'}</span>
-                    </div>
+                      <span className="font-mono font-black text-sm sm:text-base text-yellow-400 shrink-0 ml-2">
+                        {variant!.priceDc.toLocaleString('ru-RU')} DC
+                      </span>
+                    </button>
                   );
-                }
-
-                return (
-                  <button
-                    key={w}
-                    type="button"
-                    onClick={() => {
-                      sound.playClick();
-                      setSelectedWear(w);
-                    }}
-                    className={`py-3.5 px-4 sm:py-4 sm:px-5 rounded-2xl border text-left flex items-center justify-between transition-all cursor-pointer ${
-                      isSelected
-                        ? 'bg-yellow-400/20 border-yellow-400 text-white shadow-[0_0_20px_rgba(250,204,21,0.25)] ring-1 ring-yellow-400/50'
-                        : 'bg-black/50 border-white/10 hover:border-white/30 text-white/80 hover:bg-white/5'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span
-                        className="w-3.5 h-3.5 rounded-full shrink-0 shadow-sm"
-                        style={{
-                          background: wearCfg?.color || '#10b981',
-                          boxShadow: `0 0 10px ${wearCfg?.color || '#10b981'}80`,
-                        }}
-                      />
-                      <div className="flex flex-col">
-                        <span className="text-sm font-black tracking-wide text-white">
-                          {isRu ? WEAR_LABELS[w].ru : WEAR_LABELS[w].en}
-                        </span>
-                        <span className="text-[11px] font-bold text-white/40">
-                          {wearCfg?.label || w} • {wearCfg?.short || w}
-                        </span>
-                      </div>
-                    </div>
-                    <span className="font-mono font-black text-sm sm:text-base text-yellow-400 shrink-0 ml-2">
-                      {variant!.priceDc.toLocaleString('ru-RU')} DC
-                    </span>
-                  </button>
-                );
-              })}
+                })}
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          /* Non-Wearable Layout: Charms, Stickers, Agents */
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 relative z-10">
+            <div className="relative w-full h-56 sm:h-64 rounded-2xl bg-black/50 border border-white/10 flex items-center justify-center p-6 overflow-hidden">
+              <SkinImage
+                src={activeVariant.image}
+                alt={activeVariant.name}
+                size={260}
+                className="w-full h-full object-contain filter drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center gap-4 p-5 rounded-2xl bg-white/[0.03] border border-white/10">
+              <div className="flex items-center gap-2">
+                <RarityBadge rarity={group.rarity} size="sm" />
+                <span className="text-xs uppercase font-bold text-white/40">{group.weapon}</span>
+              </div>
+              <div>
+                <h3 className="text-lg font-black text-white">{group.skinName}</h3>
+                <p className="text-xs text-white/60 mt-1.5 leading-relaxed">
+                  {isRu
+                    ? 'Коллекционный предмет без степени износа в CS2. Поставляется в оригинальном виде с моментальным зачислением в инвентарь.'
+                    : 'Collectible item without wear condition in CS2. Delivered in pristine original state directly to your inventory.'}
+                </p>
+              </div>
+              <div className="pt-3 border-t border-white/10 flex items-center justify-between">
+                <span className="text-xs text-white/50">{isRu ? 'Стоимость в маркете' : 'Market Price'}:</span>
+                <span className="font-mono font-black text-lg text-yellow-400">
+                  {activeVariant.priceDc.toLocaleString('ru-RU')} DC
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Price & Action Section (Full Width Footer) */}
         <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
@@ -433,6 +478,30 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
   );
 };
 
+function isMarketAllowedItem(skin: SkinEntity): boolean {
+  if (!skin || !skin.name || !skin.image) return false;
+  const img = skin.image;
+  if (img.startsWith('file:') || img.includes('file://') || img.includes('C:/') || img.includes('C:\\')) return false;
+  if (skin.name.includes('Spruce DDPAT')) return false;
+
+  const w = (skin.weapon || '').toLowerCase();
+  const n = (skin.name || '').toLowerCase();
+
+  // 1. Regular weapons, knives, gloves
+  if (isActualWeaponOrKnifeGlove(skin)) return true;
+
+  // 2. Charms
+  if (w.includes('charm') || w.includes('брелок') || n.startsWith('charm |') || n.startsWith('брелок |')) return true;
+
+  // 3. Stickers
+  if (w.includes('sticker') || w.includes('наклейка') || n.startsWith('sticker |') || n.startsWith('наклейка |')) return true;
+
+  // 4. Agents
+  if (w.includes('agent') || w.includes('оперативник') || n.startsWith('agent |') || n.startsWith('оперативник |')) return true;
+
+  return false;
+}
+
 export default function MarketplacePage() {
   const balance = useGameStore((s) => s.balance);
   const livePrices = useGameStore((s) => s.livePrices);
@@ -453,9 +522,9 @@ export default function MarketplacePage() {
   const [purchasedSkinName, setPurchasedSkinName] = useState<string | null>(null);
   const [selectedGroupForModal, setSelectedGroupForModal] = useState<GroupedMarketSkin | null>(null);
 
-  // BASE POOL: Strictly weapons, knives, and gloves
+  // BASE POOL: Strictly weapons, knives, gloves, charms, stickers, and agents
   const basePool = useMemo(() => {
-    return SKINS_DATABASE.filter(isActualWeaponOrKnifeGlove);
+    return SKINS_DATABASE.filter(isMarketAllowedItem);
   }, []);
 
 // Synthesize complete 5 wears + StatTrak variants for every skin so users can buy any quality
@@ -471,6 +540,20 @@ function synthesizeCompleteVariants(
     rawVariants.find((v) => !v.statTrak && v.wear === 'FT') ||
     rawVariants.find((v) => !v.statTrak) ||
     rawVariants[0];
+
+  // For non-wearables (Stickers, Charms, Agents, Patches, etc.): keep single item
+  if (!isWearableItem(best)) {
+    const canonical = getCanonicalPrice(best, livePrices);
+    return [
+      {
+        ...best,
+        priceDc: canonical.priceDc,
+        priceUsd: canonical.priceUsd,
+        statTrak: false,
+        wear: undefined,
+      },
+    ];
+  }
 
   const canBeSt = isStatTrakableItem(best);
 
@@ -582,6 +665,7 @@ function synthesizeCompleteVariants(
     if (selectedCategory !== 'all') {
       list = list.filter((group) => {
         const w = (group.weapon || '').toLowerCase();
+        const sn = (group.skinName || '').toLowerCase();
         const isGlove = w.includes('gloves') || w.includes('wraps') || w.includes('перчатки');
         const isKnife =
           (group.skinName.startsWith('★') && !isGlove) ||
@@ -595,6 +679,10 @@ function synthesizeCompleteVariants(
           w.includes('talon') ||
           w.includes('ursus');
 
+        const isCharm = w.includes('charm') || w.includes('брелок') || sn.startsWith('charm |');
+        const isSticker = w.includes('sticker') || w.includes('наклейка') || sn.startsWith('sticker |');
+        const isAgent = w.includes('agent') || w.includes('оперативник') || sn.startsWith('agent |');
+
         if (selectedCategory === 'knives') return isKnife;
         if (selectedCategory === 'gloves') return isGlove;
         if (selectedCategory === 'snipers') return SNIPER_MODELS.some((m) => w.includes(m));
@@ -602,6 +690,9 @@ function synthesizeCompleteVariants(
         if (selectedCategory === 'pistols') return PISTOL_MODELS.some((m) => w.includes(m));
         if (selectedCategory === 'smgs') return SMG_MODELS.some((m) => w.includes(m));
         if (selectedCategory === 'heavy') return HEAVY_MODELS.some((m) => w.includes(m));
+        if (selectedCategory === 'charms') return isCharm;
+        if (selectedCategory === 'stickers') return isSticker;
+        if (selectedCategory === 'agents') return isAgent;
         return true;
       });
     }
@@ -676,6 +767,9 @@ function synthesizeCompleteVariants(
       if (selectedCategory === 'pistols' && PISTOL_MODELS.some((m) => lw.includes(m))) matches = true;
       if (selectedCategory === 'smgs' && SMG_MODELS.some((m) => lw.includes(m))) matches = true;
       if (selectedCategory === 'heavy' && HEAVY_MODELS.some((m) => lw.includes(m))) matches = true;
+      if (selectedCategory === 'charms' && (lw.includes('charm') || lw.includes('брелок') || g.skinName.toLowerCase().startsWith('charm |'))) matches = true;
+      if (selectedCategory === 'stickers' && (lw.includes('sticker') || lw.includes('наклейка') || g.skinName.toLowerCase().startsWith('sticker |'))) matches = true;
+      if (selectedCategory === 'agents' && (lw.includes('agent') || lw.includes('оперативник') || g.skinName.toLowerCase().startsWith('agent |'))) matches = true;
 
       if (matches) {
         counts[w] = (counts[w] || 0) + 1;
