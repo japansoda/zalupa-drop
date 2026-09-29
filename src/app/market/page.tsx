@@ -1096,8 +1096,8 @@ function synthesizeCompleteVariants(
                     className="px-8 py-3.5 rounded-2xl bg-[#0d0e14] hover:bg-white/10 text-white font-black text-xs uppercase tracking-wider border border-white/10 shadow-lg active:scale-95 transition-all cursor-pointer"
                   >
                     {locale === 'ru'
-                      ? `Показать еще (+36 из ${filteredGroups.length - visibleCount})`
-                      : `Load More (+36 of ${filteredGroups.length - visibleCount})`}
+                      ? `Показать еще 36 из ${filteredGroups.length - visibleCount}`
+                      : `Load More: 36 of ${filteredGroups.length - visibleCount}`}
                   </button>
                 </div>
               )}

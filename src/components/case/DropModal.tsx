@@ -477,10 +477,10 @@ export const DropModal: React.FC<DropModalProps> = ({
                 sound.playClick();
                 onKeep(items);
               }}
-              className="w-full py-3 px-4 rounded-xl glass-button text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 hover:bg-white/15 cursor-pointer active:scale-95 transition-all"
+              className="w-full py-3 px-3 sm:px-4 rounded-xl glass-button text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 hover:bg-white/15 cursor-pointer active:scale-95 transition-all whitespace-nowrap min-w-0"
             >
-              <Check className="w-4 h-4 text-emerald-400" />
-              <span>
+              <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span className="truncate">
                 {isMulti
                   ? locale === 'ru'
                     ? `В инвентарь (${items.length})`
@@ -496,15 +496,17 @@ export const DropModal: React.FC<DropModalProps> = ({
               onClick={() => {
                 onSell(items);
               }}
-              className="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all border border-white/10"
+              className="w-full py-3 px-3 sm:px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 transition-all border border-white/10 whitespace-nowrap min-w-0"
             >
-              <ShoppingBag className="w-4 h-4" />
-              <span className="inline-flex items-center gap-1">
-                <span>
-                  {isMulti ? (locale === 'ru' ? 'Продать всё' : 'Sell all') : (locale === 'ru' ? 'Продать' : 'Sell')} (+
-                </span>
+              <ShoppingBag className="w-4 h-4 shrink-0 text-yellow-400" />
+              <span className="shrink-0">
+                {isMulti
+                  ? (locale === 'ru' ? 'Продать всё за' : 'Sell all for')
+                  : (locale === 'ru' ? 'Продать за' : 'Sell for')}
+              </span>
+              <span className="inline-flex items-center gap-1 font-mono text-yellow-300 shrink-0">
                 <ZalupaCoinIcon size={14} />
-                <span>{formatZc(totalPriceDc)})</span>
+                <span>{formatZc(totalPriceDc)}</span>
               </span>
             </button>
           </div>

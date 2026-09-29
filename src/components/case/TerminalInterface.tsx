@@ -268,7 +268,7 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
           {sessionHasLuck && (
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/25 border border-emerald-500/50 text-emerald-300 text-xs font-black shadow-[0_0_18px_rgba(16,185,129,0.45)] animate-pulse">
               <Clover className="w-4 h-4 text-emerald-400 fill-emerald-400/40 animate-spin" style={{ animationDuration: '10s' }} />
-              <span>{isRu ? 'ЗЕЛЬЕ УДАЧИ АКТИВНО (+35% К РЕДКОСТИ)' : 'LUCK POTION ACTIVE (+35% ODDS)'}</span>
+              <span>{isRu ? 'ЗЕЛЬЕ УДАЧИ АКТИВНО: +35% К РЕДКОСТИ' : 'LUCK POTION ACTIVE: +35% ODDS'}</span>
             </div>
           )}
 
@@ -345,8 +345,8 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
                 <Clover className="w-4 h-4 text-emerald-400 fill-emerald-400/30" />
                 <span>
                   {isRu
-                    ? `Выпить Зелье удачи (+35% к редкости, в запасе: ${potionsCount})`
-                    : `Drink Luck Potion (+35% rarity, in stock: ${potionsCount})`}
+                    ? `Выпить Зелье удачи: +35% к редкости · В наличии: ${potionsCount}`
+                    : `Drink Luck Potion: +35% rarity · In stock: ${potionsCount}`}
                 </span>
               </button>
             ) : null}

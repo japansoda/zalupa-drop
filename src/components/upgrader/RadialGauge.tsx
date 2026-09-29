@@ -1840,9 +1840,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     >
                       <span>
                         {zeusUsedThisSpin
-                          ? (locale === 'ru' ? 'Zeus использован (+5%)' : 'Zeus Used (+5%)')
+                          ? (locale === 'ru' ? 'Zeus использован: +5%' : 'Zeus Used: +5%')
                           : isZeusProtected || canPressZeus
-                          ? (locale === 'ru' ? 'Вжать Zeus! (+5% перекрут)' : 'Hit Zeus! (+5% reroll)')
+                          ? (locale === 'ru' ? 'Вжать Zeus! +5% перекрут' : 'Hit Zeus! +5% reroll')
                           : zeusCount <= 0
                           ? (locale === 'ru' ? 'Нет Zeus' : 'No Zeus')
                           : (locale === 'ru' ? 'Жми во время спина' : 'Press mid-spin')}
@@ -2588,7 +2588,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     <span>
                       {zeusUsedThisSpin || zeusStriking
                         ? (locale === 'ru' ? 'Zeus бьёт! Перекрут...' : 'Zeus strikes! Rerolling...')
-                        : (locale === 'ru' ? `Вжать Zeus! (+5%) · ${zeusCount} шт.` : `Hit Zeus! (+5%) · ${zeusCount}`)}
+                        : (locale === 'ru' ? `Вжать Zeus! +5% · ${zeusCount} шт.` : `Hit Zeus! +5% · ${zeusCount}`)}
                     </span>
                   </button>
                 ) : (

@@ -336,7 +336,7 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                   </p>
                   <div className="flex items-center justify-center gap-1.5 mt-3 px-4 py-2 rounded-xl bg-sky-950/40 border border-sky-400/40 shadow-inner">
                     <span className="font-mono font-black text-sky-300 text-base">
-                      {locale === 'ru' ? 'Электрошок стрелки + Реролл (+5% шанс)' : 'Electric Shock + Reroll (+5% chance)'}
+                      {locale === 'ru' ? 'Электрошок стрелки + Реролл: +5% шанс' : 'Electric Shock + Reroll: +5% chance'}
                     </span>
                   </div>
                   <p className="text-xs text-white/50 mt-2">

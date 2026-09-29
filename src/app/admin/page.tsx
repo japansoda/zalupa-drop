@@ -778,7 +778,7 @@ export default function AdminPage() {
                         className="w-4 h-4 rounded text-amber-500 focus:ring-0 cursor-pointer accent-amber-500"
                       />
                       <span className="text-xs font-mono font-black text-amber-400">
-                        {giveStatTrak ? 'StatTrak™ ВКЛ (+20% удачи)' : 'Обычная (Без ST)'}
+                        {giveStatTrak ? 'StatTrak™ ВКЛ: +20% удачи' : 'Обычная (Без ST)'}
                       </span>
                     </label>
                   </div>

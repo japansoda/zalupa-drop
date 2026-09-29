@@ -157,7 +157,7 @@ export const RefillModal: React.FC = () => {
     addPotion(3);
     setSuccessAnimation({
       amount: '+3',
-      text: isRu ? 'Зелья удачи получены (+15% к удаче)' : 'Luck Potions claimed (+15% luck)',
+      text: isRu ? 'Зелья удачи получены: +15% к удаче' : 'Luck Potions claimed: +15% luck',
     });
     setTimeout(() => setSuccessAnimation(null), 2000);
   };
@@ -167,7 +167,7 @@ export const RefillModal: React.FC = () => {
     addSaveToken(1);
     setSuccessAnimation({
       amount: '+1',
-      text: isRu ? 'Жетон оберега получен (Защита от сгорания)' : 'Guardian Aegis claimed',
+      text: isRu ? 'Жетон оберега получен: Защита от сгорания' : 'Guardian Aegis claimed',
     });
     setTimeout(() => setSuccessAnimation(null), 2000);
   };
@@ -389,7 +389,7 @@ export const RefillModal: React.FC = () => {
                 <div className="flex flex-col min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="font-black text-xs sm:text-sm text-white truncate">
-                      {isRu ? 'Зелье удачи (+3 шт)' : 'Luck Potions (+3)'}
+                      {isRu ? 'Зелье удачи +3 шт' : 'Luck Potions +3'}
                     </span>
                     <span className="font-mono text-[10px] px-1.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30">
                       {potionsCount} {isRu ? 'в наличии' : 'owned'}
@@ -419,7 +419,7 @@ export const RefillModal: React.FC = () => {
                 <div className="flex flex-col min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="font-black text-xs sm:text-sm text-white truncate">
-                      {isRu ? 'Жетон оберега (+1 шт)' : 'Guardian Aegis (+1)'}
+                      {isRu ? 'Жетон оберега +1 шт' : 'Guardian Aegis +1'}
                     </span>
                     <span className="font-mono text-[10px] px-1.5 py-0.5 rounded-md bg-yellow-500/20 text-yellow-300 font-bold border border-yellow-500/30">
                       {saveTokensCount} {isRu ? 'в наличии' : 'owned'}
@@ -449,7 +449,7 @@ export const RefillModal: React.FC = () => {
                 <div className="flex flex-col min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="font-black text-xs sm:text-sm text-white truncate">
-                      Zeus x27 (+1 шт)
+                      {isRu ? 'Zeus x27 +1 шт' : 'Zeus x27 +1'}
                     </span>
                     <span className="font-mono text-[10px] px-1.5 py-0.5 rounded-md bg-sky-500/20 text-sky-300 font-bold border border-sky-500/30">
                       {zeusCount} {isRu ? 'в наличии' : 'owned'}
@@ -479,7 +479,7 @@ export const RefillModal: React.FC = () => {
                 <div className="flex flex-col min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="font-black text-xs sm:text-sm text-white truncate">
-                      {isRu ? 'Крюк-кошка (+1 шт)' : 'Grappling Hook (+1)'}
+                      {isRu ? 'Крюк-кошка +1 шт' : 'Grappling Hook +1'}
                     </span>
                     <span className="font-mono text-[10px] px-1.5 py-0.5 rounded-md bg-orange-500/20 text-orange-300 font-bold border border-orange-500/30">
                       {hookCount} {isRu ? 'в наличии' : 'owned'}
@@ -509,7 +509,7 @@ export const RefillModal: React.FC = () => {
                 <div className="flex flex-col min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="font-black text-xs sm:text-sm text-white truncate">
-                      {isRu ? 'Яйцо курочки (+1 шт)' : 'Chicken Egg (+1)'}
+                      {isRu ? 'Яйцо курочки +1 шт' : 'Chicken Egg +1'}
                     </span>
                     <span className="font-mono text-[10px] px-1.5 py-0.5 rounded-md bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">
                       {farmEggTokens} {isRu ? 'в наличии' : 'owned'}

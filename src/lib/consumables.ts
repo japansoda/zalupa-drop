@@ -13,8 +13,8 @@ export const LUCK_POTION: ConsumableItem = {
   name: 'Зелье удачи',
   nameEn: 'Luck Potion',
   rarity: 'contraband',
-  description: 'Универсальная удача на 3 действия (+15%): кейсы, апгрейдер и контракты',
-  descriptionEn: 'Universal luck for 3 actions (+15%): cases, upgrader and contracts',
+  description: 'Универсальная удача на 3 действия: +15% к шансу в кейсах, апгрейдере и контрактах',
+  descriptionEn: 'Universal luck for 3 actions: +15% odds in cases, upgrader and contracts',
   icon: 'FlaskConical',
 };
 

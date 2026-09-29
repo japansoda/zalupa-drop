@@ -181,14 +181,11 @@ export const ChickenDetailsModal: React.FC<ChickenDetailsModalProps> = ({
             <button
               type="button"
               onClick={() => setIsConfirmingSell(true)}
-              className="flex-1 py-3 px-4 rounded-2xl bg-red-500/20 hover:bg-red-500/30 text-red-300 font-black text-xs uppercase tracking-wider transition-all border border-red-500/40 flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 shadow-[0_0_20px_rgba(239,68,68,0.2)]"
+              className="flex-1 py-3 px-4 rounded-2xl bg-red-500/20 hover:bg-red-500/30 text-red-300 font-black text-xs uppercase tracking-wider transition-all border border-red-500/40 flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 shadow-[0_0_20px_rgba(239,68,68,0.2)] whitespace-nowrap min-w-0"
             >
-              <ZalupaCoinIcon className="w-4 h-4" />
-              <span>
-                {locale === 'ru'
-                  ? `Продать (+${formatZc(sellPrice)})`
-                  : `Sell (+${formatZc(sellPrice)})`}
-              </span>
+              <span>{locale === 'ru' ? 'Продать за' : 'Sell for'}</span>
+              <ZalupaCoinIcon size={14} />
+              <span className="font-mono">{formatZc(sellPrice)}</span>
             </button>
           </div>
         ) : (

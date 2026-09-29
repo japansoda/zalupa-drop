@@ -430,14 +430,11 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
               <button
                 type="button"
                 onClick={handleSell}
-                className="py-3 px-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border border-white/10 active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer"
+                className="py-3 px-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border border-white/10 active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer whitespace-nowrap min-w-0"
               >
-                <ZalupaCoinIcon className="w-4 h-4" />
-                <span>
-                  {locale === 'ru'
-                    ? `Продать (+${formatZc(droppedSkin.priceDc)})`
-                    : `Sell (+${formatZc(droppedSkin.priceDc)})`}
-                </span>
+                <span>{locale === 'ru' ? 'Продать за' : 'Sell for'}</span>
+                <ZalupaCoinIcon size={14} />
+                <span className="font-mono text-yellow-300">{formatZc(droppedSkin.priceDc)}</span>
               </button>
             </div>
           </div>
