@@ -25,7 +25,6 @@ import {
   Search, 
   CheckCircle2, 
   ExternalLink,
-  ShieldCheck,
   Zap,
   RotateCcw,
   FlaskConical
@@ -71,9 +70,8 @@ export const TradeUpContract: React.FC = () => {
     return selectedItems.reduce((acc, item) => acc + item.priceDc, 0);
   }, [selectedItems]);
 
-  // Expected return: 98% base RTP, or boosted +35% if Luck Potion is active
+  // Luck Potion status
   const hasPotion = activePotionCharges > 0;
-  const expectedReturnDc = Math.round(totalInputDc * (hasPotion ? 1.35 : 0.98));
 
   // Filtered available inventory
   const filteredInventory = useMemo(() => {
@@ -144,14 +142,14 @@ export const TradeUpContract: React.FC = () => {
       sound.playCashout();
     }, 600);
 
-    // 2. Select winning skin: 98% base RTP or boosted 135% with Luck Potion
-    const targetEV = Math.max(10, totalInputDc * (isPotionUsed ? 1.35 : 0.98));
+    // 2. Select winning skin: 98.5% base RTP or boosted 135% with Luck Potion
+    const targetEV = Math.max(1, totalInputDc * (isPotionUsed ? 1.35 : 0.985));
 
     // Filter candidate reward pool: exclude stickers/agents, prefer weapons & knives
     const minCandidatePrice = isPotionUsed 
-      ? Math.max(10, Math.round(totalInputDc * 1.05)) 
-      : Math.max(5, Math.round(totalInputDc * 0.25));
-    const maxCandidatePrice = Math.max(100, Math.round(totalInputDc * (isPotionUsed ? 6.0 : 4.5)));
+      ? Math.max(2, Math.round(totalInputDc * 1.05)) 
+      : Math.max(1, Math.round(totalInputDc * 0.25));
+    const maxCandidatePrice = Math.max(10, Math.round(totalInputDc * (isPotionUsed ? 6.0 : 4.5)));
 
     let candidates = SKINS_DATABASE.filter(
       (s) =>
@@ -405,23 +403,6 @@ export const TradeUpContract: React.FC = () => {
                   {totalInputDc.toLocaleString('ru-RU')} ZC
                 </span>
               </div>
-            </div>
-
-            <div className="h-8 w-px bg-white/10 hidden sm:block" />
-
-            <div className="flex flex-col">
-              <span className="text-[11px] text-white/50 uppercase tracking-wider font-semibold">
-                {t('contract.expectedRtp')}
-              </span>
-              <span className={`font-mono font-black text-sm flex items-center gap-1.5 ${hasPotion ? 'text-emerald-300 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'text-emerald-400'}`}>
-                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>~{expectedReturnDc.toLocaleString('ru-RU')} DC</span>
-                {hasPotion && (
-                  <span className="font-mono text-xs font-bold text-emerald-400 ml-1.5 flex items-center gap-1">
-                    (<FlaskConical className="w-3 h-3" /> +35%)
-                  </span>
-                )}
-              </span>
             </div>
           </div>
 

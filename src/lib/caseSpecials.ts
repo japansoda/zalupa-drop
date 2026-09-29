@@ -12,7 +12,7 @@ export const SPECIAL_ITEM_ENTITY: SkinEntity = {
   wearLabel: 'Прямо с завода',
   image: '/images/special_item.png',
   priceUsd: 1500,
-  priceDc: 150000,
+  priceDc: 6000,
   steamMarketUrl: '',
 };
 
