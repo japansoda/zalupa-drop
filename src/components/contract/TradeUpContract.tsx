@@ -10,7 +10,6 @@ import { RarityBadge } from '../ui/RarityBadge';
 import { WearBadge } from '../ui/WearBadge';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { SkinImage } from '../ui/SkinImage';
-import { ItemGlowBackdrop } from '../ui/ItemGlowBackdrop';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
@@ -649,12 +648,7 @@ export const TradeUpContract: React.FC = () => {
                 {wonSkin.name}
               </h3>
 
-              <div className="w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center my-4 relative overflow-visible">
-                <ItemGlowBackdrop
-                  rarity={wonSkin.rarity}
-                  isLegendary={wonSkin.rarity === 'gold' || wonSkin.name.startsWith('★') || wonSkin.priceDc >= 1000}
-                  size="lg"
-                />
+              <div className="w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center my-4 relative">
                 <SkinImage
                   src={wonSkin.image}
                   alt={wonSkin.name}

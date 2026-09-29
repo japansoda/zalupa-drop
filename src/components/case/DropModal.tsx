@@ -119,12 +119,14 @@ export const DropModal: React.FC<DropModalProps> = ({
               return (
                 <>
                   <div className="relative w-56 h-56 my-2 flex items-center justify-center group overflow-visible">
-                    {/* Rotating sunburst aura and ambient glow behind weapon */}
-                    <ItemGlowBackdrop
-                      rarity={single.rarity}
-                      isLegendary={single.rarity === 'gold' || single.name.startsWith('★') || single.priceDc >= 1000}
-                      size="md"
-                    />
+                    {/* Rotating sunburst — only for covert / extraordinary / gold / contraband */}
+                    {['covert', 'extraordinary', 'gold', 'contraband'].includes(single.rarity) && (
+                      <ItemGlowBackdrop
+                        rarity={single.rarity}
+                        isLegendary={single.rarity === 'gold' || single.name.startsWith('★') || single.priceDc >= 1000}
+                        size="md"
+                      />
+                    )}
 
                     {/* Bonus Extra Drop Tag */}
                     {hasBonus && (
@@ -222,11 +224,13 @@ export const DropModal: React.FC<DropModalProps> = ({
                     </div>
 
                     <div className="w-full h-24 sm:h-40 flex items-center justify-center my-1 sm:my-2 relative overflow-visible">
-                      <ItemGlowBackdrop
-                        rarity={it.rarity}
-                        isLegendary={it.rarity === 'gold' || it.name.startsWith('★') || it.priceDc >= 1000}
-                        size="sm"
-                      />
+                      {['covert', 'extraordinary', 'gold', 'contraband'].includes(it.rarity) && (
+                        <ItemGlowBackdrop
+                          rarity={it.rarity}
+                          isLegendary={it.rarity === 'gold' || it.name.startsWith('★') || it.priceDc >= 1000}
+                          size="sm"
+                        />
+                      )}
                       <SkinImage
                         src={it.image}
                         alt={it.name}
