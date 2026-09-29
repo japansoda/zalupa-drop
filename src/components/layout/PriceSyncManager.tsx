@@ -104,9 +104,6 @@ export const PriceSyncManager: React.FC = () => {
                   ? (isRu ? 'Цены обновляются...' : 'Updating live prices...')
                   : (isRu ? 'Цены актуальны' : 'Prices up to date')}
               </span>
-              <span className="text-[10px] font-mono text-blue-300/80 font-bold">
-                Skinport & CS2 Market (Daily Sync)
-              </span>
             </div>
           </div>
         </motion.div>
