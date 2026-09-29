@@ -47,11 +47,12 @@ export const ItemGlowBackdrop: React.FC<ItemGlowBackdropProps> = ({
         className={`animate-sunburst shrink-0 pointer-events-none transition-opacity duration-500 ${sizeStyles.sunburst}`}
         style={{
           opacity: isLegendary ? 0.55 : 0.4,
+          borderRadius: '50%',
           background: `conic-gradient(from 0deg, transparent 0deg 18deg, ${glowColor} 18deg 36deg, transparent 36deg 54deg, ${glowColor} 54deg 72deg, transparent 72deg 90deg, ${glowColor} 90deg 108deg, transparent 108deg 126deg, ${glowColor} 126deg 144deg, transparent 144deg 162deg, ${glowColor} 162deg 180deg, transparent 180deg 198deg, ${glowColor} 198deg 216deg, transparent 216deg 234deg, ${glowColor} 234deg 252deg, transparent 252deg 270deg, ${glowColor} 270deg 288deg, transparent 288deg 306deg, ${glowColor} 306deg 324deg, transparent 324deg 342deg, ${glowColor} 342deg 360deg)`,
           maskImage:
-            'radial-gradient(circle at center, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 28%, rgba(0,0,0,0.18) 52%, rgba(0,0,0,0) 72%)',
+            'radial-gradient(circle at center, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0) 70%)',
           WebkitMaskImage:
-            'radial-gradient(circle at center, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 28%, rgba(0,0,0,0.18) 52%, rgba(0,0,0,0) 72%)',
+            'radial-gradient(circle at center, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0) 70%)',
         }}
       />
     </div>

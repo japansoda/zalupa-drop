@@ -13,7 +13,6 @@ import { WearBadge } from '../ui/WearBadge';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { RarityBadge } from '../ui/RarityBadge';
 import { SkinImage } from '../ui/SkinImage';
-import { ItemGlowBackdrop } from '../ui/ItemGlowBackdrop';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
 import { applyCanonicalPrice, getCanonicalPrice } from '../../lib/marketPricing';
@@ -2712,11 +2711,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
               {targetSkin ? (
                 <div className="relative flex flex-col items-center justify-center my-auto overflow-visible">
-                  <ItemGlowBackdrop
-                    rarity={targetSkin.rarity}
-                    isLegendary={targetSkin.rarity === 'gold' || targetSkin.name.startsWith('★') || targetSkin.priceDc >= 1000}
-                    size="md"
-                  />
+
                   <SkinImage
                     key={targetSkin.id}
                     src={targetSkin.image}

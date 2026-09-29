@@ -7,7 +7,6 @@ import { LUCK_POTION, SAVE_TOKEN, ZEUS_ITEM } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
 import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 import { SkinImage } from '../ui/SkinImage';
-import { ItemGlowBackdrop } from '../ui/ItemGlowBackdrop';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { WearBadge } from '../ui/WearBadge';
 import { RarityBadge } from '../ui/RarityBadge';
@@ -374,13 +373,8 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                     <RarityBadge rarity={winningSkin.rarity} size="sm" />
                   </div>
 
-                  {/* Big Image with farm-style aura glow */}
+                  {/* Big Image */}
                   <div className="relative w-36 h-36 flex items-center justify-center my-3 overflow-visible">
-                    <ItemGlowBackdrop
-                      rarity={winningSkin.rarity}
-                      isLegendary={winningSkin.rarity === 'gold' || winningSkin.name.startsWith('★') || winningSkin.priceDc >= 1000}
-                      size="sm"
-                    />
                     <SkinImage
                       src={winningSkin.image}
                       alt={winningSkin.name}
@@ -388,6 +382,7 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                       className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] transition-transform duration-300"
                     />
                   </div>
+
 
                   {/* Titles */}
                   <div className="w-full text-center">
