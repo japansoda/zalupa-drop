@@ -67,7 +67,7 @@ async function triggerSkinportSyncIfNeeded(): Promise<void> {
         for (const item of items) {
           const usd = item.suggested_price || item.min_price || item.median_price || 0;
           if (usd > 0 && item.market_hash_name) {
-            const dc = Math.max(1, Math.round(usd * 100));
+            const dc = Math.max(1, Math.round(usd * 4));
             priceCache.set(item.market_hash_name, {
               priceUsd: usd,
               priceDc: dc,
@@ -224,7 +224,7 @@ export async function GET(req: NextRequest) {
       if (data && data.success) {
         const priceUsd = parseSteamPrice(data.lowest_price) ?? parseSteamPrice(data.median_price);
         if (priceUsd !== null && priceUsd > 0) {
-          const priceDc = Math.max(1, Math.round(priceUsd * 100));
+          const priceDc = Math.max(1, Math.round(priceUsd * 4));
           const entry: PriceCacheEntry = {
             priceUsd,
             priceDc,

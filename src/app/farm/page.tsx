@@ -6,7 +6,7 @@ import { Header } from '../../components/layout/Header';
 import { Footer } from '../../components/layout/Footer';
 import { LiveDropBar } from '../../components/layout/LiveDropBar';
 import { RefillModal } from '../../components/layout/RefillModal';
-import { DropCoinIcon } from '../../components/ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../../components/ui/ZalupaCoinIcon';
 import { AnimatedChicken } from '../../components/farm/AnimatedChicken';
 import { DepositSkinsModal } from '../../components/farm/DepositSkinsModal';
 import { EggCrackingModal } from '../../components/farm/EggCrackingModal';
@@ -262,7 +262,7 @@ export default function ChickenFarmPage() {
                     {locale === 'ru' ? 'Кормушка: Отборное зерно CS2' : 'Feeding Station: CS2 Select Grain'}
                   </h3>
                   <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-yellow-400/15 border border-yellow-400/30 text-yellow-400 text-xs font-mono font-black">
-                    <DropCoinIcon className="w-3.5 h-3.5" />
+                    <ZalupaCoinIcon className="w-3.5 h-3.5" />
                     <span>7 500 DC</span>
                   </div>
                   {hungryChickensCount > 0 && (
@@ -273,8 +273,8 @@ export default function ChickenFarmPage() {
                 </div>
                 <p className="text-xs text-white/50 max-w-xl mt-0.5">
                   {locale === 'ru'
-                    ? 'Стоимость порции: 7 500 DC. Перетащите мешок с зерном на голодную курочку (или кликните по мешку, а затем по курице), чтобы начать вынашивание яйца с оружием CS2!'
-                    : 'Cost per feed: 7,500 DC. Drag grain sack onto a hungry chicken (or tap sack then tap chicken) to start weapon egg laying!'}
+                    ? 'Стоимость порции: 7 500 ZC. Перетащите мешок с зерном на голодную курочку (или кликните по мешку, а затем по курице), чтобы начать вынашивание яйца с оружием CS2!'
+                    : 'Cost per feed: 7,500 ZC. Drag grain sack onto a hungry chicken (or tap sack then tap chicken) to start weapon egg laying!'}
                 </p>
               </div>
             </div>
@@ -295,8 +295,8 @@ export default function ChickenFarmPage() {
                 <Wheat className="w-3.5 h-3.5" />
                 <span>
                   {locale === 'ru'
-                    ? `Покормить всех (${(hungryChickensCount * CHICKEN_FEED_COST_DC).toLocaleString('ru-RU')} DC)`
-                    : `Feed all (${(hungryChickensCount * CHICKEN_FEED_COST_DC).toLocaleString('ru-RU')} DC)`}
+                    ? `Покормить всех (${(hungryChickensCount * CHICKEN_FEED_COST_DC).toLocaleString('ru-RU')} ZC)`
+                    : `Feed all (${(hungryChickensCount * CHICKEN_FEED_COST_DC).toLocaleString('ru-RU')} ZC)`}
                 </span>
               </button>
             )}
@@ -402,8 +402,8 @@ export default function ChickenFarmPage() {
                         </span>
                         <p className="text-[10px] text-white/40 max-w-[140px] mb-4">
                           {locale === 'ru'
-                            ? 'Заложите 10 скинов от 1к DC или яйцо с кейса'
-                            : 'Sacrifice 10 skins >= 1k DC or use a case egg'}
+                            ? 'Заложите 10 скинов от 1к ZC или яйцо с кейса'
+                            : 'Sacrifice 10 skins >= 1k ZC or use a case egg'}
                         </p>
 
                         {farmEggTokens > 0 ? (
@@ -459,7 +459,7 @@ export default function ChickenFarmPage() {
                           <span>{isIncubationDone ? '00:00:00' : formatTimer(incubatingMsLeft)}</span>
                         </div>
 
-                        {/* Speedup Button for 100,000 DC */}
+                        {/* Speedup Button for 100,000 ZC */}
                         {!isIncubationDone && (
                           <button
                             type="button"
@@ -476,10 +476,10 @@ export default function ChickenFarmPage() {
                                 ? 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.25)] active:scale-95'
                                 : 'bg-white/5 text-white/30 border border-white/5 cursor-not-allowed'
                             }`}
-                            title={balance < 100000 ? (locale === 'ru' ? 'Нужно 100 000 DC' : '100,000 DC required') : ''}
+                            title={balance < 100000 ? (locale === 'ru' ? 'Нужно 100 000 ZC' : '100,000 ZC required') : ''}
                           >
                             <Zap className="w-3.5 h-3.5 text-yellow-400" />
-                            <span>{locale === 'ru' ? 'Ускорить (100 000 DC)' : 'Speed up (100k DC)'}</span>
+                            <span>{locale === 'ru' ? 'Ускорить (100 000 ZC)' : 'Speed up (100k ZC)'}</span>
                           </button>
                         )}
 
@@ -579,7 +579,7 @@ export default function ChickenFarmPage() {
                               {formatTimer(eggProductionMsLeft)}
                             </span>
 
-                            {/* Speedup Egg Production for 10,000 DC */}
+                            {/* Speedup Egg Production for 10,000 ZC */}
                             <button
                               type="button"
                               onClick={() => {
@@ -595,10 +595,10 @@ export default function ChickenFarmPage() {
                                   ? 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.25)] active:scale-95'
                                   : 'bg-white/5 text-white/30 border border-white/5 cursor-not-allowed'
                               }`}
-                              title={balance < 10000 ? (locale === 'ru' ? 'Нужно 10 000 DC' : '10,000 DC required') : ''}
+                              title={balance < 10000 ? (locale === 'ru' ? 'Нужно 10 000 ZC' : '10,000 ZC required') : ''}
                             >
                               <Zap className="w-3.5 h-3.5 text-yellow-400" />
-                              <span>{locale === 'ru' ? 'Ускорить (10 000 DC)' : 'Speed up (10k DC)'}</span>
+                              <span>{locale === 'ru' ? 'Ускорить (10 000 ZC)' : 'Speed up (10k ZC)'}</span>
                             </button>
                           </div>
                         ) : (
@@ -625,8 +625,8 @@ export default function ChickenFarmPage() {
                               <Wheat className="w-3.5 h-3.5 text-amber-400" />
                               <span>
                                 {isDraggingGrain || isFeedModeActive
-                                  ? (locale === 'ru' ? 'Сбросьте зерно (7 500 DC)' : 'Drop Grain (7,500 DC)')
-                                  : (locale === 'ru' ? 'Голодна • Корм 7 500 DC' : 'Hungry • Grain 7,500 DC')}
+                                  ? (locale === 'ru' ? 'Сбросьте зерно (7 500 ZC)' : 'Drop Grain (7,500 ZC)')
+                                  : (locale === 'ru' ? 'Голодна • Корм 7 500 ZC' : 'Hungry • Grain 7,500 ZC')}
                               </span>
                             </div>
                           </div>

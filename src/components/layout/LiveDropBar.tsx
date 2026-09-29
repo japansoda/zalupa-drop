@@ -174,7 +174,7 @@ const LiveDropCard = memo(({ drop, isUser, locale }: CardProps) => {
             )}
           </div>
           <span className="font-mono text-yellow-400/90 font-bold shrink-0 ml-auto">
-            {drop.skin.priceDc.toLocaleString('ru-RU')} DC
+            {drop.skin.priceDc.toLocaleString('ru-RU')} ZC
           </span>
         </div>
       </div>

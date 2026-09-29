@@ -21,7 +21,7 @@ import { useGameStore } from '../../store/useGameStore';
 import { useLanguage } from '../../lib/i18n';
 import { sound } from '../../lib/sound';
 import { applyCanonicalPrice } from '../../lib/marketPricing';
-import { DropCoinIcon } from '../ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 
 interface TerminalInterfaceProps {
   terminalId: string;
@@ -358,7 +358,7 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
               <Zap className="w-5 h-5 fill-black" />
               <span>{isRu ? 'Распечатать терминал' : 'Unseal Terminal'}</span>
               <span className="bg-black/20 px-2 py-0.5 rounded text-xs">
-                {terminalPriceDc.toLocaleString('ru-RU')} DC
+                {terminalPriceDc.toLocaleString('ru-RU')} ZC
               </span>
             </button>
           </div>
@@ -435,9 +435,9 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
               <div className="flex items-center gap-2 mt-4 px-4 py-2 rounded-xl bg-black/40 border border-white/10">
                 <span className="text-xs text-white/50">{isRu ? 'Рыночная цена:' : 'Market Value:'}</span>
                 <div className="flex items-center gap-1">
-                  <DropCoinIcon size={16} />
+                  <ZalupaCoinIcon size={16} />
                   <span className="font-mono font-black text-base text-yellow-400">
-                    {currentSkin.priceDc.toLocaleString('ru-RU')} DC
+                    {currentSkin.priceDc.toLocaleString('ru-RU')} ZC
                   </span>
                 </div>
               </div>
@@ -501,7 +501,7 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
                 <span className="text-xs font-bold text-emerald-400">{acceptedSkin.weapon}</span>
                 <span className="text-sm font-black text-white truncate">{acceptedSkin.skinName}</span>
                 <span className="text-[11px] font-mono text-yellow-400 font-bold">
-                  {acceptedSkin.priceDc.toLocaleString('ru-RU')} DC
+                  {acceptedSkin.priceDc.toLocaleString('ru-RU')} ZC
                 </span>
               </div>
             </div>

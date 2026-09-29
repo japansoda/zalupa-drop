@@ -826,7 +826,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       setIsSpinning(false);
       setShowModal(true);
 
-      // Immediately emit real drops to live ticker (ONLY from 25,000 DC!)
+      // Immediately emit real drops to live ticker (ONLY from 25,000 ZC!)
       finalWinners.forEach((skin) => {
         if (skin.priceDc >= 25000) {
           addLiveDrop({
@@ -1787,8 +1787,8 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             >
               <span>
                 {locale === 'ru'
-                  ? `Открыть ${openCount > 1 ? `${openCount} кейса` : 'кейс'} за ${totalCost.toLocaleString('ru-RU')} DC`
-                  : `Open ${openCount > 1 ? `${openCount} cases` : 'case'} for ${totalCost.toLocaleString('ru-RU')} DC`}
+                  ? `Открыть ${openCount > 1 ? `${openCount} кейса` : 'кейс'} за ${totalCost.toLocaleString('ru-RU')} ZC`
+                  : `Open ${openCount > 1 ? `${openCount} cases` : 'case'} for ${totalCost.toLocaleString('ru-RU')} ZC`}
               </span>
             </button>
           )}

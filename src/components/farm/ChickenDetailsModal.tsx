@@ -5,7 +5,7 @@ import { X, Sparkles, Trophy, Egg, Coins, Flame, AlertCircle } from 'lucide-reac
 import { useGameStore } from '../../store/useGameStore';
 import { useLanguage } from '../../lib/i18n';
 import { sound } from '../../lib/sound';
-import { DropCoinIcon } from '../ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 import { AnimatedChicken } from './AnimatedChicken';
 import {
   CHICKEN_BREEDS,
@@ -160,7 +160,7 @@ export const ChickenDetailsModal: React.FC<ChickenDetailsModalProps> = ({
               <span>{locale === 'ru' ? 'Стоимость' : 'Market Value'}</span>
             </div>
             <span className="font-mono font-black text-base text-yellow-400 truncate">
-              {sellPrice.toLocaleString('ru-RU')} DC
+              {sellPrice.toLocaleString('ru-RU')} ZC
             </span>
           </div>
         </div>
@@ -181,11 +181,11 @@ export const ChickenDetailsModal: React.FC<ChickenDetailsModalProps> = ({
               onClick={() => setIsConfirmingSell(true)}
               className="flex-1 py-3 px-4 rounded-2xl bg-red-500/20 hover:bg-red-500/30 text-red-300 font-black text-xs uppercase tracking-wider transition-all border border-red-500/40 flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 shadow-[0_0_20px_rgba(239,68,68,0.2)]"
             >
-              <DropCoinIcon className="w-4 h-4" />
+              <ZalupaCoinIcon className="w-4 h-4" />
               <span>
                 {locale === 'ru'
-                  ? `Продать (+${sellPrice.toLocaleString('ru-RU')} DC)`
-                  : `Sell (+${sellPrice.toLocaleString('ru-RU')} DC)`}
+                  ? `Продать (+${sellPrice.toLocaleString('ru-RU')} ZC)`
+                  : `Sell (+${sellPrice.toLocaleString('ru-RU')} ZC)`}
               </span>
             </button>
           </div>
@@ -197,8 +197,8 @@ export const ChickenDetailsModal: React.FC<ChickenDetailsModalProps> = ({
             </div>
             <p className="text-xs text-white/60 mb-3">
               {locale === 'ru'
-                ? `Вы точно хотите продать эту курочку за ${sellPrice.toLocaleString('ru-RU')} DC? Насест освободится.`
-                : `Are you sure you want to sell this chicken for ${sellPrice.toLocaleString('ru-RU')} DC? Slot will be freed.`}
+                ? `Вы точно хотите продать эту курочку за ${sellPrice.toLocaleString('ru-RU')} ZC? Насест освободится.`
+                : `Are you sure you want to sell this chicken for ${sellPrice.toLocaleString('ru-RU')} ZC? Slot will be freed.`}
             </p>
             <div className="flex items-center gap-2 w-full">
               <button

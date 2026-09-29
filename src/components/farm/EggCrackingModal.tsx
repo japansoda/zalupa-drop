@@ -8,7 +8,7 @@ import { ChickenBreedId, CHICKEN_BREEDS } from '../../lib/farm';
 import { useGameStore } from '../../store/useGameStore';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
-import { DropCoinIcon } from '../ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 import { SkinImage } from '../ui/SkinImage';
 import { WearBadge } from '../ui/WearBadge';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
@@ -403,13 +403,13 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
                 />
               </div>
 
-              {/* Weapon name & DC Price */}
+              {/* Weapon name & ZC Price */}
               <div className="flex flex-col items-center z-10">
                 <span className="text-xs text-white/50">{droppedSkin.weapon}</span>
                 <div className="flex items-center gap-1.5 mt-2">
-                  <DropCoinIcon className="w-5 h-5" />
+                  <ZalupaCoinIcon className="w-5 h-5" />
                   <span className="font-mono font-black text-xl text-yellow-400">
-                    {droppedSkin.priceDc.toLocaleString('ru-RU')} DC
+                    {droppedSkin.priceDc.toLocaleString('ru-RU')} ZC
                   </span>
                 </div>
               </div>
@@ -431,11 +431,11 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
                 onClick={handleSell}
                 className="py-3 px-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border border-white/10 active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer"
               >
-                <DropCoinIcon className="w-4 h-4" />
+                <ZalupaCoinIcon className="w-4 h-4" />
                 <span>
                   {locale === 'ru'
-                    ? `Продать (+${droppedSkin.priceDc.toLocaleString('ru-RU')} DC)`
-                    : `Sell (+${droppedSkin.priceDc.toLocaleString('ru-RU')} DC)`}
+                    ? `Продать (+${droppedSkin.priceDc.toLocaleString('ru-RU')} ZC)`
+                    : `Sell (+${droppedSkin.priceDc.toLocaleString('ru-RU')} ZC)`}
                 </span>
               </button>
             </div>

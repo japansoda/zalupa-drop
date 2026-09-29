@@ -5,8 +5,9 @@ import { motion, useAnimation } from 'framer-motion';
 import { SkinEntity, CaseItem } from '../../lib/types';
 import { LUCK_POTION, SAVE_TOKEN, ZEUS_ITEM } from '../../lib/consumables';
 import { RARITY_CONFIG } from '../../data/skins';
-import { DropCoinIcon } from '../ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 import { SkinImage } from '../ui/SkinImage';
+import { ItemGlowBackdrop } from '../ui/ItemGlowBackdrop';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { WearBadge } from '../ui/WearBadge';
 import { RarityBadge } from '../ui/RarityBadge';
@@ -196,7 +197,7 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
             : t('cashback.badgeCase')}
         </h3>
         <p className="text-xs text-white/50 mb-6">
-          {t('cashback.lostSub')} {lostAmount.toLocaleString('ru-RU')} DC
+          {t('cashback.lostSub')} {lostAmount.toLocaleString('ru-RU')} ZC
         </p>
 
         {/* STAGE 1: SPINNING REEL */}
@@ -370,13 +371,18 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                     <RarityBadge rarity={winningSkin.rarity} size="sm" />
                   </div>
 
-                  {/* Big Image */}
-                  <div className="relative w-36 h-36 flex items-center justify-center my-3">
+                  {/* Big Image with farm-style aura glow */}
+                  <div className="relative w-36 h-36 flex items-center justify-center my-3 overflow-visible">
+                    <ItemGlowBackdrop
+                      rarity={winningSkin.rarity}
+                      isLegendary={winningSkin.rarity === 'gold' || winningSkin.name.startsWith('★') || winningSkin.priceDc >= 1000}
+                      size="sm"
+                    />
                     <SkinImage
                       src={winningSkin.image}
                       alt={winningSkin.name}
                       size={180}
-                      className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] animate-pulse"
+                      className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] transition-transform duration-300"
                     />
                   </div>
 
@@ -389,9 +395,9 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                       {t('rarity.' + winningSkin.rarity) || (rConf as any).label}
                     </p>
                     <div className="flex items-center justify-center gap-1.5 mt-3">
-                      <DropCoinIcon size={20} />
+                      <ZalupaCoinIcon size={20} />
                       <span className="font-mono font-black text-yellow-400 text-xl">
-                        +{winningSkin.priceDc.toLocaleString('ru-RU')} DC
+                        +{winningSkin.priceDc.toLocaleString('ru-RU')} ZC
                       </span>
                     </div>
                   </div>

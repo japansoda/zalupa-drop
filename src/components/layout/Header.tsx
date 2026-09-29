@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Volume2, VolumeX, Plus, Briefcase, Zap, FileText, Box, FlaskConical, ShieldCheck, Anchor, Store, Egg } from 'lucide-react';
 import { useGameStore } from '../../store/useGameStore';
-import { DropCoinIcon } from '../ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 import { LogoSvg } from '../ui/LogoSvg';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
@@ -180,13 +180,13 @@ export const Header: React.FC = () => {
             className="order-3 sm:order-none flex items-center glass-panel rounded-lg px-2 sm:pl-3 sm:pr-1.5 py-1 border border-white/10 gap-1.5 sm:gap-2.5 shrink-0 cursor-pointer sm:cursor-default active:scale-95 sm:active:scale-100 transition-all"
           >
             <div className="flex items-center gap-1 sm:gap-1.5">
-              <DropCoinIcon size={16} />
+              <ZalupaCoinIcon size={16} />
               <div className="flex flex-col text-right leading-none">
                 <span className="font-mono font-black text-xs sm:text-sm text-white tracking-tight">
                   {balance.toLocaleString('ru-RU')}
                 </span>
                 <span className="text-[7.5px] sm:text-[8px] font-extrabold text-yellow-400 uppercase tracking-wider hidden xs:inline">
-                  DC
+                  ZC
                 </span>
               </div>
             </div>

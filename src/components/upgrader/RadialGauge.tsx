@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback, useDeferredValue } from 'react';
 import { motion, useAnimation, AnimatePresence } from 'framer-motion';
 import { SkinEntity, InventoryItem, CaseItem, SkinRarity } from '../../lib/types';
-import { DropCoinIcon } from '../ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 import { RARITY_CONFIG, SKINS_DATABASE } from '../../data/skins';
 import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
@@ -13,6 +13,7 @@ import { WearBadge } from '../ui/WearBadge';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { RarityBadge } from '../ui/RarityBadge';
 import { SkinImage } from '../ui/SkinImage';
+import { ItemGlowBackdrop } from '../ui/ItemGlowBackdrop';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
 import { applyCanonicalPrice, getCanonicalPrice } from '../../lib/marketPricing';
@@ -64,7 +65,7 @@ const UpgraderInventoryCard = React.memo<{
         <span className="text-[11px] font-black text-white truncate">{item.skinName || item.name}</span>
         <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
         <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-          {item.priceDc.toLocaleString('ru-RU')} DC
+          {item.priceDc.toLocaleString('ru-RU')} ZC
         </span>
       </div>
     </button>
@@ -123,7 +124,7 @@ const UpgraderCatalogCard = React.memo<{
         <span className="text-[11px] font-black text-white truncate">{skin.skinName || skin.name}</span>
         <span className="text-[9px] text-white/40 truncate">{skin.weapon}</span>
         <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-          {skin.priceDc.toLocaleString('ru-RU')} DC
+          {skin.priceDc.toLocaleString('ru-RU')} ZC
         </span>
       </div>
     </button>
@@ -166,7 +167,7 @@ const UpgraderMiniMarketCard = React.memo<{
         </span>
         <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
         <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-          {item.priceDc.toLocaleString('ru-RU')} DC
+          {item.priceDc.toLocaleString('ru-RU')} ZC
         </span>
 
         <button
@@ -507,37 +508,46 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
 
   // Initial load or item selection changes
   useEffect(() => {
+    if (lastResult === 'lose') return;
     if (inventory.length > 0 && selectedItems.length === 0 && betMode === 'skin') {
       setSelectedItems([inventory[0]]);
       autoSelectTargetSkin(50, inventory[0].priceDc);
     } else if (betMode === 'dc' && !targetSkin) {
       autoSelectTargetSkin(targetChance, customBetDc);
     }
-  }, [inventory, betMode]);
+  }, [inventory, betMode, lastResult]);
 
   // When effectiveBetDc changes, ensure targetSkin is valid
   useEffect(() => {
+    if (lastResult === 'lose') return;
     if (effectiveBetDc > 0) {
       if (!targetSkin || targetSkin.priceDc <= effectiveBetDc || targetSkin.priceDc > maxTargetPrice) {
         autoSelectTargetSkin(targetChance, effectiveBetDc);
       }
     }
-  }, [effectiveBetDc, maxTargetPrice]);
+  }, [effectiveBetDc, maxTargetPrice, lastResult]);
 
-  // Auto-hide "НЕ БЕДА" / "NO WORRIES" after 5 seconds and restore chance display
+  // Auto-hide "НЕ БЕДА" / "NO WORRIES" after exactly 10 seconds and restore state
   useEffect(() => {
     if (lastResult === 'lose') {
       if (loseTimerRef.current) clearTimeout(loseTimerRef.current);
       loseTimerRef.current = setTimeout(() => {
         setLastResult(null);
-      }, 5000);
+        // After 10s: auto-replace/auto-select next upgrade if inventory has items
+        if (inventory.length > 0 && betMode === 'skin') {
+          setSelectedItems([inventory[0]]);
+          autoSelectTargetSkin(50, inventory[0].priceDc);
+        } else if (inventory.length === 0) {
+          setTargetSkin(null);
+        }
+      }, 10000);
     } else {
       if (loseTimerRef.current) clearTimeout(loseTimerRef.current);
     }
     return () => {
       if (loseTimerRef.current) clearTimeout(loseTimerRef.current);
     };
-  }, [lastResult]);
+  }, [lastResult, inventory, betMode]);
 
   // Immediately clear "НЕ БЕДА" if any item or bet configuration changes in upgrader
   useEffect(() => {
@@ -1117,7 +1127,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       }, 1500);
       setProtectedInstanceId(null);
 
-      // Emit real drop to live drops ticker (strictly >= 25,000 DC)
+      // Emit real drop to live drops ticker (strictly >= 25,000 ZC)
       if (targetSkin.priceDc >= 25000) {
         addLiveDrop({
           id: `upgrade_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
@@ -1213,7 +1223,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           });
         }
       } else {
-        // 2. Standard Case Consolation for losses >= 500 DC
+        // 2. Standard Case Consolation for losses >= 500 ZC
         const shouldTriggerConsolation =
           currentLostAmount >= 2000 ? Math.random() < 0.85 :
           currentLostAmount >= 1000 ? Math.random() < 0.65 :
@@ -1333,7 +1343,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     setLastResult(null);
     if (balance < skin.priceDc) {
       sound.playError();
-      alert(locale === 'ru' ? 'Недостаточно DC для покупки этого скина!' : 'Not enough DC to purchase this skin!');
+      alert(locale === 'ru' ? 'Недостаточно ZC для покупки этого скина!' : 'Not enough ZC to purchase this skin!');
       return;
     }
     const success = deductBalance(skin.priceDc);
@@ -1674,7 +1684,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                               {item.skinName || item.name}
                             </span>
                             <span className="text-[10px] font-mono font-black text-yellow-400">
-                              {item.priceDc.toLocaleString('ru-RU')} DC
+                              {item.priceDc.toLocaleString('ru-RU')} ZC
                             </span>
                           </div>
                         );
@@ -1694,7 +1704,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     <div className="flex items-center justify-between pt-2 border-t border-white/10 text-xs">
                       <span className="text-white/60 font-bold">{t('upg.betSum')}</span>
                       <div className="flex items-center gap-1 font-mono font-black text-yellow-400">
-                        <DropCoinIcon size={14} />
+                        <ZalupaCoinIcon size={14} />
                         <span>{effectiveBetDc.toLocaleString('ru-RU')} DC</span>
                       </div>
                     </div>
@@ -1881,12 +1891,12 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   </div>
                 </div>
               ) : (
-                /* DC BET MODE */
+                /* ZC BET MODE */
                 <div className="h-full flex flex-col justify-between p-2">
                   <div className="flex flex-col gap-2">
                     <label className="text-xs font-bold text-white/60">{t('upg.dcBet')}</label>
                     <div className="flex items-center gap-2 p-3 rounded-xl bg-black/60 border border-white/10">
-                      <DropCoinIcon size={20} />
+                      <ZalupaCoinIcon size={20} />
                       <input
                         type="number"
                         min="10"
@@ -2696,14 +2706,19 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               </div>
 
               {targetSkin ? (
-                <div className="flex flex-col items-center justify-center my-auto">
+                <div className="relative flex flex-col items-center justify-center my-auto overflow-visible">
+                  <ItemGlowBackdrop
+                    rarity={targetSkin.rarity}
+                    isLegendary={targetSkin.rarity === 'gold' || targetSkin.name.startsWith('★') || targetSkin.priceDc >= 1000}
+                    size="md"
+                  />
                   <SkinImage
                     key={targetSkin.id}
                     src={targetSkin.image}
                     alt={targetSkin.name}
                     size={280}
                     priority={true}
-                    className="w-48 h-32 sm:w-56 sm:h-36 object-contain filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.9)] hover:scale-105 transition-transform duration-300"
+                    className="relative z-10 w-48 h-32 sm:w-56 sm:h-36 object-contain filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.9)] transition-transform duration-300"
                   />
                   <span className="font-black text-white text-base text-center line-clamp-1 mt-2">
                     {targetSkin.name}
@@ -2725,7 +2740,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               <div className="flex items-center justify-between pt-3 border-t border-white/10">
                 <span className="text-xs text-white/60">{t('upg.target')}</span>
                 <div className="flex items-center gap-1 font-mono font-black text-yellow-400 text-base">
-                  <DropCoinIcon size={18} />
+                  <ZalupaCoinIcon size={18} />
                   <span>{targetSkin ? targetSkin.priceDc.toLocaleString('ru-RU') : 0} DC</span>
                 </div>
               </div>
@@ -2848,7 +2863,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     sound.playClick();
                     setLeftPanelMode('market');
                   }}
-                  title={locale === 'ru' ? 'Быстрый маркетплейс (покупка за коины)' : 'Quick marketplace (buy with DC)'}
+                  title={locale === 'ru' ? 'Быстрый маркетплейс (покупка за коины)' : 'Quick marketplace (buy with ZC)'}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     leftPanelMode === 'market'
                       ? 'bg-yellow-400 text-black shadow-sm'
@@ -2858,7 +2873,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   <Store className="w-3.5 h-3.5" />
                   <span>{locale === 'ru' ? 'Маркет' : 'Market'}</span>
                   <span className="text-[9px] font-black uppercase px-1 py-0.2 rounded bg-sky-500/20 text-sky-400 border border-sky-500/30">
-                    DC
+                    ZC
                   </span>
                 </button>
               </div>
@@ -2878,8 +2893,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
             ) : (
               <div className="flex items-center gap-2 self-start sm:self-center">
                 <div className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-black/60 border border-white/10 text-yellow-400 font-mono text-xs font-black">
-                  <DropCoinIcon className="w-3.5 h-3.5" />
-                  <span>{balance.toLocaleString('ru-RU')} DC</span>
+                  <ZalupaCoinIcon className="w-3.5 h-3.5" />
+                  <span>{balance.toLocaleString('ru-RU')} ZC</span>
                 </div>
                 <button
                   type="button"
@@ -2887,7 +2902,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   className="p-1.5 rounded-lg bg-black/60 border border-white/10 text-white/70 hover:text-white text-xs cursor-pointer font-bold"
                   title={miniMarketSort === 'asc' ? 'Цена: Дешевле ↑' : 'Цена: Дороже ↓'}
                 >
-                  {miniMarketSort === 'asc' ? '↑ DC' : '↓ DC'}
+                  {miniMarketSort === 'asc' ? '↑ ZC' : '↓ ZC'}
                 </button>
               </div>
             )}

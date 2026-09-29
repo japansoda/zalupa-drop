@@ -72,7 +72,7 @@ async function fetchSkinportItemsDaily(): Promise<CachedPricesState> {
         for (const item of items) {
           const usd = item.suggested_price || item.min_price || item.median_price || 0;
           if (usd > 0 && item.market_hash_name) {
-            const dc = Math.max(1, Math.round(usd * 100));
+            const dc = Math.max(1, Math.round(usd * 4));
             // Do not downgrade ultra-exotic collector grails with retail low prices
             if (!COLLECTOR_PRICES[item.market_hash_name]) {
               priceMap[item.market_hash_name] = dc;

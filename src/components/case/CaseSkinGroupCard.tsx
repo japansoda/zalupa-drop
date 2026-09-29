@@ -6,6 +6,7 @@ import { RarityBadge } from '../ui/RarityBadge';
 import { RARITY_CONFIG } from '../../data/skins';
 import { ExternalLink } from 'lucide-react';
 import { SkinImage } from '../ui/SkinImage';
+import { ItemGlowBackdrop } from '../ui/ItemGlowBackdrop';
 import { getSteamMarketListingUrl } from '../../lib/steam';
 import { useLanguage } from '../../lib/i18n';
 
@@ -56,13 +57,19 @@ export const CaseSkinGroupCard = React.memo<CaseSkinGroupCardProps>(({ variants 
         </a>
       </div>
 
-      {/* Central Skin Image with Smooth Zoom */}
-      <div className="w-full h-20 sm:h-36 flex items-center justify-center my-1.5 sm:my-2 relative">
+      {/* Central Skin Image with Ambient Sunburst Glow */}
+      <div className="w-full h-20 sm:h-36 flex items-center justify-center my-1.5 sm:my-2 relative overflow-visible">
+        <ItemGlowBackdrop
+          rarity={baseSkin.rarity}
+          isLegendary={baseSkin.rarity === 'gold' || baseSkin.name.startsWith('★')}
+          size="sm"
+          className="opacity-60 group-hover:opacity-100 transition-opacity duration-300"
+        />
         <SkinImage
           src={baseSkin.image}
           alt={baseSkin.name}
           size={180}
-          className="w-full h-[72px] sm:h-32 object-contain group-hover:scale-115 transition-transform duration-300 filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.8)]"
+          className="relative z-10 w-full h-[72px] sm:h-32 object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.8)]"
         />
       </div>
 

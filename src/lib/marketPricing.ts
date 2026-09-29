@@ -80,7 +80,7 @@ function initPricingCaches(): void {
     const bestSkin = variants[0];
     const bestHash = getSteamMarketHashName(bestSkin);
     const realLiveBase = LIVE_MARKET_PRICES[bestHash] || LIVE_MARKET_PRICES[bestSkin.name] || 0;
-    const baseP = realLiveBase > 0 ? realLiveBase : (bestSkin?.priceDc || 100);
+    const baseP = realLiveBase > 0 ? realLiveBase : (bestSkin?.priceDc || 4);
     designMap.set(key, Math.max(1, baseP));
 
     // Check if live market prices database has exact Field-Tested price
@@ -170,7 +170,7 @@ export function getCanonicalPrice(
   if (livePrices) {
     const pDc = extractPriceDc(livePrices, hashName);
     if (pDc > 0) {
-      const pUsd = Number((pDc * 0.01).toFixed(2));
+      const pUsd = Number((pDc / 4).toFixed(2));
       return { priceDc: pDc, priceUsd: pUsd };
     }
   }
@@ -180,7 +180,7 @@ export function getCanonicalPrice(
   if (realMarketPrice && realMarketPrice > 0) {
     return {
       priceDc: realMarketPrice,
-      priceUsd: Number((realMarketPrice * 0.01).toFixed(2)),
+      priceUsd: Number((realMarketPrice / 4).toFixed(2)),
     };
   }
 
@@ -196,7 +196,7 @@ export function getCanonicalPrice(
         (skin.name ? extractPriceDc(livePrices, skin.name) : 0) ||
         (skin.skinName ? extractPriceDc(livePrices, skin.skinName) : 0);
       if (pDc > 0) {
-        return { priceDc: pDc, priceUsd: Number((pDc * 0.01).toFixed(2)) };
+        return { priceDc: pDc, priceUsd: Number((pDc / 4).toFixed(2)) };
       }
     }
 
@@ -208,13 +208,13 @@ export function getCanonicalPrice(
     if (directLookup && directLookup > 0) {
       return {
         priceDc: directLookup,
-        priceUsd: Number((directLookup * 0.01).toFixed(2)),
+        priceUsd: Number((directLookup / 4).toFixed(2)),
       };
     }
 
-    const baseP = getBaseDesignPrice(skin.weapon, skin.skinName, skin.name) || skin.priceDc || 100;
+    const baseP = getBaseDesignPrice(skin.weapon, skin.skinName, skin.name) || skin.priceDc || 4;
     const priceDc = Math.max(1, baseP);
-    const priceUsd = Number((priceDc * 0.01).toFixed(2));
+    const priceUsd = Number((priceDc / 4).toFixed(2));
     return { priceDc, priceUsd };
   }
 
@@ -261,7 +261,7 @@ export function getCanonicalPrice(
   const stRate = isSt ? STATTRAK_RATE : 1.0;
 
   const priceDc = Math.max(1, Math.round(baseFtPrice * wearRate * stRate));
-  const priceUsd = Number((priceDc * 0.01).toFixed(2));
+  const priceUsd = Number((priceDc / 4).toFixed(2));
 
   return { priceDc, priceUsd };
 }

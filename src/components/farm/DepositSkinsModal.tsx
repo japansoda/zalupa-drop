@@ -6,7 +6,7 @@ import { InventoryItem } from '../../lib/types';
 import { useGameStore } from '../../store/useGameStore';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
-import { DropCoinIcon } from '../ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 import { SkinImage } from '../ui/SkinImage';
 import { WearBadge } from '../ui/WearBadge';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
@@ -29,7 +29,7 @@ export const DepositSkinsModal: React.FC<DepositSkinsModalProps> = ({
 
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  // Only skins with price >= 1000 DC are eligible
+  // Only skins with price >= 1000 ZC are eligible
   const eligibleSkins = useMemo(() => {
     return inventory.filter((item) => item.priceDc >= 1000);
   }, [inventory]);
@@ -82,8 +82,8 @@ export const DepositSkinsModal: React.FC<DepositSkinsModalProps> = ({
               </h2>
               <p className="text-xs text-white/50">
                 {locale === 'ru'
-                  ? 'Пожертвуйте 10 скинов от 1 000 DC каждый для инкубации'
-                  : 'Sacrifice 10 skins of at least 1 000 DC each for incubation'}
+                  ? 'Пожертвуйте 10 скинов от 1 000 ZC каждый для инкубации'
+                  : 'Sacrifice 10 skins of at least 1 000 ZC each for incubation'}
               </p>
             </div>
           </div>
@@ -114,7 +114,7 @@ export const DepositSkinsModal: React.FC<DepositSkinsModalProps> = ({
             </span>
             {selectedIds.length > 0 && (
               <span className="text-xs font-mono text-white/40 ml-2">
-                (~{totalValue.toLocaleString('ru-RU')} DC)
+                (~{totalValue.toLocaleString('ru-RU')} ZC)
               </span>
             )}
           </div>
@@ -140,8 +140,8 @@ export const DepositSkinsModal: React.FC<DepositSkinsModalProps> = ({
               </h4>
               <p className="text-xs text-white/40 max-w-sm mx-auto">
                 {locale === 'ru'
-                  ? 'В вашем инвентаре нет скинов стоимостью от 1 000 DC. Вы можете выиграть их в кейсах или купить в Маркетплейсе!'
-                  : 'You have no skins worth at least 1 000 DC. You can win them in cases or buy in the Marketplace!'}
+                  ? 'В вашем инвентаре нет скинов стоимостью от 1 000 ZC. Вы можете выиграть их в кейсах или купить в Маркетплейсе!'
+                  : 'You have no skins worth at least 1 000 ZC. You can win them in cases or buy in the Marketplace!'}
               </p>
             </div>
           ) : (
@@ -188,7 +188,7 @@ export const DepositSkinsModal: React.FC<DepositSkinsModalProps> = ({
                       </span>
                       <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
                       <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-                        {item.priceDc.toLocaleString('ru-RU')} DC
+                        {item.priceDc.toLocaleString('ru-RU')} ZC
                       </span>
                     </div>
                   </button>

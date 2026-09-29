@@ -8,8 +8,9 @@ import { RARITY_CONFIG } from '../../data/skins';
 import { RarityBadge } from '../ui/RarityBadge';
 import { WearBadge } from '../ui/WearBadge';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
-import { DropCoinIcon } from '../ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 import { SkinImage } from '../ui/SkinImage';
+import { ItemGlowBackdrop } from '../ui/ItemGlowBackdrop';
 import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
 import { useLanguage } from '../../lib/i18n';
@@ -116,7 +117,14 @@ export const DropModal: React.FC<DropModalProps> = ({
               const config = RARITY_CONFIG[single.rarity] || RARITY_CONFIG.milspec;
               return (
                 <>
-                  <div className="relative w-56 h-56 my-2 flex items-center justify-center group">
+                  <div className="relative w-56 h-56 my-2 flex items-center justify-center group overflow-visible">
+                    {/* Rotating sunburst aura and ambient glow behind weapon */}
+                    <ItemGlowBackdrop
+                      rarity={single.rarity}
+                      isLegendary={single.rarity === 'gold' || single.name.startsWith('★') || single.priceDc >= 1000}
+                      size="md"
+                    />
+
                     {/* Bonus Extra Drop Tag */}
                     {hasBonus && (
                       <div className="absolute top-0 right-0 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-black text-black bg-yellow-400 shadow-sm">
@@ -133,7 +141,7 @@ export const DropModal: React.FC<DropModalProps> = ({
                       src={single.image}
                       alt={single.name}
                       size={280}
-                      className="w-full h-full object-contain filter drop-shadow-2xl group-hover:scale-105 transition-transform duration-200"
+                      className="relative z-10 w-full h-full object-contain filter drop-shadow-2xl transition-transform duration-300"
                     />
 
                     {/* Quick Sell on Hover */}
@@ -146,8 +154,8 @@ export const DropModal: React.FC<DropModalProps> = ({
                         <ShoppingBag className="w-3.5 h-3.5" />
                         <span>
                           {locale === 'ru'
-                            ? `Продать за ${single.priceDc.toLocaleString('ru-RU')} DC`
-                            : `Sell for ${single.priceDc.toLocaleString('ru-RU')} DC`}
+                            ? `Продать за ${single.priceDc.toLocaleString('ru-RU')} ZC`
+                            : `Sell for ${single.priceDc.toLocaleString('ru-RU')} ZC`}
                         </span>
                       </button>
                     </div>
@@ -167,9 +175,9 @@ export const DropModal: React.FC<DropModalProps> = ({
                     </p>
 
                     <div className="flex items-center gap-2 mt-2 px-4 py-2 rounded-2xl bg-black/60 border border-white/10">
-                      <DropCoinIcon size={22} />
+                      <ZalupaCoinIcon size={22} />
                       <span className="font-mono font-black text-xl text-yellow-400">
-                        {single.priceDc.toLocaleString('ru-RU')} DC
+                        {single.priceDc.toLocaleString('ru-RU')} ZC
                       </span>
                       <span className="text-xs text-white/40">
                         (~${single.priceUsd.toFixed(2)})
@@ -212,12 +220,17 @@ export const DropModal: React.FC<DropModalProps> = ({
                       <RarityBadge rarity={it.rarity} size="sm" />
                     </div>
 
-                    <div className="w-full h-24 sm:h-40 flex items-center justify-center my-1 sm:my-2 relative">
+                    <div className="w-full h-24 sm:h-40 flex items-center justify-center my-1 sm:my-2 relative overflow-visible">
+                      <ItemGlowBackdrop
+                        rarity={it.rarity}
+                        isLegendary={it.rarity === 'gold' || it.name.startsWith('★') || it.priceDc >= 1000}
+                        size="sm"
+                      />
                       <SkinImage
                         src={it.image}
                         alt={it.name}
                         size={180}
-                        className="w-full h-20 sm:h-36 object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] group-hover:scale-110 transition-transform duration-200"
+                        className="relative z-10 w-full h-20 sm:h-36 object-contain filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] transition-transform duration-300"
                       />
                     </div>
 
@@ -228,9 +241,9 @@ export const DropModal: React.FC<DropModalProps> = ({
                       </span>
                       <div className="flex items-center justify-between pt-2 border-t border-white/5">
                         <div className="flex items-center gap-1">
-                          <DropCoinIcon size={14} />
+                          <ZalupaCoinIcon size={14} />
                           <span className="font-mono text-xs font-bold text-yellow-400">
-                            {it.priceDc.toLocaleString('ru-RU')} DC
+                            {it.priceDc.toLocaleString('ru-RU')} ZC
                           </span>
                         </div>
                         <span className="text-[10px] text-white/40 font-mono">
@@ -253,7 +266,7 @@ export const DropModal: React.FC<DropModalProps> = ({
                         <span>
                           {locale === 'ru'
                             ? `Продать за ${it.priceDc.toLocaleString('ru-RU')} DC`
-                            : `Sell for ${it.priceDc.toLocaleString('ru-RU')} DC`}
+                            : `Sell for ${it.priceDc.toLocaleString('ru-RU')} ZC`}
                         </span>
                       </button>
                     </div>
@@ -268,9 +281,9 @@ export const DropModal: React.FC<DropModalProps> = ({
                 {locale === 'ru' ? 'Общий выигрыш:' : 'Total win:'}
               </span>
               <div className="flex items-center gap-1.5">
-                <DropCoinIcon size={22} />
+                <ZalupaCoinIcon size={22} />
                 <span className="font-mono font-black text-2xl text-yellow-400">
-                  {totalPriceDc.toLocaleString('ru-RU')} DC
+                  {totalPriceDc.toLocaleString('ru-RU')} ZC
                 </span>
               </div>
               <span className="text-xs text-white/40">
@@ -442,10 +455,10 @@ export const DropModal: React.FC<DropModalProps> = ({
               <span>
                 {locale === 'ru'
                   ? `Крутить еще ${openCount && openCount > 1 ? `(${openCount}x)` : ''} ${
-                      spinAgainCost ? `· ${spinAgainCost.toLocaleString('ru-RU')} DC` : ''
+                      spinAgainCost ? `· ${spinAgainCost.toLocaleString('ru-RU')} ZC` : ''
                     }`
                   : `Spin Again ${openCount && openCount > 1 ? `(${openCount}x)` : ''} ${
-                      spinAgainCost ? `· ${spinAgainCost.toLocaleString('ru-RU')} DC` : ''
+                      spinAgainCost ? `· ${spinAgainCost.toLocaleString('ru-RU')} ZC` : ''
                     }`}
               </span>
             </button>
@@ -483,11 +496,11 @@ export const DropModal: React.FC<DropModalProps> = ({
               <span>
                 {isMulti
                   ? locale === 'ru'
-                    ? `Продать всё (+${totalPriceDc.toLocaleString('ru-RU')} DC)`
-                    : `Sell all (+${totalPriceDc.toLocaleString('ru-RU')} DC)`
+                    ? `Продать всё (+${totalPriceDc.toLocaleString('ru-RU')} ZC)`
+                    : `Sell all (+${totalPriceDc.toLocaleString('ru-RU')} ZC)`
                   : locale === 'ru'
-                  ? `Продать (+${totalPriceDc.toLocaleString('ru-RU')} DC)`
-                  : `Sell (+${totalPriceDc.toLocaleString('ru-RU')} DC)`}
+                  ? `Продать (+${totalPriceDc.toLocaleString('ru-RU')} ZC)`
+                  : `Sell (+${totalPriceDc.toLocaleString('ru-RU')} ZC)`}
               </span>
             </button>
           </div>

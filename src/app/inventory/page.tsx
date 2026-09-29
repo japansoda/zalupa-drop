@@ -10,7 +10,7 @@ import { RefillModal } from '../../components/layout/RefillModal';
 import { RarityBadge } from '../../components/ui/RarityBadge';
 import { WearBadge } from '../../components/ui/WearBadge';
 import { StatTrakBadge } from '../../components/ui/StatTrakBadge';
-import { DropCoinIcon } from '../../components/ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../../components/ui/ZalupaCoinIcon';
 import { SkinImage } from '../../components/ui/SkinImage';
 import { useGameStore } from '../../store/useGameStore';
 import { RARITY_CONFIG } from '../../data/skins';
@@ -77,9 +77,9 @@ export default function InventoryPage() {
               <div className="flex items-center gap-2 px-4 py-2.5 rounded-2xl glass-panel border border-white/10">
                 <span className="text-xs text-white/60 font-bold">{t('inv.totalValue')}</span>
                 <div className="flex items-center gap-1.5">
-                  <DropCoinIcon size={20} />
+                  <ZalupaCoinIcon size={20} />
                   <span className="font-mono font-black text-lg text-yellow-400">
-                    {totalValueDc.toLocaleString('ru-RU')} DC
+                    {totalValueDc.toLocaleString('ru-RU')} ZC
                   </span>
                 </div>
               </div>
@@ -93,7 +93,7 @@ export default function InventoryPage() {
                   className="px-5 py-2.5 rounded-xl btn-yellow text-black font-black text-xs flex items-center gap-2 cursor-pointer active:scale-95 transition-all"
                 >
                   <Trash2 className="w-4 h-4" />
-                  <span>{t('inv.sellAll')} ({totalValueDc.toLocaleString('ru-RU')} DC)</span>
+                  <span>{t('inv.sellAll')} ({totalValueDc.toLocaleString('ru-RU')} ZC)</span>
                 </button>
               )}
             </div>
@@ -254,7 +254,7 @@ export default function InventoryPage() {
 
                         <div className="flex items-center justify-between pt-2 border-t border-white/5 mb-2">
                           <div className="flex items-center gap-1">
-                            <DropCoinIcon size={14} />
+                            <ZalupaCoinIcon size={14} />
                             <span className="font-mono text-xs font-bold text-yellow-400">
                               {item.priceDc.toLocaleString('ru-RU')}
                             </span>
@@ -277,7 +277,7 @@ export default function InventoryPage() {
                           className="w-full py-1.5 rounded-lg glass-button text-[11px] font-bold text-yellow-400 hover:bg-yellow-400 hover:text-black flex items-center justify-center gap-1 transition-all cursor-pointer"
                         >
                           <ShoppingBag className="w-3 h-3" />
-                          <span>{t('inv.sell')} {item.priceDc} DC</span>
+                          <span>{t('inv.sell')} {item.priceDc}  ZC</span>
                         </button>
                       </div>
                     </div>

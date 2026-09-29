@@ -87,7 +87,7 @@ interface GameState {
 export const useGameStore = create<GameState>()(
   persist(
     (set, get) => ({
-      balance: 10000,
+      balance: 400,
       inventory: [],
       livePrices: {},
       lastPriceSyncTime: 0,
@@ -128,7 +128,7 @@ export const useGameStore = create<GameState>()(
         return true;
       },
 
-      refillDemoBalance: (amount = 10000) => {
+      refillDemoBalance: (amount = 400) => {
         set((state) => ({ balance: state.balance + amount }));
         sound.playCashout();
       },

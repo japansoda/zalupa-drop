@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { DropCoinIcon } from '../ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
 import { useLanguage } from '../../lib/i18n';
@@ -415,7 +415,7 @@ export const CrashGame: React.FC = () => {
 
           {gameState === 'cashed_out' && (
             <div className="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 font-extrabold text-sm uppercase mt-2">
-              <Check className="w-4 h-4" /> {t('crash.cashedOut')} {Math.floor(betDc * multiplier).toLocaleString('ru-RU')} DC!
+              <Check className="w-4 h-4" /> {t('crash.cashedOut')} {Math.floor(betDc * multiplier).toLocaleString('ru-RU')} ZC!
             </div>
           )}
         </div>
@@ -427,7 +427,7 @@ export const CrashGame: React.FC = () => {
         <div className="flex flex-col gap-2 w-full sm:w-1/2">
           <label className="text-xs font-bold text-white/60 uppercase tracking-wider">{t('crash.bet')}</label>
           <div className="flex items-center gap-2 p-3 rounded-2xl bg-black/60 border border-white/10">
-            <DropCoinIcon size={24} />
+            <ZalupaCoinIcon size={24} />
             <input
               type="number"
               min="10"
@@ -501,7 +501,7 @@ export const CrashGame: React.FC = () => {
               onClick={handleCashout}
               className="w-full py-6 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-black text-xl uppercase tracking-wider shadow-[0_0_30px_rgba(16,185,129,0.5)] cursor-pointer active:scale-95 transition-all flex items-center justify-center gap-2"
             >
-              <span>{t('crash.cashout')} ({Math.floor(betDc * multiplier).toLocaleString('ru-RU')} DC)</span>
+              <span>{t('crash.cashout')} ({Math.floor(betDc * multiplier).toLocaleString('ru-RU')} ZC)</span>
             </button>
           ) : (
             <button
@@ -510,7 +510,7 @@ export const CrashGame: React.FC = () => {
               className="w-full py-6 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-xl uppercase tracking-wider shadow-[0_0_30px_rgba(250,204,21,0.4)] cursor-pointer active:scale-95 transition-all flex items-center justify-center gap-2"
             >
               <Rocket className="w-5 h-5 text-black" />
-              <span>{t('crash.placeBet')} ({betDc.toLocaleString('ru-RU')} DC)</span>
+              <span>{t('crash.placeBet')} ({betDc.toLocaleString('ru-RU')} ZC)</span>
             </button>
           )}
         </div>

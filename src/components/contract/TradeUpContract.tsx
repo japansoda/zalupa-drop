@@ -5,11 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useGameStore } from '../../store/useGameStore';
 import { InventoryItem, SkinEntity } from '../../lib/types';
 import { SKINS_DATABASE, RARITY_CONFIG } from '../../data/skins';
-import { DropCoinIcon } from '../ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 import { RarityBadge } from '../ui/RarityBadge';
 import { WearBadge } from '../ui/WearBadge';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { SkinImage } from '../ui/SkinImage';
+import { ItemGlowBackdrop } from '../ui/ItemGlowBackdrop';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
@@ -223,7 +224,7 @@ export const TradeUpContract: React.FC = () => {
       const canonicalWonSkin = applyCanonicalPrice(pickedSkin, useGameStore.getState().livePrices);
       addToInventory([canonicalWonSkin]);
 
-      // Add to live drop feed (strictly >= 25,000 DC)
+      // Add to live drop feed (strictly >= 25,000 ZC)
       if (canonicalWonSkin.priceDc >= 25000) {
         addLiveDrop({
           id: `contract_${Date.now()}`,
@@ -351,7 +352,7 @@ export const TradeUpContract: React.FC = () => {
                           {item.skinName}
                         </span>
                         <div className="flex items-center justify-center gap-1 mt-1 text-yellow-400 font-mono text-xs font-black">
-                          <DropCoinIcon size={12} />
+                          <ZalupaCoinIcon size={12} />
                           <span>{item.priceDc.toLocaleString('ru-RU')}</span>
                         </div>
                       </div>
@@ -399,9 +400,9 @@ export const TradeUpContract: React.FC = () => {
                 {t('contract.totalValue')}
               </span>
               <div className="flex items-center gap-1.5">
-                <DropCoinIcon size={20} />
+                <ZalupaCoinIcon size={20} />
                 <span className="font-mono font-black text-xl text-yellow-400">
-                  {totalInputDc.toLocaleString('ru-RU')} DC
+                  {totalInputDc.toLocaleString('ru-RU')} ZC
                 </span>
               </div>
             </div>
@@ -625,7 +626,7 @@ export const TradeUpContract: React.FC = () => {
 
                     <div className="flex items-center justify-between pt-1.5 border-t border-white/5">
                       <div className="flex items-center gap-1">
-                        <DropCoinIcon size={14} />
+                        <ZalupaCoinIcon size={14} />
                         <span className="font-mono text-xs font-bold text-yellow-400">
                           {item.priceDc.toLocaleString('ru-RU')}
                         </span>
@@ -666,20 +667,17 @@ export const TradeUpContract: React.FC = () => {
                 {wonSkin.name}
               </h3>
 
-              <div className="w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center my-4 relative">
-                <div
-                  className="absolute inset-0 rounded-full blur-3xl opacity-45"
-                  style={{
-                    backgroundColor:
-                      (RARITY_CONFIG[wonSkin.rarity] || RARITY_CONFIG.milspec).color,
-                  }}
+              <div className="w-64 h-64 sm:w-72 sm:h-72 flex items-center justify-center my-4 relative overflow-visible">
+                <ItemGlowBackdrop
+                  rarity={wonSkin.rarity}
+                  isLegendary={wonSkin.rarity === 'gold' || wonSkin.name.startsWith('★') || wonSkin.priceDc >= 1000}
+                  size="lg"
                 />
                 <SkinImage
                   src={wonSkin.image}
                   alt={wonSkin.name}
                   size={260}
-                  className="w-56 h-56 sm:w-64 sm:h-64 object-contain filter drop-shadow-[0_16px_36px_rgba(0,0,0,0.9)] z-10 animate-bounce"
-                  style={{ animationDuration: '3s' }}
+                  className="relative w-56 h-56 sm:w-64 sm:h-64 object-contain filter drop-shadow-[0_16px_36px_rgba(0,0,0,0.9)] z-10 transition-transform duration-300"
                 />
               </div>
 
@@ -693,9 +691,9 @@ export const TradeUpContract: React.FC = () => {
                 <span className="text-xs text-white/50 uppercase font-semibold">
                   {locale === 'ru' ? 'Стоимость:' : 'Value:'}
                 </span>
-                <DropCoinIcon size={20} />
+                <ZalupaCoinIcon size={20} />
                 <span className="font-mono font-black text-lg text-yellow-400">
-                  {wonSkin.priceDc.toLocaleString('ru-RU')} DC
+                  {wonSkin.priceDc.toLocaleString('ru-RU')} ZC
                 </span>
               </div>
 
@@ -724,7 +722,7 @@ export const TradeUpContract: React.FC = () => {
                 >
                   <span>{t('contract.sell')}</span>
                   <span className="text-yellow-400 font-mono font-bold">
-                    {wonSkin.priceDc.toLocaleString('ru-RU')} DC
+                    {wonSkin.priceDc.toLocaleString('ru-RU')} ZC
                   </span>
                 </button>
               </div>

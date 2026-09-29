@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import { fireConfetti } from '../../lib/confetti';
 import { useGameStore } from '../../store/useGameStore';
-import { DropCoinIcon } from '../ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
 
@@ -33,14 +33,14 @@ interface TierOption {
 }
 
 const REFILL_TIERS: TierOption[] = [
-  { amount: 10000, bonusPct: 0, label: '10 000', badge: 'СТАРТ', badgeEn: 'START', theme: 'blue' },
-  { amount: 50000, bonusPct: 5, label: '50 000', badge: 'ТАКТИК', badgeEn: 'TACTIC', theme: 'purple' },
-  { amount: 100000, bonusPct: 10, label: '100 000', badge: 'ПРОФИ', badgeEn: 'PRO', theme: 'pink' },
-  { amount: 250000, bonusPct: 15, label: '250 000', badge: 'ЭЛИТА', badgeEn: 'ELITE', theme: 'red' },
-  { amount: 500000, bonusPct: 20, label: '500 000', badge: 'ХАЙРОЛЛ', badgeEn: 'HIGHROLL', theme: 'gold' },
-  { amount: 1000000, bonusPct: 25, label: '1 000 000', badge: 'МАГНАТ', badgeEn: 'TYCOON', theme: 'cyan' },
-  { amount: 2500000, bonusPct: 35, label: '2 500 000', badge: 'ОЛИГАРХ', badgeEn: 'OLIGARCH', theme: 'emerald' },
-  { amount: 5000000, bonusPct: 50, label: '5 000 000', badge: 'MAX CS2', badgeEn: 'MAX CS2', theme: 'legend' },
+  { amount: 100, bonusPct: 0, label: '100', badge: 'СТАРТ', badgeEn: 'START', theme: 'blue' },
+  { amount: 200, bonusPct: 5, label: '200', badge: 'ТАКТИК', badgeEn: 'TACTIC', theme: 'purple' },
+  { amount: 400, bonusPct: 10, label: '400', badge: 'ПРОФИ', badgeEn: 'PRO', theme: 'pink' },
+  { amount: 1000, bonusPct: 15, label: '1 000', badge: 'ЭЛИТА', badgeEn: 'ELITE', theme: 'red' },
+  { amount: 2000, bonusPct: 20, label: '2 000', badge: 'ХАЙРОЛЛ', badgeEn: 'HIGHROLL', theme: 'gold' },
+  { amount: 4000, bonusPct: 25, label: '4 000', badge: 'МАГНАТ', badgeEn: 'TYCOON', theme: 'cyan' },
+  { amount: 10000, bonusPct: 35, label: '10 000', badge: 'ОЛИГАРХ', badgeEn: 'OLIGARCH', theme: 'emerald' },
+  { amount: 20000, bonusPct: 50, label: '20 000', badge: 'MAX CS2', badgeEn: 'MAX CS2', theme: 'legend' },
 ];
 
 const THEME_STYLES: Record<
@@ -128,7 +128,7 @@ export const RefillModal: React.FC = () => {
 
   const [activeTab, setActiveTab] = useState<'tiers' | 'consumables' | 'custom'>('tiers');
   const [successAnimation, setSuccessAnimation] = useState<{ amount: string; text: string } | null>(null);
-  const [customAmount, setCustomAmount] = useState<number>(50000);
+  const [customAmount, setCustomAmount] = useState<number>(400);
 
   if (!isRefillOpen) return null;
 
@@ -142,7 +142,7 @@ export const RefillModal: React.FC = () => {
     });
 
     setSuccessAnimation({
-      amount: `+${amount.toLocaleString('ru-RU')} DC`,
+      amount: `+${amount.toLocaleString('ru-RU')} ZC`,
       text: labelText || (isRu ? 'успешно начислено!' : 'added to balance!'),
     });
 
@@ -239,7 +239,7 @@ export const RefillModal: React.FC = () => {
         <div className="flex items-center justify-between gap-3 pb-3 border-b border-white/10">
           <div className="flex items-center gap-3 min-w-0">
             <div className="w-10 h-10 rounded-2xl bg-yellow-400/15 border border-yellow-400/30 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(250,204,21,0.2)]">
-              <DropCoinIcon size={22} />
+              <ZalupaCoinIcon size={22} />
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-2">
@@ -251,16 +251,16 @@ export const RefillModal: React.FC = () => {
                 </span>
               </div>
               <p className="text-[11px] text-white/50 truncate">
-                {isRu ? 'Мгновенное пополнение монет и расходников' : 'Instant free DC refill & powerups'}
+                {isRu ? 'Мгновенное пополнение монет и расходников' : 'Instant free ZC refill & powerups'}
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 border border-white/15 shadow-inner">
-              <DropCoinIcon size={16} />
+              <ZalupaCoinIcon size={16} />
               <span className="font-mono font-black text-yellow-400 text-xs sm:text-sm whitespace-nowrap">
-                {balance.toLocaleString('ru-RU')} DC
+                {balance.toLocaleString('ru-RU')} ZC
               </span>
             </div>
 
@@ -293,7 +293,7 @@ export const RefillModal: React.FC = () => {
             }`}
           >
             <Coins className="w-3.5 h-3.5" />
-            <span>{isRu ? 'Пакеты DC' : 'DC Packages'}</span>
+            <span>{isRu ? 'Пакеты ZC' : 'ZC Packages'}</span>
           </button>
 
           <button
@@ -329,7 +329,7 @@ export const RefillModal: React.FC = () => {
           </button>
         </div>
 
-        {/* Tab 1: DC Packages */}
+        {/* Tab 1: ZC Packages */}
         {activeTab === 'tiers' && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 py-1 animate-in fade-in zoom-in-95 duration-150">
             {REFILL_TIERS.map((tier) => {
@@ -357,7 +357,7 @@ export const RefillModal: React.FC = () => {
 
                   {/* Middle: Big Coin Value */}
                   <div className="flex items-center justify-center gap-1.5 my-auto">
-                    <DropCoinIcon size={20} />
+                    <ZalupaCoinIcon size={20} />
                     <span className={`font-mono font-black text-sm sm:text-base ${styles.text}`}>
                       +{tier.label}
                     </span>
@@ -540,13 +540,13 @@ export const RefillModal: React.FC = () => {
               </label>
               <div className="relative flex items-center">
                 <div className="absolute left-4 pointer-events-none">
-                  <DropCoinIcon size={24} />
+                  <ZalupaCoinIcon size={24} />
                 </div>
                 <input
                   type="number"
-                  min={1000}
-                  max={50000000}
-                  step={5000}
+                  min={10}
+                  max={1000000}
+                  step={50}
                   value={customAmount}
                   onChange={(e) => setCustomAmount(Math.max(0, Number(e.target.value)))}
                   className="w-full py-3.5 pl-12 pr-4 rounded-xl bg-black/60 border border-white/20 font-mono font-black text-lg sm:text-xl text-yellow-400 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all"
@@ -556,7 +556,7 @@ export const RefillModal: React.FC = () => {
 
             {/* Quick preset chips */}
             <div className="flex flex-wrap gap-2">
-              {[25000, 100000, 500000, 1000000, 5000000].map((preset) => (
+              {[100, 400, 1000, 5000, 20000].map((preset) => (
                 <button
                   key={preset}
                   type="button"
@@ -570,7 +570,7 @@ export const RefillModal: React.FC = () => {
                       : 'border-white/10 bg-white/5 text-white/70 hover:border-white/30 hover:text-white'
                   }`}
                 >
-                  +{preset.toLocaleString('ru-RU')} DC
+                  +{preset.toLocaleString('ru-RU')} ZC
                 </button>
               ))}
             </div>
@@ -587,7 +587,7 @@ export const RefillModal: React.FC = () => {
               <span>
                 {isRu
                   ? `Начислить ${customAmount.toLocaleString('ru-RU')} DC`
-                  : `Add ${customAmount.toLocaleString('ru-RU')} DC`}
+                  : `Add ${customAmount.toLocaleString('ru-RU')} ZC`}
               </span>
             </button>
           </div>

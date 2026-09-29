@@ -29,7 +29,7 @@ import {
 import { useGameStore } from '../../store/useGameStore';
 import { CASES_DATABASE } from '../../data/cases';
 import { CHICKEN_BREEDS, ChickenBreedId } from '../../lib/farm';
-import { DropCoinIcon } from '../../components/ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../../components/ui/ZalupaCoinIcon';
 import { sound } from '../../lib/sound';
 
 const ADMIN_PASSWORD_HASH = 'admin777'; // Master PIN: admin777 or zalupa2026
@@ -420,7 +420,7 @@ export default function AdminPage() {
               <div className="p-5 rounded-2xl glass-panel border border-white/10 flex flex-col justify-between">
                 <div className="flex items-center justify-between text-white/50 text-xs font-bold uppercase mb-2">
                   <span>Баланс Игрока (DC)</span>
-                  <DropCoinIcon size={16} />
+                  <ZalupaCoinIcon size={16} />
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="font-mono font-black text-2xl sm:text-3xl text-yellow-400">
@@ -625,7 +625,7 @@ export default function AdminPage() {
                   <div className="flex flex-col truncate">
                     <span className="text-xs font-bold text-white truncate">{c.name}</span>
                     <span className="text-[10px] text-yellow-400 font-mono font-bold">
-                      {c.priceDc.toLocaleString('ru-RU')} DC
+                      {c.priceDc.toLocaleString('ru-RU')} ZC
                     </span>
                   </div>
                 </div>
@@ -644,7 +644,7 @@ export default function AdminPage() {
                   Тестирование Live-Ленты
                 </h3>
                 <p className="text-xs text-white/50 mb-4">
-                  Отправляет настоящий проверочный дроп 100k+ DC в живую ленту для тестирования отображения.
+                  Отправляет настоящий проверочный дроп 100k+ ZC в живую ленту для тестирования отображения.
                 </p>
               </div>
 
@@ -680,7 +680,7 @@ export default function AdminPage() {
                   alt="M4A4 Howl"
                   className="w-5 h-5 object-contain shrink-0"
                 />
-                <span>Пуш дропа M4A4 Howl (350,000 DC)</span>
+                <span>Пуш дропа M4A4 Howl (350,000 ZC)</span>
               </button>
             </div>
 
@@ -691,7 +691,7 @@ export default function AdminPage() {
                   Начисление Тестового Баланса
                 </h3>
                 <p className="text-xs text-white/50 mb-4">
-                  Начисляет 1,000,000 DC для глубокого тестирования хайроллер-кейсов и апгрейдов.
+                  Начисляет 1,000,000 ZC для глубокого тестирования хайроллер-кейсов и апгрейдов.
                 </p>
               </div>
 
@@ -704,7 +704,7 @@ export default function AdminPage() {
                 className="w-full py-3 rounded-xl border border-emerald-500/40 bg-emerald-950/30 hover:bg-emerald-900/40 text-emerald-300 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer active:scale-95"
               >
                 <DollarSign className="w-4 h-4" />
-                +1,000,000 DropCoin на баланс
+                +1,000,000 ZalupaCoin на баланс
               </button>
             </div>
 

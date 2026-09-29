@@ -10,7 +10,7 @@ import { RefillModal } from '../../../components/layout/RefillModal';
 import { ReelRoulette } from '../../../components/case/ReelRoulette';
 import { TerminalInterface } from '../../../components/case/TerminalInterface';
 import { CaseSkinGroupCard } from '../../../components/case/CaseSkinGroupCard';
-import { DropCoinIcon } from '../../../components/ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../../../components/ui/ZalupaCoinIcon';
 import { CASES_DATABASE } from '../../../data/cases';
 import { sound } from '../../../lib/sound';
 import { useLanguage, getCaseName, getCaseSubtitle } from '../../../lib/i18n';
@@ -153,9 +153,9 @@ export default function CaseOpenPage() {
             <div className="flex items-center justify-between w-full sm:w-auto gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-2xl glass-panel border border-white/10 shrink-0">
               <span className="text-xs text-white/60 font-bold">{t('case.openCost')}</span>
               <div className="flex items-center gap-1.5">
-                <DropCoinIcon size={20} />
+                <ZalupaCoinIcon size={20} />
                 <span className="font-mono font-black text-base sm:text-lg text-yellow-400">
-                  {currentCase.priceDc.toLocaleString('ru-RU')} DC
+                  {currentCase.priceDc.toLocaleString('ru-RU')} ZC
                 </span>
               </div>
             </div>

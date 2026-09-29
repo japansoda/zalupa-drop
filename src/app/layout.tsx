@@ -9,7 +9,7 @@ import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "ZALUPA DROP — CS2 Кейс Симулятор",
-  description: "Премиальный симулятор открытия CS2 кейсов, апгрейдер и краш на виртуальную валюту DropCoin (DC)",
+  description: "Премиальный симулятор открытия CS2 кейсов, апгрейдер и краш на виртуальную валюту ZalupaCoin (DC)",
   icons: {
     icon: "/logo.png",
   },

@@ -7,7 +7,7 @@ import { Header } from '../components/layout/Header';
 import { Footer } from '../components/layout/Footer';
 import { LiveDropBar } from '../components/layout/LiveDropBar';
 import { RefillModal } from '../components/layout/RefillModal';
-import { DropCoinIcon } from '../components/ui/DropCoinIcon';
+import { ZalupaCoinIcon } from '../components/ui/ZalupaCoinIcon';
 import { SkinImage } from '../components/ui/SkinImage';
 import { CASES_DATABASE } from '../data/cases';
 import { sound } from '../lib/sound';
@@ -188,13 +188,13 @@ const CaseGridCard = React.memo<CaseGridCardProps>(({ caseItem, idx, locale }) =
       {/* Price & Action */}
       <div className="flex items-center justify-between z-10">
         <div className="flex items-center gap-1">
-          <DropCoinIcon size={15} />
+          <ZalupaCoinIcon size={15} />
           <span className={`font-mono font-black text-xs sm:text-sm transition-colors ${
             isHighroller
               ? 'text-amber-300 group-hover:text-yellow-300 drop-shadow-[0_0_6px_rgba(251,191,36,0.35)]'
               : 'text-white group-hover:text-yellow-400'
           }`}>
-            {caseItem.priceDc.toLocaleString('ru-RU')} DC
+            {caseItem.priceDc.toLocaleString('ru-RU')} ZC
           </span>
         </div>
 
