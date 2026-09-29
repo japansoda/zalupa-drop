@@ -264,7 +264,7 @@ export default function ChickenFarmPage() {
                   </h3>
                   <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-yellow-400/15 border border-yellow-400/30 text-yellow-400 text-xs font-mono font-black">
                     <ZalupaCoinIcon className="w-3.5 h-3.5" />
-                    <span>7 500</span>
+                    <span>{formatZc(CHICKEN_FEED_COST_DC)}</span>
                   </div>
                   {hungryChickensCount > 0 && (
                     <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 animate-pulse">
@@ -274,8 +274,8 @@ export default function ChickenFarmPage() {
                 </div>
                 <p className="text-xs text-white/50 max-w-xl mt-0.5">
                   {locale === 'ru'
-                    ? 'Стоимость порции: 7 500 монет. Перетащите мешок с зерном на голодную курочку (или кликните по мешку, а затем по курице), чтобы начать вынашивание яйца с оружием CS2!'
-                    : 'Cost per feed: 7,500 coins. Drag grain sack onto a hungry chicken (or tap sack then tap chicken) to start weapon egg laying!'}
+                    ? 'Стоимость порции: 400 монет. Перетащите мешок с зерном на голодную курочку (или кликните по мешку, а затем по курице), чтобы начать вынашивание яйца с оружием CS2!'
+                    : 'Cost per feed: 400 coins. Drag grain sack onto a hungry chicken (or tap sack then tap chicken) to start weapon egg laying!'}
                 </p>
               </div>
             </div>
@@ -636,13 +636,13 @@ export default function ChickenFarmPage() {
                                 <span className="flex items-center gap-1">
                                   <span>{locale === 'ru' ? 'Сбросьте зерно (' : 'Drop Grain ('}</span>
                                   <ZalupaCoinIcon size={12} />
-                                  <span>7 500)</span>
+                                  <span>{formatZc(CHICKEN_FEED_COST_DC)})</span>
                                 </span>
                               ) : (
                                 <span className="flex items-center gap-1">
                                   <span>{locale === 'ru' ? 'Голодна • Корм' : 'Hungry • Grain'}</span>
                                   <ZalupaCoinIcon size={12} />
-                                  <span>7 500</span>
+                                  <span>{formatZc(CHICKEN_FEED_COST_DC)}</span>
                                 </span>
                               )}
                             </div>

@@ -309,7 +309,7 @@ export interface FarmSlot {
 
 export const INCUBATION_DURATION_MS = 2 * 60 * 60 * 1000; // 2 hours
 export const EGG_PRODUCTION_DURATION_MS = 15 * 60 * 1000; // 15 minutes
-export const CHICKEN_FEED_COST_DC = 7500; // 7,500 DC per feed
+export const CHICKEN_FEED_COST_DC = 400; // 400 DC per feed
 
 
 /**
@@ -470,7 +470,8 @@ export function getBreedDropTierStats(breedId: ChickenBreedId, locale: string = 
 /**
  * Roll a skin drop from an egg laid by a specific chicken breed.
  * STRICT: Absolutely NO stickers, NO charms, NO agents!
- * Calibrated for ~98.5% overall RTP on 7,500 DC chicken feed cost.
+ * NOTE: feed cost is 400 DC while drop odds are unchanged (previously calibrated
+ * for ~98.5% RTP on 7,500 DC feed), so farm RTP at 400 DC is well above 100%.
  * When hasLuckPotion is true, knife/glove and covert chances are boosted.
  * When isStatTrak is true, an additional +10% luck buff is applied!
  */
