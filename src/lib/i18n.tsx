@@ -13,7 +13,6 @@ const translations: Record<Locale, Record<string, string>> = {
     'nav.upgrader': 'Апгрейдер',
     'nav.contract': 'Контракты',
     'nav.farm': 'Ферма',
-    'nav.crash': 'Краш',
     'nav.inventory': 'Инвентарь',
     'nav.topup': 'Пополнить',
     'nav.topup.title': 'Бесплатно пополнить виртуальный баланс',
@@ -123,7 +122,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'upg.myTokens': 'Мои токены:',
     'upg.targetUpTo': 'Цель до',
     'upg.noTokensOwned': 'У вас нет токенов. Выбивайте их из кейсов или как утешительный приз!',
-    'upg.dcBet': 'Ставка с баланса ZC:',
+    'upg.dcBet': 'Ставка с баланса:',
     'upg.spinning': 'Крутим...',
     'upg.selectSkinsBtn': 'Выберите скины',
     'upg.selectTokenBtn': 'Выберите токен',
@@ -159,7 +158,7 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Inventory
     'inv.title': 'Ваш Инвентарь',
-    'inv.subtitle': 'Все выбитые скины с продажей за Залупакоины (ZC) и ссылками в Steam',
+    'inv.subtitle': 'Все выбитые скины с продажей за монеты и ссылками в Steam',
     'inv.items': 'предметов',
     'inv.totalValue': 'Стоимость инвентаря:',
     'inv.sellAll': 'Продать всё',
@@ -194,22 +193,9 @@ const translations: Record<Locale, Record<string, string>> = {
     'contract.sell': 'Продать за',
     'contract.potential': 'Диапазон выигрыша',
 
-    // Crash (legacy)
-    'crash.title': 'Краш',
-    'crash.subtitle': 'Успей забрать виртуальные ZC до того, как множитель крашнется',
-    'crash.bet': 'Размер ставки:',
-    'crash.multiplier': 'Множитель',
-    'crash.autoCashout': 'Авто-кешаут',
-    'crash.placeBet': 'ПОСТАВИТЬ',
-    'crash.cashout': 'ЗАБРАТЬ',
-    'crash.waiting': 'Ожидание...',
-    'crash.crashed': 'Взрыв на',
-    'crash.cashedOut': 'Вы забрали',
-    'crash.history': 'История:',
-
     // Refill
     'refill.title': 'Демо-Пополнение',
-    'refill.subtitle': 'Бесплатное восстановление валюты ZalupaCoin (ZC)',
+    'refill.subtitle': 'Бесплатное восстановление баланса Залупакоинов',
     'refill.currentBalance': 'Текущий баланс:',
     'refill.warmup': 'Для разогрева',
     'refill.standard': 'Стандартный пак',
@@ -220,7 +206,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'refill.potionsDesc': '+15% шанс на 3 прокрута',
     'refill.tokensBtn': 'Набор токенов (+1 каждый)',
     'refill.tokensDesc': '7 токенов всех редкостей',
-    'refill.disclaimer': 'Это симулятор в целях развлечения и портфолио. Валюта Залупакоин (ZC) не имеет реальной ценности, не подлежит покупке за рубли/доллары и выводу.',
+    'refill.disclaimer': 'Это симулятор в целях развлечения и портфолио. Валюта Залупакоины не имеет реальной ценности, не подлежит покупке за рубли/доллары и выводу.',
 
     // Drop Modal
     'drop.multiTitle': 'ВЫ ВЫБИЛИ {count} ПРЕДМЕТА!',
@@ -234,7 +220,7 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Footer
     'footer.desc': 'Веб-симулятор кейсов и скинов CS2. Создан в демонстрационных целях (пет-проект). Все права на скины и изображения принадлежат Valve Corporation.',
-    'footer.virtual': '100% Виртуальная валюта ZC',
+    'footer.virtual': '100% Виртуальная валюта',
     'footer.fair': 'Честный симулятор (RTP 95%)',
     'footer.madeWith': 'Сделано с',
     'footer.forFans': 'для фанатов CS2',
@@ -284,7 +270,6 @@ const translations: Record<Locale, Record<string, string>> = {
     'nav.upgrader': 'Upgrader',
     'nav.contract': 'Contracts',
     'nav.farm': 'Farm',
-    'nav.crash': 'Crash',
     'nav.inventory': 'Inventory',
     'nav.topup': 'Top Up',
     'nav.topup.title': 'Free virtual balance top up',
@@ -394,7 +379,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'upg.myTokens': 'My tokens:',
     'upg.targetUpTo': 'Target up to',
     'upg.noTokensOwned': 'You have no tokens. Win them from cases or as a consolation prize!',
-    'upg.dcBet': 'Bet from ZC balance:',
+    'upg.dcBet': 'Bet from balance:',
     'upg.spinning': 'Spinning...',
     'upg.selectSkinsBtn': 'Select skins',
     'upg.selectTokenBtn': 'Select token',
@@ -430,7 +415,7 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Inventory
     'inv.title': 'Your Inventory',
-    'inv.subtitle': 'All dropped skins with ZalupaCoins (ZC) selling and Steam market links',
+    'inv.subtitle': 'All dropped skins with coin selling and Steam market links',
     'inv.items': 'items',
     'inv.totalValue': 'Inventory value:',
     'inv.sellAll': 'Sell all',
@@ -465,22 +450,9 @@ const translations: Record<Locale, Record<string, string>> = {
     'contract.sell': 'Sell for',
     'contract.potential': 'Outcome Range',
 
-    // Crash (legacy)
-    'crash.title': 'Crash',
-    'crash.subtitle': 'Cash out virtual ZC before the multiplier crashes',
-    'crash.bet': 'Bet amount:',
-    'crash.multiplier': 'Multiplier',
-    'crash.autoCashout': 'Auto cashout',
-    'crash.placeBet': 'PLACE BET',
-    'crash.cashout': 'CASHOUT',
-    'crash.waiting': 'Waiting...',
-    'crash.crashed': 'Explosion at',
-    'crash.cashedOut': 'You cashed out',
-    'crash.history': 'History:',
-
     // Refill
     'refill.title': 'Demo Top Up',
-    'refill.subtitle': 'Free ZalupaCoin (ZC) virtual currency refill',
+    'refill.subtitle': 'Free virtual currency refill',
     'refill.currentBalance': 'Current balance:',
     'refill.warmup': 'Warm up',
     'refill.standard': 'Standard pack',
@@ -491,7 +463,7 @@ const translations: Record<Locale, Record<string, string>> = {
     'refill.potionsDesc': '+15% chance for 3 spins',
     'refill.tokensBtn': 'Token Pack (+1 each tier)',
     'refill.tokensDesc': '7 tokens of all rarities',
-    'refill.disclaimer': 'This is a simulator for entertainment and portfolio purposes. ZalupaCoin (ZC) has no real value and cannot be bought or withdrawn for real money.',
+    'refill.disclaimer': 'This is a simulator for entertainment and portfolio purposes. ZalupaCoins have no real value and cannot be bought or withdrawn for real money.',
 
     // Drop Modal
     'drop.multiTitle': 'YOU WON {count} ITEMS!',
@@ -505,7 +477,7 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Footer
     'footer.desc': 'Web simulator of CS2 cases and skins. Created for demo purposes (pet project). All rights to skins and images belong to Valve Corporation.',
-    'footer.virtual': '100% Virtual ZC Currency',
+    'footer.virtual': '100% Virtual Currency',
     'footer.fair': 'Fair Simulator (RTP 95%)',
     'footer.madeWith': 'Made with',
     'footer.forFans': 'for CS2 fans',

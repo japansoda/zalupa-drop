@@ -15,6 +15,7 @@ import { sound } from '../../lib/sound';
 import { useGameStore } from '../../store/useGameStore';
 import { useLanguage } from '../../lib/i18n';
 import { getSteamMarketListingUrl, isStatTrakableItem } from '../../lib/steam';
+import { formatZc } from '../../lib/formatZc';
 
 interface DropModalProps {
   skin?: SkinEntity | null;
@@ -152,10 +153,10 @@ export const DropModal: React.FC<DropModalProps> = ({
                         className="w-full py-2.5 px-4 rounded-xl btn-yellow text-black font-black text-xs uppercase flex items-center justify-center gap-1.5 shadow-[0_0_20px_rgba(250,204,21,0.6)] cursor-pointer active:scale-95"
                       >
                         <ShoppingBag className="w-3.5 h-3.5" />
-                        <span>
-                          {locale === 'ru'
-                            ? `Продать за ${single.priceDc.toLocaleString('ru-RU')} ZC`
-                            : `Sell for ${single.priceDc.toLocaleString('ru-RU')} ZC`}
+                        <span className="flex items-center gap-1">
+                          <span>{locale === 'ru' ? 'Продать за' : 'Sell for'}</span>
+                          <ZalupaCoinIcon size={14} />
+                          <span>{formatZc(single.priceDc)}</span>
                         </span>
                       </button>
                     </div>
@@ -177,7 +178,7 @@ export const DropModal: React.FC<DropModalProps> = ({
                     <div className="flex items-center gap-2 mt-2 px-4 py-2 rounded-2xl bg-black/60 border border-white/10">
                       <ZalupaCoinIcon size={22} />
                       <span className="font-mono font-black text-xl text-yellow-400">
-                        {single.priceDc.toLocaleString('ru-RU')} ZC
+                        {formatZc(single.priceDc)}
                       </span>
                       <span className="text-xs text-white/40">
                         (~${single.priceUsd.toFixed(2)})
@@ -243,7 +244,7 @@ export const DropModal: React.FC<DropModalProps> = ({
                         <div className="flex items-center gap-1">
                           <ZalupaCoinIcon size={14} />
                           <span className="font-mono text-xs font-bold text-yellow-400">
-                            {it.priceDc.toLocaleString('ru-RU')} ZC
+                            {formatZc(it.priceDc)}
                           </span>
                         </div>
                         <span className="text-[10px] text-white/40 font-mono">
@@ -263,10 +264,10 @@ export const DropModal: React.FC<DropModalProps> = ({
                         className="w-full py-2.5 px-3 rounded-xl btn-yellow text-black font-black text-xs uppercase flex items-center justify-center gap-1.5 shadow-[0_0_18px_rgba(250,204,21,0.55)] cursor-pointer active:scale-95"
                       >
                         <ShoppingBag className="w-3.5 h-3.5" />
-                        <span>
-                          {locale === 'ru'
-                            ? `Продать за ${it.priceDc.toLocaleString('ru-RU')} DC`
-                            : `Sell for ${it.priceDc.toLocaleString('ru-RU')} ZC`}
+                        <span className="flex items-center gap-1">
+                          <span>{locale === 'ru' ? 'Продать за' : 'Sell for'}</span>
+                          <ZalupaCoinIcon size={14} />
+                          <span>{formatZc(it.priceDc)}</span>
                         </span>
                       </button>
                     </div>
@@ -283,7 +284,7 @@ export const DropModal: React.FC<DropModalProps> = ({
               <div className="flex items-center gap-1.5">
                 <ZalupaCoinIcon size={22} />
                 <span className="font-mono font-black text-2xl text-yellow-400">
-                  {totalPriceDc.toLocaleString('ru-RU')} ZC
+                  {formatZc(totalPriceDc)}
                 </span>
               </div>
               <span className="text-xs text-white/40">
@@ -452,14 +453,19 @@ export const DropModal: React.FC<DropModalProps> = ({
               className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 hover:from-yellow-300 hover:to-amber-300 text-black font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all shadow-[0_0_25px_rgba(250,204,21,0.45)]"
             >
               <RotateCcw className="w-4 h-4 stroke-[3]" />
-              <span>
-                {locale === 'ru'
-                  ? `Крутить еще ${openCount && openCount > 1 ? `(${openCount}x)` : ''} ${
-                      spinAgainCost ? `· ${spinAgainCost.toLocaleString('ru-RU')} ZC` : ''
-                    }`
-                  : `Spin Again ${openCount && openCount > 1 ? `(${openCount}x)` : ''} ${
-                      spinAgainCost ? `· ${spinAgainCost.toLocaleString('ru-RU')} ZC` : ''
-                    }`}
+              <span className="inline-flex items-center gap-1.5">
+                <span>
+                  {locale === 'ru'
+                    ? `Крутить еще ${openCount && openCount > 1 ? `(${openCount}x)` : ''}`
+                    : `Spin Again ${openCount && openCount > 1 ? `(${openCount}x)` : ''}`}
+                </span>
+                {spinAgainCost ? (
+                  <>
+                    <span>·</span>
+                    <ZalupaCoinIcon size={14} />
+                    <span>{formatZc(spinAgainCost)}</span>
+                  </>
+                ) : null}
               </span>
             </button>
           )}
@@ -493,14 +499,12 @@ export const DropModal: React.FC<DropModalProps> = ({
               className="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all border border-white/10"
             >
               <ShoppingBag className="w-4 h-4" />
-              <span>
-                {isMulti
-                  ? locale === 'ru'
-                    ? `Продать всё (+${totalPriceDc.toLocaleString('ru-RU')} ZC)`
-                    : `Sell all (+${totalPriceDc.toLocaleString('ru-RU')} ZC)`
-                  : locale === 'ru'
-                  ? `Продать (+${totalPriceDc.toLocaleString('ru-RU')} ZC)`
-                  : `Sell (+${totalPriceDc.toLocaleString('ru-RU')} ZC)`}
+              <span className="inline-flex items-center gap-1">
+                <span>
+                  {isMulti ? (locale === 'ru' ? 'Продать всё' : 'Sell all') : (locale === 'ru' ? 'Продать' : 'Sell')} (+
+                </span>
+                <ZalupaCoinIcon size={14} />
+                <span>{formatZc(totalPriceDc)})</span>
               </span>
             </button>
           </div>

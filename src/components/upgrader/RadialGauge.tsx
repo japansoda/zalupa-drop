@@ -17,6 +17,7 @@ import { ItemGlowBackdrop } from '../ui/ItemGlowBackdrop';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
 import { applyCanonicalPrice, getCanonicalPrice } from '../../lib/marketPricing';
+import { formatZc } from '../../lib/formatZc';
 import { createRope, stepRope, stepFree, ropePath, resetRope, RopePoint } from '../../lib/ropeChain';
 
 // Memoized Inventory Card for ultra-fast 60-120fps scrolling
@@ -64,8 +65,9 @@ const UpgraderInventoryCard = React.memo<{
       <div className="w-full flex flex-col">
         <span className="text-[11px] font-black text-white truncate">{item.skinName || item.name}</span>
         <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
-        <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-          {item.priceDc.toLocaleString('ru-RU')} ZC
+        <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5 flex items-center gap-1">
+          <ZalupaCoinIcon size={11} />
+          <span>{formatZc(item.priceDc)}</span>
         </span>
       </div>
     </button>
@@ -123,8 +125,9 @@ const UpgraderCatalogCard = React.memo<{
       <div className="w-full flex flex-col">
         <span className="text-[11px] font-black text-white truncate">{skin.skinName || skin.name}</span>
         <span className="text-[9px] text-white/40 truncate">{skin.weapon}</span>
-        <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-          {skin.priceDc.toLocaleString('ru-RU')} ZC
+        <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5 flex items-center gap-1">
+          <ZalupaCoinIcon size={11} />
+          <span>{formatZc(skin.priceDc)}</span>
         </span>
       </div>
     </button>
@@ -166,8 +169,9 @@ const UpgraderMiniMarketCard = React.memo<{
           {item.skinName || item.name}
         </span>
         <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
-        <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-          {item.priceDc.toLocaleString('ru-RU')} ZC
+        <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5 flex items-center gap-1">
+          <ZalupaCoinIcon size={11} />
+          <span>{formatZc(item.priceDc)}</span>
         </span>
 
         <button
@@ -1127,8 +1131,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
       }, 1500);
       setProtectedInstanceId(null);
 
-      // Emit real drop to live drops ticker (strictly >= 25,000 ZC)
-      if (targetSkin.priceDc >= 25000) {
+      // Emit real drop to live drops ticker (from 1,000 ZC / $250)
+      if (targetSkin.priceDc >= 1000) {
         addLiveDrop({
           id: `upgrade_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
           user: 'Вы',
@@ -1146,7 +1150,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
         colors: ['#FACC15', '#FFFFFF', '#10B981'],
       });
     } else {
-      sound.playCrash();
+      sound.playError();
       setLastResult('lose');
       lastResultSettledAtRef.current = Date.now();
       recordUpgrade(false, -effectiveBetDc);
@@ -1343,7 +1347,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
     setLastResult(null);
     if (balance < skin.priceDc) {
       sound.playError();
-      alert(locale === 'ru' ? 'Недостаточно ZC для покупки этого скина!' : 'Not enough ZC to purchase this skin!');
+      alert(locale === 'ru' ? 'Недостаточно средств для покупки этого скина!' : 'Not enough funds to purchase this skin!');
       return;
     }
     const success = deductBalance(skin.priceDc);
@@ -1683,8 +1687,9 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                             <span className="text-[10px] text-white font-black truncate w-full text-center mt-0.5">
                               {item.skinName || item.name}
                             </span>
-                            <span className="text-[10px] font-mono font-black text-yellow-400">
-                              {item.priceDc.toLocaleString('ru-RU')} ZC
+                            <span className="text-[10px] font-mono font-black text-yellow-400 flex items-center justify-center gap-0.5">
+                              <ZalupaCoinIcon size={10} />
+                              <span>{formatZc(item.priceDc)}</span>
                             </span>
                           </div>
                         );
@@ -1705,7 +1710,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                       <span className="text-white/60 font-bold">{t('upg.betSum')}</span>
                       <div className="flex items-center gap-1 font-mono font-black text-yellow-400">
                         <ZalupaCoinIcon size={14} />
-                        <span>{effectiveBetDc.toLocaleString('ru-RU')} DC</span>
+                        <span>{formatZc(effectiveBetDc)}</span>
                       </div>
                     </div>
                   </div>
@@ -2741,7 +2746,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 <span className="text-xs text-white/60">{t('upg.target')}</span>
                 <div className="flex items-center gap-1 font-mono font-black text-yellow-400 text-base">
                   <ZalupaCoinIcon size={18} />
-                  <span>{targetSkin ? targetSkin.priceDc.toLocaleString('ru-RU') : 0} DC</span>
+                  <span>{targetSkin ? formatZc(targetSkin.priceDc) : 0}</span>
                 </div>
               </div>
             </div>
@@ -2863,7 +2868,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                     sound.playClick();
                     setLeftPanelMode('market');
                   }}
-                  title={locale === 'ru' ? 'Быстрый маркетплейс (покупка за коины)' : 'Quick marketplace (buy with ZC)'}
+                  title={locale === 'ru' ? 'Быстрый маркетплейс (покупка за коины)' : 'Quick marketplace (buy with coins)'}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     leftPanelMode === 'market'
                       ? 'bg-yellow-400 text-black shadow-sm'
@@ -2872,8 +2877,8 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                 >
                   <Store className="w-3.5 h-3.5" />
                   <span>{locale === 'ru' ? 'Маркет' : 'Market'}</span>
-                  <span className="text-[9px] font-black uppercase px-1 py-0.2 rounded bg-sky-500/20 text-sky-400 border border-sky-500/30">
-                    ZC
+                  <span className="p-0.5 rounded bg-sky-500/20 text-sky-400 border border-sky-500/30 flex items-center">
+                    <ZalupaCoinIcon size={12} />
                   </span>
                 </button>
               </div>
@@ -2894,7 +2899,7 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
               <div className="flex items-center gap-2 self-start sm:self-center">
                 <div className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-black/60 border border-white/10 text-yellow-400 font-mono text-xs font-black">
                   <ZalupaCoinIcon className="w-3.5 h-3.5" />
-                  <span>{balance.toLocaleString('ru-RU')} ZC</span>
+                  <span>{formatZc(balance)}</span>
                 </div>
                 <button
                   type="button"
@@ -2902,7 +2907,10 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
                   className="p-1.5 rounded-lg bg-black/60 border border-white/10 text-white/70 hover:text-white text-xs cursor-pointer font-bold"
                   title={miniMarketSort === 'asc' ? 'Цена: Дешевле ↑' : 'Цена: Дороже ↓'}
                 >
-                  {miniMarketSort === 'asc' ? '↑ ZC' : '↓ ZC'}
+                  <span className="flex items-center gap-0.5">
+                    <span>{miniMarketSort === 'asc' ? '↑' : '↓'}</span>
+                    <ZalupaCoinIcon size={11} />
+                  </span>
                 </button>
               </div>
             )}
@@ -3025,10 +3033,18 @@ export const RadialGauge: React.FC<RadialGaugeProps> = ({ inventory, catalogSkin
           <div className="shrink-0 flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10">
             <div className="flex items-center gap-2">
               <h2 className="text-base font-black text-white uppercase">{t('upg.targetCatalog')}</h2>
-              <span className="text-[11px] text-yellow-400/80 font-bold">
-                {locale === 'ru'
-                  ? `(скины дороже ${effectiveBetDc.toLocaleString('ru-RU')} DC${maxTargetPrice < Infinity ? ` до ${maxTargetPrice.toLocaleString('ru-RU')} DC` : ''})`
-                  : `(skins above ${effectiveBetDc.toLocaleString('ru-RU')} DC${maxTargetPrice < Infinity ? ` up to ${maxTargetPrice.toLocaleString('ru-RU')} DC` : ''})`}
+              <span className="text-[11px] text-yellow-400/80 font-bold inline-flex items-center gap-1">
+                <span>({locale === 'ru' ? 'скины дороже' : 'skins above'}</span>
+                <ZalupaCoinIcon size={11} />
+                <span>{formatZc(effectiveBetDc)}</span>
+                {maxTargetPrice < Infinity && (
+                  <>
+                    <span>{locale === 'ru' ? 'до' : 'up to'}</span>
+                    <ZalupaCoinIcon size={11} />
+                    <span>{formatZc(maxTargetPrice)}</span>
+                  </>
+                )}
+                <span>)</span>
               </span>
             </div>
 

@@ -23,9 +23,9 @@ const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours daily sync (Vercel Edge & 
 for (const [hashName, dc] of Object.entries(BASE_LIVE_PRICES)) {
   if (dc > 0) {
     priceCache.set(hashName, {
-      priceUsd: Number((dc * 0.01).toFixed(2)),
+      priceUsd: Number((dc / 4).toFixed(2)),
       priceDc: dc,
-      lowestPriceRaw: `$${(dc * 0.01).toFixed(2)}`,
+      lowestPriceRaw: `$${(dc / 4).toFixed(2)}`,
       medianPriceRaw: null,
       volume: null,
       timestamp: Date.now(),
@@ -67,7 +67,7 @@ async function triggerSkinportSyncIfNeeded(): Promise<void> {
         for (const item of items) {
           const usd = item.suggested_price || item.min_price || item.median_price || 0;
           if (usd > 0 && item.market_hash_name) {
-            const dc = Math.max(1, Math.round(usd * 4));
+            const dc = Math.max(0.01, Number((usd * 4).toFixed(2)));
             priceCache.set(item.market_hash_name, {
               priceUsd: usd,
               priceDc: dc,

@@ -11,6 +11,8 @@ import { WearBadge } from '../ui/WearBadge';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { RarityBadge } from '../ui/RarityBadge';
 import { SkinImage } from '../ui/SkinImage';
+import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
+import { formatZc } from '../../lib/formatZc';
 import { useGameStore } from '../../store/useGameStore';
 import { Zap, Layers, FlaskConical, Anchor } from 'lucide-react';
 import { createRope, stepRope, stepFree, ropePath, resetRope, RopePoint } from '../../lib/ropeChain';
@@ -542,8 +544,8 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     // 3. Calibrated 98.5% RTP for ALL cases:
     // Target EV = 0.985 * casePriceDc strictly adhering to 98.5% RTP!
     // Solves alpha power exponent via binary search so expected drop return is strictly ~98.5%!
-    const targetEV = Math.max(1, casePriceDc * 0.985);
-    const prices = caseSkins.map((s) => Math.max(1, s.priceDc));
+    const targetEV = Math.max(0.01, casePriceDc * 0.985);
+    const prices = caseSkins.map((s) => Math.max(0.01, s.priceDc));
     const minP = Math.min(...prices);
     const maxP = Math.max(...prices);
 
@@ -826,9 +828,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       setIsSpinning(false);
       setShowModal(true);
 
-      // Immediately emit real drops to live ticker (ONLY from 25,000 ZC!)
+      // Immediately emit real drops to live ticker (from 1,000 ZC / $250!)
       finalWinners.forEach((skin) => {
-        if (skin.priceDc >= 25000) {
+        if (skin.priceDc >= 1000) {
           addLiveDrop({
             id: `real_${Date.now()}_${Math.random().toString(36).substr(2, 6)}`,
             user: locale === 'ru' ? 'Вы' : 'YOU',
@@ -1787,9 +1789,11 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
             >
               <span>
                 {locale === 'ru'
-                  ? `Открыть ${openCount > 1 ? `${openCount} кейса` : 'кейс'} за ${totalCost.toLocaleString('ru-RU')} ZC`
-                  : `Open ${openCount > 1 ? `${openCount} cases` : 'case'} for ${totalCost.toLocaleString('ru-RU')} ZC`}
+                  ? `Открыть ${openCount > 1 ? `${openCount} кейса` : 'кейс'} за`
+                  : `Open ${openCount > 1 ? `${openCount} cases` : 'case'} for`}
               </span>
+              <ZalupaCoinIcon size={20} />
+              <span>{formatZc(totalCost)}</span>
             </button>
           )}
           {/* Крюк-кошка во время спина — клик по карте на ленте, 50/50 */}

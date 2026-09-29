@@ -19,6 +19,7 @@ import { CaseSpecialItemCard } from '../../../components/case/CaseSpecialItemCar
 import { isOfficialCase, isKnifeOrGlove } from '../../../lib/caseSpecials';
 import { getCaseThemeGlow, getOptimizedCaseImageUrl } from '../../../lib/caseTheme';
 import { getCanonicalPrice } from '../../../lib/marketPricing';
+import { formatZc } from '../../../lib/formatZc';
 
 export default function CaseOpenPage() {
   const params = useParams();
@@ -155,7 +156,7 @@ export default function CaseOpenPage() {
               <div className="flex items-center gap-1.5">
                 <ZalupaCoinIcon size={20} />
                 <span className="font-mono font-black text-base sm:text-lg text-yellow-400">
-                  {currentCase.priceDc.toLocaleString('ru-RU')} ZC
+                  {formatZc(currentCase.priceDc)}
                 </span>
               </div>
             </div>

@@ -9,6 +9,8 @@ import { CASES_DATABASE } from '../../data/cases';
 import { LiveDrop } from '../../lib/types';
 import { useLanguage } from '../../lib/i18n';
 import { CASE_NAME_EN_MAP } from '../../lib/caseNamesMap';
+import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
+import { formatZc } from '../../lib/formatZc';
 
 const BLEND_WINDOW_MS = 3 * 60 * 1000; // 3 minutes dynamic window
 
@@ -44,9 +46,6 @@ const getDropDestination = (drop: LiveDrop): string => {
   }
   if (caseName.includes('ферма') || caseName.includes('farm') || id.includes('chickendrop') || id.includes('farm')) {
     return '/farm';
-  }
-  if (caseName.includes('краш') || caseName.includes('crash') || id.includes('crash')) {
-    return '/crash';
   }
 
   // Look up in CASES_DATABASE
@@ -173,8 +172,9 @@ const LiveDropCard = memo(({ drop, isUser, locale }: CardProps) => {
               </span>
             )}
           </div>
-          <span className="font-mono text-yellow-400/90 font-bold shrink-0 ml-auto">
-            {drop.skin.priceDc.toLocaleString('ru-RU')} ZC
+          <span className="font-mono text-yellow-400/90 font-bold shrink-0 ml-auto flex items-center gap-1">
+            <ZalupaCoinIcon size={10} />
+            <span>{formatZc(drop.skin.priceDc)}</span>
           </span>
         </div>
       </div>

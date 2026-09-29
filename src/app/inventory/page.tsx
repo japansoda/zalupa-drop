@@ -19,6 +19,7 @@ import { useLanguage } from '../../lib/i18n';
 import { Briefcase, ExternalLink, ShoppingBag, Box, Trash2, FlaskConical } from 'lucide-react';
 import { getSteamMarketListingUrl, isStatTrakableItem } from '../../lib/steam';
 import { handleHorizontalWheel } from '../../components/layout/HorizontalScrollManager';
+import { formatZc } from '../../lib/formatZc';
 
 export default function InventoryPage() {
   const { inventory, sellSkin, sellAllSkins, potionsCount, activePotionCharges, drinkPotion } = useGameStore();
@@ -79,7 +80,7 @@ export default function InventoryPage() {
                 <div className="flex items-center gap-1.5">
                   <ZalupaCoinIcon size={20} />
                   <span className="font-mono font-black text-lg text-yellow-400">
-                    {totalValueDc.toLocaleString('ru-RU')} ZC
+                    {formatZc(totalValueDc)}
                   </span>
                 </div>
               </div>
@@ -93,7 +94,11 @@ export default function InventoryPage() {
                   className="px-5 py-2.5 rounded-xl btn-yellow text-black font-black text-xs flex items-center gap-2 cursor-pointer active:scale-95 transition-all"
                 >
                   <Trash2 className="w-4 h-4" />
-                  <span>{t('inv.sellAll')} ({totalValueDc.toLocaleString('ru-RU')} ZC)</span>
+                  <span className="flex items-center gap-1">
+                    <span>{t('inv.sellAll')} (</span>
+                    <ZalupaCoinIcon size={14} />
+                    <span>{formatZc(totalValueDc)})</span>
+                  </span>
                 </button>
               )}
             </div>
@@ -277,7 +282,9 @@ export default function InventoryPage() {
                           className="w-full py-1.5 rounded-lg glass-button text-[11px] font-bold text-yellow-400 hover:bg-yellow-400 hover:text-black flex items-center justify-center gap-1 transition-all cursor-pointer"
                         >
                           <ShoppingBag className="w-3 h-3" />
-                          <span>{t('inv.sell')} {item.priceDc}  ZC</span>
+                          <span>{t('inv.sell')}</span>
+                          <ZalupaCoinIcon size={12} />
+                          <span>{formatZc(item.priceDc)}</span>
                         </button>
                       </div>
                     </div>

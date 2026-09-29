@@ -9,6 +9,7 @@ import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 import { LogoSvg } from '../ui/LogoSvg';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
+import { formatZc } from '../../lib/formatZc';
 
 export const Header: React.FC = () => {
   const pathname = usePathname();
@@ -179,16 +180,11 @@ export const Header: React.FC = () => {
             title={t('nav.topup.title')}
             className="order-3 sm:order-none flex items-center glass-panel rounded-lg px-2 sm:pl-3 sm:pr-1.5 py-1 border border-white/10 gap-1.5 sm:gap-2.5 shrink-0 cursor-pointer sm:cursor-default active:scale-95 sm:active:scale-100 transition-all"
           >
-            <div className="flex items-center gap-1 sm:gap-1.5">
-              <ZalupaCoinIcon size={16} />
-              <div className="flex flex-col text-right leading-none">
-                <span className="font-mono font-black text-xs sm:text-sm text-white tracking-tight">
-                  {balance.toLocaleString('ru-RU')}
-                </span>
-                <span className="text-[7.5px] sm:text-[8px] font-extrabold text-yellow-400 uppercase tracking-wider hidden xs:inline">
-                  ZC
-                </span>
-              </div>
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <ZalupaCoinIcon size={18} />
+              <span className="font-mono font-black text-xs sm:text-sm text-white tracking-tight">
+                {formatZc(balance)}
+              </span>
             </div>
 
             {/* Free Demo Refill Button (Desktop only, hidden on mobile) */}

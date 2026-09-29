@@ -17,6 +17,7 @@ import { CHICKEN_BREEDS, ChickenBreedId, CHICKEN_FEED_COST_DC } from '../../lib/
 import { useGameStore } from '../../store/useGameStore';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
+import { formatZc } from '../../lib/formatZc';
 import {
   Egg,
   Sparkles,
@@ -263,7 +264,7 @@ export default function ChickenFarmPage() {
                   </h3>
                   <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-yellow-400/15 border border-yellow-400/30 text-yellow-400 text-xs font-mono font-black">
                     <ZalupaCoinIcon className="w-3.5 h-3.5" />
-                    <span>7 500 DC</span>
+                    <span>7 500</span>
                   </div>
                   {hungryChickensCount > 0 && (
                     <span className="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 animate-pulse">
@@ -273,8 +274,8 @@ export default function ChickenFarmPage() {
                 </div>
                 <p className="text-xs text-white/50 max-w-xl mt-0.5">
                   {locale === 'ru'
-                    ? 'Стоимость порции: 7 500 ZC. Перетащите мешок с зерном на голодную курочку (или кликните по мешку, а затем по курице), чтобы начать вынашивание яйца с оружием CS2!'
-                    : 'Cost per feed: 7,500 ZC. Drag grain sack onto a hungry chicken (or tap sack then tap chicken) to start weapon egg laying!'}
+                    ? 'Стоимость порции: 7 500 монет. Перетащите мешок с зерном на голодную курочку (или кликните по мешку, а затем по курице), чтобы начать вынашивание яйца с оружием CS2!'
+                    : 'Cost per feed: 7,500 coins. Drag grain sack onto a hungry chicken (or tap sack then tap chicken) to start weapon egg laying!'}
                 </p>
               </div>
             </div>
@@ -293,10 +294,10 @@ export default function ChickenFarmPage() {
                 className="px-4 py-2.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-black uppercase tracking-wider transition-all shadow-sm active:scale-95 flex items-center gap-1.5 cursor-pointer shrink-0"
               >
                 <Wheat className="w-3.5 h-3.5" />
-                <span>
-                  {locale === 'ru'
-                    ? `Покормить всех (${(hungryChickensCount * CHICKEN_FEED_COST_DC).toLocaleString('ru-RU')} ZC)`
-                    : `Feed all (${(hungryChickensCount * CHICKEN_FEED_COST_DC).toLocaleString('ru-RU')} ZC)`}
+                <span className="flex items-center gap-1">
+                  <span>{locale === 'ru' ? 'Покормить всех (' : 'Feed all ('}</span>
+                  <ZalupaCoinIcon size={12} />
+                  <span>{formatZc(hungryChickensCount * CHICKEN_FEED_COST_DC)})</span>
                 </span>
               </button>
             )}
@@ -402,8 +403,8 @@ export default function ChickenFarmPage() {
                         </span>
                         <p className="text-[10px] text-white/40 max-w-[140px] mb-4">
                           {locale === 'ru'
-                            ? 'Заложите 10 скинов от 1к ZC или яйцо с кейса'
-                            : 'Sacrifice 10 skins >= 1k ZC or use a case egg'}
+                            ? 'Заложите 10 скинов от 1 000 или яйцо с кейса'
+                            : 'Sacrifice 10 skins >= 1,000 or use a case egg'}
                         </p>
 
                         {farmEggTokens > 0 ? (
@@ -476,10 +477,14 @@ export default function ChickenFarmPage() {
                                 ? 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.25)] active:scale-95'
                                 : 'bg-white/5 text-white/30 border border-white/5 cursor-not-allowed'
                             }`}
-                            title={balance < 100000 ? (locale === 'ru' ? 'Нужно 100 000 ZC' : '100,000 ZC required') : ''}
+                            title={balance < 100000 ? (locale === 'ru' ? 'Нужно 100 000' : '100,000 required') : ''}
                           >
                             <Zap className="w-3.5 h-3.5 text-yellow-400" />
-                            <span>{locale === 'ru' ? 'Ускорить (100 000 ZC)' : 'Speed up (100k ZC)'}</span>
+                            <span className="flex items-center gap-1">
+                              <span>{locale === 'ru' ? 'Ускорить (' : 'Speed up ('}</span>
+                              <ZalupaCoinIcon size={12} />
+                              <span>100 000)</span>
+                            </span>
                           </button>
                         )}
 
@@ -595,10 +600,14 @@ export default function ChickenFarmPage() {
                                   ? 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.25)] active:scale-95'
                                   : 'bg-white/5 text-white/30 border border-white/5 cursor-not-allowed'
                               }`}
-                              title={balance < 10000 ? (locale === 'ru' ? 'Нужно 10 000 ZC' : '10,000 ZC required') : ''}
+                              title={balance < 10000 ? (locale === 'ru' ? 'Нужно 10 000' : '10,000 required') : ''}
                             >
                               <Zap className="w-3.5 h-3.5 text-yellow-400" />
-                              <span>{locale === 'ru' ? 'Ускорить (10 000 ZC)' : 'Speed up (10k ZC)'}</span>
+                              <span className="flex items-center gap-1">
+                                <span>{locale === 'ru' ? 'Ускорить (' : 'Speed up ('}</span>
+                                <ZalupaCoinIcon size={12} />
+                                <span>10 000)</span>
+                              </span>
                             </button>
                           </div>
                         ) : (
@@ -623,11 +632,19 @@ export default function ChickenFarmPage() {
                           >
                             <div className="flex items-center justify-center gap-1.5">
                               <Wheat className="w-3.5 h-3.5 text-amber-400" />
-                              <span>
-                                {isDraggingGrain || isFeedModeActive
-                                  ? (locale === 'ru' ? 'Сбросьте зерно (7 500 ZC)' : 'Drop Grain (7,500 ZC)')
-                                  : (locale === 'ru' ? 'Голодна • Корм 7 500 ZC' : 'Hungry • Grain 7,500 ZC')}
-                              </span>
+                              {isDraggingGrain || isFeedModeActive ? (
+                                <span className="flex items-center gap-1">
+                                  <span>{locale === 'ru' ? 'Сбросьте зерно (' : 'Drop Grain ('}</span>
+                                  <ZalupaCoinIcon size={12} />
+                                  <span>7 500)</span>
+                                </span>
+                              ) : (
+                                <span className="flex items-center gap-1">
+                                  <span>{locale === 'ru' ? 'Голодна • Корм' : 'Hungry • Grain'}</span>
+                                  <ZalupaCoinIcon size={12} />
+                                  <span>7 500</span>
+                                </span>
+                              )}
                             </div>
                           </div>
                         )}

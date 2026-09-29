@@ -16,6 +16,7 @@ import { RarityBadge } from '../ui/RarityBadge';
 import { RARITY_CONFIG } from '../../data/skins';
 import { isStatTrakableItem } from '../../lib/steam';
 import { BreedEgg } from './BreedEgg';
+import { formatZc } from '../../lib/formatZc';
 
 interface EggCrackingModalProps {
   isOpen: boolean;
@@ -409,7 +410,7 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
                 <div className="flex items-center gap-1.5 mt-2">
                   <ZalupaCoinIcon className="w-5 h-5" />
                   <span className="font-mono font-black text-xl text-yellow-400">
-                    {droppedSkin.priceDc.toLocaleString('ru-RU')} ZC
+                    {formatZc(droppedSkin.priceDc)}
                   </span>
                 </div>
               </div>
@@ -434,8 +435,8 @@ export const EggCrackingModal: React.FC<EggCrackingModalProps> = ({
                 <ZalupaCoinIcon className="w-4 h-4" />
                 <span>
                   {locale === 'ru'
-                    ? `Продать (+${droppedSkin.priceDc.toLocaleString('ru-RU')} ZC)`
-                    : `Sell (+${droppedSkin.priceDc.toLocaleString('ru-RU')} ZC)`}
+                    ? `Продать (+${formatZc(droppedSkin.priceDc)})`
+                    : `Sell (+${formatZc(droppedSkin.priceDc)})`}
                 </span>
               </button>
             </div>

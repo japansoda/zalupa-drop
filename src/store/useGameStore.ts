@@ -71,7 +71,6 @@ interface GameState {
   toggleSound: () => void;
   setRefillOpen: (open: boolean) => void;
   recordUpgrade: (won: boolean, profitDc: number) => void;
-  recordCrash: (profitDc: number) => void;
   addSaveToken: (count?: number) => void;
   useSaveToken: () => boolean;
   addZeus: (count?: number) => void;
@@ -112,19 +111,18 @@ export const useGameStore = create<GameState>()(
         totalWonDc: 0,
         upgradesWon: 0,
         upgradesLost: 0,
-        crashWonDc: 0,
       },
       liveDrops: [],
       fakeDropsEnabled: typeof window !== 'undefined' ? localStorage.getItem('zalupa_fake_drops_enabled') !== 'false' : true,
 
       addBalance: (amount) => {
-        set((state) => ({ balance: Math.max(0, state.balance + Math.floor(amount)) }));
+        set((state) => ({ balance: Math.max(0, Number((state.balance + amount).toFixed(2))) }));
       },
 
       deductBalance: (amount) => {
         const current = get().balance;
         if (current < amount) return false;
-        set({ balance: current - Math.floor(amount) });
+        set({ balance: Math.max(0, Number((current - amount).toFixed(2))) });
         return true;
       },
 
@@ -171,7 +169,7 @@ export const useGameStore = create<GameState>()(
 
         set((state) => ({
           inventory: state.inventory.filter((i) => i.instanceId !== instanceId),
-          balance: state.balance + item.priceDc,
+          balance: Number((state.balance + item.priceDc).toFixed(2)),
         }));
         sound.playCashout();
         return item.priceDc;
@@ -183,15 +181,15 @@ export const useGameStore = create<GameState>()(
 
         set((state) => ({
           inventory: [],
-          balance: state.balance + total,
+          balance: Number((state.balance + total).toFixed(2)),
         }));
         sound.playCashout();
         return total;
       },
 
       addLiveDrop: (drop) => {
-        // Strictly only valid drops >= 25,000 DC can enter live drop ticker
-        if (!drop || !drop.skin || !drop.skin.image || !drop.skin.name || (drop.skin.priceDc || 0) < 25000) return;
+        // Strictly only valid drops >= 1,000 ZC ($250) can enter live drop ticker
+        if (!drop || !drop.skin || !drop.skin.image || !drop.skin.name || (drop.skin.priceDc || 0) < 1000) return;
 
         const img = drop.skin.image;
         if (img.startsWith('file:') || img.includes('file://') || img.includes('C:/') || img.includes('C:\\')) return;
@@ -265,15 +263,6 @@ export const useGameStore = create<GameState>()(
             upgradesWon: state.stats.upgradesWon + (won ? 1 : 0),
             upgradesLost: state.stats.upgradesLost + (won ? 0 : 1),
             totalWonDc: state.stats.totalWonDc + (won ? profitDc : 0),
-          },
-        }));
-      },
-
-      recordCrash: (profitDc) => {
-        set((state) => ({
-          stats: {
-            ...state.stats,
-            crashWonDc: state.stats.crashWonDc + profitDc,
           },
         }));
       },

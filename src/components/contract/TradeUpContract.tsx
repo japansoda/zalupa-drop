@@ -15,6 +15,7 @@ import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem } from '../../lib/steam';
 import { applyCanonicalPrice } from '../../lib/marketPricing';
+import { formatZc } from '../../lib/formatZc';
 import { 
   FileText, 
   Sparkles, 
@@ -222,8 +223,8 @@ export const TradeUpContract: React.FC = () => {
       const canonicalWonSkin = applyCanonicalPrice(pickedSkin, useGameStore.getState().livePrices);
       addToInventory([canonicalWonSkin]);
 
-      // Add to live drop feed (strictly >= 25,000 ZC)
-      if (canonicalWonSkin.priceDc >= 25000) {
+      // Add to live drop feed (from 1,000 ZC / $250)
+      if (canonicalWonSkin.priceDc >= 1000) {
         addLiveDrop({
           id: `contract_${Date.now()}`,
           user: 'Вы',
@@ -400,7 +401,7 @@ export const TradeUpContract: React.FC = () => {
               <div className="flex items-center gap-1.5">
                 <ZalupaCoinIcon size={20} />
                 <span className="font-mono font-black text-xl text-yellow-400">
-                  {totalInputDc.toLocaleString('ru-RU')} ZC
+                  {formatZc(totalInputDc)}
                 </span>
               </div>
             </div>
@@ -674,7 +675,7 @@ export const TradeUpContract: React.FC = () => {
                 </span>
                 <ZalupaCoinIcon size={20} />
                 <span className="font-mono font-black text-lg text-yellow-400">
-                  {wonSkin.priceDc.toLocaleString('ru-RU')} ZC
+                  {formatZc(wonSkin.priceDc)}
                 </span>
               </div>
 
@@ -699,11 +700,12 @@ export const TradeUpContract: React.FC = () => {
                     setShowWinModal(false);
                     setWonSkin(null);
                   }}
-                  className="py-3 px-4 rounded-xl glass-button text-white/70 hover:text-white font-bold text-xs cursor-pointer transition-all flex items-center justify-center gap-1"
+                  className="py-3 px-4 rounded-xl glass-button text-white/70 hover:text-white font-bold text-xs cursor-pointer transition-all flex items-center justify-center gap-1.5"
                 >
                   <span>{t('contract.sell')}</span>
-                  <span className="text-yellow-400 font-mono font-bold">
-                    {wonSkin.priceDc.toLocaleString('ru-RU')} ZC
+                  <span className="text-yellow-400 font-mono font-bold flex items-center gap-1">
+                    <ZalupaCoinIcon size={12} />
+                    <span>{formatZc(wonSkin.priceDc)}</span>
                   </span>
                 </button>
               </div>

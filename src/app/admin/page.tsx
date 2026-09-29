@@ -30,6 +30,7 @@ import { useGameStore } from '../../store/useGameStore';
 import { CASES_DATABASE } from '../../data/cases';
 import { CHICKEN_BREEDS, ChickenBreedId } from '../../lib/farm';
 import { ZalupaCoinIcon } from '../../components/ui/ZalupaCoinIcon';
+import { formatZc } from '../../lib/formatZc';
 import { sound } from '../../lib/sound';
 
 const ADMIN_PASSWORD_HASH = 'admin777'; // Master PIN: admin777 or zalupa2026
@@ -530,11 +531,11 @@ export default function AdminPage() {
 
                   <div>
                     <div className="flex justify-between text-xs font-bold mb-1.5">
-                      <span className="flex items-center gap-1.5"><TrendingUp className="w-3.5 h-3.5 text-purple-400" /> Crash Игра</span>
+                      <span className="flex items-center gap-1.5"><Bird className="w-3.5 h-3.5 text-amber-400" /> Куриная Ферма</span>
                       <span className="font-mono text-white">3%</span>
                     </div>
                     <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
-                      <div className="h-full bg-purple-400 rounded-full w-[3%]" />
+                      <div className="h-full bg-amber-400 rounded-full w-[3%]" />
                     </div>
                   </div>
                 </div>
@@ -624,8 +625,9 @@ export default function AdminPage() {
                   </div>
                   <div className="flex flex-col truncate">
                     <span className="text-xs font-bold text-white truncate">{c.name}</span>
-                    <span className="text-[10px] text-yellow-400 font-mono font-bold">
-                      {c.priceDc.toLocaleString('ru-RU')} ZC
+                    <span className="text-[10px] text-yellow-400 font-mono font-bold flex items-center gap-1">
+                      <ZalupaCoinIcon size={10} />
+                      <span>{formatZc(c.priceDc)}</span>
                     </span>
                   </div>
                 </div>

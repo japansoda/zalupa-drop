@@ -22,6 +22,7 @@ import { useGameStore } from '../../store/useGameStore';
 import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
 import { sound } from '../../lib/sound';
 import { useLanguage } from '../../lib/i18n';
+import { formatZc } from '../../lib/formatZc';
 
 interface TierOption {
   amount: number;
@@ -142,7 +143,7 @@ export const RefillModal: React.FC = () => {
     });
 
     setSuccessAnimation({
-      amount: `+${amount.toLocaleString('ru-RU')} ZC`,
+      amount: `+${formatZc(amount)}`,
       text: labelText || (isRu ? 'успешно начислено!' : 'added to balance!'),
     });
 
@@ -251,7 +252,7 @@ export const RefillModal: React.FC = () => {
                 </span>
               </div>
               <p className="text-[11px] text-white/50 truncate">
-                {isRu ? 'Мгновенное пополнение монет и расходников' : 'Instant free ZC refill & powerups'}
+                {isRu ? 'Мгновенное пополнение монет и расходников' : 'Instant free coin refill & powerups'}
               </p>
             </div>
           </div>
@@ -260,7 +261,7 @@ export const RefillModal: React.FC = () => {
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-black/60 border border-white/15 shadow-inner">
               <ZalupaCoinIcon size={16} />
               <span className="font-mono font-black text-yellow-400 text-xs sm:text-sm whitespace-nowrap">
-                {balance.toLocaleString('ru-RU')} ZC
+                {formatZc(balance)}
               </span>
             </div>
 
@@ -293,7 +294,7 @@ export const RefillModal: React.FC = () => {
             }`}
           >
             <Coins className="w-3.5 h-3.5" />
-            <span>{isRu ? 'Пакеты ZC' : 'ZC Packages'}</span>
+            <span>{isRu ? 'Пакеты монет' : 'Coin Packages'}</span>
           </button>
 
           <button
@@ -564,13 +565,14 @@ export const RefillModal: React.FC = () => {
                     sound.playClick();
                     setCustomAmount(preset);
                   }}
-                  className={`py-1.5 px-3 rounded-xl border text-xs font-mono font-bold transition-all cursor-pointer ${
+                  className={`py-1.5 px-3 rounded-xl border text-xs font-mono font-bold transition-all cursor-pointer flex items-center justify-center gap-1 ${
                     customAmount === preset
                       ? 'border-yellow-400 bg-yellow-400/20 text-yellow-300 font-black'
                       : 'border-white/10 bg-white/5 text-white/70 hover:border-white/30 hover:text-white'
                   }`}
                 >
-                  +{preset.toLocaleString('ru-RU')} ZC
+                  <span>+{formatZc(preset)}</span>
+                  <ZalupaCoinIcon size={12} />
                 </button>
               ))}
             </div>
@@ -584,10 +586,10 @@ export const RefillModal: React.FC = () => {
               className="w-full py-3.5 px-6 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(250,204,21,0.35)] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2 mt-1"
             >
               <Sparkles className="w-4 h-4" />
-              <span>
-                {isRu
-                  ? `Начислить ${customAmount.toLocaleString('ru-RU')} DC`
-                  : `Add ${customAmount.toLocaleString('ru-RU')} ZC`}
+              <span className="flex items-center gap-1.5">
+                <span>{isRu ? 'Начислить' : 'Add'}</span>
+                <ZalupaCoinIcon size={16} />
+                <span>{formatZc(customAmount)}</span>
               </span>
             </button>
           </div>

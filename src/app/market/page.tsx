@@ -19,6 +19,7 @@ import { useLanguage } from '../../lib/i18n';
 import { isStatTrakableItem, isWearableItem, isVanillaKnife, getValidWearList } from '../../lib/steam';
 import { isActualWeaponOrKnifeGlove } from '../../lib/farm';
 import { getCanonicalPrice } from '../../lib/marketPricing';
+import { formatZc } from '../../lib/formatZc';
 import {
   Search,
   ShoppingBag,
@@ -132,8 +133,8 @@ const MarketGroupCard = React.memo<{
           <ZalupaCoinIcon className="w-3.5 h-3.5" />
           <span className="font-mono font-black text-xs text-yellow-400 truncate">
             {group.minPriceDc === group.maxPriceDc
-              ? `${group.minPriceDc.toLocaleString('ru-RU')} ZC`
-              : `${group.minPriceDc.toLocaleString('ru-RU')} – ${group.maxPriceDc.toLocaleString('ru-RU')} ZC`}
+              ? formatZc(group.minPriceDc)
+              : `${formatZc(group.minPriceDc)} – ${formatZc(group.maxPriceDc)}`}
           </span>
         </div>
 
@@ -373,8 +374,9 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
                           </span>
                         </div>
                       </div>
-                      <span className="font-mono font-black text-sm sm:text-base text-yellow-400 shrink-0 ml-2">
-                        {variant!.priceDc.toLocaleString('ru-RU')} ZC
+                      <span className="font-mono font-black text-sm sm:text-base text-yellow-400 shrink-0 ml-2 inline-flex items-center gap-1">
+                        <ZalupaCoinIcon size={14} />
+                        {formatZc(variant!.priceDc)}
                       </span>
                     </button>
                   );
@@ -409,8 +411,9 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
               </div>
               <div className="pt-3 border-t border-white/10 flex items-center justify-between">
                 <span className="text-xs text-white/50">{isRu ? 'Стоимость в маркете' : 'Market Price'}:</span>
-                <span className="font-mono font-black text-lg text-yellow-400">
-                  {activeVariant.priceDc.toLocaleString('ru-RU')} ZC
+                <span className="font-mono font-black text-lg text-yellow-400 inline-flex items-center gap-1.5">
+                  <ZalupaCoinIcon size={18} />
+                  {formatZc(activeVariant.priceDc)}
                 </span>
               </div>
             </div>
@@ -427,7 +430,7 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
               <div className="flex items-center gap-1.5 mt-0.5">
                 <ZalupaCoinIcon size={20} />
                 <span className="font-mono font-black text-xl text-yellow-400">
-                  {activeVariant.priceDc.toLocaleString('ru-RU')} ZC
+                  {formatZc(activeVariant.priceDc)}
                 </span>
               </div>
             </div>
@@ -436,8 +439,9 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
               <span className="text-[10px] font-bold uppercase text-white/40">
                 {isRu ? 'Ваш баланс' : 'Your Balance'}
               </span>
-              <span className="font-mono font-bold text-sm text-white/80">
-                {balance.toLocaleString('ru-RU')} ZC
+              <span className="font-mono font-bold text-sm text-white/80 inline-flex items-center gap-1">
+                <ZalupaCoinIcon size={14} />
+                {formatZc(balance)}
               </span>
             </div>
           </div>
@@ -453,10 +457,10 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
                 className="w-full py-3.5 px-6 rounded-2xl bg-yellow-400 hover:bg-yellow-300 text-black font-black text-sm uppercase tracking-wider shadow-[0_0_25px_rgba(250,204,21,0.35)] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2"
               >
                 <ShoppingBag className="w-4 h-4" />
-                <span>
-                  {isRu
-                    ? `Купить за ${activeVariant.priceDc.toLocaleString('ru-RU')} DC`
-                    : `Purchase for ${activeVariant.priceDc.toLocaleString('ru-RU')} ZC`}
+                <span className="inline-flex items-center gap-1.5">
+                  <span>{isRu ? 'Купить за' : 'Purchase for'}</span>
+                  <ZalupaCoinIcon size={16} />
+                  <span>{formatZc(activeVariant.priceDc)}</span>
                 </span>
               </button>
             ) : (
@@ -466,8 +470,10 @@ const SkinPurchaseModal: React.FC<SkinPurchaseModalProps> = ({
                 className="w-full py-3.5 px-6 rounded-2xl bg-white/10 hover:bg-white/20 text-yellow-400 font-black text-sm uppercase tracking-wider border border-yellow-400/40 shadow-lg active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2"
               >
                 <Sparkles className="w-4 h-4" />
-                <span>
-                  {isRu ? 'Недостаточно ZC (Пополнить)' : 'Insufficient ZC (Top Up)'}
+                <span className="inline-flex items-center gap-1.5">
+                  <span>{isRu ? 'Недостаточно' : 'Insufficient'}</span>
+                  <ZalupaCoinIcon size={14} />
+                  <span>({isRu ? 'Пополнить' : 'Top Up'})</span>
                 </span>
               </button>
             )}
@@ -881,7 +887,7 @@ function synthesizeCompleteVariants(
                     {locale === 'ru' ? 'Ваш баланс' : 'Your Balance'}
                   </span>
                   <span className="font-mono font-black text-lg text-yellow-400">
-                    {balance.toLocaleString('ru-RU')} ZC
+                    {formatZc(balance)}
                   </span>
                 </div>
               </div>
@@ -1013,9 +1019,9 @@ function synthesizeCompleteVariants(
                 className="bg-black/60 border border-white/10 rounded-xl px-3 py-2 text-xs text-white outline-none cursor-pointer"
               >
                 <option value="all">{locale === 'ru' ? 'Все цены' : 'All prices'}</option>
-                <option value="under1k">{locale === 'ru' ? 'До 1 000 ZC' : 'Under 1k ZC'}</option>
-                <option value="1k_10k">{locale === 'ru' ? '1 000 – 10 000 ZC' : '1k – 10k ZC'}</option>
-                <option value="over10k">{locale === 'ru' ? 'От 10 000 ZC' : 'Above 10k ZC'}</option>
+                <option value="under1k">{locale === 'ru' ? 'До 1 000' : 'Under 1k'}</option>
+                <option value="1k_10k">{locale === 'ru' ? '1 000 – 10 000' : '1k – 10k'}</option>
+                <option value="over10k">{locale === 'ru' ? 'От 10 000' : 'Above 10k'}</option>
               </select>
 
               {/* Sort */}

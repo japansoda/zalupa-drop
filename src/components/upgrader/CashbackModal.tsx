@@ -13,6 +13,7 @@ import { WearBadge } from '../ui/WearBadge';
 import { RarityBadge } from '../ui/RarityBadge';
 import { sound } from '../../lib/sound';
 import { useLanguage, getCaseName } from '../../lib/i18n';
+import { formatZc } from '../../lib/formatZc';
 import { Gift, FastForward, Check, Sparkles, FlaskConical, ShieldAlert, ShieldCheck, Zap, Anchor } from 'lucide-react';
 
 interface CashbackModalProps {
@@ -196,8 +197,10 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
             ? `${t('cashback.spinningCase')} «${getCaseName(caseItem, locale)}»`
             : t('cashback.badgeCase')}
         </h3>
-        <p className="text-xs text-white/50 mb-6">
-          {t('cashback.lostSub')} {lostAmount.toLocaleString('ru-RU')} ZC
+        <p className="text-xs text-white/50 mb-6 flex items-center justify-center gap-1">
+          <span>{t('cashback.lostSub')}</span>
+          <ZalupaCoinIcon size={12} />
+          <span>{formatZc(lostAmount)}</span>
         </p>
 
         {/* STAGE 1: SPINNING REEL */}
@@ -397,7 +400,7 @@ export const CashbackModal: React.FC<CashbackModalProps> = ({
                     <div className="flex items-center justify-center gap-1.5 mt-3">
                       <ZalupaCoinIcon size={20} />
                       <span className="font-mono font-black text-yellow-400 text-xl">
-                        +{winningSkin.priceDc.toLocaleString('ru-RU')} ZC
+                        +{formatZc(winningSkin.priceDc)}
                       </span>
                     </div>
                   </div>

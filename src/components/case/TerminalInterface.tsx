@@ -22,6 +22,7 @@ import { useLanguage } from '../../lib/i18n';
 import { sound } from '../../lib/sound';
 import { applyCanonicalPrice } from '../../lib/marketPricing';
 import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
+import { formatZc } from '../../lib/formatZc';
 
 interface TerminalInterfaceProps {
   terminalId: string;
@@ -357,8 +358,9 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
             >
               <Zap className="w-5 h-5 fill-black" />
               <span>{isRu ? 'Распечатать терминал' : 'Unseal Terminal'}</span>
-              <span className="bg-black/20 px-2 py-0.5 rounded text-xs">
-                {terminalPriceDc.toLocaleString('ru-RU')} ZC
+              <span className="bg-black/20 px-2 py-0.5 rounded text-xs flex items-center gap-1">
+                <ZalupaCoinIcon size={12} />
+                <span>{formatZc(terminalPriceDc)}</span>
               </span>
             </button>
           </div>
@@ -437,7 +439,7 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
                 <div className="flex items-center gap-1">
                   <ZalupaCoinIcon size={16} />
                   <span className="font-mono font-black text-base text-yellow-400">
-                    {currentSkin.priceDc.toLocaleString('ru-RU')} ZC
+                    {formatZc(currentSkin.priceDc)}
                   </span>
                 </div>
               </div>
@@ -500,8 +502,9 @@ export const TerminalInterface: React.FC<TerminalInterfaceProps> = ({
               <div className="flex flex-col text-left truncate">
                 <span className="text-xs font-bold text-emerald-400">{acceptedSkin.weapon}</span>
                 <span className="text-sm font-black text-white truncate">{acceptedSkin.skinName}</span>
-                <span className="text-[11px] font-mono text-yellow-400 font-bold">
-                  {acceptedSkin.priceDc.toLocaleString('ru-RU')} ZC
+                <span className="text-[11px] font-mono text-yellow-400 font-bold flex items-center gap-1">
+                  <ZalupaCoinIcon size={12} />
+                  <span>{formatZc(acceptedSkin.priceDc)}</span>
                 </span>
               </div>
             </div>

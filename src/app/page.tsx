@@ -15,6 +15,7 @@ import { useLanguage, getCaseName, getCaseBadge, Locale } from '../lib/i18n';
 import { useGameStore } from '../store/useGameStore';
 import { ChevronRight, Search, ArrowUpDown, X } from 'lucide-react';
 import { handleHorizontalWheel } from '../components/layout/HorizontalScrollManager';
+import { formatZc } from '../lib/formatZc';
 
 const CATEGORIES = [
   { id: 'all' },
@@ -194,7 +195,7 @@ const CaseGridCard = React.memo<CaseGridCardProps>(({ caseItem, idx, locale }) =
               ? 'text-amber-300 group-hover:text-yellow-300 drop-shadow-[0_0_6px_rgba(251,191,36,0.35)]'
               : 'text-white group-hover:text-yellow-400'
           }`}>
-            {caseItem.priceDc.toLocaleString('ru-RU')} ZC
+            {formatZc(caseItem.priceDc)}
           </span>
         </div>
 

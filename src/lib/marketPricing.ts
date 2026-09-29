@@ -80,8 +80,8 @@ function initPricingCaches(): void {
     const bestSkin = variants[0];
     const bestHash = getSteamMarketHashName(bestSkin);
     const realLiveBase = LIVE_MARKET_PRICES[bestHash] || LIVE_MARKET_PRICES[bestSkin.name] || 0;
-    const baseP = realLiveBase > 0 ? realLiveBase : (bestSkin?.priceDc || 4);
-    designMap.set(key, Math.max(1, baseP));
+    const baseP = realLiveBase > 0 ? realLiveBase : (bestSkin?.priceDc || 0.12);
+    designMap.set(key, Math.max(0.01, Number(baseP.toFixed(2))));
 
     // Check if live market prices database has exact Field-Tested price
     const cleanW = (bestSkin.weapon || '').replace(/^★\s*StatTrak™\s*/i, '★ ').replace(/^StatTrak™\s*/i, '').trim();
@@ -105,23 +105,23 @@ function initPricingCaches(): void {
     const wwVariant = variants.find((v) => !v.statTrak && v.wear === 'WW');
     const bsVariant = variants.find((v) => !v.statTrak && v.wear === 'BS');
 
-    let baseFt = 100;
+    let baseFt = 1;
     if (ftVariant && ftVariant.priceDc > 0) {
       baseFt = ftVariant.priceDc;
     } else if (mwVariant && mwVariant.priceDc > 0) {
-      baseFt = Math.round(mwVariant.priceDc / WEAR_RATES.MW);
+      baseFt = Number((mwVariant.priceDc / WEAR_RATES.MW).toFixed(2));
     } else if (fnVariant && fnVariant.priceDc > 0) {
-      baseFt = Math.round(fnVariant.priceDc / WEAR_RATES.FN);
+      baseFt = Number((fnVariant.priceDc / WEAR_RATES.FN).toFixed(2));
     } else if (wwVariant && wwVariant.priceDc > 0) {
-      baseFt = Math.round(wwVariant.priceDc / WEAR_RATES.WW);
+      baseFt = Number((wwVariant.priceDc / WEAR_RATES.WW).toFixed(2));
     } else if (bsVariant && bsVariant.priceDc > 0) {
-      baseFt = Math.round(bsVariant.priceDc / WEAR_RATES.BS);
+      baseFt = Number((bsVariant.priceDc / WEAR_RATES.BS).toFixed(2));
     } else {
-      const p = variants[0]?.priceDc || 100;
-      baseFt = variants[0]?.statTrak ? Math.round(p / STATTRAK_RATE) : p;
+      const p = variants[0]?.priceDc || 1;
+      baseFt = variants[0]?.statTrak ? Number((p / STATTRAK_RATE).toFixed(2)) : p;
     }
 
-    ftMap.set(key, Math.max(1, baseFt));
+    ftMap.set(key, Math.max(0.01, Number(baseFt.toFixed(2))));
   }
 
   baseFtPriceCache = ftMap;
@@ -212,8 +212,8 @@ export function getCanonicalPrice(
       };
     }
 
-    const baseP = getBaseDesignPrice(skin.weapon, skin.skinName, skin.name) || skin.priceDc || 4;
-    const priceDc = Math.max(1, baseP);
+    const baseP = getBaseDesignPrice(skin.weapon, skin.skinName, skin.name) || skin.priceDc || 0.12;
+    const priceDc = Math.max(0.01, Number(baseP.toFixed(2)));
     const priceUsd = Number((priceDc / 4).toFixed(2));
     return { priceDc, priceUsd };
   }
@@ -254,13 +254,14 @@ export function getCanonicalPrice(
     }
   }
 
-  baseFtPrice = Math.max(1, baseFtPrice);
+  baseFtPrice = Math.max(0.01, Number(baseFtPrice.toFixed(2)));
 
   const wearKey: SkinWear = (skin.wear ? skin.wear.toUpperCase() : 'FT') as SkinWear;
   const wearRate = WEAR_RATES[wearKey] || 1.0;
   const stRate = isSt ? STATTRAK_RATE : 1.0;
 
-  const priceDc = Math.max(1, Math.round(baseFtPrice * wearRate * stRate));
+  const rawDc = baseFtPrice * wearRate * stRate;
+  const priceDc = Math.max(0.01, Number(rawDc.toFixed(2)));
   const priceUsd = Number((priceDc / 4).toFixed(2));
 
   return { priceDc, priceUsd };

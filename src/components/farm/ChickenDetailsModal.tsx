@@ -6,6 +6,7 @@ import { useGameStore } from '../../store/useGameStore';
 import { useLanguage } from '../../lib/i18n';
 import { sound } from '../../lib/sound';
 import { ZalupaCoinIcon } from '../ui/ZalupaCoinIcon';
+import { formatZc } from '../../lib/formatZc';
 import { AnimatedChicken } from './AnimatedChicken';
 import {
   CHICKEN_BREEDS,
@@ -159,8 +160,9 @@ export const ChickenDetailsModal: React.FC<ChickenDetailsModalProps> = ({
               <Coins className="w-3.5 h-3.5 text-emerald-400" />
               <span>{locale === 'ru' ? 'Стоимость' : 'Market Value'}</span>
             </div>
-            <span className="font-mono font-black text-base text-yellow-400 truncate">
-              {sellPrice.toLocaleString('ru-RU')} ZC
+            <span className="font-mono font-black text-base text-yellow-400 truncate flex items-center gap-1">
+              <ZalupaCoinIcon size={14} />
+              <span>{formatZc(sellPrice)}</span>
             </span>
           </div>
         </div>
@@ -184,8 +186,8 @@ export const ChickenDetailsModal: React.FC<ChickenDetailsModalProps> = ({
               <ZalupaCoinIcon className="w-4 h-4" />
               <span>
                 {locale === 'ru'
-                  ? `Продать (+${sellPrice.toLocaleString('ru-RU')} ZC)`
-                  : `Sell (+${sellPrice.toLocaleString('ru-RU')} ZC)`}
+                  ? `Продать (+${formatZc(sellPrice)})`
+                  : `Sell (+${formatZc(sellPrice)})`}
               </span>
             </button>
           </div>
@@ -195,10 +197,10 @@ export const ChickenDetailsModal: React.FC<ChickenDetailsModalProps> = ({
               <AlertCircle className="w-4 h-4" />
               <span>{locale === 'ru' ? 'Подтвердите продажу' : 'Confirm Sale'}</span>
             </div>
-            <p className="text-xs text-white/60 mb-3">
-              {locale === 'ru'
-                ? `Вы точно хотите продать эту курочку за ${sellPrice.toLocaleString('ru-RU')} ZC? Насест освободится.`
-                : `Are you sure you want to sell this chicken for ${sellPrice.toLocaleString('ru-RU')} ZC? Slot will be freed.`}
+            <p className="text-xs text-white/60 mb-3 flex items-center justify-center gap-1 flex-wrap">
+              <span>{locale === 'ru' ? 'Вы точно хотите продать эту курочку за' : 'Are you sure you want to sell this chicken for'}</span>
+              <ZalupaCoinIcon size={12} />
+              <span>{formatZc(sellPrice)}? {locale === 'ru' ? 'Насест освободится.' : 'Slot will be freed.'}</span>
             </p>
             <div className="flex items-center gap-2 w-full">
               <button

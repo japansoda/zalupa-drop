@@ -70,5 +70,4 @@ export interface UserStats {
   totalWonDc: number;
   upgradesWon: number;
   upgradesLost: number;
-  crashWonDc: number;
 }

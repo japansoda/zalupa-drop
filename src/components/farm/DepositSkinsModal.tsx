@@ -12,6 +12,7 @@ import { WearBadge } from '../ui/WearBadge';
 import { StatTrakBadge } from '../ui/StatTrakBadge';
 import { RarityBadge } from '../ui/RarityBadge';
 import { isStatTrakableItem } from '../../lib/steam';
+import { formatZc } from '../../lib/formatZc';
 
 interface DepositSkinsModalProps {
   isOpen: boolean;
@@ -80,10 +81,10 @@ export const DepositSkinsModal: React.FC<DepositSkinsModalProps> = ({
               <h2 className="text-base sm:text-lg font-black text-white uppercase tracking-tight">
                 {locale === 'ru' ? 'Получить яйцо курицы' : 'Acquire Chicken Egg'}
               </h2>
-              <p className="text-xs text-white/50">
-                {locale === 'ru'
-                  ? 'Пожертвуйте 10 скинов от 1 000 ZC каждый для инкубации'
-                  : 'Sacrifice 10 skins of at least 1 000 ZC each for incubation'}
+              <p className="text-xs text-white/50 flex items-center gap-1">
+                <span>{locale === 'ru' ? 'Пожертвуйте 10 скинов от 1 000' : 'Sacrifice 10 skins of at least 1 000'}</span>
+                <ZalupaCoinIcon size={12} />
+                <span>{locale === 'ru' ? 'каждый для инкубации' : 'each for incubation'}</span>
               </p>
             </div>
           </div>
@@ -113,8 +114,10 @@ export const DepositSkinsModal: React.FC<DepositSkinsModalProps> = ({
               {selectedIds.length} / 10
             </span>
             {selectedIds.length > 0 && (
-              <span className="text-xs font-mono text-white/40 ml-2">
-                (~{totalValue.toLocaleString('ru-RU')} ZC)
+              <span className="text-xs font-mono text-white/40 ml-2 inline-flex items-center gap-1">
+                <span>(~</span>
+                <ZalupaCoinIcon size={12} />
+                <span>{formatZc(totalValue)})</span>
               </span>
             )}
           </div>
@@ -138,10 +141,10 @@ export const DepositSkinsModal: React.FC<DepositSkinsModalProps> = ({
               <h4 className="text-sm font-bold text-white mb-1">
                 {locale === 'ru' ? 'Нет подходящих скинов' : 'No eligible skins found'}
               </h4>
-              <p className="text-xs text-white/40 max-w-sm mx-auto">
-                {locale === 'ru'
-                  ? 'В вашем инвентаре нет скинов стоимостью от 1 000 ZC. Вы можете выиграть их в кейсах или купить в Маркетплейсе!'
-                  : 'You have no skins worth at least 1 000 ZC. You can win them in cases or buy in the Marketplace!'}
+              <p className="text-xs text-white/40 max-w-sm mx-auto flex items-center gap-1 justify-center flex-wrap">
+                <span>{locale === 'ru' ? 'В вашем инвентаре нет скинов от 1 000' : 'You have no skins worth at least 1 000'}</span>
+                <ZalupaCoinIcon size={12} />.
+                <span>{locale === 'ru' ? 'Вы можете выиграть их в кейсах или купить в Маркете!' : 'You can win them in cases or buy in Market!'}</span>
               </p>
             </div>
           ) : (
@@ -187,8 +190,9 @@ export const DepositSkinsModal: React.FC<DepositSkinsModalProps> = ({
                         {item.skinName || item.name}
                       </span>
                       <span className="text-[9px] text-white/40 truncate">{item.weapon}</span>
-                      <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5">
-                        {item.priceDc.toLocaleString('ru-RU')} ZC
+                      <span className="text-[11px] font-mono font-black text-yellow-400 mt-0.5 flex items-center gap-1">
+                        <ZalupaCoinIcon size={11} />
+                        <span>{formatZc(item.priceDc)}</span>
                       </span>
                     </div>
                   </button>
