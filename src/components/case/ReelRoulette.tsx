@@ -35,12 +35,13 @@ const WIN_INDEX = WINNER_INDEX;
 const ITEM_WIDTH = 180;
 const ITEM_GAP = 12;
 
-// Vertical 3-case spinning constants (shortened roulette per user request)
+// Vertical multi-case spinning constants (2x and 3x spin layout)
 const REEL_SIZE_V = 36;
 const WINNER_INDEX_V = 30;
 const WIN_INDEX_V = WINNER_INDEX_V;
-const ITEM_HEIGHT_V = 115;
-const ITEM_GAP_V = 10;
+const ITEM_HEIGHT_V = 96;
+const ITEM_GAP_V = 8;
+
 
 interface ReelTapeCardProps {
   skin: SkinEntity;
@@ -85,10 +86,13 @@ const ReelTapeCard = React.memo<ReelTapeCardProps>(({
   const isPrioritySlot = isVertical ? (idx >= 26 && idx <= 34) : (idx >= 44 && idx <= 50);
 
   if (isVertical) {
+    const isThreeMobile = openCount === 3;
     return (
       <div
         onPointerDown={(e) => onPointerDown(reelIdx, idx, e)}
-        className={`relative rounded-2xl bg-[#11121a] border shrink-0 flex items-center justify-between p-2.5 select-none overflow-hidden transition-[border-color,box-shadow] duration-150 ${
+        className={`relative rounded-xl sm:rounded-2xl bg-[#11121a] border shrink-0 flex ${
+          isThreeMobile ? 'flex-col sm:flex-row items-center justify-center p-1 sm:p-2.5' : 'flex-row items-center justify-between p-1.5 sm:p-2.5'
+        } select-none overflow-hidden transition-[border-color,box-shadow] duration-150 ${
           isHookPicked
             ? 'border-orange-400 shadow-[0_0_22px_rgba(249,115,22,0.6)]'
             : showAsSpecial
@@ -100,16 +104,18 @@ const ReelTapeCard = React.memo<ReelTapeCardProps>(({
         style={{
           width: '100%',
           height: `${ITEM_HEIGHT_V}px`,
-          borderLeftWidth: '4px',
+          borderLeftWidth: '3.5px',
           borderLeftColor: config.color,
           contain: 'layout paint style',
         }}
       >
-        <div className="relative w-20 h-20 shrink-0 flex items-center justify-center z-10 my-auto">
+        <div className={`relative ${
+          isThreeMobile ? 'w-10 h-10 sm:w-16 sm:h-16' : 'w-12 h-12 sm:w-16 sm:h-16'
+        } shrink-0 flex items-center justify-center z-10 my-auto`}>
           <SkinImage
             src={displayImage}
             alt={displayWeapon}
-            size={110}
+            size={100}
             priority={isPrioritySlot}
             thumb={!isPrioritySlot}
             className={`w-full h-full object-contain ${
@@ -120,10 +126,12 @@ const ReelTapeCard = React.memo<ReelTapeCardProps>(({
           />
         </div>
 
-        <div className="flex flex-col min-w-0 flex-1 justify-center pl-2.5 pr-1 z-10">
-          <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+        <div className={`flex flex-col min-w-0 flex-1 justify-center ${
+          isThreeMobile ? 'w-full text-center sm:text-left pl-0 sm:pl-2' : 'pl-1.5 sm:pl-2.5 pr-1'
+        } z-10`}>
+          <div className={`flex items-center gap-1 mb-0.5 ${isThreeMobile ? 'justify-center sm:justify-start' : ''} flex-wrap`}>
             {showAsSpecial ? (
-              <span className="text-[8.5px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-full text-black bg-[#facc15] shadow-[0_0_8px_rgba(250,204,21,0.4)]">
+              <span className="text-[7.5px] sm:text-[8.5px] font-black uppercase tracking-wider px-1 sm:px-1.5 py-0.5 rounded-full text-black bg-[#facc15] shadow-[0_0_8px_rgba(250,204,21,0.4)]">
                 ★ {locale === 'en' ? 'SPECIAL' : 'ОСОБЫЙ'}
               </span>
             ) : (
@@ -134,12 +142,13 @@ const ReelTapeCard = React.memo<ReelTapeCardProps>(({
               </>
             )}
           </div>
-          <p className="text-xs font-bold text-white truncate">{displayWeapon}</p>
-          <p className="text-[11px] truncate font-semibold" style={{ color: config.color }}>{displaySkinName}</p>
+          <p className="text-[10px] sm:text-xs font-bold text-white truncate">{displayWeapon}</p>
+          <p className="text-[9px] sm:text-[11px] truncate font-semibold" style={{ color: config.color }}>{displaySkinName}</p>
         </div>
       </div>
     );
   }
+
 
   return (
     <div
@@ -330,7 +339,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   const ropeLoop = () => {
     if (ropeModeRef.current === 'off') return;
     const { w, h } = ropeDimsRef.current;
-    const isVert = openCount === 3;
+    const isVert = openCount >= 2;
     const ax = w / 2;
     const ay = h / 2;
     let bx = ropeBRef.current.x;
@@ -435,9 +444,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     }
     if (!canPressHook) return;
     sound.playClick();
-    const isVert = openCount === 3;
+    const isVert = openCount >= 2;
     const w = containerRef0.current?.offsetWidth || (isVert ? 300 : 800);
-    const h = containerRef0.current?.offsetHeight || (isVert ? 390 : 220);
+    const h = containerRef0.current?.offsetHeight || (isVert ? 250 : 220);
     ropeDimsRef.current = { w, h };
     const ax = w / 2;
     const ay = h / 2;
@@ -663,7 +672,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     return skins[0];
   };
 
-  const generateReel = (winner: SkinEntity, isVert = openCount === 3): SkinEntity[] => {
+  const generateReel = (winner: SkinEntity, isVert = openCount >= 2): SkinEntity[] => {
     const list: SkinEntity[] = [];
     const size = isVert ? REEL_SIZE_V : REEL_SIZE;
     const targetIdx = isVert ? WIN_INDEX_V : WIN_INDEX;
@@ -678,7 +687,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   };
 
   useEffect(() => {
-    const isVert = openCount === 3;
+    const isVert = openCount >= 2;
     const size = isVert ? REEL_SIZE_V : REEL_SIZE;
     const initial0: SkinEntity[] = [];
     const initial1: SkinEntity[] = [];
@@ -847,7 +856,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     let winners = rollWinners(false);
     setWinningSkins(winners);
 
-    const isVertical = spinOpenCount === 3;
+    const isVertical = spinOpenCount >= 2;
     const targetWinIdx = isVertical ? WIN_INDEX_V : WIN_INDEX;
 
     // Build new reels
@@ -932,14 +941,22 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
               y: targetOffset,
               transition: { duration, ease: selectedEase },
             }),
-            controls1.start({
-              y: targetOffset,
-              transition: { duration: duration + 0.1, ease: selectedEase },
-            }),
-            controls2.start({
-              y: targetOffset,
-              transition: { duration: duration + 0.2, ease: selectedEase },
-            }),
+            ...(spinOpenCount >= 2
+              ? [
+                  controls1.start({
+                    y: targetOffset,
+                    transition: { duration: duration + 0.1, ease: selectedEase },
+                  }),
+                ]
+              : []),
+            ...(spinOpenCount >= 3
+              ? [
+                  controls2.start({
+                    y: targetOffset,
+                    transition: { duration: duration + 0.2, ease: selectedEase },
+                  }),
+                ]
+              : []),
           ]
         : [
             controls0.start({
@@ -1009,9 +1026,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
         }
         const { reelIdx, itemIdx } = target;
         frozenXRef.current = [...liveXRef.current];
-        const isVert = spinOpenCount === 3;
+        const isVert = spinOpenCount >= 2;
         const containerW = containerRef0.current?.offsetWidth || (isVert ? 300 : 800);
-        const containerH = containerRef0.current?.offsetHeight || (isVert ? 390 : 220);
+        const containerH = containerRef0.current?.offsetHeight || (isVert ? 250 : 220);
         const centerHook = isVert ? containerH / 2 : containerW / 2;
         const cardStep = isVert ? (ITEM_HEIGHT_V + ITEM_GAP_V) : (ITEM_WIDTH + ITEM_GAP);
         const cardDim = isVert ? ITEM_HEIGHT_V : ITEM_WIDTH;
@@ -1241,9 +1258,17 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
         `}
       </style>
       {/* Multi-reel display */}
-      <div className={`w-full max-w-5xl ${openCount === 3 ? 'grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4' : 'flex flex-col gap-4'}`}>
+      <div
+        className={`w-full ${
+          openCount === 3
+            ? 'grid grid-cols-3 gap-1 sm:gap-4 max-w-5xl'
+            : openCount === 2
+            ? 'grid grid-cols-2 gap-1.5 sm:gap-4 max-w-3xl'
+            : 'flex flex-col gap-4 max-w-5xl'
+        }`}
+      >
         {Array.from({ length: openCount }).map((_, reelIdx) => {
-          const isVertical = openCount === 3;
+          const isVertical = openCount >= 2;
           return (
             <div
               key={reelIdx}
@@ -1252,7 +1277,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
               onPointerCancel={() => {
                 tapDownRef.current = null;
               }}
-              className={`relative w-full rounded-3xl p-3 glass-panel border shadow-2xl overflow-hidden transition-colors duration-300 ${
+              className={`relative w-full rounded-2xl sm:rounded-3xl p-1.5 sm:p-3 glass-panel border shadow-2xl overflow-hidden transition-colors duration-300 ${
                 isZeusCharged
                   ? 'border-sky-400/50 shadow-[0_0_35px_rgba(56,189,248,0.35)]'
                   : showPotionBg
@@ -1518,8 +1543,8 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
               {/* Edge fade vignettes */}
               {isVertical ? (
                 <>
-                  <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#08080a] to-transparent z-20 pointer-events-none" />
-                  <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#08080a] to-transparent z-20 pointer-events-none" />
+                  <div className="absolute inset-x-0 top-0 h-10 sm:h-20 bg-gradient-to-b from-[#08080a] to-transparent z-20 pointer-events-none" />
+                  <div className="absolute inset-x-0 bottom-0 h-10 sm:h-20 bg-gradient-to-t from-[#08080a] to-transparent z-20 pointer-events-none" />
                 </>
               ) : (
                 <>
@@ -1530,7 +1555,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
 
               <div
                 ref={reelIdx === 0 ? containerRef0 : undefined}
-                className={`relative z-[1] w-full overflow-hidden ${isVertical ? 'h-[390px] py-1' : 'py-3'}`}
+                className={`relative z-[1] w-full overflow-hidden ${isVertical ? 'h-[250px] sm:h-[390px] py-0.5 sm:py-1' : 'py-3'}`}
                 style={{ contain: 'layout paint' }}
               >
                 {isVertical ? (
@@ -1683,7 +1708,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     </div>
 
       {/* Opening Multiplier Selectors (x1, x2, x3) and Actions */}
-      <div className="flex flex-col items-center gap-4 mt-6 w-full max-w-xl">
+      <div className="flex flex-col items-center gap-3 sm:gap-4 mt-3 sm:mt-6 w-full max-w-xl">
         <div className="flex flex-wrap items-center justify-center gap-3">
           <div className="flex items-center gap-2">
             <span className="text-xs font-bold text-white/50 uppercase tracking-wider flex items-center gap-1.5">
@@ -1736,7 +1761,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
           ) : null}
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full">
           <label className="flex items-center gap-2 text-xs font-bold text-white/60 cursor-pointer select-none">
             <input
               type="checkbox"
@@ -1757,7 +1782,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                 type="button"
                 onClick={handleActivateZeus}
                 disabled={!canPressZeus}
-                className={`w-full sm:w-auto px-10 py-4 rounded-2xl font-black text-base uppercase tracking-wider flex items-center justify-center gap-2 border-2 transition-all ${
+                className={`w-full sm:w-auto px-6 sm:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-black text-sm sm:text-base uppercase tracking-wider flex items-center justify-center gap-2 border-2 transition-all ${
                   isZeusProtected
                     ? 'bg-neutral-800 text-neutral-500 border-neutral-700/60 cursor-not-allowed shadow-none'
                     : canPressZeus
@@ -1775,7 +1800,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
               <button
                 type="button"
                 disabled
-                className="w-full sm:w-auto px-10 py-4 rounded-2xl btn-yellow text-black font-black text-base uppercase tracking-wider flex items-center justify-center gap-2 opacity-50 cursor-not-allowed"
+                className="w-full sm:w-auto px-6 sm:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl btn-yellow text-black font-black text-sm sm:text-base uppercase tracking-wider flex items-center justify-center gap-2 opacity-50 cursor-not-allowed"
               >
                 <span>{t('case.openingAction')}</span>
               </button>
@@ -1785,7 +1810,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
               type="button"
               onClick={startSpin}
               disabled={isSpinning}
-              className="w-full sm:w-auto px-10 py-4 rounded-2xl btn-yellow text-black font-black text-base uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all"
+              className="w-full sm:w-auto px-6 sm:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl btn-yellow text-black font-black text-sm sm:text-base uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all"
             >
               <span>
                 {locale === 'ru'

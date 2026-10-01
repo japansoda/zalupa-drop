@@ -229,9 +229,9 @@ export default function HomePage() {
     // Filter by Category
     if (selectedCategory !== 'all') {
       if (selectedCategory === 'budget') {
-        list = list.filter((c) => c.category === 'budget' || c.priceDc < 1000);
+        list = list.filter((c) => c.category === 'budget' || c.priceDc <= 30);
       } else if (selectedCategory === 'highroller') {
-        list = list.filter((c) => c.category === 'highroller' || c.priceDc >= 10000);
+        list = list.filter((c) => c.category === 'highroller' || c.priceDc >= 250);
       } else {
         list = list.filter((c) => c.category === selectedCategory);
       }
@@ -253,10 +253,11 @@ export default function HomePage() {
     // Sort
     if (sortBy === 'popular') {
       list.sort((a, b) => {
-        const popA = (caseOpenCounts[a.id] || 0) * 100 + (CASE_BASE_POPULARITY[a.id] || (a.category === 'custom' ? 5000 : 3500) + (a.priceDc < 2000 ? 1000 : 0));
-        const popB = (caseOpenCounts[b.id] || 0) * 100 + (CASE_BASE_POPULARITY[b.id] || (b.category === 'custom' ? 5000 : 3500) + (b.priceDc < 2000 ? 1000 : 0));
+        const popA = (caseOpenCounts[a.id] || 0) * 100 + (CASE_BASE_POPULARITY[a.id] || (a.category === 'custom' ? 5000 : 3500) + (a.priceDc < 80 ? 1000 : 0));
+        const popB = (caseOpenCounts[b.id] || 0) * 100 + (CASE_BASE_POPULARITY[b.id] || (b.category === 'custom' ? 5000 : 3500) + (b.priceDc < 80 ? 1000 : 0));
         return popB - popA;
       });
+
     } else if (sortBy === 'asc') {
       list.sort((a, b) => a.priceDc - b.priceDc);
     } else if (sortBy === 'desc') {

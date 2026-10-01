@@ -39,7 +39,7 @@ import {
   User,
 } from 'lucide-react';
 
-export const ITEM_CATEGORIES = [
+const ITEM_CATEGORIES = [
   { id: 'all', labelRu: 'Все товары', labelEn: 'All Items', icon: LayoutGrid },
   { id: 'knives', labelRu: 'Ножи', labelEn: 'Knives', icon: Sword },
   { id: 'gloves', labelRu: 'Перчатки', labelEn: 'Gloves', icon: Hand },

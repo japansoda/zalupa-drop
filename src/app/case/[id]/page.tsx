@@ -98,28 +98,28 @@ export default function CaseOpenPage() {
         <Header />
         <LiveDropBar />
 
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-2">
+        <section className="max-w-7xl mx-auto px-3 sm:px-6 pt-2.5 sm:pt-6 pb-1 sm:pb-2">
           <Link
             href="/"
             onClick={() => sound.playClick()}
-            className="inline-flex items-center gap-2 text-xs font-bold text-white/60 hover:text-yellow-400 transition-colors mb-4"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-white/60 hover:text-yellow-400 transition-colors mb-2 sm:mb-4"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span>{t('case.back')}</span>
           </Link>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 pb-4 border-b border-white/10">
-            <div className="flex items-center gap-3 sm:gap-4 text-left w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4 pb-2.5 sm:pb-4 border-b border-white/10">
+            <div className="flex items-center gap-2.5 sm:gap-4 text-left w-full sm:w-auto">
               {(() => {
                 const glow = getCaseThemeGlow(currentCase);
                 return (
                   <div 
-                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-black/60 border p-2 shrink-0 relative flex items-center justify-center overflow-visible"
+                    className="w-14 h-14 sm:w-24 sm:h-24 rounded-xl sm:rounded-2xl bg-black/60 border p-1 sm:p-2 shrink-0 relative flex items-center justify-center overflow-visible"
                     style={{ borderColor: `rgba(${glow.rgb}, 0.35)` }}
                   >
                     {/* Ambient glow behind crate */}
                     <div
-                      className="absolute w-20 h-20 sm:w-24 sm:h-24 rounded-full blur-xl z-0 pointer-events-none opacity-80"
+                      className="absolute w-14 h-14 sm:w-24 sm:h-24 rounded-full blur-xl z-0 pointer-events-none opacity-80"
                       style={{
                         background: `radial-gradient(circle, rgba(${glow.rgb}, 0.7) 0%, rgba(${glow.rgb}, 0.25) 50%, transparent 75%)`
                       }}
@@ -142,20 +142,20 @@ export default function CaseOpenPage() {
                 );
               })()}
               <div className="flex flex-col">
-                <h1 className="text-xl sm:text-3xl font-black text-white uppercase tracking-tight line-clamp-2">
+                <h1 className="text-base sm:text-3xl font-black text-white uppercase tracking-tight line-clamp-2">
                   {getCaseName(currentCase, locale)}
                 </h1>
                 {currentCase.subtitle && (
-                  <p className="text-xs text-white/50 line-clamp-1">{getCaseSubtitle(currentCase, locale)}</p>
+                  <p className="text-[11px] sm:text-xs text-white/50 line-clamp-1">{getCaseSubtitle(currentCase, locale)}</p>
                 )}
               </div>
             </div>
 
-            <div className="flex items-center justify-between w-full sm:w-auto gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-2xl glass-panel border border-white/10 shrink-0">
+            <div className="flex items-center justify-between w-full sm:w-auto gap-2 px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-xl sm:rounded-2xl glass-panel border border-white/10 shrink-0">
               <span className="text-xs text-white/60 font-bold">{t('case.openCost')}</span>
               <div className="flex items-center gap-1.5">
-                <ZalupaCoinIcon size={20} />
-                <span className="font-mono font-black text-base sm:text-lg text-yellow-400">
+                <ZalupaCoinIcon size={18} />
+                <span className="font-mono font-black text-sm sm:text-lg text-yellow-400">
                   {formatZc(currentCase.priceDc)}
                 </span>
               </div>
@@ -163,7 +163,7 @@ export default function CaseOpenPage() {
           </div>
         </section>
 
-        <section className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
+        <section className="max-w-7xl mx-auto px-2 sm:px-6 py-2 sm:py-6">
           {isTerminal ? (
             <TerminalInterface
               terminalId={currentCase.id}

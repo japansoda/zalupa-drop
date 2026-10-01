@@ -31,6 +31,26 @@ const CASE_EN_MAP: Record<string, string> = {
   ...CASE_NAME_EN_MAP,
 };
 
+// Precomputed lookup maps for instantaneous O(1) drop-to-case routing
+const CASE_PATH_BY_NAME = new Map<string, string>();
+const CASE_PATH_BY_SKIN_ID = new Map<string, string>();
+const CASE_PATH_BY_SKIN_NAME = new Map<string, string>();
+
+for (const c of CASES_DATABASE) {
+  const dest = `/case/${c.id}`;
+  CASE_PATH_BY_NAME.set(c.id.toLowerCase(), dest);
+  CASE_PATH_BY_NAME.set(c.name.toLowerCase(), dest);
+  if (c.nameEn) CASE_PATH_BY_NAME.set(c.nameEn.toLowerCase(), dest);
+  if (c.skins) {
+    for (const s of c.skins) {
+      if (s.id && !CASE_PATH_BY_SKIN_ID.has(s.id)) CASE_PATH_BY_SKIN_ID.set(s.id, dest);
+      if (s.name && !CASE_PATH_BY_SKIN_NAME.has(s.name.toLowerCase())) {
+        CASE_PATH_BY_SKIN_NAME.set(s.name.toLowerCase(), dest);
+      }
+    }
+  }
+}
+
 const getDropDestination = (drop: LiveDrop): string => {
   if (drop.destination) return drop.destination;
   if (drop.caseId) return `/case/${drop.caseId}`;
@@ -48,32 +68,23 @@ const getDropDestination = (drop: LiveDrop): string => {
     return '/farm';
   }
 
-  // Look up in CASES_DATABASE
-  const match = CASES_DATABASE.find(
-    (c) =>
-      c.id.toLowerCase() === caseName ||
-      c.name.toLowerCase() === caseName ||
-      (c.nameEn && c.nameEn.toLowerCase() === caseName) ||
-      caseName.includes(c.name.toLowerCase()) ||
-      c.name.toLowerCase().includes(caseName)
-  );
+  // Fast O(1) lookup by case name or id
+  const direct = CASE_PATH_BY_NAME.get(caseName);
+  if (direct) return direct;
 
-  if (match) {
-    return `/case/${match.id}`;
+  // Fast O(1) lookup by skin id or skin name
+  if (drop.skin?.id) {
+    const bySkinId = CASE_PATH_BY_SKIN_ID.get(drop.skin.id);
+    if (bySkinId) return bySkinId;
   }
-
-  // Fallback: look up by skin
-  if (drop.skin?.id || drop.skin?.name) {
-    const skinCase = CASES_DATABASE.find((c) =>
-      c.skins?.some((s) => s.id === drop.skin.id || s.name === drop.skin.name)
-    );
-    if (skinCase) {
-      return `/case/${skinCase.id}`;
-    }
+  if (drop.skin?.name) {
+    const bySkinName = CASE_PATH_BY_SKIN_NAME.get(drop.skin.name.toLowerCase());
+    if (bySkinName) return bySkinName;
   }
 
   return '/';
 };
+
 
 const isOwnDrop = (drop: LiveDrop): boolean => {
   return drop.user === 'Вы' || drop.user === 'YOU';
