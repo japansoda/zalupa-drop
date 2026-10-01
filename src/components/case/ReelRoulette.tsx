@@ -464,9 +464,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
   const handleReelMouseMove = (reelIdx: number, e: React.MouseEvent<HTMLDivElement>) => {
     if (!hookArmed || hookFlying) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    // Координаты вьюпорта ленты (минус паддинг внешнего контейнера p-3)
-    const x = e.clientX - rect.left - 12;
-    const y = e.clientY - rect.top - 12;
+    const isVert = openCount >= 2;
+    const pad = isVert ? (typeof window !== 'undefined' && window.innerWidth >= 640 ? 12 : 6) : 12;
+    const x = e.clientX - rect.left - pad;
+    const y = e.clientY - rect.top - pad;
     ropeReelRef.current = reelIdx;
     ropeBRef.current = { x, y };
   };
@@ -884,7 +885,9 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
     // eslint-disable-next-line no-constant-condition
     while (true) {
       const containerWidth = containerRef0.current?.offsetWidth || 800;
-      const containerHeight = containerRef0.current?.offsetHeight || 360;
+      const containerHeight =
+        containerRef0.current?.offsetHeight ||
+        (isVertical ? (typeof window !== 'undefined' && window.innerWidth >= 640 ? 390 : 250) : 360);
 
       // Reset positions
       controls0.set({ x: 0, y: 0 });
@@ -911,9 +914,8 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
       const step = isVertical ? (ITEM_HEIGHT_V + ITEM_GAP_V) : (ITEM_WIDTH + ITEM_GAP);
       const dim = isVertical ? ITEM_HEIGHT_V : ITEM_WIDTH;
       const centerOffset = (isVertical ? containerHeight : containerWidth) / 2;
-      // Landing sub-offset (jitter) within the winning card bounds for natural unpredictability
-      const maxJitter = isVertical ? 20 : 30;
-      const jitter = (Math.random() - 0.5) * 2 * maxJitter;
+      // In vertical mode, jitter is strictly 0 to guarantee the needle stops dead-center on the winning card
+      const jitter = isVertical ? 0 : (Math.random() - 0.5) * 2 * 20;
       const targetOffset = -(targetWinIdx * step + dim / 2 - centerOffset) + jitter;
 
       rafCancelRef.current = false;
@@ -1555,7 +1557,7 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
 
               <div
                 ref={reelIdx === 0 ? containerRef0 : undefined}
-                className={`relative z-[1] w-full overflow-hidden ${isVertical ? 'h-[250px] sm:h-[390px] py-0.5 sm:py-1' : 'py-3'}`}
+                className={`relative z-[1] w-full overflow-hidden ${isVertical ? 'h-[250px] sm:h-[390px] p-0' : 'py-3'}`}
                 style={{ contain: 'layout paint' }}
               >
                 {isVertical ? (
@@ -1566,9 +1568,10 @@ export const ReelRoulette: React.FC<ReelRouletteProps> = ({
                       const v = (latest as { y?: unknown }).y;
                       if (typeof v === 'number') liveXRef.current[reelIdx] = v;
                     }}
-                    className="flex flex-col gap-2.5 will-change-transform"
+                    className="flex flex-col will-change-transform"
                     style={{
                       height: `${(reels[reelIdx] || []).length * (ITEM_HEIGHT_V + ITEM_GAP_V)}px`,
+                      gap: `${ITEM_GAP_V}px`,
                       transform: 'translate3d(0, 0, 0)',
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
